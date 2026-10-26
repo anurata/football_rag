@@ -1,0 +1,457 @@
+{
+  "version": "1.0.0",
+  "teams": [
+    {
+      "team_id": "FCT",
+      "canonical_name": "FC東京",
+      "short_name": "FC東京",
+      "en_name": "FC Tokyo",
+      "jleague_name": "ＦＣ東京",
+      "football_lab_slug": "tokyo",
+      "football_lab_name": "FC東京",
+      "sofascore_id": 2110,
+      "aliases": [
+        "FC東京",
+        "ＦＣ東京",
+        "FC Tokyo",
+        "東京",
+        "F.C.TOKYO"
+      ]
+    },
+    {
+      "team_id": "KAS",
+      "canonical_name": "鹿島アントラーズ",
+      "short_name": "鹿島",
+      "en_name": "Kashima Antlers",
+      "jleague_name": "鹿島アントラーズ",
+      "football_lab_slug": "kashima",
+      "football_lab_name": "鹿島",
+      "sofascore_id": 2108,
+      "aliases": [
+        "鹿島アントラーズ",
+        "鹿島",
+        "Kashima Antlers",
+        "Antlers"
+      ]
+    },
+    {
+      "team_id": "URA",
+      "canonical_name": "浦和レッズ",
+      "short_name": "浦和",
+      "en_name": "Urawa Red Diamonds",
+      "jleague_name": "浦和レッズ",
+      "football_lab_slug": "urawa",
+      "football_lab_name": "浦和",
+      "sofascore_id": 2109,
+      "aliases": [
+        "浦和レッズ",
+        "浦和",
+        "Urawa Reds",
+        "Urawa Red Diamonds",
+        "Reds"
+      ]
+    },
+    {
+      "team_id": "REY",
+      "canonical_name": "柏レイソル",
+      "short_name": "柏",
+      "en_name": "Kashiwa Reysol",
+      "jleague_name": "柏レイソル",
+      "football_lab_slug": "kashiwa",
+      "football_lab_name": "柏",
+      "sofascore_id": 2113,
+      "aliases": [
+        "柏レイソル",
+        "柏",
+        "Kashiwa Reysol",
+        "Reysol"
+      ]
+    },
+    {
+      "team_id": "VER",
+      "canonical_name": "東京ヴェルディ",
+      "short_name": "東京V",
+      "en_name": "Tokyo Verdy",
+      "jleague_name": "東京ヴェルディ",
+      "football_lab_slug": "verdy",
+      "football_lab_name": "東京V",
+      "sofascore_id": 2112,
+      "aliases": [
+        "東京ヴェルディ",
+        "東京V",
+        "Tokyo Verdy",
+        "ヴェルディ"
+      ]
+    },
+    {
+      "team_id": "ZEL",
+      "canonical_name": "FC町田ゼルビア",
+      "short_name": "町田",
+      "en_name": "FC Machida Zelvia",
+      "jleague_name": "ＦＣ町田ゼルビア",
+      "football_lab_slug": "machida",
+      "football_lab_name": "町田",
+      "sofascore_id": 35308,
+      "aliases": [
+        "FC町田ゼルビア",
+        "ＦＣ町田ゼルビア",
+        "町田",
+        "FC Machida Zelvia",
+        "ゼルビア"
+      ]
+    },
+    {
+      "team_id": "KAW",
+      "canonical_name": "川崎フロンターレ",
+      "short_name": "川崎F",
+      "en_name": "Kawasaki Frontale",
+      "jleague_name": "川崎フロンターレ",
+      "football_lab_slug": "frontale",
+      "football_lab_name": "川崎F",
+      "sofascore_id": 2116,
+      "aliases": [
+        "川崎フロンターレ",
+        "川崎F",
+        "Kawasaki Frontale",
+        "フロンターレ"
+      ]
+    },
+    {
+      "team_id": "MAR",
+      "canonical_name": "横浜F・マリノス",
+      "short_name": "横浜FM",
+      "en_name": "Yokohama F. Marinos",
+      "jleague_name": "横浜Ｆ・マリノス",
+      "football_lab_slug": "f-marinos",
+      "football_lab_name": "横浜FM",
+      "sofascore_id": 2107,
+      "aliases": [
+        "横浜F・マリノス",
+        "横浜Ｆ・マリノス",
+        "横浜FM",
+        "Yokohama F. Marinos",
+        "マリノス"
+      ]
+    },
+    {
+      "team_id": "YFC",
+      "canonical_name": "横浜FC",
+      "short_name": "横浜FC",
+      "en_name": "Yokohama FC",
+      "jleague_name": "横浜ＦＣ",
+      "football_lab_slug": "yokohamafc",
+      "football_lab_name": "横浜FC",
+      "sofascore_id": 2111,
+      "aliases": [
+        "横浜FC",
+        "横浜ＦＣ",
+        "Yokohama FC"
+      ]
+    },
+    {
+      "team_id": "BEL",
+      "canonical_name": "湘南ベルマーレ",
+      "short_name": "湘南",
+      "en_name": "Shonan Bellmare",
+      "jleague_name": "湘南ベルマーレ",
+      "football_lab_slug": "bellmare",
+      "football_lab_name": "湘南",
+      "sofascore_id": 2114,
+      "aliases": [
+        "湘南ベルマーレ",
+        "湘南",
+        "Shonan Bellmare",
+        "ベルマーレ"
+      ]
+    },
+    {
+      "team_id": "NII",
+      "canonical_name": "アルビレックス新潟",
+      "short_name": "新潟",
+      "en_name": "Albirex Niigata",
+      "jleague_name": "アルビレックス新潟",
+      "football_lab_slug": "niigata",
+      "football_lab_name": "新潟",
+      "sofascore_id": 2117,
+      "aliases": [
+        "アルビレックス新潟",
+        "新潟",
+        "Albirex Niigata",
+        "アルビレックス"
+      ]
+    },
+    {
+      "team_id": "IWA",
+      "canonical_name": "ジュビロ磐田",
+      "short_name": "磐田",
+      "en_name": "Jubilo Iwata",
+      "jleague_name": "ジュビロ磐田",
+      "football_lab_slug": "iwata",
+      "football_lab_name": "磐田",
+      "sofascore_id": 2115,
+      "aliases": [
+        "ジュビロ磐田",
+        "磐田",
+        "Jubilo Iwata",
+        "ジュビロ"
+      ]
+    },
+    {
+      "team_id": "NAG",
+      "canonical_name": "名古屋グランパス",
+      "short_name": "名古屋",
+      "en_name": "Nagoya Grampus",
+      "jleague_name": "名古屋グランパス",
+      "football_lab_slug": "grampus",
+      "football_lab_name": "名古屋",
+      "sofascore_id": 2106,
+      "aliases": [
+        "名古屋グランパス",
+        "名古屋",
+        "Nagoya Grampus",
+        "グランパス"
+      ]
+    },
+    {
+      "team_id": "SAN",
+      "canonical_name": "京都サンガF.C.",
+      "short_name": "京都",
+      "en_name": "Kyoto Sanga F.C.",
+      "jleague_name": "京都サンガF.C.",
+      "football_lab_slug": "sanga",
+      "football_lab_name": "京都",
+      "sofascore_id": 2118,
+      "aliases": [
+        "京都サンガF.C.",
+        "京都サンガ",
+        "京都",
+        "Kyoto Sanga F.C.",
+        "Kyoto Sanga",
+        "サンガ"
+      ]
+    },
+    {
+      "team_id": "GAM",
+      "canonical_name": "ガンバ大阪",
+      "short_name": "G大阪",
+      "en_name": "Gamba Osaka",
+      "jleague_name": "ガンバ大阪",
+      "football_lab_slug": "g-osaka",
+      "football_lab_name": "G大阪",
+      "sofascore_id": 2104,
+      "aliases": [
+        "ガンバ大阪",
+        "G大阪",
+        "ガンバ",
+        "Gamba Osaka"
+      ]
+    },
+    {
+      "team_id": "CER",
+      "canonical_name": "セレッソ大阪",
+      "short_name": "C大阪",
+      "en_name": "Cerezo Osaka",
+      "jleague_name": "セレッソ大阪",
+      "football_lab_slug": "c-osaka",
+      "football_lab_name": "C大阪",
+      "sofascore_id": 2105,
+      "aliases": [
+        "セレッソ大阪",
+        "C大阪",
+        "セレッソ",
+        "Cerezo Osaka"
+      ]
+    },
+    {
+      "team_id": "VOB",
+      "canonical_name": "ヴィッセル神戸",
+      "short_name": "神戸",
+      "en_name": "Vissel Kobe",
+      "jleague_name": "ヴィッセル神戸",
+      "football_lab_slug": "kobe",
+      "football_lab_name": "神戸",
+      "sofascore_id": 2120,
+      "aliases": [
+        "ヴィッセル神戸",
+        "神戸",
+        "Vissel Kobe",
+        "ヴィッセル"
+      ]
+    },
+    {
+      "team_id": "HIR",
+      "canonical_name": "サンフレッチェ広島",
+      "short_name": "広島",
+      "en_name": "Sanfrecce Hiroshima",
+      "jleague_name": "サンフレッチェ広島",
+      "football_lab_slug": "hiroshima",
+      "football_lab_name": "広島",
+      "sofascore_id": 2119,
+      "aliases": [
+        "サンフレッチェ広島",
+        "広島",
+        "Sanfrecce Hiroshima",
+        "サンフレッチェ"
+      ]
+    },
+    {
+      "team_id": "FUK",
+      "canonical_name": "アビスパ福岡",
+      "short_name": "福岡",
+      "en_name": "Avispa Fukuoka",
+      "jleague_name": "アビスパ福岡",
+      "football_lab_slug": "fukuoka",
+      "football_lab_name": "福岡",
+      "sofascore_id": 2121,
+      "aliases": [
+        "アビスパ福岡",
+        "福岡",
+        "Avispa Fukuoka",
+        "アビスパ"
+      ]
+    },
+    {
+      "team_id": "SAG",
+      "canonical_name": "サガン鳥栖",
+      "short_name": "鳥栖",
+      "en_name": "Sagan Tosu",
+      "jleague_name": "サガン鳥栖",
+      "football_lab_slug": "tosu",
+      "football_lab_name": "鳥栖",
+      "sofascore_id": 4833,
+      "aliases": [
+        "サガン鳥栖",
+        "鳥栖",
+        "Sagan Tosu",
+        "サガン"
+      ]
+    },
+    {
+      "team_id": "CON",
+      "canonical_name": "北海道コンサドーレ札幌",
+      "short_name": "札幌",
+      "en_name": "Hokkaido Consadole Sapporo",
+      "jleague_name": "北海道コンサドーレ札幌",
+      "football_lab_slug": "sapporo",
+      "football_lab_name": "札幌",
+      "sofascore_id": 2122,
+      "aliases": [
+        "北海道コンサドーレ札幌",
+        "コンサドーレ札幌",
+        "札幌",
+        "Consadole Sapporo",
+        "Hokkaido Consadole Sapporo"
+      ]
+    },
+    {
+      "team_id": "OKA",
+      "canonical_name": "ファジアーノ岡山",
+      "short_name": "岡山",
+      "en_name": "Fagiano Okayama",
+      "jleague_name": "ファジアーノ岡山",
+      "football_lab_slug": "okayama",
+      "football_lab_name": "岡山",
+      "sofascore_id": 35306,
+      "aliases": [
+        "ファジアーノ岡山",
+        "岡山",
+        "Fagiano Okayama",
+        "ファジアーノ"
+      ]
+    },
+    {
+      "team_id": "PUL",
+      "canonical_name": "清水エスパルス",
+      "short_name": "清水",
+      "en_name": "Shimizu S-Pulse",
+      "jleague_name": "清水エスパルス",
+      "football_lab_slug": "spulse",
+      "football_lab_name": "清水",
+      "sofascore_id": 2103,
+      "aliases": [
+        "清水エスパルス",
+        "清水",
+        "Shimizu S-Pulse",
+        "エスパルス"
+      ]
+    },
+    {
+      "team_id": "MIT",
+      "canonical_name": "水戸ホーリーホック",
+      "short_name": "水戸",
+      "en_name": "Mito Hollyhock",
+      "jleague_name": "水戸ホーリーホック",
+      "football_lab_slug": "mito",
+      "football_lab_name": "水戸",
+      "sofascore_id": 2123,
+      "aliases": [
+        "水戸ホーリーホック",
+        "水戸",
+        "Mito Hollyhock",
+        "ホーリーホック"
+      ]
+    }
+  ],
+  "players": [
+    {
+      "player_id": "P_FCT_NAGATOMO",
+      "canonical_name": "長友 佑都",
+      "team_id": "FCT",
+      "position": "DF",
+      "number": 5,
+      "en_name": "Yuto Nagatomo",
+      "aliases": [
+        "長友 佑都",
+        "長友佑都",
+        "長友",
+        "Yuto Nagatomo",
+        "Y. Nagatomo"
+      ]
+    },
+    {
+      "player_id": "P_FCT_KOIZUMI",
+      "canonical_name": "小泉 慶",
+      "team_id": "FCT",
+      "position": "MF",
+      "number": 37,
+      "en_name": "Kei Koizumi",
+      "aliases": [
+        "小泉 慶",
+        "小泉慶",
+        "小泉",
+        "Kei Koizumi",
+        "K. Koizumi"
+      ]
+    },
+    {
+      "player_id": "P_KAS_SUZUKI",
+      "canonical_name": "鈴木 優磨",
+      "team_id": "KAS",
+      "position": "FW",
+      "number": 40,
+      "en_name": "Yuma Suzuki",
+      "aliases": [
+        "鈴木 優磨",
+        "鈴木優磨",
+        "鈴木",
+        "Yuma Suzuki",
+        "Y. Suzuki"
+      ]
+    },
+    {
+      "player_id": "P_KAS_ANZAI",
+      "canonical_name": "安西 幸輝",
+      "team_id": "KAS",
+      "position": "DF",
+      "number": 2,
+      "en_name": "Koki Anzai",
+      "aliases": [
+        "安西 幸輝",
+        "安西幸輝",
+        "安西",
+        "Koki Anzai",
+        "K. Anzai"
+      ]
+    }
+  ]
+}

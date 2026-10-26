@@ -182,6 +182,37 @@ class TestFootballLabScraper(unittest.TestCase):
         self.assertIn("キム スンギュ", md)
         self.assertIn("| ゴール期待値 | 1.55 |", md)
 
+    def test_extract_player_cbp_matrix(self):
+        """選手個別CBP獲得マトリクスの集約テスト."""
+        cbp_data = extract_flab_cbp(self.soup)
+        self.assertIn("player_matrix", cbp_data)
+        matrix = cbp_data["player_matrix"]
+        self.assertGreater(len(matrix), 20)
+
+        # 高宇洋のCBPチェック
+        ko = next((p for p in matrix if "高" in p["player_name"]), None)
+        self.assertIsNotNone(ko)
+        self.assertEqual(ko["team_side"], "HOME")
+        self.assertGreater(ko["gain"], 15.0)  # 奪取20.78
+        self.assertGreater(ko["pass"], 2.0)   # パス2.74
+
+    def test_football_lab_scraper_class(self):
+        """FootballLabScraperのスラッグ解決およびURL生成テスト."""
+        from scrapers.football_lab import FootballLabScraper
+
+        scraper = FootballLabScraper()
+        self.assertEqual(scraper.get_club_slug("FCT"), "fctk")
+        self.assertEqual(scraper.get_club_slug("FC東京"), "fctk")
+        self.assertEqual(scraper.get_club_slug("浦和"), "uraw")
+        self.assertEqual(scraper.get_club_slug("ZEL"), "mcd")
+
+        url = scraper.build_match_url("FCT", "2026-10-21")
+        self.assertEqual(
+            url,
+            "https://www.football-lab.jp/fctk/report/?year=2026&month=10&date=21",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
+

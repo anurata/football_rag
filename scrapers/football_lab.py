@@ -1,7 +1,12 @@
+from __future__ import annotations
+
 import os
 import re
 import urllib.request
+from typing import Any, Dict, List, Optional
+
 from bs4 import BeautifulSoup
+
 
 
 def fetch_html(url: str, timeout: int = 15) -> str:
@@ -218,7 +223,72 @@ def extract_flab_cbp(soup: BeautifulSoup) -> dict:
                         )
         cbp_data["categories"][cat_name] = players_list
 
+    # 3. 選手ごとの全8カテゴリCBPマトリクスを集約
+    cbp_data["player_matrix"] = extract_flab_player_cbp_matrix(soup, category_names)
+
     return cbp_data
+
+
+def extract_flab_player_cbp_matrix(
+    soup: BeautifulSoup,
+    category_names: dict,
+) -> list[dict]:
+    """全出場選手の各CBP項目（攻撃/パス/クロス/ドリブル/シュート/奪取/守備/セーブ）を集約する."""
+    import collections
+
+    player_dict: dict = collections.defaultdict(
+        lambda: {
+            "team_side": "",
+            "points": {cat: 0.0 for cat in category_names.values()},
+        },
+    )
+
+    for cat_id, cat_name in category_names.items():
+        rank_div = soup.find(id=f"rank{cat_id}")
+        if not rank_div:
+            continue
+        tbl = rank_div.find("table")
+        if not tbl:
+            continue
+        for tr in tbl.find_all("tr"):
+            tds = [td.get_text(strip=True) for td in tr.find_all(["th", "td"])]
+            if len(tds) < 3:
+                continue
+            h_name = tds[0] if len(tds) > 0 and tds[0] else ""
+            try:
+                pts = float(tds[2]) if len(tds) > 2 and tds[2] else 0.0
+            except ValueError:
+                pts = 0.0
+            a_name = tds[4] if len(tds) > 4 and tds[4] else ""
+
+            if h_name:
+                player_dict[h_name]["team_side"] = "HOME"
+                player_dict[h_name]["points"][cat_name] = pts
+            if a_name:
+                player_dict[a_name]["team_side"] = "AWAY"
+                player_dict[a_name]["points"][cat_name] = pts
+
+    matrix_list = []
+    for player_name, p_data in player_dict.items():
+        matrix_list.append(
+            {
+                "player_name": player_name,
+                "team_side": p_data["team_side"],
+                "attack": p_data["points"].get("攻撃", 0.0),
+                "pass": p_data["points"].get("パス", 0.0),
+                "cross": p_data["points"].get("クロス", 0.0),
+                "dribble": p_data["points"].get("ドリブル", 0.0),
+                "shoot": p_data["points"].get("シュート", 0.0),
+                "gain": p_data["points"].get("奪取", 0.0),
+                "defense": p_data["points"].get("守備", 0.0),
+                "save": p_data["points"].get("セーブ", 0.0),
+            },
+        )
+
+    # チーム側、攻撃ポイント順でソート
+    matrix_list.sort(key=lambda x: (x["team_side"], -x["attack"]))
+    return matrix_list
+
 
 
 def extract_flab_timeline_blocks(soup: BeautifulSoup) -> list[dict]:
@@ -460,7 +530,21 @@ def format_cbp_markdown(cbp_data: dict) -> str:
         else:
             lines.append("データなし\n")
 
+    # 選手別CBPマトリクス一覧表
+    if cbp_data.get("player_matrix"):
+        lines.append("### 選手個別 CBP獲得マトリクス (全8項目)")
+        lines.append("| 選手名 | 側 | 攻撃 | パス | クロス | ドリブル | シュート | 奪取 | 守備 | セーブ |")
+        lines.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+        for m in cbp_data["player_matrix"]:
+            lines.append(
+                f"| {m['player_name']} | {m['team_side']} | {m['attack']:.2f} | {m['pass']:.2f} | "
+                f"{m['cross']:.2f} | {m['dribble']:.2f} | {m['shoot']:.2f} | {m['gain']:.2f} | "
+                f"{m['defense']:.2f} | {m['save']:.2f} |",
+            )
+        lines.append("")
+
     return "\n".join(lines)
+
 
 
 def build_flab_markdown(
@@ -636,8 +720,230 @@ def scrape_football_lab_match(
     return file_path
 
 
+class FootballLabScraper:
+    """Football LABのデータスクレイパー."""
+
+    BASE_URL = "https://www.football-lab.jp"
+
+    # 主要クラブのスラッグ定義（4文字体系）
+    CLUB_SLUGS = {
+        "FCT": "fctk",
+        "KAS": "kasm",
+        "URA": "uraw",
+        "REY": "kasw",
+        "VER": "tk-v",
+        "ZEL": "mcd",
+        "KAW": "ka-f",
+        "MAR": "y-fm",
+        "YFC": "y-fc",
+        "BEL": "shon",
+        "NII": "niig",
+        "IWA": "iwat",
+        "NAG": "nago",
+        "SAN": "kyot",
+        "GAM": "g-os",
+        "CER": "c-os",
+        "VOB": "kobe",
+        "HIR": "hiro",
+        "FUK": "fuku",
+        "SAG": "tosu",
+        "CON": "sapp",
+        "OKA": "okay",
+        "PUL": "shim",
+        "MIT": "mito",
+        "JEF": "chib",
+        "VVN": "ngsk",
+    }
+
+    def __init__(self, timeout: int = 15) -> None:
+        """スクレイパーを初期化する."""
+        self.timeout = timeout
+
+    def get_club_slug(self, team_id_or_name: str) -> Optional[str]:
+        """チームIDまたは名称からFootball LABのスラッグを解決する."""
+        tid = team_id_or_name.upper().strip()
+        if tid in self.CLUB_SLUGS:
+            return self.CLUB_SLUGS[tid]
+
+        # 名称からの簡易解決
+        name_map = {
+            "FC東京": "fctk",
+            "東京": "fctk",
+            "鹿島": "kasm",
+            "浦和": "uraw",
+            "柏": "kasw",
+            "東京V": "tk-v",
+            "町田": "mcd",
+            "川崎F": "ka-f",
+            "川崎": "ka-f",
+            "横浜FM": "y-fm",
+            "横浜FC": "y-fc",
+            "湘南": "shon",
+            "新潟": "niig",
+            "磐田": "iwat",
+            "名古屋": "nago",
+            "京都": "kyot",
+            "G大阪": "g-os",
+            "ガンバ": "g-os",
+            "C大阪": "c-os",
+            "セレッソ": "c-os",
+            "神戸": "kobe",
+            "広島": "hiro",
+            "福岡": "fuku",
+            "鳥栖": "tosu",
+            "札幌": "sapp",
+            "岡山": "okay",
+            "清水": "shim",
+            "水戸": "mito",
+            "千葉": "chib",
+            "長崎": "ngsk",
+        }
+        for k, v in name_map.items():
+            if k in team_id_or_name:
+                return v
+        return None
+
+    def build_match_url(
+        self,
+        home_team_id: str,
+        date_str: str,
+    ) -> Optional[str]:
+        """ホームチームと日付からマッチレポートURLを生成する.
+
+        Args:
+            home_team_id: ホームチームのIDまたは名称
+            date_str: 試合日 (例: '2026-10-21' または '20261021')
+
+        Returns:
+            Football LABのマッチレポートURL
+        """
+        slug = self.get_club_slug(home_team_id)
+        if not slug:
+            return None
+
+        clean_date = date_str.replace("-", "").strip()
+        if len(clean_date) != 8:
+            return None
+
+        year = int(clean_date[:4])
+        month = int(clean_date[4:6])
+        day = int(clean_date[6:8])
+
+        return f"{self.BASE_URL}/{slug}/report/?year={year}&month={month}&date={day}"
+
+    def fetch_match_data(self, match_url: str) -> dict:
+        """マッチレポートURLから全データを取得・パースして辞書で返す."""
+        match_html = fetch_html(match_url, timeout=self.timeout)
+        match_soup = BeautifulSoup(match_html, "html.parser")
+
+        title_elem = match_soup.find("title")
+        title = (
+            title_elem.get_text(strip=True).split("|")[0].strip()
+            if title_elem
+            else "Match Report"
+        )
+
+        report_text = extract_flab_report_text(match_soup)
+        players_data = extract_flab_players(match_soup)
+        stats = extract_flab_stats(match_soup)
+        cbp_data = extract_flab_cbp(match_soup)
+        timeline_blocks = extract_flab_timeline_blocks(match_soup)
+        script_data = extract_flab_script_data(match_html)
+        heatmaps = extract_flab_heatmaps(match_soup)
+
+        return {
+            "title": title,
+            "url": match_url,
+            "report_text": report_text,
+            "players": players_data,
+            "stats": stats,
+            "cbp": cbp_data,
+            "timeline_blocks": timeline_blocks,
+            "script_data": script_data,
+            "heatmaps": heatmaps,
+        }
+
+    def save_raw_data(
+        self,
+        match_id: str,
+        date_str: str,
+        home_team_id: str,
+        away_team_id: str = "",
+        output_dir: str = "data/raw/football_lab",
+        markdown_dir: str = "data/markdown",
+    ) -> dict[str, str]:
+        """Football LABデータを取得し、JSONおよびMarkdownとして保存する.
+
+        Args:
+            match_id: 試合識別子 (例: '20261021_FCT_KAS' または '2026102108')
+            date_str: 試合日
+            home_team_id: ホームチームID
+            away_team_id: アウェイチームID
+            output_dir: 生JSON保存先ディレクトリ
+            markdown_dir: Markdown保存先ディレクトリ
+
+        Returns:
+            保存したファイルパスの辞書
+        """
+        import json
+
+        url = self.build_match_url(home_team_id, date_str)
+        if not url:
+            # ホームチームで取れない場合はアウェイチームでも試行
+            if away_team_id:
+                url = self.build_match_url(away_team_id, date_str)
+            if not url:
+                raise ValueError(
+                    f"Could not build Football LAB URL for {home_team_id} vs {away_team_id} on {date_str}",
+                )
+
+        data = self.fetch_match_data(url)
+
+        os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(markdown_dir, exist_ok=True)
+
+        json_path = os.path.join(output_dir, f"{match_id}.json")
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "match_id": match_id,
+                    "date": date_str,
+                    "home_team_id": home_team_id,
+                    "away_team_id": away_team_id,
+                    "data": data,
+                },
+                f,
+                ensure_ascii=False,
+                indent=2,
+            )
+
+        # 構造化Markdownの構築・保存
+        md_content = build_flab_markdown(
+            match_id=match_id,
+            url=url,
+            title=data["title"],
+            report_text=data["report_text"],
+            players_data=data["players"],
+            stats=data["stats"],
+            cbp_data=data["cbp"],
+            timeline_blocks=data["timeline_blocks"],
+            script_data=data["script_data"],
+            heatmaps=data["heatmaps"],
+            team_styles=[],
+        )
+        md_path = os.path.join(markdown_dir, f"{match_id}_flab.md")
+        with open(md_path, "w", encoding="utf-8") as f:
+            f.write(md_content)
+
+        return {
+            "json_path": json_path,
+            "markdown_path": md_path,
+        }
+
+
 if __name__ == "__main__":
     # 10/21 柏戦（全スタッツ・トラッキング・CBPが反映済みの試合）
     sample_match_id = "20261021_FCT_KAS"
     sample_url = "https://www.football-lab.jp/fctk/report/?year=2026&month=10&date=21"
     scrape_football_lab_match(sample_match_id, sample_url)
+

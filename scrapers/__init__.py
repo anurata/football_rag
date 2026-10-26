@@ -7,7 +7,7 @@ Provides modules to scrape data from:
 """
 
 from .jleague_official import scrape_jleague_match
-from .football_lab import scrape_football_lab_match
+from .football_lab import scrape_football_lab_match, FootballLabScraper
 from .fctokyo_official import scrape_fctokyo_match_review
 from .schedule_crawler import ScheduleCrawler
 from .yahoo_soccer import YahooSoccerScraper
@@ -20,6 +20,8 @@ __all__ = [
     "ScheduleCrawler",
     "YahooSoccerScraper",
     "SpaiasoccerScraper",
+    "FootballLabScraper",
 ]
+
 
 

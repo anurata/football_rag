@@ -3,6 +3,68 @@ import re
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
+from pipeline.normalizer import EntityNormalizer
+
+
+def resolve_canonical_match_id(
+    soup: BeautifulSoup,
+    url: str,
+    normalizer: EntityNormalizer | None = None,
+) -> tuple[str | None, str | None]:
+    """
+    HTML内のTitle、H1、およびURLからJ1の対戦カードと正規match_idを解決する。
+    J1の試合でない場合や404・検索ページの場合は (None, None) を返す。
+    """
+    title_text = soup.title.get_text(strip=True) if soup.title else ""
+    h1 = soup.find("h1")
+    h1_text = h1.get_text(strip=True) if h1 else ""
+
+    # 404や無効なページの判定
+    if h1_text == "404" or "見つかりません" in h1_text:
+        return None, None
+    if any(k in title_text for k in ["Ｊ２", "Ｊ３", "404"]):
+        return None, None
+
+    norm = normalizer or EntityNormalizer()
+    home_raw, away_raw = "", ""
+
+    if "vs" in h1_text:
+        parts = h1_text.split("vs")
+        home_raw, away_raw = parts[0].strip(), parts[1].strip()
+    elif "vs" in title_text:
+        m = re.search(r"【公式】(.+?)\s*vs\s*(.+?)の試合結果", title_text)
+        if m:
+            home_raw, away_raw = m.group(1).strip(), m.group(2).strip()
+
+    if not home_raw or not away_raw:
+        return None, None
+
+    home_id = norm.normalize_team_name(home_raw)
+    away_id = norm.normalize_team_name(away_raw)
+
+    # 両方のチームIDがJ1正規マスターに存在することを確認（J2/J3クラブ混入を防止）
+    if not home_id or not away_id:
+        return None, None
+
+    # URLから日付（YYYYMMDD）を抽出
+    m_url = re.search(r"/(\d{4})/(\d{4})\d{2}/", url)
+    if m_url:
+        date_str = f"{m_url.group(1)}{m_url.group(2)}"
+    else:
+        # 日付要素からの抽出フォールバック
+        date_el = soup.find(class_=lambda c: c and "o-page-header__date" in c)
+        date_text = date_el.get_text(strip=True) if date_el else ""
+        m_date = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", date_text)
+        if m_date:
+            y, m_mon, d = m_date.groups()
+            date_str = f"{int(y):04d}{int(m_mon):02d}{int(d):02d}"
+        else:
+            date_str = "UNKNOWN"
+
+    match_id = f"{date_str}_{home_id}_{away_id}"
+    match_title = f"{home_raw} vs {away_raw}"
+    return match_id, match_title
+
 
 def extract_match_title(soup: BeautifulSoup, default_id: str) -> str:
     """試合カード名（h1）を取得する。取得できない場合はデフォルト値を返す。"""
@@ -11,13 +73,13 @@ def extract_match_title(soup: BeautifulSoup, default_id: str) -> str:
         title = h1_elem.get_text(strip=True)
         if title and title != "検索":
             return title
-    
+
     title_elem = soup.find("title")
     if title_elem:
         raw_title = title_elem.get_text(strip=True)
         if raw_title and raw_title != "検索":
             return raw_title
-            
+
     return f"J1 Match {default_id}"
 
 
@@ -275,6 +337,7 @@ def build_markdown_content(
     report_text: str,
     coach_comments: list[dict],
     player_comments: list[dict],
+    matchweek: int | None = None,
 ) -> str:
     """各セクションを統合して構造化Markdownを生成する。"""
     stats_md = format_stats_markdown(stats)
@@ -283,12 +346,13 @@ def build_markdown_content(
 
     scorers_text = "、".join(basic_info.get("scorers", [])) if basic_info.get("scorers") else "なし"
     score_display = basic_info.get("score", "試合終了")
+    mw_line = f"- **節数**: 第{matchweek}節\n" if matchweek is not None else ""
 
     markdown = f"""# {title} (Match ID: {match_id})
 
 ## 【1. 試合概要・基本データ】
 - **対象URL**: {base_url}
-- **開催日時**: {basic_info.get('date', '不明')}
+{mw_line}- **開催日時**: {basic_info.get('date', '不明')}
 - **スタジアム**: {basic_info.get('stadium', '不明')}
 - **入場者数**: {basic_info.get('attendance', '不明')}
 - **天候・気候**: {basic_info.get('climate', '不明')}
@@ -314,64 +378,78 @@ def build_markdown_content(
     return markdown
 
 
-def scrape_jleague_match(
+def scrape_jleague_match_page(
+    page,
     match_id: str,
     base_url: str,
     output_dir: str = "data/markdown",
-    headless: bool = True,
-):
-    """Playwrightを用いてJリーグ公式試合ページからデータをスクレイピングし、構造化Markdownを保存する。"""
+    matchweek: int | None = None,
+    normalizer: EntityNormalizer | None = None,
+) -> str | None:
+    """既存のPlaywright Pageオブジェクトを用いてデータを抽出し、Markdownを保存する。
+    J1の有効な試合でない場合はNoneを返し、保存をスキップする。
+    """
     print(f"[{match_id}] クレンジング強化型スクレイピングを開始します: {base_url}")
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=headless)
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            viewport={
-                "width": 1280,
-                "height": 800,
-            },
-        )
-        page = context.new_page()
+    # 1. サマリー画面の取得
+    print("  -> サマリー画面を読み込み中...")
+    try:
+        page.goto(base_url, wait_until="domcontentloaded", timeout=20000)
+        page.wait_for_timeout(1000)
+    except Exception as e:
+        print(f"  [スキップ] ページ遷移エラー: {e}")
+        return None
 
+    summary_soup = BeautifulSoup(page.content(), "html.parser")
+
+    # 自己整合性検証: ページの真のmatch_idと対戦カード名を解決
+    canonical_id, canonical_title = resolve_canonical_match_id(
+        soup=summary_soup,
+        url=base_url,
+        normalizer=normalizer,
+    )
+
+    if canonical_id is None:
+        print(f"  [スキップ] J1の有効な試合ページではないためスキップします: {base_url}")
+        return None
+
+    # 呼び出し元match_idと不一致がある場合は真のIDを採用
+    if canonical_id != match_id:
+        print(f"  [自動補正] match_idを正規化補正しました: {match_id} -> {canonical_id}")
+        match_id = canonical_id
+
+    match_title = canonical_title or extract_match_title(summary_soup, match_id)
+    basic_info = extract_basic_info(summary_soup)
+    stats = extract_team_stats(summary_soup)
+
+    # 2. 戦評タブの表示・取得
+    print("  -> 戦評タブに切り替え中...")
+    review_link = page.query_selector("a[href*='#review']")
+    if review_link:
         try:
-            # 1. サマリー画面の取得
-            print("  -> サマリー画面を読み込み中...")
-            page.goto(base_url, wait_until="networkidle", timeout=30000)
-            page.wait_for_timeout(2000)
-            summary_soup = BeautifulSoup(page.content(), "html.parser")
+            review_link.click()
+            page.wait_for_timeout(1500)
+        except Exception:
+            review_url = base_url.rstrip("/") + "/#review"
+            page.goto(review_url, wait_until="domcontentloaded", timeout=15000)
+            page.wait_for_timeout(1000)
+    else:
+        review_url = base_url.rstrip("/") + "/#review"
+        try:
+            page.goto(review_url, wait_until="domcontentloaded", timeout=15000)
+            page.wait_for_timeout(1000)
+        except Exception:
+            pass
 
-            match_title = extract_match_title(summary_soup, match_id)
-            basic_info = extract_basic_info(summary_soup)
-            stats = extract_team_stats(summary_soup)
+    review_soup = BeautifulSoup(page.content(), "html.parser")
 
-            # 2. 戦評タブの表示・取得
-            print("  -> 戦評タブに切り替え中...")
-            review_link = page.query_selector("a[href*='#review']")
-            if review_link:
-                review_link.click()
-                page.wait_for_timeout(2000)
-            else:
-                # URL直接指定でリトライ
-                review_url = base_url.rstrip("/") + "/#review"
-                page.goto(review_url, wait_until="networkidle", timeout=20000)
-                page.wait_for_timeout(2000)
+    report_text = extract_match_report(review_soup)
+    coach_comments = extract_comments(review_soup, "監督コメント")
+    player_comments = extract_comments(review_soup, "選手コメント")
 
-            review_soup = BeautifulSoup(page.content(), "html.parser")
-
-            report_text = extract_match_report(review_soup)
-            coach_comments = extract_comments(review_soup, "監督コメント")
-            player_comments = extract_comments(review_soup, "選手コメント")
-
-            print(
-                f"  -> 抽出完了: 戦評 ({len(report_text)}文字), 監督コメント ({len(coach_comments)}件), 選手コメント ({len(player_comments)}件)",
-            )
-
-        except Exception as e:
-            print(f"スクレイピング中にエラーが発生しました: {e}")
-            raise
-        finally:
-            browser.close()
+    print(
+        f"  -> 抽出完了: 戦評 ({len(report_text)}文字), 監督コメント ({len(coach_comments)}件), 選手コメント ({len(player_comments)}件)",
+    )
 
     # 3. 構造化Markdownの保存
     markdown_content = build_markdown_content(
@@ -383,6 +461,7 @@ def scrape_jleague_match(
         report_text=report_text,
         coach_comments=coach_comments,
         player_comments=player_comments,
+        matchweek=matchweek,
     )
 
     os.makedirs(output_dir, exist_ok=True)
@@ -393,6 +472,36 @@ def scrape_jleague_match(
 
     print(f"成功: クレンジング済みのデータを {file_path} に保存しました。\n")
     return file_path
+
+
+def scrape_jleague_match(
+    match_id: str,
+    base_url: str,
+    output_dir: str = "data/markdown",
+    matchweek: int | None = None,
+    headless: bool = True,
+) -> str:
+    """Playwrightを用いてJリーグ公式試合ページからデータをスクレイピングし、構造化Markdownを保存する。"""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=headless)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            viewport={
+                "width": 1280,
+                "height": 800,
+            },
+        )
+        page = context.new_page()
+        try:
+            return scrape_jleague_match_page(
+                page=page,
+                match_id=match_id,
+                base_url=base_url,
+                output_dir=output_dir,
+                matchweek=matchweek,
+            )
+        finally:
+            browser.close()
 
 
 if __name__ == "__main__":

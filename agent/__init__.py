@@ -6,6 +6,7 @@ from .sql_tools import TacticalSQLTools
 from .retriever import TacticalHybridRetriever
 from .engine import TacticalAnalystEngine
 from .analyst_prompts import SYSTEM_PROMPT, WATCHING_LENSES_GUIDE
+from .gemini_client import GeminiTacticalClient
 
 __all__ = [
     "TacticalSQLTools",
@@ -13,4 +14,5 @@ __all__ = [
     "TacticalAnalystEngine",
     "SYSTEM_PROMPT",
     "WATCHING_LENSES_GUIDE",
+    "GeminiTacticalClient",
 ]

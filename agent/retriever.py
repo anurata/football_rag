@@ -5,6 +5,7 @@ Combines Layer 1 (Match Facts from ChromaDB & SQLite) with Layer 2 (Tactical Kno
 
 from pathlib import Path
 from typing import List, Optional, Dict, Any
+import json
 import yaml
 
 from pipeline.vector_indexer import TacticalVectorIndexer, DEFAULT_COLLECTION_NAME
@@ -30,11 +31,13 @@ class TacticalHybridRetriever:
         self.causal_trees: List[Dict[str, Any]] = []
         self.tactical_tradeoffs: List[Dict[str, Any]] = []
         self.system_matrix: List[Dict[str, Any]] = []
+        self.player_archetypes: List[Dict[str, Any]] = []
+        self.team_philosophies: List[Dict[str, Any]] = []
 
         self._load_knowledge_base()
 
     def _load_knowledge_base(self) -> None:
-        """Load YAML knowledge dictionaries from disk."""
+        """Load YAML and JSON knowledge dictionaries from disk."""
         metric_file = self.knowledge_path / "metric_causal_trees.yaml"
         if metric_file.exists():
             with open(metric_file, "r", encoding="utf-8") as f:
@@ -52,6 +55,13 @@ class TacticalHybridRetriever:
             with open(system_file, "r", encoding="utf-8") as f:
                 data = yaml.safe_load(f) or {}
                 self.system_matrix = data.get("matchups", [])
+
+        archetype_file = self.knowledge_path / "player_archetypes.json"
+        if archetype_file.exists():
+            with open(archetype_file, "r", encoding="utf-8") as f:
+                data = json.load(f) or {}
+                self.player_archetypes = data.get("archetypes", [])
+                self.team_philosophies = data.get("team_philosophies", [])
 
     # ---------------------------------------------------------
     # Layer 1: Match Fact Vector Search
@@ -202,6 +212,42 @@ class TacticalHybridRetriever:
 
         return None
 
+    def search_player_archetype(
+        self,
+        keyword_or_role: str,
+    ) -> List[Dict[str, Any]]:
+        """Search player archetype profile by role ID, name, or keywords."""
+        term = keyword_or_role.lower().strip()
+        matched = []
+        for arch in self.player_archetypes:
+            aid = arch.get("archetype_id", "").lower()
+            aname = arch.get("name", "").lower()
+            desc = arch.get("description", "").lower()
+            if term in aid or term in aname or term in desc:
+                matched.append(arch)
+                continue
+
+            for tf in arch.get("tactical_functions", []):
+                if term in tf.lower():
+                    matched.append(arch)
+                    break
+        return matched
+
+    def search_team_philosophy(
+        self,
+        keyword: str,
+    ) -> List[Dict[str, Any]]:
+        """Search team tactical philosophies by keyword."""
+        term = keyword.lower().strip()
+        matched = []
+        for phil in self.team_philosophies:
+            pid = phil.get("philosophy_id", "").lower()
+            pname = phil.get("name", "").lower()
+            chars = phil.get("characteristics", "").lower()
+            if term in pid or term in pname or term in chars:
+                matched.append(phil)
+        return matched
+
     # ---------------------------------------------------------
     # Combined Retrieval for Reasoning Agent
     # ---------------------------------------------------------
@@ -226,6 +272,7 @@ class TacticalHybridRetriever:
 
         causal_hypotheses = self.search_causal_hypotheses(query)
         tradeoffs = self.search_tactical_tradeoffs(query)
+        archetypes = self.search_player_archetype(query)
 
         system_matchup = None
         if formation_a and formation_b:
@@ -236,5 +283,6 @@ class TacticalHybridRetriever:
             "fact_chunks": facts,
             "causal_hypotheses": causal_hypotheses,
             "tactical_tradeoffs": tradeoffs,
+            "player_archetypes": archetypes,
             "system_matchup": system_matchup,
         }

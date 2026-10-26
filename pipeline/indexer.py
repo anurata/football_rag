@@ -12,7 +12,7 @@ from pipeline.models import (
     MatchReviewModel,
     MatchBundleModel,
 )
-from pipeline.db import get_db_connection, DEFAULT_DB_PATH
+from pipeline.db import get_db_connection, init_db, DEFAULT_DB_PATH
 
 
 class MatchIndexer:
@@ -23,7 +23,7 @@ class MatchIndexer:
             self.conn = conn
             self._should_close = False
         else:
-            self.conn = get_db_connection(db_path or DEFAULT_DB_PATH)
+            self.conn = init_db(db_path or DEFAULT_DB_PATH)
             self._should_close = True
 
     def close(self) -> None:

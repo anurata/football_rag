@@ -25,6 +25,8 @@ def _extract_header_info(md_text: str) -> Dict[str, str]:
     """Extract metadata lines from Markdown section 1."""
     data = {}
     patterns = {
+        "url": r"対象URL\*\*:\s*([^\n\r]+)",
+        "matchweek": r"節数\*\*:\s*第?(\d+)節?",
         "date": r"開催日時\*\*:\s*([^\n\r]+)",
         "stadium": r"スタジアム\*\*:\s*([^\n\r]+)",
         "attendance": r"入場者数\*\*:\s*([^\n\r]+)",
@@ -40,15 +42,15 @@ def _extract_header_info(md_text: str) -> Dict[str, str]:
 
 
 def _parse_scores(score_str: str) -> Tuple[Optional[int], Optional[int]]:
-    """Parse score string like '6 - 0' or '０－０'."""
+    """Parse score string like '6 - 0' or 'FC東京 6 - 0 水戸'."""
     if not score_str:
         return (None, None)
     import unicodedata
     clean = unicodedata.normalize("NFKC", score_str)
-    parts = re.split(r"[-ー−~〜]", clean)
-    if len(parts) >= 2:
+    m = re.search(r"(\d+)\s*[-ー−~〜]\s*(\d+)", clean)
+    if m:
         try:
-            return (int(parts[0].strip()), int(parts[1].strip()))
+            return (int(m.group(1)), int(m.group(2)))
         except ValueError:
             pass
     return (None, None)
@@ -320,10 +322,21 @@ def parse_jleague_markdown(
     )
 
     attendance_val = _safe_int(info.get("attendance", ""))
+    matchweek_val = _safe_int(info.get("matchweek", ""))
+
+    # Season extraction
+    season_val = 2026
+    if date_m:
+        season_val = int(date_m.group(1))
+    elif info.get("url"):
+        url_yr = re.search(r"/j1/(\d{4})/", info.get("url", ""))
+        if url_yr:
+            season_val = int(url_yr.group(1))
 
     match_model = MatchModel(
         match_id=match_id,
-        season=2026,
+        season=season_val,
+        matchweek=matchweek_val,
         date=date_clean,
         home_team_id=home_id,
         away_team_id=away_id,

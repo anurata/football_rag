@@ -1,0 +1,348 @@
+=== Inline Script 0 (length: 157) ===
+
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-W2XQ32EKLX');
+
+
+
+==================================================
+
+=== Inline Script 1 (length: 9449) ===
+
+$(function(){
+$(window).load(function(){
+	function swiperSeason(){
+		if(window.innerWidth <= 640){
+			var spv = 2;
+		} else {
+			var spv = 4;
+		}
+		var swiper = new Swiper('.seasonMenu .swiper-container', {
+			slidesPerView: spv,
+			initialSlide: 0,
+			spaceBetween: 20,
+			slidesPerGroup: 2,
+			loop: false,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+		});
+	}
+	$(window).on('resize', function(){
+		swiperSeason();
+	});
+	swiperSeason();
+});
+});
+function mOctagon(id,team_id,ptx,pty, uno,txt,goal,card,change) {
+	if (team_id==270) { 
+	b_clr = '#06038D';
+	f_clr = '#fff';
+	} else {
+	b_clr = '#888888';
+	f_clr = '#ffffff';
+	}
+	var canvas = document.getElementById(id);
+	ctx = canvas.getContext('2d');
+	lw = 40;
+	linew = lw/2;
+	ctx.strokeStyle = b_clr;
+
+	ctx.shadowColor = 'rgba(0,0,0,1)';
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur = 6;
+	ctx.fillStyle = b_clr;
+
+	ctx.beginPath();
+	ctx.moveTo(ptx - lw, pty - linew); 
+	ctx.lineTo(ptx - lw, pty + linew);
+	ctx.lineTo(ptx - linew, pty + lw);
+	ctx.lineTo(ptx + linew, pty + lw);
+	ctx.lineTo(ptx + lw, pty + linew);
+	ctx.lineTo(ptx + lw, pty - linew);
+	ctx.lineTo(ptx + linew, pty - lw);
+	ctx.lineTo(ptx - linew, pty - lw);
+	ctx.lineTo(ptx - lw, pty - linew);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.fill();
+
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.shadowBlur = 0;
+
+	ctx.fillStyle = '#000';
+	ctx.lineWidth = 1;
+	ctx.font = lw*1.1 + "px 'Arial'";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "top";
+	ctx.fillText(txt, ptx, pty+lw+lw/2, 180);
+
+	ctx.fillStyle = f_clr;
+	ctx.lineWidth = 2;
+	ctx.font =  lw + "px 'Arial'";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "top";
+	ctx.fillText(uno, ptx, pty-lw*0.45, lw*2);
+
+	if (card!='') {
+	var image = new Image() ;
+	image.onload = function () {
+		var canvas = document.getElementById(id);
+		ctx = canvas.getContext('2d');
+		ctx.shadowColor = 'rgba(100,100,100,1)';
+		ctx.shadowOffsetX = 1;
+		ctx.shadowOffsetY = 1;
+		ctx.shadowBlur = 3;
+		ctx.beginPath() ;
+		ctx.drawImage( this, 0, 0, 10, 10, ptx-10, pty+25, 20, 20 ) ;
+	}
+		if (card=='yellow1') {
+			image.src = 'data:image/gif;base64,R0lGODlhCQALAIAAAP/YAAAAACH5BAAAAAAALAAAAAAJAAsAAAIIhI+py+0PIysAOw==';
+		} else if (card=='yellow2') {
+			image.src = 'data:image/gif;base64,R0lGODlhCQALAKIHAP/YAO8xQPb26f/XAPf36/n58fj47vb26CH5BAEAAAcALAAAAAAJAAsAAAMeeGfRTqQ4J6oVDeiNw+bZB3TiGH6kKCjA4A4jqyoJADs=';
+		} else if (card=='red') {
+			image.src = 'data:image/gif;base64,R0lGODlhCQALAIAAAO8xQAAAACH5BAAAAAAALAAAAAAJAAsAAAIIhI+py+0PIysAOw==';
+		} else if (card=='yellowred') {
+			image.src = 'data:image/gif;base64,R0lGODlhCQALAKIHAP/YAO8xQPb26f/XAPf36/n58fj47vb26CH5BAEAAAcALAAAAAAJAAsAAAMeeGfRTqQ4J6oVDeiNw+bZB3TiGH6kKCjA4A4jqyoJADs=';
+		} else {
+			image.src = '';
+		}
+	}
+	if (change!='') {
+	var image = new Image() ;
+	image.onload = function () {
+		var canvas = document.getElementById(id);
+		ctx = canvas.getContext('2d');
+		ctx.shadowColor = 'rgba(100,100,100,1)';
+		ctx.shadowOffsetX = 1;
+		ctx.shadowOffsetY = 1;
+		ctx.shadowBlur = 3;
+		ctx.beginPath() ;
+		ctx.drawImage( this, 0, 0, 10, 10, ptx+30, pty+25, 20, 20 ) ;
+	}
+		if (change=='out') {
+			image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIVJREFUeNpiZGVlZUAGq1evLgdS9UAsExoa+g5ZjglNYTGQ6gDif+gKQYARZjJUYQ9U/AcQTwDin0hq3zJu2LCBHcjIQVKIE7BArS1gIAIwQTUwEKu4FIhLiFFMmgeRwxlJwxdg0PFicwYcABX0AqkKkD+AGoWwhQY6AFkPCs5/6BIAAQYAursnuSiCeYEAAAAASUVORK5CYII=';
+		} else if (change=='in') {
+			image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHtJREFUeNpi5Oq3Z0ADykB8B4i3A7EXsgQTAya4C8T/gdgTiDchS7AA8WogFkUSYwdiRijbF6rBD6Y4hAE/gGmIY2IgDoA0HCRWMQj8JVbxZiB2ALl5DRYPWqAphHswFItJ/9EV4gpnZSi9HVkhLsV/gHg3EIehSwAEGAC+VRQcdymilwAAAABJRU5ErkJggg==';
+		} else if (change=='inout') {
+			image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMpJREFUeNpi/P//PwMy4J7ggMwFSd4CYj0g/snCgAluAPEnIP4NxH+AWA2IjwCxBTbF6ljETID4LhMD8UCeZePGjTDOeiD2h7JBTvgHxOxQ/g8gtoU5YykQBwDx12lyaWuZGZhYWBlZWJMeTvEBinECsR0QnwEp3grEXrDAEGDmjkOy+hVU7jSIA1LsgMuRXwsOiCPzQR5UBuL7SG69AsTXgfgJumaQyS9AYQjE54CYF4h1gZgHahADuskwt4GccxHK/wKNGBQAEGAAJVMrHwvkP3EAAAAASUVORK5CYII=';
+		} else {
+			image.src = '';
+		}
+	}
+	if (parseInt(goal)>0) {
+	
+	var image = new Image() ;
+	image.onload = function () {
+		var canvas = document.getElementById(id);
+		ctx = canvas.getContext('2d');
+		ctx.shadowColor = 'rgba(100,100,100,1)';
+		ctx.shadowOffsetX = 1;
+		ctx.shadowOffsetY = 1;
+		ctx.shadowBlur = 3;
+		ctx.beginPath() ;
+		for (var z = 1; z <= parseInt(goal); z++) { 
+		ctx.drawImage( this, 0, 0, 42, 42, ptx-60+z*10, pty+25, 20, 20 ) ;
+		}
+	}
+	image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA11pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0iQTIyQjg4OTNEN0M0MEQyRTZDMDY2QzAwNkJGNEIzNkUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzAwQzM0RkEyOEI4MTFFODgxQjY4REEwMEU3RDFCQUMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzAwQzM0RjkyOEI4MTFFODgxQjY4REEwMEU3RDFCQUMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjRCM0IwQkU3QTU4OTExRTZBREQ2RTlCMEJFQTc2QzJGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjRCM0IwQkU4QTU4OTExRTZBREQ2RTlCMEJFQTc2QzJGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+sjRuEwAAAwBQTFRF29vbVExJqqmpn52dfn5+xcLCREREwcHBRT07ZWZmp6Gg4+Pj1dPTGhoaERAQzM3N4uLimZmZe3RzKysrjIWEamlpzMrJaWRky8TGt7Cw4ODgoqKiq6WlISEhuri2pqam2NbXTENDjomJ2djYu7a0ra2t3t7ec21scXFxbWpqUVFRzMbIdnZ2YlxbYmJiwb282dnZtbSxaGFeysnJ0dDQTk5O6ObmmZaW0dDNDAsLycjGioqKVFRUkY6MoJqa1tXVFBQU1NTU0tLSkJCQysrK3Nrbo56exMPDOjo65ePlWFhYMzIxyMjISUlJPT09sqysXl5esbCvhoWFwLi44d/ghX5+pJ6d4uDhuLKytLOzwMC+vLi4AAAAXVpata+vt7e33tzdqqimzs7Oz87MgoGBmZKQxb6/npiYvr270M7NQjk3uLi3vba2tbS0kIuJ4N7fVU9Orqmor62re3l5ZF9fvLq4lZSUko2KxsXD8/Dxvr6+5eXl5OLj3drc2dfYsKqqz8zNx8XFyMHCv768v7y9mJGPsK+t+vf4rqqrrKup7uzt7Orr6efoPDY3NjY229nazszLfHx8g3t5BwcHKCUlnJaWV1JSZGJhODg3/////f39/Pz8/v7++fn5+vr69/f3+/v79PT09fX1+Pj49vb26Ojo6enp7Ozs7+/v7e3t6urq8vLy6+vr8PDw1tbW3d3d8/Pz5ubm7u7u8fHx19fXurq63NzcbW1t5+fn393ey8vI9/b3wru8zMXHlY6Mu7q48vHy5ubn5+bn3dzc19bUv7q5qqSk8u/x1tXVure44eHh4uHh5eTl39/fj4iGwr/AnJybn6Cgvbu8v7q7+vv709PTd3BvdHRz1dPSy8vLoZubLy8vf3l5t7Wz0M/P6+nq0tHQ09HSpZ+gysPE6OjpkouMmpSThYSCurm5+Pb3vLu5sa2tt7e0s62tqKKjb2pmrKam8O/v8/LyvLy8vb6+v72+xcXFyMfHgnl3gHx819bW5+bm+/n6AgICBQQE////hPDDywAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAWOSURBVHjadJV5VBNXFIeHRSAJQ8QQsGgEiShgREoAjaAniMoaFIsFIRQVqlaruFVpo1axLlg1Iqi8mUkm+w5hd9+tTREstHUBi6W0KqW1dsVam9DJQsGl94+Ze9773u+cu7z7oIHhJlY2FobkufF4bmH0wg+U8uc2oWG+QtWaU5Z0l8ElDKalx1KbDNJXoRiKC6Gm2Lv8/8zNmVIrVMmRl1BRs0ApnRg3RPI5pJFyQ0S8/kVU2dBQBYCRDpcPkmbuAiEAEuimCh2OIto5BChT+K9hpcMWM99stnBTw9uZuAgAabUSGYZqIgQAqTfUyNQR7u0n0rnc9FDvxtmCqiqDFIA6yM7aUGW8HkjqdRocWK06ICQkIB6zulK1uh4FYkiL2VFM0Z9Yixu0UgRgGAYwRNzcLEatDgBijbIOgPqJUsSGor+nRNNLDXIUAARBrGL6GusXQxEMEclaMhaWsdbgVhRRkYh46XU20GqYqFaJABRFULGYOG4M9+KUx1WLCVS/OonIDEnnQAlEJDiJYhLCxCIxAFCY2cyneQsI1EjyIlTDT9pRVCKxZg1gcpFILJITyarmEdvl6YkIJOqFrQkPFwCAWpVQBEhvVsuBWI7juAIHWBTPVpA2LURJsNjQWiJcEaGEAXH/bdcmAOQymYKQR9PcbMVz7YYaSTYvugEFqFhCZJPiEseooOfrAcBlUhmQ9qbagJQAKMGmbwlbJlUocBGiMCbYmosXrBThNZoqXJ2fZLYuJJVBG5OsDsPVqDO2KjX6/HCarWG8klw7pCrKyBatyRY2n5EHLWAQf5hF1dT5t2qbg1M4g53FYLEpqsxMrWF1nPVw+SEor4LP5y64B+S4VAOEIfBQv6aPoeAxMR/v3+ucSkTOqYTaw4iY+nFQo6/SAN3mYbcgLlF1MXnr1uQfmAmEXBILIlieC9ERWrVa/VVNR8rQJXD9XiUoOrVtW/I3zFBadGwj1Brf4d6A16t0Op1KU1fLGiTLK9r0I6/MFTK3m5ZkBU/rfRIFNfifOXDpV92lk5efCZ7pzmyGzXbUK3rNRaPpqin+Trdn4JOdwh1siPr3P5eLWlqSt16/nnWqZe9iniMFcBk75ur06e8UHC44XVx82PPPLyDqvfeXBGZmZWUWnVoyt+jTnSdgvtli7aW2O1D3aV/2jBns4pUXciZ/9hEUQY0RegbO3SZkMrcHMjM72lnh9NBQ+qaNG05Pn1GcOCJnV07f4tfHfZl7GFJ3mwI9oyKuBJo8v519zzfRnU2dw558bvTUjK6cnF19fe9d6Osq3ZOx73N/SMxM86yeff1A6/YoagE7N3eE7w7fyaO/Ozd1w9Ifc3O7JnwyNeenpaVLXdIuQgO1TyKoY7yd3ZeZGgpW7skuKSlZvvzs2bO5j+Z1zn83N3v9rMKymWRyWwQCDciE8QFxh3gs74yV4/ZsyH5jQvZrbz2a/+H8R/MezOpxmcnKu5t6fEtPvpq4MFjVH+EwxwumueU9DOiaQGDr1/8y9mcy+Vqnj59bKoPL8aqc1ANJrJcbaaA7sl5523nc2Gvknjc7O1ccXUFeu45hn2Ac+giZfWSIgrn2EplTF+4jzzp69MHbu8+f373l+GCbWbz3o45BRIl1LHKjg8gP7t9fe8PH58YWP1r54PT0RAdnFjKxkOYoZ9iNIJ9Fi478dWTU41SLY43ULx+ahJKmQd0Kv68Xjbp1a9KoyFVch+aJNNHwUSyBxkTbQ/Pwu+UXGTkl0olhF3Xb3CF9YcDX5JMqYYsFPnhsyrF1Tk5OHhUci9mLFldqeOktQOSUxSQGfJDAxo/38PBYdbCCC0d7VyvQVz1GdVTnhKeTNh0j0FXj1+U9fhiQ2PI/79bAgMzYOy1oI91v05TQp0H7TL89t/mvAAMAjSasFwOW7xwAAAAASUVORK5CYII=';
+	}
+}
+
+
+==================================================
+
+=== Inline Script 2 (length: 7235) ===
+
+if (window.innerWidth<360) {
+	sz = 1000 + (360 - window.innerWidth) * 2;
+	ctlz = window.innerWidth/360;
+} else {
+	sz = 1000;
+	ctlz = 1;
+}
+document.getElementById("homeFormation").height = 800;
+document.getElementById("homeFormation").width = sz;
+document.getElementById("awayFormation").height = 800;
+document.getElementById("awayFormation").width = sz;
+var lX = [21*ctlz, 94*ctlz, 166*ctlz, 237*ctlz, 309*ctlz];
+var lY = [7, 60, 112, 164, 216];
+	mOctagon('homeFormation', 270, sz/10*3,60,26,'長倉幹樹',0,'','out');
+	mOctagon('homeFormation', 270, sz/10*7,60,9,'マルセロヒアン',0,'','out');
+	mOctagon('homeFormation', 270, sz/10*1,210,7,'安斎颯馬',0,'','out');
+	mOctagon('homeFormation', 270, sz/10*9,210,10,'佐藤恵允',0,'','out');
+	mOctagon('homeFormation', 270, sz/10*3,360,27,'常盤亨太',0,'','');
+	mOctagon('homeFormation', 270, sz/10*7,360,8,'高宇洋',0,'','');
+	mOctagon('homeFormation', 270, sz/10*1,510,6,'バングーナガンデ佳史扶',0,'','out');
+	mOctagon('homeFormation', 270, sz/10*3,510,4,'稲村隼翔',0,'yellow1','');
+	mOctagon('homeFormation', 270, sz/10*7,510,24,'アレクサンダーショルツ',0,'yellow1','');
+	mOctagon('homeFormation', 270, sz/10*9,510,22,'石原広教',0,'yellow1','');
+	mOctagon('homeFormation', 270, sz/10*5,660,81,'キムスンギュ',0,'','');
+	mOctagon('awayFormation', 132, sz/10*5,60,15,'藤尾翔太',0,'','out');
+	mOctagon('awayFormation', 132, sz/10*3,210,16,'汰木康也',0,'','out');
+	mOctagon('awayFormation', 132, sz/10*7,210,87,'山内日向汰',0,'','out');
+	mOctagon('awayFormation', 132, sz/10*1,360,44,'弓場堅真',0,'','');
+	mOctagon('awayFormation', 132, sz/10*3,360,39,'中川敦瑛',0,'','');
+	mOctagon('awayFormation', 132, sz/10*7,360,21,'小西雄大',0,'yellow1','');
+	mOctagon('awayFormation', 132, sz/10*9,360,24,'久保藤次郎',0,'','out');
+	mOctagon('awayFormation', 132, sz/10*1,510,2,'三丸拡',0,'','');
+	mOctagon('awayFormation', 132, sz/10*5,510,4,'古賀太陽',0,'','');
+	mOctagon('awayFormation', 132, sz/10*9,510,28,'戸嶋祥郎',0,'','out');
+	mOctagon('awayFormation', 132, sz/10*5,660,29,'永井堅梧',0,'','');
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+			['min.', 'Home', 'Away'],[0, 0, 0],[1, 2, -2],[2, 5, 0],[3, 6, 0],[4, 1, -1],[5, 5, 0],[6, 1, -1],[7, 0, -5],[8, 2, 0],[9, 1, -2],[10, 0, -1],[11, 0, -2],[12, 0, -2],[13, 0, -6],[14, 0, -5],[15, 0, -5],[16, 0, -2],[17, 0, -6],[18, 1, -1],[19, 2, 0],[20, 5, 0],[21, 6, 0],[22, 2, -2],[23, 2, -1],[24, 5, 0],[25, 5, 0],[26, 1, -1],[27, 2, 0],[28, 6, -2],[29, 2, -1],[30, 0, -2],[31, 2, -1],[32, 2, 0],[33, 6, 0],[34, 5, 0],[35, 2, 0],[36, 1, -2],[37, 0, 0],[38, 2, 0],[39, 2, -1],[40, 1, -6],[41, 2, 0],[42, 1, 0],[43, 4, 0],[44, 0, -6],[45, 5, 0],[46, 0, 0],[47, 0, 0],[48, 0, 0],[49, 0, 0],[50, 0, 0],        ]);
+
+        var options = {
+			colors: ['#06038D','#888888'],
+			chartArea: {top: 16, width: '90%', height: '80%'},
+			legend: {position: 'none'},
+			vAxis: {
+				gridlines: {count: 0},
+				minValue: -7,
+				maxValue: 7
+			},
+			hAxis: {
+				gridlines: {count: 3},
+				ticks: [0,15,30,45]
+			},
+			tooltip: {
+				trigger: 'none'
+			}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chartStream'));
+        chart.draw(data, options);
+      }
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart2);
+	function drawChart2() {
+		var data = google.visualization.arrayToDataTable([
+			['min.', 'Home', 'Away'],[0, 0, 0],[1, 2, -2],[2, 1, 0],[3, 0, -2],[4, 2, 0],[5, 6, 0],[6, 0, -5],[7, 0, -4],[8, 1, -5],[9, 6, -2],[10, 6, 0],[11, 0, -2],[12, 0, -5],[13, 0, -2],[14, 6, 0],[15, 0, -6],[16, 0, -3],[17, 0, -2],[18, 2, -2],[19, 0, -5],[20, 0, -3],[21, 0, -5],[22, 0, -6],[23, 5, 0],[24, 1, -3],[25, 0, -2],[26, 2, 0],[27, 1, 0],[28, 0, -2],[29, 1, -2],[30, 0, -3],[31, 2, 0],[32, 5, 0],[33, 5, 0],[34, 2, 0],[35, 2, 0],[36, 0, -6],[37, 0, -5],[38, 0, 0],[39, 2, -1],[40, 2, 0],[41, 4, 0],[42, 1, 0],[43, 2, -2],[44, 5, 0],[45, 6, -6],[46, 0, 0],[47, 0, 0],[48, 0, 0],[49, 0, 0],[50, 0, 0],        ]);
+
+        var options = {
+			colors: ['#06038D','#888888'],
+			chartArea: {top: 16, width: '90%', height: '80%'},
+			legend: {position: 'none'},
+			vAxis: {
+				gridlines: {count: 0},
+				minValue: -7,
+				maxValue: 7
+			},
+			hAxis: {
+				gridlines: {count: 3},
+				ticks: [0,15,30,45]
+			},
+			tooltip: {
+				trigger: 'none'
+			}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chartStream2'));
+        chart.draw(data, options);
+      }
+	$(window).resize(function(){
+		drawChart();
+		drawChart2();
+	});
+	google.charts.load('current', {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawShot);
+	function drawShot() {
+	var fromData = google.visualization.arrayToDataTable([
+	['x', 'y'],[31.0,95.0],[42.7,82.3],[39.0,95.3],[42.7,87.8],[22.2,91.8],[44.8,89.7],[32.7,81.3],[41.0,92.2],[22.7,92.7],[23.7,101.0],[45.8,94.8],[39.7,87.7],[45.0,86.3],[39.0,97.2],[34.0,97.2],[23.3,90.7],[28.5,86.2],[40.0,85.3],]);
+	var toData = google.visualization.arrayToDataTable([
+	['x', 'y'],[32.5,101.0],[31.8,105.7],[38.5,96.0],[35.8,102.2],[29.7,105.7],[44.5,90.3],[36.7,105.7],[35.7,105.7],[35.5,105.7],[27.3,105.7],[38.0,105.7],[39.5,105.7],[39.5,105.7],[38.7,97.5],[33.5,101.5],[35.7,105.7],[32.5,101.8],[39.2,86.5],]);
+	var options = {
+		backgroundColor: 'none',
+		chartArea: {
+			top: 0,
+			width: '100%',
+			height: '100%'
+		},
+		hAxis: {
+			viewWindow: {min: -2, max: 70},
+			baseline: 'none',
+			gridlines: {count: 0}
+		},
+		vAxis: {
+			viewWindow: {min: 65, max: 106},
+			baseline: 'none',
+			gridlines: {count: 0}
+		},
+		legend: { position: 'none' },
+		tooltip: { trigger: 'none' },
+		series: [
+  		{color: '#444', visibleInLegend: false},
+		{color: '#444', visibleInLegend: false}
+		]
+    };
+	var chartShots = new google.visualization.ScatterChart(document.getElementById('chartHomeShots'));
+	var diffData = chartShots.computeDiff(toData , fromData);
+	chartShots.draw(diffData, options);
+	}
+	google.charts.load('current', {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawShot2);
+	function drawShot2() {
+	var fromData = google.visualization.arrayToDataTable([
+	['x', 'y'],[32.7,102.7],[44.2,97.0],[20.2,92.2],[45.0,92.8],[28.2,92.8],[42.3,86.7],[39.2,86.7],[47.2,95.2],[27.0,90.8],[32.0,96.8],[53.2,96.3],]);
+	var toData = google.visualization.arrayToDataTable([
+	['x', 'y'],[41.7,105.7],[44.0,97.2],[21.0,92.7],[30.3,105.0],[31.8,103.2],[40.8,89.5],[38.5,92.3],[37.2,102.7],[42.7,105.7],[33.2,99.8],[36.8,103.0],]);
+	var options = {
+		backgroundColor: 'none',
+		chartArea: {
+			top: 0,
+			width: '100%',
+			height: '100%'
+		},
+		hAxis: {
+			viewWindow: {min: -2, max: 70},
+			baseline: 'none',
+			gridlines: {count: 0}
+		},
+		vAxis: {
+			viewWindow: {min: 65, max: 106},
+			baseline: 'none',
+			gridlines: {count: 0}
+		},
+		legend: { position: 'none' },
+		tooltip: { trigger: 'none' },
+		series: [
+  		{color: '#444', visibleInLegend: false},
+		{color: '#444', visibleInLegend: false}
+		]
+    };
+	var chartShots = new google.visualization.ScatterChart(document.getElementById('chartAwayShots'));
+	var diffData = chartShots.computeDiff(toData , fromData);
+	chartShots.draw(diffData, options);
+	}
+	$(window).resize(function(){
+		drawShot();
+		drawShot2();
+	});
+
+
+==================================================
+
+=== Inline Script 3 (length: 323) ===
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.async = true;
+  js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+==================================================
+

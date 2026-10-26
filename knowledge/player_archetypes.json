@@ -1,0 +1,288 @@
+{
+  "version": "1.0",
+  "description": "J-League Player Archetype and Team Tactical Philosophy Knowledge Base",
+  "archetypes": [
+    {
+      "archetype_id": "line_breaker",
+      "name": "裏抜けスプリンター（チャンネルランナー）",
+      "position_group": "FW",
+      "description": "相手最終ラインの背後やCB-SB間のチャンネル（隙間）に鋭いスプリントで侵入し、一本のスルーパスから決定機を創出する。",
+      "tactical_functions": [
+        "相手DFラインを押し下げて中盤のスペース（バイタルエリア）を拡大する",
+        "カウンター時のファーストターゲットとなり、独力で敵陣深くまで陣地を挽回する"
+      ],
+      "key_metrics": [
+        "スプリント回数（時速24km以上）",
+        "オフサイドライン直前でのレシーブ成功数",
+        "ファイナルサード被ファウル数"
+      ],
+      "synergies": [
+        "deep_lying_playmaker",
+        "false_nine",
+        "wide_playmaker"
+      ]
+    },
+    {
+      "archetype_id": "target_man",
+      "name": "基準点ポストワーカー",
+      "position_group": "FW",
+      "description": "フィジカルコンタクトと空中戦の強さを活かしてロングボールや楔のパスを背負って収め、時間を作って味方の攻め上がりを促す。",
+      "tactical_functions": [
+        "相手のハイプレスを回避する安全弁となる",
+        "セカンドボールの発生点を敵陣内に作り出す"
+      ],
+      "key_metrics": [
+        "空中戦勝率",
+        "敵陣でのボールキープ成功数",
+        "ペナルティエリア内タッチ数"
+      ],
+      "synergies": [
+        "line_breaker",
+        "pocket_infiltrator",
+        "touchline_winger"
+      ]
+    },
+    {
+      "archetype_id": "false_nine",
+      "name": "偽9番（ドロップ型CF）",
+      "position_group": "FW",
+      "description": "前線から中盤のライン間（ボランチの背後）まで意図的に下りてボールを受け、相手CBを釣り出して守備ブロックを内側から崩壊させる。",
+      "tactical_functions": [
+        "中盤中央で4対3や3対2の数的優位を作り出し、ポゼッションを安定させる",
+        "相手CBを引き連れて空けた背後スペースへ、両翼や2列目の飛び出しを誘発する"
+      ],
+      "key_metrics": [
+        "中盤（ミドルゾーン）でのタッチ比率",
+        "ライン間レシーブ数",
+        "スルーパス成功数"
+      ],
+      "synergies": [
+        "inside_forward",
+        "line_breaker",
+        "pocket_infiltrator"
+      ]
+    },
+    {
+      "archetype_id": "touchline_winger",
+      "name": "大外アイソレーション型ウイング",
+      "position_group": "WG",
+      "description": "サイドラインいっぱいに開いて相手守備陣の横幅を広げ、相手SBとの1対1で単独突破から高精度のクロスやシュートを狙う。",
+      "tactical_functions": [
+        "チームの幅（Width）を確保し、中央の密集を緩和する",
+        "アイソレーション（逆サイドからボールを振って1対1の状況）で質的優位を発揮する"
+      ],
+      "key_metrics": [
+        "大外レーン（Y座標0-20または80-100）でのタッチ数",
+        "ドリブル成功率",
+        "ペナルティエリア侵入クロス数"
+      ],
+      "synergies": [
+        "target_man",
+        "inverted_fullback",
+        "deep_lying_playmaker"
+      ]
+    },
+    {
+      "archetype_id": "inside_forward",
+      "name": "カットインフィニッシャー",
+      "position_group": "WG",
+      "description": "逆足（左サイドの右利き等）で起用され、サイドから中央ハーフスペースへ斜めに切れ込んで自らシュートを放つかポケットへ侵入する。",
+      "tactical_functions": [
+        "ゴール前のシュート脅威を高め、相手DFの目線を中央に集める",
+        "大外にオーバーラップしてくるSBのためのスペースを空ける"
+      ],
+      "key_metrics": [
+        "ハーフスペースからのシュート数",
+        "カットインシュートxG",
+        "PA内ポケット侵入回数"
+      ],
+      "synergies": [
+        "overlap_runner",
+        "false_nine",
+        "between_the_lines_receiver"
+      ]
+    },
+    {
+      "archetype_id": "pocket_infiltrator",
+      "name": "ポケット侵入型インサイドハーフ",
+      "position_group": "MF",
+      "description": "相手CBとSBの隙間、ペナルティエリア脇の深いエリア（ニアゾーン／ポケット）に3人目の動きで走り込み、決定的なマイナスクロスを供給する。",
+      "tactical_functions": [
+        "相手DFラインを自陣ゴール前へ後退させ、バイタルエリアを空洞化させる",
+        "最もゴール期待値が高いカットバック（マイナスパス）を創出する"
+      ],
+      "key_metrics": [
+        "ポケット（X: 84-100, Y: 21-38 / 62-79）でのパス試行数",
+        "オフ・ザ・ボールのボックス侵入スプリント数",
+        "xA（アシスト期待値）"
+      ],
+      "synergies": [
+        "touchline_winger",
+        "between_the_lines_receiver",
+        "inverted_fullback"
+      ]
+    },
+    {
+      "archetype_id": "between_the_lines_receiver",
+      "name": "ライン間レシーバー（シャドー）",
+      "position_group": "MF",
+      "description": "相手中盤ラインと最終ラインの間の狭いスペースに潜り込み、体の向きを作りながら半身で前を向いて決定打を放つ。",
+      "tactical_functions": [
+        "相手ボランチに背後を警戒させ、プレスの出足を鈍らせる",
+        "ワンタッチのフリックやスルーパスで一気にチャンスを加速させる"
+      ],
+      "key_metrics": [
+        "ライン間でのボール受託率",
+        "ターン成功率",
+        "ファイナルサード決定機創出パス数"
+      ],
+      "synergies": [
+        "line_breaker",
+        "target_man",
+        "deep_lying_playmaker"
+      ]
+    },
+    {
+      "archetype_id": "deep_lying_playmaker",
+      "name": "レジスタ（展開系アンカー）",
+      "position_group": "MF",
+      "description": "ピッチの最も低い位置でゲームをコントロールし、相手の第一プレスを外す長短のパスや逆サイドへの対角線ロングフィードを配給する。",
+      "tactical_functions": [
+        "プレッシャー回避の逃げ道となり、攻撃方向を自在に旋回させる",
+        "相手陣形の隙を見逃さず、一撃で裏を取るロングボールを供給する"
+      ],
+      "key_metrics": [
+        "パス総数およびパス成功率",
+        "対角線ロングパス成功数",
+        "プレッシャー下でのパス成功率"
+      ],
+      "synergies": [
+        "line_breaker",
+        "touchline_winger",
+        "destroyer_filter"
+      ]
+    },
+    {
+      "archetype_id": "destroyer_filter",
+      "name": "デストロイヤー（迎撃型アンカー）",
+      "position_group": "MF",
+      "description": "強靭なフィジカルと危険察知能力で相手のカウンターの芽を摘み、セカンドボールをことごとく回収する中盤の防波堤。",
+      "tactical_functions": [
+        "ネガティブ・トランジション（ボールロスト時）に中央を塞ぎ、被カウンターを即座に遅延・阻止する",
+        "空中戦や地上デュエルでボールを奪取し、即座に安全な味方へ預ける"
+      ],
+      "key_metrics": [
+        "地上・空中デュエル勝率",
+        "インターセプト・タックル数",
+        "セカンドボール回収数"
+      ],
+      "synergies": [
+        "deep_lying_playmaker",
+        "pocket_infiltrator",
+        "inverted_fullback"
+      ]
+    },
+    {
+      "archetype_id": "inverted_fullback",
+      "name": "偽SB（内側絞り型フルバック）",
+      "position_group": "SB",
+      "description": "ビルドアップ時に大外を駆け上がるのではなく、アンカーの脇（ハーフスペース内側）にポジショニングして中盤化する。",
+      "tactical_functions": [
+        "ビルドアップ時に中盤中央で数的優位を作り、中央経由の前進を可能にする",
+        "相手がボールを奪ってカウンターを仕掛ける中央ルートに最初から蓋をする"
+      ],
+      "key_metrics": [
+        "ハーフスペース（Y座標21-38または62-79）でのボールタッチ比率",
+        "パス中継回数",
+        "中央エリアでの即時奪回（ゲーゲンプレス）成功数"
+      ],
+      "synergies": [
+        "touchline_winger",
+        "pocket_infiltrator",
+        "ball_playing_defender"
+      ]
+    },
+    {
+      "archetype_id": "overlap_runner",
+      "name": "大外オーバーラップ型フルバック",
+      "position_group": "SB",
+      "description": "味方ウイングの外側を爆発的な運動量で駆け上がり、大外レーンで縦の数的優位（2対1）を作ってクロスを量産する。",
+      "tactical_functions": [
+        "ウイングに相手DFを引きつけさせ、フリーの状態で良質なクロスを配給する",
+        "相手SBとSHの連係を分断し、サイド深くまで押し込む"
+      ],
+      "key_metrics": [
+        "総走行距離およびスプリント回数",
+        "ファイナルサード大外タッチ数",
+        "オープンプレーからのクロス数"
+      ],
+      "synergies": [
+        "inside_forward",
+        "target_man",
+        "destroyer_filter"
+      ]
+    },
+    {
+      "archetype_id": "ball_playing_defender",
+      "name": "持ち運び型ストッパー（ビルドアップCB）",
+      "position_group": "CB",
+      "description": "高いパス精度とドリブル運搬力（キャリー／ドライブ）を持ち、自ら第一プレッシャーラインを突破して相手守備ブロックを収縮させる。",
+      "tactical_functions": [
+        "相手のフォワードの守備網を独力で突破し、中盤にフリーマンを生み出す",
+        "相手FWの頭上を越えるピンポイント縦パスでアタッカーに楔を入れる"
+      ],
+      "key_metrics": [
+        "敵陣方向へのドリブルキャリー距離",
+        "ファイナルサード侵入プログレッシブパス数",
+        "プレッシャー下でのパス成功率"
+      ],
+      "synergies": [
+        "between_the_lines_receiver",
+        "inverted_fullback",
+        "sweeper_keeper"
+      ]
+    },
+    {
+      "archetype_id": "sweeper_keeper",
+      "name": "スウィーパーGK",
+      "position_group": "GK",
+      "description": "ハイラインの背後に広がる広大なスペースをカバーするため、ペナルティエリア外まで積極的に飛び出して相手のロングボールをクリア・回収する。",
+      "tactical_functions": [
+        "最終ラインを40〜50mまで高く押し上げることを可能にし、チーム全体をコンパクトに保つ",
+        "バックパスのレシーバーとなり、数的優位を活かしたビルドアップに参加する"
+      ],
+      "key_metrics": [
+        "PA外でのアクション数",
+        "ロングボールに対するインターセプト数",
+        "自陣でのパス成功率"
+      ],
+      "synergies": [
+        "ball_playing_defender",
+        "destroyer_filter"
+      ]
+    }
+  ],
+  "team_philosophies": [
+    {
+      "philosophy_id": "high_intensity_storming",
+      "name": "ハイプレス・ストーミング型（激闘・徹底型）",
+      "characteristics": "ハイライン・ハイプレスによる即時奪取と最短手数でのカウンター。球際の強度と切り替え速度が生命線。",
+      "core_archetypes": ["sweeper_keeper", "destroyer_filter", "line_breaker", "overlap_runner"],
+      "vulnerability": "プレスを剥がされた際の中盤中央の広大スペース、後半60分以降の運動量低下"
+    },
+    {
+      "philosophy_id": "positional_possession",
+      "name": "ポジショナル・ポゼッション型（可変崩し型）",
+      "characteristics": "ボール保持により主導権を握り、偽SBやポケット侵入で配置の優位性を作って相手ブロックを解体する。",
+      "core_archetypes": ["ball_playing_defender", "inverted_fullback", "deep_lying_playmaker", "pocket_infiltrator"],
+      "vulnerability": "ボールロスト時のネガティブ・トランジション（大外背後のカウンター被弾）"
+    },
+    {
+      "philosophy_id": "low_block_counter",
+      "name": "堅守速攻・ブロック構築型（ロングカウンター）",
+      "characteristics": "自陣に強固な4-4-2または5-3-2のブロックを敷き、中央を固めて外へ誘導し、奪った瞬間に快速FWへ長距離フィード。",
+      "core_archetypes": ["target_man", "line_breaker", "destroyer_filter"],
+      "vulnerability": "自陣ボックス付近での波状攻撃とセカンドボール回収の遅れ、判定によるFK・PK被弾"
+    }
+  ]
+}

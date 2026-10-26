@@ -158,7 +158,7 @@ def get_db_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
     """Open or create a SQLite database connection with row factory enabled."""
     target_path = db_path or DEFAULT_DB_PATH
     os.makedirs(os.path.dirname(os.path.abspath(target_path)), exist_ok=True)
-    conn = sqlite3.connect(target_path)
+    conn = sqlite3.connect(target_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn

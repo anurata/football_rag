@@ -58,6 +58,12 @@ class TestGeminiTacticalClient(unittest.TestCase):
         self.assertEqual(output, "AI戦術分析結果テキスト")
         mock_genai_client.models.generate_content.assert_called_once()
 
+    def test_supported_models(self):
+        from agent.gemini_client import SUPPORTED_GEMINI_MODELS, DEFAULT_GEMINI_MODEL
+        self.assertIn("gemini-3.8-flash", SUPPORTED_GEMINI_MODELS)
+        self.assertIn("gemini-3.8-pro", SUPPORTED_GEMINI_MODELS)
+        self.assertEqual(DEFAULT_GEMINI_MODEL, "gemini-3.8-flash")
+
 
 if __name__ == "__main__":
     unittest.main()

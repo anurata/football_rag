@@ -138,5 +138,30 @@ class TestObjectiveProfilerAndComparator(unittest.TestCase):
         self.assertIn("away_coach", ratings["coaches"])
 
 
+    def test_team_name_resolution(self):
+        """Verify team code properly resolves to canonical Japanese name."""
+        from agent.objective_profiler import resolve_team_name
+        self.assertEqual(resolve_team_name("FCT"), "FC東京")
+        self.assertEqual(resolve_team_name("MIT"), "水戸ホーリーホック")
+        self.assertEqual(resolve_team_name("KAS"), "鹿島アントラーズ")
+        self.assertEqual(resolve_team_name("UNKNOWN_CLUB"), "UNKNOWN_CLUB")
+
+    def test_overall_structure_summary_and_away_perspective(self):
+        """Verify Step 88 rich overall structure summary and away team perspectives."""
+        obj_report = self.profiler.build_15_perspective_report(self.sample_match_summary)
+        self.assertIn("overall_structure_summary", obj_report)
+        struct = obj_report["overall_structure_summary"]
+        self.assertIn("narrative", struct)
+        self.assertEqual(len(struct.get("phases", [])), 3)
+
+        perspectives = obj_report.get("perspectives", [])
+        self.assertEqual(len(perspectives), 15)
+        # Check first perspective has away_perspective and theory
+        p1 = perspectives[0]
+        self.assertIn("away_perspective", p1)
+        self.assertIn("layer3_theory", p1)
+        self.assertIn("layer2_counts", p1)
+
+
 if __name__ == "__main__":
     unittest.main()

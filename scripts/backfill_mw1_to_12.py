@@ -8,19 +8,40 @@ import sys
 import glob
 import argparse
 from pathlib import Path
+from typing import List, Optional, Dict, Any
 
 # Add project root to sys.path so scripts can be run directly
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from typing import List, Optional, Dict, Any
-
 from pipeline.db import DEFAULT_DB_PATH
 from pipeline.indexer import MatchIndexer
 from pipeline.vector_indexer import TacticalVectorIndexer, DEFAULT_CHROMA_DIR
 from pipeline.importer import parse_jleague_markdown
 from pipeline.normalizer import EntityNormalizer
+
+
+def _find_match_files(data_dir: str, pattern: str = "*.md", recursive: bool = False) -> List[str]:
+    """Search for match markdown files under data_dir, optionally recursively."""
+    target_path = Path(data_dir)
+    if not target_path.exists():
+        return []
+
+    if recursive:
+        search_pattern = str(target_path / "**" / pattern)
+        return sorted(glob.glob(search_pattern, recursive=True))
+
+    search_pattern = str(target_path / pattern)
+    return sorted(glob.glob(search_pattern))
+
+
+def _should_skip_auxiliary_file(file_path: str) -> bool:
+    """Ignore special supplement markdown files like club-specific additions."""
+    fname = os.path.basename(file_path)
+    if fname.endswith("_fctokyo.md"):
+        return True
+    return False
 
 
 class BackfillPipeline:
@@ -62,19 +83,69 @@ class BackfillPipeline:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
+    def _resolve_bundle_matchweek(self, bundle) -> Optional[int]:
+        """Resolve matchweek from bundle, falling back to schedule map."""
+        mw = bundle.match.matchweek
+        if mw is None and bundle.match.match_id in self.schedule_map:
+            mw = self.schedule_map[bundle.match.match_id]
+            bundle.match.matchweek = mw
+        return mw
+
+    def _should_filter_match(
+        self,
+        bundle,
+        start_mw: int,
+        end_mw: int,
+        season: Optional[int] = None,
+    ) -> bool:
+        """Determine if a match should be excluded by season or matchweek."""
+        if season is not None and bundle.match.season is not None:
+            if bundle.match.season != season:
+                return True
+
+        mw = bundle.match.matchweek
+        if mw is not None and (mw < start_mw or mw > end_mw):
+            return True
+
+        return False
+
+    def _ingest_single_bundle(self, bundle) -> Dict[str, Any]:
+        """Persist bundle to SQLite and ChromaDB."""
+        # Stage 2 for historical confirmed backfill
+        bundle.match.source_updated_stage = 2
+
+        # 1. SQLite Upsert
+        self.indexer.upsert_bundle(bundle)
+
+        # 2. ChromaDB Upsert (4 chunks per match)
+        chunks = self.vector_indexer.upsert_bundle(bundle)
+
+        return {
+            "match_id": bundle.match.match_id,
+            "season": bundle.match.season,
+            "matchweek": bundle.match.matchweek,
+            "date": bundle.match.date,
+            "home_team": bundle.match.home_team_id,
+            "away_team": bundle.match.away_team_id,
+            "score": f"{bundle.match.home_score}-{bundle.match.away_score}",
+            "chunks_indexed": len(chunks),
+        }
+
     def run_backfill(
         self,
         data_dir: str,
         start_mw: int = 1,
         end_mw: int = 12,
         pattern: str = "*.md",
+        season: Optional[int] = None,
+        recursive: bool = False,
     ) -> Dict[str, Any]:
         """
         Scan directory for match files within [start_mw, end_mw], parse,
         and atomically upsert them into SQLite and ChromaDB.
         """
-        target_path = Path(data_dir)
-        if not target_path.exists():
+        files = _find_match_files(data_dir=data_dir, pattern=pattern, recursive=recursive)
+        if not files:
             return {
                 "total_files": 0,
                 "processed": 0,
@@ -82,48 +153,28 @@ class BackfillPipeline:
                 "matches": [],
             }
 
-        files = sorted(glob.glob(str(target_path / pattern)))
         processed_matches = []
         skipped_count = 0
 
         for file_path in files:
+            if _should_skip_auxiliary_file(file_path):
+                skipped_count += 1
+                continue
+
             try:
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
 
                 bundle = parse_jleague_markdown(content, self.normalizer)
-                mw = bundle.match.matchweek
-                if mw is None and bundle.match.match_id in self.schedule_map:
-                    mw = self.schedule_map[bundle.match.match_id]
-                    bundle.match.matchweek = mw
+                self._resolve_bundle_matchweek(bundle)
 
-                # Filter by matchweek if present, or include if unassigned/within range
-                if mw is not None and (mw < start_mw or mw > end_mw):
+                if self._should_filter_match(bundle, start_mw, end_mw, season):
                     skipped_count += 1
                     continue
 
-                # Stage 2 for historical confirmed backfill
-                bundle.match.source_updated_stage = 2
-
-                # 1. SQLite Upsert
-                self.indexer.upsert_bundle(bundle)
-
-                # 2. ChromaDB Upsert (4 chunks per match)
-                chunks = self.vector_indexer.upsert_bundle(bundle)
-
-                processed_matches.append(
-                    {
-                        "match_id": bundle.match.match_id,
-                        "matchweek": bundle.match.matchweek,
-                        "date": bundle.match.date,
-                        "home_team": bundle.match.home_team_id,
-                        "away_team": bundle.match.away_team_id,
-                        "score": f"{bundle.match.home_score}-{bundle.match.away_score}",
-                        "chunks_indexed": len(chunks),
-                    },
-                )
+                match_info = self._ingest_single_bundle(bundle)
+                processed_matches.append(match_info)
             except Exception as e:
-                # Log error and continue with next match
                 print(f"Error processing {file_path}: {e}")
                 skipped_count += 1
 
@@ -135,9 +186,56 @@ class BackfillPipeline:
         }
 
 
+def _load_dynamic_schedule_map(
+    season: int,
+    start_mw: int,
+    end_mw: int,
+) -> Dict[str, int]:
+    """Attempt loading official schedule map if crawler is available."""
+    schedule_map = {}
+    try:
+        from scrapers.schedule_crawler import ScheduleCrawler
+        crawler = ScheduleCrawler()
+        matches = crawler.build_schedule(year=season, start_mw=start_mw, end_mw=end_mw)
+        schedule_map = {
+            m["match_id"]: m["matchweek"]
+            for m in matches
+            if m.get("matchweek") is not None
+        }
+        print(f"Loaded schedule mapping for {len(schedule_map)} matches (Season {season}).")
+    except Exception as e:
+        print(f"Warning: Could not load dynamic schedule map: {e}")
+    return schedule_map
+
+
+def _print_report_summary(report: Dict[str, Any]) -> None:
+    """Print clean summary of backfill results."""
+    print(f"\n=== Backfill Summary ===")
+    print(f"Total files discovered: {report['total_files']}")
+    print(f"Successfully processed: {report['processed']}")
+    print(f"Skipped / Filtered:    {report['skipped']}")
+
+    # Matchweek breakdown
+    mw_counts: Dict[Any, int] = {}
+    for m in report.get("matches", []):
+        mw = m.get("matchweek", "None")
+        mw_counts[mw] = mw_counts.get(mw, 0) + 1
+
+    print("\nProcessed matches by matchweek:")
+    for mw, count in sorted(mw_counts.items(), key=lambda x: (isinstance(x[0], str), x[0])):
+        print(f" - MW {mw}: {count} matches")
+    print("========================\n")
+
+
 def main():
     """CLI entrypoint for executing backfill."""
     parser = argparse.ArgumentParser(description="J-League Historical Matches Backfill Pipeline")
+    parser.add_argument(
+        "--season",
+        type=int,
+        default=2026,
+        help="Season year (default: 2026)",
+    )
     parser.add_argument(
         "--start-mw",
         type=int,
@@ -153,8 +251,14 @@ def main():
     parser.add_argument(
         "--data-dir",
         type=str,
-        default="data/markdown",
-        help="Directory containing markdown match records",
+        default="data/markdown/2026",
+        help="Directory containing markdown match records (default: data/markdown/2026)",
+    )
+    parser.add_argument(
+        "--recursive",
+        action="store_true",
+        default=False,
+        help="Search markdown files recursively in subdirectories",
     )
     parser.add_argument(
         "--db-path",
@@ -171,16 +275,14 @@ def main():
 
     args = parser.parse_args()
 
-    print(f"Starting initial backfill for MW {args.start_mw} to {args.end_mw} from {args.data_dir}...")
-    schedule_map = {}
-    try:
-        from scrapers.schedule_crawler import ScheduleCrawler
-        crawler = ScheduleCrawler()
-        matches = crawler.build_schedule(start_mw=args.start_mw, end_mw=args.end_mw)
-        schedule_map = {m["match_id"]: m["matchweek"] for m in matches if m["matchweek"] is not None}
-        print(f"Loaded schedule mapping for {len(schedule_map)} matches.")
-    except Exception as e:
-        print(f"Warning: Could not load dynamic schedule map: {e}")
+    print(
+        f"Starting backfill for Season {args.season} (MW {args.start_mw} to {args.end_mw}) from {args.data_dir}...",
+    )
+    schedule_map = _load_dynamic_schedule_map(
+        season=args.season,
+        start_mw=args.start_mw,
+        end_mw=args.end_mw,
+    )
 
     pipeline = BackfillPipeline(
         db_path=args.db_path,
@@ -193,10 +295,10 @@ def main():
             data_dir=args.data_dir,
             start_mw=args.start_mw,
             end_mw=args.end_mw,
+            season=args.season,
+            recursive=args.recursive,
         )
-        print(f"Backfill Completed! Processed: {report['processed']}, Skipped: {report['skipped']}")
-        for m in report["matches"]:
-            print(f" - [{m['match_id']}] MW{m['matchweek'] or '-'}: {m['home_team']} {m['score']} {m['away_team']}")
+        _print_report_summary(report)
     finally:
         pipeline.close()
 

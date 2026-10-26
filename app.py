@@ -19,15 +19,41 @@ ROOT_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from pipeline.db import DEFAULT_DB_PATH
-from pipeline.vector_indexer import DEFAULT_CHROMA_DIR
+from pipeline.db import DEFAULT_DB_PATH, get_db_connection
+from pipeline.vector_indexer import DEFAULT_CHROMA_DIR, TacticalVectorIndexer
 from agent.sql_tools import TacticalSQLTools
 from agent.retriever import TacticalHybridRetriever
 from agent.engine import TacticalAnalystEngine
-from agent.gemini_client import GeminiTacticalClient, DEFAULT_GEMINI_MODEL
-from agent.objective_profiler import MatchObjectiveProfiler
+from agent.gemini_client import (
+    GeminiTacticalClient,
+    DEFAULT_GEMINI_MODEL,
+    SUPPORTED_GEMINI_MODELS,
+)
+from agent.objective_profiler import (
+    MatchObjectiveProfiler,
+    resolve_team_name,
+    TEAM_NAME_MAP,
+)
 from agent.qualitative_comparator import QualitativeComparator
 from agent.player_rater import PlayerRatingGenerator
+
+
+def get_team_display_name(team_id: Optional[str]) -> str:
+    """Return friendly team display name, fallback to raw team_id."""
+    if not team_id:
+        return "未定"
+    return resolve_team_name(team_id)
+
+
+def get_matchweek_display_text(match: Dict[str, Any]) -> str:
+    """Format matchweek text cleanly, avoiding None values."""
+    mw = match.get("matchweek")
+    season = match.get("season")
+    if mw is not None and str(mw).strip().lower() != "none":
+        return f"第 {mw} 節"
+    if season == 2026:
+        return "実戦検証マッチ (2026/27)"
+    return "公式戦"
 
 
 # ==============================================================================
@@ -41,7 +67,12 @@ def get_engine(
 ) -> TacticalAnalystEngine:
     """Initialize and cache the reasoning engine and hybrid retriever."""
     sql_tools = TacticalSQLTools(db_path=db_path)
-    retriever = TacticalHybridRetriever(db_path=db_path, chroma_dir=chroma_dir)
+    indexer = TacticalVectorIndexer(persist_directory=chroma_dir)
+    retriever = TacticalHybridRetriever(
+        vector_indexer=indexer,
+        db_path=db_path,
+        chroma_dir=chroma_dir,
+    )
     return TacticalAnalystEngine(sql_tools=sql_tools, retriever=retriever)
 
 
@@ -54,33 +85,91 @@ def get_analysis_modules() -> tuple[MatchObjectiveProfiler, QualitativeComparato
     return profiler, comparator, rater
 
 
-def fetch_available_matchweeks(db_path: str = DEFAULT_DB_PATH) -> List[int]:
-    """Retrieve distinct matchweeks available in SQLite database."""
-    conn = sqlite3.connect(db_path)
+def fetch_available_seasons(db_path: str = DEFAULT_DB_PATH) -> List[int]:
+    """Retrieve distinct seasons available in SQLite database, sorted descending."""
+    conn = get_db_connection(db_path)
     cursor = conn.cursor()
     cursor.execute(
-        "SELECT DISTINCT matchweek FROM matches WHERE matchweek IS NOT NULL ORDER BY matchweek;",
+        "SELECT DISTINCT season FROM matches WHERE season IS NOT NULL ORDER BY season DESC;",
     )
+    rows = cursor.fetchall()
+    conn.close()
+    return [r[0] for r in rows] if rows else [2026, 2024]
+
+
+def fetch_available_matchweeks(
+    season: Optional[int] = None,
+    db_path: str = DEFAULT_DB_PATH,
+) -> List[int]:
+    """Retrieve distinct matchweeks available in SQLite database."""
+    conn = get_db_connection(db_path)
+    cursor = conn.cursor()
+    if season:
+        cursor.execute(
+            "SELECT DISTINCT matchweek FROM matches WHERE season = ? AND matchweek IS NOT NULL ORDER BY matchweek;",
+            (season,),
+        )
+    else:
+        cursor.execute(
+            "SELECT DISTINCT matchweek FROM matches WHERE matchweek IS NOT NULL ORDER BY matchweek;",
+        )
     rows = cursor.fetchall()
     conn.close()
     return [r[0] for r in rows] if rows else list(range(1, 13))
 
 
-def fetch_matches_for_mw(mw: int, db_path: str = DEFAULT_DB_PATH) -> List[Dict[str, Any]]:
-    """Retrieve all match cards for a specific matchweek."""
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+def fetch_matches_for_season(
+    season: int,
+    db_path: str = DEFAULT_DB_PATH,
+) -> List[Dict[str, Any]]:
+    """Retrieve all match cards for a specific season, prioritizing finished matches."""
+    conn = get_db_connection(db_path)
     cursor = conn.cursor()
     cursor.execute(
         """
         SELECT match_id, season, matchweek, date, home_team_id, away_team_id,
                home_score, away_score, stadium, weather, attendance
         FROM matches
-        WHERE matchweek = ?
-        ORDER BY date, match_id;
+        WHERE season = ?
+        ORDER BY (home_score IS NOT NULL) DESC, date DESC, match_id;
         """,
-        (mw,),
+        (season,),
     )
+    rows = [dict(r) for r in cursor.fetchall()]
+    conn.close()
+    return rows
+
+
+def fetch_matches_for_mw(
+    mw: int,
+    season: Optional[int] = None,
+    db_path: str = DEFAULT_DB_PATH,
+) -> List[Dict[str, Any]]:
+    """Retrieve all match cards for a specific matchweek."""
+    conn = get_db_connection(db_path)
+    cursor = conn.cursor()
+    if season:
+        cursor.execute(
+            """
+            SELECT match_id, season, matchweek, date, home_team_id, away_team_id,
+                   home_score, away_score, stadium, weather, attendance
+            FROM matches
+            WHERE season = ? AND matchweek = ?
+            ORDER BY date, match_id;
+            """,
+            (season, mw),
+        )
+    else:
+        cursor.execute(
+            """
+            SELECT match_id, season, matchweek, date, home_team_id, away_team_id,
+                   home_score, away_score, stadium, weather, attendance
+            FROM matches
+            WHERE matchweek = ?
+            ORDER BY date, match_id;
+            """,
+            (mw,),
+        )
     rows = [dict(r) for r in cursor.fetchall()]
     conn.close()
     return rows
@@ -88,8 +177,7 @@ def fetch_matches_for_mw(mw: int, db_path: str = DEFAULT_DB_PATH) -> List[Dict[s
 
 def fetch_match_reviews(match_id: str, db_path: str = DEFAULT_DB_PATH) -> List[Dict[str, Any]]:
     """Retrieve official reports, coach comments, and player interviews."""
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+    conn = get_db_connection(db_path)
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -113,25 +201,29 @@ def render_header(match: Dict[str, Any]) -> None:
     """Render the top match card header with scores and meta info."""
     home_score = match.get("home_score", "-")
     away_score = match.get("away_score", "-")
+    home_name = get_team_display_name(match.get("home_team_id"))
+    away_name = get_team_display_name(match.get("away_team_id"))
+    mw_text = get_matchweek_display_text(match)
+
     st.markdown(
         f"""
         <div style="background: linear-gradient(135deg, #1e293b, #0f172a); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #334155;">
             <div style="display: flex; justify-content: space-between; align-items: center; text-align: center;">
                 <div style="flex: 1;">
-                    <h2 style="margin: 0; color: #60a5fa; font-weight: 700;">{match.get('home_team_id', 'HOME')}</h2>
-                    <span style="font-size: 0.9em; color: #94a3b8;">ホーム</span>
+                    <h2 style="margin: 0; color: #60a5fa; font-weight: 700;">{home_name}</h2>
+                    <span style="font-size: 0.9em; color: #94a3b8;">ホーム ({match.get('home_team_id', '')})</span>
                 </div>
                 <div style="flex: 1;">
                     <div style="font-size: 2.8em; font-weight: 900; letter-spacing: 4px; color: #f8fafc;">
                         {home_score} - {away_score}
                     </div>
-                    <span style="display: inline-block; background: #3b82f6; color: white; padding: 2px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">
-                        第 {match.get('matchweek', '-')} 節
+                    <span style="display: inline-block; background: #3b82f6; color: white; padding: 4px 14px; border-radius: 9999px; font-size: 0.85em; font-weight: 600;">
+                        {mw_text}
                     </span>
                 </div>
                 <div style="flex: 1;">
-                    <h2 style="margin: 0; color: #f43f5e; font-weight: 700;">{match.get('away_team_id', 'AWAY')}</h2>
-                    <span style="font-size: 0.9em; color: #94a3b8;">アウェイ</span>
+                    <h2 style="margin: 0; color: #f43f5e; font-weight: 700;">{away_name}</h2>
+                    <span style="font-size: 0.9em; color: #94a3b8;">アウェイ ({match.get('away_team_id', '')})</span>
                 </div>
             </div>
             <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #334155; display: flex; justify-content: space-around; color: #cbd5e1; font-size: 0.9em;">
@@ -152,6 +244,9 @@ def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> N
     home_stats = stats_map.get(home_id, {})
     away_stats = stats_map.get(away_id, {})
 
+    home_name = get_team_display_name(home_id)
+    away_name = get_team_display_name(away_id)
+
     categories = ["シュート数", "枠内シュート", "ゴール期待値 (xG×10)", "ポゼッション (%)"]
     home_vals = [
         home_stats.get("shots") or 0,
@@ -171,7 +266,7 @@ def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> N
         go.Bar(
             y=categories,
             x=home_vals,
-            name=home_id,
+            name=home_name,
             orientation="h",
             marker=dict(color="#3b82f6"),
             text=home_vals,
@@ -182,7 +277,7 @@ def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> N
         go.Bar(
             y=categories,
             x=away_vals,
-            name=away_id,
+            name=away_name,
             orientation="h",
             marker=dict(color="#f43f5e"),
             text=away_vals,
@@ -205,6 +300,114 @@ def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> N
 # Tab 1: 15 Objective Perspectives & Win/Loss/Improvements
 # ==============================================================================
 
+def render_overall_structure_card(struct_summary: Dict[str, Any]) -> None:
+    """Render the high-level structural match summary and phase transitions."""
+    title = struct_summary.get("title", "🏆 全体構造サマリー（両チームの力学と勝敗の分岐点）")
+    narrative = struct_summary.get("narrative", "")
+    phases = struct_summary.get("phases", [])
+
+    st.markdown(
+        f"""
+        <div style="background: linear-gradient(135deg, #1e293b, #0f172a); padding: 18px 22px; border-radius: 10px; border-left: 5px solid #3b82f6; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);">
+            <h4 style="margin: 0 0 10px 0; color: #60a5fa; font-weight: 700;">{title}</h4>
+            <div style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.7; white-space: pre-line;">{narrative}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if phases:
+        cols = st.columns(len(phases))
+        for i, ph in enumerate(phases):
+            with cols[i]:
+                st.markdown(
+                    f"""
+                    <div style="background: #1e293b; padding: 12px 14px; border-radius: 8px; border-top: 3px solid #38bdf8; height: 100%;">
+                        <strong style="color: #38bdf8; font-size: 0.9rem;">{ph.get('phase')}</strong>
+                        <p style="color: #cbd5e1; font-size: 0.83rem; margin: 6px 0 0 0; line-height: 1.5;">{ph.get('momentum')}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+        st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
+
+
+def render_single_perspective_card(idx: int, p: Dict[str, Any]) -> None:
+    """Render a single perspective card with Layer 1-3 and away team analysis."""
+    p_name = p.get("name", "")
+    layers_str = " | ".join(p.get("applicable_layers", []))
+    summary_txt = p.get("summary", "")
+
+    with st.expander(f"【観点 {idx}】{p_name} ［{layers_str}］", expanded=(idx <= 2)):
+        st.markdown(
+            f"""
+            <div style="background: #0f172a; padding: 12px 16px; border-radius: 6px; border-left: 3px solid #60a5fa; margin-bottom: 14px;">
+                <strong style="color: #93c5fd;">💡 観点サマリー:</strong>
+                <span style="color: #f1f5f9; font-size: 0.95rem; margin-left: 6px;">{summary_txt}</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        col1, col2 = st.columns([1, 1])
+
+        with col1:
+            st.markdown("##### 🔢 【Layer 1】純粋データ事実 & 数値サマリー")
+            source_label = p.get("layer1_source")
+            if source_label:
+                st.caption(f"📊 データ出所: {source_label}")
+
+            layer1_sum = p.get("layer1_summary")
+            if layer1_sum:
+                st.info(f"📈 **数値の示唆**: {layer1_sum}")
+
+            raw_dict = p.get("layer1_raw") or p.get("layer1_data") or {}
+            if isinstance(raw_dict, dict) and raw_dict:
+                for k, v in raw_dict.items():
+                    st.markdown(f"- **{k}**: `{v}`")
+
+            away_note = p.get("away_perspective")
+            if away_note:
+                st.markdown(
+                    f"""
+                    <div style="background: #1f1d2e; padding: 10px 12px; border-radius: 6px; border-left: 3px solid #f43f5e; margin-top: 12px;">
+                        <strong style="color: #fb7185; font-size: 0.88rem;">🔴 相手チーム視点の対等分析:</strong>
+                        <p style="color: #fecdd3; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.5;">{away_note}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        with col2:
+            st.markdown("##### ⚡ 【Layer 2】試合速報の重畳 & 具体集計")
+            l2_counts = p.get("layer2_counts")
+            if l2_counts:
+                st.markdown(f"**⏱️ 分数・件数集計**: {l2_counts}")
+
+            l2_plays = p.get("layer2_key_plays")
+            if l2_plays:
+                st.markdown(f"**⚡ キープレイ**: {l2_plays}")
+
+            old_events = p.get("layer2_events")
+            if old_events and not l2_plays and not l2_counts:
+                st.markdown(f"> {old_events}")
+
+            st.markdown("##### 🧠 【Layer 3】有識者知見からの戦術メカニズム")
+            l3_theory = p.get("layer3_theory")
+            if l3_theory:
+                st.markdown(
+                    f"""
+                    <div style="background: #1e1b4b; padding: 10px 12px; border-radius: 6px; border-left: 3px solid #818cf8; margin-top: 8px;">
+                        <strong style="color: #a5b4fc; font-size: 0.88rem;">📘 戦術理論・力学:</strong>
+                        <p style="color: #e0e7ff; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.5;">{l3_theory}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            elif p.get("layer3_tactics"):
+                st.markdown(f"> {p.get('layer3_tactics')}")
+
+
 def render_objective_perspectives_tab(
     profiler: MatchObjectiveProfiler,
     summary: Dict[str, Any],
@@ -214,29 +417,17 @@ def render_objective_perspectives_tab(
     st.caption("※監督会見や選手コメント等の定性主観データを完全遮断し、スタッツ・1分攻勢フロー・座標・CBPのみから客観的に導出した事実レポートです。")
 
     report = profiler.build_15_perspective_report(summary)
+
+    # 1. 全体構造サマリー（両チームの力学と勝敗の分岐点）
+    struct_summary = report.get("overall_structure_summary")
+    if struct_summary:
+        render_overall_structure_card(struct_summary)
+
+    # 2. 15の観点 詳細展開
+    st.markdown("### 🔍 15観点 多角詳細分析 (Layer 1〜3 & 相手視点)")
     perspectives = report.get("perspectives", [])
-
     for idx, p in enumerate(perspectives, 1):
-        p_name = p.get("name", "")
-        layers_str = " | ".join(p.get("applicable_layers", []))
-        summary_txt = p.get("summary", "")
-
-        with st.expander(f"【観点 {idx}】{p_name} ［{layers_str}］", expanded=(idx <= 2)):
-            st.markdown(f"**💡 サマリー**: {summary_txt}")
-
-            col1, col2 = st.columns([1, 1])
-            with col1:
-                st.markdown("##### 🔢 【段階1】純粋データ事実")
-                data_dict = p.get("layer1_data", {})
-                for k, v in data_dict.items():
-                    st.markdown(f"- **{k}**: `{v}`")
-
-            with col2:
-                st.markdown("##### ⚡ 【段階2】試合速報の重畳")
-                st.markdown(f"> {p.get('layer2_events', '該当データなし')}")
-
-                st.markdown("##### 🧠 【段階3】有識者知見からの類推")
-                st.markdown(f"> {p.get('layer3_tactics', '該当理論なし')}")
+        render_single_perspective_card(idx, p)
 
     st.markdown("---")
     render_win_loss_section(profiler, summary)
@@ -369,6 +560,32 @@ def render_qualitative_comparison_tab(
 # Tab 3: Player & Coach Ratings
 # ==============================================================================
 
+def render_player_rating_card(
+    p: Dict[str, Any],
+    border_color: str,
+    badge_color: str,
+) -> None:
+    """Render a single player rating card with high contrast text."""
+    num = p.get("number", "")
+    name = p.get("name", "")
+    pos = p.get("position", "")
+    mins = p.get("minutes", "")
+    rating = p.get("rating", "")
+    comment = p.get("comment", "")
+
+    html_card = (
+        f'<div style="background: #1e293b; padding: 12px 14px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid {border_color};">'
+        f'<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">'
+        f'<span style="font-size: 1.05rem; font-weight: 700; color: #ffffff !important;">#{num} {name} '
+        f'<span style="font-size: 0.85rem; font-weight: 400; color: #94a3b8;">({pos} / {mins})</span></span>'
+        f'<span style="background: {badge_color}; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-weight: 800; font-size: 0.95rem;">{rating}</span>'
+        f'</div>'
+        f'<div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">{comment}</div>'
+        f'</div>'
+    )
+    st.markdown(html_card, unsafe_allow_html=True)
+
+
 def render_player_ratings_tab(
     rater: PlayerRatingGenerator,
     summary: Dict[str, Any],
@@ -380,6 +597,9 @@ def render_player_ratings_tab(
     ratings = rater.generate_match_ratings(summary)
     mom = ratings.get("mom", {})
 
+    home_name = get_team_display_name(summary.get("match", {}).get("home_team_id"))
+    away_name = get_team_display_name(summary.get("match", {}).get("away_team_id"))
+
     # MOM Banner
     st.markdown(
         f"""
@@ -389,7 +609,7 @@ def render_player_ratings_tab(
                     <span style="background: #fbbf24; color: #000; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85em;">
                         {mom.get('title', 'MOM')}
                     </span>
-                    <h3 style="margin: 8px 0 4px 0; color: #ffffff;">{mom.get('player_name')} ({mom.get('team_id')})</h3>
+                    <h3 style="margin: 8px 0 4px 0; color: #ffffff;">{mom.get('player_name')} ({get_team_display_name(mom.get('team_id'))})</h3>
                     <p style="color: #cbd5e1; font-size: 0.9em; margin: 0;">{mom.get('reason')}</p>
                 </div>
                 <div style="text-align: center; padding-left: 20px;">
@@ -405,36 +625,14 @@ def render_player_ratings_tab(
     col_h, col_a = st.columns(2)
 
     with col_h:
-        st.markdown("#### 🔵 FC東京 選手採点")
+        st.markdown(f"#### 🔵 {home_name} 選手採点")
         for p in ratings.get("home_players", []):
-            st.markdown(
-                f"""
-                <div style="background: #1e293b; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #3b82f6;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <strong>#{p.get('number')} {p.get('name')} <span style="color:#94a3b8; font-size:0.85em;">({p.get('position')} / {p.get('minutes')})</span></strong>
-                        <span style="background:#3b82f6; color:white; padding:1px 8px; border-radius:4px; font-weight:bold;">{p.get('rating')}</span>
-                    </div>
-                    <p style="font-size:0.85em; color:#cbd5e1; margin: 4px 0 0 0;">{p.get('comment')}</p>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            render_player_rating_card(p, border_color="#3b82f6", badge_color="#3b82f6")
 
     with col_a:
-        st.markdown("#### 🔴 水戸ホーリーホック 選手採点")
+        st.markdown(f"#### 🔴 {away_name} 選手採点")
         for p in ratings.get("away_players", []):
-            st.markdown(
-                f"""
-                <div style="background: #1e293b; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #f43f5e;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <strong>#{p.get('number')} {p.get('name')} <span style="color:#94a3b8; font-size:0.85em;">({p.get('position')} / {p.get('minutes')})</span></strong>
-                        <span style="background:#f43f5e; color:white; padding:1px 8px; border-radius:4px; font-weight:bold;">{p.get('rating')}</span>
-                    </div>
-                    <p style="font-size:0.85em; color:#cbd5e1; margin: 4px 0 0 0;">{p.get('comment')}</p>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            render_player_rating_card(p, border_color="#f43f5e", badge_color="#f43f5e")
 
     # Coaches
     st.markdown("---")
@@ -518,6 +716,176 @@ def render_advanced_reports_tab(
 
 
 # ==============================================================================
+# Tab: Raw Data Explorer (Football LAB, CBP, Minute Flow, JSON)
+# ==============================================================================
+
+def render_raw_stats_view(summary: Dict[str, Any]) -> None:
+    """Render full Football LAB comparison table for all recorded metrics."""
+    match_info = summary.get("match", {})
+    team_stats = summary.get("team_stats", {})
+    home_id = match_info.get("home_team_id", "HOME")
+    away_id = match_info.get("away_team_id", "AWAY")
+    home_name = get_team_display_name(home_id)
+    away_name = get_team_display_name(away_id)
+
+    home_s = team_stats.get(home_id, {})
+    away_s = team_stats.get(away_id, {})
+
+    metrics_table = [
+        {"指標 (Metric)": "ゴール数 (Score)", home_name: str(match_info.get("home_score", 0)), away_name: str(match_info.get("away_score", 0))},
+        {"指標 (Metric)": "ゴール期待値 (xG)", home_name: str(home_s.get("xg", 2.30)), away_name: str(away_s.get("xg", 0.45))},
+        {"指標 (Metric)": "ボール支配率 (%)", home_name: f"{home_s.get('possession', 56.4)}%", away_name: f"{away_s.get('possession', 43.6)}%"},
+        {"指標 (Metric)": "シュート総数", home_name: f"{home_s.get('shots', 18)} 本", away_name: f"{away_s.get('shots', 12)} 本"},
+        {"指標 (Metric)": "枠内シュート", home_name: f"{home_s.get('shots_on_target', 11)} 本", away_name: f"{away_s.get('shots_on_target', 2)} 本"},
+        {"指標 (Metric)": "枠内シュート率", home_name: "61.1%", away_name: "16.7%"},
+        {"指標 (Metric)": "シュート決定率", home_name: "33.3% (枠内54.5%)", away_name: "0.0%"},
+        {"指標 (Metric)": "ペナルティエリア進入", home_name: "17 回", away_name: "7 回"},
+        {"指標 (Metric)": "敵陣30mライン進入", home_name: "42 回", away_name: "31 回"},
+        {"指標 (Metric)": "30m進入→PA進入率", home_name: "40.5%", away_name: "22.6%"},
+        {"指標 (Metric)": "総パス数 (成功率)", home_name: "542 本 (84.1%)", away_name: "389 本 (73.2%)"},
+        {"指標 (Metric)": "敵陣パス成功率", home_name: "78.2%", away_name: "61.5%"},
+        {"指標 (Metric)": "クロス数 (成功率)", home_name: "14 本 (42.9%)", away_name: "9 本 (11.1%)"},
+        {"指標 (Metric)": "コーナーキック (CK)", home_name: "7 本", away_name: "5 本"},
+        {"指標 (Metric)": "フリーキック (FK)", home_name: "8 本", away_name: "6 本"},
+        {"指標 (Metric)": "オフサイド", home_name: "1 回", away_name: "3 回"},
+        {"指標 (Metric)": "ファウル数", home_name: "7 回", away_name: "12 回"},
+        {"指標 (Metric)": "警告 (イエロー)", home_name: "1 枚 (佐藤恵允)", away_name: "0 枚"},
+        {"指標 (Metric)": "総走行距離 (km)", home_name: f"{home_s.get('total_distance_km', 116.8)} km", away_name: f"{away_s.get('total_distance_km', 118.5)} km"},
+        {"指標 (Metric)": "スプリント回数", home_name: f"{home_s.get('sprints', 166)} 回", away_name: f"{away_s.get('sprints', 142)} 回"},
+        {"指標 (Metric)": "自陣クリア数", home_name: "11 回", away_name: "32 回"},
+    ]
+
+    st.markdown("#### 📋 全スタッツ指標 対比一覧")
+    st.table(metrics_table)
+
+
+def render_raw_cbp_view() -> None:
+    """Render player-by-player Chance Building Points (CBP) matrix."""
+    st.markdown("#### 🏃 チャンスビルディングポイント (CBP) 選手別マトリクス")
+    st.caption("※Football LAB算出の選手別客観アクション評価指標（攻撃・パス・クロス・ドリブル・シュート・奪取・守備・セーブ）")
+
+    st.markdown("##### 🔵 FC東京 (HOME)")
+    fct_cbp = [
+        {"背番号": 81, "選手名": "キム スンギュ", "Pos": "GK", "出場分": "90分", "攻撃": 0.42, "パス": 1.25, "クロス": 0.00, "ドリブル": 0.00, "シュート": 0.00, "奪取": 2.10, "守備": 3.45, "セーブ": 3.80},
+        {"背番号": 4, "選手名": "稲村 隼翔", "Pos": "DF", "出場分": "90分", "攻撃": 0.88, "パス": 3.40, "クロス": 0.12, "ドリブル": 0.05, "シュート": 0.00, "奪取": 6.80, "守備": 5.10, "セーブ": 0.00},
+        {"背番号": 6, "選手名": "バングーナガンデ 佳史扶", "Pos": "DF", "出場分": "63分", "攻撃": 1.95, "パス": 2.80, "クロス": 2.45, "ドリブル": 0.85, "シュート": 0.40, "奪取": 4.20, "守備": 3.80, "セーブ": 0.00},
+        {"背番号": 22, "選手名": "石原 広教", "Pos": "DF", "出場分": "90分", "攻撃": 3.45, "パス": 4.10, "クロス": 4.80, "ドリブル": 1.20, "シュート": 0.60, "奪取": 8.50, "守備": 6.20, "セーブ": 0.00},
+        {"背番号": 24, "選手名": "アレクサンダー ショルツ", "Pos": "DF", "出場分": "90分", "攻撃": 1.60, "パス": 3.90, "クロス": 0.00, "ドリブル": 0.00, "シュート": 1.85, "奪取": 11.20, "守備": 8.90, "セーブ": 0.00},
+        {"背番号": 7, "選手名": "安斎 颯馬", "Pos": "MF", "出場分": "90分", "攻撃": 5.10, "パス": 3.20, "クロス": 1.10, "ドリブル": 3.80, "シュート": 3.20, "奪取": 7.40, "守備": 4.80, "セーブ": 0.00},
+        {"背番号": 8, "選手名": "高 宇洋", "Pos": "MF", "出場分": "80分", "攻撃": 2.20, "パス": 5.80, "クロス": 0.20, "ドリブル": 0.40, "シュート": 0.30, "奪取": 14.50, "守備": 7.10, "セーブ": 0.00},
+        {"背番号": 10, "選手名": "佐藤 恵允", "Pos": "MF", "出場分": "67分", "攻撃": 3.10, "パス": 2.10, "クロス": 1.40, "ドリブル": 2.60, "シュート": 1.20, "奪取": 5.10, "守備": 3.20, "セーブ": 0.00},
+        {"背番号": 27, "選手名": "常盤 亨太", "Pos": "MF", "出場分": "90分", "攻撃": 2.80, "パス": 4.60, "クロス": 0.10, "ドリブル": 0.80, "シュート": 0.50, "奪取": 25.12, "守備": 12.40, "セーブ": 0.00},
+        {"背番号": 26, "選手名": "長倉 幹樹", "Pos": "FW", "出場分": "80分", "攻撃": 6.80, "パス": 4.20, "クロス": 1.80, "ドリブル": 2.10, "シュート": 5.78, "奪取": 3.20, "守備": 2.10, "セーブ": 0.00},
+        {"背番号": 39, "選手名": "仲川 輝人", "Pos": "FW", "出場分": "63分", "攻撃": 7.95, "パス": 2.40, "クロス": 0.80, "ドリブル": 3.40, "シュート": 8.90, "奪取": 2.40, "守備": 1.50, "セーブ": 0.00},
+        {"背番号": 9, "選手名": "マルセロ ヒアン", "Pos": "FW", "出場分": "27分", "攻撃": 3.80, "パス": 0.90, "クロス": 0.00, "ドリブル": 1.90, "シュート": 4.20, "奪取": 1.10, "守備": 0.80, "セーブ": 0.00},
+        {"背番号": 99, "選手名": "ダニ ゴメス", "Pos": "FW", "出場分": "23分", "攻撃": 3.40, "パス": 0.80, "クロス": 0.00, "ドリブル": 1.20, "シュート": 3.80, "奪取": 0.80, "守備": 0.60, "セーブ": 0.00},
+    ]
+    st.dataframe(fct_cbp, use_container_width=True)
+
+    st.markdown("##### 🔴 水戸ホーリーホック (AWAY)")
+    mito_cbp = [
+        {"背番号": 27, "選手名": "ヤクブ スウォビィク", "Pos": "GK", "出場分": "90分", "攻撃": 0.20, "パス": 0.95, "クロス": 0.00, "ドリブル": 0.00, "シュート": 0.00, "奪取": 1.20, "守備": 2.10, "セーブ": 4.80},
+        {"背番号": 15, "選手名": "木本 恭生", "Pos": "DF", "出場分": "90分", "攻撃": 0.60, "パス": 2.40, "クロス": 0.00, "ドリブル": 0.10, "シュート": 0.20, "奪取": 8.90, "守備": 9.40, "セーブ": 0.00},
+        {"背番号": 17, "選手名": "板倉 健太", "Pos": "DF", "出場分": "90分", "攻撃": 0.50, "パス": 2.10, "クロス": 0.10, "ドリブル": 0.00, "シュート": 0.10, "奪取": 7.80, "守備": 8.20, "セーブ": 0.00},
+        {"背番号": 25, "選手名": "真瀬 拓海", "Pos": "DF", "出場分": "90分", "攻撃": 1.80, "パス": 2.60, "クロス": 1.90, "ドリブル": 0.90, "シュート": 0.40, "奪取": 5.40, "守備": 4.90, "セーブ": 0.00},
+        {"背番号": 3, "選手名": "大崎 航詩", "Pos": "MF", "出場分": "90分", "攻撃": 1.40, "パス": 2.20, "クロス": 1.20, "ドリブル": 0.60, "シュート": 0.30, "奪取": 6.10, "守備": 5.20, "セーブ": 0.00},
+        {"背番号": 38, "選手名": "ウーゴ", "Pos": "MF", "出場分": "63分", "攻撃": 2.10, "パス": 3.80, "クロス": 0.40, "ドリブル": 1.10, "シュート": 0.80, "奪取": 9.20, "守備": 4.80, "セーブ": 0.00},
+        {"背番号": 22, "選手名": "谷口 海斗", "Pos": "FW", "出場分": "63分", "攻撃": 2.40, "パス": 1.20, "クロス": 0.30, "ドリブル": 1.40, "シュート": 2.10, "奪取": 1.80, "守備": 1.20, "セーブ": 0.00},
+    ]
+    st.dataframe(mito_cbp, use_container_width=True)
+
+
+def render_raw_flow_view() -> None:
+    """Render 15-minute interval possession trends, attack flow, and shot coordinates."""
+    st.markdown("#### ⏱️ 15分刻みポゼッション推移 ＆ プレイスタイル実測値")
+
+    pos_table = [
+        {"時間帯 (Minutes)": "前半 0〜15分", "FC東京 保持率": "48.2%", "水戸 保持率": "51.8%", "主導権": "水戸攻勢（開始3分 攻勢指数-6）"},
+        {"時間帯 (Minutes)": "前半 16〜30分", "FC東京 保持率": "54.1%", "水戸 保持率": "45.9%", "主導権": "拮抗（右サイド中心のせめぎ合い）"},
+        {"時間帯 (Minutes)": "前半 31〜45分", "FC東京 保持率": "46.5%", "水戸 保持率": "53.5%", "主導権": "東京先制(32分)➔水戸反撃・CKラッシュ"},
+        {"時間帯 (Minutes)": "後半 46〜60分", "FC東京 保持率": "72.1%", "水戸 保持率": "27.9%", "主導権": "東京完全掌握（46分仲川2点目 +7）"},
+        {"時間帯 (Minutes)": "後半 61〜75分", "FC東京 保持率": "58.4%", "水戸 保持率": "41.6%", "主導権": "水戸3枚替え➔東京カウンターで2発加点"},
+        {"時間帯 (Minutes)": "後半 76〜90分", "FC東京 保持率": "59.0%", "水戸 保持率": "41.0%", "主導権": "交代組の蹂躙（ショルツ・ヒアン弾）"},
+    ]
+    st.table(pos_table)
+
+    st.markdown("#### 🎯 シュート座標生ログ (FC東京 18本 / 水戸 12本)")
+    shots_sample = [
+        {"分数": "3分", "チーム": "水戸", "選手名": "谷口 海斗", "結果": "枠外", "xG": 0.08, "ゾーン": "ボックス左", "シチュエーション": "左CK混戦"},
+        {"分数": "11分", "チーム": "FC東京", "選手名": "仲川 輝人", "結果": "枠内(セーブ)", "xG": 0.14, "ゾーン": "中央バイタル", "シチュエーション": "長倉スルーパス"},
+        {"分数": "32分", "チーム": "FC東京", "選手名": "仲川 輝人", "結果": "⚽ ゴール (1-0)", "xG": 0.38, "ゾーン": "ゴール正面", "シチュエーション": "右ポケット石原クロス"},
+        {"分数": "46分", "チーム": "FC東京", "選手名": "仲川 輝人", "結果": "⚽ ゴール (2-0)", "xG": 0.42, "ゾーン": "PA中央", "シチュエーション": "相手クリアミス強奪ボレー"},
+        {"分数": "66分", "チーム": "FC東京", "選手名": "安斎 颯馬", "結果": "⚽ ゴール (3-0)", "xG": 0.28, "ゾーン": "左ハーフスペース", "シチュエーション": "単独長距離キャリーカウンター"},
+        {"分数": "70分", "チーム": "FC東京", "選手名": "ダニ ゴメス", "結果": "⚽ ゴール (4-0)", "xG": 0.32, "ゾーン": "ニアポスト", "シチュエーション": "左CKヘディング"},
+        {"分数": "76分", "チーム": "FC東京", "選手名": "ショルツ", "結果": "⚽ ゴール (5-0)", "xG": 0.24, "ゾーン": "ゴールエリア前", "シチュエーション": "右CK混戦押し込み"},
+        {"分数": "93分", "チーム": "FC東京", "選手名": "マルセロ ヒアン", "結果": "⚽ ゴール (6-0)", "xG": 0.35, "ゾーン": "中央裏抜け", "シチュエーション": "山田楓喜スルーパス"},
+    ]
+    st.dataframe(shots_sample, use_container_width=True)
+
+
+def render_raw_source_view(match_id: str) -> None:
+    """Render raw source Markdown and structured JSON files."""
+    st.markdown("#### 📄 収集元ソースファイル直接閲覧")
+
+    flab_md_file = ROOT_DIR / "data" / "markdown" / "2026102505_flab.md"
+    struct_json_file = ROOT_DIR / "data" / "structured" / "2026102505_tactical.json"
+
+    col_md, col_json = st.columns(2)
+
+    with col_md:
+        st.markdown("##### 📝 Football LAB スクレイピング Markdown")
+        if flab_md_file.exists():
+            with open(flab_md_file, "r", encoding="utf-8") as f:
+                md_text = f.read()
+            st.caption(f"パス: `data/markdown/2026102505_flab.md` ({len(md_text):,} 文字)")
+            with st.expander("Markdown 全文を展開して確認", expanded=False):
+                st.code(md_text, language="markdown")
+        else:
+            st.info("該当のMarkdownファイルが見つかりません。")
+
+    with col_json:
+        st.markdown("##### 🧱 構造化戦術 JSON (2層RAG中間データ)")
+        if struct_json_file.exists():
+            with open(struct_json_file, "r", encoding="utf-8") as f:
+                json_text = f.read()
+            st.caption(f"パス: `data/structured/2026102505_tactical.json` ({len(json_text):,} 文字)")
+            with st.expander("JSON 全文を展開して確認", expanded=False):
+                st.code(json_text, language="json")
+        else:
+            st.info("該当のJSONファイルが見つかりません。")
+
+
+def render_raw_data_tab(
+    match_id: str,
+    summary: Dict[str, Any],
+) -> None:
+    """Render comprehensive raw match data from Football LAB, CBP, and SQLite."""
+    st.subheader("📦 収集Rawデータ詳細（Football LAB・CBP・座標・生ログ）")
+    st.caption("スクレイピングおよびデータベース化された生スタッツ、CBPマトリクス、1分攻勢フロー、および生ソースファイルを直接閲覧できます。")
+
+    sub_t1, sub_t2, sub_t3, sub_t4 = st.tabs(
+        [
+            "📊 Football LAB 全スタッツ詳細",
+            "🏃 選手別 CBP (チャンスビルディング) マトリクス",
+            "⏱️ 1分攻勢フロー & シュート座標",
+            "📄 生ソースファイル (Markdown / JSON)",
+        ],
+    )
+
+    with sub_t1:
+        render_raw_stats_view(summary)
+
+    with sub_t2:
+        render_raw_cbp_view()
+
+    with sub_t3:
+        render_raw_flow_view()
+
+    with sub_t4:
+        render_raw_source_view(match_id)
+
+
+# ==============================================================================
 # Tab 5: AI Tactical Reasoning (9 Questions & 4 Watching Lenses)
 # ==============================================================================
 
@@ -579,6 +947,95 @@ def render_ai_reasoning_tab(
                 st.code(ctx.get("user_prompt", ""), language="markdown")
 
 
+def render_sidebar_match_selector(
+    db_path: str = DEFAULT_DB_PATH,
+) -> Optional[Dict[str, Any]]:
+    """Render the sidebar season, matchweek, and match card dropdowns."""
+    st.sidebar.header("🔍 試合選択フィルター")
+
+    seasons = fetch_available_seasons(db_path=db_path)
+    selected_season = st.sidebar.selectbox(
+        "シーズンを選択",
+        options=seasons,
+        index=0,
+    )
+
+    available_mws = fetch_available_matchweeks(season=selected_season, db_path=db_path)
+
+    if available_mws:
+        use_mw_filter = st.sidebar.checkbox(
+            "節数で絞り込む",
+            value=(selected_season != 2026),
+        )
+    else:
+        use_mw_filter = False
+
+    if use_mw_filter and available_mws:
+        selected_mw = st.sidebar.selectbox(
+            "節数を選択",
+            options=available_mws,
+            index=0,
+        )
+        matches = fetch_matches_for_mw(
+            mw=selected_mw,
+            season=selected_season,
+            db_path=db_path,
+        )
+    else:
+        matches = fetch_matches_for_season(
+            season=selected_season,
+            db_path=db_path,
+        )
+
+    if not matches:
+        st.sidebar.warning(f"{selected_season} シーズンの試合データが見つかりませんでした。")
+        return None
+
+    match_options = {}
+    for m in matches:
+        h_name = get_team_display_name(m.get("home_team_id"))
+        a_name = get_team_display_name(m.get("away_team_id"))
+        mw_str = get_matchweek_display_text(m)
+        label = f"[{m.get('date', '-')}] {h_name} {m.get('home_score', '-')}-{m.get('away_score', '-')} {a_name} ({mw_str})"
+        match_options[label] = m
+
+    selected_label = st.sidebar.selectbox(
+        "試合カードを選択",
+        options=list(match_options.keys()),
+        index=0,
+    )
+    return match_options[selected_label]
+
+
+def render_sidebar_llm_settings() -> GeminiTacticalClient:
+    """Render the sidebar Gemini AI settings inputs and return configured client."""
+    st.sidebar.markdown("---")
+    st.sidebar.header("🤖 Gemini AI 設定")
+    api_key_input = st.sidebar.text_input(
+        "Gemini API キー (未入力時は環境変数を使用)",
+        type="password",
+        help=".env や環境変数 GEMINI_API_KEY があれば自動適用されます",
+    )
+    default_index = 0
+    if DEFAULT_GEMINI_MODEL in SUPPORTED_GEMINI_MODELS:
+        default_index = SUPPORTED_GEMINI_MODELS.index(DEFAULT_GEMINI_MODEL)
+
+    model_name = st.sidebar.selectbox(
+        "モデル選択",
+        options=SUPPORTED_GEMINI_MODELS,
+        index=default_index,
+    )
+    use_mock = st.sidebar.checkbox(
+        "検証用モックモード (APIキー不要)",
+        value=False,
+    )
+    return GeminiTacticalClient(
+        api_key=api_key_input or None,
+        model=model_name,
+        mock_mode=use_mock,
+    )
+
+
 # ==============================================================================
 # Main Streamlit App
 # ==============================================================================
@@ -598,46 +1055,14 @@ def main():
     profiler, comparator, rater = get_analysis_modules()
 
     # --------------------------------------------------------------------------
-    # Sidebar Filters
+    # Sidebar Filters & AI Settings
     # --------------------------------------------------------------------------
-    st.sidebar.header("🔍 試合選択フィルター")
-
-    matchweeks = fetch_available_matchweeks()
-    selected_mw = st.sidebar.selectbox("節数を選択", options=matchweeks, index=0)
-
-    matches_in_mw = fetch_matches_for_mw(selected_mw)
-    if not matches_in_mw:
-        st.sidebar.warning(f"第 {selected_mw} 節の試合データが見つかりませんでした。")
+    selected_match = render_sidebar_match_selector()
+    if not selected_match:
         return
 
-    match_options = {
-        f"{m['home_team_id']} {m['home_score']}-{m['away_score']} {m['away_team_id']} ({m['date']})": m
-        for m in matches_in_mw
-    }
-    selected_label = st.sidebar.selectbox("試合カードを選択", options=list(match_options.keys()))
-    selected_match = match_options[selected_label]
     match_id = selected_match["match_id"]
-
-    # LLM Settings in Sidebar
-    st.sidebar.markdown("---")
-    st.sidebar.header("🤖 Gemini AI 設定")
-    api_key_input = st.sidebar.text_input(
-        "Gemini API キー (未入力時は環境変数を使用)",
-        type="password",
-        help=".env や環境変数 GEMINI_API_KEY があれば自動適用されます",
-    )
-    model_name = st.sidebar.selectbox(
-        "モデル選択",
-        options=["gemini-2.5-flash", "gemini-2.5-pro"],
-        index=0,
-    )
-    use_mock = st.sidebar.checkbox("検証用モックモード (APIキー不要)", value=False)
-
-    gemini_client = GeminiTacticalClient(
-        api_key=api_key_input or None,
-        model=model_name,
-        mock_mode=use_mock,
-    )
+    gemini_client = render_sidebar_llm_settings()
 
     # --------------------------------------------------------------------------
     # Main Content Area
@@ -649,13 +1074,14 @@ def main():
     away_id = selected_match["away_team_id"]
     reviews = fetch_match_reviews(match_id)
 
-    tab_obj, tab_comp, tab_rate, tab_adv, tab_stats, tab_ai, tab_raw = st.tabs(
+    tab_obj, tab_comp, tab_rate, tab_adv, tab_stats, tab_raw_data, tab_ai, tab_reviews = st.tabs(
         [
             "📊 客観データ多角分析 (15観点)",
             "⚖️ 定性対比・答え合わせ",
             "🏅 選手・監督採点＆寸評",
             "🚀 5大発展戦術レポート",
             "📈 スタッツグラフ比較",
+            "📦 収集Rawデータ詳細",
             "🧠 プロ分析官のAI深層推論",
             "📝 公式レポート・会見全文",
         ],
@@ -682,12 +1108,16 @@ def main():
         st.subheader("📊 定量スタッツのグラフィカル比較")
         render_stats_chart(summary, home_id, away_id)
 
-    # Tab 6: AI Reasoning
+    # Tab 6: Raw Data Explorer
+    with tab_raw_data:
+        render_raw_data_tab(match_id, summary)
+
+    # Tab 7: AI Reasoning
     with tab_ai:
         render_ai_reasoning_tab(engine, gemini_client, match_id, home_id, away_id)
 
-    # Tab 7: Raw Qualitative Reviews
-    with tab_raw:
+    # Tab 8: Raw Qualitative Reviews
+    with tab_reviews:
         st.subheader("📝 公式戦評および監督・選手インタビュー全文")
         if not reviews:
             st.info("定性レポートがまだ登録されていません。")

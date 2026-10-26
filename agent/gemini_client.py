@@ -24,6 +24,14 @@ except ImportError:
 
 DEFAULT_GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 FALLBACK_GEMINI_MODELS = ["gemini-3.5-flash", "gemini-3.1-pro-preview"]
+SUPPORTED_GEMINI_MODELS = [
+    "gemini-3.8-flash",
+    "gemini-3.8-pro",
+    "gemini-3.5-flash",
+    "gemini-3.1-pro-preview",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+]
 
 
 class GeminiTacticalClient:

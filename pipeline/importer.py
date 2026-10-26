@@ -202,11 +202,36 @@ def _safe_float(val: str) -> Optional[float]:
         return None
 
 
+def _is_home_team(
+    team_label: str,
+    home_id: str,
+    away_id: str,
+    normalizer: Optional[EntityNormalizer] = None,
+) -> bool:
+    """Helper to classify speaker team affiliation accurately."""
+    clean_label = team_label.strip()
+    if normalizer is not None:
+        norm_tid = normalizer.normalize_team_name(clean_label)
+        if norm_tid == home_id:
+            return True
+        if norm_tid == away_id:
+            return False
+
+    # Fallback to identifier/substring match
+    if home_id in clean_label:
+        return True
+    if away_id in clean_label:
+        return False
+
+    return True
+
+
 def _parse_reviews(
     match_id: str,
     home_id: str,
     away_id: str,
     md_text: str,
+    normalizer: Optional[EntityNormalizer] = None,
 ) -> List[MatchReviewModel]:
     """Parse match report and coach/player interview sections."""
     reviews = []
@@ -235,7 +260,7 @@ def _parse_reviews(
             speaker = c_blocks[i + 1].strip()
             body = c_blocks[i + 2].strip()
 
-            is_home = (home_id in team_label or "ＦＣ東京" in team_label or "東京" in team_label)
+            is_home = _is_home_team(team_label, home_id, away_id, normalizer)
             rev_type = "HOME_COACH" if is_home else "AWAY_COACH"
             tid = home_id if is_home else away_id
 
@@ -261,7 +286,7 @@ def _parse_reviews(
             speaker = p_blocks[i + 1].strip()
             body = p_blocks[i + 2].strip()
 
-            is_home = (home_id in team_label or "ＦＣ東京" in team_label or "東京" in team_label)
+            is_home = _is_home_team(team_label, home_id, away_id, normalizer)
             rev_type = "HOME_PLAYER" if is_home else "AWAY_PLAYER"
             tid = home_id if is_home else away_id
 
@@ -350,7 +375,7 @@ def parse_jleague_markdown(
 
     team_stats = _parse_stats_table(match_id, home_id, away_id, md_text)
     events = _parse_goal_events(match_id, home_id, away_id, info.get("scorers", ""), norm)
-    reviews = _parse_reviews(match_id, home_id, away_id, md_text)
+    reviews = _parse_reviews(match_id, home_id, away_id, md_text, norm)
 
     return MatchBundleModel(
         match=match_model,

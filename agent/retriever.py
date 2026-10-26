@@ -23,9 +23,17 @@ class TacticalHybridRetriever:
     def __init__(
         self,
         vector_indexer: Optional[TacticalVectorIndexer] = None,
+        chroma_dir: Optional[str] = None,
+        db_path: Optional[str] = None,
         knowledge_dir: Optional[str] = None,
     ):
-        self.vector_indexer = vector_indexer or TacticalVectorIndexer()
+        if vector_indexer is not None:
+            self.vector_indexer = vector_indexer
+        elif chroma_dir is not None:
+            self.vector_indexer = TacticalVectorIndexer(persist_directory=chroma_dir)
+        else:
+            self.vector_indexer = TacticalVectorIndexer()
+        self.db_path = db_path
         self.knowledge_path = Path(knowledge_dir) if knowledge_dir else KNOWLEDGE_DIR
 
         self.causal_trees: List[Dict[str, Any]] = []

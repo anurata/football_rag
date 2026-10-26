@@ -115,3 +115,43 @@ class SerializedChunkModel(BaseModel):
     content: str = Field(description="Serialized markdown or narrative content")
     metadata: Dict[str, Any] = Field(default_factory=dict, description="Metadata for filtering in vector DB")
 
+
+class TacticalEventItem(BaseModel):
+    """Structured tactical event extracted by AI from text live commentary."""
+    minute: Optional[int] = Field(default=None, description="Match minute, e.g., 32")
+    period: str = Field(default="1H", description="1H, 2H, or ET")
+    team_side: str = Field(default="HOME", description="HOME or AWAY")
+    category: str = Field(
+        default="CHANCE_CREATION",
+        description="CHANCE_CREATION, PRESSING, BUILDUP, SUBSTITUTION_TACTIC, GAME_STATE_SHIFT",
+    )
+    actors: List[str] = Field(default_factory=list, description="Key players involved")
+    zone: Optional[str] = Field(default=None, description="Tactical area, e.g., 右ハーフスペース, バイタルエリア")
+    description: str = Field(default="", description="Tactical explanation of the event")
+
+
+class PhaseSummaryItem(BaseModel):
+    """Tactical summary of a 15-minute game phase."""
+    phase: str = Field(description="0-15, 15-30, 30-45+, 45-60, 60-75, 75-90+")
+    dominant_team: str = Field(default="EQUAL", description="HOME, AWAY, or EQUAL")
+    momentum_summary: str = Field(default="", description="Summary of who had control and chances")
+    pressing_battle: str = Field(default="", description="Pressing intensity and press-breaking dynamics")
+    tactical_adjustments: str = Field(default="", description="Tactical adaptations or bench interventions")
+
+
+class MatchTacticalStructure(BaseModel):
+    """Complete AI-structured tactical representation of a match."""
+    match_id: str = Field(description="Match identifier, e.g., 2026102505")
+    home_formation: Optional[str] = Field(default=None, description="Estimated home formation, e.g., 4-4-2")
+    away_formation: Optional[str] = Field(default=None, description="Estimated away formation, e.g., 4-4-2")
+    tactical_highlights: List[str] = Field(
+        default_factory=list,
+        description="Core tactical highlights and decisive factors of the match",
+    )
+    phases: List[PhaseSummaryItem] = Field(default_factory=list, description="6 tactical phase summaries")
+    key_tactical_events: List[TacticalEventItem] = Field(
+        default_factory=list,
+        description="Key tactical events extracted from live text",
+    )
+
+

@@ -22,6 +22,7 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from pipeline.normalizer import EntityNormalizer
+from pipeline.text_live_structurer import TextLiveStructurer
 from scrapers.football_lab import FootballLabScraper
 from scrapers.schedule_crawler import ScheduleCrawler
 from scrapers.spaia_soccer import SpaiasoccerScraper
@@ -41,15 +42,18 @@ class RawMatchFetcher:
         self,
         raw_dir: str = "data/raw",
         markdown_dir: str = "data/markdown",
+        structured_dir: str = "data/structured",
         normalizer: Optional[EntityNormalizer] = None,
         schedule_crawler: Optional[ScheduleCrawler] = None,
         yahoo_scraper: Optional[YahooSoccerScraper] = None,
         spaia_scraper: Optional[SpaiasoccerScraper] = None,
         football_lab_scraper: Optional[FootballLabScraper] = None,
+        text_live_structurer: Optional[TextLiveStructurer] = None,
     ) -> None:
         """フェッチャーを初期化する."""
         self.raw_dir = raw_dir
         self.markdown_dir = markdown_dir
+        self.structured_dir = structured_dir
         self.yahoo_dir = os.path.join(raw_dir, "yahoo")
         self.spaia_dir = os.path.join(raw_dir, "spaia")
         self.flab_dir = os.path.join(raw_dir, "football_lab")
@@ -61,6 +65,10 @@ class RawMatchFetcher:
         self.yahoo_scraper = yahoo_scraper or YahooSoccerScraper()
         self.spaia_scraper = spaia_scraper or SpaiasoccerScraper()
         self.football_lab_scraper = football_lab_scraper or FootballLabScraper()
+        self.text_live_structurer = text_live_structurer or TextLiveStructurer(
+            raw_dir=self.raw_dir,
+            output_dir=self.structured_dir,
+        )
 
         os.makedirs(self.yahoo_dir, exist_ok=True)
         os.makedirs(self.spaia_dir, exist_ok=True)
@@ -355,6 +363,7 @@ class RawMatchFetcher:
         force: bool = False,
         delay: float = 1.0,
         dry_run: bool = False,
+        structure_ai: bool = False,
     ) -> Dict[str, Any]:
         """指定条件の試合を一括取得するバッチ処理を実行する."""
         matches = self.discover_matches(
@@ -432,6 +441,10 @@ class RawMatchFetcher:
                     list(res["saved_files"].keys()),
                 )
 
+            # AI構造化のオプション実行
+            if structure_ai:
+                self._run_ai_structuring_for_game(g_id, force=force)
+
             # リクエスト待機（キャッシュスキップ時は待機しない）
             if not res["skipped"] and idx < len(matches) and delay > 0:
                 time.sleep(delay)
@@ -445,6 +458,33 @@ class RawMatchFetcher:
         }
         self._print_final_summary(summary)
         return summary
+
+    def _run_ai_structuring_for_game(
+        self,
+        game_id: str,
+        force: bool = False,
+    ) -> None:
+        """試合のテキスト速報をAI構造化し、Markdownファイルがあれば追記更新する."""
+        try:
+            logger.info("  -> Running AI tactical structuring for %s...", game_id)
+            structure = self.text_live_structurer.structure_match(
+                game_id=game_id,
+                force_refresh=force,
+            )
+            # Markdownファイルへの追記（もし存在すれば）
+            md_candidates = [
+                os.path.join(self.markdown_dir, f"{game_id}_flab.md"),
+                os.path.join(self.markdown_dir, f"{game_id}.md"),
+            ]
+            for md_path in md_candidates:
+                if os.path.exists(md_path):
+                    self.text_live_structurer.append_to_markdown_file(
+                        markdown_path=md_path,
+                        structure=structure,
+                    )
+        except Exception as e:
+            logger.warning("AI structuring failed for %s: %s", game_id, e)
+
 
     def _print_dry_run_summary(self, matches: List[Dict[str, Any]]) -> None:
         """Dry-run時の対象試合一覧を表示する."""
@@ -538,6 +578,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="実際のスクレイピングは実行せず、対象試合一覧のみを表示する",
     )
+    parser.add_argument(
+        "--structure-ai",
+        action="store_true",
+        help="生データ取得後にGeminiによるテキスト速報の戦術構造化とMarkdown追記を実行する",
+    )
     return parser
 
 
@@ -559,6 +604,7 @@ def main() -> None:
         force=args.force,
         delay=args.delay,
         dry_run=args.dry_run,
+        structure_ai=args.structure_ai,
     )
 
 

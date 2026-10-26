@@ -9,6 +9,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from pipeline.normalizer import EntityNormalizer
+from pipeline.text_live_structurer import TextLiveStructurer
 from scrapers.football_lab import FootballLabScraper
 from scrapers.schedule_crawler import ScheduleCrawler
 from scrapers.spaia_soccer import SpaiasoccerScraper
@@ -28,12 +29,14 @@ class TestFetchRawMatches(unittest.TestCase):
         self.test_dir = tempfile.mkdtemp()
         self.md_dir = os.path.join(self.test_dir, "markdown")
         self.raw_dir = os.path.join(self.test_dir, "raw")
+        self.structured_dir = os.path.join(self.test_dir, "structured")
 
         self.mock_normalizer = MagicMock(spec=EntityNormalizer)
         self.mock_crawler = MagicMock(spec=ScheduleCrawler)
         self.mock_yahoo = MagicMock(spec=YahooSoccerScraper)
         self.mock_spaia = MagicMock(spec=SpaiasoccerScraper)
         self.mock_flab = MagicMock(spec=FootballLabScraper)
+        self.mock_structurer = MagicMock(spec=TextLiveStructurer)
 
         # チーム名解決のモック
         self.mock_normalizer.normalize_team_name.side_effect = lambda x: (
@@ -43,11 +46,13 @@ class TestFetchRawMatches(unittest.TestCase):
         self.fetcher = RawMatchFetcher(
             raw_dir=self.raw_dir,
             markdown_dir=self.md_dir,
+            structured_dir=self.structured_dir,
             normalizer=self.mock_normalizer,
             schedule_crawler=self.mock_crawler,
             yahoo_scraper=self.mock_yahoo,
             spaia_scraper=self.mock_spaia,
             football_lab_scraper=self.mock_flab,
+            text_live_structurer=self.mock_structurer,
         )
 
     def tearDown(self) -> None:
@@ -292,6 +297,7 @@ class TestFetchRawMatches(unittest.TestCase):
             "-s", "football_lab",
             "--force",
             "--delay", "0.5",
+            "--structure-ai",
         ])
 
         self.assertEqual(args.season, 2026)
@@ -300,7 +306,43 @@ class TestFetchRawMatches(unittest.TestCase):
         self.assertEqual(args.source, "football_lab")
         self.assertTrue(args.force)
         self.assertEqual(args.delay, 0.5)
+        self.assertTrue(args.structure_ai)
+
+    def test_run_batch_with_structure_ai(self) -> None:
+        """--structure-ai フラグ指定時のバッチAI構造化呼び出しテスト."""
+        self.mock_crawler.build_schedule.return_value = [
+            {
+                "year": 2026,
+                "matchweek": 1,
+                "mmdd": "0808",
+                "daily_match_index": 2,
+                "home_team_id": "FCT",
+                "away_team_id": "MAC",
+                "home_team_raw": "FC東京",
+                "away_team_raw": "町田",
+            },
+        ]
+        self.mock_yahoo.save_raw_data.return_value = {"stats_path": "dummy_stats"}
+        self.mock_spaia.save_raw_data.return_value = {"comments_path": "dummy_comments"}
+        self.mock_flab.save_raw_data.return_value = {"json_path": "dummy_json"}
+
+        summary = self.fetcher.run_batch(
+            season=2026,
+            start_mw=1,
+            end_mw=1,
+            structure_ai=True,
+            delay=0.0,
+        )
+
+        self.assertEqual(summary["total"], 1)
+        self.assertEqual(summary["success"], 1)
+        # text_live_structurer.structure_match が呼び出されたことを検証
+        self.mock_structurer.structure_match.assert_called_once_with(
+            game_id="2026080802",
+            force_refresh=False,
+        )
 
 
 if __name__ == "__main__":
     unittest.main()
+

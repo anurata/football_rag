@@ -291,12 +291,68 @@ def build_game_state_dna_prompt(
 """
 
 
+def build_tactical_evolution_prompt(
+    team_id: str,
+    trajectory_summary: str,
+    opponent_interviews: str,
+    tradeoffs_knowledge: Optional[str] = None,
+) -> str:
+    """8. 【戦術の賞味期限と進化】プロンプト構築"""
+    tradeoffs_section = (
+        f"\n【戦術トレードオフ辞書】\n{tradeoffs_knowledge}\n"
+        if tradeoffs_knowledge
+        else ""
+    )
+    return f"""チーム（{team_id}）の戦術が相手に対策・研究された推移と、それに対するチームの進化・マイナーチェンジを分析してください。
+
+【時系列スタッツ推移】
+{trajectory_summary}
+
+【対戦相手側の証言・監督コメント（対策の痕跡）】
+{opponent_interviews}
+{tradeoffs_section}
+【出力要件】
+1. **相手による対策・研究の分析**: 相手チームがどのエリアを消し、誰をピン留め・封鎖してきたか（証言とスタッツから特定）。
+2. **チーム側のマイナーチェンジ**: 対策に対し、監督やチームが施した微修正（ビルドアップ形状、選手のポジショニング、交代策の工夫）。
+3. **賞味期限と次の進化課題**: 現在の戦術が今後も通用するか、更なる対策を破るための次の進化軸を提示。
+"""
+
+
+def build_skill_vs_luck_prompt(
+    team_id: str,
+    trajectory_summary: str,
+) -> str:
+    """9. 【実力と運の切り分け】プロンプト構築"""
+    return f"""チーム（{team_id}）の現在の成績が「実力通り」か、それとも「実得点とxGの乖離（運・偶発性の偏り）」によるものかを診断してください。
+
+【直近試合の得失点 vs xG・被xG推移】
+{trajectory_summary}
+
+【出力要件】
+1. **攻撃の運・実力診断**: 実得点とxGの乖離度（xg_goal_diff）を評価。チャンス構築の質（実力）か、決定力の一時的フィーバー/決定力不足（運）かを切り分け。
+2. **守備の運・実力診断**: 失点数と被xGの乖離度を評価。組織的な被シュート抑制（実力）か、GKのスーパーセーブ連発/被弾の偏り（運）かを切り分け。
+3. **揺り戻し（回帰傾向）予測と提言**: 今後期待される成績の収斂方向と、勝点を安定維持するために改善すべき本質的スタッツ指標を提示。
+"""
+
+
 def build_watching_guide_prompt(
     match_facts: str,
     system_matchup: str,
     quantitative_summary: str,
+    player_roles_info: Optional[str] = None,
+    substitutions_info: Optional[str] = None,
 ) -> str:
     """観戦が10倍面白くなる4つのレンズ プロンプト構築"""
+    roles_section = (
+        f"\n【注目選手と戦術ロール】\n{player_roles_info}\n"
+        if player_roles_info
+        else ""
+    )
+    subs_section = (
+        f"\n【ベンチ入り・想定交代カード】\n{substitutions_info}\n"
+        if substitutions_info
+        else ""
+    )
     return f"""専門知識が少ないサッカーファンでも、スタジアムや画面の前で観戦を何倍も楽しめる観戦ガイドを生成してください。
 
 【対戦カード・試合背景】
@@ -307,7 +363,8 @@ def build_watching_guide_prompt(
 
 【主要スタッツ】
 {quantitative_summary}
-
+{roles_section}{subs_section}
 【指示】
 {WATCHING_LENSES_GUIDE}
 """
+

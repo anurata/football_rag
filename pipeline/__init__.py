@@ -10,6 +10,9 @@ from .models import (
     MatchReviewModel,
     MatchBundleModel,
     SerializedChunkModel,
+    TacticalEventItem,
+    PhaseSummaryItem,
+    MatchTacticalStructure,
 )
 from .db import (
     get_db_connection,
@@ -34,6 +37,7 @@ from .semantic_serializer import (
     get_y_zone,
 )
 from .vector_indexer import TacticalVectorIndexer
+from .text_live_structurer import TextLiveStructurer
 
 __all__ = [
     "MatchModel",
@@ -58,6 +62,10 @@ __all__ = [
     "get_x_zone",
     "get_y_zone",
     "TacticalVectorIndexer",
+    "TacticalEventItem",
+    "PhaseSummaryItem",
+    "MatchTacticalStructure",
+    "TextLiveStructurer",
 ]
 
 

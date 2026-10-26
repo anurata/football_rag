@@ -103,3 +103,15 @@ class MatchBundleModel(BaseModel):
     player_stats: List[PlayerMatchStatsModel] = Field(default_factory=list)
     events: List[MatchEventModel] = Field(default_factory=list)
     reviews: List[MatchReviewModel] = Field(default_factory=list)
+
+
+class SerializedChunkModel(BaseModel):
+    """Vector-ready chunk containing formatted tactical text and metadata."""
+    chunk_id: str = Field(description="Unique identifier, e.g. {match_id}_{chunk_type}")
+    match_id: str
+    chunk_type: str = Field(
+        description="match_summary_and_stats, tactical_timeline_and_zones, manager_interviews, player_interviews",
+    )
+    content: str = Field(description="Serialized markdown or narrative content")
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="Metadata for filtering in vector DB")
+

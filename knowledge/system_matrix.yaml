@@ -1,0 +1,117 @@
+# システム噛み合わせ・空間ミスマッチ辞書 (System Matrix)
+# フォーメーション同士の噛み合わせによる構造的な数的優位エリア、ピン留めの力学、ハーフスペースの空き方を定義する辞書
+version: "1.0"
+description: "J-League Formation Matchup Structural Dynamics Matrix"
+
+matchups:
+  - matchup_id: "442_vs_3421"
+    home_formation: "4-4-2"
+    away_formation: "3-4-2-1"
+    name: "4-4-2 vs 3-4-2-1（4バック2ボランチ vs 3バック2シャドー）"
+    structural_advantages_for_home:
+      - zone: "サイドの数的優位（大外レーン）"
+        description: "4-4-2のサイドハーフ(SH)とサイドバック(SB)の縦2枚に対し、相手はウイングバック(WB)1枚のみ。サイドで2対1の数的優位を作りやすい。"
+      - zone: "2トップによる相手3CBへの制限"
+        description: "2トップが中央のCBと左右のストッパーのパスコースを斜めに切りながら追い込みやすい。"
+    structural_advantages_for_away:
+      - zone: "ハーフスペースとライン間（2シャドー）"
+        description: "3-4-2-1の2シャドーが4-4-2の2ボランチの背後・脇（ハーフスペース）に位置取り、ボランチとCBの間に捕まえにくいギャップを生み出す。"
+      - zone: "ビルドアップ初期の3CB vs 2トップの数的優位（3対2）"
+        description: "相手2トップに対して最終ラインが3枚いるため、常に1人のストッパーが前を向いてボールを持ち運べるフリーマンとなる。"
+    pinning_mechanisms:
+      - "3-4-2-1の1トップと2シャドー（3枚）が4-4-2の4バックをピン留めし、CBが前に釣り出されにくくする。"
+      - "3-4-2-1のWBが高い位置を取ることで、4-4-2のSBを深く押し下げてサイドハーフとの縦関係を分断する。"
+    half_space_dynamics:
+      - "4-4-2側のボランチが中央を締めると、シャドーへの斜めのパス（対角線パス）が通りやすくなる。"
+      - "シャドーを監視するためにボランチがサイドに引っ張られると、バイタルエリア中央が空洞化する。"
+    sliding_and_shift_triggers:
+      - "4-4-2側はSHを一段下げて一時的に5-3-2化するか、ボランチ1枚をシャドーのマンマークに下げる修正が頻出する。"
+      - "相手WBにボールが出た瞬間、4-4-2のSBが縦にスライドして迎撃する。"
+    watching_perspective_guide:
+      - "開始10分：3-4-2-1のストッパーがどこまでボールを持ち運べるか、4-4-2の2トップが制限できているか注目。"
+      - "4-4-2のボランチが背後のシャドーを気にしすぎて前へのプレスが遅れていないか確認。"
+
+  - matchup_id: "3421_vs_442"
+    home_formation: "3-4-2-1"
+    away_formation: "4-4-2"
+    name: "3-4-2-1 vs 4-4-2（3バック2シャドー vs 4バック2ボランチ）"
+    structural_advantages_for_home:
+      - zone: "最終ラインの数的優位（3CB vs 2トップ）"
+        description: "左右のストッパーが外に開き、相手2トップの脇からスムーズにボールを持ち運べる。"
+      - zone: "中盤ライン間・ポケットの2シャドー配置"
+        description: "相手2ボランチの左右ハーフスペースにシャドーが立つことで、常に選択肢の優位性を保つ。"
+    structural_advantages_for_away:
+      - zone: "大外レーンの2対1（SH＋SB vs WB）"
+        description: "WBが前に釣り出された瞬間にその背後のスペースを突かれ、ストッパーが外に引きずり出される。"
+    pinning_mechanisms:
+      - "1トップ（CF）が相手2CBの中央に位置取り、両CBを同時に中央に縛り付ける。"
+      - "シャドーのオフ・ザ・ボールの動きで相手ボランチの視線を釘付けにする。"
+    half_space_dynamics:
+      - "相手ボランチの脇からポケットへシャドーが斜めに走り込むことで、4バックのライン間に亀裂が入る。"
+    sliding_and_shift_triggers:
+      - "WBが相手SHに押し下げられた際、5-4-1の低重心ブロックに変形して自陣を固める。"
+    watching_perspective_guide:
+      - "シャドーにボールが入った瞬間、相手CBが前向きで潰しに出てくるか、それとも下がって対応するか注目。"
+
+  - matchup_id: "4231_vs_433"
+    home_formation: "4-2-3-1"
+    away_formation: "4-3-3"
+    name: "4-2-3-1 vs 4-3-3（2ボランチ1トップ下 vs 3トップ1アンカー）"
+    structural_advantages_for_home:
+      - zone: "トップ下（OMF）による相手アンカーの監視と制限"
+        description: "4-2-3-1のトップ下が相手4-3-3の配球の心臓であるアンカーに密着し、中央ルートの配球を寸断できる。"
+      - zone: "2ボランチによるバイタルエリアの強固なプロテクト"
+        description: "相手の2人のインサイドハーフ(IH)に対して2ボランチが1対1で正面から噛み合う。"
+    structural_advantages_for_away:
+      - zone: "3トップによる相手4バックへのハイプレス圧力"
+        description: "3トップ（WG-CF-WG）が相手4バック（SB-CB-CB-SB）のパス出しコースを素早く遮断し、サイドへ閉じ込めやすい。"
+      - zone: "インサイドハーフの飛び出しとハーフスペースの急襲"
+        description: "アンカーからインサイドハーフがポケットへ斜めに抜け出すことで、2ボランチの背後を取れる。"
+    pinning_mechanisms:
+      - "4-3-3の両WGが大外高い位置に張り、4-2-3-1の両SBを自陣深くピン留めする。"
+    half_space_dynamics:
+      - "4-3-3のIHがハーフスペースを突き、4-2-3-1のボランチとCBの間にプレッシャーをかける。"
+    sliding_and_shift_triggers:
+      - "4-3-3のアンカーが下りて3バック化（サリーダ・ラボルピアーナ）した際、4-2-3-1のトップ下が追撃するかどうかが分岐点。"
+    watching_perspective_guide:
+      - "4-2-3-1のトップ下が相手アンカーを消せているか、あるいはアンカーが自由に前を向いてゲームメイクできているか。"
+
+  - matchup_id: "433_vs_442"
+    home_formation: "4-3-3"
+    away_formation: "4-4-2"
+    name: "4-3-3 vs 4-4-2（1アンカー2IH vs 2ボランチフラット）"
+    structural_advantages_for_home:
+      - zone: "中盤中央の数的優位（3MF vs 2MF）"
+        description: "アンカー＋2IH（3枚）に対して相手は2ボランチ（2枚）。中央で常に1人のフリーマンが生まれやすい。"
+      - zone: "相手SBに対するWG＋IHの2対1局面"
+        description: "ハーフスペースに立つIHと大外のWGが連携し、相手SBをインサイド・アウトサイドの両面から攻略する。"
+    structural_advantages_for_away:
+      - zone: "2トップによるアンカー脇からの鋭いショートカウンター"
+        description: "相手アンカーの左右スペースにボールを回収した際、2トップが素早く前線へ飛び出してCBと2対2を作れる。"
+    pinning_mechanisms:
+      - "4-3-3のCFが相手CBを中央に押し留め、2人のIHが相手2ボランチの背後を脅かす。"
+    half_space_dynamics:
+      - "IHがハーフスペースでボールを受け、相手ボランチを釣り出すことで大外のWGがフリーになる。"
+    sliding_and_shift_triggers:
+      - "4-4-2側はSHの1枚を中央に絞らせて中盤を3枚にするか、FWの1枚をアンカー番に下げる（4-4-1-1化）。"
+    watching_perspective_guide:
+      - "4-4-2のFWが相手アンカーを背中で消せているか、それとも中盤で3対2の数的優位を作られて回されているか。"
+
+  - matchup_id: "mirror_442"
+    home_formation: "4-4-2"
+    away_formation: "4-4-2"
+    name: "4-4-2 vs 4-4-2（同型・ミラーゲーム）"
+    structural_advantages_for_home:
+      - zone: "全ポジションでのマンツーマン同数マッチアップ"
+        description: "配置のズレがないため、純粋な球際のデュエル勝率、セカンドボール回収、走力、個の技術の差がそのまま反映される。"
+    structural_advantages_for_away:
+      - zone: "同上（完全なミラーマッチ）"
+        description: "戦術的な構造優位が相殺されるため、どちらが相手のマークを動かす工夫（サリーやポジションチェンジ）を行えるかが鍵。"
+    pinning_mechanisms:
+      - "互いの2トップが相手2CBを監視し合い、DFラインからの単純な縦パスを遮断する。"
+    half_space_dynamics:
+      - "定位置ではハーフスペースが埋まっているため、SHが内側に絞るか、FWの1枚が落ちて（ゼロトップ化）相手ボランチを釣り出すことでスペースを創出する。"
+    sliding_and_shift_triggers:
+      - "相手ボランチの1枚が落ちて3バック化した場合、FWがどこまで追うか全体のプレスの高さが変わる。"
+    watching_perspective_guide:
+      - "同型対決において、どちらのチームが先にフォーメーションを崩して意図的なズレを生み出すか。"

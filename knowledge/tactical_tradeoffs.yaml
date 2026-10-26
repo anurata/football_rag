@@ -1,0 +1,142 @@
+# 戦術トレードオフ辞書 (If-Then-Risk)
+# 戦術的な決断・配置変更における「主作用（メリット・狙い）」と「副作用（構造的リスク・弱点）」のペア定義辞書
+version: "1.0"
+description: "J-League Tactical Trade-offs and Structural Risk Matrix"
+
+tradeoffs:
+  - tactic_id: "high_line_high_press"
+    tactic_name: "ハイライン・ハイプレス"
+    category: "pressing"
+    core_mechanism: "前線から連動して相手の出し手を限定し、DFラインをハーフウェイライン付近まで押し上げて敵陣にコンパクトな網を張る。"
+    main_effects:
+      - effect_id: "ME1"
+        summary: "敵陣でのショートカウンター創出"
+        description: "相手ペナルティエリア近くでボールを奪取し、手数をかけずに決定機（高xG）を量産できる。"
+      - effect_id: "ME2"
+        summary: "相手の攻撃時間を最小化"
+        description: "相手にビルドアップの自由時間を与えず、クリアや苦し紛れのロングボールに追いやる。"
+    side_effects:
+      - risk_id: "SE1"
+        risk_name: "DFライン背後広大スペースの被弾リスク"
+        description: "プレッシャーが一度外された際、GKとCB間の広大なスペースへスルーパスや裏抜け一本でGKと1対1を作られる。"
+        severity: "HIGH"
+      - risk_id: "SE2"
+        risk_name: "後半60分以降の運動量・プレス強度低下"
+        description: "前線とインサイドハーフのスプリント消耗が激しく、交代枠が遅れるとブロック全体が間延びする。"
+        severity: "MEDIUM"
+    vulnerability_conditions:
+      - "相手にプレッシャーを苦にしないGK/CBの長距離高精度フィードがある場合"
+      - "相手前線に圧倒的走力・スプリント力を持つスピード系FWが配置されている場合"
+      - "中盤でのセカンドボール回収が後手に回った場合"
+    countermeasures:
+      - "GKのスイーパー起用（ハイポジション設定）"
+      - "60分前後の前線2〜3枚の計画的リフレッシュ交代"
+      - "奪えなかった場合は即座に40m幅のミドルブロックへ撤退する切り替え徹底"
+
+  - tactic_id: "inverted_fullback"
+    tactic_name: "偽SB（インバーテッド・フルバック）"
+    category: "buildup"
+    core_mechanism: "SBがボール保持時に大外を駆け上がるのではなく、ボランチの脇やアンカーの横（ハーフスペース内側）に絞って3-2や2-3の陣形を形成する。"
+    main_effects:
+      - effect_id: "ME1"
+        summary: "中盤中央の数的優位とパス中継点の増加"
+        description: "中盤中央で数的優位を作り、中央のバイタルエリアを経由した前進パスルートを確保する。"
+      - effect_id: "ME2"
+        summary: "ネガティブ・トランジション（被カウンター）時の即時中央奪回"
+        description: "ロスト時に中央に複数人が密集しているため、即座に中央ルートのカウンターを塞いでゲーゲンプレスをかけられる。"
+    side_effects:
+      - risk_id: "SE1"
+        risk_name: "サイドの広大な空きスペース（大外の被カウンター）"
+        description: "SBが内側にいるため、ボールを奪われた瞬間に大外レーンの背後スペースを相手の快速WGやサイドハーフに独走される。"
+        severity: "HIGH"
+      - risk_id: "SE2"
+        risk_name: "WG（ウイング）の単独孤立化"
+        description: "大外をオーバーラップする味方がいないため、相手SBとSHに2対1で挟まれやすく個の突破力に依存する。"
+        severity: "MEDIUM"
+    vulnerability_conditions:
+      - "相手が2トップやサイドに明確なカウンターの出口（槍）を残している場合"
+      - "WGの突破が防がれ、中央への安易な横パスをカットされた場合"
+    countermeasures:
+      - "ボールサイドのCBが大外スペースをプロテクトするスライドの準備"
+      - "逆サイドのSBは上がりすぎずバックラインを3枚で維持"
+
+  - tactic_id: "man_marking_press"
+    tactic_name: "マンツーマン志向のハイプレス"
+    category: "pressing"
+    core_mechanism: "相手のすべてのビルドアップ起点（CB、アンカー、SB）に対して各選手が人を基準に密着してマークする。"
+    main_effects:
+      - effect_id: "ME1"
+        summary: "相手のビルドアップ再現性の完全破壊"
+        description: "フリーの受け手が一切存在しないため、相手の定型的なパス回しを窒息させられる。"
+      - effect_id: "ME2"
+        summary: "パスコース限定とパスカット予測の容易化"
+        description: "相手の出す場所が限定されるため、インターセプトを狙いやすい。"
+    side_effects:
+      - risk_id: "SE1"
+        risk_name: "マークのズレ・ピン留めによる構造崩壊"
+        description: "相手選手に意図的にポジションを動かされてスペースを空けられ、3人目の動きで剥がされた瞬間に致命的ピンチとなる。"
+        severity: "HIGH"
+      - risk_id: "SE2"
+        risk_name: "1対1の個の局面での敗北リスク"
+        description: "マーク対象の選手にドリブル突破や身体能力で負けた場合、カバーリングが存在しないため一撃でゴール前まで運ばれる。"
+        severity: "CRITICAL"
+    vulnerability_conditions:
+      - "相手CFがポストプレーやキープ力で圧倒的なアドバンテージを持っている場合"
+      - "相手GKが足元のスキルに長け、実質的な+1のフリーマンとして振る舞う場合"
+    countermeasures:
+      - "GKにはプレスをかけずパスを出させた瞬間にトラップ際を狙う"
+      - "最後のCB1枚だけはカバー役として人を捨ててスペースを守る（余りを作る）"
+
+  - tactic_id: "low_block_counter"
+    tactic_name: "低重心5バック／リトリート・ブロック"
+    category: "defense"
+    core_mechanism: "自陣ペナルティエリア手前に強固な5-3-2または5-4-1のコンパクトなブロックを敷き、スペースを埋め尽くす。"
+    main_effects:
+      - effect_id: "ME1"
+        summary: "ペナルティエリア内・バイタルエリアの被侵入防止"
+        description: "ゴール前の危険ゾーンを高密度で固め、相手の決定的なラストパスやxGの高いシュートを最小化する。"
+      - effect_id: "ME2"
+        summary: "相手の背後スペースを最大化させたロングカウンター"
+        description: "相手を前がかりに引き込み、奪った瞬間に敵陣の広大な背後へカウンターを突き刺す。"
+    side_effects:
+      - risk_id: "SE1"
+        risk_name: "延々と押し込まれるセカンドボール回収の劣勢"
+        description: "前線が孤立し、クリアボールを相手CBに回収され続けて波状攻撃を受ける。"
+        severity: "HIGH"
+      - risk_id: "SE2"
+        risk_name: "ミドルシュート被弾・不運なディフレクション・ハンドの誘発"
+        description: "ボックス周辺でのプレー回数が増えるため、ミドルシュートのこぼれ球やPK献上リスクが高まる。"
+        severity: "MEDIUM"
+    vulnerability_conditions:
+      - "相手に強烈な長距離ミドルシュートを持つ選手がいる場合"
+      - "カウンターのターゲットとなる最前線選手が競り負けて収まらない場合"
+    countermeasures:
+      - "ロングボールを1人で収められる屈強なターゲットマンの配置"
+      - "ボランチがペナルティエリア手前のバイタルエリアのクリアボールに素早く前向きでアプローチする"
+
+  - tactic_id: "wide_overload_isolation"
+    tactic_name: "片側オーバーロード＆逆サイドアイソレーション"
+    category: "attack"
+    core_mechanism: "ボール保持時に味方の複数人を片側のサイド（例：左サイド）に密集（オーバーロード）させ、相手ブロックを極端に圧縮させた後、手薄な逆サイドの大外（アイソレーション）へ一気にサイドチェンジする。"
+    main_effects:
+      - effect_id: "ME1"
+        summary: "逆サイドでの完全な1対1（アイソレーション）の創出"
+        description: "相手守備が片側に寄っているため、逆サイドのアタッカーが広大なスペースで相手SBと1対1を仕掛けられる。"
+      - effect_id: "ME2"
+        summary: "密集地帯でのコンビネーション崩し"
+        description: "密集側でもワンツーや3人目の動きでポケット（ハーフスペース深部）を攻略できる。"
+    side_effects:
+      - risk_id: "SE1"
+        risk_name: "密集側でのロスト時における逆サイドの広大な露出"
+        description: "ロングレンジの展開パスが引っかかったり密集で奪われた際、バランスを崩しているため逆サイドを高速逆カウンターされる。"
+        severity: "HIGH"
+      - risk_id: "SE2"
+        risk_name: "高精度サイドチェンジのキック精度への依存"
+        description: "対角線フィードの弾道が浮いて滞空時間が長いと、相手ブロックのスライドが間に合って優位性が消滅する。"
+        severity: "LOW"
+    vulnerability_conditions:
+      - "相手がサイドに寄らず中央ゾーンを優先してコンパクトネスを崩さない場合"
+      - "強風などの悪天候で対角線ロングフィードの精度が著しく低下する場合"
+    countermeasures:
+      - "グラウンダーの早いテンポでの中央経由のサイドチェンジ"
+      - "アイソレーション側のSBは上がらずカウンターケアに専念"

@@ -1,0 +1,139 @@
+# 指標の多義性と因果ツリー辞書 (Metric-to-Cause)
+# スタッツや数値指標の増減に対して単一の結論を急がず、複数の仮説と検証ロジックを提示するための辞書
+version: "1.0"
+description: "J-League Tactical Analysis Metric-to-Cause Diagnostic Tree"
+
+trees:
+  - metric_id: "final_third_pass_accuracy_drop"
+    metric_name: "敵陣・ファイナルサードのパス成功率低下"
+    phenomenon: "アタッキングサードやペナルティエリア周辺でのパス成功率が低下している。"
+    hypotheses:
+      - hypothesis_id: "H1"
+        name: "相手守備陣のミドル・ハイプレス強度とアプローチ速度"
+        description: "相手の中盤および前線によるプレスバックやインターセプトの出足が鋭く、出し手への時間的プレッシャーが強い。"
+        verification_metrics:
+          - metric: "相手のアタッキングサード・ミドルサードでのボール奪取数"
+            expected_pattern: "平時平均より有意に高値"
+          - metric: "プレッシャー下でのパス比率"
+            expected_pattern: "パス試行のうち敵接近下の比率が60%超"
+        elimination_condition: "相手のプレス強度が低く自陣に引いてブロックを敷いている場合は除外"
+
+      - hypothesis_id: "H2"
+        name: "前線受け手のポジショニング不良とライン間サポート不足"
+        description: "FWやシャドーが相手DFの陰に隠れてパスラインが遮断されているか、中盤との距離感が間延びしている。"
+        verification_metrics:
+          - metric: "ライン間（ハーフスペース・バイタル）でのレシーブ成功数"
+            expected_pattern: "通常時より30%以上減少"
+          - metric: "FWとMFの平均縦距離 (avg_xの差)"
+            expected_pattern: "平均距離が25m以上に開いている"
+        elimination_condition: "ライン間で何度もフリーでボールを受けられている場合は除外"
+
+      - hypothesis_id: "H3"
+        name: "リスクを冒した縦パス・ボックス侵入志向の向上"
+        description: "安全な横パス・バックパスを控え、崩しや得点狙いの決定的なラストパスやクロスを積極的に選択している。"
+        verification_metrics:
+          - metric: "ペナルティエリア侵入パス数およびクロス数"
+            expected_pattern: "パス成功率は低いが侵入試行数・クロス数が増加"
+          - metric: "試合の創出xG（ゴール期待値）"
+            expected_pattern: "パス成功率低下にもかかわらずxGは高水準または増加"
+        elimination_condition: "シュート数・xG・ボックス進入数がいずれも激減している場合は除外"
+
+  - metric_id: "second_half_xg_conceded_surge"
+    metric_name: "後半（特に60分以降）の被xG・被決定機の急増"
+    phenomenon: "前半と比較して後半の被xGが急増し、失点危機が頻発している。"
+    hypotheses:
+      - hypothesis_id: "H1"
+        name: "ハイプレス・前線追従の運動量減衰（フィジカル疲労）"
+        description: "前半のハイインテンシティ守備の消耗により前線・中盤のスプリントが落ち、ファーストディフェンスがかからなくなっている。"
+        verification_metrics:
+          - metric: "15分刻みスプリント回数および走行距離"
+            expected_pattern: "60分以降のスプリント回数が前半比30%以上減少"
+          - metric: "ボール奪取位置の平均ライン (avg_x)"
+            expected_pattern: "奪取位置が後半にかけて10m以上後退"
+        elimination_condition: "交代選手投入後も運動量・スプリント数が落ちていない場合は除外"
+
+      - hypothesis_id: "H2"
+        name: "リード時の心理的リトリートによる自陣引きこもり"
+        description: "スコアでリードしたこと（game_state: LEADING）により無意識に重心が下がり、相手に自由なビルドアップと押し込みを許した。"
+        verification_metrics:
+          - metric: "スコア状況別のDFライン平均高さ (avg_x)"
+            expected_pattern: "得点直後からDFラインのavg_xが著しく自陣側に低下"
+          - metric: "敵陣へのパス試行数・クリア比率"
+            expected_pattern: "ボール奪取後のパスが繋がらずクリア比率が急増"
+        elimination_condition: "同点またはビハインドで前がかりに攻めている最中に被xGが増えている場合は除外"
+
+      - hypothesis_id: "H3"
+        name: "相手ベンチの戦術的修正（配置変更・ミスマッチ突きの交代）"
+        description: "相手がシステム変更（例：3バック化や長身FW投入）を行い、自チームのマーク受け渡しが混乱している。"
+        verification_metrics:
+          - metric: "相手交代選手のポジショニングとチャンス創出数"
+            expected_pattern: "途中出場選手経由でのチャンス創出・クロスが集中"
+          - metric: "相手監督インタビューの発言内容"
+            expected_pattern: "ハーフタイムや交代による狙い撃ちの言及と一致"
+        elimination_condition: "相手にメンバー交代や配置変更がなく、同じ攻撃パターンのまま崩されている場合は除外"
+
+  - metric_id: "high_possession_low_xg"
+    metric_name: "ポゼッション率優勢（60%超）にもかかわらず低xG（0.8以下）"
+    phenomenon: "ボールを圧倒的に保持しているが、シュートや決定機に結びついていない（持たされている状態）。"
+    hypotheses:
+      - hypothesis_id: "H1"
+        name: "相手の5バック/4-4-2低重心ブロックによる中央閉鎖"
+        description: "相手が中央のバイタルエリアやポケットを完全に封鎖し、外回りの安全なパス回しだけを許容している。"
+        verification_metrics:
+          - metric: "ゾーン別ボール保持率（大外 vs 中央・バイタル）"
+            expected_pattern: "大外レーン（Y: 0-20, 80-100）での保持が全体の70%超"
+          - metric: "相手PA内でのタッチ数"
+            expected_pattern: "敵PA内タッチ数が1試合10回未満と極少"
+        elimination_condition: "中央スルーパスが通り決定的なシュートミスが連続しただけの場合は除外"
+
+      - hypothesis_id: "H2"
+        name: "ビルドアップのボール循環テンポ不足と横パス偏重"
+        description: "CBやボランチのパススピードが遅く、相手のスライドが間に合い続けて縦のズレが生まれない。"
+        verification_metrics:
+          - metric: "CB・GK間のパス交換本数"
+            expected_pattern: "チーム内パス交換トップがCB同士またはCB-GK間"
+          - metric: "1回のポゼッションにおける前進速度 (m/秒)"
+            expected_pattern: "前進速度が極めて遅く、横・バックパス比率が75%超"
+        elimination_condition: "相手DFラインの背後へ効果的なロングフィードやワンタッチパスが出ている場合は除外"
+
+      - hypothesis_id: "H3"
+        name: "アタッキングサードでの個の打開力・アイソレーション不足"
+        description: "サイドにボールを運んだ後、1対1で突破できるドリブラーやコンビネーションの崩し手がいない。"
+        verification_metrics:
+          - metric: "アタッキングサードでのドリブル成功率・試行数"
+            expected_pattern: "ドリブル試行数が極少、または成功率が30%以下"
+          - metric: "クロス成功率"
+            expected_pattern: "単調なクロスが相手長身CBに跳ね返されている"
+        elimination_condition: "サイドを完全に崩してフリークロスを供給できている場合は除外"
+
+  - metric_id: "possession_rate_drop"
+    metric_name: "チームボールポゼッション率の大幅低下（40%未満）"
+    phenomenon: "通常よりボール保持率が低く、相手にボールを持たれる時間が長い。"
+    hypotheses:
+      - hypothesis_id: "H1"
+        name: "相手のプレッシング回避不能によるビルドアップ破壊"
+        description: "自陣深くからの繋ぎを相手に狙われ、ショートパスが通らずにパニックに陥っている。"
+        verification_metrics:
+          - metric: "自陣サードでのロスト数・被ターンオーバー数"
+            expected_pattern: "自陣危険エリアでの被ロストが10回以上"
+          - metric: "GKからのロングボール成功率"
+            expected_pattern: "GKの蹴ったロングボール回収率が35%未満"
+        elimination_condition: "自陣でのロストがなく意図的にロングカウンターを仕掛けている場合は除外"
+
+      - hypothesis_id: "H2"
+        name: "意図的なローブロック＆ロングカウンター戦術の採用"
+        description: "相手の背後スペースを狙うため、あえてボール保持を放棄してブロックを敷き速攻を狙っている。"
+        verification_metrics:
+          - metric: "ターンオーバーからのシュート到達時間"
+            expected_pattern: "ボール奪取から12秒以内にシュートまで至る回数が多数"
+          - metric: "シュート1本あたりのxG（チャンスの質）"
+            expected_pattern: "保持率は低いが高xG（決定機）を複数創出"
+        elimination_condition: "カウンターが一度も成立せず防戦一方のままシュートゼロの場合は除外"
+
+      - hypothesis_id: "H3"
+        name: "退場者（数的不利）またはスコアリードによる受け身展開"
+        description: "レッドカード退場や2点差以上のリードにより、リスクを冒さず守備専勢に回った。"
+        verification_metrics:
+          - metric: "退場イベント・ゲームステート別ポゼッション"
+            expected_pattern: "カード発生時またはリード発生時以降のみポゼッションが急低下"
+        elimination_condition: "11対11かつ0-0の状態で一方的に持たれている場合は除外"

@@ -10,10 +10,16 @@ from .jleague_official import scrape_jleague_match
 from .football_lab import scrape_football_lab_match
 from .fctokyo_official import scrape_fctokyo_match_review
 from .schedule_crawler import ScheduleCrawler
+from .yahoo_soccer import YahooSoccerScraper
+from .spaia_soccer import SpaiasoccerScraper
 
 __all__ = [
     "scrape_jleague_match",
     "scrape_football_lab_match",
     "scrape_fctokyo_match_review",
     "ScheduleCrawler",
+    "YahooSoccerScraper",
+    "SpaiasoccerScraper",
 ]
+
+

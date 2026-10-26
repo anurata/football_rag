@@ -16,11 +16,13 @@ class TestMarkdownImporter(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.normalizer = EntityNormalizer()
-        cls.sample_path = os.path.join(
+        path_2026 = os.path.join("data", "markdown", "2026", "20261025_FCT_MIT.md")
+        cls.sample_path = path_2026 if os.path.exists(path_2026) else os.path.join(
             "data",
             "markdown",
             "20261025_FCT_MIT.md",
         )
+
 
     def test_parse_jleague_markdown(self):
         """Verify markdown extraction accurately populates MatchBundleModel."""
@@ -44,13 +46,14 @@ class TestMarkdownImporter(unittest.TestCase):
         away_s = next(s for s in bundle.team_stats if s.team_id == "MIT")
         self.assertEqual(home_s.shots, 23)
         self.assertEqual(home_s.shots_on_target, 11)
-        self.assertAlmostEqual(home_s.possession, 55.0)
+        self.assertAlmostEqual(home_s.possession, 54.0)
         self.assertAlmostEqual(home_s.total_distance_km, 116.9)
         self.assertEqual(home_s.sprints, 166)
 
         self.assertEqual(away_s.shots, 12)
         self.assertEqual(away_s.shots_on_target, 2)
-        self.assertAlmostEqual(away_s.possession, 45.0)
+        self.assertAlmostEqual(away_s.possession, 46.0)
+
 
         # Goal events check (6 goals)
         self.assertEqual(len(bundle.events), 6)

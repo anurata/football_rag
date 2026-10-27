@@ -1,56 +1,19 @@
 {
   "match_id": "20261025_FCT_MIT",
-  "home_team_id": "FCT",
-  "away_team_id": "MIT",
   "home_formation": "4-4-2",
   "away_formation": "4-4-2",
   "tactical_highlights": [
-    "FC東京 vs 水戸ホーリーホック（6 - 0）: 得点者（仲川 輝人, 安斎 颯馬, ダニ ゴメス, アレクサンダー ショルツ, マルセロ ヒアン）を中心とした激しい攻防戦",
-    "アタッキングサードでのポゼッション循環とペナルティエリア角（ポケット）への侵入戦",
-    "後半のシステム修正と交代カード投入（ＦＣ東京・松橋 力蔵監督 / 水戸ホーリーホック・樹森 大介監督）がもたらした局面の打開"
+    "右サイドの攻略",
+    "ロングカウンター",
+    "交代策の的中"
   ],
   "phases": [
     {
       "phase": "0-15",
-      "dominant_team": "HOME",
-      "momentum_summary": "試合は立ち上がりから水戸が積極的に攻め入る。ファーストシュートを放つと、３分には最初のCKを獲得。",
-      "pressing_battle": "FC東京が前線から連動プレスを仕掛け、水戸ホーリーホックはサイドスペースへの配球でプレス回避を狙う。",
-      "tactical_adjustments": "仲川 輝人にとってはこれが今季リーグ戦初スタメンとなるが、Ｊリーグ ヤマザキビスケット ルヴァンカップ1stラウンド３回戦・水戸戦（０●１）では先発しているとあって、早々にリベンジの機会を得た。対する水戸は、前節・岡山戦の先発から３人を入れ替え、大崎 航詩、山﨑 希一、山本 隼大を起用。"
-    },
-    {
-      "phase": "15-30",
       "dominant_team": "EQUAL",
-      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
-      "pressing_battle": "ここから徐々にFC東京がゴールへの期待値を再び高めると、迎えた32分、稲村 隼翔からのパスを受けた石原 広教が精度の高いクロスを送る。70分にCKを獲得すると、石原 広教のクロスに反応したのは、交代で入ったばかりのダニ ゴメス。",
-      "tactical_adjustments": "飲水タイムを挟んだ30分、FC東京が流れるようなパスワークから長倉 幹樹がシュート。"
-    },
-    {
-      "phase": "30-45+",
-      "dominant_team": "HOME",
-      "momentum_summary": "ここから徐々にFC東京がゴールへの期待値を再び高めると、迎えた32分、稲村 隼翔からのパスを受けた石原 広教が精度の高いクロスを送る。水戸は前半終了間際、古巣対戦となった木本 恭生が鋭いミドルシュートを見せたが、同点ゴールは生まれず、前半を０－１で終えた。",
-      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
-      "tactical_adjustments": "数的不利や失点直後のリスクマネジメントとハーフタイム前の守備引き締め。"
-    },
-    {
-      "phase": "46-60",
-      "dominant_team": "HOME",
-      "momentum_summary": "試合は立ち上がりから水戸が積極的に攻め入る。迎えた後半、試合はすぐに動いた。",
-      "pressing_battle": "FC東京がバックパスの判定を受け、ペナルティーエリア内での間接FKが与えられた。",
-      "tactical_adjustments": "ここから水戸が３人の選手を入れ替え、直後にFC東京も２人を入れ替え、選手交代でゲームを動かしにかかった。70分にCKを獲得すると、石原 広教のクロスに反応したのは、交代で入ったばかりのダニ ゴメス。"
-    },
-    {
-      "phase": "60-75",
-      "dominant_team": "EQUAL",
-      "momentum_summary": "70分にCKを獲得すると、石原 広教のクロスに反応したのは、交代で入ったばかりのダニ ゴメス。",
-      "pressing_battle": "飲水タイムを挟んだ30分、FC東京が流れるようなパスワークから長倉 幹樹がシュート。",
-      "tactical_adjustments": "対する水戸は、前節・岡山戦の先発から３人を入れ替え、大崎 航詩、山﨑 希一、山本 隼大を起用。"
-    },
-    {
-      "phase": "75-90+",
-      "dominant_team": "EQUAL",
-      "momentum_summary": "水戸は前半終了間際、古巣対戦となった木本 恭生が鋭いミドルシュートを見せたが、同点ゴールは生まれず、前半を０－１で終えた。後半アディショナルタイムにはマルセロ ヒアンにもゴールが生まれ、６－０で試合を締めくくった。",
-      "pressing_battle": "ファーストシュートを放つと、３分には最初のCKを獲得。これは水戸のGKヤクブ スウォビィクが片手で触り、CKとした。",
-      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+      "momentum_summary": "ハイプレスとビルドアップの探り合い",
+      "pressing_battle": "前線からのプレス合戦",
+      "tactical_adjustments": "立ち上がりの指示"
     }
   ],
   "key_tactical_events": [
@@ -62,57 +25,196 @@
       "actors": [
         "仲川 輝人"
       ],
-      "tactical_context": "仲川 輝人のゴール (32分)"
-    },
-    {
-      "minute": 46,
-      "period": "2H",
-      "team_side": "HOME",
-      "category": "CHANCE_CREATION",
-      "actors": [
-        "仲川 輝人"
-      ],
-      "tactical_context": "仲川 輝人のゴール (46分)"
-    },
-    {
-      "minute": 66,
-      "period": "2H",
-      "team_side": "HOME",
-      "category": "CHANCE_CREATION",
-      "actors": [
-        "安斎 颯馬"
-      ],
-      "tactical_context": "安斎 颯馬のゴール (66分)"
-    },
-    {
-      "minute": 70,
-      "period": "2H",
-      "team_side": "HOME",
-      "category": "CHANCE_CREATION",
-      "actors": [
-        "ダニ ゴメス"
-      ],
-      "tactical_context": "ダニ ゴメスのゴール (70分)"
-    },
-    {
-      "minute": 76,
-      "period": "2H",
-      "team_side": "HOME",
-      "category": "CHANCE_CREATION",
-      "actors": [
-        "アレクサンダー ショルツ"
-      ],
-      "tactical_context": "アレクサンダー ショルツのゴール (76分)"
-    },
-    {
-      "minute": 90,
-      "period": "2H",
-      "team_side": "HOME",
-      "category": "CHANCE_CREATION",
-      "actors": [
-        "マルセロ ヒアン"
-      ],
-      "tactical_context": "マルセロ ヒアンのゴール (90分)"
+      "zone": "右ポケット",
+      "description": "ヘディングで先制"
     }
-  ]
+  ],
+  "deep_metrics": {
+    "match_id": "2026102505",
+    "conversion_rates": {
+      "home": {
+        "m30_count": 212,
+        "pa_count": 36,
+        "shot_count": 23,
+        "rate_30_to_pa": 16.98,
+        "eval_30_to_pa": "外周停滞・封殺（PA手前で跳ね返され外回しに終始）",
+        "rate_pa_to_shot": 63.89,
+        "eval_pa_to_shot": "高脅威フィニッシュ（エリア侵入が確実に決定打へ直結）"
+      },
+      "away": {
+        "m30_count": 100,
+        "pa_count": 10,
+        "shot_count": 12,
+        "rate_30_to_pa": 10.0,
+        "eval_30_to_pa": "外周停滞・封殺（PA手前で跳ね返され外回しに終始）",
+        "rate_pa_to_shot": 120.0,
+        "eval_pa_to_shot": "高脅威フィニッシュ（エリア侵入が確実に決定打へ直結）"
+      }
+    },
+    "field_tilt": {
+      "home_at3rd_count": 256,
+      "away_at3rd_count": 126,
+      "home_field_tilt": 67.02,
+      "away_field_tilt": 32.98,
+      "home_eval": "敵陣圧倒（相手を自陣深くに釘付けにしハーフコート展開）",
+      "away_eval": "自陣防戦（押し込まれロングボール依存の展開）"
+    },
+    "cbp_rankings": {
+      "home": {
+        "top_attack": [
+          {
+            "name": "安斎　颯馬",
+            "value": 3.5
+          },
+          {
+            "name": "長倉　幹樹",
+            "value": 3.15
+          },
+          {
+            "name": "稲村　隼翔",
+            "value": 2.27
+          }
+        ],
+        "top_defense": [
+          {
+            "name": "キム　スンギュ",
+            "value": 1.71
+          },
+          {
+            "name": "アレクサンダー　ショルツ",
+            "value": 1.51
+          },
+          {
+            "name": "稲村　隼翔",
+            "value": 1.26
+          }
+        ],
+        "top_gain": [
+          {
+            "name": "常盤　亨太",
+            "value": 25.12
+          },
+          {
+            "name": "高　宇洋",
+            "value": 13.88
+          },
+          {
+            "name": "安斎　颯馬",
+            "value": 12.62
+          }
+        ],
+        "top_pass": [
+          {
+            "name": "稲村　隼翔",
+            "value": 2.27
+          },
+          {
+            "name": "高　宇洋",
+            "value": 1.95
+          },
+          {
+            "name": "安斎　颯馬",
+            "value": 1.65
+          }
+        ],
+        "bench_impact": 0.0,
+        "bench_eval": "交代不発・沈黙（交代組がボールに絡めずピッチ上で孤立）"
+      },
+      "away": {
+        "top_attack": [
+          {
+            "name": "木本　恭生",
+            "value": 1.38
+          },
+          {
+            "name": "真瀬　拓海",
+            "value": 1.11
+          },
+          {
+            "name": "奥村　仁",
+            "value": 1.0
+          }
+        ],
+        "top_defense": [
+          {
+            "name": "板倉　健太",
+            "value": 4.02
+          },
+          {
+            "name": "木本　恭生",
+            "value": 3.14
+          },
+          {
+            "name": "大崎　航詩",
+            "value": 2.79
+          }
+        ],
+        "top_gain": [
+          {
+            "name": "大崎　航詩",
+            "value": 13.87
+          },
+          {
+            "name": "真瀬　拓海",
+            "value": 13.67
+          },
+          {
+            "name": "木本　恭生",
+            "value": 13.29
+          }
+        ],
+        "top_pass": [
+          {
+            "name": "木本　恭生",
+            "value": 1.38
+          },
+          {
+            "name": "奥村　仁",
+            "value": 1.0
+          },
+          {
+            "name": "大崎　航詩",
+            "value": 0.81
+          }
+        ],
+        "bench_impact": 0.0,
+        "bench_eval": "交代不発・沈黙（交代組がボールに絡めずピッチ上で孤立）"
+      }
+    },
+    "timeline_events": {
+      "total_events": 113,
+      "home_counts": {
+        "goals": 18,
+        "shots": 13,
+        "blocks": 13,
+        "crosses": 9,
+        "corners": 3,
+        "fouls": 0,
+        "yellow_cards": 1,
+        "red_cards": 0,
+        "subs": 5
+      },
+      "away_counts": {
+        "goals": 8,
+        "shots": 4,
+        "blocks": 5,
+        "crosses": 4,
+        "corners": 5,
+        "fouls": 0,
+        "yellow_cards": 0,
+        "red_cards": 0,
+        "subs": 5
+      },
+      "key_plays_sample": [
+        "前半0分 【ゴール】長倉は直近5試合で3得点2アシストを記録",
+        "前半1分 【ゴール】こぼれ球に反応した奥村がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう",
+        "前半20分 【ゴール】ここまでのシュート:FC東京:2本、水戸:3本/枠内シュート:FC東京:2本、水戸:1本/ゴール期待値:FC東京:0.1",
+        "前半22分 【ゴール】佐藤恵がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう",
+        "前半23分 【ゴール】ウーゴがペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
+        "前半23分 【ゴール】ペナルティエリア手前から奥村がパスを送る。谷口がペナルティエリア左からシュートを放つも、ゴール右に外れてしまう",
+        "前半26分 【ゴール】奥村がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう",
+        "前半32分 【ゴール】GOOOOOAL!!右サイドからの石原のクロスに反応した仲川がペナルティエリア中央からヘディングでゴール左下に決める"
+      ]
+    }
+  }
 }

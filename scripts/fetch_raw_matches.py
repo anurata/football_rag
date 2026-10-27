@@ -34,6 +34,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger("fetch_raw_matches")
 
+# J公式連番とYahoo!サッカーのURL連番が異なる場合の個別マッピング
+YAHOO_GAME_ID_OVERRIDE = {
+    "2026090208": "2026090221",  # 第5節: 清水 vs FC東京
+    "2026101002": "2026101009",  # 第9節: FC東京 vs 浦和
+    "2026101704": "2026101708",  # 第10節: 東京V vs FC東京
+}
+
 
 class RawMatchFetcher:
     """生データ（Yahoo!サッカー / SPAIA / Football LAB）の一括取得・保存オーケストレーター."""
@@ -296,9 +303,11 @@ class RawMatchFetcher:
         # 1. Yahoo!サッカー
         if need_yahoo:
             try:
+                y_fetch_id = YAHOO_GAME_ID_OVERRIDE.get(game_id, game_id)
                 res_y = self.yahoo_scraper.save_raw_data(
-                    game_id=game_id,
+                    game_id=y_fetch_id,
                     output_dir=self.yahoo_dir,
+                    save_game_id=game_id,
                 )
                 for k, v in res_y.items():
                     saved_files[f"yahoo_{k}"] = v
@@ -310,9 +319,11 @@ class RawMatchFetcher:
         # 2. SPAIA
         if need_spaia:
             try:
+                s_fetch_id = YAHOO_GAME_ID_OVERRIDE.get(game_id, game_id)
                 res_s = self.spaia_scraper.save_raw_data(
-                    game_id=game_id,
+                    game_id=s_fetch_id,
                     output_dir=self.spaia_dir,
+                    save_game_id=game_id,
                 )
                 for k, v in res_s.items():
                     saved_files[f"spaia_{k}"] = v

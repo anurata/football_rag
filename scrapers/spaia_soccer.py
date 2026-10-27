@@ -103,38 +103,41 @@ class SpaiasoccerScraper:
         self,
         game_id: str,
         output_dir: str = "data/raw/spaia",
+        save_game_id: Optional[str] = None,
     ) -> Dict[str, str]:
         """指定試合のコメントと選手詳細スタッツを取得し、JSONとして保存する.
 
         Args:
-            game_id: 試合ID
+            game_id: 取得元試合ID
             output_dir: 出力先ディレクトリ
+            save_game_id: 保存ファイル名に使用する試合ID (指定時はこちらで保存)
 
         Returns:
             保存したファイルパスの辞書
         """
         os.makedirs(output_dir, exist_ok=True)
+        target_id = save_game_id or game_id
 
         comments = self.fetch_comments(game_id)
         player_stats = self.fetch_player_detail_stats(game_id)
         meta = self.fetch_game_meta(game_id)
 
-        comments_path = os.path.join(output_dir, f"{game_id}_comments.json")
-        stats_path = os.path.join(output_dir, f"{game_id}_player_stats.json")
-        meta_path = os.path.join(output_dir, f"{game_id}_meta.json")
+        comments_path = os.path.join(output_dir, f"{target_id}_comments.json")
+        stats_path = os.path.join(output_dir, f"{target_id}_player_stats.json")
+        meta_path = os.path.join(output_dir, f"{target_id}_meta.json")
 
         self._write_json_file(comments_path, {
-            "game_id": game_id,
+            "game_id": target_id,
             "count": len(comments),
             "comments": comments,
         })
         self._write_json_file(stats_path, {
-            "game_id": game_id,
+            "game_id": target_id,
             "count": len(player_stats),
             "player_stats": player_stats,
         })
         self._write_json_file(meta_path, {
-            "game_id": game_id,
+            "game_id": target_id,
             "meta": meta,
         })
 

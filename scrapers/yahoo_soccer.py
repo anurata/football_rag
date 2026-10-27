@@ -89,23 +89,26 @@ class YahooSoccerScraper:
         self,
         game_id: str,
         output_dir: str = "data/raw/yahoo",
+        save_game_id: Optional[str] = None,
     ) -> Dict[str, str]:
         """スタッツとテキスト速報を取得し、JSONファイルとして保存する.
 
         Args:
-            game_id: 試合ID
+            game_id: 取得元試合ID
             output_dir: 出力先ディレクトリ
+            save_game_id: 保存ファイル名に使用する試合ID (指定時はこちらで保存)
 
         Returns:
             保存したファイルパスの辞書
         """
         os.makedirs(output_dir, exist_ok=True)
+        target_id = save_game_id or game_id
 
         stats_data = self.fetch_stats(game_id)
         text_data = self.fetch_text_live(game_id)
 
-        stats_path = os.path.join(output_dir, f"{game_id}_stats.json")
-        text_path = os.path.join(output_dir, f"{game_id}_text.json")
+        stats_path = os.path.join(output_dir, f"{target_id}_stats.json")
+        text_path = os.path.join(output_dir, f"{target_id}_text.json")
 
         with open(stats_path, "w", encoding="utf-8") as f:
             json.dump(stats_data, f, ensure_ascii=False, indent=2)

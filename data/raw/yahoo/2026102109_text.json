@@ -1,0 +1,884 @@
+{
+  "game_id": "2026102109",
+  "url": "https://soccer.yahoo.co.jp/jleague/category/j1/game/2026102109/text",
+  "match_info": {
+    "section": "J1 第11節自動更新手動更新",
+    "datetime_venue": "10/21（水）19:00Uvanceとどろきスタジアム by Fujitsu",
+    "home_team": "川崎フロンターレ",
+    "away_team": "ヴィッセル神戸",
+    "score": "2 - 1",
+    "home_scorers": [
+      {
+        "player": "マルシーニョ",
+        "time": "後16'"
+      },
+      {
+        "player": "伊藤 達哉",
+        "time": "後26'"
+      }
+    ],
+    "away_scorers": [
+      {
+        "player": "大迫 勇也",
+        "time": "後28'"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "order": 0,
+      "time": "前半0分",
+      "team": "川崎F",
+      "text": "マルシーニョは直近5試合で4得点1アシストを記録",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 1,
+      "time": "前半0分",
+      "team": null,
+      "text": "川崎Fの直近5試合は3勝1分け1敗。神戸の直近5試合は4勝0分け1敗。両者の過去対戦成績は21勝10分け12敗と川崎Fの勝ち越し",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 2,
+      "time": "前半0分",
+      "team": "川崎F",
+      "text": "予想フォーメーションは4-2-3-1。直近のリーグ戦からのスタメン変更は5人。Fウレモヴィッチ、三浦、山本、伊藤、脇坂が外れ、山原、丸山、河原、山市、大関が入る",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 3,
+      "time": "前半0分",
+      "team": "神戸",
+      "text": "予想フォーメーションは4-1-2-3。直近のリーグ戦からのスタメン変更は1人。酒井が外れ、飯野が入る",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 4,
+      "time": "前半2分",
+      "team": "神戸",
+      "text": "エリキがペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 5,
+      "time": "前半2分",
+      "team": "神戸",
+      "text": "山川がペナルティエリア中央からシュートを放つも、ゴール左に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 6,
+      "time": "前半4分",
+      "team": "川崎F",
+      "text": "右サイドから山原がクロスを入れるも、大迫にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 7,
+      "time": "前半5分",
+      "team": "川崎F",
+      "text": "左サイドから佐々木がドリブルで前進。そのまま持ち運んでクロスを供給するが、飯野にブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 8,
+      "time": "前半5分",
+      "team": "川崎F",
+      "text": "河原がペナルティエリア中央から右足で枠内にシュートを放つも、Mトゥーレルにブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 9,
+      "time": "前半5分",
+      "team": "川崎F",
+      "text": "ペナルティエリア手前から大関がパスを送る。デリキラセルダがペナルティエリア中央から右足で枠内にシュートを放つも、山川にブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 10,
+      "time": "前半7分",
+      "team": "川崎F",
+      "text": "ペナルティエリア内から佐々木が中央へ折り返すも、ジエゴにブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 11,
+      "time": "前半7分",
+      "team": "川崎F",
+      "text": "この試合1本目のCKを獲得する",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 12,
+      "time": "前半7分",
+      "team": "川崎F",
+      "text": "右サイドからのCKを獲得。キッカーの山原がボールを蹴り込むも、武藤にクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 13,
+      "time": "前半8分",
+      "team": "川崎F",
+      "text": "ペドロホマーノがオフサイドを取られ、相手ボールとなる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 14,
+      "time": "前半9分",
+      "team": "神戸",
+      "text": "右サイドから武藤がクロスを入れるも、丸山にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 15,
+      "time": "前半9分",
+      "team": "川崎F",
+      "text": "大関のパスがペナルティエリア内のデリキラセルダにつながる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 16,
+      "time": "前半10分",
+      "team": "川崎F",
+      "text": "右サイドからドリブルで進入した山市がペナルティエリア右から左足で枠内にシュートを放つも、権田にセーブされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 17,
+      "time": "前半12分",
+      "team": "川崎F",
+      "text": "左サイドでマルシーニョがドリブルで相手選手をかわす",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 18,
+      "time": "前半13分",
+      "team": "川崎F",
+      "text": "ペナルティエリア手前からマルシーニョがスルーパスを送る。抜け出したデリキラセルダがペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 19,
+      "time": "前半14分",
+      "team": "神戸",
+      "text": "ペナルティエリア手前から武藤がクロスを入れる。これに反応した永戸がペナルティエリア中央からシュートを放つも、ゴール左に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 20,
+      "time": "前半15分",
+      "team": null,
+      "text": "直近15分のポゼッション:川崎F:64%、神戸:36%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 21,
+      "time": "前半16分",
+      "team": "川崎F",
+      "text": "左サイドからマルシーニョがクロスを入れるも、Mトゥーレルにクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 22,
+      "time": "前半19分",
+      "team": "川崎F",
+      "text": "デリキラセルダがオフサイドを取られ、相手ボールとなる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 23,
+      "time": "前半20分",
+      "team": null,
+      "text": "ここまでのシュート:川崎F:4本、神戸:2本/枠内シュート:川崎F:1本、神戸:0本/ゴール期待値:川崎F:0.36、神戸:0.24",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 24,
+      "time": "前半21分",
+      "team": "川崎F",
+      "text": "ペナルティエリア内から大関が中央へ折り返すも、飯野にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 25,
+      "time": "前半21分",
+      "team": "川崎F",
+      "text": "右サイドから大関がクロスを入れる。これに反応したデリキラセルダがペナルティエリア中央からシュートを放つも、ゴールの上に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 26,
+      "time": "前半23分",
+      "team": null,
+      "text": "ここまでは両チームともに歓喜の瞬間は訪れず。先にこじ開けるのはどちらになるか",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 27,
+      "time": "前半23分",
+      "team": "神戸",
+      "text": "ジエゴがオフサイドを取られ、相手ボールとなる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 28,
+      "time": "前半27分",
+      "team": "川崎F",
+      "text": "ペナルティエリア手前から山市がパスを送る。マルシーニョがペナルティエリア中央から右足で枠内にシュートを放つも、権田にセーブされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 29,
+      "time": "前半30分",
+      "team": null,
+      "text": "直近15分のポゼッション:川崎F:60%、神戸:40%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 30,
+      "time": "前半33分",
+      "team": "川崎F",
+      "text": "右サイドから山市がクロスを入れる。これに反応したデリキラセルダがペナルティエリア中央からヘディングで枠内にシュートを放つも、権田にセーブされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 31,
+      "time": "前半36分",
+      "team": "神戸",
+      "text": "この試合1本目のCKを獲得する",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 32,
+      "time": "前半36分",
+      "team": "神戸",
+      "text": "左サイドからのCKを獲得。キッカーの永戸がボールを蹴り込むも、大関にクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 33,
+      "time": "前半39分",
+      "team": "川崎F",
+      "text": "デリキラセルダがオフサイドを取られ、相手ボールとなる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 34,
+      "time": "前半40分",
+      "team": null,
+      "text": "ここまでのシュート:川崎F:7本、神戸:2本/枠内シュート:川崎F:3本、神戸:0本/ゴール期待値:川崎F:1.12、神戸:0.24",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 35,
+      "time": "前半41分",
+      "team": "川崎F",
+      "text": "左サイドからのCKを獲得。キッカーの山市がボールを蹴り込むも、鍬先にクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 36,
+      "time": "前半41分",
+      "team": "川崎F",
+      "text": "山市がクロスを入れるも、ジエゴにクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 37,
+      "time": "前半41分",
+      "team": "川崎F",
+      "text": "山原がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 38,
+      "time": "前半48分",
+      "team": null,
+      "text": "ここまでのシュート:川崎F:8本、神戸:2本/枠内シュート:川崎F:3本、神戸:0本/ゴール期待値:川崎F:1.14、神戸:0.24",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 39,
+      "time": "前半48分",
+      "team": null,
+      "text": "ここまでのポゼッション:川崎F:59%、神戸:41%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 40,
+      "time": "後半0分",
+      "team": "神戸",
+      "text": "41永戸OUT→23岩本IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 41,
+      "time": "後半1分",
+      "team": "川崎F",
+      "text": "左サイドからドリブルで進入したマルシーニョがペナルティエリア左からシュートを放つも、ゴール右に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 42,
+      "time": "後半4分",
+      "team": "神戸",
+      "text": "左サイドからエリキがクロスを入れるも、ペドロホマーノにクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 43,
+      "time": "後半4分",
+      "team": "神戸",
+      "text": "左サイドからのCKを獲得。キッカーの岩本がボールを蹴り込むも、マルシーニョにクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 44,
+      "time": "後半6分",
+      "team": "川崎F",
+      "text": "ペナルティエリア手前からドリブルで進入した橘田がペナルティエリア左から左足で枠内にシュートを放つも、権田にセーブされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 45,
+      "time": "後半7分",
+      "team": "川崎F",
+      "text": "佐々木にイエローカード",
+      "is_goal": false,
+      "is_card": true,
+      "is_substitution": false
+    },
+    {
+      "order": 46,
+      "time": "後半11分",
+      "team": "川崎F",
+      "text": "右サイドからペドロホマーノがクロスを入れるも、山川にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 47,
+      "time": "後半11分",
+      "team": "川崎F",
+      "text": "山市がペナルティエリア手前から左足で枠内にシュートを放つも、井手口にブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 48,
+      "time": "後半11分",
+      "team": "神戸",
+      "text": "右サイドから飯野がクロスを入れるも、河原にブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 49,
+      "time": "後半11分",
+      "team": "神戸",
+      "text": "井手口がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 50,
+      "time": "後半14分",
+      "team": "川崎F",
+      "text": "25山市OUT→17伊藤IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 51,
+      "time": "後半14分",
+      "team": "川崎F",
+      "text": "16大関OUT→14脇坂IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 52,
+      "time": "後半15分",
+      "team": null,
+      "text": "直近15分のポゼッション:川崎F:37%、神戸:63%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 53,
+      "time": "後半15分",
+      "team": "川崎F",
+      "text": "マルシーニョのパスがペナルティエリア内の脇坂につながる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 54,
+      "time": "後半15分",
+      "team": "川崎F",
+      "text": "脇坂がペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 55,
+      "time": "後半15分",
+      "team": "川崎F",
+      "text": "右サイドから山原がクロスを入れるも、飯野にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 56,
+      "time": "後半15分",
+      "team": "川崎F",
+      "text": "脇坂がペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 57,
+      "time": "後半16分",
+      "team": "川崎F",
+      "text": "GOOOOOAL!!右サイドからの伊藤のクロスに反応したマルシーニョがペナルティエリア中央からヘディングでゴール左下に決める",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 58,
+      "time": "後半16分",
+      "team": "川崎F",
+      "text": "今季のリーグ戦、先制に成功した試合は6試合。4勝1分け1敗で勝率は66.7%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 59,
+      "time": "後半17分",
+      "team": "川崎F",
+      "text": "脇坂がペナルティエリア手前から右足で枠内にシュートを放つも、権田にセーブされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 60,
+      "time": "後半18分",
+      "team": "川崎F",
+      "text": "右サイドからのCKを獲得。キッカーの山原がボールを蹴り込むも、飯野にクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 61,
+      "time": "後半20分",
+      "team": null,
+      "text": "ここまでのシュート:川崎F:13本、神戸:3本/枠内シュート:川崎F:6本、神戸:0本/ゴール期待値:川崎F:1.60、神戸:0.27",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 62,
+      "time": "後半22分",
+      "team": "川崎F",
+      "text": "4ペドロホマーノOUT→22FウレモヴィッチIN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 63,
+      "time": "後半22分",
+      "team": "神戸",
+      "text": "2飯野OUT→26JパトリッキIN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 64,
+      "time": "後半25分",
+      "team": "川崎F",
+      "text": "左サイドでマルシーニョがドリブルを試みるも、相手の対応に遭う",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 65,
+      "time": "後半26分",
+      "team": "川崎F",
+      "text": "左サイドから佐々木がクロスを入れるも、山川にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 66,
+      "time": "後半26分",
+      "team": "川崎F",
+      "text": "GOOOOOAL!!ペナルティエリア手前から河原が出したパスに反応した伊藤が右サイドから右足でゴール左下に決める",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 67,
+      "time": "後半28分",
+      "team": "神戸",
+      "text": "井手口がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 68,
+      "time": "後半28分",
+      "team": "神戸",
+      "text": "GOOOOOAL!!左サイドからエリキが入れたクロスが大迫につながる。大迫がペナルティエリア中央から左足でゴール左上に決める",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 69,
+      "time": "後半30分",
+      "team": null,
+      "text": "直近15分のポゼッション:川崎F:41%、神戸:59%",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 70,
+      "time": "後半31分",
+      "team": "川崎F",
+      "text": "脇坂のスルーパスがペナルティエリア内のマルシーニョにつながる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 71,
+      "time": "後半31分",
+      "team": "川崎F",
+      "text": "ペナルティエリア内からマルシーニョが中央へ折り返すも、Mトゥーレルにクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 72,
+      "time": "後半32分",
+      "team": "神戸",
+      "text": "25鍬先OUT→44日高IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 73,
+      "time": "後半34分",
+      "team": "神戸",
+      "text": "武藤にイエローカード",
+      "is_goal": false,
+      "is_card": true,
+      "is_substitution": false
+    },
+    {
+      "order": 74,
+      "time": "後半37分",
+      "team": "川崎F",
+      "text": "97デリキラセルダOUT→11小林IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 75,
+      "time": "後半37分",
+      "team": "川崎F",
+      "text": "29山原OUT→6山本IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 76,
+      "time": "後半38分",
+      "team": "神戸",
+      "text": "ジエゴがクロスを入れるも、橘田にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 77,
+      "time": "後半38分",
+      "team": "神戸",
+      "text": "武藤がペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 78,
+      "time": "後半38分",
+      "team": "神戸",
+      "text": "大迫がペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 79,
+      "time": "後半40分",
+      "team": "神戸",
+      "text": "右サイドから日高がクロスを入れるも、Fウレモヴィッチにクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 80,
+      "time": "後半40分",
+      "team": null,
+      "text": "ここまでのシュート:川崎F:14本、神戸:5本/枠内シュート:川崎F:7本、神戸:1本/ゴール期待値:川崎F:1.63、神戸:0.51",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 81,
+      "time": "後半41分",
+      "team": "神戸",
+      "text": "94エリキOUT→29小松IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 82,
+      "time": "後半42分",
+      "team": "川崎F",
+      "text": "23マルシーニョOUT→20持山IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 83,
+      "time": "後半43分",
+      "team": "川崎F",
+      "text": "左サイドからのCKを獲得。キッカーの脇坂がボールを蹴り込むも、権田にクリアされてしまう",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 84,
+      "time": "後半43分",
+      "team": "川崎F",
+      "text": "山本がペナルティエリア内でボールを収める",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 85,
+      "time": "後半43分",
+      "team": "神戸",
+      "text": "日高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 86,
+      "time": "後半46分",
+      "team": "神戸",
+      "text": "武藤がオフサイドを取られ、相手ボールとなる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 87,
+      "time": "後半47分",
+      "team": "川崎F",
+      "text": "左サイドで持山がドリブルを試みるも、相手の対応に遭う",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 88,
+      "time": "後半47分",
+      "team": "川崎F",
+      "text": "ペナルティエリア内から佐々木がクロスを入れる。これに反応した小林がペナルティエリア中央から左足で枠内にシュートを放つも、ジエゴにブロックされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 89,
+      "time": "後半48分",
+      "team": "川崎F",
+      "text": "8橘田OUT→2松長根IN",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": true
+    },
+    {
+      "order": 90,
+      "time": "後半49分",
+      "team": "神戸",
+      "text": "ジエゴのパスがペナルティエリア内の小松につながる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 91,
+      "time": "後半51分",
+      "team": "川崎F",
+      "text": "右サイドから松長根がクロスを入れるも、山川にクリアされる",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 92,
+      "time": "後半51分",
+      "team": "川崎F",
+      "text": "こぼれ球に反応した脇坂がペナルティエリア右からシュートを放つも、ゴールの上に外れてしまう",
+      "is_goal": true,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 93,
+      "time": "後半53分",
+      "team": null,
+      "text": "この試合のシュート:川崎F:16本、神戸:6本/枠内シュート:川崎F:7本、神戸:1本/ゴール期待値:川崎F:1.87、神戸:0.53",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    },
+    {
+      "order": 94,
+      "time": "後半53分",
+      "team": null,
+      "text": "本日の入場者数は20,737人",
+      "is_goal": false,
+      "is_card": false,
+      "is_substitution": false
+    }
+  ]
+}

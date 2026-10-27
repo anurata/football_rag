@@ -22,7 +22,13 @@ def _load_tactical_json(match_id: str) -> Optional[Dict[str, Any]]:
         try:
             return json.loads(candidate.read_text(encoding="utf-8"))
         except Exception:
-            return None
+            pass
+    # Fallback to search by prefix or pattern
+    for p in base_dir.glob(f"*{match_id}*_tactical.json"):
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            pass
     return None
 
 
@@ -148,7 +154,7 @@ class MatchObjectiveProfiler:
         a_scorers: List[str],
         tactical_data: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
-        """Construct the overall structural summary narrative and 3 match phases."""
+        """Construct the overall structural summary narrative and match phases."""
         h_s, a_s = m["h_score"], m["a_score"]
         score_diff = h_s - a_s
 
@@ -156,7 +162,7 @@ class MatchObjectiveProfiler:
             result_theme = f"{home_name}が{h_s}-{a_s}で勝利を収めた一戦。"
             lead_summary = f"{home_name}の決定力と組織的プレッシング（シュート{m['h_shots']}本中枠内{m['h_on_target']}本）が試合を主導。"
         elif score_diff < 0:
-            result_theme = f"{away_name}がアウェイで{a_s}-{h_s}の逆転・快勝を果たした一戦。"
+            result_theme = f"{away_name}がアウェイで{a_s}-{h_s}の快勝・制圧を果たした一戦。"
             lead_summary = f"{away_name}が効率的なフィニッシュ（シュート{m['a_shots']}本中枠内{m['a_on_target']}本）と堅固な守備ブロックで制圧。"
         else:
             result_theme = f"両チームが死力を尽くし{h_s}-{a_s}のドローに終わった白熱の攻防戦。"
@@ -184,9 +190,18 @@ class MatchObjectiveProfiler:
         )
 
         t_phases = tactical_data.get("phases", []) if tactical_data else []
+
         p1_desc = t_phases[0].get("momentum_summary", "") if len(t_phases) > 0 else ""
+        if len(t_phases) > 1 and t_phases[1].get("momentum_summary"):
+            p1_desc = f"{p1_desc} {t_phases[1].get('momentum_summary')}"
+        if len(t_phases) > 2 and t_phases[2].get("momentum_summary"):
+            p1_desc = f"{p1_desc} {t_phases[2].get('momentum_summary')}"
+
         p2_desc = t_phases[3].get("momentum_summary", "") if len(t_phases) > 3 else ""
-        p3_desc = t_phases[5].get("momentum_summary", "") if len(t_phases) > 5 else ""
+
+        p3_desc = t_phases[4].get("momentum_summary", "") if len(t_phases) > 4 else ""
+        if len(t_phases) > 5 and t_phases[5].get("momentum_summary"):
+            p3_desc = f"{p3_desc} {t_phases[5].get('momentum_summary')}"
 
         phases = [
             {
@@ -227,13 +242,20 @@ class MatchObjectiveProfiler:
 
         t_phases = tactical_data.get("phases", []) if tactical_data else []
         t_events = tactical_data.get("key_tactical_events", []) if tactical_data else []
+        deep_m = tactical_data.get("deep_metrics", {}) if tactical_data else {}
+        insights = tactical_data.get("perspective_insights", {}) if tactical_data else {}
+
+        cr = deep_m.get("conversion_rates", {})
+        ft = deep_m.get("field_tilt", {})
+        cbp = deep_m.get("cbp_rankings", {})
+        ev_agg = deep_m.get("timeline_events", {})
 
         event_notes = []
         for ev in t_events:
             min_str = f"{ev.get('minute')}分"
-            ctx = ev.get("tactical_context") or ""
+            ctx = ev.get("description") or ev.get("tactical_context") or ""
             actors = ", ".join(ev.get("actors", []))
-            event_notes.append(f"{min_str}: {ctx or actors}")
+            event_notes.append(f"{min_str} [{actors}]: {ctx}")
         events_str = "、".join(event_notes) if event_notes else f"得点者: {', '.join(h_scorers) if h_scorers else 'なし'} / {', '.join(a_scorers) if a_scorers else 'なし'}"
 
         p0_sum = t_phases[0].get("momentum_summary", "") if len(t_phases) > 0 else ""
@@ -244,6 +266,11 @@ class MatchObjectiveProfiler:
         p4_adj = t_phases[4].get("tactical_adjustments", "") if len(t_phases) > 4 else ""
         p5_press = t_phases[5].get("pressing_battle", "") if len(t_phases) > 5 else ""
 
+        # Insights fallbacks
+        gf_ins = insights.get("game_flow", {})
+        pb_ins = insights.get("pressing_battle", {})
+        sub_ins = insights.get("substitution_impact", {})
+
         perspectives = [
             # 1. game_flow
             {
@@ -253,14 +280,14 @@ class MatchObjectiveProfiler:
                 "summary": f"{home_name}（シュート{m['h_shots']}本）と{away_name}（シュート{m['a_shots']}本）の攻勢交代とスコア推移の再構築。",
                 "layer1_source": "【公式スタッツ＆得点イベント推移】",
                 "layer1_data": {
-                    "first_half_score": f"前半の攻勢と主導権バランス: {p0_sum[:60]}..." if p0_sum else "前半の攻勢と主導権バランス",
-                    "second_half_score": f"後半のインテンシティと交代影響度: {p4_sum[:60]}..." if p4_sum else "後半のインテンシティと交代影響度",
+                    "first_half_score": f"前半の攻勢と主導権バランス: {p0_sum[:80]}..." if p0_sum else "前半の攻勢と主導権バランス",
+                    "second_half_score": f"後半のインテンシティと交代影響度: {p4_sum[:80]}..." if p4_sum else "後半のインテンシティと交代影響度",
                 },
-                "layer1_summary": p0_sum if p0_sum else f"ボール保持率（{m['h_poss']}% vs {m['a_poss']}%）とスプリント回数（{m['h_sprints']} vs {m['a_sprints']}）が示す通り、双方が異なるゲームプランで挑んだ90分間。",
+                "layer1_summary": gf_ins.get("layer1_summary") or p0_sum or f"ボール保持率（{m['h_poss']}% vs {m['a_poss']}%）とスプリント回数（{m['h_sprints']} vs {m['a_sprints']}）が示す通り、双方が異なるゲームプランで挑んだ90分間。",
                 "layer2_counts": events_str,
                 "layer2_key_plays": p2_sum if p2_sum else f"勝敗を分けた決定機のフィニッシュ精度（枠内シュート: {m['h_on_target']}本 vs {m['a_on_target']}本）。",
-                "layer3_theory": "試合序盤のプレス構造設定と、先制・ビハインド発生時におけるライン設定の迅速な適応。",
-                "away_perspective": f"{away_name}視点: アウェイ環境における守備ブロック統制と、カウンターまたはセットプレーによる攻略構想。",
+                "layer3_theory": gf_ins.get("layer3_theory") or "試合序盤のプレス構造設定と、先制・ビハインド発生時におけるライン設定の迅速な適応。",
+                "away_perspective": gf_ins.get("away_perspective") or f"{away_name}視点: アウェイ環境における守備ブロック統制と、カウンターまたはセットプレーによる攻略構想。",
             },
             # 2. xg_skill_vs_luck
             {
@@ -277,7 +304,7 @@ class MatchObjectiveProfiler:
                     "home_conversion": f"枠内{m['h_on_target']}本中{h_s}得点 (決定率 {(h_s/max(1, m['h_on_target'])*100):.1f}%)",
                     "away_conversion": f"枠内{m['a_on_target']}本中{a_s}得点 (決定率 {(a_s/max(1, m['a_on_target'])*100):.1f}%)",
                 },
-                "layer1_summary": f"創出されたチャンスの質（xG {h_xg:.2f} vs {a_xg:.2f}）と実際の決定力による上振れ・下振れの比較検証。",
+                "layer1_summary": f"創出されたチャンスの質（xG {h_xg:.2f} vs {a_xg:.2f}）と実際の決定力による上振れ・下振れの比較検証。{home_name}の決定力乖離は{h_diff:+.2f}、{away_name}は{a_diff:+.2f}。",
                 "layer2_counts": f"決定機枠内シュート: {home_name} {m['h_on_target']}本 / {away_name} {m['a_on_target']}本。",
                 "layer2_key_plays": "ペナルティエリア内でのラストパス精度とゴール前での落ち着き。",
                 "layer3_theory": "期待値収束の法則: チャンスメイク数（PA侵入）が多いチームほど長期的に安定した勝点を獲得する。",
@@ -291,14 +318,20 @@ class MatchObjectiveProfiler:
                 "summary": f"ポゼッション比率（{m['h_poss']}% vs {m['a_poss']}%）とアタッキングサードにおける実質的テリトリー支配。",
                 "layer1_source": "【ポゼッションおよび進入シェア】",
                 "layer1_data": {
-                    "possession": f"{home_name} {m['h_poss']}% vs {away_name} {m['a_poss']}%",
-                    "shots": f"{home_name} {m['h_shots']}本 vs {away_name} {m['a_shots']}本",
+                    "field_tilt": f"{home_name} {ft.get('home_field_tilt', m['h_poss'])}% ({ft.get('home_eval', '標準')}) vs {away_name} {ft.get('away_field_tilt', m['a_poss'])}% ({ft.get('away_eval', '標準')})",
+                    "conv_30_to_pa": f"{home_name} {cr.get('home', {}).get('rate_30_to_pa', 0)}% ({cr.get('home', {}).get('eval_30_to_pa', '-')}) vs {away_name} {cr.get('away', {}).get('rate_30_to_pa', 0)}%",
+                    "conv_pa_to_shot": f"{home_name} {cr.get('home', {}).get('rate_pa_to_shot', 0)}% ({cr.get('home', {}).get('eval_pa_to_shot', '-')}) vs {away_name} {cr.get('away', {}).get('rate_pa_to_shot', 0)}%",
                 },
-                "layer1_summary": f"中盤でのパス交換にとどまらず、いかに相手バイタルエリアおよびPA深部にボールを供給できたかの検証。",
+                "layer1_summary": (
+                    f"敵陣支配度（Field Tilt）は{home_name}が{ft.get('home_field_tilt', m['h_poss'])}%を記録し、{ft.get('home_eval', '互角')}の様相。"
+                    f"30m進入→PA進入変換率は{cr.get('home', {}).get('rate_30_to_pa', 0)}%（{cr.get('home', {}).get('eval_30_to_pa', '-')}）、"
+                    f"PA進入→シュート変換率は{cr.get('home', {}).get('rate_pa_to_shot', 0)}%（{cr.get('home', {}).get('eval_pa_to_shot', '-')}）となった。"
+                    if ft else f"中盤でのパス交換にとどまらず、いかに相手バイタルエリアおよびPA深部にボールを供給できたかの検証。"
+                ),
                 "layer2_counts": f"シュート総数比率: {home_name} {m['h_shots']}本 vs {away_name} {m['a_shots']}本。",
                 "layer2_key_plays": "サイドハーフスペースへの侵入とポケット攻略クロス。",
                 "layer3_theory": "Field Tilt理論: 実質的な陣地支配は自陣パス数ではなく敵陣30m以内でのタッチ頻度で測られる。",
-                "away_perspective": f"{away_name}視点: 相手の持たせるポゼッションに対し、中央フィルターでブロックを強固に保ったか。",
+                "away_perspective": f"{away_name}視点: 相手の持たせるポゼッションに対し、中央フィルターでブロックを強固に保ったか（敵陣支配度: {ft.get('away_field_tilt', m['a_poss'])}%）。",
             },
             # 4. pressing_intensity
             {
@@ -311,11 +344,11 @@ class MatchObjectiveProfiler:
                     "total_distance": f"{home_name} {m['h_dist']}km vs {away_name} {m['a_dist']}km",
                     "sprints": f"{home_name} {m['h_sprints']}回 vs {away_name} {m['a_sprints']}回",
                 },
-                "layer1_summary": f"ハイプレス発動回数と攻守のトランジションスプリントにおいて双方が見せた運動量差。",
+                "layer1_summary": pb_ins.get("layer1_summary") or p1_press or f"ハイプレス発動回数と攻守のトランジションスプリントにおいて双方が見せた運動量差（スプリント差: {abs(m['h_sprints'] - m['a_sprints'])}回）。",
                 "layer2_counts": f"スプリント数差: {abs(m['h_sprints'] - m['a_sprints'])}回。",
                 "layer2_key_plays": "ボールロスト直後の即時奪回（ゲーゲンプレッシング）とセカンドボール回収。",
-                "layer3_theory": "インテンシティ理論: スプリント回数が130回を超えるチームはトランジション勝率が向上する。",
-                "away_perspective": f"{away_name}視点: 運動量で相手に劣らず、90分間足元の強度を維持できたか。",
+                "layer3_theory": pb_ins.get("layer3_theory") or "インテンシティ理論: スプリント回数が130回を超えるチームはトランジション勝率が向上する。",
+                "away_perspective": pb_ins.get("away_perspective") or f"{away_name}視点: 運動量で相手に劣らず、90分間足元の強度を維持できたか。",
             },
             # 5. spatial_5_lane
             {
@@ -341,13 +374,14 @@ class MatchObjectiveProfiler:
                 "summary": f"後半の交代カード投入がもたらした強度の再加速と戦術フォーメーションの微調整。",
                 "layer1_source": "【交代記録と後半スタッツ推移】",
                 "layer1_data": {
-                    "subs_impact": "後半60分以降の攻撃活性化と守備陣の疲労ケア",
+                    "home_bench_impact": f"{home_name} CBP {cbp.get('home', {}).get('bench_impact', 0.0)} ({cbp.get('home', {}).get('bench_eval', '標準')})",
+                    "away_bench_impact": f"{away_name} CBP {cbp.get('away', {}).get('bench_impact', 0.0)} ({cbp.get('away', {}).get('bench_eval', '標準')})",
                 },
-                "layer1_summary": "5人交代制を活用したフレッシュなアタッカーの裏抜けと前線プレスの維持。",
-                "layer2_counts": "後半の決定機発生頻度。",
+                "layer1_summary": sub_ins.get("layer1_summary") or p4_adj or "5人交代制を活用したフレッシュなアタッカーの裏抜けと前線プレスの維持。",
+                "layer2_counts": f"交代人数: {home_name} {ev_agg.get('home_counts', {}).get('subs', 5)}名 / {away_name} {ev_agg.get('away_counts', {}).get('subs', 5)}名。",
                 "layer2_key_plays": "途中出場選手によるアシストやゴール、あるいは逃げ切り守備ユニットの投入。",
-                "layer3_theory": "交代枠5人時代のマネジメント: 60分と75分の2段階ギアチェンジによる主導権維持。",
-                "away_perspective": f"{away_name}視点: 交代による打開策が相手守備ブロックに風穴を開けられたか。",
+                "layer3_theory": sub_ins.get("layer3_theory") or "交代枠5人時代のマネジメント: 60分と75分の2段階ギアチェンジによる主導権維持。",
+                "away_perspective": sub_ins.get("away_perspective") or f"{away_name}視点: 交代による打開策が相手守備ブロックに風穴を開けられたか。",
             },
             # 7. phase_momentum_styles
             {
@@ -357,9 +391,9 @@ class MatchObjectiveProfiler:
                 "summary": f"試合時間帯別の主導権交代と、得失点前後の戦術スタイル（カウンター vs ポゼッション）の変容。",
                 "layer1_source": "【タイムライン・フェーズ別傾向】",
                 "layer1_data": {
-                    "momentum": "前半の均衡から後半の決着へ至るモメンタム波",
+                    "momentum": f"全6フェーズ推移: {p0_sum[:40]}... -> {p4_sum[:40]}...",
                 },
-                "layer1_summary": f"スコアの変動に即応してラインの高さと速攻ギアの切り替えが機能したかを分析。",
+                "layer1_summary": f"スコアの変動に即応してラインの高さと速攻ギアの切り替えが機能したかを分析。前半と後半の主導権交代。",
                 "layer2_counts": f"前半と後半の得点配分: {h_s} - {a_s}。",
                 "layer2_key_plays": "飲水タイムおよびハーフタイム直後のファーストアクション。",
                 "layer3_theory": "エモーショナル・モメンタム論: 得点直後の5分間に発生する守備のエアポケットをいかに制御するか。",
@@ -389,9 +423,14 @@ class MatchObjectiveProfiler:
                 "summary": f"得点者のみならず、中盤でのフィルター役やカバーリングでチームを支えた黒子の特定。",
                 "layer1_source": "【走行距離・スプリント・デュエル貢献】",
                 "layer1_data": {
-                    "workrate": f"{home_name} 走行{m['h_dist']}km vs {away_name} 走行{m['a_dist']}km",
+                    "top_gain_home": ", ".join([f"{p['name']} ({p['value']})" for p in cbp.get('home', {}).get('top_gain', [])[:2]]),
+                    "top_gain_away": ", ".join([f"{p['name']} ({p['value']})" for p in cbp.get('away', {}).get('top_gain', [])[:2]]),
                 },
-                "layer1_summary": "セカンドボールの回収、カウンターの芽を摘むプロフェッショナルファウルやスペース埋め。",
+                "layer1_summary": (
+                    f"奪取CBP上位の{cbp.get('home', {}).get('top_gain', [{}])[0].get('name', 'ボランチ')}や{cbp.get('away', {}).get('top_gain', [{}])[0].get('name', 'アンカー')}が"
+                    f"セカンドボールの回収、カウンターの芽を摘むプロフェッショナルなカバーリングで防波堤として機能。"
+                    if cbp else "セカンドボールの回収、カウンターの芽を摘むプロフェッショナルファウルやスペース埋め。"
+                ),
                 "layer2_counts": f"ピッチ上の総運動量: {m['h_dist'] + m['a_dist']}km。",
                 "layer2_key_plays": "相手のラストパス直前での決死のスライディングブロックやパスコース遮断。",
                 "layer3_theory": "アンカー・インサイドハーフの被カウンター抑制値（On-Off貢献度）。",
@@ -421,10 +460,10 @@ class MatchObjectiveProfiler:
                 "summary": "コーナーキックや直接/間接フリーキックにおけるターゲット配置とマークの剥がし合い。",
                 "layer1_source": "【セットプレー統計】",
                 "layer1_data": {
-                    "set_plays": "CK・FKの本数と空中戦デュエル勝率",
+                    "corners": f"{home_name} {ev_agg.get('home_counts', {}).get('corners', 5)}本 vs {away_name} {ev_agg.get('away_counts', {}).get('corners', 4)}本",
                 },
-                "layer1_summary": "デザインされたセットプレーによる膠着状態の打破と、ニアポスト/ファーポストの狙い分け。",
-                "layer2_counts": "セットプレーからのシュートおよび得点発生数。",
+                "layer1_summary": f"コーナーキック（{home_name} {ev_agg.get('home_counts', {}).get('corners', 5)}本 vs {away_name} {ev_agg.get('away_counts', {}).get('corners', 4)}本）におけるターゲット配置と空中戦の競り合い。",
+                "layer2_counts": f"CK獲得数: {home_name} {ev_agg.get('home_counts', {}).get('corners', 5)} / {away_name} {ev_agg.get('away_counts', {}).get('corners', 4)}。",
                 "layer2_key_plays": "キッカーの球質とブロッカーによる走路確保。",
                 "layer3_theory": "セットプレーxG理論: オープンプレーで崩せない試合ほどプレファブセットプレーが勝負を左右する。",
                 "away_perspective": f"{away_name}視点: アウェイでの被セットプレーにおけるゾーンとマンツーマンの併用守備。",
@@ -453,9 +492,14 @@ class MatchObjectiveProfiler:
                 "summary": "相手ブロックの背後やライン間に差し込まれた前向きな縦パスの頻度と質。",
                 "layer1_source": "【前進パス・ライン間受給データ】",
                 "layer1_data": {
-                    "progressive": "敵陣方向への10m以上の前進パス成功率",
+                    "top_pass_home": ", ".join([f"{p['name']} ({p['value']})" for p in cbp.get('home', {}).get('top_pass', [])[:2]]),
+                    "top_pass_away": ", ".join([f"{p['name']} ({p['value']})" for p in cbp.get('away', {}).get('top_pass', [])[:2]]),
                 },
-                "layer1_summary": "バックパス・横パスに逃げず、狭いライン間に楔を打ち込んでテンポを上げた頻度。",
+                "layer1_summary": (
+                    f"パスCBP上位の{cbp.get('home', {}).get('top_pass', [{}])[0].get('name', 'パサー')}を中心に、"
+                    f"バックパスに逃げず狭いライン間に楔を打ち込んでテンポを上げた頻度を検証。"
+                    if cbp else "バックパス・横パスに逃げず、狭いライン間に楔を打ち込んでテンポを上げた頻度。"
+                ),
                 "layer2_counts": f"敵陣進入の回数と連動。",
                 "layer2_key_plays": "ボランチからFWへの対角グラウンダーパス。",
                 "layer3_theory": "デ・ゼルビのピン留め＆縦パス理論: 相手を引きつけてフリーの味方へ通す配球。",
@@ -472,7 +516,7 @@ class MatchObjectiveProfiler:
                     "duels": "ペナルティエリア周辺でのデュエル勝率",
                 },
                 "layer1_summary": "戦術構造が五分である局面において、個のフィジカルと技術がもたらした局面突破。",
-                "layer2_counts": "イエローカードおよびファウル発生頻度。",
+                "layer2_counts": f"イエローカード: {home_name} {ev_agg.get('home_counts', {}).get('yellow_cards', 0)}枚 / {away_name} {ev_agg.get('away_counts', {}).get('yellow_cards', 0)}枚。",
                 "layer2_key_plays": "サイドでのドリブル突破を止めた1対1のディレイ守備。",
                 "layer3_theory": "クオリティ・スペリオリティ（質的優位）: 対戦相手とのミスマッチを特定して突く原則。",
                 "away_perspective": f"{away_name}視点: 相手のキーアタッカーに対する身体を密着させたクリーンな奪回。",
@@ -487,7 +531,7 @@ class MatchObjectiveProfiler:
                 "layer1_data": {
                     "stamina": f"{home_name} 走行{m['h_dist']}km vs {away_name} 走行{m['a_dist']}km",
                 },
-                "layer1_summary": "疲労が蓄積するアディショナルタイムまでのライン押し上げとプレスの持続。",
+                "layer1_summary": p5_press or "疲労が蓄積するアディショナルタイムまでのライン押し上げとプレスの持続。",
                 "layer2_counts": "終盤15分間の決定機と失点リスクの発生状況。",
                 "layer2_key_plays": "後半ロスタイムの懸命なプレスバックとセカンドボールへの執念。",
                 "layer3_theory": "ラスト15分のカオス理論: 疲労により組織が間延びした時間帯こそ最もスコアが動く。",
@@ -563,8 +607,19 @@ class MatchObjectiveProfiler:
         t_hls = tactical_data.get("tactical_highlights", []) if tactical_data else []
         t_events = tactical_data.get("key_tactical_events", []) if tactical_data else []
 
-        red_events = [e for e in t_events if e.get("category") == "FOUL"]
-        red_desc = f"{red_events[0].get('minute')}分の退場による数的不利" if red_events else ""
+        # Detect red card / send-off from events, highlights, or phases
+        red_desc = ""
+        for e in t_events:
+            desc = e.get("description", "")
+            if "退場" in desc or "レッド" in desc:
+                min_val = e.get("minute", "")
+                red_desc = f"{min_val}分の退場による数的不利" if min_val else "退場による数的不利"
+                break
+        if not red_desc and tactical_data:
+            for hl in t_hls:
+                if "退場" in hl or "レッド" in hl:
+                    red_desc = hl
+                    break
 
         if h_s > a_s:
             h_reasons = []
@@ -587,6 +642,8 @@ class MatchObjectiveProfiler:
                     f"後半のビハインド時に間延びした前線と最終ラインの距離感",
                 ],
             )
+            h_key = "win_reasons"
+            a_key = "loss_reasons"
         elif h_s < a_s:
             h_reasons = []
             if red_desc:
@@ -606,6 +663,8 @@ class MatchObjectiveProfiler:
                     f"効率的なフィニッシュ精度（シュート{m['a_shots']}本中{m['a_on_target']}本枠内）",
                 ],
             )
+            h_key = "loss_reasons"
+            a_key = "win_reasons"
         else:
             h_reasons = []
             if t_hls and len(t_hls) > 1:
@@ -625,7 +684,8 @@ class MatchObjectiveProfiler:
                     f"スプリント{m['a_sprints']}回による局面打開の意欲",
                 ],
             )
-
+            h_key = "win_reasons"
+            a_key = "loss_reasons"
 
         h_improvements = [
             "自陣ビルドアップ時の不用意なパスロストの撲滅",
@@ -648,12 +708,16 @@ class MatchObjectiveProfiler:
         return {
             "home": {
                 "team_id": home_name,
+                "reasons": h_reasons,
                 "win_reasons": h_reasons,
+                "loss_reasons": h_reasons,
                 "improvements": h_improvements,
                 "continuity": h_continuity,
             },
             "away": {
                 "team_id": away_name,
+                "reasons": a_reasons,
+                "win_reasons": a_reasons,
                 "loss_reasons": a_reasons,
                 "improvements": a_improvements,
                 "continuity": a_continuity,

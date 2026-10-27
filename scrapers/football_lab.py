@@ -826,10 +826,10 @@ class FootballLabScraper:
             return None
 
         year = int(clean_date[:4])
-        month = int(clean_date[4:6])
-        day = int(clean_date[6:8])
+        month_str = clean_date[4:6]
+        day_str = clean_date[6:8]
 
-        return f"{self.BASE_URL}/{slug}/report/?year={year}&month={month}&date={day}"
+        return f"{self.BASE_URL}/{slug}/report/?year={year}&month={month_str}&date={day_str}"
 
     def fetch_match_data(self, match_url: str) -> dict:
         """マッチレポートURLから全データを取得・パースして辞書で返す."""
@@ -887,17 +887,27 @@ class FootballLabScraper:
         """
         import json
 
+        data = None
         url = self.build_match_url(home_team_id, date_str)
-        if not url:
-            # ホームチームで取れない場合はアウェイチームでも試行
-            if away_team_id:
-                url = self.build_match_url(away_team_id, date_str)
-            if not url:
-                raise ValueError(
-                    f"Could not build Football LAB URL for {home_team_id} vs {away_team_id} on {date_str}",
-                )
+        if url:
+            try:
+                data = self.fetch_match_data(url)
+            except Exception:
+                data = None
 
-        data = self.fetch_match_data(url)
+        if not data and away_team_id:
+            alt_url = self.build_match_url(away_team_id, date_str)
+            if alt_url:
+                try:
+                    data = self.fetch_match_data(alt_url)
+                    url = alt_url
+                except Exception:
+                    data = None
+
+        if not data or not url:
+            raise ValueError(
+                f"Could not build or fetch Football LAB URL for {home_team_id} vs {away_team_id} on {date_str}",
+            )
 
         os.makedirs(output_dir, exist_ok=True)
         os.makedirs(markdown_dir, exist_ok=True)

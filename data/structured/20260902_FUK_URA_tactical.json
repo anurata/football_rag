@@ -1,0 +1,113 @@
+{
+  "match_id": "20260902_FUK_URA",
+  "home_team_id": "FUK",
+  "away_team_id": "URA",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "アビスパ福岡と浦和レッズによる激闘（最終スコア: 2 - 3）",
+    "得点者: マテウス サヴィオ (7分), 碓井 聖生 (24分), 師岡 柊生 (35分), 浦和レッズ選手 (45分), 浦和レッズ選手 (65分)",
+    "局面ごとの戦術的適応とインテンシティの維持が勝敗を決定"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "AWAY",
+      "momentum_summary": "立ち上がりはアビスパ福岡と浦和レッズによるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
+      "pressing_battle": "アビスパ福岡が前線から連動プレスを仕掛け、浦和レッズはサイドスペースへの配球でプレス回避を狙う。",
+      "tactical_adjustments": "序盤の探り合いを経て、両チームが陣形のコンパクトネスを維持し中央の進入路を遮断。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
+      "pressing_battle": "サイドハーフスペースへの侵入に対するチャレンジ＆カバーの徹底。",
+      "tactical_adjustments": "ボランチの立ち位置を微修正し、セカンドボールの回収率向上を図る。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "前半終了に向けたプレッシャーの強まり。セットプレーおよびクロスからペナルティエリア内の攻防が激化。",
+      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
+      "tactical_adjustments": "ライン間を締め直し、アディショナルタイムの失点リスクを最小化。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "ハーフタイムの修正を経た後半立ち上がり。両指揮官の戦術指示がピッチ上で展開。",
+      "pressing_battle": "前線からの即時奪回（ゲーゲンプレス）によるショートカウンターの応酬。",
+      "tactical_adjustments": "ボールの循環テンポを上げ、相手の守備スライドを揺さぶる。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "AWAY",
+      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
+      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
+      "tactical_adjustments": "交代枠を駆使したプレスのギアチェンジと守備陣形の再構築。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合最終盤の総力戦。スコア 2-3 をめぐるアディショナルタイムまでの白熱した攻防決着。",
+      "pressing_battle": "ラスト15分における集中力維持と、泥臭いデュエル・クリアの応酬。",
+      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+    }
+  ],
+  "key_tactical_events": [
+    {
+      "minute": 7,
+      "period": "1H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "マテウス サヴィオ"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: マテウス サヴィオ による得点 (7分)"
+    },
+    {
+      "minute": 24,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "碓井 聖生"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "アビスパ福岡の決定機: 碓井 聖生 による得点 (24分)"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "師岡 柊生"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "アビスパ福岡の決定機: 師岡 柊生 による得点 (35分)"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "浦和レッズ選手"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: 浦和レッズ選手 による得点 (45分)"
+    },
+    {
+      "minute": 65,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "浦和レッズ選手"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: 浦和レッズ選手 による得点 (65分)"
+    }
+  ]
+}

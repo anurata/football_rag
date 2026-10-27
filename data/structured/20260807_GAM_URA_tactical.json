@@ -1,0 +1,135 @@
+{
+  "match_id": "20260807_GAM_URA",
+  "home_team_id": "GAM",
+  "away_team_id": "URA",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "ガンバ大阪と浦和レッズによる激闘（最終スコア: 4 - 3）",
+    "得点者: 小森 飛絢 (17分), イッサム ジェバリ (36分), デニス ヒュメット (52分), 金子 拓郎 (78分), 南野 遥海 (80分), ウェルトン (84分), 植中 朝日 (86分)",
+    "局面ごとの戦術的適応とインテンシティの維持が勝敗を決定"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "HOME",
+      "momentum_summary": "立ち上がりはガンバ大阪と浦和レッズによるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
+      "pressing_battle": "ガンバ大阪が前線から連動プレスを仕掛け、浦和レッズはサイドスペースへの配球でプレス回避を狙う。",
+      "tactical_adjustments": "序盤の探り合いを経て、両チームが陣形のコンパクトネスを維持し中央の進入路を遮断。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
+      "pressing_battle": "サイドハーフスペースへの侵入に対するチャレンジ＆カバーの徹底。",
+      "tactical_adjustments": "ボランチの立ち位置を微修正し、セカンドボールの回収率向上を図る。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "前半終了に向けたプレッシャーの強まり。セットプレーおよびクロスからペナルティエリア内の攻防が激化。",
+      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
+      "tactical_adjustments": "ライン間を締め直し、アディショナルタイムの失点リスクを最小化。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "ハーフタイムの修正を経た後半立ち上がり。両指揮官の戦術指示がピッチ上で展開。",
+      "pressing_battle": "前線からの即時奪回（ゲーゲンプレス）によるショートカウンターの応酬。",
+      "tactical_adjustments": "ボールの循環テンポを上げ、相手の守備スライドを揺さぶる。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "HOME",
+      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
+      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
+      "tactical_adjustments": "交代枠を駆使したプレスのギアチェンジと守備陣形の再構築。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合最終盤の総力戦。スコア 4-3 をめぐるアディショナルタイムまでの白熱した攻防決着。",
+      "pressing_battle": "ラスト15分における集中力維持と、泥臭いデュエル・クリアの応酬。",
+      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+    }
+  ],
+  "key_tactical_events": [
+    {
+      "minute": 17,
+      "period": "1H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "小森 飛絢"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: 小森 飛絢 による得点 (17分)"
+    },
+    {
+      "minute": 36,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "イッサム ジェバリ"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "ガンバ大阪の決定機: イッサム ジェバリ による得点 (36分)"
+    },
+    {
+      "minute": 52,
+      "period": "2H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "デニス ヒュメット"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "ガンバ大阪の決定機: デニス ヒュメット による得点 (52分)"
+    },
+    {
+      "minute": 78,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "金子 拓郎"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: 金子 拓郎 による得点 (78分)"
+    },
+    {
+      "minute": 80,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "GOAL",
+      "actors": [
+        "南野 遥海"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "浦和レッズの決定機: 南野 遥海 による得点 (80分)"
+    },
+    {
+      "minute": 84,
+      "period": "2H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "ウェルトン"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "ガンバ大阪の決定機: ウェルトン による得点 (84分)"
+    },
+    {
+      "minute": 86,
+      "period": "2H",
+      "team_side": "HOME",
+      "category": "GOAL",
+      "actors": [
+        "植中 朝日"
+      ],
+      "zone": "ペナルティエリア中央",
+      "description": "ガンバ大阪の決定機: 植中 朝日 による得点 (86分)"
+    }
+  ]
+}

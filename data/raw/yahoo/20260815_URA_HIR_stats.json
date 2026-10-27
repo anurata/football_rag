@@ -1,0 +1,38 @@
+{
+  "match_id": "20260815_URA_HIR",
+  "home_team": "浦和レッズ",
+  "away_team": "サンフレッチェ広島",
+  "score": {
+    "home": 1,
+    "away": 4
+  },
+  "team_stats": {
+    "home": {
+      "shots": 3,
+      "shots_on_target": 1,
+      "possession": 55.0,
+      "pass_success": 69.0,
+      "distance_km": 113.0,
+      "sprints": 127,
+      "offsides": 3,
+      "corner_kicks": 1,
+      "free_kicks": 10,
+      "cards": "警告:2 / 退場:0"
+    },
+    "away": {
+      "shots": 25,
+      "shots_on_target": 7,
+      "possession": 45.0,
+      "pass_success": 71.0,
+      "distance_km": 108.0,
+      "sprints": 118,
+      "offsides": 4,
+      "corner_kicks": 11,
+      "free_kicks": 21,
+      "cards": "警告:1 / 退場:0"
+    }
+  },
+  "venue": "埼玉スタジアム２００２",
+  "weather": "天候:晴れ｜気温:25.2℃｜湿度:80%",
+  "spectators": 48707
+}

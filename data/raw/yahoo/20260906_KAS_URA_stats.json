@@ -1,0 +1,38 @@
+{
+  "match_id": "20260906_KAS_URA",
+  "home_team": "鹿島アントラーズ",
+  "away_team": "浦和レッズ",
+  "score": {
+    "home": 0,
+    "away": 1
+  },
+  "team_stats": {
+    "home": {
+      "shots": 15,
+      "shots_on_target": 3,
+      "possession": 55.0,
+      "pass_success": 75.0,
+      "distance_km": 114.1,
+      "sprints": 130,
+      "offsides": 2,
+      "corner_kicks": 5,
+      "free_kicks": 13,
+      "cards": "警告:1 / 退場:0"
+    },
+    "away": {
+      "shots": 11,
+      "shots_on_target": 3,
+      "possession": 45.0,
+      "pass_success": 67.0,
+      "distance_km": 119.6,
+      "sprints": 139,
+      "offsides": 0,
+      "corner_kicks": 8,
+      "free_kicks": 11,
+      "cards": "警告:3 / 退場:0"
+    }
+  },
+  "venue": "メルカリスタジアム",
+  "weather": "天候:雨｜気温:24.9℃｜湿度:90%",
+  "spectators": 26589
+}

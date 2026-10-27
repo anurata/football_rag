@@ -1,0 +1,78 @@
+{
+  "match_id": "20260906_FCT_SAN",
+  "home_team_id": "FCT",
+  "away_team_id": "SAN",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "FC東京 vs 京都サンガF.C.（2 - 0）: 得点者（マルセロ ヒアン, 長倉 幹樹）を中心とした激しい攻防戦",
+    "アタッキングサードでのポゼッション循環とペナルティエリア角（ポケット）への侵入戦",
+    "後半のシステム修正と交代カード投入（ＦＣ東京・松橋 力蔵監督 / 京都サンガF.C.・ランコ ポポヴィッチ監督）がもたらした局面の打開"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "HOME",
+      "momentum_summary": "ホームのFC東京は序盤から積極的に攻め入り、３分、７分と続けてチャンスを作る。その京都は後半開始から松田 天馬を投入。",
+      "pressing_battle": "FC東京が前線から連動プレスを仕掛け、京都サンガF.C.はサイドスペースへの配球でプレス回避を狙う。",
+      "tactical_adjustments": "フォーメーションはこれまでと同じく［４－４－２］を選択した。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "20分前後からは、再びFC東京のペース。",
+      "pressing_battle": "ジョアン ペドロのクロスがゴール前に渡ると、ラファエル エリアスが勢いのあるヘディングシュートを放つ。直後には京都も相手のボールをカットすると、最後は新井 晴樹がフィニッシュを放つ。",
+      "tactical_adjustments": "ライン間への配給とセカンドボールの回収率向上を図るポジショニング調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "FC東京の攻撃が目立つ展開だったが、前半アディショナルタイムには京都にビッグチャンス。FC東京は前半を通して主導権を握りチャンスを多く作っただけに、決め切れないもどかしさが尾を引く。",
+      "pressing_battle": "キム スンギュからボールがこぼれるも、稲村 隼翔がクリア。",
+      "tactical_adjustments": "数的不利や失点直後のリスクマネジメントとハーフタイム前の守備引き締め。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "HOME",
+      "momentum_summary": "その京都は後半開始から松田 天馬を投入。だが試合はなおもFC東京ペースで進み、51分には室屋 成から本間 至恩がボールを受け、ゴール前に迫った。",
+      "pressing_battle": "さらに９分には、ボックス付近でFKを獲得。これを橋本 健人が直接狙ったが、京都のGKハウスが片手で弾き出した。",
+      "tactical_adjustments": "マルセロ ヒアン、俵積田 晃太、さらに左SBには長友 佑都が交代出場。この交代でFC東京は再び勢いを増す。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "そして70分、アレクサンダー ショルツからのパスを受けた室屋 成が中央にクロスを上げる。",
+      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
+      "tactical_adjustments": "対する京都は、前節・横浜FM戦と同じ11人をスタメンに起用。その京都は後半開始から松田 天馬を投入。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "FC東京の攻撃が目立つ展開だったが、前半アディショナルタイムには京都にビッグチャンス。",
+      "pressing_battle": "対する京都は15分にCKを獲得したが、シュートには至らず。FC東京はその後のCKもなんとかしのぎ切り、０－０でハーフタイムを迎えた。",
+      "tactical_adjustments": "互いに前節をドローで終えているとあって、勝点３で晴れ間をのぞきたい一戦となった。反撃に出たい京都だが、FC東京が最後まで集中した守りを見せる。"
+    }
+  ],
+  "key_tactical_events": [
+    {
+      "minute": 70,
+      "period": "2H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "マルセロ ヒアン"
+      ],
+      "tactical_context": "マルセロ ヒアンのゴール (70分)"
+    },
+    {
+      "minute": 75,
+      "period": "2H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "長倉 幹樹"
+      ],
+      "tactical_context": "長倉 幹樹のゴール (75分)"
+    }
+  ]
+}

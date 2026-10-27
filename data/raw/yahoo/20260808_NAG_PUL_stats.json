@@ -1,0 +1,38 @@
+{
+  "match_id": "20260808_NAG_PUL",
+  "home_team": "名古屋グランパス",
+  "away_team": "清水エスパルス",
+  "score": {
+    "home": 0,
+    "away": 1
+  },
+  "team_stats": {
+    "home": {
+      "shots": 17,
+      "shots_on_target": 6,
+      "possession": 66.0,
+      "pass_success": 83.0,
+      "distance_km": 106.8,
+      "sprints": 95,
+      "offsides": 1,
+      "corner_kicks": 13,
+      "free_kicks": 15,
+      "cards": "警告:0 / 退場:0"
+    },
+    "away": {
+      "shots": 14,
+      "shots_on_target": 6,
+      "possession": 34.0,
+      "pass_success": 63.0,
+      "distance_km": 104.6,
+      "sprints": 118,
+      "offsides": 1,
+      "corner_kicks": 7,
+      "free_kicks": 6,
+      "cards": "警告:3 / 退場:1"
+    }
+  },
+  "venue": "豊田スタジアム",
+  "weather": "天候:曇り｜気温:28.9℃｜湿度:63%",
+  "spectators": 40494
+}

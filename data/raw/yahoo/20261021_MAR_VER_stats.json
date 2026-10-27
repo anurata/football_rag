@@ -1,0 +1,38 @@
+{
+  "match_id": "20261021_MAR_VER",
+  "home_team": "横浜F・マリノス",
+  "away_team": "東京ヴェルディ",
+  "score": {
+    "home": 2,
+    "away": 2
+  },
+  "team_stats": {
+    "home": {
+      "shots": 16,
+      "shots_on_target": 4,
+      "possession": 60.0,
+      "pass_success": 81.0,
+      "distance_km": 112.6,
+      "sprints": 141,
+      "offsides": 8,
+      "corner_kicks": 6,
+      "free_kicks": 25,
+      "cards": "警告:0 / 退場:0"
+    },
+    "away": {
+      "shots": 12,
+      "shots_on_target": 3,
+      "possession": 40.0,
+      "pass_success": 72.0,
+      "distance_km": 117.6,
+      "sprints": 161,
+      "offsides": 2,
+      "corner_kicks": 6,
+      "free_kicks": 15,
+      "cards": "警告:2 / 退場:0"
+    }
+  },
+  "venue": "ＭＵＦＧスタジアム",
+  "weather": "天候:晴れ｜気温:26.7℃｜湿度:67%",
+  "spectators": 40765
+}

@@ -1,0 +1,38 @@
+{
+  "match_id": "20261017_MIT_URA",
+  "home_team": "水戸ホーリーホック",
+  "away_team": "浦和レッズ",
+  "score": {
+    "home": 0,
+    "away": 1
+  },
+  "team_stats": {
+    "home": {
+      "shots": 1,
+      "shots_on_target": 1,
+      "possession": 27.0,
+      "pass_success": 51.0,
+      "distance_km": 106.0,
+      "sprints": 70,
+      "offsides": 1,
+      "corner_kicks": 0,
+      "free_kicks": 8,
+      "cards": "警告:1 / 退場:1"
+    },
+    "away": {
+      "shots": 28,
+      "shots_on_target": 7,
+      "possession": 73.0,
+      "pass_success": 85.0,
+      "distance_km": 117.4,
+      "sprints": 107,
+      "offsides": 0,
+      "corner_kicks": 13,
+      "free_kicks": 6,
+      "cards": "警告:1 / 退場:0"
+    }
+  },
+  "venue": "水戸信用金庫スタジアム",
+  "weather": "天候:晴れ｜気温:19.6℃｜湿度:55%",
+  "spectators": 10909
+}

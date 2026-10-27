@@ -1,0 +1,38 @@
+{
+  "match_id": "20260807_GAM_URA",
+  "home_team": "ガンバ大阪",
+  "away_team": "浦和レッズ",
+  "score": {
+    "home": 4,
+    "away": 3
+  },
+  "team_stats": {
+    "home": {
+      "shots": 11,
+      "shots_on_target": 9,
+      "possession": 60.0,
+      "pass_success": 82.0,
+      "distance_km": 112.6,
+      "sprints": 105,
+      "offsides": 2,
+      "corner_kicks": 5,
+      "free_kicks": 13,
+      "cards": "警告:0 / 退場:0"
+    },
+    "away": {
+      "shots": 19,
+      "shots_on_target": 6,
+      "possession": 40.0,
+      "pass_success": 76.0,
+      "distance_km": 110.4,
+      "sprints": 118,
+      "offsides": 0,
+      "corner_kicks": 6,
+      "free_kicks": 11,
+      "cards": "警告:5 / 退場:1"
+    }
+  },
+  "venue": "パナソニック スタジアム 吹田",
+  "weather": "天候:晴れ｜気温:31.4℃｜湿度:51%",
+  "spectators": 34855
+}

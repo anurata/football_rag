@@ -1,0 +1,38 @@
+{
+  "match_id": "20261017_VER_FCT",
+  "home_team": "東京ヴェルディ",
+  "away_team": "FC東京",
+  "score": {
+    "home": 0,
+    "away": 4
+  },
+  "team_stats": {
+    "home": {
+      "shots": 0,
+      "shots_on_target": 0,
+      "possession": 23.0,
+      "pass_success": 53.0,
+      "distance_km": 108.5,
+      "sprints": 110,
+      "offsides": 2,
+      "corner_kicks": 1,
+      "free_kicks": 10,
+      "cards": "警告:2 / 退場:1"
+    },
+    "away": {
+      "shots": 21,
+      "shots_on_target": 8,
+      "possession": 77.0,
+      "pass_success": 85.0,
+      "distance_km": 114.8,
+      "sprints": 122,
+      "offsides": 3,
+      "corner_kicks": 11,
+      "free_kicks": 13,
+      "cards": "警告:0 / 退場:0"
+    }
+  },
+  "venue": "味の素スタジアム",
+  "weather": "天候:晴れ｜気温:29.2℃｜湿度:20%",
+  "spectators": 28945
+}

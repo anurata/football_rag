@@ -1,0 +1,38 @@
+{
+  "match_id": "20260822_NAG_GAM",
+  "home_team": "名古屋グランパス",
+  "away_team": "ガンバ大阪",
+  "score": {
+    "home": 3,
+    "away": 1
+  },
+  "team_stats": {
+    "home": {
+      "shots": 20,
+      "shots_on_target": 11,
+      "possession": 49.0,
+      "pass_success": 80.0,
+      "distance_km": 113.4,
+      "sprints": 133,
+      "offsides": 1,
+      "corner_kicks": 4,
+      "free_kicks": 20,
+      "cards": "警告:1 / 退場:0"
+    },
+    "away": {
+      "shots": 11,
+      "shots_on_target": 3,
+      "possession": 51.0,
+      "pass_success": 80.0,
+      "distance_km": 111.5,
+      "sprints": 114,
+      "offsides": 4,
+      "corner_kicks": 3,
+      "free_kicks": 13,
+      "cards": "警告:2 / 退場:1"
+    }
+  },
+  "venue": "豊田スタジアム",
+  "weather": "天候:晴れ｜気温:29.5℃｜湿度:76%",
+  "spectators": 30651
+}

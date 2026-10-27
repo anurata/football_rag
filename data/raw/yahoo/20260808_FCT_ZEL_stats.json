@@ -1,0 +1,38 @@
+{
+  "match_id": "20260808_FCT_ZEL",
+  "home_team": "FC東京",
+  "away_team": "町田ゼルビア",
+  "score": {
+    "home": 1,
+    "away": 5
+  },
+  "team_stats": {
+    "home": {
+      "shots": 9,
+      "shots_on_target": 3,
+      "possession": 48.0,
+      "pass_success": 77.0,
+      "distance_km": 113.7,
+      "sprints": 139,
+      "offsides": 3,
+      "corner_kicks": 2,
+      "free_kicks": 13,
+      "cards": "警告:1 / 退場:1"
+    },
+    "away": {
+      "shots": 16,
+      "shots_on_target": 8,
+      "possession": 52.0,
+      "pass_success": 83.0,
+      "distance_km": 119.8,
+      "sprints": 131,
+      "offsides": 1,
+      "corner_kicks": 5,
+      "free_kicks": 12,
+      "cards": "警告:1 / 退場:0"
+    }
+  },
+  "venue": "味の素スタジアム",
+  "weather": "天候:晴れ｜気温:29.7℃｜湿度:76%",
+  "spectators": 36336
+}

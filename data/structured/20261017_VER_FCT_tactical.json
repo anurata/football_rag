@@ -1,0 +1,88 @@
+{
+  "match_id": "20261017_VER_FCT",
+  "home_team_id": "VER",
+  "away_team_id": "FCT",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "東京ヴェルディ vs FC東京（0 - 4）: 得点者（アレクサンダー ショルツ, マルセロ ヒアン, 長倉 幹樹）を中心とした激しい攻防戦",
+    "アタッキングサードでのポゼッション循環とペナルティエリア角（ポケット）への侵入戦",
+    "後半のシステム修正と交代カード投入（東京ヴェルディ・相馬 直樹監督 / ＦＣ東京・松橋 力蔵監督）がもたらした局面の打開"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がりは東京ヴェルディとFC東京によるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
+      "pressing_battle": "東京ヴェルディが前線から連動プレスを仕掛け、FC東京はサイドスペースへの配球でプレス回避を狙う。",
+      "tactical_adjustments": "ホームの東京Ｖは、前節・広島戦と同じ先発メンバー。システムを［３－５－１］にして攻守の安定感を取り戻そうとしたが、絶好調のFC東京の勢いは止まらず。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "AWAY",
+      "momentum_summary": "数的有利となったFC東京は21分、左サイドの俵積田 晃太がカットインから右足でアーリークロス。",
+      "pressing_battle": "数的有利となったFC東京は21分、左サイドの俵積田 晃太がカットインから右足でアーリークロス。51分、右サイドを攻め上がったアレクサンダー ショルツが中央へクロスを送ると、ボールが柴戸 海の腕に当たりPKの判定に。",
+      "tactical_adjustments": "ライン間への配給とセカンドボールの回収率向上を図るポジショニング調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "FC東京が前半終了間際の得点で先制し、試合を折り返した。",
+      "pressing_battle": "上村 篤史主審は迷わずレッドカードを提示。",
+      "tactical_adjustments": "なんとしても勝利が欲しい東京Ｖだったが、早い時間に数的不利となった。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "後半、東京Ｖはキム ヒョンウに代えて一美 和成を投入。51分、右サイドを攻め上がったアレクサンダー ショルツが中央へクロスを送ると、ボールが柴戸 海の腕に当たりPKの判定に。",
+      "pressing_battle": "即時奪回（ゲーゲンプレス）の強度を高め、前向きのショートカウンターを狙う。",
+      "tactical_adjustments": "システム変更や交代策による陣形のマイナーチェンジと前進ルートの修正。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "AWAY",
+      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
+      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
+      "tactical_adjustments": "後半、東京Ｖはキム ヒョンウに代えて一美 和成を投入。東京Ｖは80分に、ケガ明けの森田 晃樹、新加入のチョ ユミンを投入。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "FC東京が前半終了間際の得点で先制し、試合を折り返した。東京Ｖは80分に、ケガ明けの森田 晃樹、新加入のチョ ユミンを投入。",
+      "pressing_battle": "６分、左サイドからのCKを俵積田 晃太が中央へ放り込むと、ファーサイドに走り込んだ石原 広教がフリーで合わせる。左サイドからのCKを蹴るのは俵積田 晃太。",
+      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+    }
+  ],
+  "key_tactical_events": [
+    {
+      "minute": 55,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "アレクサンダー ショルツ"
+      ],
+      "tactical_context": "アレクサンダー ショルツのゴール (55分)"
+    },
+    {
+      "minute": 68,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "マルセロ ヒアン"
+      ],
+      "tactical_context": "マルセロ ヒアンのゴール (68分)"
+    },
+    {
+      "minute": 90,
+      "period": "2H",
+      "team_side": "AWAY",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "長倉 幹樹"
+      ],
+      "tactical_context": "長倉 幹樹のゴール (90分)"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "match_id": "20261011_VER_HIR",
+  "home_team": "東京ヴェルディ",
+  "away_team": "サンフレッチェ広島",
+  "score": {
+    "home": 0,
+    "away": 2
+  },
+  "team_stats": {
+    "home": {
+      "shots": 7,
+      "shots_on_target": 3,
+      "possession": 30.0,
+      "pass_success": 67.0,
+      "distance_km": 122.2,
+      "sprints": 117,
+      "offsides": 2,
+      "corner_kicks": 1,
+      "free_kicks": 12,
+      "cards": "警告:3 / 退場:0"
+    },
+    "away": {
+      "shots": 12,
+      "shots_on_target": 5,
+      "possession": 70.0,
+      "pass_success": 83.0,
+      "distance_km": 117.9,
+      "sprints": 107,
+      "offsides": 1,
+      "corner_kicks": 4,
+      "free_kicks": 15,
+      "cards": "警告:1 / 退場:0"
+    }
+  },
+  "venue": "味の素スタジアム",
+  "weather": "天候:晴れ｜気温:26.4℃｜湿度:32%",
+  "spectators": 18233
+}

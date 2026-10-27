@@ -1,0 +1,38 @@
+{
+  "match_id": "20261011_MIT_PUL",
+  "home_team": "水戸ホーリーホック",
+  "away_team": "清水エスパルス",
+  "score": {
+    "home": 1,
+    "away": 2
+  },
+  "team_stats": {
+    "home": {
+      "shots": 7,
+      "shots_on_target": 2,
+      "possession": 60.0,
+      "pass_success": 77.0,
+      "distance_km": 120.6,
+      "sprints": 105,
+      "offsides": 0,
+      "corner_kicks": 7,
+      "free_kicks": 11,
+      "cards": "警告:2 / 退場:0"
+    },
+    "away": {
+      "shots": 7,
+      "shots_on_target": 4,
+      "possession": 40.0,
+      "pass_success": 69.0,
+      "distance_km": 118.7,
+      "sprints": 125,
+      "offsides": 2,
+      "corner_kicks": 1,
+      "free_kicks": 13,
+      "cards": "警告:1 / 退場:0"
+    }
+  },
+  "venue": "水戸信用金庫スタジアム",
+  "weather": "天候:晴れ｜気温:24.1℃｜湿度:61%",
+  "spectators": 15116
+}

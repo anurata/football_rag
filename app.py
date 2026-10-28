@@ -237,6 +237,132 @@ def render_header(match: Dict[str, Any]) -> None:
     )
 
 
+def _load_match_context_data(match_id: str) -> Optional[Dict[str, Any]]:
+    """Load match context from structured tactical JSON file."""
+    if not match_id:
+        return None
+    base_dir = Path(__file__).resolve().parent / "data" / "structured"
+    for p in base_dir.glob(f"*{match_id}*_tactical.json"):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if "match_context" in data:
+                return data["match_context"]
+        except Exception:
+            pass
+    return None
+
+
+def render_match_context_bar(match_id: str) -> None:
+    """Render the 5 external tactical context cards (Injuries, Cards, Schedule, Loan, Weather)."""
+    ctx = _load_match_context_data(match_id)
+    if not ctx:
+        return
+
+    fatigue = ctx.get("schedule_fatigue", {})
+    disciplinary = ctx.get("disciplinary", {})
+    weather = ctx.get("weather_pitch", {})
+    loan = ctx.get("loan_restrictions", {})
+    injury = ctx.get("injury_condition", {})
+
+    # Fatigue badge
+    rest_text = fatigue.get("rest_days_display", "-")
+    fatigue_color = "#ef4444" if fatigue.get("is_congested") else "#3b82f6"
+    if fatigue.get("is_consecutive_away"):
+        rest_text += " (アウェイ連戦)"
+
+    # Disciplinary badge
+    suspended = disciplinary.get("suspended_players", [])
+    reach = disciplinary.get("warning_reach_players", [])
+    if suspended:
+        card_text = f"停止: {len(suspended)}名"
+        card_color = "#ef4444"
+    elif reach:
+        card_text = f"リーチ: {len(reach)}名"
+        card_color = "#f59e0b"
+    else:
+        card_text = "停止・リーチなし"
+        card_color = "#10b981"
+
+    # Weather badge
+    w_cond = weather.get("weather_condition", "-")
+    w_temp = weather.get("temperature_c")
+    w_text = f"{w_cond} ({w_temp}℃)" if w_temp else w_cond
+    w_color = "#ef4444" if weather.get("is_extreme_heat") else ("#0284c7" if weather.get("is_rain_slippery") else "#64748b")
+
+    # Loan restriction badge
+    loan_restricted = loan.get("restricted_players", [])
+    if loan_restricted:
+        loan_text = f"契約不可: {len(loan_restricted)}名"
+        loan_color = "#8b5cf6"
+    else:
+        loan_text = "制限なし"
+        loan_color = "#64748b"
+
+    # Injury badge
+    injuries = injury.get("active_injuries", [])
+    if injuries:
+        injury_text = f"離脱・調整: {len(injuries)}名"
+        injury_color = "#f97316"
+    else:
+        injury_text = "離脱者なし"
+        injury_color = "#10b981"
+
+    st.markdown(
+        f"""
+        <div style="background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 14px; margin-bottom: 20px;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #94a3b8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em;">
+                🛡️ 試合背景・前提サポート情報 (Tactical Pre-conditions)
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                <div style="background: #1e293b; border-left: 4px solid {injury_color}; padding: 8px 12px; border-radius: 6px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">🏥 怪我・コンディション</span>
+                    <strong style="font-size: 0.95rem; color: #f8fafc;">{injury_text}</strong>
+                </div>
+                <div style="background: #1e293b; border-left: 4px solid {card_color}; padding: 8px 12px; border-radius: 6px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">🟨 累積警告・出場停止</span>
+                    <strong style="font-size: 0.95rem; color: #f8fafc;">{card_text}</strong>
+                </div>
+                <div style="background: #1e293b; border-left: 4px solid {fatigue_color}; padding: 8px 12px; border-radius: 6px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">🗓️ 過密日程・休養</span>
+                    <strong style="font-size: 0.95rem; color: #f8fafc;">{rest_text}</strong>
+                </div>
+                <div style="background: #1e293b; border-left: 4px solid {loan_color}; padding: 8px 12px; border-radius: 6px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">📄 契約上の出場制限</span>
+                    <strong style="font-size: 0.95rem; color: #f8fafc;">{loan_text}</strong>
+                </div>
+                <div style="background: #1e293b; border-left: 4px solid {w_color}; padding: 8px 12px; border-radius: 6px;">
+                    <span style="font-size: 0.75rem; color: #94a3b8; display: block;">🌦️ 気候・ピッチ状態</span>
+                    <strong style="font-size: 0.95rem; color: #f8fafc;">{w_text}</strong>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    with st.expander("🔍 試合前提サポート情報・背景詳細（なぜ主力不在/交代/疲労/割り切りが起きたのか）", expanded=False):
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown(f"**🏥 怪我・コンディション調整:**")
+            st.markdown(f"- {injury.get('summary_text', '-')}")
+            if injury.get("coach_mentions"):
+                st.caption(f"監督・公式証言: {injury['coach_mentions'][0]}")
+
+            st.markdown(f"**🟨 累積警告・出場停止情報:**")
+            st.markdown(f"- {disciplinary.get('summary_text', '-')}")
+
+            st.markdown(f"**📄 契約上の出場制限（ローン条項）:**")
+            st.markdown(f"- {loan.get('summary_text', '-')}")
+
+        with c2:
+            st.markdown(f"**🗓️ 過密日程・移動負担:**")
+            st.markdown(f"- {fatigue.get('summary_text', '-')}")
+
+            st.markdown(f"**🌦️ 気候・ピッチ状態と戦術示唆:**")
+            st.markdown(f"- {weather.get('summary_text', '-')}")
+            st.info(f"💡 戦術的必然性: {weather.get('tactical_implications', '')}")
+
+
 def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> None:
     """Render a comparative horizontal bar chart of team stats using Plotly."""
     stats_map = summary.get("team_stats", {})
@@ -1174,6 +1300,7 @@ def main():
     # Main Content Area
     # --------------------------------------------------------------------------
     render_header(selected_match)
+    render_match_context_bar(match_id)
 
     summary = engine.sql_tools.get_match_summary(match_id) or {}
     home_id = selected_match["home_team_id"]

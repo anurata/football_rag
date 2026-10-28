@@ -314,5 +314,63 @@
         "前半40分 【ゴール】ペナルティエリア手前でFKを獲得。キッカーの相馬が右足で直接ゴールを狙うも、キムスンギュにセーブされる"
       ]
     }
+  },
+  "match_context": {
+    "match_id": "20260808_FCT_ZEL",
+    "team_id": "FCT",
+    "opponent_team_id": "ZEL",
+    "schedule_fatigue": {
+      "previous_match_date": "2024-05-06",
+      "days_between": 824,
+      "rest_days": null,
+      "rest_days_display": "シーズン開幕戦",
+      "is_congested": false,
+      "is_consecutive_away": false,
+      "travel_distance_km": 0,
+      "transit_type": "HOME",
+      "fatigue_risk_level": "LOW",
+      "summary_text": "シーズン開幕戦（プレシーズン調整期間を経て疲労懸念なし）。"
+    },
+    "disciplinary": {
+      "suspended_players": [],
+      "warning_reach_players": [],
+      "all_cumulative_yellows": {},
+      "summary_text": "累積警告による出場停止・リーチ選手なし"
+    },
+    "weather_pitch": {
+      "weather_condition": "晴れ｜気温:29.7",
+      "temperature_c": 29.7,
+      "humidity_percent": 76,
+      "is_extreme_heat": true,
+      "is_rain_slippery": false,
+      "cooling_break_required": true,
+      "tactical_implications": "気温29.7℃・湿度76%の酷暑環境。飲水・クーリングブレイク実施基準。ハイプレス強度の持続低下と後半60分以降の交代枠活用が勝敗を左右する。",
+      "summary_text": "【気候】晴れ｜気温:29.7 (気温: 29.7℃ / 湿度: 76%) [酷暑警戒/飲水タイム]"
+    },
+    "loan_restrictions": {
+      "has_loan_restriction": false,
+      "restricted_players": [],
+      "summary_text": "所属元契約による出場制限なし"
+    },
+    "injury_condition": {
+      "active_injuries": [
+        {
+          "player_name": "エンリケ トレヴィザン",
+          "injury_type": "左膝内側側副靭帯損傷",
+          "expected_recovery": "全治約6〜8週間",
+          "status": "RECOVERING",
+          "notes": "MW1〜MW6メンバー外。最終ラインのセンターバック運用に影響。"
+        },
+        {
+          "player_name": "仲川 輝人",
+          "injury_type": "コンディション調整・プレー時間制限",
+          "expected_recovery": "段階的プレー時間延長",
+          "status": "ACTIVE_LIMITED",
+          "notes": "MW1〜MW11は主に途中出場（クローザー起用）。MW12水戸戦で今季リーグ戦初スタメン2得点。"
+        }
+      ],
+      "coach_mentions": [],
+      "summary_text": "【負傷離脱・調整】エンリケ トレヴィザン（左膝内側側副靭帯損傷）, 仲川 輝人（コンディション調整・プレー時間制限）"
+    }
   }
 }

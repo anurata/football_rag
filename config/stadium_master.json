@@ -1,0 +1,158 @@
+{
+  "味の素スタジアム": {
+    "team_id": "FCT",
+    "city": "東京都調布市",
+    "distance_from_tokyo_km": 0,
+    "transit_type": "HOME"
+  },
+  "味スタ": {
+    "team_id": "FCT",
+    "city": "東京都調布市",
+    "distance_from_tokyo_km": 0,
+    "transit_type": "HOME"
+  },
+  "国立競技場": {
+    "team_id": "FCT",
+    "city": "東京都新宿区",
+    "distance_from_tokyo_km": 0,
+    "transit_type": "HOME"
+  },
+  "味の素フィールド西が丘": {
+    "team_id": "VER",
+    "city": "東京都北区",
+    "distance_from_tokyo_km": 25,
+    "transit_type": "LOCAL_BUS"
+  },
+  "三協フロンテア柏スタジアム": {
+    "team_id": "REY",
+    "city": "千葉県柏市",
+    "distance_from_tokyo_km": 50,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "フクダ電子アリーナ": {
+    "team_id": "JEF",
+    "city": "千葉県千葉市",
+    "distance_from_tokyo_km": 60,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "町田ＧＩＯＮスタジアム": {
+    "team_id": "ZEL",
+    "city": "東京都町田市",
+    "distance_from_tokyo_km": 35,
+    "transit_type": "LOCAL_BUS"
+  },
+  "県立カシマサッカースタジアム": {
+    "team_id": "KAS",
+    "city": "茨城県鹿嶋市",
+    "distance_from_tokyo_km": 110,
+    "transit_type": "HIGHWAY_BUS"
+  },
+  "ケーズデンキスタジアム水戸": {
+    "team_id": "MIT",
+    "city": "茨城県水戸市",
+    "distance_from_tokyo_km": 120,
+    "transit_type": "TRAIN"
+  },
+  "埼玉スタジアム２００２": {
+    "team_id": "URA",
+    "city": "埼玉県さいたま市",
+    "distance_from_tokyo_km": 40,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "Ｕｖａｎｃｅとどろきスタジアム　ｂｙ　Ｆｕｊｉｔｓｕ": {
+    "team_id": "KAW",
+    "city": "神奈川県川崎市",
+    "distance_from_tokyo_km": 25,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "日産スタジアム": {
+    "team_id": "MAR",
+    "city": "神奈川県横浜市",
+    "distance_from_tokyo_km": 35,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "レモンガススタジアム平塚": {
+    "team_id": "BEL",
+    "city": "神奈川県平塚市",
+    "distance_from_tokyo_km": 65,
+    "transit_type": "LOCAL_TRAIN"
+  },
+  "ＩＡＩスタジアム日本平": {
+    "team_id": "PUL",
+    "city": "静岡県静岡市清水区",
+    "distance_from_tokyo_km": 170,
+    "transit_type": "SHINKANSEN"
+  },
+  "豊田スタジアム": {
+    "team_id": "NAG",
+    "city": "愛知県豊田市",
+    "distance_from_tokyo_km": 320,
+    "transit_type": "SHINKANSEN"
+  },
+  "サンガスタジアム by KYOCERA": {
+    "team_id": "SAN",
+    "city": "京都府亀岡市",
+    "distance_from_tokyo_km": 460,
+    "transit_type": "SHINKANSEN"
+  },
+  "パナソニック スタジアム 吹田": {
+    "team_id": "GAM",
+    "city": "大阪府吹田市",
+    "distance_from_tokyo_km": 500,
+    "transit_type": "SHINKANSEN"
+  },
+  "ヨドコウ桜スタジアム": {
+    "team_id": "CER",
+    "city": "大阪府大阪市東住吉区",
+    "distance_from_tokyo_km": 510,
+    "transit_type": "SHINKANSEN"
+  },
+  "ノエビアスタジアム神戸": {
+    "team_id": "VOB",
+    "city": "兵庫県神戸市兵庫区",
+    "distance_from_tokyo_km": 530,
+    "transit_type": "SHINKANSEN"
+  },
+  "エディオンピースウイング広島": {
+    "team_id": "HIR",
+    "city": "広島県広島市中区",
+    "distance_from_tokyo_km": 810,
+    "transit_type": "SHINKANSEN_OR_FLIGHT"
+  },
+  "シティライトスタジアム": {
+    "team_id": "OKA",
+    "city": "岡山県岡山市北区",
+    "distance_from_tokyo_km": 650,
+    "transit_type": "SHINKANSEN"
+  },
+  "ベスト電器スタジアム": {
+    "team_id": "FUK",
+    "city": "福岡県福岡市博多区",
+    "distance_from_tokyo_km": 1050,
+    "transit_type": "FLIGHT"
+  },
+  "駅前不動産スタジアム": {
+    "team_id": "SAG",
+    "city": "佐賀県鳥栖市",
+    "distance_from_tokyo_km": 1080,
+    "transit_type": "FLIGHT"
+  },
+  "PEACE STADIUM Connected by SoftBank": {
+    "team_id": "VVN",
+    "city": "長崎県長崎市幸町",
+    "distance_from_tokyo_km": 1220,
+    "transit_type": "FLIGHT"
+  },
+  "デンカビッグスワンスタジアム": {
+    "team_id": "ALB",
+    "city": "新潟県新潟市中央区",
+    "distance_from_tokyo_km": 330,
+    "transit_type": "SHINKANSEN"
+  },
+  "大和ハウス プレミストドーム": {
+    "team_id": "CON",
+    "city": "北海道札幌市豊平区",
+    "distance_from_tokyo_km": 1150,
+    "transit_type": "FLIGHT"
+  }
+}

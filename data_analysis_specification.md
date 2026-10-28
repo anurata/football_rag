@@ -31,6 +31,10 @@
 ### ルール5：プロ分析官レベルの文量担保原則
 * サマリーや解説文は、簡易要約にとどめず、90分間の力学推移と勝敗の分岐点を専門分析官レベルの文量（全体サマリーで数千文字、各観点ごとにも独立した段落で重厚に論じる）で書き切る。
 
+### ルール6：試合前提サポート情報（外部コンテキスト）による因果確定の原則
+* ピッチ内の数値変動（ポゼッション、シュート数、交代など）のみに依存した主観推論を厳禁とする。
+* 「なぜあの主力が出ていないのか」「なぜ大幅ターンオーバーしたのか」「なぜ後半足が止まったのか」「なぜロングボールに割り切ったのか」という根本的な疑問（Why）に対し、**必ず5大前提サポート情報（🏥怪我・🟨累積警告/前節退場出場停止・🗓️過密日程中◯日/移動負担・📄契約出場制限・🌦️気候ピッチ重馬場）を決定論的ファクトとして突合・論理立証**すること。
+
 ---
 
 ## 第2章：収集生データ完全定義（東京水戸戦 成功事例 準拠）
@@ -626,16 +630,236 @@ class MatchAnalysisOutput(BaseModel):
     reasons_win_loss: Dict[str, List[str]]
     player_ratings: List[PlayerRatingItem]
     coach_ratings: List[CoachRatingItem]
+    match_context: Optional[MatchContextModel] = None
+
+
+class ScheduleFatigueModel(BaseModel):
+    previous_match_date: Optional[str] = None
+    days_between: Optional[int] = None
+    rest_days: Optional[int] = None
+    rest_days_display: str = "-"
+    is_congested: bool = False
+    is_consecutive_away: bool = False
+    travel_distance_km: int = 0
+    transit_type: str = "HOME"
+    fatigue_risk_level: str = "LOW"
+    summary_text: str = ""
+
+
+class DisciplinaryModel(BaseModel):
+    suspended_players: List[Dict[str, Any]] = Field(default_factory=list)
+    warning_reach_players: List[Dict[str, Any]] = Field(default_factory=list)
+    all_cumulative_yellows: Dict[str, int] = Field(default_factory=dict)
+    summary_text: str = ""
+
+
+class WeatherPitchModel(BaseModel):
+    weather_condition: str = "不明"
+    temperature_c: Optional[float] = None
+    humidity_percent: Optional[int] = None
+    is_extreme_heat: bool = False
+    is_rain_slippery: bool = False
+    cooling_break_required: bool = False
+    tactical_implications: str = ""
+    summary_text: str = ""
+
+
+class LoanRestrictionModel(BaseModel):
+    has_loan_restriction: bool = False
+    restricted_players: List[Dict[str, Any]] = Field(default_factory=list)
+    summary_text: str = ""
+
+
+class InjuryConditionModel(BaseModel):
+    active_injuries: List[Dict[str, Any]] = Field(default_factory=list)
+    coach_mentions: List[str] = Field(default_factory=list)
+    summary_text: str = ""
+
+
+class MatchContextModel(BaseModel):
+    match_id: str
+    team_id: str = "FCT"
+    opponent_team_id: str = "AWAY"
+    schedule_fatigue: ScheduleFatigueModel = Field(default_factory=ScheduleFatigueModel)
+    disciplinary: DisciplinaryModel = Field(default_factory=DisciplinaryModel)
+    weather_pitch: WeatherPitchModel = Field(default_factory=WeatherPitchModel)
+    loan_restrictions: LoanRestrictionModel = Field(default_factory=LoanRestrictionModel)
+    injury_condition: InjuryConditionModel = Field(default_factory=InjuryConditionModel)
+
+
+class MatchTacticalStructure(BaseModel):
+    """AI推論エンジンが生成・永続化する中間構造化JSONモデル (data/structured/{match_id}_tactical.json)"""
+    match_id: str
+    home_formation: Optional[str] = None
+    away_formation: Optional[str] = None
+    tactical_highlights: List[str] = Field(default_factory=list)
+    phases: List[PhaseSummaryItem] = Field(default_factory=list)
+    key_tactical_events: List[TacticalEventItem] = Field(default_factory=list)
+    deep_metrics: Optional[Dict[str, Any]] = None
+    match_context: Optional[MatchContextModel] = None
 ```
 
 ---
 
-## 第8章：最終Markdown出力テンプレートと必須トークン規定
+## 第8章：試合前提サポート情報・外部コンテキスト仕様（Match Pre-conditions & Context Specification）
 
-出力されるMarkdownドキュメントは、以下の厳密な見出し構成およびトークン（`【データ根拠】`, `【数値サマリと意味】`, `【速報集計】`, `【戦術理論】`, `【相手視点】`）を完全に包含しなければならない。
+### 8.1 目的と背景
+サッカーの試合において、ピッチ内スタッツ（保持率・シュート数・CBP等）だけでは説明がつかない**「なぜ主力が出ていないのか」「なぜターンオーバーしたのか」「なぜ後半足が止まったのか」「なぜ戦術を割り切ったのか」という根本的な疑問（Why）**に対し、外部要因（コンディション、規律、日程、契約、環境）を100%の客観事実として紐付けるサポート情報基盤。
+
+```mermaid
+graph TD
+    subgraph Data Sources & Masters
+        DB[(SQLite football.db / matches)] --> MC[scripts/calculate_match_context.py<br>MatchContextCalculator]
+        SPAIA[data/raw/spaia/*_player_stats.json] --> MC
+        ST_M[config/stadium_master.json<br>移動距離・移動手段マスタ] --> MC
+        LN_M[config/loan_restrictions.json<br>期限付き移籍制限マスタ] --> MC
+        IN_M[config/injury_tracker.json<br>公式負傷リリース・全治マスタ] --> MC
+        REV[data/markdown/2026/*.md<br>公式戦評・監督会見] --> MC
+    end
+
+    subgraph 5-Element Context Engine
+        MC --> C1[1. 🏥 怪我・コンディション調整]
+        MC --> C2[2. 🟨 累積警告・出場停止情報]
+        MC --> C3[3. 🗓️ 過密日程中◯日・移動負担]
+        MC --> C4[4. 📄 契約上の出場制限ローン条項]
+        MC --> C5[5. 🌦️ 気候・ピッチ状態酷暑/重馬場]
+    end
+
+    subgraph Output Integration
+        C1 & C2 & C3 & C4 & C5 --> JSON[data/structured/*_tactical.json<br>match_context セクション]
+        JSON --> Prompt[pipeline/tactical_enricher.py<br>Gemini 3.8 Flash プロンプト注入]
+        JSON --> UI[Streamlit UI app.py & モバイルHTMLビューア]
+    end
+```
+
+### 8.2 5大サポート情報の定義と決定論的算出ロジック
+
+#### 1. 🏥 怪我・コンディション調整情報 (Injury & Condition Context)
+* **情報源**: `config/injury_tracker.json`（受傷日、診断名、全治期間、ステータス） ＋ 公式戦評・監督会見（`data/markdown/2026/`）
+* **算出ロジック**: 試合日以前に診断され現在離脱中、または調整中（`ACTIVE_LIMITED: プレー時間制限`）の選手を抽出。さらに戦評・会見テキストから「怪我」「別メニュー」「違和感」「大事をとって」等の発言センテンスを正規表現で抽出。
+* **分析への効果**: 「なぜ主力が出ていないのか（戦術的理由ではなく負傷離脱）」「復帰初戦でのベンチ入り」「再発防止のための途中交代」を完全に解明。
+
+#### 2. 🟨 累積警告・出場停止情報 (Disciplinary Status)
+* **情報源**: `data/raw/spaia/*_player_stats.json`（全試合の選手別 Yellow / Red 数値）
+* **算出ロジック**: 同一シーズン内の対象試合より過去の全公式戦から、同一チームのイエローカード枚数を時系列で集計。
+  - **自動出場停止判定**: 直前の公式戦でレッドカード（一発退場または警告2枚）を受けた選手、あるいは前節でシーズン4枚目のイエローを満たした選手を `suspended_players` として抽出。
+  - **警告リーチ判定**: 現在のサイクルでイエロー3枚に達している選手（`count % 4 == 3`）を `warning_reach_players` として特定。
+* **分析への効果**: 「前節退場による今節の自動出場停止」「次節出場停止を回避するためのエース温存交代」を100%決定論的に特定。
+
+#### 3. 🗓️ 過密日程・中何日・移動負担 (Schedule & Fatigue Context)
+* **情報源**: `matches` テーブル（全公式戦日程） ＋ `config/stadium_master.json`（スタジアム間移動距離）
+* **算出ロジック**:
+  - **休養日数（中◯日）**: $\text{rest\_days} = (\text{対象試合日} - \text{直前公式戦日}) - 1$ 日。
+  - **開幕戦判定**: 前年シーズンから60日以上空いている場合は「シーズン開幕戦」と表示。
+  - **過密判定**: 中3日以下は `is_congested = True`。
+  - **アウェイ連戦・遠征負担**: 直前戦がアウェイかつ今節もアウェイの場合 `is_consecutive_away = True`。ホームスタジアムからの距離（km）および移動手段（新幹線、航空機、近郊等）を付与。
+  - **疲労リスク判定**: 中2日以下は `EXTREME`、中3日かつ（アウェイ連戦または移動300km以上）は `HIGH`、中3日は `MEDIUM`。
+* **分析への効果**: 「なぜスタメンを大幅ターンオーバーしたのか」「なぜ後半60分以降に前線プレスの足が止まり失点したのか」が「戦術の欠陥」ではなく「物理的疲労・移動負荷」であると客観立証。
+
+#### 4. 📄 契約上の出場制限 (Loan Restrictions)
+* **情報源**: `config/loan_restrictions.json`（期限付き移籍選手・保有元クラブID・対戦制限条項）
+* **算出ロジック**: 対象試合の対戦相手クラブIDが当該選手の保有元クラブIDと一致し、`restricted_against_parent == True` の場合に `restricted_players` として抽出。
+* **分析への効果**: 「レギュラー選手が古巣対決時のみ突如メンバー外になる」契約上の必然性を完璧に説明。
+
+#### 5. 🌦️ 特殊なピッチ状態・気候条件 (Pitch & Weather Context)
+* **情報源**: `matches` テーブルの `weather`（天候・気温・湿度・スタジアム）
+* **算出ロジック**:
+  - 正規表現により気温（℃）、湿度（%）、天候をパース。
+  - **酷暑・給水基準**: 気温28.5℃以上、または気温27.0℃以上かつ湿度75%以上の環境を「酷暑（`is_extreme_heat=True` / クーリングブレイク実施基準）」と判定。
+  - **雨天重馬場**: 降雨または湿度85%以上を「スリッピー・重馬場ピッチ（`is_rain_slippery=True`）」と判定。
+  - 戦術的示唆（パススピード変化、ロングボール割り切り、後半交代枠重要性）を自動付与。
+* **分析への効果**: 「なぜ普段のショートパスポゼッションを捨て、ロングボール主体に割り切ったのか」という指揮官のプラン変更の必然性を解明。
+
+### 8.3 構造化データスキーマ (JSON Schema: `match_context`)
+
+`data/structured/{match_id}_tactical.json` に追加同期される `match_context` の定義：
+
+```json
+{
+  "match_context": {
+    "match_id": "20261025_FCT_MIT",
+    "team_id": "FCT",
+    "opponent_team_id": "MIT",
+    "schedule_fatigue": {
+      "previous_match_date": "2026-10-21",
+      "days_between": 4,
+      "rest_days": 3,
+      "rest_days_display": "中3日",
+      "is_congested": true,
+      "is_consecutive_away": false,
+      "travel_distance_km": 0,
+      "transit_type": "HOME",
+      "fatigue_risk_level": "MEDIUM",
+      "summary_text": "前節（2026-10-21）より中3日の過密日程。選手の筋疲労・後半運動量低下リスクに注意。"
+    },
+    "disciplinary": {
+      "suspended_players": [],
+      "warning_reach_players": [
+        {
+          "player_name": "佐藤 恵允",
+          "cumulative_yellows": 3,
+          "warning": "累積警告3枚（あと1枚で次節出場停止リーチ）"
+        }
+      ],
+      "all_cumulative_yellows": {
+        "高 宇洋": 3,
+        "マルセロ ヒアン": 2,
+        "石原 広教": 2,
+        "佐藤 恵允": 3
+      },
+      "summary_text": "【警告リーチ】佐藤 恵允(3枚)"
+    },
+    "weather_pitch": {
+      "weather_condition": "曇",
+      "temperature_c": 24.0,
+      "humidity_percent": 65,
+      "is_extreme_heat": false,
+      "is_rain_slippery": false,
+      "cooling_break_required": false,
+      "tactical_implications": "良好な気候コンディション。通常通りの戦術プラン実行に適した環境。",
+      "summary_text": "【気候】曇 (気温: 24.0℃ / 湿度: 65%)"
+    },
+    "loan_restrictions": {
+      "has_loan_restriction": false,
+      "restricted_players": [],
+      "summary_text": "所属元契約による出場制限なし"
+    },
+    "injury_condition": {
+      "active_injuries": [
+        {
+          "player_name": "仲川 輝人",
+          "injury_type": "コンディション調整・プレー時間制限",
+          "expected_recovery": "段階的プレー時間延長",
+          "status": "ACTIVE_LIMITED",
+          "notes": "MW1〜MW11は主に途中出場。MW12水戸戦で今季リーグ戦初スタメン。"
+        }
+      ],
+      "coach_mentions": [
+        "連戦かつ怪我人も多い状況で、ある程度固定している流れがあるなかで、どういったタイミングで彼を起用するかということを考えていたなかでの起用です。"
+      ],
+      "summary_text": "【負傷離脱・調整】仲川 輝人（コンディション調整・プレー時間制限） / 【監督・公式言及】連戦かつ怪我人も多い状況で..."
+    }
+  }
+}
+```
+
+---
+
+## 第9章：最終Markdown出力テンプレートと必須トークン規定
+
+出力されるMarkdownドキュメントは、以下の厳密な見出し構成およびトークン（`【データ根拠】`, `【数値サマリと意味】`, `【速報集計】`, `【戦術理論】`, `【相手視点】`, `【試合前提サポート情報】`）を完全に包含しなければならない。
 
 ```markdown
 # 🏆 試合分析レポート：{HOMEチーム} vs {AWAYチーム} ({試合日})
+
+## 0. 🛡️ 試合前提サポート情報（コンテキスト・外部要因）
+* **🏥 怪我・コンディション**: {離脱選手および公式言及}
+* **🟨 累積警告・出場停止**: {出場停止選手および警告リーチ選手}
+* **🗓️ 過密日程・移動負担**: {前節より中◯日、アウェイ連戦、遠征距離}
+* **📄 契約上の出場制限**: {ローン選手対戦不可条項の有無}
+* **🌦️ 気候・ピッチ状態**: {天候、気温、湿度、酷暑飲水/雨天重馬場示唆}
+
+---
 
 ## 1. 試合全体構造サマリー（両チームの力学と勝敗の分岐点）
 {全体力学ナラティブ（1500文字以上の重厚な分析文）}
@@ -696,9 +920,12 @@ class MatchAnalysisOutput(BaseModel):
 
 ---
 
-## 第9章：改定履歴と合意経緯
+## 第10章：改定履歴と合意経緯
 * **2026-10-26 (初期設計)**: 2層RAGおよび4大データ収集仕様の策定。
 * **2026-10-26 (データ取り込み改定)**: Yahoo!サッカー、SPAIA（個人スタッツ・速報）、Football LAB（CBP・15分推移）の3大生データ収集を合意。
 * **2026-10-27 (多角分析策定)**: 15観点客観分析、勝因敗因、全選手採点、5大発展レポートをFC東京vs水戸戦にて検証・合意。
 * **2026-10-27 (完全定義書策定)**: 生データ100%根拠、深層指標、速報具体集計を義務付ける正本仕様書として策定。
 * **2026-10-27 (厳密仕様全面改定)**: ユーザー指示に基づき、入力JSONキー完全マッピング、深層指標数式（ゼロ除算防止・閾値）、速報抽出正規表現、15観点データスキーマ、選手・監督決定論的採点アルゴリズム、Pydanticモデル、Markdownテンプレートを一切のブレなく厳密規定。
+* **2026-10-28 (5大分析サポート情報・外部コンテキスト仕様策定)**: ユーザー指示に基づき、ピッチ内スタッツの背後にある「Why」を解明する5大分析サポート情報（怪我・警告・過密日程中◯日・契約制限・気候ピッチ）の決定論的算出モジュール（`scripts/calculate_match_context.py`）、マスタ構成（`config/stadium_master.json`, `loan_restrictions.json`, `injury_tracker.json`）、`match_context` 構造化スキーマ、プロンプト注入ルールおよびUI可視化仕様を第8章として正式策定・追加。章構成を第1章〜第10章として完全体系化。
+
+

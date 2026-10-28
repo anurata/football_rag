@@ -469,6 +469,27 @@ class MobileViewerGenerator:
       </div>
     `;
 
+    // Match Context Pre-conditions
+    const ctx = st.match_context || {{}};
+    if (ctx && Object.keys(ctx).length > 0) {{
+      const fatigue = ctx.schedule_fatigue || {{}};
+      const disc = ctx.disciplinary || {{}};
+      const wth = ctx.weather_pitch || {{}};
+      const loan = ctx.loan_restrictions || {{}};
+      const inj = ctx.injury_condition || {{}};
+
+      html += `
+        <div class="section-title">🛡️ 試合背景・前提サポート情報</div>
+        <div style="background:rgba(15,23,42,0.6); border:1px solid #334155; border-radius:10px; padding:10px; margin-bottom:12px; font-size:0.75rem; line-height:1.6;">
+          <div style="margin-bottom:4px;"><span style="color:#f97316;">🏥 怪我:</span> ${{inj.summary_text || '離脱者なし'}}</div>
+          <div style="margin-bottom:4px;"><span style="color:#eab308;">🟨 規律:</span> ${{disc.summary_text || '停止なし'}}</div>
+          <div style="margin-bottom:4px;"><span style="color:#60a5fa;">🗓️ 日程:</span> ${{fatigue.summary_text || '-'}}</div>
+          <div style="margin-bottom:4px;"><span style="color:#a78bfa;">📄 契約:</span> ${{loan.summary_text || '制限なし'}}</div>
+          <div><span style="color:#38bdf8;">🌦️ 気候:</span> ${{wth.summary_text || '-'}}</div>
+        </div>
+      `;
+    }}
+
     // Highlights
     if (st.tactical_highlights && st.tactical_highlights.length > 0) {{
       html += '<div class="section-title">戦術ハイライト</div>';

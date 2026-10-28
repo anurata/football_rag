@@ -139,6 +139,66 @@ class PhaseSummaryItem(BaseModel):
     tactical_adjustments: str = Field(default="", description="Tactical adaptations or bench interventions")
 
 
+class ScheduleFatigueModel(BaseModel):
+    """Schedule, rest days, and travel fatigue model."""
+    previous_match_date: Optional[str] = Field(default=None)
+    days_between: Optional[int] = Field(default=None)
+    rest_days: Optional[int] = Field(default=None)
+    rest_days_display: str = Field(default="-")
+    is_congested: bool = Field(default=False)
+    is_consecutive_away: bool = Field(default=False)
+    travel_distance_km: int = Field(default=0)
+    transit_type: str = Field(default="HOME")
+    fatigue_risk_level: str = Field(default="LOW")
+    summary_text: str = Field(default="")
+
+
+class DisciplinaryModel(BaseModel):
+    """Cumulative cards and suspension status model."""
+    suspended_players: List[Dict[str, Any]] = Field(default_factory=list)
+    warning_reach_players: List[Dict[str, Any]] = Field(default_factory=list)
+    all_cumulative_yellows: Dict[str, int] = Field(default_factory=dict)
+    summary_text: str = Field(default="")
+
+
+class WeatherPitchModel(BaseModel):
+    """Weather, pitch condition, and climate risk model."""
+    weather_condition: str = Field(default="不明")
+    temperature_c: Optional[float] = Field(default=None)
+    humidity_percent: Optional[int] = Field(default=None)
+    is_extreme_heat: bool = Field(default=False)
+    is_rain_slippery: bool = Field(default=False)
+    cooling_break_required: bool = Field(default=False)
+    tactical_implications: str = Field(default="")
+    summary_text: str = Field(default="")
+
+
+class LoanRestrictionModel(BaseModel):
+    """Loan contract playing restriction model."""
+    has_loan_restriction: bool = Field(default=False)
+    restricted_players: List[Dict[str, Any]] = Field(default_factory=list)
+    summary_text: str = Field(default="")
+
+
+class InjuryConditionModel(BaseModel):
+    """Injury status and physical conditioning model."""
+    active_injuries: List[Dict[str, Any]] = Field(default_factory=list)
+    coach_mentions: List[str] = Field(default_factory=list)
+    summary_text: str = Field(default="")
+
+
+class MatchContextModel(BaseModel):
+    """Comprehensive external match pre-conditions and context."""
+    match_id: str
+    team_id: str = Field(default="FCT")
+    opponent_team_id: str = Field(default="AWAY")
+    schedule_fatigue: ScheduleFatigueModel = Field(default_factory=ScheduleFatigueModel)
+    disciplinary: DisciplinaryModel = Field(default_factory=DisciplinaryModel)
+    weather_pitch: WeatherPitchModel = Field(default_factory=WeatherPitchModel)
+    loan_restrictions: LoanRestrictionModel = Field(default_factory=LoanRestrictionModel)
+    injury_condition: InjuryConditionModel = Field(default_factory=InjuryConditionModel)
+
+
 class MatchTacticalStructure(BaseModel):
     """Complete AI-structured tactical representation of a match."""
     match_id: str = Field(description="Match identifier, e.g., 2026102505")
@@ -153,5 +213,87 @@ class MatchTacticalStructure(BaseModel):
         default_factory=list,
         description="Key tactical events extracted from live text",
     )
+    deep_metrics: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Deterministic conversion rates, field tilt, and CBP rankings",
+    )
+    match_context: Optional[MatchContextModel] = Field(
+        default=None,
+        description="External pre-conditions (injuries, disciplinary, fatigue, loans, pitch)",
+    )
+
+
+class Layer1Metrics(BaseModel):
+    """Pure numeric layer 1 statistics."""
+    raw_keys_used: List[str] = Field(default_factory=list,)
+    metrics: Dict[str, float] = Field(default_factory=dict,)
+    formatted_display: Dict[str, str] = Field(default_factory=dict,)
+
+
+class EventDetail(BaseModel):
+    """Timeline incident details extracted from live text."""
+    minute: int
+    half: str
+    team: str
+    player_name: str
+    event_category: str
+    description: str
+
+
+class Layer2EventCounts(BaseModel):
+    """Aggregated occurrence counts and timeline events."""
+    home_counts: Dict[str, int] = Field(default_factory=dict,)
+    away_counts: Dict[str, int] = Field(default_factory=dict,)
+    key_incidents: List[EventDetail] = Field(default_factory=list,)
+
+
+class PerspectiveItem(BaseModel):
+    """Single multi-angle perspective analysis card (4-Element Card)."""
+    perspective_id: int = Field(ge=1, le=15,)
+    title: str
+    layer1_data: Layer1Metrics
+    layer2_events: Layer2EventCounts
+    layer3_theory_tags: List[str] = Field(default_factory=list,)
+    narrative_home: str = Field(min_length=100,)
+    narrative_away: str = Field(min_length=100,)
+
+
+class PlayerRatingItem(BaseModel):
+    """Player performance rating and tactical evaluation."""
+    name: str
+    uniform_number: int
+    position: str
+    team_side: str  # "HOME" or "AWAY"
+    starting: bool
+    minutes_played: int
+    rating: str  # e.g. "7.0" or "-"
+    is_mom: bool = False
+    cbp_attack: float = 0.0
+    cbp_defense: float = 0.0
+    cbp_steal: float = 0.0
+    review_comment: str = ""
+
+
+class CoachRatingItem(BaseModel):
+    """Head coach rating and tactical management review."""
+    coach_name: str
+    team_name: str
+    rating: str
+    game_plan_review: str = ""
+    substitutions_review: str = ""
+
+
+class MatchAnalysisOutput(BaseModel):
+    """Full comprehensive match tactical analysis output schema."""
+    match_id: str
+    match_title: str
+    overall_summary: str = Field(min_length=200,)
+    tactical_highlights: List[str] = Field(default_factory=list,)
+    three_phase_chronology: Dict[str, str] = Field(default_factory=dict,)
+    perspectives: List[PerspectiveItem] = Field(default_factory=list,)
+    reasons_win_loss: Dict[str, List[str]] = Field(default_factory=dict,)
+    player_ratings: List[PlayerRatingItem] = Field(default_factory=list,)
+    coach_ratings: List[CoachRatingItem] = Field(default_factory=list,)
+    match_context: Optional[MatchContextModel] = None
 
 

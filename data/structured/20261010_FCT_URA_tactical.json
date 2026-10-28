@@ -316,5 +316,97 @@
         "前半48分 【ゴール】安居がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう"
       ]
     }
+  },
+  "match_context": {
+    "match_id": "20261010_FCT_URA",
+    "team_id": "FCT",
+    "opponent_team_id": "URA",
+    "schedule_fatigue": {
+      "previous_match_date": "2026-09-19",
+      "days_between": 21,
+      "rest_days": 20,
+      "rest_days_display": "中20日",
+      "is_congested": false,
+      "is_consecutive_away": false,
+      "travel_distance_km": 0,
+      "transit_type": "HOME",
+      "fatigue_risk_level": "LOW",
+      "summary_text": "前節より中20日。"
+    },
+    "disciplinary": {
+      "suspended_players": [
+        {
+          "player_name": "高 宇洋",
+          "reason": "前節退場（一発レッドまたは警告2枚）に伴う自動出場停止",
+          "type": "RED_SUSPENSION"
+        }
+      ],
+      "warning_reach_players": [
+        {
+          "player_name": "高 宇洋",
+          "cumulative_yellows": 3,
+          "warning": "累積警告3枚（あと1枚で次節出場停止リーチ）"
+        }
+      ],
+      "all_cumulative_yellows": {
+        "佐藤 恵允": 2,
+        "本間 至恩": 1,
+        "高 宇洋": 3,
+        "マルセロ ヒアン": 1,
+        "バングーナガンデ 佳史扶": 1,
+        "石原 広教": 1,
+        "橋本 拳人": 1
+      },
+      "summary_text": "【出場停止】高 宇洋（前節退場） / 【警告リーチ】高 宇洋(3枚)"
+    },
+    "weather_pitch": {
+      "weather_condition": "晴れ｜気温:25.7",
+      "temperature_c": 25.7,
+      "humidity_percent": 48,
+      "is_extreme_heat": false,
+      "is_rain_slippery": false,
+      "cooling_break_required": false,
+      "tactical_implications": "良好な気候コンディション。通常通りの戦術プラン実行に適した環境。",
+      "summary_text": "【気候】晴れ｜気温:25.7 (気温: 25.7℃ / 湿度: 48%)"
+    },
+    "loan_restrictions": {
+      "has_loan_restriction": false,
+      "restricted_players": [],
+      "summary_text": "所属元契約による出場制限なし"
+    },
+    "injury_condition": {
+      "active_injuries": [
+        {
+          "player_name": "エンリケ トレヴィザン",
+          "injury_type": "左膝内側側副靭帯損傷",
+          "expected_recovery": "全治約6〜8週間",
+          "status": "RECOVERING",
+          "notes": "MW1〜MW6メンバー外。最終ラインのセンターバック運用に影響。"
+        },
+        {
+          "player_name": "荒木 遼太郎",
+          "injury_type": "右大腿二頭筋筋損傷",
+          "expected_recovery": "全治約4週間",
+          "status": "RECOVERED",
+          "notes": "MW2〜MW5離脱。MW6京都戦より部分合流、MW7ガンバ戦でベンチ復帰。"
+        },
+        {
+          "player_name": "仲川 輝人",
+          "injury_type": "コンディション調整・プレー時間制限",
+          "expected_recovery": "段階的プレー時間延長",
+          "status": "ACTIVE_LIMITED",
+          "notes": "MW1〜MW11は主に途中出場（クローザー起用）。MW12水戸戦で今季リーグ戦初スタメン2得点。"
+        },
+        {
+          "player_name": "小泉 慶",
+          "injury_type": "右足首捻挫",
+          "expected_recovery": "全治約3週間",
+          "status": "RECOVERED",
+          "notes": "MW7〜MW9欠場。中盤のボランチ構成（高宇洋・常盤・橋本拳人）に影響。"
+        }
+      ],
+      "coach_mentions": [],
+      "summary_text": "【負傷離脱・調整】エンリケ トレヴィザン（左膝内側側副靭帯損傷）, 荒木 遼太郎（右大腿二頭筋筋損傷）, 仲川 輝人（コンディション調整・プレー時間制限）, 小泉 慶（右足首捻挫）"
+    }
   }
 }

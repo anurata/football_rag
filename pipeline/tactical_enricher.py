@@ -14,12 +14,13 @@ import re
 
 from agent.gemini_client import GeminiTacticalClient
 from scripts.calculate_deep_metrics import calculate_match_deep_metrics
+from scripts.calculate_match_context import MatchContextCalculator
 
 logger = logging.getLogger("tactical_enricher")
 
 TACTICAL_ANALYST_SYSTEM_PROMPT = """あなたはJリーグ専属のトッププロ戦術分析官です。
 提供された公式生データ、事前計算された客観深層指標（進入変換率・CBP・速報カウント）、
-時系列テキスト速報、および公式戦評・監督会見を照合し、
+時系列テキスト速報、公式戦評・監督会見、および試合背景コンテキスト（怪我・警告リーチ・過密日程中◯日・アウェイ遠征・気候・契約制限）を照合し、
 プロの分析官レベルの深い戦術的因果・駆け引き・アウェイ（対戦相手）視点を言語化した構造化JSONを作成してください。
 
 【厳格な生成ルール（Zero-Hallucination & High-Fidelity）】
@@ -27,6 +28,7 @@ TACTICAL_ANALYST_SYSTEM_PROMPT = """あなたはJリーグ専属のトッププ�
 2. 出場選手（背番号・実名）、途中交代選手、監督名を必ず名指しし、「誰が」「どこ（レーン・ハーフスペース・ポケット）で」「何をして」「相手の誰を釣り出し/防壁を破ったか」の力学を詳述してください。
 3. 相手チーム（AWAY）視点を対等に論じ、相手が何を狙い、どこで守備が決壊し、どこに継続すべき光明があったかを論理的に分析してください。
 4. 6フェーズ（0-15, 15-30, 30-45+, 45-60, 60-75, 75-90+）それぞれにおいて、実際のスコア動意、退場、交代、攻勢指数の波を反映した具体的推移を記述してください。
+5. 【外部コンテキストの因果解明】: 提供された「過密日程（中◯日）」「怪我人」「前節退場・警告累積リーチ」「雨天重馬場・酷暑」「契約出場制限」を必ず分析に反映し、なぜ主力不在なのか・なぜ大幅ターンオーバーしたのか・なぜ後半失速したのか・なぜロングボールに割り切ったのかの必然性を解明してください。
 """
 
 
@@ -68,12 +70,16 @@ class TacticalEnricher:
             structured_dir or Path(__file__).resolve().parent.parent / "data" / "structured"
         )
         self.structured_dir.mkdir(parents=True, exist_ok=True)
+        self.context_calculator = MatchContextCalculator(
+            raw_spaia_dir=self.raw_dir / "spaia",
+        )
 
     def build_enrichment_prompt(
         self,
         target_id: str,
         metrics: Dict[str, Any],
         raw_context: Dict[str, Any],
+        match_context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Construct a comprehensive prompt feeding all deterministic stats and text."""
         home_name = raw_context.get("home_team", "FC東京")
@@ -87,6 +93,7 @@ class TacticalEnricher:
         ft = metrics.get("field_tilt", {})
         cbp = metrics.get("cbp_rankings", {})
         ev = metrics.get("timeline_events", {})
+        ctx = match_context or {}
 
         prompt_lines = [
             f"# J1公式試合戦術推論タスク: {home_name} vs {away_name} (スコア: {score})",
@@ -111,6 +118,13 @@ class TacticalEnricher:
             "",
             "## 【4. 速報重要プレー・得点・退場イベント】",
             "\n".join([f"- {kp}" for kp in ev.get("key_plays_sample", [])]),
+            "",
+            "## 【5. 試合前提コンテキスト・外部サポート情報（事前前提条件）】",
+            f"- 🗓️ 日程・過密・移動負担: {ctx.get('schedule_fatigue', {}).get('summary_text', '特記事項なし')}",
+            f"- 🟨 累積警告・出場停止状況: {ctx.get('disciplinary', {}).get('summary_text', '特記事項なし')}",
+            f"- 🌦️ 気候・ピッチ状態: {ctx.get('weather_pitch', {}).get('summary_text', '特記事項なし')} / 示唆: {ctx.get('weather_pitch', {}).get('tactical_implications', '')}",
+            f"- 📄 契約上出場制限（ローン）: {ctx.get('loan_restrictions', {}).get('summary_text', '特記事項なし')}",
+            f"- 🏥 怪我・コンディション調整: {ctx.get('injury_condition', {}).get('summary_text', '特記事項なし')}",
             "",
             "## 【出力形式要件】",
             "必ず以下のキー構造を持つ単一の純粋なJSONオブジェクトのみを出力してください（Markdownの ```json 等の囲みを含めても可）：",
@@ -203,7 +217,31 @@ class TacticalEnricher:
             "coach_away": fl_data.get("data", {}).get("players", {}).get("away", {}).get("coach", "監督"),
         }
 
-        user_prompt = self.build_enrichment_prompt(target_id, metrics, raw_context)
+        # Resolve match context
+        m_id = match_id_synonym or target_id
+        # Date resolution from id (e.g. 20260808)
+        m_date = re.search(r"(\d{4})(\d{2})(\d{2})", m_id)
+        date_str = f"{m_date.group(1)}-{m_date.group(2)}-{m_date.group(3)}" if m_date else "2026-10-25"
+        
+        home_is_fct = "FCT" in m_id.split("_")[1] if "_" in m_id else True
+        opponent_id = m_id.split("_")[2] if "_" in m_id and len(m_id.split("_")) > 2 else "AWAY"
+        stadium_name = "味の素スタジアム" if home_is_fct else "アウェイスタジアム"
+
+        match_context = self.context_calculator.get_full_match_context(
+            team_id="FCT",
+            opponent_team_id=opponent_id,
+            match_id=m_id,
+            date_str=date_str,
+            stadium=stadium_name,
+            is_home=home_is_fct,
+        )
+
+        user_prompt = self.build_enrichment_prompt(
+            target_id=target_id,
+            metrics=metrics,
+            raw_context=raw_context,
+            match_context=match_context,
+        )
         raw_response = self.client.generate(
             system_prompt=TACTICAL_ANALYST_SYSTEM_PROMPT,
             user_prompt=user_prompt,
@@ -213,14 +251,17 @@ class TacticalEnricher:
         cleaned_json = self._clean_json_string(raw_response)
         parsed = json.loads(cleaned_json)
 
-        # Merge precalculated deep metrics
+        # Merge precalculated deep metrics & match context
         parsed["deep_metrics"] = metrics
+        parsed["match_context"] = match_context
 
         # Save to both target_id and match_id_synonym
         self._save_structured(parsed, target_id)
         if match_id_synonym:
             parsed_syn = dict(parsed)
             parsed_syn["match_id"] = match_id_synonym
+            parsed_syn["deep_metrics"] = metrics
+            parsed_syn["match_context"] = match_context
             self._save_structured(parsed_syn, match_id_synonym)
 
         return parsed

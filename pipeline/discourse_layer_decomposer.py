@@ -57,9 +57,10 @@ DECOMPOSER_SYSTEM_PROMPT = """あなたはJリーグ戦術言説の『虚実の�
 
 【絶対遵守ルール（改ざん防止）】
 1. 発言内に存在しない事実や言葉を創作することは厳禁です。
-2. `original_quote` には必ず入力テキスト内の該当箇所をそのまま抜粋してください。
-3. 挨拶やチャンネル登録呼びかけ等の無意味な雑談は除外してください。
-4. 言及対象のクラブID（候補リストから選択）を `team_id` に設定してください。
+2. 音声認識崩れやあだ名がある場合、【候補クラブ所属選手】に存在する選手のみ実名補完を許可し、リストにない他クラブ選手名を勝手に推測して当てはめることは厳禁です（不明な場合は発言のまま記載）。
+3. `original_quote` には必ず入力テキスト内の該当箇所をそのまま抜粋してください。
+4. 挨拶やチャンネル登録呼びかけ等の無意味な雑談は除外してください。
+5. 言及対象のクラブID（候補リストから選択）を `team_id` に設定してください。
 """
 
 GEMINI_RESPONSE_SCHEMA: Dict[str, Any] = {
@@ -466,8 +467,10 @@ class DiscourseLayerDecomposer:
         club_hint_lines = []
         for tid in candidate_team_ids:
             p = self.club_profiles.get(tid, {})
+            roster_str = "、".join(p.get("key_players", [])[:14])
             club_hint_lines.append(
-                f"- {tid}: {p.get('canonical_name', tid)} (現監督: {p.get('current_manager', '不明')})",
+                f"- {tid}: {p.get('canonical_name', tid)} "
+                f"(現監督: {p.get('current_manager', '不明')} | 所属主力: {roster_str})",
             )
         clubs_context = "\n".join(club_hint_lines) if club_hint_lines else "- FCT: FC東京"
 

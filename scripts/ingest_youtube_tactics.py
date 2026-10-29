@@ -15,6 +15,7 @@ import argparse
 import json
 import logging
 import re
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -176,6 +177,10 @@ def fetch_channel_html(url: str, timeout: int = 12) -> str:
         return resp.read().decode("utf-8", errors="ignore")
 
 
+class YouTubeRateLimitError(RuntimeError):
+    """Raised when YouTube temporarily blocks transcript fetches due to rate limits."""
+
+
 def fetch_video_transcript(video_id: str) -> Optional[List[Dict[str, Any]]]:
     """Fetch Japanese or English transcript for video using youtube_transcript_api."""
     try:
@@ -192,6 +197,9 @@ def fetch_video_transcript(video_id: str) -> Optional[List[Dict[str, Any]]]:
             for item in fetched
         ]
     except Exception as e:
+        err_cls = type(e).__name__
+        if err_cls in {"IpBlocked", "RequestBlocked"} or "blocking requests" in str(e):
+            raise YouTubeRateLimitError(f"Rate limited on {video_id}: {err_cls}") from e
         logger.info("Transcript unavailable for video %s: %s", video_id, e)
         return None
 
@@ -511,7 +519,10 @@ class YouTubeTacticalIngester:
         if target_channel_id:
             channels = [c for c in channels if c.get("channel_id") == target_channel_id]
 
+        rate_limited = False
         for ch in channels:
+            if rate_limited:
+                break
             ch_name = ch.get("name", "Unknown")
             ch_id = ch.get("channel_id", "unknown")
             summary["channels_checked"] += 1
@@ -524,12 +535,26 @@ class YouTubeTacticalIngester:
                     summary["transcripts_skipped"] += 1
                     continue
 
-                success = self.process_single_video(
-                    video_id=vid,
-                    video_title=title,
-                    channel_name=ch_name,
-                    channel_id=ch_id,
-                )
+                try:
+                    success = self.process_single_video(
+                        video_id=vid,
+                        video_title=title,
+                        channel_name=ch_name,
+                        channel_id=ch_id,
+                    )
+                    time.sleep(1.5)
+                except YouTubeRateLimitError as rle:
+                    logger.warning("Circuit breaker tripped due to YouTube rate limit: %s", rle)
+                    self.record_history(
+                        video_id=vid,
+                        channel_id=ch_id,
+                        title=title,
+                        status="RATE_LIMITED",
+                        error_message=str(rle),
+                    )
+                    rate_limited = True
+                    break
+
                 if success:
                     summary["transcripts_fetched"] += 1
                 else:

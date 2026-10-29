@@ -20,6 +20,7 @@ import argparse
 import glob
 import json
 import logging
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -29,6 +30,10 @@ from pipeline.club_entity_registry import ClubEntityRegistry
 from pipeline.discourse_layer_decomposer import (
     DiscourseLayerDecomposer,
     TacticalDiscourseRepository,
+)
+from pipeline.official_discourse_ingester import (
+    export_all_clubs_primary_dossiers,
+    ingest_official_markdowns_into_layers,
 )
 from scripts.curate_and_clean_youtube_tactics import (
     NOISE_VIDEO_TITLE_TERMS,
@@ -43,6 +48,7 @@ from scripts.ingest_youtube_tactics import (
     HISTORY_PATH,
     PROFILES_PATH,
     RAW_YOUTUBE_DIR,
+    YouTubeRateLimitError,
     YouTubeTacticalIngester,
     load_json_safely,
     save_json_safely,
@@ -116,9 +122,14 @@ def ingest_videos_for_clubs(
         if ch.get("scan_mode") == "SEARCH_AND_RECENT" and int(ch.get("priority", 2)) == 1
     ]
 
+    rate_limited = False
     for club in clubs:
+        if rate_limited:
+            break
         query = club["youtube_search_query"]
         for ch in channels:
+            if rate_limited:
+                break
             ch_id = ch.get("channel_id", "unknown")
             ch_name = ch.get("name", "Unknown")
             candidates = ingester.discover_new_videos(
@@ -130,12 +141,26 @@ def ingest_videos_for_clubs(
             for vid, title in candidates:
                 if ingester.is_video_processed(vid):
                     continue
-                ok = ingester.process_single_video(
-                    video_id=vid,
-                    video_title=title,
-                    channel_name=ch_name,
-                    channel_id=ch_id,
-                )
+                try:
+                    ok = ingester.process_single_video(
+                        video_id=vid,
+                        video_title=title,
+                        channel_name=ch_name,
+                        channel_id=ch_id,
+                    )
+                    time.sleep(1.5)
+                except YouTubeRateLimitError as rle:
+                    logger.warning("Circuit breaker tripped on %s: %s", vid, rle)
+                    ingester.record_history(
+                        video_id=vid,
+                        channel_id=ch_id,
+                        title=title,
+                        status="RATE_LIMITED",
+                        error_message=str(rle),
+                    )
+                    rate_limited = True
+                    break
+
                 if ok:
                     stats["fetched"] += 1
                 else:
@@ -426,6 +451,13 @@ def main() -> None:
         print(f"Ingest stats: {ingest_stats}")
 
     repo = TacticalDiscourseRepository()
+
+    off_stats = ingest_official_markdowns_into_layers(
+        registry=registry,
+        repo=repo,
+    )
+    print(f"Official 2026 Press/Player Ingestion: {off_stats}")
+
     result = run_layer_decomposition_pipeline(
         registry=registry,
         repo=repo,
@@ -433,10 +465,16 @@ def main() -> None:
         gemini_segment_budget=args.gemini_budget,
     )
     print(
-        f"Completed 7-Layer Decomposition: {result['videos_processed']} videos -> "
-        f"{result['total_claims_stored']} claims stored (Gemini segments: {result['gemini_segments_enriched']})",
+        f"Completed YouTube 7-Layer Decomposition: {result['videos_processed']} videos -> "
+        f"{result['total_claims_stored']} YouTube claims (Gemini segments: {result['gemini_segments_enriched']})",
     )
-    print("Layer Distribution:", json.dumps(result["layer_distribution"], ensure_ascii=False))
+
+    exported_files = export_all_clubs_primary_dossiers(
+        registry=registry,
+        repo=repo,
+    )
+    print(f"Exported {len(exported_files)} club primary dossiers -> exports/clubs/")
+    print("Club x Layer Matrix:", json.dumps(repo.count_by_team_and_layer(), ensure_ascii=False))
 
 
 if __name__ == "__main__":

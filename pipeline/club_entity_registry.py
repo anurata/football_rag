@@ -34,10 +34,32 @@ def _norm_nfkc(text: str) -> str:
     return unicodedata.normalize("NFKC", str(text or "")).strip()
 
 
+AMBIGUOUS_SHARED_TOKENS: Set[str] = {
+    "選手",
+    "監督",
+    "東京",
+    "大阪",
+    "横浜",
+    "キム",
+    "ヤン",
+    "パク",
+    "チョ",
+    "ソン",
+    "レオ",
+    "マテウス",
+    "ジョルディ",
+    "ディエゴ",
+    "ブルーノ",
+    "ラファエル",
+    "マルコス",
+    "ルーカス",
+}
+
+
 def _extract_surname_tokens(full_name: str) -> List[str]:
     """
-    Extract useful distinctive name tokens (full name without space + family/given parts >= 2 chars)
-    for transcript matching while avoiding 1-character false positives.
+    Extract useful distinctive name tokens (full name without space + non-ambiguous parts >= 2 chars)
+    for transcript matching while avoiding cross-club false positives.
     """
     norm = _norm_nfkc(full_name)
     if not norm:
@@ -45,14 +67,13 @@ def _extract_surname_tokens(full_name: str) -> List[str]:
 
     tokens: List[str] = []
     compact = norm.replace(" ", "")
-    if len(compact) >= 2:
+    if len(compact) >= 2 and compact not in AMBIGUOUS_SHARED_TOKENS:
         tokens.append(compact)
     if " " in norm:
         tokens.append(norm)
         parts = [p.strip() for p in norm.split(" ") if len(p.strip()) >= 2]
-        # Prefer surname (first part for Japanese, last/distinctive part for foreign names)
         for p in parts:
-            if p not in {"選手", "監督"} and p not in tokens:
+            if p not in AMBIGUOUS_SHARED_TOKENS and p not in tokens:
                 tokens.append(p)
     return tokens
 
@@ -424,22 +445,38 @@ class ClubEntityRegistry:
     ) -> List[str]:
         """
         Identify which target clubs are meaningfully discussed in a video.
-        Returns sorted list of team_ids.
+        If specific clubs are named in the video title, scopes strictly to those clubs.
+        For general roundup videos (no club in title), detects clubs mentioned >= 2 times by name.
         """
         norm_title = _norm_nfkc(title)
         norm_body = _norm_nfkc(transcript_text)
-        matched_ids: List[str] = []
+        title_matched_ids: List[str] = []
 
         for tid, info in self._clubs.items():
             cname = info["canonical_name"]
             sname = info["short_name"]
-            in_title = (cname in norm_title) or (len(sname) >= 2 and sname in norm_title)
+            jp_aliases = [
+                a for a in info.get("aliases", [])
+                if len(a) >= 2 and a not in AMBIGUOUS_SHARED_TOKENS and not re.match(r"^[A-Za-z\s\.]+$", a)
+            ]
+            if any(name in norm_title for name in [cname, sname, *jp_aliases] if len(name) >= 2):
+                title_matched_ids.append(tid)
+
+        if title_matched_ids:
+            return sorted(title_matched_ids)
+
+        body_matched_ids: List[str] = []
+        for tid, info in self._clubs.items():
+            cname = info["canonical_name"]
+            sname = info["short_name"]
+            club_mentions = norm_body.count(cname) + (
+                norm_body.count(sname) if sname != cname and sname not in AMBIGUOUS_SHARED_TOKENS else 0
+            )
             kw_hits = sum(1 for kw in info["entity_keywords"] if kw in norm_body)
+            if club_mentions >= 2 and kw_hits >= 3:
+                body_matched_ids.append(tid)
 
-            if in_title or kw_hits >= 3:
-                matched_ids.append(tid)
-
-        return sorted(matched_ids)
+        return sorted(body_matched_ids)
 
     def export_registry_json(
         self,

@@ -1,0 +1,147 @@
+{
+  "version": "1.1.0",
+  "description": "Tactical YouTube Channels Master for J-League Team and Manager Policies (14 Channels)",
+  "channels": [
+    {
+      "channel_id": "tokyo_nigennron",
+      "name": "トーキョウ二元論",
+      "handle": "@トーキョウ二元論",
+      "url": "https://www.youtube.com/@%E3%83%88%E3%83%BC%E3%82%AD%E3%83%A7%E3%82%A6%E4%BA%8C%E5%85%83%E8%AB%96",
+      "focus": "FC東京特化の戦術的ジレンマ・深層課題・ピッチ内力学",
+      "priority": 1,
+      "scan_mode": "FULL_CHANNEL",
+      "target_teams": ["FCT"]
+    },
+    {
+      "channel_id": "tokyo_overlay",
+      "name": "TOKYO OVERLAY",
+      "handle": "@tokyo_overlay",
+      "url": "https://www.youtube.com/@tokyo_overlay",
+      "focus": "FC東京特化の戦術データ検証・構造分析・マッチレビュー＆プレビュー",
+      "priority": 1,
+      "scan_mode": "FULL_CHANNEL",
+      "target_teams": ["FCT"]
+    },
+    {
+      "channel_id": "damedafootball",
+      "name": "ダメだ！フットボール",
+      "handle": "@damedafootball",
+      "url": "https://www.youtube.com/@damedafootball",
+      "focus": "FC東京全試合の詳細戦術チャート・構造的弱点指摘・全選手採点レビュー",
+      "priority": 1,
+      "scan_mode": "FULL_CHANNEL",
+      "target_teams": ["FCT", "ALL"]
+    },
+    {
+      "channel_id": "J1zenbumiru",
+      "name": "のぶや【J1全部見るマン】",
+      "handle": "@J1zenbumiru",
+      "url": "https://www.youtube.com/@J1zenbumiru",
+      "focus": "J1全試合の配置優位性・プレス回避・前後半修正の徹底戦術レビュー",
+      "priority": 1,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "ryoheihayashi",
+      "name": "林陵平チャンネル",
+      "handle": "@ryoheihayashi-b8t",
+      "url": "https://www.youtube.com/@ryoheihayashi-b8t",
+      "focus": "プロ解説者・林陵平氏による精緻なポジショナルプレー・戦術構造・新戦力分析",
+      "priority": 1,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "narahashidaigomi",
+      "name": "名良橋さんの大悟味チャンネル",
+      "handle": "@narahashidaigomi",
+      "url": "https://www.youtube.com/@narahashidaigomi",
+      "focus": "元日本代表SB名良橋晃氏によるサイド攻防・守備対応・試合総括",
+      "priority": 1,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "jri_gunonakanohito",
+      "name": "Jリーグの中の人",
+      "handle": "@jri-gunonakanohito",
+      "url": "https://www.youtube.com/@jri-gunonakanohito",
+      "focus": "Jリーグ各クラブの戦術トレンド・編成評価・構造的現在地分析",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "MILKsoccer_academy",
+      "name": "MILKサッカーアカデミー",
+      "handle": "@MILKsoccer_academy",
+      "url": "https://www.youtube.com/@MILKsoccer_academy",
+      "focus": "J1全クラブのスカッド・監督戦術・データに基づく戦力分析",
+      "priority": 1,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "FootballZONEweb",
+      "name": "Football ZONE web",
+      "handle": "@FootballZONEweb",
+      "url": "https://www.youtube.com/@FootballZONEweb",
+      "focus": "専門家・元プロ目線の技術・局面戦術深掘り・インタビュー",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "jron",
+      "name": "J論チャンネル",
+      "handle": "@jron",
+      "url": "https://www.youtube.com/@jron",
+      "focus": "Jリーグ深層論考・クラブ経営・監督戦術と現場分析",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "purechan",
+      "name": "プレチャン【サッカーを熱く語るチャンネル】",
+      "handle": "@Prechan0918",
+      "url": "https://www.youtube.com/@Prechan0918",
+      "focus": "戦術ボードを用いたJ1全クラブの配置・噛み合わせ・監督原則の徹底図解",
+      "priority": 1,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "leothefootballtv",
+      "name": "Leo the football TV",
+      "handle": "@leothefootballtv7690",
+      "url": "https://www.youtube.com/@leothefootballtv7690",
+      "focus": "ポジショナルプレー・守備原則・ハイライン背後の力学言語化",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "goatfootball",
+      "name": "GOAT football tactics",
+      "handle": "@goatfootball",
+      "url": "https://www.youtube.com/@goatfootball",
+      "focus": "5レーン・可変ビルドアップ・プレストラップの幾何学的解説",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    },
+    {
+      "channel_id": "shukyu_meganes",
+      "name": "シン・蹴球メガネーズ",
+      "handle": "@footballmeganes",
+      "handle_url": "https://www.youtube.com/@footballmeganes",
+      "url": "https://www.youtube.com/@footballmeganes",
+      "focus": "戦術専門ジャーナリスト（西部謙司氏等）による監督哲学・思想論",
+      "priority": 2,
+      "scan_mode": "SEARCH_AND_RECENT",
+      "target_teams": ["ALL"]
+    }
+  ]
+}

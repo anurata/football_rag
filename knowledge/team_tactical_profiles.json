@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "J-League 2026 Season Team and Manager Tactical Profiles Master (Layer 2)",
-  "updated_at": "2026-10-29T05:33:17.929347+00:00",
+  "updated_at": "2026-10-29T09:11:57.448684+00:00",
   "teams": {
     "FCT": {
       "team_id": "FCT",
@@ -375,6 +375,20 @@
           "confidence": "HIGH",
           "ingested_at": "2026-10-29T05:33:17.929347+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "高 宇洋",
+        "稲村 隼翔",
+        "アレクサンダー ショルツ",
+        "常盤 亨太",
+        "佐藤 恵允",
+        "長倉 幹樹",
+        "石原 広教",
+        "安斎 颯馬",
+        "室屋 成",
+        "バングーナガンデ 佳史扶"
       ]
     },
     "ZEL": {
@@ -462,12 +476,26 @@
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:15.912498+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "前 寛之",
+        "ネタ ラヴィ",
+        "中山 雄太",
+        "明本 考浩",
+        "岡村 大八",
+        "昌子 源",
+        "谷 晃生",
+        "中村 帆高",
+        "白崎 凌兵",
+        "ミッチェル デューク"
       ]
     },
     "VOB": {
       "team_id": "VOB",
       "team_name": "ヴィッセル神戸",
-      "manager": "吉田 孝行",
+      "manager": "ミヒャエル スキッベ",
       "base_formation": "4-3-3",
       "alternative_formations": [
         "4-2-3-1"
@@ -494,12 +522,26 @@
         "ハイプレスの出足を交わされた際のアンカー脇スペースの露出",
         "大迫不在時または徹底マークされた際の前線起点不全"
       ],
-      "evidences": []
+      "evidences": [],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "マテウス トゥーレル",
+        "酒井 高徳",
+        "山川 哲史",
+        "井手口 陽介",
+        "ジエゴ",
+        "鍬先 祐弥",
+        "郷家 友太",
+        "髙橋 壱晟",
+        "権田 修一",
+        "日髙 光揮"
+      ]
     },
     "MAR": {
       "team_id": "MAR",
       "team_name": "横浜F・マリノス",
-      "manager": "ジョン・ハッチンソン",
+      "manager": "スティーブ コリカ",
       "base_formation": "4-2-1-3",
       "alternative_formations": [
         "4-3-3"
@@ -554,12 +596,26 @@
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:32:57.815917+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "朴 一圭",
+        "遠野 大弥",
+        "喜田 拓也",
+        "谷村 海那",
+        "ジョルディ クルークス",
+        "井上 太聖",
+        "知念 慶",
+        "渡邊 泰基",
+        "ジェイソン キニョーネス",
+        "オナイウ 情滋"
       ]
     },
     "SAN": {
       "team_id": "SAN",
       "team_name": "京都サンガF.C.",
-      "manager": "曺 貴裁",
+      "manager": "ランコ ポポヴィッチ",
       "base_formation": "4-3-3",
       "alternative_formations": [
         "4-1-2-3"
@@ -614,12 +670,26 @@
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:00.162999+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "ジョアン ペドロ",
+        "尹 星俊",
+        "ウェベルトン",
+        "鈴木 義宜",
+        "佐藤 響",
+        "新井 晴樹",
+        "石田 侑資",
+        "エベルトン マセイオ",
+        "中野 瑠馬",
+        "松田 天馬"
       ]
     },
     "MIT": {
       "team_id": "MIT",
       "team_name": "水戸ホーリーホック",
-      "manager": "森 直樹",
+      "manager": "樹森 大介",
       "base_formation": "4-4-2",
       "alternative_formations": [
         "4-2-3-1"
@@ -719,12 +789,26 @@
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:32:38.064300+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "木本 恭生",
+        "大崎 航詩",
+        "真瀬 拓海",
+        "板倉 健太",
+        "山本 隼大",
+        "谷口 海斗",
+        "山﨑 希一",
+        "ウーゴ",
+        "西原 源樹",
+        "奥村 仁"
       ]
     },
     "URA": {
       "team_id": "URA",
       "team_name": "浦和レッズ",
-      "manager": "監督",
+      "manager": "曺 貴裁",
       "base_formation": "4-4-2",
       "in_possession": {},
       "out_of_possession": {},
@@ -758,6 +842,336 @@
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:17.929347+00:00"
         }
+      ],
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "山根 視来",
+        "宮本 優太",
+        "植木 颯",
+        "林 幸多郎",
+        "根本 健太",
+        "瀬古 樹",
+        "安居 海渡",
+        "マテウス サヴィオ",
+        "西川 周作",
+        "金子 拓郎"
+      ]
+    },
+    "CER": {
+      "team_id": "CER",
+      "team_name": "セレッソ大阪",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "パブロ マチン",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "上林 豪",
+        "中村 拓海",
+        "井上 黎生人",
+        "登里 享平",
+        "上門 知樹",
+        "香川 真司",
+        "櫻川 ソロモン",
+        "田中 駿汰",
+        "チアゴ アンドラーデ",
+        "横山 夢樹"
+      ]
+    },
+    "FUK": {
+      "team_id": "FUK",
+      "team_name": "アビスパ福岡",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "塚原 真也",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "永石 拓海",
+        "湯澤 聖人",
+        "上島 拓巳",
+        "重見 柾斗",
+        "碓井 聖生",
+        "奥野 耕平",
+        "ウェリック ポポ",
+        "城後 寿",
+        "見木 友哉",
+        "師岡 柊生"
+      ]
+    },
+    "GAM": {
+      "team_id": "GAM",
+      "team_name": "ガンバ大阪",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "明神 智和",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "安部 柊斗",
+        "初瀬 亮",
+        "岸本 武流",
+        "中谷 進之介",
+        "美藤 倫",
+        "福岡 将太",
+        "食野 亮太郎",
+        "中野 伸哉",
+        "鈴木 徳真",
+        "一森 純"
+      ]
+    },
+    "HIR": {
+      "team_id": "HIR",
+      "team_name": "サンフレッチェ広島",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "バルトシュ ガウル",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": []
+    },
+    "JEF": {
+      "team_id": "JEF",
+      "team_name": "ジェフユナイテッド千葉",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "小林 慶行",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "ダニエル ホール",
+        "河野 貴志",
+        "石川 大地",
+        "マテウス インディオ",
+        "エリソン",
+        "石尾 陸登",
+        "日高 大",
+        "田中 和樹",
+        "津久井 匠海",
+        "田口 泰士"
+      ]
+    },
+    "KAS": {
+      "team_id": "KAS",
+      "team_name": "鹿島アントラーズ",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "鬼木 達",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "早川 友基",
+        "安西 幸輝",
+        "キム テヒョン",
+        "千田 海人",
+        "関川 郁万",
+        "三竿 健斗",
+        "小川 諒也",
+        "マテウス ブエノ",
+        "レオ セアラ",
+        "柴崎 岳"
+      ]
+    },
+    "KAW": {
+      "team_id": "KAW",
+      "team_name": "川崎フロンターレ",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "長谷部 茂利",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "中野 大虎",
+        "全 天海",
+        "初音 虎次郎",
+        "加藤 昊",
+        "十河 晟央",
+        "吉田 琉海",
+        "土肥 瑠星",
+        "對馬 羽琉",
+        "小川 翔太",
+        "小村 風人"
+      ]
+    },
+    "NAG": {
+      "team_id": "NAG",
+      "team_name": "名古屋グランパス",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "ペトロヴィッチ",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "藤井 陽也",
+        "稲垣 祥",
+        "高嶺 朋樹",
+        "中山 克広",
+        "徳元 悠平",
+        "原 輝綺",
+        "和泉 竜司",
+        "シュミット ダニエル",
+        "木村 勇大",
+        "内田 宅哉"
+      ]
+    },
+    "OKA": {
+      "team_id": "OKA",
+      "team_name": "ファジアーノ岡山",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "木山 隆之",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "チーマ ハサンアリ",
+        "万代 瑛飛",
+        "元野 蒼空",
+        "堤 清史郎",
+        "安西 来起",
+        "岡田 遼",
+        "岡﨑 葵",
+        "本山 史玖馬",
+        "来海 良宣",
+        "松本 優輝"
+      ]
+    },
+    "PUL": {
+      "team_id": "PUL",
+      "team_name": "清水エスパルス",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "吉田 孝行",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "住吉 ジェラニレショーン",
+        "高橋 祐治",
+        "嶋本 悠大",
+        "弓場 将輝",
+        "辻 友翔",
+        "吉田 豊",
+        "松崎 快",
+        "須貝 英大",
+        "藤井 智也",
+        "オ セフン"
+      ]
+    },
+    "REY": {
+      "team_id": "REY",
+      "team_name": "柏レイソル",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "リカルド ロドリゲス",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "小西 雄大",
+        "弓場 堅真",
+        "三丸 拡",
+        "中川 敦瑛",
+        "小泉 佳穂",
+        "久保 藤次郎",
+        "遠藤 渓太",
+        "汰木 康也",
+        "古賀 太陽",
+        "藤尾 翔太"
+      ]
+    },
+    "VER": {
+      "team_id": "VER",
+      "team_name": "東京ヴェルディ",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "相馬 直樹",
+      "previous_managers_2026": [
+        "城福 浩"
+      ],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "佐古 真礼",
+        "鈴木 海音",
+        "林 尚輝",
+        "柴戸 海",
+        "新井 悠太",
+        "齋藤 功佑",
+        "藤本 寛也",
+        "染野 唯月",
+        "マテウス",
+        "福田 湧矢"
+      ]
+    },
+    "VVN": {
+      "team_id": "VVN",
+      "team_name": "V・ファーレン長崎",
+      "base_formation": "4-4-2",
+      "in_possession": {},
+      "out_of_possession": {},
+      "transitions": {},
+      "structural_vulnerabilities": [],
+      "evidences": [],
+      "manager": "高木 琢也",
+      "previous_managers_2026": [],
+      "competition_scope": "J1_2026",
+      "key_players_2026": [
+        "江川 湧清",
+        "山田 陸",
+        "翁長 聖",
+        "進藤 亮佑",
+        "長谷川 元希",
+        "チアゴ サンタナ",
+        "ディエゴ ピトゥカ",
+        "山口 蛍",
+        "関口 正大",
+        "岩崎 悠人"
       ]
     }
   }

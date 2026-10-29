@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "scope_description": "2026/27 J1全20クラブ + FC東京の天皇杯対戦相手（J2/J3/JFL/大学等）",
+  "include_all_j1_2026": true,
+  "fct_emperor_cup_opponents": [
+    {
+      "enabled": false,
+      "team_id": "EC_SAMPLE",
+      "canonical_name": "（天皇杯対戦決定時に有効化・追加）",
+      "short_name": "天皇杯相手",
+      "category": "J2/J3/JFL/UNIV",
+      "round_label": "天皇杯 JFA 全日本サッカー選手権大会",
+      "current_manager": "",
+      "key_players": [],
+      "aliases": []
+    }
+  ]
+}
+

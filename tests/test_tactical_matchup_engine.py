@@ -162,8 +162,113 @@ class TestTacticalMatchupEngine(unittest.TestCase):
         self.assertTrue(res["total_mismatches_found"] > 0)
 
         categories = {m["category"] for m in res["mismatches"]}
-        # Should have detected at least speed or aerial mismatches
-        self.assertTrue("IN_BEHIND_VS_HIGH_LINE" in categories or "AERIAL_DUEL_MISMATCH" in categories)
+        # Should have detected at least speed or aerial or formation mismatches
+        self.assertTrue(
+            bool(categories & {"IN_BEHIND_VS_HIGH_LINE", "AERIAL_DUEL_MISMATCH", "FORMATION_SPACE_MISMATCH"}),
+        )
+
+    def test_left_footed_lsb_does_not_mask_right_footed_cbs(self) -> None:
+        """左SBに左利きが先発していても、CB2枚(RCB/LCB)が右利きなら利き足誘導脆弱性を正しく検出する."""
+        buildup_players = [
+            {
+                "player_name": "ショルツ",
+                "primary_role": "RCB",
+                "primary_role_group": "CB",
+                "primary_lane": "CENTER",
+                "dominant_foot": "右足",
+                "is_starter": 1,
+                "role_stints": [{"from_min": 0, "to_min": 90, "role": "RCB", "role_group": "CB", "lane": "CENTER"}],
+            },
+            {
+                "player_name": "森重 真人",
+                "primary_role": "LCB",
+                "primary_role_group": "CB",
+                "primary_lane": "CENTER",
+                "dominant_foot": "右足",
+                "is_starter": 1,
+                "role_stints": [{"from_min": 0, "to_min": 90, "role": "LCB", "role_group": "CB", "lane": "CENTER"}],
+            },
+            {
+                "player_name": "バングーナガンデ 佳史扶",
+                "primary_role": "LSB",
+                "primary_role_group": "FB",
+                "primary_lane": "LEFT",
+                "dominant_foot": "左足",
+                "is_starter": 1,
+                "role_stints": [{"from_min": 0, "to_min": 90, "role": "LSB", "role_group": "FB", "lane": "LEFT"}],
+            },
+        ]
+        mismatches = self.engine.extract_dominant_foot_funneling_mismatches(
+            buildup_players=buildup_players,
+            pressing_team_id="ZEL",
+            buildup_team_id="FCT",
+        )
+        self.assertEqual(len(mismatches), 1)
+        self.assertEqual(mismatches[0]["layer1_facts"]["left_footed_cb_count"], 0)
+        self.assertIn("森重 真人", mismatches[0]["layer1_facts"]["right_footed_lcb"])
+
+    def test_aerial_requires_opposing_lane_and_overlapping_stint(self) -> None:
+        """非対面レーン(RWG vs RSB)や出場時間帯が重ならないペアは除外し、対面(RWG vs LSB)のみ抽出する."""
+        attackers = [
+            {
+                "player_name": "長身右WG",
+                "primary_role": "RWG",
+                "primary_role_group": "WIDE_ATT",
+                "primary_lane": "RIGHT",
+                "height_cm": 186,
+                "fluidity_tags": [],
+                "role_stints": [{"from_min": 0, "to_min": 60, "role": "RWG", "role_group": "WIDE_ATT", "lane": "RIGHT"}],
+            },
+        ]
+        defenders = [
+            # 非対面レーン(右SB) -> 除外されるべき
+            {
+                "player_name": "逆サイド小柄RSB",
+                "primary_role": "RSB",
+                "primary_role_group": "FB",
+                "primary_lane": "RIGHT",
+                "height_cm": 170,
+                "fluidity_tags": [],
+                "role_stints": [{"from_min": 0, "to_min": 90, "role": "RSB", "role_group": "FB", "lane": "RIGHT"}],
+            },
+            # 対面レーン(左SB)だが65分からの途中出場で時間帯重複なし -> 除外されるべき
+            {
+                "player_name": "後半途中出場LSB",
+                "primary_role": "LSB",
+                "primary_role_group": "FB",
+                "primary_lane": "LEFT",
+                "height_cm": 170,
+                "fluidity_tags": [],
+                "role_stints": [{"from_min": 65, "to_min": 90, "role": "LSB", "role_group": "FB", "lane": "LEFT"}],
+            },
+            # 対面レーン(左SB)かつ0〜60分で重複 -> これだけ検出されるべき
+            {
+                "player_name": "先発対面LSB",
+                "primary_role": "LSB",
+                "primary_role_group": "FB",
+                "primary_lane": "LEFT",
+                "height_cm": 171,
+                "fluidity_tags": [],
+                "role_stints": [{"from_min": 0, "to_min": 65, "role": "LSB", "role_group": "FB", "lane": "LEFT"}],
+            },
+        ]
+        mismatches = self.engine.extract_aerial_duel_mismatches(
+            attackers=attackers,
+            defenders=defenders,
+            att_team_id="FCT",
+            def_team_id="OPP",
+        )
+        self.assertEqual(len(mismatches), 1)
+        self.assertEqual(mismatches[0]["defender"], "先発対面LSB")
+        self.assertEqual(mismatches[0]["time_window"], "0〜60分")
+
+    def test_analyze_other_j1_match_mar_kas(self) -> None:
+        """FC東京以外のJ1試合(20260807_MAR_KAS: 4-2-3-1 vs 4-4-2)でも実ポジションで動作することを検証."""
+        res = self.engine.analyze_match_mismatches("20260807_MAR_KAS")
+        self.assertEqual(res["home_formation"], "4-2-3-1")
+        self.assertEqual(res["away_formation"], "4-4-2")
+        self.assertEqual(res["formation_source"], "match_formations_actual")
+        self.assertGreater(res["total_mismatches_found"], 0)
 
 
 if __name__ == "__main__":

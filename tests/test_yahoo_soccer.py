@@ -9,7 +9,11 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from bs4 import BeautifulSoup
-from scrapers.yahoo_soccer import YahooSoccerScraper
+from scrapers.yahoo_soccer import (
+    YahooSoccerScraper,
+    infer_panel_tactical_roles,
+    parse_yahoo_minute_label,
+)
 
 SAMPLE_STATS_HTML = """
 <!DOCTYPE html>
@@ -255,6 +259,151 @@ class TestYahooSoccerScraper(unittest.TestCase):
                 data = json.load(f)
                 self.assertEqual(data["game_id"], "2026102502")
                 self.assertEqual(len(data["timeline"]), 5)
+
+    def test_parse_yahoo_minute_label(self) -> None:
+        """時間ラベルの通算分変換テスト."""
+        self.assertEqual(parse_yahoo_minute_label("前半0分"), 0)
+        self.assertEqual(parse_yahoo_minute_label("前半39分"), 39)
+        self.assertEqual(parse_yahoo_minute_label("後半0分"), 45)
+        self.assertEqual(parse_yahoo_minute_label("後半18分"), 63)
+
+    def test_infer_panel_tactical_roles_multi_formations(self) -> None:
+        """4-2-3-1 と 3-4-2-1 それぞれの座標から戦術ロールとレーンが正確に推論されるか検証."""
+        items_4231 = [
+            {"number": "1", "x": -148, "y": 0},
+            {"number": "2", "x": -101, "y": 77},
+            {"number": "4", "x": -101, "y": 33},
+            {"number": "5", "x": -101, "y": -33},
+            {"number": "6", "x": -101, "y": -77},
+            {"number": "8", "x": -71, "y": 33},
+            {"number": "16", "x": -71, "y": -33},
+            {"number": "14", "x": -35, "y": 44},
+            {"number": "10", "x": -35, "y": 0},
+            {"number": "7", "x": -35, "y": -44},
+            {"number": "9", "x": -9, "y": 0},
+        ]
+        res_4231 = {p["number"]: p for p in infer_panel_tactical_roles(items_4231, "4-2-3-1")}
+        self.assertEqual(res_4231["2"]["inferred_role"], "RSB")
+        self.assertEqual(res_4231["2"]["inferred_lane"], "RIGHT")
+        self.assertEqual(res_4231["4"]["inferred_role"], "RCB")
+        self.assertEqual(res_4231["5"]["inferred_role"], "LCB")
+        self.assertEqual(res_4231["6"]["inferred_role"], "LSB")
+        self.assertEqual(res_4231["14"]["inferred_role"], "RSH")
+        self.assertEqual(res_4231["10"]["inferred_role"], "OMF")
+        self.assertEqual(res_4231["7"]["inferred_role"], "LSH")
+        self.assertEqual(res_4231["9"]["inferred_role"], "CF")
+
+        items_3421 = [
+            {"number": "1", "x": -148, "y": 0},
+            {"number": "3", "x": -101, "y": 44},
+            {"number": "50", "x": -101, "y": 0},
+            {"number": "19", "x": -101, "y": -44},
+            {"number": "88", "x": -71, "y": 88},
+            {"number": "16", "x": -71, "y": 33},
+            {"number": "31", "x": -71, "y": -33},
+            {"number": "33", "x": -71, "y": -88},
+            {"number": "15", "x": -35, "y": 33},
+            {"number": "7", "x": -35, "y": -33},
+            {"number": "99", "x": -9, "y": 0},
+        ]
+        res_3421 = {p["number"]: p for p in infer_panel_tactical_roles(items_3421, "3-4-2-1")}
+        self.assertEqual(res_3421["3"]["inferred_role"], "RCB")
+        self.assertEqual(res_3421["50"]["inferred_role"], "CCB")
+        self.assertEqual(res_3421["19"]["inferred_role"], "LCB")
+        self.assertEqual(res_3421["88"]["inferred_role"], "RWB")
+        self.assertEqual(res_3421["33"]["inferred_role"], "LWB")
+        self.assertEqual(res_3421["15"]["inferred_role"], "RST")
+        self.assertEqual(res_3421["7"]["inferred_role"], "LST")
+
+    @patch("requests.get")
+    def test_fetch_and_save_summary_snapshots(self, mock_get: MagicMock) -> None:
+        """/summaryの時間帯別フォーメーション推移とrowspanメンバー結合のテスト."""
+        sample_summary_html = """
+        <html><body>
+          <div class="sc-scoreBoard">
+            <div class="sc-scoreBoard__header">J1 第12節</div>
+            <div class="sc-scoreBoard__team--home"><span class="sc-scoreBoard__name">FC東京</span></div>
+            <div class="sc-scoreBoard__team--away"><span class="sc-scoreBoard__name">水戸</span></div>
+            <div class="sc-scoreBoard__scoreTotal">6 - 0</div>
+          </div>
+          <div><header class="sc-head01"><h2>戦評</h2></header><p>FC東京が快勝。</p></div>
+          <div class="sc-formation">
+            <div class="sc-formation__team--home">
+              <p class="js-changeFormation">4-4-2</p>
+              <p class="js-changeFormation">4-4-2</p>
+            </div>
+            <div class="sc-formation__change">
+              <p class="js-changeTime">前半0分</p>
+              <p class="js-changeTime">後半18分</p>
+            </div>
+            <div class="sc-formation__team--away">
+              <p class="js-changeFormation">4-4-2</p>
+              <p class="js-changeFormation">4-4-2</p>
+            </div>
+            <div class="sc-formation__panelBack">
+              <div class="sc-formation__panel sc-formation__panel--home">
+                <div class="sc-formation__item sc-formation__item--x-101 sc-formation__item--y-77">
+                  <div class="sc-formation__itemPlayer">DF <span class="sc-formation__itemNumber">6</span> <span class="sc-formation__itemName">バングーナガンデ</span></div>
+                </div>
+                <div class="sc-formation__item sc-formation__item--x-53 sc-formation__item--y77">
+                  <div class="sc-formation__itemPlayer">MF <span class="sc-formation__itemNumber">10</span> <span class="sc-formation__itemName">佐藤恵</span></div>
+                </div>
+              </div>
+              <div class="sc-formation__panel sc-formation__panel--away">
+                <div class="sc-formation__item sc-formation__item--x-101 sc-formation__item--y77">
+                  <div class="sc-formation__itemPlayer">DF <span class="sc-formation__itemNumber">25</span> <span class="sc-formation__itemName">真瀬</span></div>
+                </div>
+              </div>
+              <div class="sc-formation__panel sc-formation__panel--home">
+                <div class="sc-formation__item sc-formation__item--x-101 sc-formation__item--y-77">
+                  <div class="sc-formation__itemPlayer">MF <span class="sc-formation__itemNumber">10</span> <span class="sc-formation__itemName">佐藤恵</span> <span class="sc-formation__itemName sc-formation__itemName--out">バングーナガンデ</span></div>
+                </div>
+              </div>
+              <div class="sc-formation__panel sc-formation__panel--away">
+                <div class="sc-formation__item sc-formation__item--x-101 sc-formation__item--y77">
+                  <div class="sc-formation__itemPlayer">DF <span class="sc-formation__itemNumber">25</span> <span class="sc-formation__itemName">真瀬</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="sc-tableSplits">
+            <tr><th>Pos.</th><th>背番号</th><th>選手名</th><th>交代</th></tr>
+            <tr><td>DF</td><td>6</td><td>バングーナガンデ 佳史扶</td><td>アウト後半18分</td></tr>
+            <tr><td>MF</td><td>10</td><td>佐藤 恵允</td><td></td></tr>
+          </table>
+          <table class="sc-tableSplits">
+            <tr><th>Pos.</th><th>背番号</th><th>選手名</th><th>交代</th></tr>
+            <tr><td>DF</td><td>25</td><td>真瀬 拓海</td><td></td></tr>
+          </table>
+          <table class="sc-tableSplits"><tr><th>Pos.</th><th>背番号</th><th>選手名</th><th>交代</th></tr></table>
+          <table class="sc-tableSplits"><tr><th>Pos.</th><th>背番号</th><th>選手名</th><th>交代</th></tr></table>
+          <table class="sc-tableSplits"><tr><th>監督名</th></tr><tr><td>松橋 力蔵</td></tr></table>
+          <table class="sc-tableSplits"><tr><th>監督名</th></tr><tr><td>樹森 大介</td></tr></table>
+        </body></html>
+        """
+        resp = MagicMock()
+        resp.text = sample_summary_html
+        resp.status_code = 200
+        mock_get.return_value = resp
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_path = self.scraper.save_summary_data("2026102505", output_dir=tmpdir, save_game_id="20261025_FCT_MIT")
+            self.assertTrue(os.path.exists(out_path))
+            with open(out_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+        self.assertEqual(data["lineup"]["home"]["manager"], "松橋 力蔵")
+        snaps = data["formation_snapshots"]
+        self.assertEqual(len(snaps), 2)
+        # Snapshot 0 (0分): 佐藤恵允は RSH
+        s0_p10 = [p for p in snaps[0]["home_players"] if p["number"] == "10"][0]
+        self.assertEqual(s0_p10["player_name"], "佐藤 恵允")
+        self.assertEqual(s0_p10["inferred_role"], "RSH")
+        # Snapshot 1 (後半18分=63分): 佐藤恵允が LSB へコンバートされた推移を検出
+        self.assertEqual(snaps[1]["minute_approx"], 63)
+        s1_p10 = [p for p in snaps[1]["home_players"] if p["number"] == "10"][0]
+        self.assertEqual(s1_p10["inferred_role"], "LSB")
+        self.assertEqual(s1_p10["replaced_out_name"], "バングーナガンデ")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,2269 @@
+{
+  "game_id": "2026100901",
+  "url": "https://soccer.yahoo.co.jp/jleague/category/j1/game/2026100901/summary",
+  "match_info": {
+    "section": "J1 第9節",
+    "datetime_venue": "10/9（金）19:00三協フロンテア柏スタジアム",
+    "home_team": "柏レイソル",
+    "away_team": "ヴィッセル神戸",
+    "score": "4 - 2",
+    "home_scorers": [
+      {
+        "player": "藤尾 翔太",
+        "time": "前27'"
+      },
+      {
+        "player": "山内 日向汰",
+        "time": "後8'"
+      },
+      {
+        "player": "久保 藤次郎",
+        "time": "後19'"
+      },
+      {
+        "player": "瀬川 祐輔",
+        "time": "後39'"
+      }
+    ],
+    "away_scorers": [
+      {
+        "player": "小松 蓮",
+        "time": "後36'"
+      },
+      {
+        "player": "ジエゴ",
+        "time": "後43'"
+      }
+    ]
+  },
+  "report_text": "ホームの柏が快勝で勢いを加速させた。立ち上がりから主導権を握ると、前半27分に藤尾が流れを呼び込む先制ゴールを沈める。後半8分には山内が追加点を奪い、同19分には久保も続いてリードを大きく広げた。同36分に神戸の小松に反撃のゴールを返されるも、同39分には途中出場の瀬川がすかさず突き放し、再び流れを引き戻す。終盤の同43分にはジエゴに一矢報いられたものの、最後は集中を切らさず4-2で逃げ切り。これで公式戦4連勝を飾り、聖地で確かな手応えをつかみ、サポーターを沸かせる会心の一戦となった。",
+  "lineup": {
+    "home": {
+      "manager": "リカルド ロドリゲス",
+      "starters": [
+        {
+          "registered_pos": "GK",
+          "number": "77",
+          "player_name": "若原 智哉",
+          "sub_info": "アウト 後半26分"
+        },
+        {
+          "registered_pos": "DF",
+          "number": "4",
+          "player_name": "古賀 太陽",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "24",
+          "player_name": "久保 藤次郎",
+          "sub_info": "アウト 後半39分"
+        },
+        {
+          "registered_pos": "DF",
+          "number": "26",
+          "player_name": "杉岡 大暉",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "88",
+          "player_name": "馬場 晴也",
+          "sub_info": "アウト 前半18分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "5",
+          "player_name": "遠藤 渓太",
+          "sub_info": "アウト 後半26分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "8",
+          "player_name": "小泉 佳穂",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "21",
+          "player_name": "小西 雄大",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "39",
+          "player_name": "中川 敦瑛",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "FW",
+          "number": "15",
+          "player_name": "藤尾 翔太",
+          "sub_info": "アウト 後半39分"
+        },
+        {
+          "registered_pos": "FW",
+          "number": "87",
+          "player_name": "山内 日向汰",
+          "sub_info": "アウト 後半26分"
+        }
+      ],
+      "bench": [
+        {
+          "registered_pos": "GK",
+          "number": "29",
+          "player_name": "永井 堅梧",
+          "sub_info": "イン 後半26分"
+        },
+        {
+          "registered_pos": "DF",
+          "number": "2",
+          "player_name": "三丸 拡",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "42",
+          "player_name": "原田 亘",
+          "sub_info": "イン 後半39分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "16",
+          "player_name": "汰木 康也",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "20",
+          "player_name": "瀬川 祐輔",
+          "sub_info": "イン 後半26分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "28",
+          "player_name": "戸嶋 祥郎",
+          "sub_info": "イン 前半18分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "40",
+          "player_name": "原川 力",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "44",
+          "player_name": "弓場 堅真",
+          "sub_info": "イン 後半26分"
+        },
+        {
+          "registered_pos": "FW",
+          "number": "9",
+          "player_name": "細谷 真大",
+          "sub_info": "イン 後半39分"
+        }
+      ],
+      "roster_by_number": {
+        "77": "若原 智哉",
+        "4": "古賀 太陽",
+        "24": "久保 藤次郎",
+        "26": "杉岡 大暉",
+        "88": "馬場 晴也",
+        "5": "遠藤 渓太",
+        "8": "小泉 佳穂",
+        "21": "小西 雄大",
+        "39": "中川 敦瑛",
+        "15": "藤尾 翔太",
+        "87": "山内 日向汰",
+        "29": "永井 堅梧",
+        "2": "三丸 拡",
+        "42": "原田 亘",
+        "16": "汰木 康也",
+        "20": "瀬川 祐輔",
+        "28": "戸嶋 祥郎",
+        "40": "原川 力",
+        "44": "弓場 堅真",
+        "9": "細谷 真大"
+      }
+    },
+    "away": {
+      "manager": "ミヒャエル スキッベ",
+      "starters": [
+        {
+          "registered_pos": "GK",
+          "number": "1",
+          "player_name": "前川 黛也",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "3",
+          "player_name": "マテウス トゥーレル",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "4",
+          "player_name": "山川 哲史",
+          "sub_info": "アウト 後半13分"
+        },
+        {
+          "registered_pos": "DF",
+          "number": "15",
+          "player_name": "ジエゴ",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "7",
+          "player_name": "井手口 陽介",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "11",
+          "player_name": "武藤 嘉紀",
+          "sub_info": "アウト 後半26分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "17",
+          "player_name": "髙橋 壱晟",
+          "sub_info": "アウト 後半31分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "24",
+          "player_name": "酒井 高徳",
+          "sub_info": "アウト 後半26分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "41",
+          "player_name": "永戸 勝也",
+          "sub_info": "アウト 後半0分"
+        },
+        {
+          "registered_pos": "FW",
+          "number": "10",
+          "player_name": "大迫 勇也",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "FW",
+          "number": "94",
+          "player_name": "エリキ",
+          "sub_info": ""
+        }
+      ],
+      "bench": [
+        {
+          "registered_pos": "GK",
+          "number": "71",
+          "player_name": "権田 修一",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "DF",
+          "number": "16",
+          "player_name": "カエターノ",
+          "sub_info": "イン 後半13分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "2",
+          "player_name": "飯野 七聖",
+          "sub_info": "イン 後半31分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "5",
+          "player_name": "郷家 友太",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "23",
+          "player_name": "岩本 悠庵",
+          "sub_info": "イン 後半26分"
+        },
+        {
+          "registered_pos": "MF",
+          "number": "25",
+          "player_name": "鍬先 祐弥",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "MF",
+          "number": "44",
+          "player_name": "日髙 光揮",
+          "sub_info": ""
+        },
+        {
+          "registered_pos": "FW",
+          "number": "26",
+          "player_name": "ジェアン パトリッキ",
+          "sub_info": "イン 後半0分"
+        },
+        {
+          "registered_pos": "FW",
+          "number": "29",
+          "player_name": "小松 蓮",
+          "sub_info": "イン 後半26分"
+        }
+      ],
+      "roster_by_number": {
+        "1": "前川 黛也",
+        "3": "マテウス トゥーレル",
+        "4": "山川 哲史",
+        "15": "ジエゴ",
+        "7": "井手口 陽介",
+        "11": "武藤 嘉紀",
+        "17": "髙橋 壱晟",
+        "24": "酒井 高徳",
+        "41": "永戸 勝也",
+        "10": "大迫 勇也",
+        "94": "エリキ",
+        "71": "権田 修一",
+        "16": "カエターノ",
+        "2": "飯野 七聖",
+        "5": "郷家 友太",
+        "23": "岩本 悠庵",
+        "25": "鍬先 祐弥",
+        "44": "日髙 光揮",
+        "26": "ジェアン パトリッキ",
+        "29": "小松 蓮"
+      }
+    }
+  },
+  "formation_snapshots": [
+    {
+      "snapshot_index": 0,
+      "time_label": "前半0分",
+      "minute_approx": 0,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "5",
+          "short_name": "遠藤",
+          "player_name": "遠藤 渓太",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "77",
+          "short_name": "若原",
+          "player_name": "若原 智哉",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "88",
+          "short_name": "馬場",
+          "player_name": "馬場 晴也",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "87",
+          "short_name": "山内",
+          "player_name": "山内 日向汰",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "24",
+          "short_name": "酒井",
+          "player_name": "酒井 高徳",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "11",
+          "short_name": "武藤",
+          "player_name": "武藤 嘉紀",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "4",
+          "short_name": "山川",
+          "player_name": "山川 哲史",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "17",
+          "short_name": "髙橋",
+          "player_name": "髙橋 壱晟",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "41",
+          "short_name": "永戸",
+          "player_name": "永戸 勝也",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 1,
+      "time_label": "前半18分",
+      "minute_approx": 18,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "5",
+          "short_name": "遠藤",
+          "player_name": "遠藤 渓太",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "77",
+          "short_name": "若原",
+          "player_name": "若原 智哉",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "馬場",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "87",
+          "short_name": "山内",
+          "player_name": "山内 日向汰",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "24",
+          "short_name": "酒井",
+          "player_name": "酒井 高徳",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "11",
+          "short_name": "武藤",
+          "player_name": "武藤 嘉紀",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "4",
+          "short_name": "山川",
+          "player_name": "山川 哲史",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "17",
+          "short_name": "髙橋",
+          "player_name": "髙橋 壱晟",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "41",
+          "short_name": "永戸",
+          "player_name": "永戸 勝也",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 2,
+      "time_label": "後半0分",
+      "minute_approx": 45,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "5",
+          "short_name": "遠藤",
+          "player_name": "遠藤 渓太",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "77",
+          "short_name": "若原",
+          "player_name": "若原 智哉",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "87",
+          "short_name": "山内",
+          "player_name": "山内 日向汰",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "24",
+          "short_name": "酒井",
+          "player_name": "酒井 高徳",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "11",
+          "short_name": "武藤",
+          "player_name": "武藤 嘉紀",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "4",
+          "short_name": "山川",
+          "player_name": "山川 哲史",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "17",
+          "short_name": "髙橋",
+          "player_name": "髙橋 壱晟",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "Jパトリッキ",
+          "player_name": "ジェアン パトリッキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "永戸",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 3,
+      "time_label": "後半13分",
+      "minute_approx": 58,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "5",
+          "short_name": "遠藤",
+          "player_name": "遠藤 渓太",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "77",
+          "short_name": "若原",
+          "player_name": "若原 智哉",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "87",
+          "short_name": "山内",
+          "player_name": "山内 日向汰",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "24",
+          "short_name": "酒井",
+          "player_name": "酒井 高徳",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "11",
+          "short_name": "武藤",
+          "player_name": "武藤 嘉紀",
+          "registered_pos": "MF",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "17",
+          "short_name": "髙橋",
+          "player_name": "髙橋 壱晟",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "Jパトリッキ",
+          "player_name": "ジェアン パトリッキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "16",
+          "short_name": "カエターノ",
+          "player_name": "カエターノ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "山川",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 4,
+      "time_label": "後半26分",
+      "minute_approx": 71,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "29",
+          "short_name": "永井",
+          "player_name": "永井 堅梧",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "若原",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "20",
+          "short_name": "瀬川",
+          "player_name": "瀬川 祐輔",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "山内",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "44",
+          "short_name": "弓場",
+          "player_name": "弓場 堅真",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "遠藤",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "17",
+          "short_name": "髙橋",
+          "player_name": "髙橋 壱晟",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "29",
+          "short_name": "小松",
+          "player_name": "小松 蓮",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "酒井",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "26",
+          "short_name": "Jパトリッキ",
+          "player_name": "ジェアン パトリッキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "23",
+          "short_name": "岩本",
+          "player_name": "岩本 悠庵",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "武藤",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "16",
+          "short_name": "カエターノ",
+          "player_name": "カエターノ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 5,
+      "time_label": "後半31分",
+      "minute_approx": 76,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "29",
+          "short_name": "永井",
+          "player_name": "永井 堅梧",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "20",
+          "short_name": "瀬川",
+          "player_name": "瀬川 祐輔",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "藤尾",
+          "player_name": "藤尾 翔太",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "24",
+          "short_name": "久保",
+          "player_name": "久保 藤次郎",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "44",
+          "short_name": "弓場",
+          "player_name": "弓場 堅真",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "29",
+          "short_name": "小松",
+          "player_name": "小松 蓮",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "2",
+          "short_name": "飯野",
+          "player_name": "飯野 七聖",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "髙橋",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "26",
+          "short_name": "Jパトリッキ",
+          "player_name": "ジェアン パトリッキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "23",
+          "short_name": "岩本",
+          "player_name": "岩本 悠庵",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "16",
+          "short_name": "カエターノ",
+          "player_name": "カエターノ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    },
+    {
+      "snapshot_index": 6,
+      "time_label": "後半39分",
+      "minute_approx": 84,
+      "home_formation": "3-4-2-1",
+      "away_formation": "4-1-2-3",
+      "home_players": [
+        {
+          "number": "29",
+          "short_name": "永井",
+          "player_name": "永井 堅梧",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "8",
+          "short_name": "小泉",
+          "player_name": "小泉 佳穂",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RST",
+          "role_group": "SHADOW",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "26",
+          "short_name": "杉岡",
+          "player_name": "杉岡 大暉",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -44,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "20",
+          "short_name": "瀬川",
+          "player_name": "瀬川 祐輔",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LST",
+          "role_group": "SHADOW",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "21",
+          "short_name": "小西",
+          "player_name": "小西 雄大",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "4",
+          "short_name": "古賀",
+          "player_name": "古賀 太陽",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "28",
+          "short_name": "戸嶋",
+          "player_name": "戸嶋 祥郎",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 44,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "9",
+          "short_name": "細谷",
+          "player_name": "細谷 真大",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "藤尾",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "42",
+          "short_name": "原田",
+          "player_name": "原田 亘",
+          "registered_pos": "DF",
+          "x": -71,
+          "y": 88,
+          "replaced_out_name": "久保",
+          "inferred_role": "RWB",
+          "role_group": "WB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "39",
+          "short_name": "中川",
+          "player_name": "中川 敦瑛",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LDMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "44",
+          "short_name": "弓場",
+          "player_name": "弓場 堅真",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": -88,
+          "replaced_out_name": "",
+          "inferred_role": "LWB",
+          "role_group": "WB",
+          "inferred_lane": "LEFT"
+        }
+      ],
+      "away_players": [
+        {
+          "number": "10",
+          "short_name": "大迫",
+          "player_name": "大迫 勇也",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "CF",
+          "role_group": "CF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "7",
+          "short_name": "井手口",
+          "player_name": "井手口 陽介",
+          "registered_pos": "MF",
+          "x": -35,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCMF",
+          "role_group": "CMF",
+          "inferred_lane": "RIGHT_HALF"
+        },
+        {
+          "number": "1",
+          "short_name": "前川",
+          "player_name": "前川 黛也",
+          "registered_pos": "GK",
+          "x": -148,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "GK",
+          "role_group": "GK",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "29",
+          "short_name": "小松",
+          "player_name": "小松 蓮",
+          "registered_pos": "FW",
+          "x": -35,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCMF",
+          "role_group": "CMF",
+          "inferred_lane": "LEFT_HALF"
+        },
+        {
+          "number": "15",
+          "short_name": "ジエゴ",
+          "player_name": "ジエゴ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LSB",
+          "role_group": "FB",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "2",
+          "short_name": "飯野",
+          "player_name": "飯野 七聖",
+          "registered_pos": "MF",
+          "x": -101,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RSB",
+          "role_group": "FB",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "94",
+          "short_name": "エリキ",
+          "player_name": "エリキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": 77,
+          "replaced_out_name": "",
+          "inferred_role": "RWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "RIGHT"
+        },
+        {
+          "number": "26",
+          "short_name": "Jパトリッキ",
+          "player_name": "ジェアン パトリッキ",
+          "registered_pos": "FW",
+          "x": -9,
+          "y": -77,
+          "replaced_out_name": "",
+          "inferred_role": "LWG",
+          "role_group": "WIDE_ATT",
+          "inferred_lane": "LEFT"
+        },
+        {
+          "number": "3",
+          "short_name": "Mトゥーレル",
+          "player_name": "マテウス トゥーレル",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": 33,
+          "replaced_out_name": "",
+          "inferred_role": "RCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "23",
+          "short_name": "岩本",
+          "player_name": "岩本 悠庵",
+          "registered_pos": "MF",
+          "x": -71,
+          "y": 0,
+          "replaced_out_name": "",
+          "inferred_role": "DMF",
+          "role_group": "DMF",
+          "inferred_lane": "CENTER"
+        },
+        {
+          "number": "16",
+          "short_name": "カエターノ",
+          "player_name": "カエターノ",
+          "registered_pos": "DF",
+          "x": -101,
+          "y": -33,
+          "replaced_out_name": "",
+          "inferred_role": "LCB",
+          "role_group": "CB",
+          "inferred_lane": "CENTER"
+        }
+      ]
+    }
+  ],
+  "match_id": "20261009_REY_VOB",
+  "matchweek_scraped": 9
+}

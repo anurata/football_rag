@@ -1,18 +1,14 @@
 {
-  "version": "1.2.0",
-  "description": "J-League 2026 Season Team and Manager Tactical Profiles Master (Layer 2)",
-  "updated_at": "2026-10-29T09:38:23.657185+00:00",
+  "version": "2.0.0",
+  "description": "J-League 2026 Season Team and Manager Tactical Profiles Master (Layer 2) - 100% All 20 Clubs Populated",
+  "updated_at": "2026-10-29T23:31:13.051330+00:00",
   "teams": {
     "FCT": {
       "team_id": "FCT",
       "team_name": "FC東京",
       "manager": "松橋 力蔵",
-      "base_formation": "4-2-1-3",
-      "alternative_formations": [
-        "3-4-2-1",
-        "4-4-2",
-        "4-3-3"
-      ],
+      "base_formation": "4-4-2",
+      "alternative_formations": [],
       "in_possession": {
         "build_up_style": "positional_with_vertical_spring",
         "target_reliance": "high",
@@ -393,33 +389,32 @@
     },
     "ZEL": {
       "team_id": "ZEL",
-      "team_name": "FC町田ゼルビア",
+      "team_name": "町田ゼルビア",
       "manager": "黒田 剛",
-      "base_formation": "4-4-2",
-      "alternative_formations": [
-        "4-2-3-1"
-      ],
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
       "in_possession": {
-        "build_up_style": "direct_long_ball",
-        "target_reliance": "very_high",
-        "progression_route": "target_second_ball_and_long_throw",
-        "tempo": "fast_direct_risk_avoidance",
-        "summary": "自陣でのリスクあるパス回しを徹底排除し、前線オ・セフンやデュークへのロングボールとロングスロー、徹底したセカンド回収で陣地を前進。"
+        "build_up_style": "positional_3_box_2_progression",
+        "target_reliance": "medium",
+        "progression_route": "half_space_overload_and_wb_width",
+        "tempo": "controlled_possession",
+        "summary": "黒田 剛監督のもと、3バック（3-4-2-1）の左右CBが積極的に幅を取り、ボランチとシャドーで中央ハーフスペースに数的優位を形成して前進する（平均保持率52.0%）。WBを高い位置に押し出して幅を確保する。"
       },
       "out_of_possession": {
-        "defensive_line": "mid_to_low_compact",
-        "pressing_trigger": "opponent_sideways_pass_and_touchline",
-        "pressing_funnel": "funnel_outside",
-        "block_shape": "4-4-2_rigid_two_lines",
-        "summary": "強固な4-4-2の2ラインで中央を固め、相手をサイドに誘導して激しい対人守備と連動でハメ殺す。"
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
       },
       "transitions": {
-        "positive": "direct_vertical_spear",
-        "negative": "quick_retreat_and_foul_tactics"
+        "positive": "measured_counter_or_recycle",
+        "negative": "gegenpressing_and_foul_stop"
       },
       "structural_vulnerabilities": [
-        "ボール保持率を握らされた際の引いた相手に対する遅攻バリエーションの不足",
-        "サイドチェンジを連続して行われた際の2ライン横スライドの負荷"
+        "WBが攻撃参加した直後の背後広大なスペース（3バック脇のチャンネル）を突かれるカウンターリスク",
+        "相手の幅を使ったサイドチェンジに対する3バックとWBのスライド遅れ",
+        "ハイプレスを剥がされた際の中盤底（ボランチ脇）のスペース空洞化"
       ],
       "evidences": [
         {
@@ -475,98 +470,183 @@
           "key_quote": "あのだいぶ青はきそうですか? いや、これは大きな勝利なんじゃないですか?やっぱり悪くない。ま、退場で町田に負けたで神戸もしかった。 これでもう1 回勝てないとちょっとやじゃないですか。うん。 まあ、そうですね。 で、村選手もその自分たちのやり方は疑ってはなかったけどみたいなコメントしてやっぱり結果があっていう はい。 なのでこれ大きいんじゃないかなと。 はい。そうなんだ。1 個いいすかも。こ選手い ... ロさん 間コ選手来ます。 もう去年っていうか特別ステの時でしたっけ?なんかすごいインパクト すごい ロングスローもあるしはい。ロングスローもあるしミドルもあるし はい。 ま、潰せるし はい。",
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:15.912498+00:00"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260823_ZEL_URA",
+          "speaker": "黒田 剛 監督",
+          "quote": "後半に関しては、左右に相手をどんどん揺さぶっていくこと、それから押し返していけるようにもっと適切なポジションを取ること、またわれわれが積み上げてきたことをしっかりともう一度やり切ろうということで、相手を走力で上回っていくことを選手たちにも意識させながら、「もっとわれわれが相手を上回っていかないとこのまま終わるぞ」という言葉をかけて引き締めつつ、選手たちを後半に臨ませました。",
+          "context": "第3節 FC町田ゼルビア vs 浦和レッズ (Match ID: 20260823_ZEL_URA) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_ZEL_MAR",
+          "speaker": "黒田 剛 監督",
+          "quote": "そのほかの場面では、相手GKのこぼれ球を押し込めそうな状況など、あと3点ほど取れそうな決定的な場面を作ることができましたが、相手GKのファインセーブがあったことで相手を乗らせてしまいました。 ただ同点ゴールの場面に関しては、ヘンリー(望月 ヘンリー海輝)がその場で足をつりかけながらもしっかりと押し込んでくれた結果です。",
+          "context": "第7節 FC町田ゼルビア vs 横浜F・マリノス (Match ID: 20260912_ZEL_MAR) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_SAN_ZEL",
+          "speaker": "黒田 剛 監督",
+          "quote": "ご覧いただいたとおり、今回は多くの選手がケガから復帰し、ベンチに入っていましたが、少しずつ時間をかけながら、チームになじませていくことも念頭に置いていました。 試合開始から強度が下がることは避けつつ、0-0で試合が推移した場合には、ベンチに控えている選手たちを投入して自分たちの流れに変えていこうという狙いがありました。",
+          "context": "第9節 京都サンガF.C. vs FC町田ゼルビア (Match ID: 20261010_SAN_ZEL) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_NAG_ZEL",
+          "speaker": "黒田 剛 監督",
+          "quote": "2点目、3点目を取れたことは、本当に大きかったです。 交代選手もみんなでつながりながら、ゲームをマネジメントするという意味でよくやってくれたと思います。 あとは菊池(ダビド)流帆を中心に、CBの選手たちがたくさんのクロスをはね返してくれました。 CB3人がしっかり耐えてくれたことが、この3得点につながったと思います。",
+          "context": "第6節 名古屋グランパス vs FC町田ゼルビア (Match ID: 20260906_NAG_ZEL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_ZEL_KAW",
+          "speaker": "黒田 剛 監督",
+          "quote": "まずは平日の試合にもかかわらず、9,000人を超える両チームのファン・サポーターの皆さんに集まっていただいたことに感謝を申し上げます。 また、野津田での今季初めてのリーグ戦ということで、選手たちも相当気持ちが入っていましたし、前節の水戸戦を1-1で引き分けたぶんも、絶対に勝ってやるという意思を選手たちから感じました。",
+          "context": "第5節 FC町田ゼルビア vs 川崎フロンターレ (Match ID: 20260902_ZEL_KAW) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261018_ZEL_FUK",
+          "speaker": "黒田 剛 監督",
+          "quote": "チーム全員で力を合わせて、強くあり続けたいと考えています。 帆高に関しては症状を悪化させないよう、大事を取って休養させました。 長期の離脱にはならないとみています。 ただ、今回の試合はもともとローテーションを意識していて、ヘンリーでいくことに決めていたため、良いタイミングで帆高を休ませることができたと考えています。",
+          "context": "第10節 FC町田ゼルビア vs アビスパ福岡 (Match ID: 20261018_ZEL_FUK) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_VOB_ZEL",
+          "speaker": "黒田 剛 監督",
+          "quote": "痛みが見られたことや、このままプレーを続けると今後長引いてしまう恐れがあったことが交代の理由の1つです。 また、このあとにACL Twoの試合(アウェイでの上海申花戦)を控えていますし、さらに中2日でG大阪戦と連戦が続くこと、そして岡村自身が疲労を抱えながらも試合に出続けていた選手の1人であったことも考慮しました。",
+          "context": "第12節 ヴィッセル神戸 vs FC町田ゼルビア (Match ID: 20261024_VOB_ZEL) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_JEF_ZEL",
+          "speaker": "黒田 剛 監督",
+          "quote": "まずはこのアウェイの地まで、約2,000人のサポーターの方々が駆けつけてくださったことに感謝するとともに、おとといの悪天候があった中でも、多くの方にご来場いただいたことに感謝したいと思います。 ありがとうございました。 われわれにとってもすごくうれしいことでしたし、本当に皆さんから勇気をもらったなと感じています。",
+          "context": "第2節 ジェフユナイテッド千葉 vs FC町田ゼルビア (Match ID: 20260815_JEF_ZEL) (節: 第2節)"
         }
-      ],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "前 寛之",
-        "ネタ ラヴィ",
-        "中山 雄太",
-        "明本 考浩",
-        "岡村 大八",
-        "昌子 源",
-        "谷 晃生",
-        "中村 帆高",
-        "白崎 凌兵",
-        "ミッチェル デューク"
       ]
     },
     "VOB": {
       "team_id": "VOB",
       "team_name": "ヴィッセル神戸",
       "manager": "ミヒャエル スキッベ",
-      "base_formation": "4-3-3",
-      "alternative_formations": [
-        "4-2-3-1"
-      ],
+      "base_formation": "4-1-2-3",
+      "alternative_formations": [],
       "in_possession": {
-        "build_up_style": "direct_target_hybrid",
-        "target_reliance": "very_high",
-        "progression_route": "target_osako_and_cross",
-        "tempo": "high_intensity_vertical",
-        "summary": "大迫勇也へのロングフィードを基準点とし、武藤・佐々木らが脇からセカンドボールを狩り取って即座にPA内クロスへ持ち込む。"
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-1-2-3の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率50.5%）。"
       },
       "out_of_possession": {
-        "defensive_line": "high_to_mid",
-        "pressing_trigger": "immediate_forward_counterpress",
-        "pressing_funnel": "funnel_inside_and_crush",
-        "block_shape": "4-3-3_aggressive",
-        "summary": "前線3枚とインサイドハーフが連動して相手最終ラインに強烈なプレッシャーをかけ、前向きで奪い切る。"
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
       },
       "transitions": {
-        "positive": "lightning_counter_to_box",
-        "negative": "relentless_counterpress"
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
       },
       "structural_vulnerabilities": [
-        "ハイプレスの出足を交わされた際のアンカー脇スペースの露出",
-        "大迫不在時または徹底マークされた際の前線起点不全"
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
       ],
-      "evidences": [],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "マテウス トゥーレル",
-        "酒井 高徳",
-        "山川 哲史",
-        "井手口 陽介",
-        "ジエゴ",
-        "鍬先 祐弥",
-        "郷家 友太",
-        "髙橋 壱晟",
-        "権田 修一",
-        "日髙 光揮"
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260920_GAM_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "そこでまず圧倒されて、耐えることから試合に入っていったかなと思う。 それと関連して、ボールを取り切ったあとにミスが多くて、そこからつながるパスがなくて休む時間もなく、相手のアタッキングサードに入れなかった感じです。 前半の最後の20分に関しては自分たちで試合を見つけた、試合に入ることができたと思うので満足しています。",
+          "context": "第8節 ガンバ大阪 vs ヴィッセル神戸 (Match ID: 20260920_GAM_VOB) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260920_GAM_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "試合を振り返ってみると前半はG大阪がペースを握っていたかなという印象です。 後半は自分たちも交代したことで少しずつ試合の流れを取り戻して、最終的には相手を押し込むことに成功したと思う。 付け加えるなら、両方のGKが素晴らしく、締まったゲームになったと思います。 終了間際に得点をしたわれわれは幸運な勝者だと思っている。",
+          "context": "第8節 ガンバ大阪 vs ヴィッセル神戸 (Match ID: 20260920_GAM_VOB) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_KAW_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "後半は相手も自分たちもギアを上げた中で、向かい風だったところが自分の中では少し気になっていました。 (SBは)いつもプレーしている選手がいない状況でしたけど、岩本(悠庵)がそのポジションをやってくれて、最初に少しミスがあったあとはできることをしっかりやってくれていたと思います。 七聖については、喋れて意識もあります。",
+          "context": "第11節 川崎フロンターレ vs ヴィッセル神戸 (Match ID: 20261021_KAW_VOB) (節: 第11節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260911_VOB_KAS",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "感情的には最後の5分くらいは、向こうにゴールが入ってもおかしくなかったですし、逆に3-1にしていてもおかしくなかった気持ちもあります。 ですので、今日のチームが見せてくれたパフォーマンスに関しては心の底から満足していますし、今季も競争力のあるチームになってくれるんじゃないかなと期待させてくれる試合だったと思います。",
+          "context": "第7節 ヴィッセル神戸 vs 鹿島アントラーズ (Match ID: 20260911_VOB_KAS) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_MAR_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "ケガの選手が戻ってくればいいのですが、間に合うかはまだ分かりません。 より選手の力を信じて次の試合に向けて準備したいです。 もちろんいつも試合に出ていない選手が多く、異なる戦い方をする必要があったと理解しています。 いまいる選手がどう、というわけではありませんが、いない選手のことを考えると、その損失は大きいです。",
+          "context": "第3節 横浜F・マリノス vs ヴィッセル神戸 (Match ID: 20260822_MAR_VOB) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_VOB_CER",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "前半とはまたちょっと違う捉え方でサッカーを相手陣地、(ゴール裏の)ファンのいるゴールへ向かう気概を選手に見せてもらいたくて、こういうプランになりました。 まずは彼がケガしたことに関して、素早く戻ってきてくれたことをうれしく思っています。 彼の人格だったり、チームをもう1段、上に上げてくれる選手だと思っています。",
+          "context": "第4節 ヴィッセル神戸 vs セレッソ大阪 (Match ID: 20260829_VOB_CER) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_MAR_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "後半も同様ですが、最終的にはペナルティーエリアの近くでのアクションが少なかったと感じています。 ご存じのように、過密日程の中で、まだシーズンの最初です。 すべてのコンペティションでできる限り残るためには、さまざまな選手に出場してもらうことが必要なので、今日の決断となりました。 水曜日にはすぐに試合があります。",
+          "context": "第3節 横浜F・マリノス vs ヴィッセル神戸 (Match ID: 20260822_MAR_VOB) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261009_REY_VOB",
+          "speaker": "ミヒャエル スキッベ 監督",
+          "quote": "後半の失点に関しては、1失点目に比べるとこちらが崩された失点だったので痛かったです。 自分の中では弱点であったり、交代して相手が弱くなるとは見ていませんでした。 レイソルの選手のクオリティーが高くてどの選手でも走れてボールをつなげるので、特にその交代に関して何かそこを狙っていこうという意図はありませんでした。",
+          "context": "第9節 柏レイソル vs ヴィッセル神戸 (Match ID: 20261009_REY_VOB) (節: 第9節)"
+        }
       ]
     },
     "MAR": {
       "team_id": "MAR",
       "team_name": "横浜F・マリノス",
       "manager": "スティーブ コリカ",
-      "base_formation": "4-2-1-3",
+      "base_formation": "4-2-3-1",
       "alternative_formations": [
-        "4-3-3"
+        "4-4-2"
       ],
       "in_possession": {
-        "build_up_style": "positional_possession",
-        "target_reliance": "low",
-        "progression_route": "inverted_fullback_and_wide_winger",
-        "tempo": "dynamic_positional",
-        "summary": "偽SBが中盤に絞って3-2構造を作り、中央から前進して大外の快速ウイングへ展開、ポケット侵入を狙うアタッキングフットボール。"
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-2-3-1の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率50.8%）。"
       },
       "out_of_possession": {
-        "defensive_line": "ultra_high_line",
-        "pressing_trigger": "high_intensity_forward_press",
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
         "pressing_funnel": "funnel_outside",
-        "block_shape": "compact_high_block",
-        "summary": "ハーフウェイライン付近まで最終ラインを押し上げ、相手を敵陣深くに閉じ込める。"
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
       },
       "transitions": {
-        "positive": "immediate_box_overload",
-        "negative": "instant_gegenpressing"
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
       },
       "structural_vulnerabilities": [
-        "Jリーグ最高峰のハイラインの背後に広大なスペースがあり、ロングカウンターや裏抜けスプリンターに極めて脆弱",
-        "偽SBが上がった裏の大外レーンをカウンターで突かれるリスク"
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
       ],
       "evidences": [
         {
@@ -595,52 +675,97 @@
           "key_quote": "皆さんどうも。今回はJ1年高層リーグ第 5節FC東京横浜FマリノスFC東京が どのようにして干渉を納めたのかこちらに ついて考えていきますので、最後までお 付き合いいただけると嬉しいです。では 早速やっていきましょう。え、この1戦な んですけど文字通りFC東京が完全勝利を 収めることができました。ま、鬱憤を 晴らすようなゴールラッシュだったと思い ますし、",
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:32:57.815917+00:00"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_MAR_MIT",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "冬一はケガから復帰後、初めて先発した公式戦となった中、彼の良さを見せてくれたと思います。 (欠場した)井上(太聖)は次のゲームには間に合うと思いますが、ツノ(角田 涼太朗)については様子を見ながら準備していきます。 以前、喜田(拓也)がCBを急きょ何度かやったことがあるということでしたので、彼をCB中央に配置しました。",
+          "context": "第8節 横浜F・マリノス vs 水戸ホーリーホック (Match ID: 20260919_MAR_MIT) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_MAR_MIT",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "変更を加えた理由としてはジェイソン(キニョーネス)と卓斗の2人が足にきていたので、そこのカバーが絶対に必要だったからです。 水戸がサイズの大きな選手を入れてきて、よりダイレクトにプレーしてくることは予想ができたので、その部分でカバーが必要だったために変更を加えました。 変更後は相手にチャンスを作らせなかったと思います。",
+          "context": "第8節 横浜F・マリノス vs 水戸ホーリーホック (Match ID: 20260919_MAR_MIT) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_REY_MAR",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "素晴らしいパフォーマンスでした。 3、4点取れるチャンスを作れていたとも思います。 今日は(前節・京都戦から先発を入れ替えて)3人フレッシュな選手を入れましたが、そのうちの2人(宮市 亮と二田 理央)が大事な得点を取ってくれました。 守備でも問題なく良い守備ができたと思います。 ゲームプランを持ってゲームに入りました。",
+          "context": "第6節 柏レイソル vs 横浜F・マリノス (Match ID: 20260906_REY_MAR) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_MAR_SAN",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "前半はシーズンの中でベストな出来ではありませんでした。 ロングボールで押され、不用意なミスも目立ち、チャンスも少なかった。 後半に関しては、チャンスを前半よりも多く作れ、結局はPKでの1点にとどまったという試合になりました。 数日前の練習でひざに違和感を覚え、MRIを撮りました。 全治まで4週間ほどを見込んでいます。",
+          "context": "第5節 横浜F・マリノス vs 京都サンガF.C. (Match ID: 20260902_MAR_SAN) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_JEF_MAR",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "失点しないチームというのは、私が就任したときにお話をしたとおりです。 守備はかなり良いと評価をしていますが、一方で点を取る、チャンスを作る、そして谷村(海那)以外にも点を取れる選手(を増やすこと)が課題です。 両ウイング、そして10番ポジションの選手、天野(純)や今日はベンチ外の遠野(大弥)には得点を期待したいです。",
+          "context": "第10節 ジェフユナイテッド千葉 vs 横浜F・マリノス (Match ID: 20261017_JEF_MAR) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_NAG_MAR",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "前半は良かったと思います。 相手が後半に選手を入れ替えてくることは予想していました。 後半のスタートから20分ほどは決して悪くなかったです。 その中で相手にボールを握られ始め、軽率な失点、セットプレーでのセカンドフェーズで失点をしてしまい、時間帯としてもまたゲーム終盤の失点ということで、非常に悔しい結果になりました。",
+          "context": "第12節 名古屋グランパス vs 横浜F・マリノス (Match ID: 20261025_NAG_MAR) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_NAG_MAR",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "ゲームの60分から65分はうまく進められている。 それが90分間できていないということが問題だと伝えていました。 サブの選手のフレッシュな力を使ってゲームを進めたかったのですが、それがうまくいかなかった。 失点の場面に関してはセットプレーからのセカンドフェーズで、これは遂行力に問題があった失点だと思っています。",
+          "context": "第12節 名古屋グランパス vs 横浜F・マリノス (Match ID: 20261025_NAG_MAR) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_ZEL_MAR",
+          "speaker": "スティーブ コリカ 監督",
+          "quote": "良いパフォーマンスであったと思います。 どのような戦いになるかを事前に予測して挑みました。 町田さんは最も点を多く取っていて、一度も負けていないという自信のあるチームです。 そのような相手に対し、われわれの選手たちの今日の戦い、結果を責めることはできません。 セットプレーから得点を取れたのは非常に良かったです。",
+          "context": "第7節 FC町田ゼルビア vs 横浜F・マリノス (Match ID: 20260912_ZEL_MAR) (節: 第7節)"
         }
-      ],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "朴 一圭",
-        "遠野 大弥",
-        "喜田 拓也",
-        "谷村 海那",
-        "ジョルディ クルークス",
-        "井上 太聖",
-        "知念 慶",
-        "渡邊 泰基",
-        "ジェイソン キニョーネス",
-        "オナイウ 情滋"
       ]
     },
     "SAN": {
       "team_id": "SAN",
       "team_name": "京都サンガF.C.",
       "manager": "ランコ ポポヴィッチ",
-      "base_formation": "4-3-3",
+      "base_formation": "4-2-3-1",
       "alternative_formations": [
-        "4-1-2-3"
+        "3-4-2-1",
+        "4-1-2-3",
+        "4-4-2"
       ],
       "in_possession": {
-        "build_up_style": "vertical_direct_storming",
-        "target_reliance": "medium",
-        "progression_route": "channel_run_and_high_tempo",
-        "tempo": "ultra_fast_intensity",
-        "summary": "ショートパスを長く繋ぐよりも、相手背後へのスプリントと推進力で手数をかけずにアタッキングサードへ侵入。"
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-2-3-1の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率45.0%）。"
       },
       "out_of_possession": {
-        "defensive_line": "high_line_extreme",
-        "pressing_trigger": "all_out_sprint_pressing",
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
         "pressing_funnel": "funnel_outside",
-        "block_shape": "man_oriented_high_block",
-        "summary": "リーグ屈指の走行距離とスプリント数で前線からマンツーマン気味に激しく追い込み、相手のパスワークを破壊する。"
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
       },
       "transitions": {
-        "positive": "swarm_counter",
-        "negative": "immediate_counterpress"
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
       },
       "structural_vulnerabilities": [
-        "90分間プレスの強度が持続せず、後半65分以降にプレスが空転して間延びする時間帯の被弾",
-        "最終ラインの背後スペースをワンタッチで外された際の決定的一対一被弾"
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
       ],
       "evidences": [
         {
@@ -669,21 +794,63 @@
           "key_quote": "ロックをしてきながら、 え、戦っていく中でカウンターをうまく 使いながらでなおかつ時折り折り混ぜる ハイプレスによってさらに2点追加して 勝利を得ることができました。試合を通し てハイプレッシングだけではなくて ブロックを作ることっていうのにもトライ しているのかなと感じる一戦だったですし 、ま、本当にエイリアス選手だったり決定 的な仕事ができる選手たちが多く揃って いるなと改めて感じる一戦だった",
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:00.162999+00:00"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_SAN_ZEL",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "ラファエル(エリアス)が負傷退場しましたが、その後もチームとしての力を落とさずにチャンスを作れていました。 自分たちが取り組んできたことをしっかり出せたのは、チームとしての成長です。 彼に頼らなくても勝てるチームになっていかないといけませんし、だからこそわれわれの選手たちが今日見せてくれたプレーを誇らしく思っています。",
+          "context": "第9節 京都サンガF.C. vs FC町田ゼルビア (Match ID: 20261010_SAN_ZEL) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "(開幕から)連続して相手に先制点を与えてしまっているのは、われわれの良くない部分と捉えています。 先制点を与えて追いかける展開になると、選手にも焦りが生じて、精度がついていかないこともあります。 ただ後半に見せられたもの、選手は最後まであきらめずに戦ってくれましたし、ここまで積み上げてきたものを見せられました。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "これをしっかりと結果につなげていかないといけません。 サポーターの皆さんはホーム開幕戦で素晴らしい雰囲気を作ってくれましたが、それに応えることができなくて本当に残念に思っています。 皆さんに満足してもらえる結果ではありませんでしたが、お伝えしたいのは、成長していく上でこうした過程は必ず通るものだということです。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_FCT_SAN",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "あとはボールを持ったときに球離れが遅くなって、失い方というのも今日の試合に関しては課題として挙げられると思いますし、数回われわれも狙った形でボールを奪って出ていってというのができていたシーンでは、相手にとってのピンチを作れていたと思うのですけど、それも得点に結びつけることができなかった試合だったと感じています。",
+          "context": "第6節 FC東京 vs 京都サンガF.C. (Match ID: 20260906_FCT_SAN) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "まずサポーターの皆さんに「申し訳ない」と伝えないといけない、前半の出来でした。 本来見せたいサッカーではなかったし、原因は全体でコンパクトに守備をできなかったところにあると思います。 相手に中盤を使われた攻撃を自由にやらせてしまった時間帯がありましたし、そこではわれわれの準備してきたことができませんでした。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_KAW_SAN",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "ただ、われわれは完成に近づくためのプロセスを歩んでいる途中です。 キャンプでもケガ人が出ていて、全員が90分の試合をできたわけではないですし、チームを作りながらリーグ戦を戦っている状況です。 2戦を戦って修正していかないといけないのは、ディシプリンをより守るところ、あとは正確なポジショニングを取るところ。",
+          "context": "第2節 川崎フロンターレ vs 京都サンガF.C. (Match ID: 20260815_KAW_SAN) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "失点シーンや相手にやられた場面を振り返ってみると、自分たちで首を絞めた判断やプレーがありました。 そこを改善する、修正する必要があります。 イージーなミスをしないことです。 勝負に関わる場面でミスをしてしまったことが、今日のわれわれが苦しんだところでもありました。 ただ、前半の入り方は悪くはなかったです。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_SAN_KAS",
+          "speaker": "ランコ ポポヴィッチ 監督",
+          "quote": "彼といつも話して求めていることは、ゴールから逆算してプレーをすることです。 ゴールに向かったプレーを増やしてほしいと話しています。 背後やスペースを取りにいくことを、クロスを上げるためだけではなく、ゴールを決めるために走る。 ここ2試合は無得点だったので、2得点を取れたことはチームにとっても良かったです。",
+          "context": "第11節 京都サンガF.C. vs 鹿島アントラーズ (Match ID: 20261021_SAN_KAS) (節: 第11節)"
         }
-      ],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "ジョアン ペドロ",
-        "尹 星俊",
-        "ウェベルトン",
-        "鈴木 義宜",
-        "佐藤 響",
-        "新井 晴樹",
-        "石田 侑資",
-        "エベルトン マセイオ",
-        "中野 瑠馬",
-        "松田 天馬"
       ]
     },
     "MIT": {
@@ -692,29 +859,30 @@
       "manager": "樹森 大介",
       "base_formation": "4-4-2",
       "alternative_formations": [
-        "4-2-3-1"
+        "3-4-2-1"
       ],
       "in_possession": {
-        "build_up_style": "hybrid_vertical",
-        "target_reliance": "medium",
-        "progression_route": "side_combination_and_cross",
-        "tempo": "moderate",
-        "summary": "サイドでの連動したパス交換からクロスを供給し、セカンドボール回収から二次攻撃を仕掛ける。"
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-4-2の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率46.0%）。"
       },
       "out_of_possession": {
-        "defensive_line": "mid_block",
-        "pressing_trigger": "midfield_compact_trap",
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
         "pressing_funnel": "funnel_outside",
-        "block_shape": "4-4-2_standard",
-        "summary": "中盤でコンパクトなブロックを組み、相手の縦パスを誘導して奪取を試みる。"
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
       },
       "transitions": {
-        "positive": "side_counter",
-        "negative": "balanced_retreat"
+        "positive": "measured_counter_or_recycle",
+        "negative": "immediate_drop_to_compact_block"
       },
       "structural_vulnerabilities": [
-        "個の突破力を持つウイングにポケットを連続侵入された際の組織崩壊",
-        "後半の選手交代による強度低下時の連続失点"
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
       ],
       "evidences": [
         {
@@ -788,32 +956,96 @@
           "key_quote": "京がサイドを充し始め [音楽]たように見えたんですよ。 やっぱり今日はここなんじゃないかって。 でも水戸の対応が早かった。 リードしてるから割り切ってすぐに後ろを 5枚に54みたいな形でサイドを閉じてき た。 それまで使えそうだったサイドに完全に 蓋さえちゃいましたよね。 東京が攻める。水戸が閉じる。東京が失う 。なんかずっとこの繰り返しもかしい感じ でしたね。あれはもう青い壁って感じでし たよね",
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:32:38.064300+00:00"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_MAR_MIT",
+          "speaker": "樹森 大介 監督",
+          "quote": "そちらも同時に鍛えていきたい。 これから間がちょっと空くので、修正して挑んでいきたいと思います。 大森に関して言うと、急な話だったので、影響がどうかと考えることはなかったんですけど、この世界にいれば自然な流れですし、こういうことは多々あることだと思っているので、いるメンバーでしっかり戦えば問題ないと思っていました。",
+          "context": "第8節 横浜F・マリノス vs 水戸ホーリーホック (Match ID: 20260919_MAR_MIT) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_MIT_PUL",
+          "speaker": "樹森 大介 監督",
+          "quote": "ハーフタイムに伝えたのですが、こういう前半良い形で折り返したときに勝ち切れない試合が百年構想リーグでは多かったので、克服するためにも勝ち切ろうという話をして送り出したんですけど、こういう結果になって残念です。 まだまだやることは多い。 そういうところを成長していかなければ、こういう結果になってしまうと思っています。",
+          "context": "第9節 水戸ホーリーホック vs 清水エスパルス (Match ID: 20261011_MIT_PUL) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "樹森 大介 監督",
+          "quote": "J1で歴史的な初勝利を挙げたということで、今まで水戸に関わってくれたすべての人たちに感謝したいです。 今まで何十年も水戸に関わってくれた選手、サポーター、スタッフ、ボランティアなどがいたからこそ、いま僕らはJ1の舞台で戦うことができています。 そういった思いを共有して、J1初勝利できたことをうれしく思っています。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_SAN_MIT",
+          "speaker": "樹森 大介 監督",
+          "quote": "流れの中での得点、ちょっと課題だったセットプレーからの得点、そしてカウンターからのウチらしい得点の3点は今まで積み上げてきたことが表現できたからこそ生まれた得点だったと思っています。 もちろん、1失点というのは余分だったので、ゼロで抑えられるようにならないと、最後難しいゲームになってしまうことは理解しています。",
+          "context": "第3節 京都サンガF.C. vs 水戸ホーリーホック (Match ID: 20260822_SAN_MIT) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_MIT_GAM",
+          "speaker": "樹森 大介 監督",
+          "quote": "結果、同点で勝点1を積み上げられたことは良かったのですが、勝点3を取りたかったというのが率直な思いです。 ただ、流れの中から良い得点を奪いましたし、ゴール前での体を張った守備とか、要所要所で選手たちは課題と向き合ってくれて、厳しい時間帯もチーム全体で乗り越えられたことは次のゲームにつながると思っています。",
+          "context": "第2節 水戸ホーリーホック vs ガンバ大阪 (Match ID: 20260815_MIT_GAM) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_MIT_ZEL",
+          "speaker": "樹森 大介 監督",
+          "quote": "得点後は相手コートに入っていこうという狙いがありました。 そこに関して言うと、通常の僕らの原則からズレていたところがありました。 距離感の長い刺すボールに関しては、近い距離感の外し方はトレーニングしているんですけど、あそこはリスクのないときにしか入れてほしくないと伝えています。 そこは狙いではありません。",
+          "context": "第4節 水戸ホーリーホック vs FC町田ゼルビア (Match ID: 20260829_MIT_ZEL) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_OKA_MIT",
+          "speaker": "樹森 大介 監督",
+          "quote": "今日、平日ナイターという難しい状態だったんですけれど、本当にたくさんのサポーターが来てくれたので、しっかり勝利を届けたかったという思いが強い中で、残念な結果になってしまいました。 本当に申し訳ないと思っています。 連敗中で、チーム状況が悪い中だったんですけれど、良い準備をして、戦えるメンバーで挑みました。",
+          "context": "第11節 ファジアーノ岡山 vs 水戸ホーリーホック (Match ID: 20261021_OKA_MIT) (節: 第11節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_MIT_PUL",
+          "speaker": "樹森 大介 監督",
+          "quote": "前半から3週間修正したことや準備してきたことを表現してくれて、良い前半だったと思ったんですけど、そこでしっかり得点を奪い切れなかったこともこの結果の原因になってしまったと思っています。 後半は良い形から点を取ってくれましたが、守備の粘り強さや最後の耐え切れる力もつけていかないと難しい試合になってしまう。",
+          "context": "第9節 水戸ホーリーホック vs 清水エスパルス (Match ID: 20261011_MIT_PUL) (節: 第9節)"
         }
-      ],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "木本 恭生",
-        "大崎 航詩",
-        "真瀬 拓海",
-        "板倉 健太",
-        "山本 隼大",
-        "谷口 海斗",
-        "山﨑 希一",
-        "ウーゴ",
-        "西原 源樹",
-        "奥村 仁"
       ]
     },
     "URA": {
       "team_id": "URA",
       "team_name": "浦和レッズ",
       "manager": "曺 貴裁",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
+      "base_formation": "4-1-2-3",
+      "alternative_formations": [
+        "3-4-2-1"
+      ],
+      "in_possession": {
+        "build_up_style": "positional_with_vertical_spring",
+        "target_reliance": "medium",
+        "progression_route": "center_back_progression_and_wing_in_behind",
+        "tempo": "dynamic_tempo_switch",
+        "summary": "曺 貴裁監督のもと、4バック（4-1-2-3）のCBとアンカーを起点にボールを動かし（平均保持率53.5%）、相手の縦スライドの隙を突いて快速ウイングやインサイドハーフがライン間に潜り込んで打開する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "high_line",
+        "pressing_trigger": "forward_pressing_and_touchline_trap",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-1-2-3_high_compact",
+        "summary": "前線からのアグレッシブなハイプレスと連動したハイライン（平均スプリント123.0回）で相手のビルドアップをサイドへ誘導・制限し、高い位置でのボール奪取を狙う。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "ハイライン背後を突かれた際の一対一およびGKとの広大なスペース",
+        "攻撃時にSBが内側または高い位置を取った際の大外カウンター被弾",
+        "セットプレーおよびセカンドボール奪回遅れからの失点リスク"
+      ],
       "evidences": [
         {
           "video_id": "o-5bRxoI07g",
@@ -841,337 +1073,1220 @@
           "key_quote": "のとこだと思い ます。ま、もしも中盤で引っ掛けた時に時 はってのはこの試合、この選手は、ま、 前世の浦和線も出てましたけど、守備の ところで結構頑張れる選手なので、ここは 、ま、トランジションのところを意識して 時は入れてきたんじゃないかなと思います 。 で、最後にはヒアンに変えてダニゴメス だったりを入れて、ま、ダニゴメス新加入 で入ってきた選手ですよね。ま、スペイン のいろんなクラブでプレイし ... ま、怪我人が 多いので、で、左のカシーフのとこもそう ですけど、あとあと前回のAC東京の分析 動画、レッズとの分析動画で僕カシーフの ことカシフって書いてで、そのまま カシフって呼んでました",
           "confidence": "MEDIUM",
           "ingested_at": "2026-10-29T05:33:17.929347+00:00"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_URA_MAR",
+          "speaker": "曺 貴裁 監督",
+          "quote": "ただ、おっしゃるように、1節(・G大阪戦)、2節(・広島戦)の中で起きたように、ボールを持ったあとに縦方向の意識が強過ぎて、あまり人がいなくなると相手からすると1本調子になりますから、一番良いのは間違いなく、縦方向にボールを送る選択肢を持ちながら、その次のハイブリッドな選択肢を選手が取れれば、縦に意識していた相手のディフェンスラインは幅に行ったときにアプローチが遅れるので、そういうものの順序を間違えないようにしないと得点というのは入らないと思っています。",
+          "context": "第4節 浦和レッズ vs 横浜F・マリノス (Match ID: 20260829_URA_MAR) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_FCT_URA",
+          "speaker": "曺 貴裁 監督",
+          "quote": "当初僕が予想していた以上にFC東京さんの前線や、全体の足が止まるのが早かった印象だったので、もう、かさにかかって後半に行けるというところで、少しもったいない形というか、もちろん反省しなきゃいけないんですけども、あそこで得点を取る、逆に取れなくてもああいうプレーを誘発するようなことを起こさないというところで言うと、勝ち方の幅、勝てる戦略的なものも含めてまだ狭いなと思います。",
+          "context": "第9節 FC東京 vs 浦和レッズ (Match ID: 20261010_FCT_URA) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_FCT_URA",
+          "speaker": "曺 貴裁 監督",
+          "quote": "10月に入っても多少今日は暑さがありましたけども、涼しくなってくるときに自分たちの良さというのがより武器となるように、今日の試合も臨んだつもりですけれど、一言で言って、前半と後半の自分たちがやってきた内容的な進化と、この0-3という結果については、こんな言い方をしたら正しい言い方じゃないですけど、もったいない試合だったな、というふうに思います。",
+          "context": "第9節 FC東京 vs 浦和レッズ (Match ID: 20261010_FCT_URA) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_URA_VVN",
+          "speaker": "曺 貴裁 監督",
+          "quote": "ただ、(前々節・)水戸戦で相手が(退場者を出して)10人になって、最後の最後まで我慢して自分たちの攻撃をやり続けたというメンタリティーのところと、カウンターを食らってはいけないというところを選手たちが非常によく理解してやったという意味では、この3日間でも、その試合からでも、それより前の試合と比べても、非常に選手の成長を感じます。",
+          "context": "第12節 浦和レッズ vs V・ファーレン長崎 (Match ID: 20261025_URA_VVN) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_FUK_URA",
+          "speaker": "曺 貴裁 監督",
+          "quote": "ただ、前節の横浜FMさんとの試合、(前々節の)町田さんとの試合、そして、今日の試合と後半(終了)のホイッスルが近づけば近づくほど、自分たちの足が止まらずに前に出ていく力が出てきたというのは浦和レッズとして1つの武器だと思いますし、そのことを担保できるのであれば、それまでの60分や70分をもう少しソリッドに戦わなければいけない。",
+          "context": "第5節 アビスパ福岡 vs 浦和レッズ (Match ID: 20260902_FUK_URA) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260913_URA_OKA",
+          "speaker": "曺 貴裁 監督",
+          "quote": "今日、(試合前に)選手たちには「攻撃とか守備のところで短い時間で準備したことで勝点を3取れたら、非常に良い7試合だったということになる」という話をしたのですが、そこに届かず悔しい思いですけども、選手はよくファイティングスピリットを出してやったと思っているので、それに勝ちを持ってこれなかった自分の責任が大きいかなと思います。",
+          "context": "第7節 浦和レッズ vs ファジアーノ岡山 (Match ID: 20260913_URA_OKA) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_URA_MAR",
+          "speaker": "曺 貴裁 監督",
+          "quote": "今日も前半、長沼(洋一)が1回左でクロスを上げましたけど、それぐらい切り込んでいかないとゴールの確率は上がらないと思いますし、[4-4-2]とか[3-5-2]とかいろいろありますけど、最初にボールを前向きに持ったCBの選手、もしくはGKが幅と幅を使いながら何回サイドチェンジをしても僕はまったく意味がないと思っているので。",
+          "context": "第4節 浦和レッズ vs 横浜F・マリノス (Match ID: 20260829_URA_MAR) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_KAS_URA",
+          "speaker": "曺 貴裁 監督",
+          "quote": "そういう意味では、そのプレスに行けていた、(ボールを)拾えたということよりも、そのあとのボールの動かし方が前半から相手にとってかなり脅威になっていることが多かったと思います。 多少前半、後半が始まって15分、20分は少し彼らがインサイドにボールを集めてきて、最後は危ないところでクロスを上げられる場面が増えましたけど。",
+          "context": "第6節 鹿島アントラーズ vs 浦和レッズ (Match ID: 20260906_KAS_URA) (節: 第6節)"
         }
-      ],
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "山根 視来",
-        "宮本 優太",
-        "植木 颯",
-        "林 幸多郎",
-        "根本 健太",
-        "瀬古 樹",
-        "安居 海渡",
-        "マテウス サヴィオ",
-        "西川 周作",
-        "金子 拓郎"
       ]
     },
     "CER": {
       "team_id": "CER",
       "team_name": "セレッソ大阪",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "パブロ マチン",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "上林 豪",
-        "中村 拓海",
-        "井上 黎生人",
-        "登里 享平",
-        "上門 知樹",
-        "香川 真司",
-        "櫻川 ソロモン",
-        "田中 駿汰",
-        "チアゴ アンドラーデ",
-        "横山 夢樹"
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "positional_3_box_2_progression",
+        "target_reliance": "medium",
+        "progression_route": "half_space_overload_and_wb_width",
+        "tempo": "controlled_possession",
+        "summary": "パブロ マチン監督のもと、3バック（3-4-2-1）の左右CBが積極的に幅を取り、ボランチとシャドーで中央ハーフスペースに数的優位を形成して前進する（平均保持率52.5%）。WBを高い位置に押し出して幅を確保する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "measured_counter_or_recycle",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "WBが攻撃参加した直後の背後広大なスペース（3バック脇のチャンネル）を突かれるカウンターリスク",
+        "相手の幅を使ったサイドチェンジに対する3バックとWBのスライド遅れ",
+        "ハイプレスを剥がされた際の中盤底（ボランチ脇）のスペース空洞化"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_CER_PUL",
+          "speaker": "パブロ マチン 監督",
+          "quote": "前半(ハーフタイム)で代えた香川(真司)に関しても、しっかりと特長を出しながら間で受けるプレーはすごく良かったのですが、相手のラインが高くなってきたので、速い選手、背後を使える選手として後半から小見(洋太)を起用しました。 そうしたアクションを後半も続けることで、最後はチアゴ(アンドラーデ)の能力が出たかなと思います。",
+          "context": "第3節 セレッソ大阪 vs 清水エスパルス (Match ID: 20260822_CER_PUL) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_CER_REY",
+          "speaker": "パブロ マチン 監督",
+          "quote": "自動化された攻撃、コンビネーションを展開するチームに対して、相手の分析もうまくハマったと思います。 自分たちがボールを保持できたことも、デュエルで勝てたこと、それによって自分たちにボールが転がってきたことが大きかったと思います。 相手の陣地で押し込んでプレーできた時間も長かったので、攻撃面の良いところも出たと思います。",
+          "context": "第5節 セレッソ大阪 vs 柏レイソル (Match ID: 20260902_CER_REY) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_VOB_CER",
+          "speaker": "パブロ マチン 監督",
+          "quote": "互角の試合だったと思っています。 VARの決定によりPKでの失点で敗戦になりました。 僕らのゴールはオフサイドで取り消されました。 そうした少しの差で勝敗が決まった試合だと思います。 自分たちのチームに関しては、前半は決定機も多かったですし、試合の展開も自分たちが支配していました。 デュエルでも勝っていたと思います。",
+          "context": "第4節 ヴィッセル神戸 vs セレッソ大阪 (Match ID: 20260829_VOB_CER) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_CER_JEF",
+          "speaker": "パブロ マチン 監督",
+          "quote": "サイドチェンジをしながら、クロスを入れることが今日のプランだったのですが、前半はなかなかそうした展開にならなかったので、後半は2トップにして前線に厚みを持たせて、クロスを入れることに関しては、後半の途中からはそういった場面も作れていました。 最後の最後、追いついたことは、選手たちは勝ちにいく姿勢を示せたと思います。",
+          "context": "第12節 セレッソ大阪 vs ジェフユナイテッド千葉 (Match ID: 20261025_CER_JEF) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_CER_OKA",
+          "speaker": "パブロ マチン 監督",
+          "quote": "私自身、ファンの皆さまの前で試合をして勝てて、満足しています。 試合に関しては、前半の入りはあまり良くなく、立ち上がりに失点しました。 そこから2点を取り返して逆転したということでは、良い場面も多く出ました。 後半はなかなか追加点が入らない展開でしたが、そういった展開になっても崩れず守れたことは、満足しています。",
+          "context": "第1節 セレッソ大阪 vs ファジアーノ岡山 (Match ID: 20260808_CER_OKA) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_CER_KAW",
+          "speaker": "パブロ マチン 監督",
+          "quote": "ハーフタイムでも話したのですが、オーガナイズした守備から攻撃に出ることが後半はできていたと思います。 前半の最後に決まったPKもそうですが、オーガナイズされた守備から攻撃ができれば、数的不利でもあのような展開に持ち込めることは示せたと思います。 10人で2回も同点に追いつけたことは、個人的には満足しています。",
+          "context": "第10節 セレッソ大阪 vs 川崎フロンターレ (Match ID: 20261017_CER_KAW) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_CER_KAW",
+          "speaker": "パブロ マチン 監督",
+          "quote": "ただし、後ろのところが管理できないとやられてしまう。 それが最後の展開だったと思います。 なぜ入りが良くなかったのか、僕にも疑問があります。 いくら準備しても入りが良くないことはあります。 それがフットボールの難しさだと思います。 失点につながるセットプレーを与えたファウルも、必要がなかったファウルでした。",
+          "context": "第10節 セレッソ大阪 vs 川崎フロンターレ (Match ID: 20261017_CER_KAW) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_CER_MAR",
+          "speaker": "パブロ マチン 監督",
+          "quote": "互角の試合だったと思います。 強度の高い試合になりました。 特に前半はどちらもチャンスはあまり多くなく、決定機はなかったと思います。 後半に入る前、選手たちには「よりボールを握ること、サイドからの攻撃」という指示を出しました。 そこからうまくチャンスを作って、ポゼッションの数値で上回った部分もありました。",
+          "context": "第9節 セレッソ大阪 vs 横浜F・マリノス (Match ID: 20261010_CER_MAR) (節: 第9節)"
+        }
       ]
     },
     "FUK": {
       "team_id": "FUK",
       "team_name": "アビスパ福岡",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "塚原 真也",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "永石 拓海",
-        "湯澤 聖人",
-        "上島 拓巳",
-        "重見 柾斗",
-        "碓井 聖生",
-        "奥野 耕平",
-        "ウェリック ポポ",
-        "城後 寿",
-        "見木 友哉",
-        "師岡 柊生"
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "direct_channel_vertical",
+        "target_reliance": "high",
+        "progression_route": "direct_wb_or_front_target",
+        "tempo": "high_tempo_vertical",
+        "summary": "3-4-2-1の堅牢なブロックから、ボール奪取後は手数をかけずに最前線のターゲットやWBの走力を活かして縦へ速く運ぶ直截的な前進スタイル（平均保持率43.3%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "measured_counter_or_recycle",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "5バックで深く押し込まれた際のセカンドボール回収遅れと波状攻撃の被弾",
+        "前線孤立によるボールキープ失敗からのショートカウンター",
+        "相手のミドルシュートに対するボックス手前バイタルエリアの寄せの遅延"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261018_ZEL_FUK",
+          "speaker": "塚原 真也 監督",
+          "quote": "上回れなかったという観点がどこの部分かというのはお互いに検証の余地はあると思いますが、もちろん町田さんはACL Twoを戦ってきて、中2日、実質的には1.5日くらいだったと思いますが、そういった相手に対して、われわれは鳥栖戦からメンバーを大きく替えているため、そういう観点だけで判断すると、もっとわれわれが相手を呑み込むようなものは必要だったと思います。",
+          "context": "第10節 FC町田ゼルビア vs アビスパ福岡 (Match ID: 20261018_ZEL_FUK) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_FUK_HIR",
+          "speaker": "塚原 真也 監督",
+          "quote": "2人目の退場者が出てからは非常に難しくなりましたが、それでもピッチ上であきらめない選手を目の当たりにしていたので、なんとか最後の最後まで、という形を考えていましたが、取り切れず、2失点目のところ(実際にはVARで取り消し)はわれわれも形を変えて点を取りにいったところですので、それよりもあの状態で勝点1をもぎ取りたかったというのが印象です。",
+          "context": "第8節 アビスパ福岡 vs サンフレッチェ広島 (Match ID: 20260919_FUK_HIR) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_PUL_FUK",
+          "speaker": "塚原 真也 監督",
+          "quote": "それまでの時間帯は、ペナルティーエリアまで進入されることはありましたが、(最終ラインの)3枚が壁になり、クロスも含めて弾けていたところが多かったのですが、失点シーンについては、左サイドでプレスが被ってしまい、もう一度相手にボールが渡り、さらに深い位置まで行かれて、そこからジャーメイン(良)選手が内側にカットインしてきたシーンでした。",
+          "context": "第7節 清水エスパルス vs アビスパ福岡 (Match ID: 20260912_PUL_FUK) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261018_ZEL_FUK",
+          "speaker": "塚原 真也 監督",
+          "quote": "前節の岡山戦やカップ戦(ルヴァンカップ1stラウンド3回戦)の鳥栖戦から少し形は違いますが、続いているなと感じているのは、(相手の)ボランチを管理できず、つぶし切れない。 さらにそこから、今日も前 寛之選手が得点を決めたように、高い位置を取ってくるボランチに対して、走力でもついていけていないというのは課題になります。",
+          "context": "第10節 FC町田ゼルビア vs アビスパ福岡 (Match ID: 20261018_ZEL_FUK) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_FUK_URA",
+          "speaker": "塚原 真也 監督",
+          "quote": "ちょっとまだ失点シーンも得点シーンも(映像で)確認し切れていないですが、勝っている状況での立ち振る舞い、カウンターシチュエーション、セットプレー含めて、(追加点を)取れるシーンで取れなかったところが多々あったと思います。 その裏返しで相手のパワーというか警戒していた選手にそのままやられてしまったという印象が強くて。",
+          "context": "第5節 アビスパ福岡 vs 浦和レッズ (Match ID: 20260902_FUK_URA) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_FUK_VOB",
+          "speaker": "塚原 真也 監督",
+          "quote": "(神戸とは)百年構想リーグも点差は1-2、0-1と僅差でしたが、この一歩というか半歩というのがすごく大きいように感じています。 開幕戦ということで少し硬くなることも想定していましたが、その中でも彼らはわれわれがイヤな形から点を取るところは表現したと思うので、そういう意味では勝ち切れなかったという印象が大きいです。",
+          "context": "第1節 アビスパ福岡 vs ヴィッセル神戸 (Match ID: 20260808_FUK_VOB) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_KAS_FUK",
+          "speaker": "塚原 真也 監督",
+          "quote": "1つはゲーム構成力というか、先ほど触れましたけど、やっぱり最初に点を取ることができていれば、ゲーム展開も違ったでしょうし、鹿島さんは粘り強く守備を全員でしながらもチャンスをうかがうというか、セットプレー一発のところをまず全員で狙うという、前節もそうですしその前もそうだったんですけど、そういった差は非常に感じます。",
+          "context": "第3節 鹿島アントラーズ vs アビスパ福岡 (Match ID: 20260822_KAS_FUK) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_PUL_FUK",
+          "speaker": "塚原 真也 監督",
+          "quote": "ただ、そこから奪ってカウンターまでのシーンで、運べはするものの、効果的なシュートまで持ち込むことができなかったので、そこは1つ反省材料かなと思います。 交代枠のこともあり、最後の交代のタイミングは非常に難しかったのですが、その前段階でやられてしまい、粘り強さが最後、あと一歩のところで出せなかったなという印象です。",
+          "context": "第7節 清水エスパルス vs アビスパ福岡 (Match ID: 20260912_PUL_FUK) (節: 第7節)"
+        }
       ]
     },
     "GAM": {
       "team_id": "GAM",
       "team_name": "ガンバ大阪",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "明神 智和",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "安部 柊斗",
-        "初瀬 亮",
-        "岸本 武流",
-        "中谷 進之介",
-        "美藤 倫",
-        "福岡 将太",
-        "食野 亮太郎",
-        "中野 伸哉",
-        "鈴木 徳真",
-        "一森 純"
+      "base_formation": "4-2-3-1",
+      "alternative_formations": [
+        "4-1-2-3"
+      ],
+      "in_possession": {
+        "build_up_style": "positional_with_vertical_spring",
+        "target_reliance": "medium",
+        "progression_route": "center_back_progression_and_wing_in_behind",
+        "tempo": "dynamic_tempo_switch",
+        "summary": "明神 智和監督のもと、4バック（4-2-3-1）のCBとアンカーを起点にボールを動かし（平均保持率54.8%）、相手の縦スライドの隙を突いて快速ウイングやインサイドハーフがライン間に潜り込んで打開する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
+      },
+      "transitions": {
+        "positive": "measured_counter_or_recycle",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "ハイライン背後を突かれた際の一対一およびGKとの広大なスペース",
+        "攻撃時にSBが内側または高い位置を取った際の大外カウンター被弾",
+        "セットプレーおよびセカンドボール奪回遅れからの失点リスク"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_GAM_SAN",
+          "speaker": "明神 智和 監督",
+          "quote": "前半は私たちの狙いどおりで、より相手コートでプレーし、ゴールに迫るという中で、(宇佐美)貴史の素晴らしいFKで先制して、試合を優位に進めていたと思いますけど、一瞬のスキを突かれて同点に追いつかれ、前半を終えました。 ただ、サッカーではそういったことはあることなので、より集中力を持った中で続けていこうと後半に入りました。",
+          "context": "第12節 ガンバ大阪 vs 京都サンガF.C. (Match ID: 20261024_GAM_SAN) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_VVN_GAM",
+          "speaker": "明神 智和 監督",
+          "quote": "後半に入って少し前線からプレッシングにいけるようになって、というところで良い流れだったんですけども、2失点して。 ただ、最後まで選手が点を取りにいく部分で2点取れたこと、あわよくばもう1点行けたというところに持ってきたあのスピリットには満足していますけども、選手たちも僕自身もこの勝点1にはまったく満足していません。",
+          "context": "第5節 V・ファーレン長崎 vs ガンバ大阪 (Match ID: 20260902_VVN_GAM) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260920_GAM_VOB",
+          "speaker": "明神 智和 監督",
+          "quote": "合流してまだ間もない中だったので、起用については少し迷いましたが、新潟でのプレーや練習を見ていると、基礎技術も高いですし個人戦術のところがしっかりしている選手なので、ぶっつけ本番で、すぐにチームにフィットするだろうという感覚はなんとなくありました。 想像以上に、攻守にわたって良いパフォーマンスだったと思っています。",
+          "context": "第8節 ガンバ大阪 vs ヴィッセル神戸 (Match ID: 20260920_GAM_VOB) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_VVN_GAM",
+          "speaker": "明神 智和 監督",
+          "quote": "しっかり立ち上がりから入りたいという中で、ただ相手の強度とかそういう部分に押された前半だったなと思います。 もちろん、なんとか前半を0-0で終われたことはチームにとっては良かったですけれども、守備の部分でコンパクトになったり、強度を出したり、意図的に奪うとか守るということがなかなか難しい前半だったなと思います。",
+          "context": "第5節 V・ファーレン長崎 vs ガンバ大阪 (Match ID: 20260902_VVN_GAM) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_GAM_HIR",
+          "speaker": "明神 智和 監督",
+          "quote": "ただ、ほんのささいなことかもしれないんですけれども、この連戦を振り返ると、チームで一人ひとりの良さを出せていたのかとか、選手が躍動できているかを振り返ったときに、そこをイジる必要は逆にないなというふうに思いまして、そこを少し変えたというか、ささいなことなのですが、そのことで選手が躍動できるというふうになった。",
+          "context": "第4節 ガンバ大阪 vs サンフレッチェ広島 (Match ID: 20260829_GAM_HIR) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261009_KAS_GAM",
+          "speaker": "明神 智和 監督",
+          "quote": "まずはリーグ戦が再開して自分たちがここから上に行くための大事な試合というところで入ったんですけど、結果的に0-2で、勝点3が取れなかったことを非常に悔しく思います。 選手たちはこういう状況でも最後まで相手のゴールに迫るところを含めて、やってくれたんですけれども、結果が出なかったのは自分自身、反省しています。",
+          "context": "第9節 鹿島アントラーズ vs ガンバ大阪 (Match ID: 20261009_KAS_GAM) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_GAM_FCT",
+          "speaker": "明神 智和 監督",
+          "quote": "チームとしてはそこで下がるのではなく、よりボールに制限をかけるというところで、後半も何度か良い形で奪って、チャンスはありましたが、なかなか相手のゴールを割ることができなかった印象です。 選手たちは最後までハードワークして、戦ってくれていましたので、本当に選手の戦う姿勢やスピリットについては満足しています。",
+          "context": "第7節 ガンバ大阪 vs FC東京 (Match ID: 20260912_GAM_FCT) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_FUK_GAM",
+          "speaker": "明神 智和 監督",
+          "quote": "まずはずっと連戦が続いている中で、今日の試合が重要な試合だというのはお互いにとってそうだったと思います。 選手たちが立ち上がりから素晴らしくハードワークしてくれましたし、前半は0-0という中で終わりましたが、相手コートでプレーするというところでは自分たちの狙いが攻撃、守備で出せたんじゃないかなと思います。",
+          "context": "第11節 アビスパ福岡 vs ガンバ大阪 (Match ID: 20261021_FUK_GAM) (節: 第11節)"
+        }
       ]
     },
     "HIR": {
       "team_id": "HIR",
       "team_name": "サンフレッチェ広島",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "バルトシュ ガウル",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": []
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "positional_3_box_2_progression",
+        "target_reliance": "medium",
+        "progression_route": "half_space_overload_and_wb_width",
+        "tempo": "controlled_possession",
+        "summary": "バルトシュ ガウル監督のもと、3バック（3-4-2-1）の左右CBが積極的に幅を取り、ボランチとシャドーで中央ハーフスペースに数的優位を形成して前進する（平均保持率57.8%）。WBを高い位置に押し出して幅を確保する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "measured_counter_or_recycle",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "WBが攻撃参加した直後の背後広大なスペース（3バック脇のチャンネル）を突かれるカウンターリスク",
+        "相手の幅を使ったサイドチェンジに対する3バックとWBのスライド遅れ",
+        "ハイプレスを剥がされた際の中盤底（ボランチ脇）のスペース空洞化"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_HIR_KAW",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "もちろん、4枚というのは常にプランBの自分たちのオプションとして持っていますし、中にいる選手たちがプランBをしたときに快適にプレーできるというのであれば、相手も自分たちのことを研究してくると思うので、基本的には3枚で試合をスタートしても、試合の状況によってはフォーメーション変えていくことはもちろん今後もあり得ると思います。",
+          "context": "第3節 サンフレッチェ広島 vs 川崎フロンターレ (Match ID: 20260822_HIR_KAW) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_HIR_JEF",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "後半も前に行く力はあったんですけど、守備のところでなかなかプレスがハマらなくて相手にちょっとボールを握られる時間帯があったので、そこは修正していかないといけないポイントかなと。 その中でチャンスを決め切れて、特に(川村)拓夢が帰ってきて最初の試合で自分のゴールで試合を決定づけた。 素晴らしい活躍をしてくれたと思います。",
+          "context": "第1節 サンフレッチェ広島 vs ジェフユナイテッド千葉 (Match ID: 20260808_HIR_JEF) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_VER_HIR",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "いつも入るようなゴールではないですけど、自分自身が決断したことに対して、やっぱりプレーするのは選手たちですし、本当に選手たちがすごくよくやってくれたので、自分の決断が正しかったという形に今日はなったと思います。 一番大きな期待というのは、健康でいてもらうことです。 彼はコンディションが良ければ良いプレーをしてくれる。",
+          "context": "第9節 東京ヴェルディ vs サンフレッチェ広島 (Match ID: 20261011_VER_HIR) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_HIR_NAG",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "後半はまだまだ前に行く推進力を出して、自分たちがゴールのチャンスを作っていくために、しっかりとディフェンスのところから入りました。 それで攻撃もうまくいったんじゃないかなと思います。 そういう流れでゴールが生まれて、1つ目のゴールが生まれれば2つ目、3つ目のゴールは生まれやすかったんじゃないかなと考えています。",
+          "context": "第5節 サンフレッチェ広島 vs 名古屋グランパス (Match ID: 20260902_HIR_NAG) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_HIR_JEF",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "そういう状況でもチームに対して自分が一度出した言葉を変える必要もないし、大内を自分も信頼しているので、本人にも「開幕戦は大内で行く」という話をしました。 もちろん敬介自身もメンタルに少なからず傷を負って帰ってきた中で、開幕戦に準備できるかというところも考えて、自分の言葉どおりに大内を先発で使うことにしました。",
+          "context": "第1節 サンフレッチェ広島 vs ジェフユナイテッド千葉 (Match ID: 20260808_HIR_JEF) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_URA_HIR",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "常にボールを持って支配するという自分たちのスタイルに自信を持ってプレーしていたと思います。 選手たちに常に言っているのが、年齢は関係なくパフォーマンスによって(起用する)選手が変わるということです。 彼のパフォーマンスは皆さんも見ていて分かると思いますが、ゲームを読む力や、正しい判断をし続けることができます。",
+          "context": "第2節 浦和レッズ vs サンフレッチェ広島 (Match ID: 20260815_URA_HIR) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_GAM_HIR",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "ミスが起きにくい形でも、ボールを持っているときだけではなく、持っていないときのミスも起こっていたので、フォーメーションを変えてある程度ミスを減らして立て直せたところはあるのですけど、コンディションのところで言えば、U-19日本代表に試合で使えるであろう選手が行っているというのもこの連戦の中では難しい状況です。",
+          "context": "第4節 ガンバ大阪 vs サンフレッチェ広島 (Match ID: 20260829_GAM_HIR) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_HIR_CER",
+          "speaker": "バルトシュ ガウル 監督",
+          "quote": "GKのところは本当にすごく神経質な問題で、本当にどちらが出てもおかしくないぐらい素晴らしいGKが2人いるのは自分にとっても悩ましい問題でもありましたけど、敬介は移籍の市場が閉まるタイミングまではという話もしていましたし、実際に市場が閉まって日本に集中するという状況になって、すごくフェアな競争の中で選びました。",
+          "context": "第7節 サンフレッチェ広島 vs セレッソ大阪 (Match ID: 20260912_HIR_CER) (節: 第7節)"
+        }
+      ]
     },
     "JEF": {
       "team_id": "JEF",
       "team_name": "ジェフユナイテッド千葉",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "小林 慶行",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "ダニエル ホール",
-        "河野 貴志",
-        "石川 大地",
-        "マテウス インディオ",
-        "エリソン",
-        "石尾 陸登",
-        "日高 大",
-        "田中 和樹",
-        "津久井 匠海",
-        "田口 泰士"
+      "base_formation": "4-4-2",
+      "alternative_formations": [
+        "3-4-2-1"
+      ],
+      "in_possession": {
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-4-2の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率46.2%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_JEF_VVN",
+          "speaker": "小林 慶行 監督",
+          "quote": "右サイドのところで言うと、まさにそこの部分があったんですけど、そうは言っても一方で自分たちがボールを保持したときには、というところであったり、自分たちがリードしていれば相手が少なからずパワーを出してくるのは当然あったりする中で、そういう部分の想定は当然ありますし、その中で我慢強く戦っていれば、前半でのパフォーマンス、もしくはここ最近続いているパフォーマンスを考えたときに、ダブルボランチを起点にチャンスは作れるというところ。",
+          "context": "第9節 ジェフユナイテッド千葉 vs V・ファーレン長崎 (Match ID: 20261011_JEF_VVN) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_JEF_MAR",
+          "speaker": "小林 慶行 監督",
+          "quote": "もちろん相手がどうこうというところもあるのですけど、結局相手は変化してくるので、その中で自分たちのベースの部分での強度だったり、チームがやろうとしている戦術に対しての個人個人の理解みたいなところ、プラスαその都度グループでコミュニケーションをとれてそれを表現できているかというようなところしかないので、そういうようなところがしっかりと上がってきているという部分はピッチ上で表現できていると感じています。",
+          "context": "第10節 ジェフユナイテッド千葉 vs 横浜F・マリノス (Match ID: 20261017_JEF_MAR) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_HIR_JEF",
+          "speaker": "小林 慶行 監督",
+          "quote": "だからこそ守備のときに全員が前向きになっている状態のときにやられてはいなくて、それでも広島さんのクオリティーの高さでGKから一番前の選手、もしくはシャドーの選手に長いボールが入って前進されている場面も当然あるのですけれど、全員がしっかりと前向きを作って粘り強く対応すれば(守れる)という部分も当然あるので、そのチャレンジの塩梅というところをしっかりと見極めていかなければいけないなと思っています。",
+          "context": "第1節 サンフレッチェ広島 vs ジェフユナイテッド千葉 (Match ID: 20260808_HIR_JEF) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260821_FCT_JEF",
+          "speaker": "小林 慶行 監督",
+          "quote": "その部分から、自分たちの課題としてはゲームを通してですけど明確で、長いボール、相手の圧力を相当感じているというところでの長いボールからのチャンスをうかがっていましたけど、その中でやはり、相手をしっかりと見て、もう少し自分たちで主体的に前進するというようなところも作って、自分たちのボールを保持する時間を持ちながらという部分は、トライしていきたいなというふうには感じています。",
+          "context": "第3節 FC東京 vs ジェフユナイテッド千葉 (Match ID: 20260821_FCT_JEF) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_JEF_VVN",
+          "speaker": "小林 慶行 監督",
+          "quote": "あとは相手が出てくることによって、自分たちが使いたいスペースも有効に使える、相手がブロックを組む前に仕留め切れないかなというような絵を持ちながら、もちろん1-0から2-0とゲームを進められればというところがあったので、やり合いにはなりますが、そこをしっかりと粘り強く対応できれば、逆に自分たちがチャンスを作れるのかなというイメージです。",
+          "context": "第9節 ジェフユナイテッド千葉 vs V・ファーレン長崎 (Match ID: 20261011_JEF_VVN) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_HIR_JEF",
+          "speaker": "小林 慶行 監督",
+          "quote": "もちろん皆さん昨日の鹿島とマリノスの試合を見ていると思うのですけれど、この気温、湿度の中で90分を通して強度の高い中で戦うというのは相当に難しい部分はあるので、こちら側の仕事としてしっかりと交代のタイミング、じゃ誰をというところも含めてですけど、一番はやはり90分ピッチ上でタフに戦える選手をどれだけそろえられるかが非常に重要な問題。",
+          "context": "第1節 サンフレッチェ広島 vs ジェフユナイテッド千葉 (Match ID: 20260808_HIR_JEF) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_JEF_GAM",
+          "speaker": "小林 慶行 監督",
+          "quote": "狙いというか、守備は最前線からやらないと守れないものなので、前の選手のハードワークでどれだけ規制できたかによって中盤のエリアで引っかけられるシーンは当然増えますし、シンプルなところだと思います。 うれしいのが半分、あとは「どうするんだろう? 」というところですかね。 ただのうれしいだけじゃないなというような気がします。",
+          "context": "第6節 ジェフユナイテッド千葉 vs ガンバ大阪 (Match ID: 20260906_JEF_GAM) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_PUL_JEF",
+          "speaker": "小林 慶行 監督",
+          "quote": "全員のハードワークが結果になっている部分でもあります。 それをやりながら、自分たちが保持する時間をどれだけ増やしていけるか。 でも、保持だけじゃなくて、ラインブレイクもできないといけない。 相手のゴール前にボールをどれだけ運べるか、もしくは追加点といったシーンを作れるようなチームにいずれはなっていきたいと思っています。",
+          "context": "第8節 清水エスパルス vs ジェフユナイテッド千葉 (Match ID: 20260919_PUL_JEF) (節: 第8節)"
+        }
       ]
     },
     "KAS": {
       "team_id": "KAS",
       "team_name": "鹿島アントラーズ",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "鬼木 達",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "早川 友基",
-        "安西 幸輝",
-        "キム テヒョン",
-        "千田 海人",
-        "関川 郁万",
-        "三竿 健斗",
-        "小川 諒也",
-        "マテウス ブエノ",
-        "レオ セアラ",
-        "柴崎 岳"
+      "base_formation": "4-4-2",
+      "alternative_formations": [
+        "4-2-3-1"
+      ],
+      "in_possession": {
+        "build_up_style": "positional_with_vertical_spring",
+        "target_reliance": "medium",
+        "progression_route": "center_back_progression_and_wing_in_behind",
+        "tempo": "dynamic_tempo_switch",
+        "summary": "鬼木 達監督のもと、4バック（4-4-2）のCBとアンカーを起点にボールを動かし（平均保持率55.0%）、相手の縦スライドの隙を突いて快速ウイングやインサイドハーフがライン間に潜り込んで打開する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "high_line",
+        "pressing_trigger": "forward_pressing_and_touchline_trap",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_high_compact",
+        "summary": "前線からのアグレッシブなハイプレスと連動したハイライン（平均スプリント126.2回）で相手のビルドアップをサイドへ誘導・制限し、高い位置でのボール奪取を狙う。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "ハイライン背後を突かれた際の一対一およびGKとの広大なスペース",
+        "攻撃時にSBが内側または高い位置を取った際の大外カウンター被弾",
+        "セットプレーおよびセカンドボール奪回遅れからの失点リスク"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_KAS_FUK",
+          "speaker": "鬼木 達 監督",
+          "quote": "それこそ(三竿)健斗はこの2試合本当に非常に走って、チームに常にエネルギーを与えていた選手ですけど、そういう選手に替わって出る選手もまた違う特徴で、今日であればボールを動かす作業のところに入っていきたかったんですが、なかなか前半はボールがピッチの中に入っている時間が短かったり、自分たちが動かす時間が短かったので、そういう意味では特性は出し切れなかったかなと思っています。",
+          "context": "第3節 鹿島アントラーズ vs アビスパ福岡 (Match ID: 20260822_KAS_FUK) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260807_MAR_KAS",
+          "speaker": "鬼木 達 監督",
+          "quote": "そういう中で、立ち上がりは本当に自分たちがやってはいけないような失点の仕方を、言ってしまえば3点すべてそういう形になりましたけども、それでも焦れることなく、我慢強く、今日はもう必ずタフな戦いになるというふうに送り出していたので、最後の最後まであきらめることなく、鹿島のメンタルの強さとか、そういうものを最後は見せられたゲームだったと思います。",
+          "context": "第1節 横浜F・マリノス vs 鹿島アントラーズ (Match ID: 20260807_MAR_KAS) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_KAS_NAG",
+          "speaker": "鬼木 達 監督",
+          "quote": "ゲームの内容のほうは、自分たちの納得のいく内容ではなかったですし、目指しているものとは程遠いものだったと思っています。 それでも、最後は勝って反省できるというのはずっと自分たちが目指しているところなので、また来週に向けて修正はしたいと思います。 ただ、もう1回自信を持ってボールを動かす、自信を持ってボールを奪いにいく。",
+          "context": "第2節 鹿島アントラーズ vs 名古屋グランパス (Match ID: 20260815_KAS_NAG) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_KAS_REY",
+          "speaker": "鬼木 達 監督",
+          "quote": "そして敗戦を受けた中でも、選手に伝えたのは、それでも自分たちはやっぱり上を見続けなきゃいけない。 一度でもそこから目をそらしたりとかすると、やっぱり目標がブレてしまうので。 もちろん、勝点差とか順位は重要ですけども、まだ中盤戦まで行っていない中ですけども、それでもそこのところをこだわりながら戦っていきたいと思います。",
+          "context": "第12節 鹿島アントラーズ vs 柏レイソル (Match ID: 20261024_KAS_REY) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_MIT_KAS",
+          "speaker": "鬼木 達 監督",
+          "quote": "それはナオ(植田)だけではなくて、後ろのリスク管理のところで、単純にはね返したり、つぶしたり。 今日は特に後半、そういうゲームになったと思いますけど、それが結局、最後の最後までできたとは言えませんでした。 ただ、それはチームをマネジメントしている自分の問題であって、選手を代えたからどうこうということではありません。",
+          "context": "第5節 水戸ホーリーホック vs 鹿島アントラーズ (Match ID: 20260902_MIT_KAS) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_VER_KAS",
+          "speaker": "鬼木 達 監督",
+          "quote": "まず天気のあまり良くない中でしたけども、多くのサポーターに集まっていただき、最後まで後押ししていただいたことに本当に感謝します。 プラス、選手が本当にスタートから最後まで集中力を切らすことなく、常に圧倒しようという形で送り出していますけども、やれる・やれないは別として、そういう意志を感じるゲームだったと思います。",
+          "context": "第4節 東京ヴェルディ vs 鹿島アントラーズ (Match ID: 20260829_VER_KAS) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_MIT_KAS",
+          "speaker": "鬼木 達 監督",
+          "quote": "本当に1、2分の話かもしれませんけど、そういう最初のチャンスをどうするか、決められるかどうかでゲームは変わります。 相手もまだ、どちらが集中し切れているかというラインだったと思います。 そこで失点してしまったことで、一気に相手のペースになったと思います。 そういう意味で言うと、結局ゲームはゴールで動いていきます。",
+          "context": "第5節 水戸ホーリーホック vs 鹿島アントラーズ (Match ID: 20260902_MIT_KAS) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_KAS_REY",
+          "speaker": "鬼木 達 監督",
+          "quote": "また攻撃は、前節(・京都戦)も非常にチャンスがあった中で取り切れない。 今節も決してチャンスがないわけではないので、やっぱり決め切る力。 両ゴール前をもう1回やっていきたいという思いでいます。 選手にも言いましたけども、本当に首位に(立つという目標に)対して粘り強くやっていこうと試合前から話をして挑んでいます。",
+          "context": "第12節 鹿島アントラーズ vs 柏レイソル (Match ID: 20261024_KAS_REY) (節: 第12節)"
+        }
       ]
     },
     "KAW": {
       "team_id": "KAW",
       "team_name": "川崎フロンターレ",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "長谷部 茂利",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "中野 大虎",
-        "全 天海",
-        "初音 虎次郎",
-        "加藤 昊",
-        "十河 晟央",
-        "吉田 琉海",
-        "土肥 瑠星",
-        "對馬 羽琉",
-        "小川 翔太",
-        "小村 風人"
+      "base_formation": "4-2-3-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-2-3-1の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率51.8%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_KAW_PUL",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "自分たちが点数を取れたんですけど、(その後は追加点を)取れないで、(退場者を出して)1人少ない相手に取られて危うくゲームを落とす、勝点を落とす流れを作られたので、後半の2点目を取るまでは自分たちが反省して、同じようなことが多くはないと思いますけど、これからもあると思うので、そういうときに同じことをしないようにしたいです。",
+          "context": "第6節 川崎フロンターレ vs 清水エスパルス (Match ID: 20260906_KAW_PUL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_KAW_OKA",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "加えて、失点をミスからですけど(してしまったので)、判断も含めて、「今日こそは無失点で」とハーフタイムに指示を共有させてもらって送り出したんですけど、できなかったと。 課題を残して次の試合というか、次こそは無失点で終われるように。 ただ、勝った中で修正でき、選手たちとまた明日いい顔で会えると思うので、それは救いですね。",
+          "context": "第12節 川崎フロンターレ vs ファジアーノ岡山 (Match ID: 20261025_KAW_OKA) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_KAW_OKA",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "クロスを何本も入れられて、そこで合う、合わないはもちろんありますけど、積極的なアグレッシブなサイドからの攻撃は彼らの長所だと思うので、それをやられてしまいました。 ただ、おっしゃってくれたことが的確ではあると思いますけど、1つ自分たちの守備で言えば、クロスから失点することが多かった中で今日はそこを守れた、CKを含めて。",
+          "context": "第12節 川崎フロンターレ vs ファジアーノ岡山 (Match ID: 20261025_KAW_OKA) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_KAW_KAS",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "点数もありますけど、相手にすぐに取り返すんだという前への勢いというものがあったと思うので、そこに残念ながら押されてしまった。 ボールを奪うチャンスはあったと思いますけど、そこでつなげずにまた拾われるシーンが続きましたね。 そこで交代で流れを変えようとしましたけど、そこが少し遅れたことは否めないので責任を感じています。",
+          "context": "第8節 川崎フロンターレ vs 鹿島アントラーズ (Match ID: 20260919_KAW_KAS) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_KAW_PUL",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "反省は残ります。 ただ、勝点3を取れたことは良かったと思います。 ありがとうございます。 攻守にわたって自分たちが目指しているプレーを11人でしようと。 誰が入ってもということはミーティングと練習でコーチと私で選手に伝えていて、少しずつ良くなってきているところは好材料というか、進歩しているところだと感じています。",
+          "context": "第6節 川崎フロンターレ vs 清水エスパルス (Match ID: 20260906_KAW_PUL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_CER_KAW",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "監督としては非常に反省すべきで、こういう単語はなかなか使わないのですが、責任を感じます。 なぜ同じ絵を描けないのか、なぜ2失点してしまうゲーム運びになってしまうのか。 分かりやすく相手にボールが行ってしまった。 1人多い人数に関して優位性をうまく使えなかった。 きちっと選手に伝えて、実行させることができなかった。",
+          "context": "第10節 セレッソ大阪 vs 川崎フロンターレ (Match ID: 20261017_CER_KAW) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_KAW_VOB",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "神戸の選手が脳震盪で運ばれて、どういう状況か分からないですけど、それ以外にも故障(者)が出ていないか心配ですね。 特に前半は攻守にわたってアグレッシブにいい仕事をしていたと思います。 ボールもよく入っていました。 交代に関しては、全員で、20人で戦うつもりでいます。 当然、20人は出せないですけど、全員で戦うと。",
+          "context": "第11節 川崎フロンターレ vs ヴィッセル神戸 (Match ID: 20261021_KAW_VOB) (節: 第11節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_KAW_OKA",
+          "speaker": "長谷部 茂利 監督",
+          "quote": "その中、自分たちで「こうやっていこう」というプランを持っていながら少し捕まった場面が多かったです。 そういう中で2得点ともカウンターの形だったと思いますけど、ハマっていたぶん、より彼らの前へ前への守備や切り替えだったと思うので、そこを裏返してうまく得点につながったと思っています。 ただ、自分たちも良くなかった。",
+          "context": "第12節 川崎フロンターレ vs ファジアーノ岡山 (Match ID: 20261025_KAW_OKA) (節: 第12節)"
+        }
       ]
     },
     "NAG": {
       "team_id": "NAG",
       "team_name": "名古屋グランパス",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
-      "manager": "ペトロヴィッチ",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "藤井 陽也",
-        "稲垣 祥",
-        "高嶺 朋樹",
-        "中山 克広",
-        "徳元 悠平",
-        "原 輝綺",
-        "和泉 竜司",
-        "シュミット ダニエル",
-        "木村 勇大",
-        "内田 宅哉"
+      "manager": "ミハイロ ペトロヴィッチ",
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [
+        "3-4-1-2",
+        "4-1-2-3"
+      ],
+      "in_possession": {
+        "build_up_style": "positional_3_box_2_progression",
+        "target_reliance": "medium",
+        "progression_route": "half_space_overload_and_wb_width",
+        "tempo": "controlled_possession",
+        "summary": "ミハイロ ペトロヴィッチ監督のもと、3バック（3-4-2-1）の左右CBが積極的に幅を取り、ボランチとシャドーで中央ハーフスペースに数的優位を形成して前進する（平均保持率55.2%）。WBを高い位置に押し出して幅を確保する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "high_line",
+        "pressing_trigger": "forward_pressing_and_touchline_trap",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "3-4-2-1_high_compact",
+        "summary": "前線からのアグレッシブなハイプレスと連動したハイライン（平均スプリント123.4回）で相手のビルドアップをサイドへ誘導・制限し、高い位置でのボール奪取を狙う。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "WBが攻撃参加した直後の背後広大なスペース（3バック脇のチャンネル）を突かれるカウンターリスク",
+        "相手の幅を使ったサイドチェンジに対する3バックとWBのスライド遅れ",
+        "ハイプレスを剥がされた際の中盤底（ボランチ脇）のスペース空洞化"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_NAG_GAM",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "その中でポジティブなサプライズはサポーターの皆さんの応援の力です。 2連敗している中で、これだけたくさんのファンの方が足を運んでくれて、開始1分から非常に力強い声援を送ってくれた。 そういう状況で酷いプレーは見せられません。 それを選手も理解してアグレッシブに、球際もセカンドボールも含めて戦いながら最後まで走り続けた。",
+          "context": "第3節 名古屋グランパス vs ガンバ大阪 (Match ID: 20260822_NAG_GAM) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_HIR_NAG",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "1-1に戻すために選手たちは全力を尽くして前に行きましたけども、前がかりになったことで少しコントロールを失ったような状況もありましたし、2点目、3点目に関しては少しミスが重なったような状況で簡単に失点してしまいました。 連戦が続いているので選手たちは厳しい状況が続いていると思いますし、何人かケガ人が出てしまっています。",
+          "context": "第5節 サンフレッチェ広島 vs 名古屋グランパス (Match ID: 20260902_HIR_NAG) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261011_KAW_NAG",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "選手たちは開始直後から勇気と「勝ちたい」という意欲を持ち、前向きにプレーしてくれたと思います。 球際やセカンドボール、プレッシャーを掛けにいくときのスピード感をはじめ、いろいろなところに表れていました。 また、規律を守ってチームのために攻守両面で闘うということ。 それらも含め、本当に素晴らしいものを見せてくれました。",
+          "context": "第9節 川崎フロンターレ vs 名古屋グランパス (Match ID: 20261011_KAW_NAG) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_NAG_CER",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "1-1という結果は少し物足りないという思いはありますが、それもサッカーですし、また次を見据えてプレーしないといけないと思います。 もちろん『1』という勝点の意味はあると思いますが、ゲームを冷静に振り返ると満足はしていません。 われわれはリスクを負って攻撃的にプレーしていましたし、勝点3が取れるゲームだったと思います。",
+          "context": "第11節 名古屋グランパス vs セレッソ大阪 (Match ID: 20261021_NAG_CER) (節: 第11節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_HIR_NAG",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "ただ、20分、25分の時間を耐えたあとは、少しずつボールが動くようになったり、少し前進することもできましたし、チャンスも何回かありました。 後半が始まって少し主導権を広島さんに握られているような印象もありましたけど、オープンな状況でお互いチャンスもありながら、そんなに決定的なチャンスも作られずに進んでたと思います。",
+          "context": "第5節 サンフレッチェ広島 vs 名古屋グランパス (Match ID: 20260902_HIR_NAG) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_NAG_ZEL",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "ハーフタイムにしっかり話をしたあと、選手たちは引き続き後ろからビルドアップしながらサイドへ展開したり、内側に差し込んだりと、落ち着いてゲームを進めていたと思います。 その中でオウンゴールでしたけども、しっかりとボールを動かして相手を揺さぶった結果として、ああいうプレーになったと思いますし、追いつくことができました。",
+          "context": "第6節 名古屋グランパス vs FC町田ゼルビア (Match ID: 20260906_NAG_ZEL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_NAG_ZEL",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "その後、チームはよりパワーを持って、「絶対にひっくり返すんだ」という気持ちを持って臨んでくれたと思いますし、落ち着いてボールを動かすというスタイルを体現しながらゴールに向かってくれました。 勝ち越しのゴールを決められたあとも、追いつくために全力を尽くしてトライを続けてくれましたが、最終的に3点目が決まってしまった。",
+          "context": "第6節 名古屋グランパス vs FC町田ゼルビア (Match ID: 20260906_NAG_ZEL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_NAG_OKA",
+          "speaker": "ペトロヴィッチ 監督",
+          "quote": "水曜日の試合(天皇杯2回戦)で鳥取さんに敗れて、ネガティブな雰囲気とか、いろいろな情報が世の中に出るのは当たり前ですけど、一番感謝の意を述べたいのはサポーターに対してです。 こういう難しい状況で、心苦しい思いもあった中で、たくさんのサポーターがスタジアムに足を運んでくれた。 ほぼ満員に近い状況だったと思います。",
+          "context": "第4節 名古屋グランパス vs ファジアーノ岡山 (Match ID: 20260829_NAG_OKA) (節: 第4節)"
+        }
       ]
     },
     "OKA": {
       "team_id": "OKA",
       "team_name": "ファジアーノ岡山",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "木山 隆之",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "チーマ ハサンアリ",
-        "万代 瑛飛",
-        "元野 蒼空",
-        "堤 清史郎",
-        "安西 来起",
-        "岡田 遼",
-        "岡﨑 葵",
-        "本山 史玖馬",
-        "来海 良宣",
-        "松本 優輝"
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "direct_channel_vertical",
+        "target_reliance": "high",
+        "progression_route": "direct_wb_or_front_target",
+        "tempo": "high_tempo_vertical",
+        "summary": "3-4-2-1の堅牢なブロックから、ボール奪取後は手数をかけずに最前線のターゲットやWBの走力を活かして縦へ速く運ぶ直截的な前進スタイル（平均保持率45.5%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "5バックで深く押し込まれた際のセカンドボール回収遅れと波状攻撃の被弾",
+        "前線孤立によるボールキープ失敗からのショートカウンター",
+        "相手のミドルシュートに対するボックス手前バイタルエリアの寄せの遅延"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_OKA_SAN",
+          "speaker": "木山 隆之 監督",
+          "quote": "非常に残念な結果になりましたけど、そういうときもあるかなと思うしかないかなと思います。 自分たちのことを言えば、立ち上がりから失点するまでは良くなかったし、そこで1点取られましたけど、しっかり追いついてまた勝ちに持っていけるチャンスもあったかなと思います。 ちょっとストレスが溜まりましたし、しょうがないかなと思います。",
+          "context": "第8節 ファジアーノ岡山 vs 京都サンガF.C. (Match ID: 20260919_OKA_SAN) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_JEF_OKA",
+          "speaker": "木山 隆之 監督",
+          "quote": "立ち上がりから、守備も攻撃もしっかりゲームに入っていけたと思います。 先制したのは本当に良かったですが、今季続いているのは、点を取ったあとにスキを作ってしまって、簡単に失点してしまうことです。 田中(和樹)選手のプレーはすごかったですし、トラップも良かったですが、一発でやられてしまうとなかなか勝点は取れないと思います。",
+          "context": "第5節 ジェフユナイテッド千葉 vs ファジアーノ岡山 (Match ID: 20260902_JEF_OKA) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260919_OKA_SAN",
+          "speaker": "木山 隆之 監督",
+          "quote": "また頑張ります。 まず粘る。 チャンスがあったら、1点取りたい。 でも、そんな簡単にはチャンスは来ないので、粘ってどこかで一刺し。 それだけです。 最後は『1』を狙っていました。 田上(大地)を入れたのもそういうことですし、ちょっと悔しいですね。 戦術的にはマッチアップするし、ちょっと自分たちの守備がハマらなかった。",
+          "context": "第8節 ファジアーノ岡山 vs 京都サンガF.C. (Match ID: 20260919_OKA_SAN) (節: 第8節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261010_FUK_OKA",
+          "speaker": "木山 隆之 監督",
+          "quote": "これからまたルヴァンカップ(1stラウンド3回戦・名古屋戦)で今度は岐阜に行きますが、自分たちが強くなっていきたければ、試合は増える。 そういうところで何ができるか。 替わった選手も含めて、チームとしてしっかり戦えるかが大事だと思います。 そこはしっかり自分たちでもう1回、落とし込んでやる必要があるのかなと思います。",
+          "context": "第9節 アビスパ福岡 vs ファジアーノ岡山 (Match ID: 20261010_FUK_OKA) (節: 第9節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_KAW_OKA",
+          "speaker": "木山 隆之 監督",
+          "quote": "そこはちょっと悔やまれます。 また反省して頑張ればいいかなと思います。 選手たちのプレーは本当に誇らしい、素晴らしいプレーでした。 ボールを持ったときの機能性や狙いというのはずっと続けてきているけど、上がってきた気がします。 カウンターだけでなくて握ったときに間を突きながら最後ボックスを崩しにいくシーンも増えている。",
+          "context": "第12節 川崎フロンターレ vs ファジアーノ岡山 (Match ID: 20261025_KAW_OKA) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261018_OKA_VOB",
+          "speaker": "木山 隆之 監督",
+          "quote": "先ほども言ったみたいに、前半は自分たちも十分に対抗して、もちろん相手のパワーとかに押し込まれたとしても、耐えながら点を取るチャンスも作っていると思います。 だけど、勝利したスキッベ監督の言葉だけに満足してはいけないですし、テクニカルエリアで見ている僕からすると、ちょっとのディテールの違いが0-3になっていると思う。",
+          "context": "第10節 ファジアーノ岡山 vs ヴィッセル神戸 (Match ID: 20261018_OKA_VOB) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_KAW_OKA",
+          "speaker": "木山 隆之 監督",
+          "quote": "われわれも入れないといけない、入れたいシュートは何本もありました。 先ほどフラッシュインタビューでも言いましたけど、もし今日の試合で自分たちの勝つチャンスがさらに広がるとすれば、僕自身のメンバー選考のところでもう少しフレッシュな選手をスタートで交ぜて、最後足がよりもつようにできていれば何かあったかもしれないですね。",
+          "context": "第12節 川崎フロンターレ vs ファジアーノ岡山 (Match ID: 20261025_KAW_OKA) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_JEF_OKA",
+          "speaker": "木山 隆之 監督",
+          "quote": "スカウティングを通して、ボールを取った瞬間が一番大きなチャンスだということはみんなが理解していました。 ゲームの中で何回か大きなカウンターが出そうなときがありましたが、精度が足りず、シュートまで行き切れませんでした。 ただ、最後のところはルカオがしっかり強さを出して、神谷がしっかり走ってシュートまで持っていった。",
+          "context": "第5節 ジェフユナイテッド千葉 vs ファジアーノ岡山 (Match ID: 20260902_JEF_OKA) (節: 第5節)"
+        }
       ]
     },
     "PUL": {
       "team_id": "PUL",
       "team_name": "清水エスパルス",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "吉田 孝行",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "住吉 ジェラニレショーン",
-        "高橋 祐治",
-        "嶋本 悠大",
-        "弓場 将輝",
-        "辻 友翔",
-        "吉田 豊",
-        "松崎 快",
-        "須貝 英大",
-        "藤井 智也",
-        "オ セフン"
+      "base_formation": "4-1-2-3",
+      "alternative_formations": [
+        "4-4-2"
+      ],
+      "in_possession": {
+        "build_up_style": "compact_direct_counter",
+        "target_reliance": "high",
+        "progression_route": "vertical_flank_advance",
+        "tempo": "high_tempo_vertical",
+        "summary": "強固な4-1-2-3の守備網から、サイドバックの素早い押し上げと前線ターゲットへのロングボールを軸に最短手数でゴールへ迫るダイレクトアタック（平均保持率42.1%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "compact_mid_block",
+        "pressing_trigger": "compact_trap_at_middle_third",
+        "pressing_funnel": "funnel_outside",
+        "block_shape": "4-4-2_compact_mid_block",
+        "summary": "中盤と最終ラインの距離感を20〜25mに保ったコンパクトなブロックを敷き、ボールサイドへ組織的にスライドして中央のコースを制限する。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "自陣深くで守勢に回った際、相手のクロスやこぼれ球に対するクリア不足",
+        "先制された後に主導権を握って能動的に崩すポゼッション精度の課題",
+        "連続したハイプレスを受けた際の自陣ビルドアップでのパス引っかけ事故"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_PUL_FCT",
+          "speaker": "吉田 孝行 監督",
+          "quote": "選手たちは90分間、最後まで勝点3を目指して頑張ってくれたと思います。 試合に関しては、なんとか引き分けに持っていったゲームではあるのですが、この勝点1をポジティブに捉えて、次は勝点3をしっかり取れるように、またみんなで頑張っていきたいと思います。 なかなか取れていないと、チームとしてもイヤな雰囲気になってしまいます。",
+          "context": "第5節 清水エスパルス vs FC東京 (Match ID: 20260902_PUL_FCT) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_PUL_MAR",
+          "speaker": "吉田 孝行 監督",
+          "quote": "全体的にもったいないゲームでした。 みんなが球際の部分で戦い、スライドも徹底してハードワークができている中で、まだまだ足りない選手もいます。 1人がズレると、全体的に遅れてしまいます。 勝負を分けるポイントは、寄せるところにどれだけ寄せられるか、シュートコースを消せるか、奪ったら前に行ってゴールにどれだけ迫れるかです。",
+          "context": "第2節 清水エスパルス vs 横浜F・マリノス (Match ID: 20260815_PUL_MAR) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_PUL_REY",
+          "speaker": "吉田 孝行 監督",
+          "quote": "奪ってからのところで、もう少しマイボールの時間を作ることも大事だし、一気に攻めることも大事です。 クロスの入り方にしても、相手の前に入るだとか、単純なところではじき返されている場面も多かったです。 それ以外も、ボックス内で3人目の動きとか、スルーパスとか、今日の相手がやっていたこともできればいいのかなとは思っています。",
+          "context": "第4節 清水エスパルス vs 柏レイソル (Match ID: 20260829_PUL_REY) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_KAW_PUL",
+          "speaker": "吉田 孝行 監督",
+          "quote": "相手を見ていても、自信を持ってつなげていますし、つなぐことがすべてではありませんが、(退場シーンは)そこにトライした上でのミスでした。 ミスした選手の責任ではなく、自分の責任です。 もっと自信を持って、相手が来るなら狙いどころを変えるとか、個人の判断になる部分もありますが、そこだけを責めてしまうと次につながりません。",
+          "context": "第6節 川崎フロンターレ vs 清水エスパルス (Match ID: 20260906_KAW_PUL) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_HIR_PUL",
+          "speaker": "吉田 孝行 監督",
+          "quote": "ズルズルとラインが下がって、相手を自由にさせて、失点をする。 自分たちがやることをやっていれば、こんなに失点することはないです。 そこは一人ひとりの強度が足りないと思います。 ただ、いまはケガ人が多くて、毎試合ケガ人が複数人出るので、出た選手にやってもらうしかありません。 そこは切り替えて、次に向けてやっていきます。",
+          "context": "第12節 サンフレッチェ広島 vs 清水エスパルス (Match ID: 20261024_HIR_PUL) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260815_PUL_MAR",
+          "speaker": "吉田 孝行 監督",
+          "quote": "1つでも欠けたら勝てませんし、今日は相手のほうが上回ったと思います。 ボールに対してアプローチを掛けられなければ、相手に自由に蹴られてしまいます。 圧力という観点では、失点シーンは足りていませんでした。 もちろん、1人だけの責任ではありませんが、勝敗を分ける要素なので、もっともっとアラートにやらなければなりません。",
+          "context": "第2節 清水エスパルス vs 横浜F・マリノス (Match ID: 20260815_PUL_MAR) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_NAG_PUL",
+          "speaker": "吉田 孝行 監督",
+          "quote": "非常に苦しいゲームでした。 (退場者が出て)10人になり、苦しい時間も非常に長かったですが、チーム全員が、一人ひとりが、やるべきことをやり、しぶとく、粘り強く戦ってくれました。 その結果が、無失点での勝利につながったと思います。 アウェイの中、清水から5,000人のサポーターの方々が来てくださったと聞いています。",
+          "context": "第1節 名古屋グランパス vs 清水エスパルス (Match ID: 20260808_NAG_PUL) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_CER_PUL",
+          "speaker": "吉田 孝行 監督",
+          "quote": "静岡からたくさんのサポーターが来てくれた中で、勝点を持って帰れないことは本当に悔しいです。 2連敗で得点もゼロ。 もっともっと点を取るサッカーをしなければならないと思います。 試合に関しては、前半は一人ひとりの緩さがあったし、いつもだったらもっと寄せられている部分も、相手の圧力があっていけないシーンがありました。",
+          "context": "第3節 セレッソ大阪 vs 清水エスパルス (Match ID: 20260822_CER_PUL) (節: 第3節)"
+        }
       ]
     },
     "REY": {
       "team_id": "REY",
       "team_name": "柏レイソル",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "リカルド ロドリゲス",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "小西 雄大",
-        "弓場 堅真",
-        "三丸 拡",
-        "中川 敦瑛",
-        "小泉 佳穂",
-        "久保 藤次郎",
-        "遠藤 渓太",
-        "汰木 康也",
-        "古賀 太陽",
-        "藤尾 翔太"
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "positional_3_box_2_progression",
+        "target_reliance": "medium",
+        "progression_route": "half_space_overload_and_wb_width",
+        "tempo": "controlled_possession",
+        "summary": "リカルド ロドリゲス監督のもと、3バック（3-4-2-1）の左右CBが積極的に幅を取り、ボランチとシャドーで中央ハーフスペースに数的優位を形成して前進する（平均保持率55.1%）。WBを高い位置に押し出して幅を確保する。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "measured_counter_or_recycle",
+        "negative": "gegenpressing_and_foul_stop"
+      },
+      "structural_vulnerabilities": [
+        "WBが攻撃参加した直後の背後広大なスペース（3バック脇のチャンネル）を突かれるカウンターリスク",
+        "相手の幅を使ったサイドチェンジに対する3バックとWBのスライド遅れ",
+        "ハイプレスを剥がされた際の中盤底（ボランチ脇）のスペース空洞化"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_CER_REY",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "これまでは、中3日、中2日といった過密スケジュールでも多くの選手たちがわれわれのプレースタイルを貫き、強度の高いプレーができていましたが、今日に関しては、そして夏開幕の今季に関しては、過密スケジュールの中、なかなか疲労が抜けず、自分たちのプレーを表現するためのフレッシュな状態を保てない選手が複数いたことが課題なので、そこに関してはしっかりと改善して次に臨みたいと思います。",
+          "context": "第5節 セレッソ大阪 vs 柏レイソル (Match ID: 20260902_CER_REY) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260814_VER_REY",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "ですので、戦術的な交代カードを私としては切る準備を進めるわけですけれども、それと同時に、誰が90分間もたない可能性があるのか、そこも見極めながらタイミングを見計らうというのがあります。 今日に関しても、ハーフタイムに渡井、そして瀬川の投入も検討しましたけれども、暑さを考慮した上でもう少し待とうという決断を下しました。",
+          "context": "第2節 東京ヴェルディ vs 柏レイソル (Match ID: 20260814_VER_REY) (節: 第2節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_KAS_REY",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "偉大なライバル相手との難しい試合でした。 キックオフから守備がうまくいかず、苦しい時間帯があり、そこで失点してしまったという形で、試合の入りとしては難しい展開でした。 けれども、そのあとに調整をして、前半のうちに2点を取れて逆転できた状態でハーフタイムを迎えられたというのは、自分たちにとってプラスに働いたと思います。",
+          "context": "第12節 鹿島アントラーズ vs 柏レイソル (Match ID: 20261024_KAS_REY) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260821_REY_VVN",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "しっかりとチームの攻撃に貢献してほしいというのも伝えましたし、ある特定のスペースを突いてほしいというメッセージも伝えました。 そして、彼は私からのメッセージもうまく理解した上で、相手のスキとなるようなスペースを突いた形で攻撃に貢献してくれていたと思います。 まさしく彼のチームへの貢献度というのはとても高いと思います。",
+          "context": "第3節 柏レイソル vs V・ファーレン長崎 (Match ID: 20260821_REY_VVN) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_REY_MIT",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "難しい相手である水戸さん相手に開幕戦で勝点3を取れたとともにシーズンをスタートできたところを高く評価できますし、満足しています。 選手たちに試合の前に伝えたメッセージとしては、今季長い戦いになる。 そして目標に向けての長い戦い、そこに向かうためには一試合一試合が重要であり、目の前の試合に集中して勝点3を取り続ける。",
+          "context": "第1節 柏レイソル vs 水戸ホーリーホック (Match ID: 20260808_REY_MIT) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260808_REY_MIT",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "後半も良い形でスタートできていました。 追加点が取れる展開になるであろうという流れが作れていたかと思います。 ただ、PKを与えてしまい、失点した場面のところで垣田(裕暉)が足をつってしまい、ほぼ10人で試合をしている時間帯でしたので、その部分は交代の仕方というところも改善しなければいけない部分だったかと思います。",
+          "context": "第1節 柏レイソル vs 水戸ホーリーホック (Match ID: 20260808_REY_MIT) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_CER_REY",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "われわれのスタイルを表現するために必要な守備の強度、攻撃の精度の高いプレーがなかなか表現できていなかった前半だったと思います。 失点シーンも、われわれのスローインのところで戸惑い、相手のスローインにさせてしまったところから生まれました。 自分たちの責任の中から生まれた、われわれのミスから生まれた失点とも取れます。",
+          "context": "第5節 セレッソ大阪 vs 柏レイソル (Match ID: 20260902_CER_REY) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261009_REY_VOB",
+          "speaker": "リカルド ロドリゲス 監督",
+          "quote": "もちろんわれわれが期待するプレーができていた時間もありましたが、神戸の武器であるロングスローやセットプレー、そしてクロスからの空中戦で苦しむ部分はありました。 ただ、それに対しても良い守備ができていましたし、この偉大なライバルを相手に4ゴールを決めて勝利を収めることができた、とても評価できる試合だったと思います。",
+          "context": "第9節 柏レイソル vs ヴィッセル神戸 (Match ID: 20261009_REY_VOB) (節: 第9節)"
+        }
       ]
     },
     "VER": {
       "team_id": "VER",
       "team_name": "東京ヴェルディ",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
-      "manager": "相馬 直樹",
-      "previous_managers_2026": [
-        "城福 浩"
+      "manager": "城福 浩",
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [
+        "4-4-2"
       ],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "佐古 真礼",
-        "鈴木 海音",
-        "林 尚輝",
-        "柴戸 海",
-        "新井 悠太",
-        "齋藤 功佑",
-        "藤本 寛也",
-        "染野 唯月",
-        "マテウス",
-        "福田 湧矢"
+      "in_possession": {
+        "build_up_style": "direct_channel_vertical",
+        "target_reliance": "high",
+        "progression_route": "direct_wb_or_front_target",
+        "tempo": "high_tempo_vertical",
+        "summary": "3-4-2-1の堅牢なブロックから、ボール奪取後は手数をかけずに最前線のターゲットやWBの走力を活かして縦へ速く運ぶ直截的な前進スタイル（平均保持率42.2%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "5バックで深く押し込まれた際のセカンドボール回収遅れと波状攻撃の被弾",
+        "前線孤立によるボールキープ失敗からのショートカウンター",
+        "相手のミドルシュートに対するボックス手前バイタルエリアの寄せの遅延"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_VER_FCT",
+          "speaker": "相馬 直樹 監督",
+          "quote": "公式(記録)は1本になっていたので、そういう状況ではありますが、非常に厳しいゲームだったと思っています。 それをひっくり返す形が作れなかった。 前節の広島さんとのゲームでも、やはり上位のチームとのゲームの中では、なかなか難しい展開になってしまうのは現状あると思っています。 ただ、これをどうやってひっくり返していくのか。",
+          "context": "第10節 東京ヴェルディ vs FC東京 (Match ID: 20261017_VER_FCT) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260809_VER_KAW",
+          "speaker": "城福 浩 監督",
+          "quote": "選手生命も長くないので、与えられた時間の中で超野心的な目標を目指さなきゃいけない。 みんなそういう思いの中でやっています。 ただ、それを言ったからそうなるわけじゃなくて、1つのハードワーク、1つの判断、1つのスキル、そういうのを上げていかないと、たやすく目標には到達できない。 口で言うということは、それだけ責任も伴う。",
+          "context": "第1節 東京ヴェルディ vs 川崎フロンターレ (Match ID: 20260809_VER_KAW) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260822_OKA_VER",
+          "speaker": "城福 浩 監督",
+          "quote": "まずはここ(岡山)まで来てくれたサポーターに感謝したいと思います。 彼らの声は力になりました。 苦しい時間もありましたが、無失点に抑えられたのはサポーターの後押しがあったからだと思います。 その前はいつだったか思い出せないほど久しぶりの無失点だったので、われわれらしく最後にしっかりと体を張った選手を褒めたいと思います。",
+          "context": "第3節 ファジアーノ岡山 vs 東京ヴェルディ (Match ID: 20260822_OKA_VER) (節: 第3節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260902_VER_VOB",
+          "speaker": "城福 浩 監督",
+          "quote": "いろいろな思いはありますけれど、最後にサポーターの前へ挨拶に行ったときに、彼らのいろいろな思いをチャントで感じました。 萎えている場合じゃないと思いました。 ゲームに関しては、少なくとも前節と前々節に比べれば、はるかに進歩していると思います。 勇気を持ってサッカーをやったし、いま持てる力を出そうとしてくれたと思います。",
+          "context": "第5節 東京ヴェルディ vs ヴィッセル神戸 (Match ID: 20260902_VER_VOB) (節: 第5節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261021_MAR_VER",
+          "speaker": "相馬 直樹 監督",
+          "quote": "攻撃でもっと自信を持ってできるようなシーンを前半から何度か出しましたが、なかなか継続的にできませんでした。 それに伴い、守備もリズムが悪い展開になりました。 ただ、そこも含めて2点ビハインドで連戦の中、選手たちは前に足を出してくれました。 これまでなかなか取れなかった得点を2つ取れたこともわれわれにとって大きいです。",
+          "context": "第11節 横浜F・マリノス vs 東京ヴェルディ (Match ID: 20261021_MAR_VER) (節: 第11節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261017_VER_FCT",
+          "speaker": "相馬 直樹 監督",
+          "quote": "ゲームのほうですけれども、ある程度想定したとおり、少し相手に持たれる状況が続くけれど、そこからわれわれがどれくらい奪ったあとに早く相手陣に入れるかという立ち上がりだったと思っています。 そうした中、やはり(染野)唯月が退場という形でかなり早い時間で代えなければいけなくなり、福田 湧矢のアクシデントも少しありました。",
+          "context": "第10節 東京ヴェルディ vs FC東京 (Match ID: 20261017_VER_FCT) (節: 第10節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261024_VER_FUK",
+          "speaker": "相馬 直樹 監督",
+          "quote": "この辺も含めて、スタッフの働きがこの連戦において非常に良かった。 本当にこのチームが勝つことに向けて、まだ僕も、ここに来てあまり長くはありませんが、僕のことを信じて、本当に良い仕事をしてくれたおかげで、選手が躍動してくれたんじゃないかなと思っています。 もともといたスタッフのみんなが1つの方向を向いてやってくれた。",
+          "context": "第12節 東京ヴェルディ vs アビスパ福岡 (Match ID: 20261024_VER_FUK) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260913_VER_JEF",
+          "speaker": "城福 浩 監督",
+          "quote": "ただ内容に関しては、ここ数試合で格段に向上しているので、ここは全否定するものでもなくて、これを続けるのみだと思います。 クロスの数もCKの数も、相手の何倍か分かりませんが、おそらくCKは9本と1本というのが象徴していると思うのですが、この内容を続けるのみだと思います。 この内容を続ける中でスキを見せてはいけない。",
+          "context": "第7節 東京ヴェルディ vs ジェフユナイテッド千葉 (Match ID: 20260913_VER_JEF) (節: 第7節)"
+        }
       ]
     },
     "VVN": {
       "team_id": "VVN",
       "team_name": "V・ファーレン長崎",
-      "base_formation": "4-4-2",
-      "in_possession": {},
-      "out_of_possession": {},
-      "transitions": {},
-      "structural_vulnerabilities": [],
-      "evidences": [],
       "manager": "高木 琢也",
-      "previous_managers_2026": [],
-      "competition_scope": "J1_2026",
-      "key_players_2026": [
-        "江川 湧清",
-        "山田 陸",
-        "翁長 聖",
-        "進藤 亮佑",
-        "長谷川 元希",
-        "チアゴ サンタナ",
-        "ディエゴ ピトゥカ",
-        "山口 蛍",
-        "関口 正大",
-        "岩崎 悠人"
+      "base_formation": "3-4-2-1",
+      "alternative_formations": [],
+      "in_possession": {
+        "build_up_style": "direct_channel_vertical",
+        "target_reliance": "high",
+        "progression_route": "direct_wb_or_front_target",
+        "tempo": "high_tempo_vertical",
+        "summary": "3-4-2-1の堅牢なブロックから、ボール奪取後は手数をかけずに最前線のターゲットやWBの走力を活かして縦へ速く運ぶ直截的な前進スタイル（平均保持率45.4%）。"
+      },
+      "out_of_possession": {
+        "defensive_line": "mid_to_low_block_5_back",
+        "pressing_trigger": "midfield_interception_and_wb_press",
+        "pressing_funnel": "funnel_into_center_crowd",
+        "block_shape": "5-4-1_or_5-2-3_low_block",
+        "summary": "非保持時は両WBが最終ラインに吸収されて5バック化し、自陣ペナルティエリア幅を強固に閉ざして中央への侵入をシャットアウトする組織的ブロック守備。"
+      },
+      "transitions": {
+        "positive": "immediate_vertical_attack",
+        "negative": "immediate_drop_to_compact_block"
+      },
+      "structural_vulnerabilities": [
+        "5バックで深く押し込まれた際のセカンドボール回収遅れと波状攻撃の被弾",
+        "前線孤立によるボールキープ失敗からのショートカウンター",
+        "相手のミドルシュートに対するボックス手前バイタルエリアの寄せの遅延"
+      ],
+      "evidences": [
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260809_VVN_SAN",
+          "speaker": "高木 琢也 監督",
+          "quote": "もちろんつなぐという選択肢も含みながらミーティング、それからトレーニングもやってきたのですが、やっぱり京都さんのスプリント、それからキワの速さ・強さというのに食われると、自分たちもリズムを失ってしまうということも少し(リスクとして)あったので、少し回避するような形で、裏返すという選択肢を多く取りにいった中で、選手たちも良い判断をしてくれたと思います。",
+          "context": "第1節 V・ファーレン長崎 vs 京都サンガF.C. (Match ID: 20260809_VVN_SAN) (節: 第1節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_URA_VVN",
+          "speaker": "高木 琢也 監督",
+          "quote": "そのときの選手たちの状況で変えていったのですが、そういったことも前向きにとらえて選手たちがプレーしていかなければ、なかなかうまくいかないという感じがありました。 ゲームを終えてからも少し話しましたし、これから(次の試合まで)少し時間が空きますので、しっかりと対話を行いながら今日のゲームの反省をしていきたいと思います。",
+          "context": "第12節 浦和レッズ vs V・ファーレン長崎 (Match ID: 20261025_URA_VVN) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_VVN_NAG",
+          "speaker": "高木 琢也 監督",
+          "quote": "今日はミラーゲームで、ある種の戦いやすさ。 難しさもあるのですけども、戦いやすい状況が生まれたということと、それからマテ(マテウス ジェズス)とチアゴ(サンタナ)の個人の強さというところで、良い形をむき出しにできたというところは、チームが得点を取るに至る、それから勝利に至るまでというところでできたんじゃないかなと。",
+          "context": "第7節 V・ファーレン長崎 vs 名古屋グランパス (Match ID: 20260912_VVN_NAG) (節: 第7節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_URA_VVN",
+          "speaker": "高木 琢也 監督",
+          "quote": "僕も今まで長くサッカーに携わってきましたけど、初めての経験だったのですが......。 言っていいのかな、ハチに刺されたと。 スズメバチということで、ちょっと時間がかかってしまいました。 もちろんそうです。 後半の頭から少し形を変えましたが、サイドの選手が相手のSBもしくはボランチに対して出られなくなっていました。",
+          "context": "第12節 浦和レッズ vs V・ファーレン長崎 (Match ID: 20261025_URA_VVN) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20261025_URA_VVN",
+          "speaker": "高木 琢也 監督",
+          "quote": "間延びしてアプローチを掛けられなくなって押し込まれてしまうシーンが増えたと思います。 正直に言うと、逆効果であったかなと思いますので、自分としての反省もあります。 後半のスタートだったので、自分の中ではジャンプするアプローチ、要するに長い距離のアプローチができるという想定で変えましたので、そこは想定外の部分でした。",
+          "context": "第12節 浦和レッズ vs V・ファーレン長崎 (Match ID: 20261025_URA_VVN) (節: 第12節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260906_VOB_VVN",
+          "speaker": "高木 琢也 監督",
+          "quote": "リスタートで先に失点をしてしまったんですが、神戸さんのリスタートに関してはかなりレベルが高いので、そこに自分たちの対応をうまくハメることができなかったのも反省しなくてはいけない部分だと思っています。 途中、少し形を変えて対応しましたけども、その辺は選手たちも納得して対応してくれたということには感謝しています。",
+          "context": "第6節 ヴィッセル神戸 vs V・ファーレン長崎 (Match ID: 20260906_VOB_VVN) (節: 第6節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260829_VVN_FCT",
+          "speaker": "高木 琢也 監督",
+          "quote": "ありきたりな言葉にはなりますけど、ゲームの入りの時間というのはすごく重要だったと思っています。 FC東京さんの試合をすべて見ていく中で、やっぱり入りの時間帯のプレーの速さと強さというのは見て感じていましたし、そこに対してのアプローチがあまりうまくいかなかった、足りなかったのかなということは少し感じています。",
+          "context": "第4節 V・ファーレン長崎 vs FC東京 (Match ID: 20260829_VVN_FCT) (節: 第4節)"
+        },
+        {
+          "source_type": "OFFICIAL_PRESS_CONFERENCE",
+          "match_id": "20260912_VVN_NAG",
+          "speaker": "高木 琢也 監督",
+          "quote": "良い表現ができたんじゃないかなと思います。 ただ彼ら2人だけじゃなくて、ほかの選手もやれることを本当に精一杯やってくれたと思いますし、前半の相手の強いアプローチに対して、落ち着いてやってくれたと思います。 あの時間帯で失点をしなかったことが、ゲームの大きな流れになったんじゃないかなというふうに思います。",
+          "context": "第7節 V・ファーレン長崎 vs 名古屋グランパス (Match ID: 20260912_VVN_NAG) (節: 第7節)"
+        }
       ]
     }
   }

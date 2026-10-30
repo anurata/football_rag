@@ -1,38 +1,1700 @@
 {
-  "match_id": "20260919_KAW_KAS",
-  "home_team": "KAW",
-  "away_team": "鹿島アントラーズ",
-  "score": {
-    "home": 3,
-    "away": 3
+  "game_id": "2026091909",
+  "url": "https://soccer.yahoo.co.jp/jleague/category/j1/game/2026091909/stats",
+  "match_info": {
+    "section": "J1 第8節",
+    "datetime_venue": "9/19（土）18:00Uvanceとどろきスタジアム by Fujitsu",
+    "home_team": "川崎フロンターレ",
+    "away_team": "鹿島アントラーズ",
+    "score": "3 - 3",
+    "home_scorers": [
+      {
+        "player": "マルシーニョ",
+        "time": "前48'"
+      },
+      {
+        "player": "伊藤 達哉",
+        "time": "後9'"
+      },
+      {
+        "player": "ペドロ ホマーノ",
+        "time": "後52'"
+      }
+    ],
+    "away_scorers": [
+      {
+        "player": "レオ セアラ",
+        "time": "前44'"
+      },
+      {
+        "player": "松村 優太",
+        "time": "後38'"
+      }
+    ]
   },
   "team_stats": {
-    "home": {
-      "shots": 24,
-      "shots_on_target": 11,
-      "possession": 52.0,
-      "pass_success": 83.0,
-      "distance_km": 115.4,
-      "sprints": 109,
-      "offsides": 0,
-      "corner_kicks": 3,
-      "free_kicks": 16,
-      "cards": "警告:4 / 退場:0"
-    },
-    "away": {
-      "shots": 13,
-      "shots_on_target": 7,
-      "possession": 48.0,
-      "pass_success": 81.0,
-      "distance_km": 112.8,
-      "sprints": 120,
-      "offsides": 2,
-      "corner_kicks": 2,
-      "free_kicks": 22,
-      "cards": "警告:1 / 退場:0"
+    "home_team": "川崎F",
+    "away_team": "鹿島",
+    "metrics": {
+      "保持率": {
+        "川崎F": "52%",
+        "鹿島": "48%"
+      },
+      "シュート": {
+        "川崎F": "24",
+        "鹿島": "13"
+      },
+      "枠内シュート": {
+        "川崎F": "11",
+        "鹿島": "7"
+      },
+      "走行距離": {
+        "川崎F": "115.371km",
+        "鹿島": "112.814km"
+      },
+      "スプリント": {
+        "川崎F": "109",
+        "鹿島": "120"
+      },
+      "パス（成功率）": {
+        "川崎F": "545\n                (82.9%)",
+        "鹿島": "449\n                (81.3%)"
+      },
+      "オフサイド": {
+        "川崎F": "2",
+        "鹿島": "0"
+      },
+      "FK": {
+        "川崎F": "16",
+        "鹿島": "22"
+      },
+      "CK": {
+        "川崎F": "3",
+        "鹿島": "2"
+      },
+      "PK": {
+        "川崎F": "0",
+        "鹿島": "0"
+      },
+      "警告・退場": {
+        "川崎F": "イエローカード4レッドカード0",
+        "鹿島": "イエローカード3レッドカード0"
+      }
     }
   },
-  "venue": "Ｕｖａｎｃｅとどろきスタジアム　ｂｙ　Ｆｕｊｉｔｓｕ",
-  "weather": "天候:雨一時曇り｜気温:24℃｜湿度:90%",
-  "spectators": 22734
+  "player_stats": [
+    {
+      "position": "FW",
+      "player_name": "レオ セアラ",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "7",
+        "shoot_on_target": "5",
+        "goals": "2",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.655km",
+        "first_half": "5.149km",
+        "second_half": "5.506km"
+      },
+      "sprint": {
+        "total": "15",
+        "first_half": "9",
+        "second_half": "6",
+        "max_speed": "33.3km/h"
+      },
+      "pass": {
+        "pass_success": "18(66.7%)",
+        "attacking_third_pass": "8(62.5%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "42",
+        "attacking_third": "23",
+        "middle_third": "15",
+        "defensive_third": "4"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "3"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "脇坂 泰斗",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "5",
+        "shoot_on_target": "2",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "12.081km",
+        "first_half": "5.903km",
+        "second_half": "6.178km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "1",
+        "second_half": "2",
+        "max_speed": "28.3km/h"
+      },
+      "pass": {
+        "pass_success": "49(87.8%)",
+        "attacking_third_pass": "25(84%)",
+        "through_pass": "3(33.3%)",
+        "cross": "0(0%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "99",
+        "attacking_third": "51",
+        "middle_third": "46",
+        "defensive_third": "2"
+      },
+      "set_pieces": {
+        "fk": "3",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "ペドロ ホマーノ",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "2",
+        "goals": "1",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "3",
+        "block": "2",
+        "clear": "6",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.504km",
+        "first_half": "4.472km",
+        "second_half": "5.032km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "4",
+        "second_half": "8",
+        "max_speed": "34km/h"
+      },
+      "pass": {
+        "pass_success": "53(77.4%)",
+        "attacking_third_pass": "1(0%)",
+        "through_pass": "0(0%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "105",
+        "attacking_third": "4",
+        "middle_third": "51",
+        "defensive_third": "50"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "山本 悠樹",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "2",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "4",
+        "block": "3",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "11.363km",
+        "first_half": "5.354km",
+        "second_half": "6.009km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "2",
+        "second_half": "1",
+        "max_speed": "28.5km/h"
+      },
+      "pass": {
+        "pass_success": "79(84.8%)",
+        "attacking_third_pass": "20(80%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "155",
+        "attacking_third": "38",
+        "middle_third": "95",
+        "defensive_third": "22"
+      },
+      "set_pieces": {
+        "fk": "4",
+        "ck": "2"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "徳田 誉",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "6.117km",
+        "first_half": "6.117km",
+        "second_half": "-"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "1",
+        "second_half": "-",
+        "max_speed": "26.1km/h"
+      },
+      "pass": {
+        "pass_success": "7(42.9%)",
+        "attacking_third_pass": "3(33.3%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "14",
+        "attacking_third": "5",
+        "middle_third": "8",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "デリキ ラセルダ",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.296km",
+        "first_half": "5.238km",
+        "second_half": "4.058km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "6",
+        "second_half": "6",
+        "max_speed": "32.8km/h"
+      },
+      "pass": {
+        "pass_success": "18(72.2%)",
+        "attacking_third_pass": "11(54.5%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "38",
+        "attacking_third": "23",
+        "middle_third": "10",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "3",
+        "suffer_foul": "3"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "三浦 颯太",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.071km",
+        "first_half": "4.97km",
+        "second_half": "5.101km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "5",
+        "second_half": "7",
+        "max_speed": "34.2km/h"
+      },
+      "pass": {
+        "pass_success": "56(73.2%)",
+        "attacking_third_pass": "20(50%)",
+        "through_pass": "0(0%)",
+        "cross": "6(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "101",
+        "attacking_third": "36",
+        "middle_third": "50",
+        "defensive_third": "15"
+      },
+      "set_pieces": {
+        "fk": "4",
+        "ck": "1"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "伊藤 達哉",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "1",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "3(66.7%)",
+        "loose_ball_recovery": "5",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.371km",
+        "first_half": "5.002km",
+        "second_half": "4.369km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "8",
+        "second_half": "4",
+        "max_speed": "31.8km/h"
+      },
+      "pass": {
+        "pass_success": "23(100%)",
+        "attacking_third_pass": "14(100%)",
+        "through_pass": "0(0%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "51",
+        "attacking_third": "29",
+        "middle_third": "19",
+        "defensive_third": "3"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "4"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "マルシーニョ",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "1",
+        "dribble_success": "3(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "4",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "7.216km",
+        "first_half": "4.889km",
+        "second_half": "2.327km"
+      },
+      "sprint": {
+        "total": "13",
+        "first_half": "10",
+        "second_half": "3",
+        "max_speed": "31.4km/h"
+      },
+      "pass": {
+        "pass_success": "28(85.7%)",
+        "attacking_third_pass": "15(80%)",
+        "through_pass": "2(100%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "63",
+        "attacking_third": "32",
+        "middle_third": "25",
+        "defensive_third": "6"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "佐々木 旭",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "5",
+        "block": "0",
+        "clear": "4",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "11.101km",
+        "first_half": "5.451km",
+        "second_half": "5.65km"
+      },
+      "sprint": {
+        "total": "15",
+        "first_half": "7",
+        "second_half": "8",
+        "max_speed": "30.6km/h"
+      },
+      "pass": {
+        "pass_success": "57(75.4%)",
+        "attacking_third_pass": "20(65%)",
+        "through_pass": "2(50%)",
+        "cross": "4(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "113",
+        "attacking_third": "33",
+        "middle_third": "49",
+        "defensive_third": "31"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "橘田 健人",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "4",
+        "block": "2",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.384km",
+        "first_half": "5.777km",
+        "second_half": "4.607km"
+      },
+      "sprint": {
+        "total": "8",
+        "first_half": "4",
+        "second_half": "4",
+        "max_speed": "29km/h"
+      },
+      "pass": {
+        "pass_success": "56(92.9%)",
+        "attacking_third_pass": "11(81.8%)",
+        "through_pass": "2(50%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "103",
+        "attacking_third": "21",
+        "middle_third": "65",
+        "defensive_third": "17"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "津久井 佳祐",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "2",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "5.796km",
+        "first_half": "5.796km",
+        "second_half": "-"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "-",
+        "max_speed": "27.7km/h"
+      },
+      "pass": {
+        "pass_success": "19(68.4%)",
+        "attacking_third_pass": "2(50%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "40",
+        "attacking_third": "5",
+        "middle_third": "23",
+        "defensive_third": "12"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "松村 優太",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "1",
+        "dribble_success": "4(75%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "4",
+        "block": "3",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.414km",
+        "first_half": "4.848km",
+        "second_half": "5.566km"
+      },
+      "sprint": {
+        "total": "27",
+        "first_half": "11",
+        "second_half": "16",
+        "max_speed": "34.2km/h"
+      },
+      "pass": {
+        "pass_success": "25(84%)",
+        "attacking_third_pass": "15(80%)",
+        "through_pass": "4(100%)",
+        "cross": "3(33.3%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "59",
+        "attacking_third": "32",
+        "middle_third": "18",
+        "defensive_third": "9"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "柴崎 岳",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "3",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "5.706km",
+        "first_half": "-",
+        "second_half": "5.706km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "-",
+        "second_half": "5",
+        "max_speed": "28.7km/h"
+      },
+      "pass": {
+        "pass_success": "28(78.6%)",
+        "attacking_third_pass": "7(85.7%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "47",
+        "attacking_third": "12",
+        "middle_third": "29",
+        "defensive_third": "6"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "1"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "長 璃喜",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "3.61km",
+        "first_half": "-",
+        "second_half": "3.61km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "-",
+        "second_half": "5",
+        "max_speed": "31.7km/h"
+      },
+      "pass": {
+        "pass_success": "14(64.3%)",
+        "attacking_third_pass": "6(66.7%)",
+        "through_pass": "1(0%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "27",
+        "attacking_third": "12",
+        "middle_third": "13",
+        "defensive_third": "2"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "持山 匡佑",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.751km",
+        "first_half": "-",
+        "second_half": "1.751km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "-",
+        "second_half": "1",
+        "max_speed": "27.6km/h"
+      },
+      "pass": {
+        "pass_success": "2(0%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "6",
+        "attacking_third": "3",
+        "middle_third": "3",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "早川 友基",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "2",
+        "clear": "0",
+        "save_rate": "11(72.7%)"
+      },
+      "distance": {
+        "total": "4.697km",
+        "first_half": "2.402km",
+        "second_half": "2.295km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "1",
+        "second_half": "0",
+        "max_speed": "29.3km/h"
+      },
+      "pass": {
+        "pass_success": "29(75.9%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "67",
+        "attacking_third": "0",
+        "middle_third": "0",
+        "defensive_third": "67"
+      },
+      "set_pieces": {
+        "fk": "5",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "スベンド ブローダーセン",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "7(57.1%)"
+      },
+      "distance": {
+        "total": "6.093km",
+        "first_half": "2.994km",
+        "second_half": "3.099km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "0",
+        "max_speed": "24.6km/h"
+      },
+      "pass": {
+        "pass_success": "24(100%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "45",
+        "attacking_third": "0",
+        "middle_third": "1",
+        "defensive_third": "44"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "谷口 栄斗",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "2",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.296km",
+        "first_half": "5.021km",
+        "second_half": "5.275km"
+      },
+      "sprint": {
+        "total": "10",
+        "first_half": "4",
+        "second_half": "6",
+        "max_speed": "29.5km/h"
+      },
+      "pass": {
+        "pass_success": "60(85%)",
+        "attacking_third_pass": "3(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "109",
+        "attacking_third": "4",
+        "middle_third": "54",
+        "defensive_third": "51"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "4",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "キム テヒョン",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.84km",
+        "first_half": "4.896km",
+        "second_half": "4.944km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "4",
+        "second_half": "3",
+        "max_speed": "32.7km/h"
+      },
+      "pass": {
+        "pass_success": "53(86.8%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "100",
+        "attacking_third": "0",
+        "middle_third": "42",
+        "defensive_third": "58"
+      },
+      "set_pieces": {
+        "fk": "3",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "3",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "小川 諒也",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "2(0%)",
+        "loose_ball_recovery": "2",
+        "block": "1",
+        "clear": "5",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.377km",
+        "first_half": "5.162km",
+        "second_half": "5.215km"
+      },
+      "sprint": {
+        "total": "8",
+        "first_half": "5",
+        "second_half": "3",
+        "max_speed": "28.7km/h"
+      },
+      "pass": {
+        "pass_success": "40(72.5%)",
+        "attacking_third_pass": "10(70%)",
+        "through_pass": "0(0%)",
+        "cross": "5(20%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "77",
+        "attacking_third": "14",
+        "middle_third": "48",
+        "defensive_third": "15"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "小池 龍太",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "6",
+        "block": "5",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "7.527km",
+        "first_half": "4.985km",
+        "second_half": "2.542km"
+      },
+      "sprint": {
+        "total": "10",
+        "first_half": "8",
+        "second_half": "2",
+        "max_speed": "32.5km/h"
+      },
+      "pass": {
+        "pass_success": "33(84.8%)",
+        "attacking_third_pass": "5(60%)",
+        "through_pass": "0(0%)",
+        "cross": "2(50%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "70",
+        "attacking_third": "8",
+        "middle_third": "31",
+        "defensive_third": "31"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "植田 直通",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "3(100%)",
+        "loose_ball_recovery": "6",
+        "block": "2",
+        "clear": "7",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.008km",
+        "first_half": "4.819km",
+        "second_half": "5.189km"
+      },
+      "sprint": {
+        "total": "6",
+        "first_half": "4",
+        "second_half": "2",
+        "max_speed": "30.1km/h"
+      },
+      "pass": {
+        "pass_success": "66(95.5%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "135",
+        "attacking_third": "1",
+        "middle_third": "57",
+        "defensive_third": "77"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "マテウス ブエノ",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "5.71km",
+        "first_half": "5.71km",
+        "second_half": "-"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "2",
+        "second_half": "-",
+        "max_speed": "29km/h"
+      },
+      "pass": {
+        "pass_success": "33(90.9%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "2(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "64",
+        "attacking_third": "1",
+        "middle_third": "41",
+        "defensive_third": "22"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "1"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "鈴木 優磨",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "3",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.649km",
+        "first_half": "4.932km",
+        "second_half": "3.717km"
+      },
+      "sprint": {
+        "total": "20",
+        "first_half": "15",
+        "second_half": "5",
+        "max_speed": "29.3km/h"
+      },
+      "pass": {
+        "pass_success": "19(57.9%)",
+        "attacking_third_pass": "5(60%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "29",
+        "attacking_third": "6",
+        "middle_third": "19",
+        "defensive_third": "4"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "4",
+        "suffer_foul": "4"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "広瀬 陸斗",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "3.104km",
+        "first_half": "-",
+        "second_half": "3.104km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "-",
+        "second_half": "2",
+        "max_speed": "29km/h"
+      },
+      "pass": {
+        "pass_success": "11(81.8%)",
+        "attacking_third_pass": "2(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "21",
+        "attacking_third": "5",
+        "middle_third": "9",
+        "defensive_third": "7"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "三竿 健斗",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "1",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "6.386km",
+        "first_half": "-",
+        "second_half": "6.386km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "30.6km/h"
+      },
+      "pass": {
+        "pass_success": "35(82.9%)",
+        "attacking_third_pass": "10(70%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "51",
+        "attacking_third": "13",
+        "middle_third": "26",
+        "defensive_third": "12"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "3"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "ヤン マテウス",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "2",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "2.045km",
+        "first_half": "-",
+        "second_half": "2.045km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "31.3km/h"
+      },
+      "pass": {
+        "pass_success": "2(100%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "7",
+        "attacking_third": "3",
+        "middle_third": "3",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "河原 創",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.818km",
+        "first_half": "-",
+        "second_half": "1.818km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "-",
+        "second_half": "1",
+        "max_speed": "27.4km/h"
+      },
+      "pass": {
+        "pass_success": "13(84.6%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "0(0%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "23",
+        "attacking_third": "6",
+        "middle_third": "11",
+        "defensive_third": "6"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "家長 昭博",
+      "team_name": "川崎F",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.416km",
+        "first_half": "-",
+        "second_half": "1.416km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "-",
+        "second_half": "2",
+        "max_speed": "27.7km/h"
+      },
+      "pass": {
+        "pass_success": "9(77.8%)",
+        "attacking_third_pass": "6(66.7%)",
+        "through_pass": "1(100%)",
+        "cross": "2(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "17",
+        "attacking_third": "11",
+        "middle_third": "6",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "チャヴリッチ",
+      "team_name": "鹿島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "5.783km",
+        "first_half": "-",
+        "second_half": "5.783km"
+      },
+      "sprint": {
+        "total": "10",
+        "first_half": "-",
+        "second_half": "10",
+        "max_speed": "34.8km/h"
+      },
+      "pass": {
+        "pass_success": "17(76.5%)",
+        "attacking_third_pass": "10(80%)",
+        "through_pass": "2(0%)",
+        "cross": "2(50%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "24",
+        "attacking_third": "13",
+        "middle_third": "8",
+        "defensive_third": "3"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    }
+  ],
+  "match_id": "20260919_KAW_KAS"
 }

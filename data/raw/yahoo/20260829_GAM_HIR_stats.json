@@ -1,38 +1,1522 @@
 {
-  "match_id": "20260829_GAM_HIR",
-  "home_team": "ガンバ大阪",
-  "away_team": "サンフレッチェ広島",
-  "score": {
-    "home": 0,
-    "away": 0
+  "game_id": "2026082902",
+  "url": "https://soccer.yahoo.co.jp/jleague/category/j1/game/2026082902/stats",
+  "match_info": {
+    "section": "J1 第4節",
+    "datetime_venue": "8/29（土）18:00パナソニック スタジアム 吹田",
+    "home_team": "ガンバ大阪",
+    "away_team": "サンフレッチェ広島",
+    "score": "0 - 0",
+    "home_scorers": [],
+    "away_scorers": []
   },
   "team_stats": {
-    "home": {
-      "shots": 11,
-      "shots_on_target": 4,
-      "possession": 49.0,
-      "pass_success": 82.0,
-      "distance_km": 106.7,
-      "sprints": 70,
-      "offsides": 1,
-      "corner_kicks": 5,
-      "free_kicks": 11,
-      "cards": "警告:1 / 退場:1"
-    },
-    "away": {
-      "shots": 14,
-      "shots_on_target": 4,
-      "possession": 51.0,
-      "pass_success": 81.0,
-      "distance_km": 105.9,
-      "sprints": 72,
-      "offsides": 3,
-      "corner_kicks": 7,
-      "free_kicks": 11,
-      "cards": "警告:2 / 退場:0"
+    "home_team": "G大阪",
+    "away_team": "広島",
+    "metrics": {
+      "保持率": {
+        "G大阪": "49%",
+        "広島": "51%"
+      },
+      "シュート": {
+        "G大阪": "11",
+        "広島": "14"
+      },
+      "枠内シュート": {
+        "G大阪": "4",
+        "広島": "4"
+      },
+      "走行距離": {
+        "G大阪": "106.682km",
+        "広島": "105.925km"
+      },
+      "スプリント": {
+        "G大阪": "70",
+        "広島": "72"
+      },
+      "パス（成功率）": {
+        "G大阪": "422\n                (82.2%)",
+        "広島": "492\n                (81.3%)"
+      },
+      "オフサイド": {
+        "G大阪": "3",
+        "広島": "1"
+      },
+      "FK": {
+        "G大阪": "11",
+        "広島": "11"
+      },
+      "CK": {
+        "G大阪": "5",
+        "広島": "7"
+      },
+      "PK": {
+        "G大阪": "0",
+        "広島": "0"
+      },
+      "警告・退場": {
+        "G大阪": "イエローカード1レッドカード1",
+        "広島": "イエローカード2レッドカード0"
+      }
     }
   },
-  "venue": "パナソニック スタジアム 吹田",
-  "weather": "天候:曇り一時雨｜気温:29.1℃｜湿度:71%",
-  "spectators": 30075
+  "player_stats": [
+    {
+      "position": "FW",
+      "player_name": "加藤 陸次樹",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "2",
+        "goals": "0",
+        "dribble_success": "2(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(0%)",
+        "loose_ball_recovery": "2",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.462km",
+        "first_half": "5.122km",
+        "second_half": "5.34km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "4",
+        "second_half": "3",
+        "max_speed": "31.2km/h"
+      },
+      "pass": {
+        "pass_success": "27(77.8%)",
+        "attacking_third_pass": "16(68.8%)",
+        "through_pass": "1(0%)",
+        "cross": "2(50%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "62",
+        "attacking_third": "36",
+        "middle_third": "21",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "デニス ヒュメット",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "2",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "2",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.345km",
+        "first_half": "5.265km",
+        "second_half": "5.08km"
+      },
+      "sprint": {
+        "total": "9",
+        "first_half": "5",
+        "second_half": "4",
+        "max_speed": "31.5km/h"
+      },
+      "pass": {
+        "pass_success": "13(69.2%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "34",
+        "attacking_third": "15",
+        "middle_third": "14",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "中野 就斗",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "2(100%)"
+      },
+      "defense": {
+        "tackle_success": "7(71.4%)",
+        "loose_ball_recovery": "9",
+        "block": "4",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.991km",
+        "first_half": "4.968km",
+        "second_half": "5.023km"
+      },
+      "sprint": {
+        "total": "14",
+        "first_half": "7",
+        "second_half": "7",
+        "max_speed": "31.9km/h"
+      },
+      "pass": {
+        "pass_success": "53(83%)",
+        "attacking_third_pass": "17(70.6%)",
+        "through_pass": "2(100%)",
+        "cross": "6(33.3%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "112",
+        "attacking_third": "39",
+        "middle_third": "41",
+        "defensive_third": "32"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "新井 直人",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "2",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "9",
+        "block": "1",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.451km",
+        "first_half": "5.152km",
+        "second_half": "5.299km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "2",
+        "second_half": "3",
+        "max_speed": "30.6km/h"
+      },
+      "pass": {
+        "pass_success": "60(85%)",
+        "attacking_third_pass": "20(75%)",
+        "through_pass": "2(100%)",
+        "cross": "3(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "117",
+        "attacking_third": "37",
+        "middle_third": "56",
+        "defensive_third": "24"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "鈴木 徳真",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "6",
+        "block": "0",
+        "clear": "6",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.997km",
+        "first_half": "5.678km",
+        "second_half": "5.319km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "1",
+        "second_half": "1",
+        "max_speed": "26.7km/h"
+      },
+      "pass": {
+        "pass_success": "52(94.2%)",
+        "attacking_third_pass": "7(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "90",
+        "attacking_third": "12",
+        "middle_third": "54",
+        "defensive_third": "24"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "3"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "鈴木 章斗",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "3",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.025km",
+        "first_half": "4.644km",
+        "second_half": "4.381km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "5",
+        "second_half": "2",
+        "max_speed": "29.8km/h"
+      },
+      "pass": {
+        "pass_success": "19(68.4%)",
+        "attacking_third_pass": "10(60%)",
+        "through_pass": "3(66.7%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "41",
+        "attacking_third": "24",
+        "middle_third": "15",
+        "defensive_third": "2"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "イッサム ジェバリ",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "2",
+        "block": "0",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.922km",
+        "first_half": "4.909km",
+        "second_half": "4.013km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "1",
+        "second_half": "0",
+        "max_speed": "27.4km/h"
+      },
+      "pass": {
+        "pass_success": "36(66.7%)",
+        "attacking_third_pass": "13(76.9%)",
+        "through_pass": "12(50%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "80",
+        "attacking_third": "24",
+        "middle_third": "46",
+        "defensive_third": "10"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "セバスティアン アレー",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "6.703km",
+        "first_half": "5.128km",
+        "second_half": "1.575km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "4",
+        "second_half": "1",
+        "max_speed": "29.1km/h"
+      },
+      "pass": {
+        "pass_success": "25(72%)",
+        "attacking_third_pass": "11(72.7%)",
+        "through_pass": "2(50%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "42",
+        "attacking_third": "21",
+        "middle_third": "21",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "初瀬 亮",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "3(100%)",
+        "loose_ball_recovery": "1",
+        "block": "2",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.096km",
+        "first_half": "5.164km",
+        "second_half": "4.932km"
+      },
+      "sprint": {
+        "total": "8",
+        "first_half": "5",
+        "second_half": "3",
+        "max_speed": "29.9km/h"
+      },
+      "pass": {
+        "pass_success": "39(87.2%)",
+        "attacking_third_pass": "8(62.5%)",
+        "through_pass": "0(0%)",
+        "cross": "3(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "72",
+        "attacking_third": "14",
+        "middle_third": "30",
+        "defensive_third": "28"
+      },
+      "set_pieces": {
+        "fk": "3",
+        "ck": "2"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "佐々木 翔悟",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "4(25%)",
+        "loose_ball_recovery": "2",
+        "block": "0",
+        "clear": "8",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.64km",
+        "first_half": "5.039km",
+        "second_half": "4.601km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "2",
+        "second_half": "3",
+        "max_speed": "28.5km/h"
+      },
+      "pass": {
+        "pass_success": "50(86%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "108",
+        "attacking_third": "3",
+        "middle_third": "46",
+        "defensive_third": "59"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "東 俊希",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "4",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.049km",
+        "first_half": "4.977km",
+        "second_half": "5.072km"
+      },
+      "sprint": {
+        "total": "6",
+        "first_half": "5",
+        "second_half": "1",
+        "max_speed": "28.9km/h"
+      },
+      "pass": {
+        "pass_success": "51(64.7%)",
+        "attacking_third_pass": "26(61.5%)",
+        "through_pass": "3(33.3%)",
+        "cross": "9(22.2%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "87",
+        "attacking_third": "43",
+        "middle_third": "31",
+        "defensive_third": "13"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "2"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "倉田 秋",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "3",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "6.454km",
+        "first_half": "5.212km",
+        "second_half": "1.242km"
+      },
+      "sprint": {
+        "total": "4",
+        "first_half": "4",
+        "second_half": "0",
+        "max_speed": "29.4km/h"
+      },
+      "pass": {
+        "pass_success": "37(83.8%)",
+        "attacking_third_pass": "2(50%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "63",
+        "attacking_third": "7",
+        "middle_third": "41",
+        "defensive_third": "15"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "食野 亮太郎",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "3(33.3%)"
+      },
+      "defense": {
+        "tackle_success": "4(25%)",
+        "loose_ball_recovery": "4",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.418km",
+        "first_half": "5.717km",
+        "second_half": "3.701km"
+      },
+      "sprint": {
+        "total": "4",
+        "first_half": "2",
+        "second_half": "2",
+        "max_speed": "27.7km/h"
+      },
+      "pass": {
+        "pass_success": "34(88.2%)",
+        "attacking_third_pass": "12(91.7%)",
+        "through_pass": "1(0%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "70",
+        "attacking_third": "25",
+        "middle_third": "34",
+        "defensive_third": "11"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "川村 拓夢",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "4km",
+        "first_half": "-",
+        "second_half": "4km"
+      },
+      "sprint": {
+        "total": "8",
+        "first_half": "-",
+        "second_half": "8",
+        "max_speed": "29.7km/h"
+      },
+      "pass": {
+        "pass_success": "6(83.3%)",
+        "attacking_third_pass": "6(83.3%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "14",
+        "attacking_third": "11",
+        "middle_third": "1",
+        "defensive_third": "2"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "松本 泰志",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "5",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "6.06km",
+        "first_half": "-",
+        "second_half": "6.06km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "27.6km/h"
+      },
+      "pass": {
+        "pass_success": "42(85.7%)",
+        "attacking_third_pass": "19(78.9%)",
+        "through_pass": "2(50%)",
+        "cross": "3(66.7%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "75",
+        "attacking_third": "30",
+        "middle_third": "34",
+        "defensive_third": "11"
+      },
+      "set_pieces": {
+        "fk": "3",
+        "ck": "4"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "一森 純",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "1",
+        "save_rate": "4(100%)"
+      },
+      "distance": {
+        "total": "4.364km",
+        "first_half": "2.291km",
+        "second_half": "2.073km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "0",
+        "max_speed": "24.3km/h"
+      },
+      "pass": {
+        "pass_success": "16(81.3%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "38",
+        "attacking_third": "0",
+        "middle_third": "0",
+        "defensive_third": "38"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "大内 一生",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "4",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "4(100%)"
+      },
+      "distance": {
+        "total": "4.733km",
+        "first_half": "2.408km",
+        "second_half": "2.325km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "0",
+        "max_speed": "23.2km/h"
+      },
+      "pass": {
+        "pass_success": "29(79.3%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "55",
+        "attacking_third": "0",
+        "middle_third": "1",
+        "defensive_third": "54"
+      },
+      "set_pieces": {
+        "fk": "4",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "中谷 進之介",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "2",
+        "clear": "6",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.817km",
+        "first_half": "4.659km",
+        "second_half": "4.158km"
+      },
+      "sprint": {
+        "total": "9",
+        "first_half": "4",
+        "second_half": "5",
+        "max_speed": "29.6km/h"
+      },
+      "pass": {
+        "pass_success": "41(78%)",
+        "attacking_third_pass": "1(0%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "80",
+        "attacking_third": "1",
+        "middle_third": "41",
+        "defensive_third": "38"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "荒木 隼人",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "2",
+        "block": "2",
+        "clear": "4",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.436km",
+        "first_half": "4.669km",
+        "second_half": "4.767km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "5",
+        "second_half": "2",
+        "max_speed": "30.6km/h"
+      },
+      "pass": {
+        "pass_success": "50(84%)",
+        "attacking_third_pass": "3(66.7%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "91",
+        "attacking_third": "5",
+        "middle_third": "50",
+        "defensive_third": "36"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "岸本 武流",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "2",
+        "block": "4",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.676km",
+        "first_half": "5.226km",
+        "second_half": "4.45km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "7",
+        "second_half": "5",
+        "max_speed": "34km/h"
+      },
+      "pass": {
+        "pass_success": "42(76.2%)",
+        "attacking_third_pass": "8(75%)",
+        "through_pass": "1(100%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "75",
+        "attacking_third": "14",
+        "middle_third": "38",
+        "defensive_third": "23"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "1",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "佐々木 翔",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(50%)",
+        "loose_ball_recovery": "2",
+        "block": "3",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.916km",
+        "first_half": "4.407km",
+        "second_half": "4.509km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "4",
+        "second_half": "1",
+        "max_speed": "30km/h"
+      },
+      "pass": {
+        "pass_success": "62(95.2%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "116",
+        "attacking_third": "6",
+        "middle_third": "72",
+        "defensive_third": "38"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "川辺 駿",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "0",
+        "block": "3",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "7.647km",
+        "first_half": "5.068km",
+        "second_half": "2.579km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "2",
+        "second_half": "1",
+        "max_speed": "31.9km/h"
+      },
+      "pass": {
+        "pass_success": "33(90.9%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "0(0%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "61",
+        "attacking_third": "7",
+        "middle_third": "34",
+        "defensive_third": "20"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "中島 洋太朗",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "5.559km",
+        "first_half": "5.559km",
+        "second_half": "-"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "-",
+        "max_speed": "24.4km/h"
+      },
+      "pass": {
+        "pass_success": "31(71%)",
+        "attacking_third_pass": "3(66.7%)",
+        "through_pass": "1(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "52",
+        "attacking_third": "7",
+        "middle_third": "30",
+        "defensive_third": "15"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "1"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "山下 諒也",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "8",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.204km",
+        "first_half": "5.028km",
+        "second_half": "5.176km"
+      },
+      "sprint": {
+        "total": "13",
+        "first_half": "10",
+        "second_half": "3",
+        "max_speed": "31.5km/h"
+      },
+      "pass": {
+        "pass_success": "41(78%)",
+        "attacking_third_pass": "15(73.3%)",
+        "through_pass": "1(100%)",
+        "cross": "2(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "79",
+        "attacking_third": "31",
+        "middle_third": "37",
+        "defensive_third": "11"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "イーライ アダムス",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.222km",
+        "first_half": "-",
+        "second_half": "1.222km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "-",
+        "second_half": "2",
+        "max_speed": "30.5km/h"
+      },
+      "pass": {
+        "pass_success": "0(0%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "3",
+        "attacking_third": "1",
+        "middle_third": "1",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "吉原 優輝",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "4.303km",
+        "first_half": "-",
+        "second_half": "4.303km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "-",
+        "second_half": "1",
+        "max_speed": "28.3km/h"
+      },
+      "pass": {
+        "pass_success": "17(88.2%)",
+        "attacking_third_pass": "4(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "37",
+        "attacking_third": "6",
+        "middle_third": "22",
+        "defensive_third": "9"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "3",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "名和田 我空",
+      "team_name": "G大阪",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "2",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "2.224km",
+        "first_half": "-",
+        "second_half": "2.224km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "-",
+        "second_half": "0",
+        "max_speed": "25.6km/h"
+      },
+      "pass": {
+        "pass_success": "2(50%)",
+        "attacking_third_pass": "1(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "9",
+        "attacking_third": "5",
+        "middle_third": "3",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "鮎川 峻",
+      "team_name": "広島",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "2.893km",
+        "first_half": "-",
+        "second_half": "2.893km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "-",
+        "second_half": "2",
+        "max_speed": "31km/h"
+      },
+      "pass": {
+        "pass_success": "2(100%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "6",
+        "attacking_third": "3",
+        "middle_third": "2",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    }
+  ],
+  "match_id": "20260829_GAM_HIR"
 }

@@ -1,38 +1,1696 @@
 {
-  "match_id": "20260829_URA_MAR",
-  "home_team": "浦和レッズ",
-  "away_team": "横浜F・マリノス",
-  "score": {
-    "home": 3,
-    "away": 2
+  "game_id": "2026082905",
+  "url": "https://soccer.yahoo.co.jp/jleague/category/j1/game/2026082905/stats",
+  "match_info": {
+    "section": "J1 第4節",
+    "datetime_venue": "8/29（土）19:00埼玉スタジアム2002",
+    "home_team": "浦和レッズ",
+    "away_team": "横浜F・マリノス",
+    "score": "3 - 2",
+    "home_scorers": [
+      {
+        "player": "マテウス サヴィオ",
+        "time": "前40'"
+      },
+      {
+        "player": "根本 健太",
+        "time": "後19'"
+      },
+      {
+        "player": "南野 遥海",
+        "time": "後26'"
+      }
+    ],
+    "away_scorers": [
+      {
+        "player": "谷村 海那",
+        "time": "前38'"
+      }
+    ]
   },
   "team_stats": {
-    "home": {
-      "shots": 17,
-      "shots_on_target": 8,
-      "possession": 47.0,
-      "pass_success": 67.0,
-      "distance_km": 119.1,
-      "sprints": 150,
-      "offsides": 2,
-      "corner_kicks": 4,
-      "free_kicks": 19,
-      "cards": "警告:1 / 退場:0"
-    },
-    "away": {
-      "shots": 9,
-      "shots_on_target": 6,
-      "possession": 53.0,
-      "pass_success": 75.0,
-      "distance_km": 114.5,
-      "sprints": 111,
-      "offsides": 5,
-      "corner_kicks": 3,
-      "free_kicks": 22,
-      "cards": "警告:3 / 退場:0"
+    "home_team": "浦和",
+    "away_team": "横浜FM",
+    "metrics": {
+      "保持率": {
+        "浦和": "47%",
+        "横浜FM": "53%"
+      },
+      "シュート": {
+        "浦和": "17",
+        "横浜FM": "9"
+      },
+      "枠内シュート": {
+        "浦和": "8",
+        "横浜FM": "6"
+      },
+      "走行距離": {
+        "浦和": "119.103km",
+        "横浜FM": "114.547km"
+      },
+      "スプリント": {
+        "浦和": "150",
+        "横浜FM": "111"
+      },
+      "パス（成功率）": {
+        "浦和": "350\n                (67.4%)",
+        "横浜FM": "388\n                (75%)"
+      },
+      "オフサイド": {
+        "浦和": "5",
+        "横浜FM": "2"
+      },
+      "FK": {
+        "浦和": "19",
+        "横浜FM": "22"
+      },
+      "CK": {
+        "浦和": "4",
+        "横浜FM": "3"
+      },
+      "PK": {
+        "浦和": "0",
+        "横浜FM": "0"
+      },
+      "警告・退場": {
+        "浦和": "イエローカード1レッドカード0",
+        "横浜FM": "イエローカード3レッドカード0"
+      }
     }
   },
-  "venue": "埼玉スタジアム２００２",
-  "weather": "天候:雨のち曇り｜気温:20.8℃｜湿度:90%",
-  "spectators": 33863
+  "player_stats": [
+    {
+      "position": "FW",
+      "player_name": "マテウス サヴィオ",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "5",
+        "shoot_on_target": "2",
+        "goals": "1",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "3(66.7%)",
+        "loose_ball_recovery": "6",
+        "block": "4",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.577km",
+        "first_half": "5.938km",
+        "second_half": "4.639km"
+      },
+      "sprint": {
+        "total": "22",
+        "first_half": "13",
+        "second_half": "9",
+        "max_speed": "33.2km/h"
+      },
+      "pass": {
+        "pass_success": "23(73.9%)",
+        "attacking_third_pass": "7(100%)",
+        "through_pass": "3(33.3%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "62",
+        "attacking_third": "24",
+        "middle_third": "30",
+        "defensive_third": "8"
+      },
+      "set_pieces": {
+        "fk": "4",
+        "ck": "2"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "渡邊 凌磨",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "3",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "4(100%)",
+        "loose_ball_recovery": "3",
+        "block": "1",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "12.918km",
+        "first_half": "6.851km",
+        "second_half": "6.067km"
+      },
+      "sprint": {
+        "total": "15",
+        "first_half": "8",
+        "second_half": "7",
+        "max_speed": "31.6km/h"
+      },
+      "pass": {
+        "pass_success": "32(65.6%)",
+        "attacking_third_pass": "10(80%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "61",
+        "attacking_third": "21",
+        "middle_third": "28",
+        "defensive_third": "12"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "2"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "ダニーロ ボザ",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "0",
+        "block": "2",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "11.665km",
+        "first_half": "6.171km",
+        "second_half": "5.494km"
+      },
+      "sprint": {
+        "total": "14",
+        "first_half": "11",
+        "second_half": "3",
+        "max_speed": "29.3km/h"
+      },
+      "pass": {
+        "pass_success": "34(67.6%)",
+        "attacking_third_pass": "9(88.9%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "64",
+        "attacking_third": "18",
+        "middle_third": "33",
+        "defensive_third": "13"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "根本 健太",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "2",
+        "goals": "1",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "2",
+        "block": "2",
+        "clear": "4",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.69km",
+        "first_half": "5.584km",
+        "second_half": "5.106km"
+      },
+      "sprint": {
+        "total": "6",
+        "first_half": "3",
+        "second_half": "3",
+        "max_speed": "30.2km/h"
+      },
+      "pass": {
+        "pass_success": "33(72.7%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "66",
+        "attacking_third": "2",
+        "middle_third": "24",
+        "defensive_third": "40"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "天野 純",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "4",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.979km",
+        "first_half": "5.751km",
+        "second_half": "5.228km"
+      },
+      "sprint": {
+        "total": "11",
+        "first_half": "6",
+        "second_half": "5",
+        "max_speed": "29.1km/h"
+      },
+      "pass": {
+        "pass_success": "23(65.2%)",
+        "attacking_third_pass": "12(58.3%)",
+        "through_pass": "2(0%)",
+        "cross": "2(50%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "42",
+        "attacking_third": "22",
+        "middle_third": "14",
+        "defensive_third": "6"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "谷村 海那",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "2",
+        "shoot_on_target": "2",
+        "goals": "2",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.444km",
+        "first_half": "5.607km",
+        "second_half": "4.837km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "2",
+        "second_half": "3",
+        "max_speed": "29.6km/h"
+      },
+      "pass": {
+        "pass_success": "13(76.9%)",
+        "attacking_third_pass": "4(50%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "25",
+        "attacking_third": "8",
+        "middle_third": "16",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "ジェイソン キニョーネス",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "3",
+        "block": "2",
+        "clear": "6",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.818km",
+        "first_half": "4.923km",
+        "second_half": "4.895km"
+      },
+      "sprint": {
+        "total": "12",
+        "first_half": "5",
+        "second_half": "7",
+        "max_speed": "32.6km/h"
+      },
+      "pass": {
+        "pass_success": "55(90.9%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "105",
+        "attacking_third": "1",
+        "middle_third": "41",
+        "defensive_third": "63"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "長沼 洋一",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "4(75%)",
+        "loose_ball_recovery": "4",
+        "block": "6",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.798km",
+        "first_half": "5.553km",
+        "second_half": "5.245km"
+      },
+      "sprint": {
+        "total": "18",
+        "first_half": "8",
+        "second_half": "10",
+        "max_speed": "33.7km/h"
+      },
+      "pass": {
+        "pass_success": "29(65.5%)",
+        "attacking_third_pass": "6(50%)",
+        "through_pass": "0(0%)",
+        "cross": "3(33.3%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "61",
+        "attacking_third": "15",
+        "middle_third": "27",
+        "defensive_third": "19"
+      },
+      "set_pieces": {
+        "fk": "2",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "知念 慶",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "7(42.9%)",
+        "loose_ball_recovery": "2",
+        "block": "4",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "12.106km",
+        "first_half": "6.221km",
+        "second_half": "5.885km"
+      },
+      "sprint": {
+        "total": "4",
+        "first_half": "2",
+        "second_half": "2",
+        "max_speed": "28.2km/h"
+      },
+      "pass": {
+        "pass_success": "44(70.5%)",
+        "attacking_third_pass": "6(50%)",
+        "through_pass": "2(0%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "89",
+        "attacking_third": "15",
+        "middle_third": "46",
+        "defensive_third": "28"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "4",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "安居 海渡",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "2(50%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.195km",
+        "first_half": "5.898km",
+        "second_half": "2.297km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "5",
+        "second_half": "2",
+        "max_speed": "31km/h"
+      },
+      "pass": {
+        "pass_success": "24(66.7%)",
+        "attacking_third_pass": "8(37.5%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "46",
+        "attacking_third": "13",
+        "middle_third": "21",
+        "defensive_third": "12"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "植木 颯",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "4(75%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "7.639km",
+        "first_half": "6.45km",
+        "second_half": "1.189km"
+      },
+      "sprint": {
+        "total": "9",
+        "first_half": "7",
+        "second_half": "2",
+        "max_speed": "32.4km/h"
+      },
+      "pass": {
+        "pass_success": "34(55.9%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "1(0%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "52",
+        "attacking_third": "7",
+        "middle_third": "22",
+        "defensive_third": "23"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "松村 晃助",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "3(33.3%)",
+        "loose_ball_recovery": "2",
+        "block": "3",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.211km",
+        "first_half": "6.271km",
+        "second_half": "3.94km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "1",
+        "second_half": "6",
+        "max_speed": "29.4km/h"
+      },
+      "pass": {
+        "pass_success": "31(93.5%)",
+        "attacking_third_pass": "8(100%)",
+        "through_pass": "1(100%)",
+        "cross": "1(100%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "64",
+        "attacking_third": "15",
+        "middle_third": "33",
+        "defensive_third": "16"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "3"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "3",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "小森 飛絢",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "4",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "12.218km",
+        "first_half": "6.212km",
+        "second_half": "6.006km"
+      },
+      "sprint": {
+        "total": "14",
+        "first_half": "9",
+        "second_half": "5",
+        "max_speed": "30.3km/h"
+      },
+      "pass": {
+        "pass_success": "13(30.8%)",
+        "attacking_third_pass": "8(37.5%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "28",
+        "attacking_third": "18",
+        "middle_third": "7",
+        "defensive_third": "3"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "近藤 友喜",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "3(33.3%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "2",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.852km",
+        "first_half": "5.485km",
+        "second_half": "4.367km"
+      },
+      "sprint": {
+        "total": "17",
+        "first_half": "12",
+        "second_half": "5",
+        "max_speed": "30.5km/h"
+      },
+      "pass": {
+        "pass_success": "26(61.5%)",
+        "attacking_third_pass": "19(68.4%)",
+        "through_pass": "1(100%)",
+        "cross": "4(25%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "53",
+        "attacking_third": "37",
+        "middle_third": "12",
+        "defensive_third": "4"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "2",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "三井寺 眞",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "3",
+        "block": "0",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.883km",
+        "first_half": "5.927km",
+        "second_half": "2.956km"
+      },
+      "sprint": {
+        "total": "13",
+        "first_half": "7",
+        "second_half": "6",
+        "max_speed": "28.8km/h"
+      },
+      "pass": {
+        "pass_success": "21(47.6%)",
+        "attacking_third_pass": "9(44.4%)",
+        "through_pass": "2(0%)",
+        "cross": "3(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "43",
+        "attacking_third": "18",
+        "middle_third": "15",
+        "defensive_third": "10"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "3"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "南野 遥海",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "1",
+        "shoot_on_target": "1",
+        "goals": "1",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "3",
+        "block": "1",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "3.409km",
+        "first_half": "-",
+        "second_half": "3.409km"
+      },
+      "sprint": {
+        "total": "6",
+        "first_half": "-",
+        "second_half": "6",
+        "max_speed": "32km/h"
+      },
+      "pass": {
+        "pass_success": "8(87.5%)",
+        "attacking_third_pass": "4(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "18",
+        "attacking_third": "8",
+        "middle_third": "5",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "西川 周作",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "6(66.7%)"
+      },
+      "distance": {
+        "total": "4.549km",
+        "first_half": "2.37km",
+        "second_half": "2.179km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "0",
+        "second_half": "0",
+        "max_speed": "23.4km/h"
+      },
+      "pass": {
+        "pass_success": "21(76.2%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "44",
+        "attacking_third": "0",
+        "middle_third": "0",
+        "defensive_third": "44"
+      },
+      "set_pieces": {
+        "fk": "6",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "GK",
+      "player_name": "ルベン ブランコ",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "8(62.5%)"
+      },
+      "distance": {
+        "total": "5.102km",
+        "first_half": "2.399km",
+        "second_half": "2.703km"
+      },
+      "sprint": {
+        "total": "2",
+        "first_half": "1",
+        "second_half": "1",
+        "max_speed": "26.7km/h"
+      },
+      "pass": {
+        "pass_success": "31(87.1%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "64",
+        "attacking_third": "0",
+        "middle_third": "0",
+        "defensive_third": "64"
+      },
+      "set_pieces": {
+        "fk": "11",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "宮本 優太",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(100%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "5",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.147km",
+        "first_half": "5.548km",
+        "second_half": "4.599km"
+      },
+      "sprint": {
+        "total": "9",
+        "first_half": "4",
+        "second_half": "5",
+        "max_speed": "28.2km/h"
+      },
+      "pass": {
+        "pass_success": "52(71.2%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "1(100%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "95",
+        "attacking_third": "2",
+        "middle_third": "48",
+        "defensive_third": "45"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "井上 太聖",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "4",
+        "block": "4",
+        "clear": "1",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.671km",
+        "first_half": "5.394km",
+        "second_half": "4.277km"
+      },
+      "sprint": {
+        "total": "11",
+        "first_half": "3",
+        "second_half": "8",
+        "max_speed": "31.2km/h"
+      },
+      "pass": {
+        "pass_success": "42(71.4%)",
+        "attacking_third_pass": "10(70%)",
+        "through_pass": "1(100%)",
+        "cross": "2(50%)",
+        "assist": "1"
+      },
+      "plays_by_area": {
+        "total": "76",
+        "attacking_third": "16",
+        "middle_third": "45",
+        "defensive_third": "15"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "角田 涼太朗",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "1",
+        "block": "3",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "8.677km",
+        "first_half": "5.173km",
+        "second_half": "3.504km"
+      },
+      "sprint": {
+        "total": "9",
+        "first_half": "4",
+        "second_half": "5",
+        "max_speed": "31.4km/h"
+      },
+      "pass": {
+        "pass_success": "28(75%)",
+        "attacking_third_pass": "4(75%)",
+        "through_pass": "1(0%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "55",
+        "attacking_third": "6",
+        "middle_third": "25",
+        "defensive_third": "24"
+      },
+      "set_pieces": {
+        "fk": "6",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "諏訪間 幸成",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "4",
+        "block": "1",
+        "clear": "6",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "10.587km",
+        "first_half": "5.433km",
+        "second_half": "5.154km"
+      },
+      "sprint": {
+        "total": "4",
+        "first_half": "2",
+        "second_half": "2",
+        "max_speed": "28km/h"
+      },
+      "pass": {
+        "pass_success": "54(75.9%)",
+        "attacking_third_pass": "1(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "104",
+        "attacking_third": "1",
+        "middle_third": "29",
+        "defensive_third": "74"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "金子 拓郎",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "1(100%)"
+      },
+      "defense": {
+        "tackle_success": "1(100%)",
+        "loose_ball_recovery": "6",
+        "block": "3",
+        "clear": "3",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "9.885km",
+        "first_half": "5.324km",
+        "second_half": "4.561km"
+      },
+      "sprint": {
+        "total": "24",
+        "first_half": "15",
+        "second_half": "9",
+        "max_speed": "32.4km/h"
+      },
+      "pass": {
+        "pass_success": "29(69%)",
+        "attacking_third_pass": "16(68.8%)",
+        "through_pass": "4(75%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "63",
+        "attacking_third": "30",
+        "middle_third": "25",
+        "defensive_third": "8"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "4",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "林 幸多郎",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "0.863km",
+        "first_half": "-",
+        "second_half": "0.863km"
+      },
+      "sprint": {
+        "total": "1",
+        "first_half": "-",
+        "second_half": "1",
+        "max_speed": "26.2km/h"
+      },
+      "pass": {
+        "pass_success": "0(0%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "0",
+        "attacking_third": "0",
+        "middle_third": "0",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "鈴木 冬一",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "2(0%)",
+        "loose_ball_recovery": "1",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "2.68km",
+        "first_half": "-",
+        "second_half": "2.68km"
+      },
+      "sprint": {
+        "total": "7",
+        "first_half": "-",
+        "second_half": "7",
+        "max_speed": "31.5km/h"
+      },
+      "pass": {
+        "pass_success": "7(57.1%)",
+        "attacking_third_pass": "2(50%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "17",
+        "attacking_third": "5",
+        "middle_third": "7",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "DF",
+      "player_name": "片山 瑛一",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "0.742km",
+        "first_half": "-",
+        "second_half": "0.742km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "-",
+        "second_half": "0",
+        "max_speed": "22.4km/h"
+      },
+      "pass": {
+        "pass_success": "2(50%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "2",
+        "attacking_third": "0",
+        "middle_third": "1",
+        "defensive_third": "1"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "喜田 拓也",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "2",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.851km",
+        "first_half": "-",
+        "second_half": "1.851km"
+      },
+      "sprint": {
+        "total": "0",
+        "first_half": "-",
+        "second_half": "0",
+        "max_speed": "23.6km/h"
+      },
+      "pass": {
+        "pass_success": "6(50%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "9",
+        "attacking_third": "1",
+        "middle_third": "3",
+        "defensive_third": "5"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "MF",
+      "player_name": "瀬古 樹",
+      "team_name": "浦和",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "1",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "4.808km",
+        "first_half": "-",
+        "second_half": "4.808km"
+      },
+      "sprint": {
+        "total": "5",
+        "first_half": "-",
+        "second_half": "5",
+        "max_speed": "27km/h"
+      },
+      "pass": {
+        "pass_success": "16(75%)",
+        "attacking_third_pass": "3(66.7%)",
+        "through_pass": "1(100%)",
+        "cross": "1(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "27",
+        "attacking_third": "4",
+        "middle_third": "21",
+        "defensive_third": "2"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "2"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "ジョルディ クルークス",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "0.973km",
+        "first_half": "-",
+        "second_half": "0.973km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "32.5km/h"
+      },
+      "pass": {
+        "pass_success": "1(100%)",
+        "attacking_third_pass": "1(100%)",
+        "through_pass": "0(0%)",
+        "cross": "1(100%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "4",
+        "attacking_third": "3",
+        "middle_third": "1",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "1",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "1",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "1"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "宮市 亮",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "1(0%)",
+        "loose_ball_recovery": "0",
+        "block": "1",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.032km",
+        "first_half": "-",
+        "second_half": "1.032km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "28.3km/h"
+      },
+      "pass": {
+        "pass_success": "2(50%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "4",
+        "attacking_third": "0",
+        "middle_third": "1",
+        "defensive_third": "3"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "1",
+        "suffer_foul": "0"
+      }
+    },
+    {
+      "position": "FW",
+      "player_name": "二田 理央",
+      "team_name": "横浜FM",
+      "attack": {
+        "shoot": "0",
+        "shoot_on_target": "0",
+        "goals": "0",
+        "dribble_success": "0(0%)"
+      },
+      "defense": {
+        "tackle_success": "0(0%)",
+        "loose_ball_recovery": "0",
+        "block": "0",
+        "clear": "0",
+        "save_rate": "0(0%)"
+      },
+      "distance": {
+        "total": "1.681km",
+        "first_half": "-",
+        "second_half": "1.681km"
+      },
+      "sprint": {
+        "total": "3",
+        "first_half": "-",
+        "second_half": "3",
+        "max_speed": "33.1km/h"
+      },
+      "pass": {
+        "pass_success": "2(0%)",
+        "attacking_third_pass": "0(0%)",
+        "through_pass": "0(0%)",
+        "cross": "0(0%)",
+        "assist": "0"
+      },
+      "plays_by_area": {
+        "total": "4",
+        "attacking_third": "0",
+        "middle_third": "4",
+        "defensive_third": "0"
+      },
+      "set_pieces": {
+        "fk": "0",
+        "ck": "0"
+      },
+      "discipline": {
+        "yellow_card": "0",
+        "red_card": "0",
+        "foul": "0",
+        "suffer_foul": "1"
+      }
+    }
+  ],
+  "match_id": "20260829_URA_MAR"
 }

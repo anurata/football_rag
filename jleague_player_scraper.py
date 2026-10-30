@@ -72,7 +72,7 @@ J1_CLUBS_2026 = [
         "club_name": "名古屋グランパス",
     },
     {
-        "team_id": "KYO",
+        "team_id": "SAN",
         "club_slug": "kyoto",
         "club_name": "京都サンガF.C.",
     },
@@ -97,7 +97,7 @@ J1_CLUBS_2026 = [
         "club_name": "ファジアーノ岡山",
     },
     {
-        "team_id": "SAN",
+        "team_id": "HIR",
         "club_slug": "hiroshima",
         "club_name": "サンフレッチェ広島",
     },

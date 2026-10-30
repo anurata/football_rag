@@ -29,22 +29,32 @@ class TestDataIntegrity(unittest.TestCase):
         self.assertIn("timeline", res["yahoo_text"])
 
     def test_dummy_spaia_player_stats_rejected(self) -> None:
-        """786バイトの簡易ダミーファイル（20260815_URA_HIR）が確実に弾かれることを検証."""
-        dummy_path = os.path.join(
-            "data",
-            "raw",
-            "spaia",
-            f"{self.DUMMY_MATCH_ID}_player_stats.json",
-        )
-        if os.path.exists(dummy_path):
+        """簡易ダミーファイル（stats_summary形式・サイズ不足）が確実に弾かれ、補完済み実ファイルは合格することを検証."""
+        import json
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dummy_tmp = os.path.join(tmpdir, "dummy_player_stats.json")
+            with open(dummy_tmp, "w", encoding="utf-8") as f:
+                json.dump({"match_id": "DUMMY", "stats_summary": {}}, f)
+
             with self.assertRaises(InvalidRawDataError) as ctx:
-                validate_spaia_player_stats(dummy_path)
-            # エラーメッセージにサイズ不足またはダミー形式の警告が含まれていること
+                validate_spaia_player_stats(dummy_tmp)
             err_msg = str(ctx.exception)
             self.assertTrue(
                 "ファイルサイズが不足しています" in err_msg or "stats_summary" in err_msg,
                 f"Unexpected error message: {err_msg}",
             )
+
+        upgraded_path = os.path.join(
+            "data",
+            "raw",
+            "spaia",
+            f"{self.DUMMY_MATCH_ID}_player_stats.json",
+        )
+        if os.path.exists(upgraded_path):
+            upgraded_data = validate_spaia_player_stats(upgraded_path)
+            self.assertGreaterEqual(len(upgraded_data.get("player_stats", [])), 28)
 
     def test_nonexistent_file_rejected(self) -> None:
         """存在しないファイルパスが正しく InvalidRawDataError として検出されることを検証."""

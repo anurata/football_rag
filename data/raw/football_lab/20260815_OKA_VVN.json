@@ -1,74 +1,2772 @@
 {
   "match_id": "20260815_OKA_VVN",
-  "date": "2026-8-15",
-  "season": 2026,
-  "matchweek": 2,
+  "date": "2026-08-15",
   "home_team_id": "OKA",
   "away_team_id": "VVN",
-  "home_team_name": "ファジアーノ岡山",
-  "away_team_name": "V・ファーレン長崎",
-  "score": "1 - 0",
-  "stadium": "ＪＦＥ晴れの国スタジアム",
-  "attendance": 14223,
-  "climate": "天候:晴れ｜気温:29.5℃｜湿度:62%",
   "data": {
-    "title": "ファジアーノ岡山 vs V・ファーレン長崎 2026/27 マッチレポート",
-    "url": "https://www.jleague.jp/match/j1/2026/081504/",
-    "report_text": "チケットが完売して満員になったＪＦＥ晴れの国スタジアムでキックオフした一戦は、両チームがタフに戦い抜いて最後まで目の離せない戦いが繰り広げられた。岡山は前節・Ｃ大阪戦の先発から３選手を変更。GKはレナート モーザーが任され、左ウイングバックは山根 永遠が先発し、前節で得点を挙げたブラウン ノア 賢信はベンチスタートとなった。そして、ボランチはオベルダンが加入後初スタメンを飾った。長崎は前節・京都戦から先発２選手を変更。ディフェンスラインは土肥 幹太に替わって進藤 亮佑が先発し、１トップは前節で２得点を挙げたチアゴ サンタナがベンチスタートとなり、山﨑 凌吾が先発に名を連ねた。立ち上がりはなかなかボールが落ち着かない展開になった中、長崎が最初にチャンスをつかむ。７分に岩崎 悠人がペナルティーエリアでうまく入れ替わってシュートを放ったが、ボールはポストにはじかれた。15分には岡山がビッグチャンスを作った。左サイドでパスを受けたナ サンホが前を向いてドリブルで前進し、ラストパスを受けたルカオがゴールネットを揺らしたが、これはオフサイドによりノーゴールとなる。23分、長崎はエドゥアルドがルカオと競り合って負傷し、新井 一耀との交代を強いられる。その後は岡山が相手陣でボールを動かす時間を長くしていき、特に左サイドで江坂 任、山根 永遠、鈴木 喜丈がうまく関わって突破を試みる。アタッキングサードにも多く進入したが、なかなかシュートまで持ち込むことができず、０－０のまま試合を折り返した。後半、長崎はチアゴ サンタナを投入してスタートした中、先制点を奪ったのは岡山。54分、宮本 英治の縦パスに抜け出したルカオがニア上に豪快に蹴り込んだ。追いかける長崎はなかなかボールを前に運ぶことができず、64分に米田 隼也と松本 天夢を投入して打開を図る。69分には翁長 聖が右足で上げたクロスにチアゴ サンタナが合わせたが、シュートは枠を捉えることができない。その後も長崎はボランチにポジションを移した長谷川 元希が中心になってボールをつなぎ、チャンスをうかがう。岡山も運動量と集中力を切らさずに対応し、90分にはＪリーグデビューとなる池戸 柊宇とベテランの藤田 息吹がピッチに入った。アディショナルタイムは６分と掲示された中、岡山はディフェンスラインの大森 博、立田 悠悟、鈴木 喜丈の３選手をはじめ、ピッチに立った全員が集中して戦い抜いてリードを守り切り、14,223人が駆けつけたＪＦＥスでファン・サポーターと喜びを分かち合った。［ 文：寺田 弘幸 ］",
-    "team_stats": {
+    "title": "ファジアーノ岡山 2026/27 マッチレポート",
+    "url": "https://www.football-lab.jp/okay/report/?year=2026&month=08&date=15",
+    "report_text": "岡山は待望のホーム開幕戦で長崎を迎え撃った。前半は互いに一歩も譲らず、均衡した展開の中でゴールが遠い時間帯が続いた。しかし、後半９分にルカオが均衡を破る先制ゴールを突き刺し、チームに先取点をもたらしてみせる。その後は相手の反撃を全員で粘り強く耐えしのぎ、集中を切らさずに最後まで自陣ゴールを守り抜いた。攻撃のタクトを振る江坂を中心に主導権を握り続けた岡山は、１－０で勝利をつかみ取る。本拠地に駆け付けたサポーターへ、待望の白星を届けることに成功した。",
+    "players": {
       "home": {
-        "shots": 20,
-        "shots_on_target": 3,
-        "possession": 45.0,
-        "pass_success": 70.0,
-        "distance_km": 117.0,
-        "sprints": 121,
-        "offsides": 4,
-        "corner_kicks": 5,
-        "free_kicks": 14,
-        "cards": "警告:0 / 退場:0"
+        "name": "ファジアーノ岡山",
+        "coach": "木山　隆之　監督",
+        "starting": [
+          {
+            "position": "GK",
+            "number": "1",
+            "name": "レナート　モーザー",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "6",
+            "name": "大森　博",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "48",
+            "name": "立田　悠悟",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "43",
+            "name": "鈴木　喜丈",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "51",
+            "name": "白井　康介",
+            "minutes": "89分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "80",
+            "name": "オベルダン",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "41",
+            "name": "宮本　英治",
+            "minutes": "89分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "88",
+            "name": "山根　永遠",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "10",
+            "name": "ナ　サンホ",
+            "minutes": "75分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "99",
+            "name": "ルカオ",
+            "minutes": "65分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "8",
+            "name": "江坂　任",
+            "minutes": "75分",
+            "change": "途中交代OUT",
+            "card": "-"
+          }
+        ],
+        "substitutes": [
+          {
+            "position": "GK",
+            "number": "13",
+            "name": "松田　駿",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "5",
+            "name": "池戸　柊宇",
+            "minutes": "1分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "44",
+            "name": "森　壮一朗",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "79",
+            "name": "ブラウン　ノア　賢信",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "24",
+            "name": "藤田　息吹",
+            "minutes": "1分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "33",
+            "name": "神谷　優太",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "66",
+            "name": "西川　潤",
+            "minutes": "15分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "22",
+            "name": "一美　和成",
+            "minutes": "15分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "9",
+            "name": "レオ　ガウショ",
+            "minutes": "25分",
+            "change": "交代",
+            "card": "-"
+          }
+        ]
       },
       "away": {
-        "shots": 3,
-        "shots_on_target": 0,
-        "possession": 55.0,
-        "pass_success": 77.0,
-        "distance_km": 116.1,
-        "sprints": 97,
-        "offsides": 2,
-        "corner_kicks": 1,
-        "free_kicks": 14,
-        "cards": "警告:1 / 退場:0"
+        "name": "Ｖ・ファーレン長崎",
+        "coach": "高木　琢也　監督",
+        "starting": [
+          {
+            "position": "GK",
+            "number": "1",
+            "name": "後藤　雅明",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "3",
+            "name": "関口　正大",
+            "minutes": "64分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "4",
+            "name": "エドゥアルド",
+            "minutes": "23分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "25",
+            "name": "大南　拓磨",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "50",
+            "name": "進藤　亮佑",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "5",
+            "name": "山口　蛍",
+            "minutes": "64分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "8",
+            "name": "岩崎　悠人",
+            "minutes": "81分",
+            "change": "途中交代OUT",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "22",
+            "name": "翁長　聖",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "24",
+            "name": "山田　陸",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "41",
+            "name": "長谷川　元希",
+            "minutes": "90分",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "18",
+            "name": "山﨑　凌吾",
+            "minutes": "45分",
+            "change": "途中交代OUT",
+            "card": "-"
+          }
+        ],
+        "substitutes": [
+          {
+            "position": "GK",
+            "number": "13",
+            "name": "波多野　豪",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "23",
+            "name": "米田　隼也",
+            "minutes": "26分",
+            "change": "交代",
+            "card": "警告(1)"
+          },
+          {
+            "position": "DF",
+            "number": "29",
+            "name": "新井　一耀",
+            "minutes": "67分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "DF",
+            "number": "45",
+            "name": "ノ　ヒョンジュン",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "19",
+            "name": "澤田　崇",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "21",
+            "name": "ディエゴ　ピトゥカ",
+            "minutes": "",
+            "change": "フル出場",
+            "card": "-"
+          },
+          {
+            "position": "MF",
+            "number": "34",
+            "name": "松本　天夢",
+            "minutes": "26分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "9",
+            "name": "チアゴ　サンタナ",
+            "minutes": "45分",
+            "change": "交代",
+            "card": "-"
+          },
+          {
+            "position": "FW",
+            "number": "39",
+            "name": "洪　怜鎭",
+            "minutes": "9分",
+            "change": "交代",
+            "card": "-"
+          }
+        ]
       }
     },
-    "scorers_text": "ルカオ 54'",
-    "coaches": {
-      "home": {
-        "team_label": "ファジアーノ岡山",
-        "name": "木山 隆之",
-        "comment": "ホームの開幕戦ということで、本当にたくさんのファン・サポーターの人に集まっていただいて、非常に良い雰囲気の中で選手たちはしっかりプレーしたんじゃないかなと思います。\nミーティングで選手たちに一番要求したことは、前節（・Ｃ大阪戦）は負けましたけども、やっぱりわれわれがホームで今年どういうスタンスでフットボールに向き合っていくかということをしっかり示そうと。われわれらしく走って戦う中で、昨年よりも向上できるようにみんなでチャレンジしていることをしっかり示したいと思って試合に入りました。選手たちは本当によくやってくれたと思います。もちろんもっと向上していける可能性を感じることも多かったですし、１つ勝ちを取ったことが大きなモチベーションになると思うので、また次の試合へ向けて努力していきたいなと思います。\n－－前半はこう着状態が続いていましたが、後半に向けてはどのような言葉を選手たちに伝えて送り出したのでしょうか？\nゴールにはいけなかったけど、オフサイドになって取り消されたプレーとか、もう少しクロスに良いポジションで入っていくこととか、まあ（白井）康介が背後を抜け出そうとして果敢に相手のビハインドを突いていったりとか、そういったプレーがあったけど、ボックスの中での思い切りはもうちょっと必要だなと思って見ていました。あとは、ボールが入りそうなポジションがほかにもあったので、そういうところを突いていくことを共有して後半に入りました。相手が人をつかみにきたときに裏に出ていくことはよく表現できたと思うし、実際にそれで１つゴールが取れたので、そういうのを続けていきながら、さらに攻撃の質が上がるように努力したいなと思います。\n－－ルカオ選手が今季初得点を決めました。彼のプレーの評価と彼にどういうところを期待して送り出したかを教えていただけますか。\nルカさん（ルカオ）に関しては、たくさんゴールを決めるわけではないけど、最前線で攻守において体を張って、われわれの選手たちに時間とスペースを与えてくれる。そこに関しては今日も求めた中で、前半も１つ惜しいゴール（オフサイドでゴールが認められなかった場面）もあったし、むしろ後半のほうがオフサイドかなと思ったけど、実際オフサイドじゃなかったし、ゴールも取ってくれたので今日は言うことないです。"
+    "stats": [
+      {
+        "name": "攻撃",
+        "home_val": "16.13",
+        "home_rate": "(12.79)",
+        "home_avg": "",
+        "away_val": "10.48",
+        "away_rate": "(12.17)",
+        "away_avg": ""
       },
-      "away": {
-        "team_label": "Ｖ・ファーレン長崎",
-        "name": "高木 琢也",
-        "comment": "われわれの攻撃を長いボールで無力化されてしまった。逆にファジアーノさんはそのボールをうまく使いながら、攻撃をうまく構築できたというところで、パワーとそれからインテンシティーの部分を出した。ピッチの中で倒れるのはわれわれの選手のほうが多かったと思いますし、その部分は反省をして、次のゲームでそういうことがないようにしていかなきゃいけないなというところは感じました。\nただ、最少失点に抑えながら、残り少ない時間でしたけど、かなりチャンスができるようなシーンというのを（作れて）最後までプレーできたということに関しては感謝しています。もっともっとやれる力はあると思いますので、そういうところをまた次のゲームまでに引き出しながら準備していきたいなと思います。"
+      {
+        "name": "パス",
+        "home_val": "10.75",
+        "home_rate": "(9.58)",
+        "home_avg": "",
+        "away_val": "9.43",
+        "away_rate": "(9.86)",
+        "away_avg": ""
+      },
+      {
+        "name": "クロス",
+        "home_val": "3.11",
+        "home_rate": "(1.97)",
+        "home_avg": "",
+        "away_val": "0.97",
+        "away_rate": "(1.09)",
+        "away_avg": ""
+      },
+      {
+        "name": "ドリブル",
+        "home_val": "2.27",
+        "home_rate": "(1.24)",
+        "home_avg": "",
+        "away_val": "0.09",
+        "away_rate": "(1.21)",
+        "away_avg": ""
+      },
+      {
+        "name": "シュート",
+        "home_val": "7.23",
+        "home_rate": "(6.02)",
+        "home_avg": "",
+        "away_val": "0.00",
+        "away_rate": "(6.49)",
+        "away_avg": ""
+      },
+      {
+        "name": "ゴール",
+        "home_val": "3.39",
+        "home_rate": "(4.29)",
+        "home_avg": "",
+        "away_val": "0.00",
+        "away_rate": "(3.78)",
+        "away_avg": ""
+      },
+      {
+        "name": "奪取",
+        "home_val": "95.16",
+        "home_rate": "(92.39)",
+        "home_avg": "",
+        "away_val": "51.33",
+        "away_rate": "(84.31)",
+        "away_avg": ""
+      },
+      {
+        "name": "守備",
+        "home_val": "11.40",
+        "home_rate": "(13.50)",
+        "home_avg": "",
+        "away_val": "21.88",
+        "away_rate": "(16.98)",
+        "away_avg": ""
+      },
+      {
+        "name": "セーブ",
+        "home_val": "0.00",
+        "home_rate": "(0.23)",
+        "home_avg": "",
+        "away_val": "0.07",
+        "away_rate": "(0.36)",
+        "away_avg": ""
+      },
+      {
+        "name": "ゴール期待値",
+        "home_val": "1.331",
+        "home_rate": "-",
+        "home_avg": "1.185",
+        "away_val": "0.259",
+        "away_rate": "-",
+        "away_avg": "1.016"
+      },
+      {
+        "name": "シュート",
+        "home_val": "20",
+        "home_rate": "(5.0%)",
+        "home_avg": "13.8",
+        "away_val": "3",
+        "away_rate": "(0.0%)",
+        "away_avg": "11.3"
+      },
+      {
+        "name": "枠内シュート",
+        "home_val": "3",
+        "home_rate": "-",
+        "home_avg": "3.2",
+        "away_val": "0",
+        "away_rate": "-",
+        "away_avg": "3.3"
+      },
+      {
+        "name": "PKによるシュート",
+        "home_val": "0",
+        "home_rate": "-",
+        "home_avg": "0.0",
+        "away_val": "0",
+        "away_rate": "-",
+        "away_avg": "0.1"
+      },
+      {
+        "name": "パス",
+        "home_val": "404",
+        "home_rate": "(70.3%)",
+        "home_avg": "374.6",
+        "away_val": "546",
+        "away_rate": "(77.3%)",
+        "away_avg": "422.0"
+      },
+      {
+        "name": "クロス",
+        "home_val": "30",
+        "home_rate": "(20.0%)",
+        "home_avg": "18.8",
+        "away_val": "10",
+        "away_rate": "(20.0%)",
+        "away_avg": "10.2"
+      },
+      {
+        "name": "直接ＦＫ",
+        "home_val": "10",
+        "home_rate": "-",
+        "home_avg": "10.5",
+        "away_val": "12",
+        "away_rate": "-",
+        "away_avg": "10.5"
+      },
+      {
+        "name": "間接ＦＫ",
+        "home_val": "4",
+        "home_rate": "-",
+        "home_avg": "2.3",
+        "away_val": "2",
+        "away_rate": "-",
+        "away_avg": "1.3"
+      },
+      {
+        "name": "ＣＫ",
+        "home_val": "5",
+        "home_rate": "-",
+        "home_avg": "6.3",
+        "away_val": "1",
+        "away_rate": "-",
+        "away_avg": "3.8"
+      },
+      {
+        "name": "スローイン",
+        "home_val": "27",
+        "home_rate": "(66.7%)",
+        "home_avg": "24.5",
+        "away_val": "21",
+        "away_rate": "(71.4%)",
+        "away_avg": "16.8"
+      },
+      {
+        "name": "ドリブル",
+        "home_val": "15",
+        "home_rate": "(46.7%)",
+        "home_avg": "10.0",
+        "away_val": "4",
+        "away_rate": "(25.0%)",
+        "away_avg": "10.2"
+      },
+      {
+        "name": "タックル",
+        "home_val": "6",
+        "home_rate": "(33.3%)",
+        "home_avg": "16.1",
+        "away_val": "7",
+        "away_rate": "(28.6%)",
+        "away_avg": "13.7"
+      },
+      {
+        "name": "クリア",
+        "home_val": "19",
+        "home_rate": "-",
+        "home_avg": "25.2",
+        "away_val": "37",
+        "away_rate": "-",
+        "away_avg": "30.3"
+      },
+      {
+        "name": "インターセプト",
+        "home_val": "3",
+        "home_rate": "-",
+        "home_avg": "2.0",
+        "away_val": "2",
+        "away_rate": "-",
+        "away_avg": "2.3"
+      },
+      {
+        "name": "オフサイド",
+        "home_val": "2",
+        "home_rate": "-",
+        "home_avg": "2.2",
+        "away_val": "4",
+        "away_rate": "-",
+        "away_avg": "1.6"
+      },
+      {
+        "name": "警告",
+        "home_val": "0",
+        "home_rate": "-",
+        "home_avg": "1.8",
+        "away_val": "1",
+        "away_rate": "-",
+        "away_avg": "1.5"
+      },
+      {
+        "name": "退場",
+        "home_val": "0",
+        "home_rate": "-",
+        "home_avg": "0.2",
+        "away_val": "0",
+        "away_rate": "-",
+        "away_avg": "0.0"
+      },
+      {
+        "name": "３０ｍライン進入",
+        "home_val": "45",
+        "home_rate": "-",
+        "home_avg": "36.7",
+        "away_val": "20",
+        "away_rate": "-",
+        "away_avg": "30.2"
+      },
+      {
+        "name": "ペナルティエリア進入",
+        "home_val": "17",
+        "home_rate": "-",
+        "home_avg": "12.4",
+        "away_val": "6",
+        "away_rate": "-",
+        "away_avg": "9.8"
+      },
+      {
+        "name": "総移動距離",
+        "home_val": "116,984m",
+        "home_rate": "-",
+        "home_avg": "114",
+        "away_val": "116,131m",
+        "away_rate": "-",
+        "away_avg": "114"
+      },
+      {
+        "name": "スプリント",
+        "home_val": "121",
+        "home_rate": "-",
+        "home_avg": "128.7",
+        "away_val": "97",
+        "away_rate": "-",
+        "away_avg": "120.3"
+      },
+      {
+        "name": "攻撃回数",
+        "home_val": "116",
+        "home_rate": "-",
+        "home_avg": "119.8",
+        "away_val": "115",
+        "away_rate": "-",
+        "away_avg": "110.1"
+      },
+      {
+        "name": "チャンス構築率",
+        "home_val": "17.2%",
+        "home_rate": "-",
+        "home_avg": "11.6",
+        "away_val": "2.6%",
+        "away_rate": "-",
+        "away_avg": "10.2"
+      },
+      {
+        "name": "ボール保持率",
+        "home_val": "43.9%",
+        "home_rate": "-",
+        "home_avg": "45.4",
+        "away_val": "56.1%",
+        "away_rate": "-",
+        "away_avg": "45.6"
       }
+    ],
+    "cbp": {
+      "team": [
+        {
+          "name": "攻撃",
+          "home_val": "16.13",
+          "home_avg": "(12.79)",
+          "away_val": "10.48",
+          "away_avg": "(12.17)"
+        },
+        {
+          "name": "パス",
+          "home_val": "10.75",
+          "home_avg": "(9.58)",
+          "away_val": "9.43",
+          "away_avg": "(9.86)"
+        },
+        {
+          "name": "クロス",
+          "home_val": "3.11",
+          "home_avg": "(1.97)",
+          "away_val": "0.97",
+          "away_avg": "(1.09)"
+        },
+        {
+          "name": "ドリブル",
+          "home_val": "2.27",
+          "home_avg": "(1.24)",
+          "away_val": "0.09",
+          "away_avg": "(1.21)"
+        },
+        {
+          "name": "シュート",
+          "home_val": "7.23",
+          "home_avg": "(6.02)",
+          "away_val": "0.00",
+          "away_avg": "(6.49)"
+        },
+        {
+          "name": "奪取",
+          "home_val": "95.16",
+          "home_avg": "(92.39)",
+          "away_val": "51.33",
+          "away_avg": "(84.31)"
+        },
+        {
+          "name": "守備",
+          "home_val": "11.40",
+          "home_avg": "(13.50)",
+          "away_val": "21.88",
+          "away_avg": "(16.98)"
+        },
+        {
+          "name": "セーブ",
+          "home_val": "0.00",
+          "home_avg": "(0.23)",
+          "away_val": "0.07",
+          "away_avg": "(0.36)"
+        },
+        {
+          "name": "シュート",
+          "home_val": "(5.0%)",
+          "home_avg": "13.8",
+          "away_val": "シュート",
+          "away_avg": "3"
+        },
+        {
+          "name": "パス",
+          "home_val": "(70.3%)",
+          "home_avg": "374.6",
+          "away_val": "パス",
+          "away_avg": "546"
+        },
+        {
+          "name": "クロス",
+          "home_val": "(20.0%)",
+          "home_avg": "18.8",
+          "away_val": "クロス",
+          "away_avg": "10"
+        },
+        {
+          "name": "ドリブル",
+          "home_val": "(46.7%)",
+          "home_avg": "10.0",
+          "away_val": "ドリブル",
+          "away_avg": "4"
+        }
+      ],
+      "categories": {
+        "攻撃": [
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "2.21"
+          },
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "2.19"
+          },
+          {
+            "home_player": "",
+            "away_player": "翁長　聖",
+            "points": "2.04"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "1.99"
+          },
+          {
+            "home_player": "オベルダン",
+            "away_player": "",
+            "points": "1.55"
+          },
+          {
+            "home_player": "鈴木　喜丈",
+            "away_player": "",
+            "points": "1.45"
+          },
+          {
+            "home_player": "大森　博",
+            "away_player": "",
+            "points": "1.29"
+          },
+          {
+            "home_player": "宮本　英治",
+            "away_player": "",
+            "points": "1.24"
+          },
+          {
+            "home_player": "",
+            "away_player": "長谷川　元希",
+            "points": "1.21"
+          },
+          {
+            "home_player": "レオ　ガウショ",
+            "away_player": "",
+            "points": "1.18"
+          },
+          {
+            "home_player": "白井　康介",
+            "away_player": "",
+            "points": "1.17"
+          },
+          {
+            "home_player": "",
+            "away_player": "進藤　亮佑",
+            "points": "1.12"
+          },
+          {
+            "home_player": "",
+            "away_player": "大南　拓磨",
+            "points": "1.10"
+          },
+          {
+            "home_player": "",
+            "away_player": "新井　一耀",
+            "points": "0.95"
+          },
+          {
+            "home_player": "立田　悠悟",
+            "away_player": "",
+            "points": "0.92"
+          },
+          {
+            "home_player": "",
+            "away_player": "山田　陸",
+            "points": "0.79"
+          },
+          {
+            "home_player": "",
+            "away_player": "チアゴ　サンタナ",
+            "points": "0.61"
+          },
+          {
+            "home_player": "",
+            "away_player": "米田　隼也",
+            "points": "0.54"
+          },
+          {
+            "home_player": "",
+            "away_player": "洪　怜鎭",
+            "points": "0.46"
+          },
+          {
+            "home_player": "",
+            "away_player": "山口　蛍",
+            "points": "0.43"
+          },
+          {
+            "home_player": "ルカオ",
+            "away_player": "",
+            "points": "0.40"
+          },
+          {
+            "home_player": "",
+            "away_player": "岩崎　悠人",
+            "points": "0.37"
+          },
+          {
+            "home_player": "レナート　モーザー",
+            "away_player": "",
+            "points": "0.33"
+          },
+          {
+            "home_player": "",
+            "away_player": "松本　天夢",
+            "points": "0.28"
+          },
+          {
+            "home_player": "",
+            "away_player": "後藤　雅明",
+            "points": "0.23"
+          },
+          {
+            "home_player": "西川　潤",
+            "away_player": "",
+            "points": "0.17"
+          },
+          {
+            "home_player": "",
+            "away_player": "関口　正大",
+            "points": "0.14"
+          },
+          {
+            "home_player": "",
+            "away_player": "山﨑　凌吾",
+            "points": "0.11"
+          },
+          {
+            "home_player": "",
+            "away_player": "エドゥアルド",
+            "points": "0.11"
+          },
+          {
+            "home_player": "藤田　息吹",
+            "away_player": "",
+            "points": "0.01"
+          }
+        ],
+        "パス": [
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "1.60"
+          },
+          {
+            "home_player": "オベルダン",
+            "away_player": "",
+            "points": "1.55"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "1.41"
+          },
+          {
+            "home_player": "宮本　英治",
+            "away_player": "",
+            "points": "1.24"
+          },
+          {
+            "home_player": "",
+            "away_player": "長谷川　元希",
+            "points": "1.21"
+          },
+          {
+            "home_player": "",
+            "away_player": "進藤　亮佑",
+            "points": "1.12"
+          },
+          {
+            "home_player": "",
+            "away_player": "大南　拓磨",
+            "points": "1.10"
+          },
+          {
+            "home_player": "",
+            "away_player": "翁長　聖",
+            "points": "1.07"
+          },
+          {
+            "home_player": "",
+            "away_player": "新井　一耀",
+            "points": "0.95"
+          },
+          {
+            "home_player": "鈴木　喜丈",
+            "away_player": "",
+            "points": "0.95"
+          },
+          {
+            "home_player": "立田　悠悟",
+            "away_player": "",
+            "points": "0.92"
+          },
+          {
+            "home_player": "",
+            "away_player": "山田　陸",
+            "points": "0.79"
+          },
+          {
+            "home_player": "大森　博",
+            "away_player": "",
+            "points": "0.74"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "0.66"
+          },
+          {
+            "home_player": "白井　康介",
+            "away_player": "",
+            "points": "0.62"
+          },
+          {
+            "home_player": "",
+            "away_player": "チアゴ　サンタナ",
+            "points": "0.61"
+          },
+          {
+            "home_player": "",
+            "away_player": "洪　怜鎭",
+            "points": "0.46"
+          },
+          {
+            "home_player": "",
+            "away_player": "米田　隼也",
+            "points": "0.45"
+          },
+          {
+            "home_player": "",
+            "away_player": "山口　蛍",
+            "points": "0.43"
+          },
+          {
+            "home_player": "ルカオ",
+            "away_player": "",
+            "points": "0.40"
+          },
+          {
+            "home_player": "",
+            "away_player": "岩崎　悠人",
+            "points": "0.37"
+          },
+          {
+            "home_player": "レナート　モーザー",
+            "away_player": "",
+            "points": "0.33"
+          },
+          {
+            "home_player": "",
+            "away_player": "松本　天夢",
+            "points": "0.28"
+          },
+          {
+            "home_player": "",
+            "away_player": "後藤　雅明",
+            "points": "0.23"
+          },
+          {
+            "home_player": "西川　潤",
+            "away_player": "",
+            "points": "0.17"
+          },
+          {
+            "home_player": "",
+            "away_player": "関口　正大",
+            "points": "0.14"
+          },
+          {
+            "home_player": "レオ　ガウショ",
+            "away_player": "",
+            "points": "0.12"
+          },
+          {
+            "home_player": "",
+            "away_player": "山﨑　凌吾",
+            "points": "0.11"
+          },
+          {
+            "home_player": "",
+            "away_player": "エドゥアルド",
+            "points": "0.11"
+          },
+          {
+            "home_player": "藤田　息吹",
+            "away_player": "",
+            "points": "0.01"
+          }
+        ],
+        "クロス": [
+          {
+            "home_player": "",
+            "away_player": "翁長　聖",
+            "points": "0.97"
+          },
+          {
+            "home_player": "白井　康介",
+            "away_player": "",
+            "points": "0.55"
+          },
+          {
+            "home_player": "大森　博",
+            "away_player": "",
+            "points": "0.55"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "0.52"
+          },
+          {
+            "home_player": "鈴木　喜丈",
+            "away_player": "",
+            "points": "0.50"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "0.50"
+          },
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "0.49"
+          }
+        ],
+        "ドリブル": [
+          {
+            "home_player": "レオ　ガウショ",
+            "away_player": "",
+            "points": "1.06"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "0.81"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "0.30"
+          },
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "0.10"
+          },
+          {
+            "home_player": "",
+            "away_player": "米田　隼也",
+            "points": "0.09"
+          }
+        ],
+        "シュート": [
+          {
+            "home_player": "宮本　英治",
+            "away_player": "",
+            "points": "2.52"
+          },
+          {
+            "home_player": "オベルダン",
+            "away_player": "",
+            "points": "1.24"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "1.19"
+          },
+          {
+            "home_player": "ルカオ",
+            "away_player": "",
+            "points": "1.17"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "1.12"
+          }
+        ],
+        "奪取": [
+          {
+            "home_player": "オベルダン",
+            "away_player": "",
+            "points": "37.32"
+          },
+          {
+            "home_player": "",
+            "away_player": "大南　拓磨",
+            "points": "10.69"
+          },
+          {
+            "home_player": "大森　博",
+            "away_player": "",
+            "points": "10.45"
+          },
+          {
+            "home_player": "宮本　英治",
+            "away_player": "",
+            "points": "9.39"
+          },
+          {
+            "home_player": "白井　康介",
+            "away_player": "",
+            "points": "8.68"
+          },
+          {
+            "home_player": "",
+            "away_player": "新井　一耀",
+            "points": "8.45"
+          },
+          {
+            "home_player": "",
+            "away_player": "関口　正大",
+            "points": "7.82"
+          },
+          {
+            "home_player": "鈴木　喜丈",
+            "away_player": "",
+            "points": "6.79"
+          },
+          {
+            "home_player": "立田　悠悟",
+            "away_player": "",
+            "points": "5.58"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "5.19"
+          },
+          {
+            "home_player": "",
+            "away_player": "米田　隼也",
+            "points": "4.84"
+          },
+          {
+            "home_player": "レオ　ガウショ",
+            "away_player": "",
+            "points": "4.05"
+          },
+          {
+            "home_player": "",
+            "away_player": "翁長　聖",
+            "points": "3.94"
+          },
+          {
+            "home_player": "",
+            "away_player": "進藤　亮佑",
+            "points": "3.85"
+          },
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "3.82"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "3.28"
+          },
+          {
+            "home_player": "",
+            "away_player": "エドゥアルド",
+            "points": "2.62"
+          },
+          {
+            "home_player": "",
+            "away_player": "山口　蛍",
+            "points": "2.49"
+          },
+          {
+            "home_player": "",
+            "away_player": "岩崎　悠人",
+            "points": "2.31"
+          },
+          {
+            "home_player": "",
+            "away_player": "山田　陸",
+            "points": "2.15"
+          },
+          {
+            "home_player": "",
+            "away_player": "後藤　雅明",
+            "points": "1.90"
+          },
+          {
+            "home_player": "レナート　モーザー",
+            "away_player": "",
+            "points": "0.63"
+          },
+          {
+            "home_player": "",
+            "away_player": "長谷川　元希",
+            "points": "0.26"
+          }
+        ],
+        "守備": [
+          {
+            "home_player": "",
+            "away_player": "新井　一耀",
+            "points": "4.57"
+          },
+          {
+            "home_player": "立田　悠悟",
+            "away_player": "",
+            "points": "3.36"
+          },
+          {
+            "home_player": "",
+            "away_player": "大南　拓磨",
+            "points": "2.89"
+          },
+          {
+            "home_player": "",
+            "away_player": "エドゥアルド",
+            "points": "2.32"
+          },
+          {
+            "home_player": "",
+            "away_player": "進藤　亮佑",
+            "points": "2.29"
+          },
+          {
+            "home_player": "",
+            "away_player": "後藤　雅明",
+            "points": "2.27"
+          },
+          {
+            "home_player": "",
+            "away_player": "長谷川　元希",
+            "points": "2.11"
+          },
+          {
+            "home_player": "",
+            "away_player": "関口　正大",
+            "points": "2.04"
+          },
+          {
+            "home_player": "大森　博",
+            "away_player": "",
+            "points": "1.54"
+          },
+          {
+            "home_player": "鈴木　喜丈",
+            "away_player": "",
+            "points": "1.43"
+          },
+          {
+            "home_player": "",
+            "away_player": "翁長　聖",
+            "points": "1.27"
+          },
+          {
+            "home_player": "",
+            "away_player": "山田　陸",
+            "points": "1.22"
+          },
+          {
+            "home_player": "オベルダン",
+            "away_player": "",
+            "points": "1.21"
+          },
+          {
+            "home_player": "レナート　モーザー",
+            "away_player": "",
+            "points": "1.05"
+          },
+          {
+            "home_player": "山根　永遠",
+            "away_player": "",
+            "points": "0.72"
+          },
+          {
+            "home_player": "",
+            "away_player": "米田　隼也",
+            "points": "0.60"
+          },
+          {
+            "home_player": "白井　康介",
+            "away_player": "",
+            "points": "0.59"
+          },
+          {
+            "home_player": "池戸　柊宇",
+            "away_player": "",
+            "points": "0.50"
+          },
+          {
+            "home_player": "宮本　英治",
+            "away_player": "",
+            "points": "0.47"
+          },
+          {
+            "home_player": "江坂　任",
+            "away_player": "",
+            "points": "0.28"
+          },
+          {
+            "home_player": "",
+            "away_player": "山口　蛍",
+            "points": "0.18"
+          },
+          {
+            "home_player": "一美　和成",
+            "away_player": "",
+            "points": "0.12"
+          },
+          {
+            "home_player": "",
+            "away_player": "岩崎　悠人",
+            "points": "0.09"
+          },
+          {
+            "home_player": "ナ　サンホ",
+            "away_player": "",
+            "points": "0.08"
+          },
+          {
+            "home_player": "ルカオ",
+            "away_player": "",
+            "points": "0.06"
+          },
+          {
+            "home_player": "",
+            "away_player": "山﨑　凌吾",
+            "points": "0.02"
+          },
+          {
+            "home_player": "",
+            "away_player": "洪　怜鎭",
+            "points": "0.01"
+          },
+          {
+            "home_player": "レオ　ガウショ",
+            "away_player": "",
+            "points": "0.01"
+          }
+        ],
+        "セーブ": [
+          {
+            "home_player": "",
+            "away_player": "後藤　雅明",
+            "points": "0.07"
+          }
+        ]
+      },
+      "player_matrix": [
+        {
+          "player_name": "翁長　聖",
+          "team_side": "AWAY",
+          "attack": 2.04,
+          "pass": 1.07,
+          "cross": 0.97,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 3.94,
+          "defense": 1.27,
+          "save": 0.0
+        },
+        {
+          "player_name": "長谷川　元希",
+          "team_side": "AWAY",
+          "attack": 1.21,
+          "pass": 1.21,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.26,
+          "defense": 2.11,
+          "save": 0.0
+        },
+        {
+          "player_name": "進藤　亮佑",
+          "team_side": "AWAY",
+          "attack": 1.12,
+          "pass": 1.12,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 3.85,
+          "defense": 2.29,
+          "save": 0.0
+        },
+        {
+          "player_name": "大南　拓磨",
+          "team_side": "AWAY",
+          "attack": 1.1,
+          "pass": 1.1,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 10.69,
+          "defense": 2.89,
+          "save": 0.0
+        },
+        {
+          "player_name": "新井　一耀",
+          "team_side": "AWAY",
+          "attack": 0.95,
+          "pass": 0.95,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 8.45,
+          "defense": 4.57,
+          "save": 0.0
+        },
+        {
+          "player_name": "山田　陸",
+          "team_side": "AWAY",
+          "attack": 0.79,
+          "pass": 0.79,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 2.15,
+          "defense": 1.22,
+          "save": 0.0
+        },
+        {
+          "player_name": "チアゴ　サンタナ",
+          "team_side": "AWAY",
+          "attack": 0.61,
+          "pass": 0.61,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.0,
+          "save": 0.0
+        },
+        {
+          "player_name": "米田　隼也",
+          "team_side": "AWAY",
+          "attack": 0.54,
+          "pass": 0.45,
+          "cross": 0.0,
+          "dribble": 0.09,
+          "shoot": 0.0,
+          "gain": 4.84,
+          "defense": 0.6,
+          "save": 0.0
+        },
+        {
+          "player_name": "洪　怜鎭",
+          "team_side": "AWAY",
+          "attack": 0.46,
+          "pass": 0.46,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.01,
+          "save": 0.0
+        },
+        {
+          "player_name": "山口　蛍",
+          "team_side": "AWAY",
+          "attack": 0.43,
+          "pass": 0.43,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 2.49,
+          "defense": 0.18,
+          "save": 0.0
+        },
+        {
+          "player_name": "岩崎　悠人",
+          "team_side": "AWAY",
+          "attack": 0.37,
+          "pass": 0.37,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 2.31,
+          "defense": 0.09,
+          "save": 0.0
+        },
+        {
+          "player_name": "松本　天夢",
+          "team_side": "AWAY",
+          "attack": 0.28,
+          "pass": 0.28,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.0,
+          "save": 0.0
+        },
+        {
+          "player_name": "後藤　雅明",
+          "team_side": "AWAY",
+          "attack": 0.23,
+          "pass": 0.23,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 1.9,
+          "defense": 2.27,
+          "save": 0.07
+        },
+        {
+          "player_name": "関口　正大",
+          "team_side": "AWAY",
+          "attack": 0.14,
+          "pass": 0.14,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 7.82,
+          "defense": 2.04,
+          "save": 0.0
+        },
+        {
+          "player_name": "山﨑　凌吾",
+          "team_side": "AWAY",
+          "attack": 0.11,
+          "pass": 0.11,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.02,
+          "save": 0.0
+        },
+        {
+          "player_name": "エドゥアルド",
+          "team_side": "AWAY",
+          "attack": 0.11,
+          "pass": 0.11,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 2.62,
+          "defense": 2.32,
+          "save": 0.0
+        },
+        {
+          "player_name": "江坂　任",
+          "team_side": "HOME",
+          "attack": 2.21,
+          "pass": 1.41,
+          "cross": 0.5,
+          "dribble": 0.3,
+          "shoot": 1.19,
+          "gain": 3.28,
+          "defense": 0.28,
+          "save": 0.0
+        },
+        {
+          "player_name": "山根　永遠",
+          "team_side": "HOME",
+          "attack": 2.19,
+          "pass": 1.6,
+          "cross": 0.49,
+          "dribble": 0.1,
+          "shoot": 0.0,
+          "gain": 3.82,
+          "defense": 0.72,
+          "save": 0.0
+        },
+        {
+          "player_name": "ナ　サンホ",
+          "team_side": "HOME",
+          "attack": 1.99,
+          "pass": 0.66,
+          "cross": 0.52,
+          "dribble": 0.81,
+          "shoot": 1.12,
+          "gain": 5.19,
+          "defense": 0.08,
+          "save": 0.0
+        },
+        {
+          "player_name": "オベルダン",
+          "team_side": "HOME",
+          "attack": 1.55,
+          "pass": 1.55,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 1.24,
+          "gain": 37.32,
+          "defense": 1.21,
+          "save": 0.0
+        },
+        {
+          "player_name": "鈴木　喜丈",
+          "team_side": "HOME",
+          "attack": 1.45,
+          "pass": 0.95,
+          "cross": 0.5,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 6.79,
+          "defense": 1.43,
+          "save": 0.0
+        },
+        {
+          "player_name": "大森　博",
+          "team_side": "HOME",
+          "attack": 1.29,
+          "pass": 0.74,
+          "cross": 0.55,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 10.45,
+          "defense": 1.54,
+          "save": 0.0
+        },
+        {
+          "player_name": "宮本　英治",
+          "team_side": "HOME",
+          "attack": 1.24,
+          "pass": 1.24,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 2.52,
+          "gain": 9.39,
+          "defense": 0.47,
+          "save": 0.0
+        },
+        {
+          "player_name": "レオ　ガウショ",
+          "team_side": "HOME",
+          "attack": 1.18,
+          "pass": 0.12,
+          "cross": 0.0,
+          "dribble": 1.06,
+          "shoot": 0.0,
+          "gain": 4.05,
+          "defense": 0.01,
+          "save": 0.0
+        },
+        {
+          "player_name": "白井　康介",
+          "team_side": "HOME",
+          "attack": 1.17,
+          "pass": 0.62,
+          "cross": 0.55,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 8.68,
+          "defense": 0.59,
+          "save": 0.0
+        },
+        {
+          "player_name": "立田　悠悟",
+          "team_side": "HOME",
+          "attack": 0.92,
+          "pass": 0.92,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 5.58,
+          "defense": 3.36,
+          "save": 0.0
+        },
+        {
+          "player_name": "ルカオ",
+          "team_side": "HOME",
+          "attack": 0.4,
+          "pass": 0.4,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 1.17,
+          "gain": 0.0,
+          "defense": 0.06,
+          "save": 0.0
+        },
+        {
+          "player_name": "レナート　モーザー",
+          "team_side": "HOME",
+          "attack": 0.33,
+          "pass": 0.33,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.63,
+          "defense": 1.05,
+          "save": 0.0
+        },
+        {
+          "player_name": "西川　潤",
+          "team_side": "HOME",
+          "attack": 0.17,
+          "pass": 0.17,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.0,
+          "save": 0.0
+        },
+        {
+          "player_name": "藤田　息吹",
+          "team_side": "HOME",
+          "attack": 0.01,
+          "pass": 0.01,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.0,
+          "save": 0.0
+        },
+        {
+          "player_name": "池戸　柊宇",
+          "team_side": "HOME",
+          "attack": 0.0,
+          "pass": 0.0,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.5,
+          "save": 0.0
+        },
+        {
+          "player_name": "一美　和成",
+          "team_side": "HOME",
+          "attack": 0.0,
+          "pass": 0.0,
+          "cross": 0.0,
+          "dribble": 0.0,
+          "shoot": 0.0,
+          "gain": 0.0,
+          "defense": 0.12,
+          "save": 0.0
+        }
+      ]
     },
-    "player_comments": [
+    "timeline_blocks": [
       {
-        "team_label": "ファジアーノ岡山",
-        "player_name": "ルカオ",
-        "comment": "－－前半にオフサイドでゴールが認められない場面もありましたけれども、後半にゴールに結びつきました。\n前半にオフサイドになったときは本当に悔しかったですけど、その悔しさをエネルギーに変えて、後半に得点を決めることができて非常にうれしく思います。\n－－得点のシーンは裏にスペースがあることを味方に呼びかけて、ロングボールを受けて抜け出しました。\n今週、コーチングスタッフに求められたのは必ず１人は背後に抜け出さないといけないということです。あのシーンは私が背後に抜け出して、宮本（英治）選手が本当に素晴らしいパスを出してくれた。宮本選手にありがとうと伝えたいです。\n－－今季初勝利につながるゴールになりました。\nホーム開幕戦で勝点３を取ることができて良かったです。非常に結果は大事でしたし、私たちの力だけじゃなくてサポーターの力も必要だと思うので、次の試合もたくさんの人に来てもらえると助かります。"
+        "period": "00-15",
+        "home_possession": "52.7%",
+        "away_possession": "47.3%",
+        "home_style": "SetPlayCounterSide",
+        "away_style": "Counter"
       },
       {
-        "team_label": "ファジアーノ岡山",
-        "player_name": "ナ サンホ",
-        "comment": "－－勝利をつかんだいまの気持ちは？\nホーム開幕戦は必ず勝つ。ホームのサポーターに勝利を届ける。そうみんなで誓って準備をしていたので、それがまず良かったと思います。しっかりと準備の段階でうまくできたのかなと思っています。\n－－ホームのサポーターの前でプレーしてみていかがでしたか？\n今日われわれが見せたタフで情熱的なパフォーマンスは、サポーターの方々の声援を受けたから。それは間違いないです。ファン・サポーターの方々が本当に熱い応援を常に送り続けてくれたと思っていますし、応援がすごくて正直ビックリしました。\n－－自身のプレーを振り返って。\nいくつか自分のストロングを見せられたシーンがあったと思うのですけど、正直自分の中ではまだ全然納得がいっていません。もっともっとファン・サポーターの前で自分のストロングを数多く見せていきたいと思っています。"
+        "period": "16-30",
+        "home_possession": "50.8%",
+        "away_possession": "49.2%",
+        "home_style": "SideCounterSide",
+        "away_style": "SideCounter"
       },
       {
-        "team_label": "Ｖ・ファーレン長崎",
-        "player_name": "洪 怜鎭",
-        "comment": "－－Ｊリーグデビューを果たし、プロとしての第一歩を踏みました。ご自身のプレーを振り返ると、悔しさのほうが大きいですか？それとも、出場時間は短かったですが、その中でできることはやったというような思いが大きいですか？\nいや、全然やれることをやれていないというか、悔しさのほうが全然ありますし、満足感はまったくないですね。チームの結果が出ていないので。チームのためにやらなきゃいけないので、満足感はあまりないですね。\n－－実際にプロのピッチに立ちましたが、出場するまでに考えていたものと何か違いはありましたか？\n想定はしていましたし、練習から自分は良いコンディションでできていたので、あまりギャップみたいなものは感じなかったです。"
+        "period": "31-45",
+        "home_possession": "57.0%",
+        "away_possession": "43.0%",
+        "home_style": "SideSetPlayCounter",
+        "away_style": "SidePossessionSetPlay"
+      },
+      {
+        "period": "46-60",
+        "home_possession": "54.4%",
+        "away_possession": "45.6%",
+        "home_style": "SetPlaySideCenter",
+        "away_style": "SetPlay"
+      },
+      {
+        "period": "61-75",
+        "home_possession": "27.7%",
+        "away_possession": "72.3%",
+        "home_style": "SideCenterCounter",
+        "away_style": "PossessionCenter"
+      },
+      {
+        "period": "76-90",
+        "home_possession": "27.7%",
+        "away_possession": "72.3%",
+        "home_style": "CounterSideCenter",
+        "away_style": "PossessionSetPlayCenter"
+      }
+    ],
+    "script_data": {
+      "stream_1st": [
+        {
+          "min": 0,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 1,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 2,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 3,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 4,
+          "home": 4,
+          "away": -1
+        },
+        {
+          "min": 5,
+          "home": 4,
+          "away": 0
+        },
+        {
+          "min": 6,
+          "home": 2,
+          "away": -5
+        },
+        {
+          "min": 7,
+          "home": 1,
+          "away": -6
+        },
+        {
+          "min": 8,
+          "home": 3,
+          "away": 0
+        },
+        {
+          "min": 9,
+          "home": 4,
+          "away": -1
+        },
+        {
+          "min": 10,
+          "home": 5,
+          "away": 0
+        },
+        {
+          "min": 11,
+          "home": 3,
+          "away": 0
+        },
+        {
+          "min": 12,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 13,
+          "home": 4,
+          "away": 0
+        },
+        {
+          "min": 14,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 15,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 16,
+          "home": 0,
+          "away": -2
+        },
+        {
+          "min": 17,
+          "home": 0,
+          "away": -2
+        },
+        {
+          "min": 18,
+          "home": 0,
+          "away": -2
+        },
+        {
+          "min": 19,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 20,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 21,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 22,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 23,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 24,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 25,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 26,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 27,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 28,
+          "home": 1,
+          "away": -2
+        },
+        {
+          "min": 29,
+          "home": 0,
+          "away": -2
+        },
+        {
+          "min": 30,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 31,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 32,
+          "home": 5,
+          "away": -2
+        },
+        {
+          "min": 33,
+          "home": 1,
+          "away": -2
+        },
+        {
+          "min": 34,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 35,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 36,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 37,
+          "home": 5,
+          "away": 0
+        },
+        {
+          "min": 38,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 39,
+          "home": 2,
+          "away": -2
+        },
+        {
+          "min": 40,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 41,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 42,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 43,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 44,
+          "home": 2,
+          "away": -2
+        },
+        {
+          "min": 45,
+          "home": 5,
+          "away": -5
+        },
+        {
+          "min": 46,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 47,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 48,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 49,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 50,
+          "home": 0,
+          "away": 0
+        }
+      ],
+      "stream_2nd": [
+        {
+          "min": 0,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 1,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 2,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 3,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 4,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 5,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 6,
+          "home": 5,
+          "away": -2
+        },
+        {
+          "min": 7,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 8,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 9,
+          "home": 7,
+          "away": -1
+        },
+        {
+          "min": 10,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 11,
+          "home": 2,
+          "away": -2
+        },
+        {
+          "min": 12,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 13,
+          "home": 5,
+          "away": -1
+        },
+        {
+          "min": 14,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 15,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 16,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 17,
+          "home": 2,
+          "away": -2
+        },
+        {
+          "min": 18,
+          "home": 3,
+          "away": -1
+        },
+        {
+          "min": 19,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 20,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 21,
+          "home": 4,
+          "away": -1
+        },
+        {
+          "min": 22,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 23,
+          "home": 5,
+          "away": -2
+        },
+        {
+          "min": 24,
+          "home": 0,
+          "away": -6
+        },
+        {
+          "min": 25,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 26,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 27,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 28,
+          "home": 1,
+          "away": -1
+        },
+        {
+          "min": 29,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 30,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 31,
+          "home": 2,
+          "away": 0
+        },
+        {
+          "min": 32,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 33,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 34,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 35,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 36,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 37,
+          "home": 1,
+          "away": 0
+        },
+        {
+          "min": 38,
+          "home": 0,
+          "away": -1
+        },
+        {
+          "min": 39,
+          "home": 6,
+          "away": 0
+        },
+        {
+          "min": 40,
+          "home": 1,
+          "away": -2
+        },
+        {
+          "min": 41,
+          "home": 2,
+          "away": -1
+        },
+        {
+          "min": 42,
+          "home": 6,
+          "away": -5
+        },
+        {
+          "min": 43,
+          "home": 0,
+          "away": -2
+        },
+        {
+          "min": 44,
+          "home": 0,
+          "away": -5
+        },
+        {
+          "min": 45,
+          "home": 4,
+          "away": -6
+        },
+        {
+          "min": 46,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 47,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 48,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 49,
+          "home": 0,
+          "away": 0
+        },
+        {
+          "min": 50,
+          "home": 0,
+          "away": 0
+        }
+      ],
+      "home_shots": [
+        {
+          "from_x": 30.3,
+          "from_y": 80.0,
+          "to_x": 31.2,
+          "to_y": 88.3
+        },
+        {
+          "from_x": 16.8,
+          "from_y": 87.0,
+          "to_x": 34.7,
+          "to_y": 103.0
+        },
+        {
+          "from_x": 24.3,
+          "from_y": 76.7,
+          "to_x": 46.5,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 33.0,
+          "from_y": 85.5,
+          "to_x": 33.5,
+          "to_y": 95.8
+        },
+        {
+          "from_x": 37.3,
+          "from_y": 97.7,
+          "to_x": 23.0,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 48.8,
+          "from_y": 90.0,
+          "to_x": 39.8,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 27.0,
+          "from_y": 84.3,
+          "to_x": 39.7,
+          "to_y": 94.8
+        },
+        {
+          "from_x": 15.8,
+          "from_y": 80.2,
+          "to_x": 32.7,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 27.0,
+          "from_y": 96.3,
+          "to_x": 32.2,
+          "to_y": 97.3
+        },
+        {
+          "from_x": 35.2,
+          "from_y": 90.7,
+          "to_x": 34.7,
+          "to_y": 91.7
+        },
+        {
+          "from_x": 33.0,
+          "from_y": 98.2,
+          "to_x": 31.0,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 44.7,
+          "from_y": 94.3,
+          "to_x": 36.2,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 32.3,
+          "from_y": 93.5,
+          "to_x": 32.7,
+          "to_y": 94.3
+        },
+        {
+          "from_x": 13.3,
+          "from_y": 85.3,
+          "to_x": 33.2,
+          "to_y": 103.0
+        },
+        {
+          "from_x": 30.3,
+          "from_y": 82.2,
+          "to_x": 28.5,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 32.7,
+          "from_y": 90.0,
+          "to_x": 39.7,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 23.0,
+          "from_y": 89.5,
+          "to_x": 25.5,
+          "to_y": 92.7
+        },
+        {
+          "from_x": 41.0,
+          "from_y": 89.5,
+          "to_x": 27.8,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 36.8,
+          "from_y": 68.7,
+          "to_x": 32.3,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 50.7,
+          "from_y": 77.7,
+          "to_x": 36.0,
+          "to_y": 105.7
+        }
+      ],
+      "away_shots": [
+        {
+          "from_x": 44.5,
+          "from_y": 97.0,
+          "to_x": 37.7,
+          "to_y": 105.0
+        },
+        {
+          "from_x": 35.7,
+          "from_y": 96.5,
+          "to_x": 43.5,
+          "to_y": 105.7
+        },
+        {
+          "from_x": 31.0,
+          "from_y": 93.2,
+          "to_x": 32.8,
+          "to_y": 105.7
+        }
+      ]
+    },
+    "heatmaps": [
+      {
+        "title": "前半 HOME (FC東京)",
+        "grid": [
+          [
+            0.6,
+            0.63,
+            0.75,
+            0.63,
+            0.73,
+            1.15,
+            1.3,
+            0.92,
+            0.73
+          ],
+          [
+            0.6,
+            0.65,
+            0.73,
+            0.85,
+            0.9,
+            0.9,
+            0.87,
+            0.7,
+            0.78
+          ],
+          [
+            0.68,
+            0.68,
+            0.68,
+            0.8,
+            0.73,
+            0.73,
+            0.65,
+            0.68,
+            0.6
+          ],
+          [
+            0.68,
+            0.7,
+            0.63,
+            0.65,
+            0.68,
+            0.7,
+            0.63,
+            0.6,
+            0.68
+          ],
+          [
+            0.65,
+            0.73,
+            0.63,
+            0.7,
+            0.73,
+            0.82,
+            0.7,
+            0.78,
+            0.63
+          ],
+          [
+            0.63,
+            0.75,
+            0.7,
+            0.8,
+            0.65,
+            0.75,
+            0.85,
+            0.78,
+            0.65
+          ]
+        ]
+      },
+      {
+        "title": "前半 AWAY",
+        "grid": [
+          [
+            0.6,
+            0.6,
+            0.65,
+            0.81,
+            0.65,
+            0.89,
+            0.81,
+            0.76,
+            0.71
+          ],
+          [
+            0.6,
+            0.6,
+            0.6,
+            0.65,
+            0.79,
+            0.76,
+            0.71,
+            0.84,
+            0.6
+          ],
+          [
+            0.62,
+            0.6,
+            0.6,
+            0.65,
+            0.62,
+            0.73,
+            0.73,
+            0.79,
+            0.84
+          ],
+          [
+            0.6,
+            0.6,
+            0.62,
+            0.62,
+            0.73,
+            0.71,
+            0.76,
+            0.73,
+            1.0
+          ],
+          [
+            0.65,
+            0.62,
+            0.68,
+            0.62,
+            0.79,
+            0.81,
+            0.81,
+            0.71,
+            0.73
+          ],
+          [
+            0.62,
+            0.79,
+            0.79,
+            0.81,
+            0.84,
+            0.76,
+            0.79,
+            0.71,
+            0.68
+          ]
+        ]
+      },
+      {
+        "title": "後半 HOME (FC東京)",
+        "grid": [
+          [
+            0.71,
+            0.71,
+            0.64,
+            0.77,
+            0.74,
+            0.77,
+            0.84,
+            1.29,
+            0.87
+          ],
+          [
+            0.64,
+            0.71,
+            0.74,
+            0.8,
+            0.74,
+            0.71,
+            0.74,
+            0.8,
+            0.74
+          ],
+          [
+            0.71,
+            0.8,
+            0.87,
+            0.91,
+            0.71,
+            0.64,
+            0.67,
+            0.77,
+            0.74
+          ],
+          [
+            0.87,
+            0.6,
+            0.67,
+            0.8,
+            0.94,
+            0.6,
+            0.74,
+            0.71,
+            0.64
+          ],
+          [
+            0.64,
+            0.64,
+            0.64,
+            0.77,
+            0.74,
+            0.67,
+            0.77,
+            0.71,
+            0.6
+          ],
+          [
+            0.6,
+            0.64,
+            0.64,
+            0.6,
+            0.64,
+            0.74,
+            0.8,
+            0.71,
+            0.64
+          ]
+        ]
+      },
+      {
+        "title": "後半 AWAY",
+        "grid": [
+          [
+            0.61,
+            0.67,
+            0.66,
+            0.76,
+            0.79,
+            0.79,
+            0.7,
+            0.63,
+            0.64
+          ],
+          [
+            0.6,
+            0.6,
+            0.64,
+            0.68,
+            0.79,
+            0.79,
+            0.74,
+            0.77,
+            0.64
+          ],
+          [
+            0.61,
+            0.64,
+            0.63,
+            0.66,
+            0.71,
+            0.82,
+            0.76,
+            0.83,
+            0.86
+          ],
+          [
+            0.61,
+            0.66,
+            0.63,
+            0.66,
+            0.74,
+            0.77,
+            0.76,
+            0.76,
+            0.74
+          ],
+          [
+            0.64,
+            0.61,
+            0.67,
+            0.79,
+            0.79,
+            0.9,
+            0.83,
+            0.73,
+            0.64
+          ],
+          [
+            0.6,
+            0.68,
+            0.67,
+            0.73,
+            0.82,
+            0.8,
+            0.76,
+            0.76,
+            0.61
+          ]
+        ]
       }
     ]
   }

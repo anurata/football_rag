@@ -134,32 +134,50 @@ class TacticalPositionResolver:
         finally:
             conn.close()
 
-    def _load_emp_lookups(self) -> Tuple[Dict[Tuple[str, str], str], Dict[Tuple[str, str], str]]:
-        """entity_master_players から (team_id, number) と (team_id, clean_name) の辞書を構築する."""
-        by_num: Dict[Tuple[str, str], str] = {}
+    def _load_emp_lookups(self) -> Tuple[Dict[Tuple[str, str], Tuple[str, str]], Dict[Tuple[str, str], str]]:
+        """entity_master_players から (team_id, number) と (team_id, clean_name/alias) の辞書を構築する."""
+        by_num: Dict[Tuple[str, str], Tuple[str, str]] = {}
         by_name: Dict[Tuple[str, str], str] = {}
         conn = sqlite3.connect(self.db_path)
         try:
             cur = conn.cursor()
-            cur.execute(
-                "SELECT player_id, team_id, number, canonical_name FROM entity_master_players",
+            cols = {r[1] for r in cur.execute("PRAGMA table_info(entity_master_players)").fetchall()}
+            has_aliases = "aliases_json" in cols
+            sql = (
+                "SELECT player_id, team_id, number, canonical_name, aliases_json FROM entity_master_players"
+                if has_aliases
+                else "SELECT player_id, team_id, number, canonical_name, NULL FROM entity_master_players"
             )
-            for pid, tid, num, cname in cur.fetchall():
+            cur.execute(sql)
+            for pid, tid, num, cname, aliases_raw in cur.fetchall():
+                clean_c = _clean_name_key(cname or "")
                 if tid and num is not None:
-                    by_num[(tid, str(num))] = pid
-                if tid and cname:
-                    by_name[(tid, _clean_name_key(cname))] = pid
+                    by_num[(tid, str(num))] = (pid, clean_c)
+                if tid and clean_c:
+                    by_name[(tid, clean_c)] = pid
+                if tid and aliases_raw:
+                    try:
+                        for al in json.loads(aliases_raw):
+                            cal = _clean_name_key(str(al))
+                            if cal and (tid, cal) not in by_name:
+                                by_name[(tid, cal)] = pid
+                    except Exception:
+                        pass
         finally:
             conn.close()
         return (by_num, by_name)
 
     def _resolve_player_id(self, team_id: str, number: str, player_name: str) -> Optional[str]:
-        """チームIDと背番号または氏名から entity_master_players.player_id を解決する."""
+        """チームIDと氏名（優先）または同一人物確認付き背番号から entity_master_players.player_id を解決する."""
         ckey = _clean_name_key(player_name)
         if ckey and (team_id, ckey) in self._emp_by_name:
             return self._emp_by_name[(team_id, ckey)]
         if number and (team_id, str(number)) in self._emp_by_num:
-            return self._emp_by_num[(team_id, str(number))]
+            cand_pid, cand_ckey = self._emp_by_num[(team_id, str(number))]
+            if not ckey or not cand_ckey:
+                return cand_pid
+            if ckey in cand_ckey or cand_ckey in ckey or ckey[:2] == cand_ckey[:2]:
+                return cand_pid
         return None
 
     # ------------------------------------------------------------------
@@ -629,6 +647,10 @@ class TacticalPositionResolver:
                 )
                 for r in records
             ]
+            cur.execute(
+                "DELETE FROM player_match_positions WHERE match_id = ?",
+                (match_id,),
+            )
             cur.executemany(
                 """
                 INSERT OR REPLACE INTO player_match_positions (

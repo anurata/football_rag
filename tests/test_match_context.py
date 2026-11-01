@@ -135,16 +135,15 @@ class TestMatchContextCalculator(unittest.TestCase):
     def test_loan_restrictions_clause(self) -> None:
         """
         Test Loan Player Restriction Clauses:
-        - Against Kashima Antlers (KAS): Ryotaro Araki is restricted.
         - Against Albirex Niigata (ALB): Shion Homma is restricted.
         - Against Machida Zelvia (ZEL): No restriction.
         """
-        res_kas = self.calculator.check_loan_restrictions(
+        res_alb = self.calculator.check_loan_restrictions(
             current_team_id="FCT",
-            opponent_team_id="KAS",
+            opponent_team_id="ALB",
         )
-        self.assertTrue(res_kas["has_loan_restriction"])
-        self.assertTrue(any("荒木" in p["player_name"] for p in res_kas["restricted_players"]))
+        self.assertTrue(res_alb["has_loan_restriction"])
+        self.assertTrue(any("本間" in p["player_name"] for p in res_alb["restricted_players"]))
 
         res_zel = self.calculator.check_loan_restrictions(
             current_team_id="FCT",
@@ -156,7 +155,8 @@ class TestMatchContextCalculator(unittest.TestCase):
     def test_injury_condition_context_mw12(self) -> None:
         """
         Test Injury & Condition extraction in MW12 (20261025_FCT_MIT):
-        - Should extract active injuries (Henrique Trevisan, Nakagawa limited minutes, etc.)
+        - Should extract verified active injuries (Muroya, Nagatomo, etc.)
+        - Should not include transferred or recovered players (Araki, Koizumi, Nakagawa)
         - Should extract coach mentions ('連戦かつ怪我人も多い状況で') from markdown
         """
         res = self.calculator.get_injury_condition_context(
@@ -165,7 +165,10 @@ class TestMatchContextCalculator(unittest.TestCase):
             match_id="20261025_FCT_MIT",
         )
         self.assertGreater(len(res["active_injuries"]), 0)
-        self.assertIn("仲川 輝人", [p["player_name"] for p in res["active_injuries"]])
+        active_names = [p["player_name"] for p in res["active_injuries"]]
+        self.assertIn("室屋 成", active_names)
+        self.assertNotIn("仲川 輝人", active_names)
+        self.assertNotIn("荒木 遼太郎", active_names)
         self.assertGreater(len(res["coach_mentions"]), 0)
         self.assertTrue(any("怪我人" in m for m in res["coach_mentions"]))
 

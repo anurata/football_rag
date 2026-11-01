@@ -967,6 +967,9 @@ class MatchContextService:
         for item in self.injury_master:
             if item.get("team_id") != team_id:
                 continue
+            status = item.get("status", "ACTIVE")
+            if status not in ("OUT", "INJURED", "RECOVERING"):
+                continue
             diag_date = str(item.get("diagnosis_date", "2099-12-31"))
             if diag_date <= current_date_str:
                 active_injuries.append(
@@ -974,7 +977,7 @@ class MatchContextService:
                         "player_name": item.get("player_name"),
                         "injury_type": item.get("injury_type"),
                         "expected_recovery": item.get("expected_recovery"),
-                        "status": item.get("status", "ACTIVE"),
+                        "status": status,
                         "notes": item.get("notes", ""),
                     },
                 )

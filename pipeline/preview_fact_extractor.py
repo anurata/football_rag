@@ -11,7 +11,7 @@ import json
 import logging
 import sqlite3
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from pipeline.lineup_prediction_service import LineupPredictionService
 
@@ -180,27 +180,55 @@ class PreviewFactExtractor:
         }
 
     def _get_injuries(self, team_id: str) -> List[Dict[str, str]]:
-        """Get injury list from config."""
+        """Get injury list from config, filtering only currently active OUT/INJURED players on the roster."""
         if not self.injury_path.exists():
             return []
+
+        # 在籍選手セットを取得して他クラブ移籍・退団選手を除外
+        active_roster_names = self._get_active_roster_player_names(team_id)
 
         try:
             with open(self.injury_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 injuries = data.get("injuries", [])
-                return [
-                    {
-                        "player_name": inj.get("player_name", ""),
-                        "status": inj.get("status", ""),
-                        "injury_type": inj.get("injury_type", ""),
-                        "notes": inj.get("notes", ""),
-                    }
-                    for inj in injuries
-                    if inj.get("team_id") == team_id
-                ]
+                result: List[Dict[str, str]] = []
+                for inj in injuries:
+                    if inj.get("team_id") != team_id:
+                        continue
+                    status = inj.get("status", "")
+                    if status not in ("OUT", "INJURED"):
+                        continue
+                    pname = inj.get("player_name", "")
+                    if active_roster_names and pname not in active_roster_names:
+                        continue
+                    result.append(
+                        {
+                            "player_name": pname,
+                            "status": status,
+                            "injury_type": inj.get("injury_type", ""),
+                            "notes": inj.get("notes", ""),
+                        },
+                    )
+                return result
         except Exception as e:
             logger.error(f"Failed to read injuries: {e}")
             return []
+
+    def _get_active_roster_player_names(self, team_id: str) -> Set[str]:
+        """Fetch active canonical player names for a team from entity master."""
+        if not self.db_path.exists():
+            return set()
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                c = conn.cursor()
+                rows = c.execute(
+                    "SELECT canonical_name FROM entity_master_players WHERE team_id = ?",
+                    (team_id,),
+                ).fetchall()
+                return {r[0] for r in rows if r[0]}
+        except Exception as e:
+            logger.warning(f"Failed to fetch active roster names for {team_id}: {e}")
+            return set()
 
     def _get_recent_record(self, team_id: str) -> Dict[str, Any]:
         """Calculate season record for matches up to MW12."""

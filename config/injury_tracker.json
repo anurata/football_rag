@@ -2,46 +2,6 @@
   "description": "クラブ公式負傷リリースおよび練習レポート・コンディション追跡マスタ",
   "injuries": [
     {
-      "player_name": "エンリケ トレヴィザン",
-      "player_id": "henrique_trevisan",
-      "team_id": "FCT",
-      "injury_type": "左膝内側側副靭帯損傷",
-      "diagnosis_date": "2026-07-20",
-      "expected_recovery": "全治約6〜8週間",
-      "status": "RECOVERING",
-      "notes": "MW1〜MW6メンバー外。最終ラインのセンターバック運用に影響。"
-    },
-    {
-      "player_name": "荒木 遼太郎",
-      "player_id": "araki_ryotaro",
-      "team_id": "FCT",
-      "injury_type": "右大腿二頭筋筋損傷",
-      "diagnosis_date": "2026-08-10",
-      "expected_recovery": "全治約4週間",
-      "status": "RECOVERED",
-      "notes": "MW2〜MW5離脱。MW6京都戦より部分合流、MW7ガンバ戦でベンチ復帰。"
-    },
-    {
-      "player_name": "仲川 輝人",
-      "player_id": "nakagawa_teruhito",
-      "team_id": "FCT",
-      "injury_type": "コンディション調整・プレー時間制限",
-      "diagnosis_date": "2026-08-01",
-      "expected_recovery": "段階的プレー時間延長",
-      "status": "ACTIVE_LIMITED",
-      "notes": "MW1〜MW11は主に途中出場（クローザー起用）。MW12水戸戦で今季リーグ戦初スタメン2得点。"
-    },
-    {
-      "player_name": "小泉 慶",
-      "player_id": "koizumi_kei",
-      "team_id": "FCT",
-      "injury_type": "右足首捻挫",
-      "diagnosis_date": "2026-09-10",
-      "expected_recovery": "全治約3週間",
-      "status": "RECOVERED",
-      "notes": "MW7〜MW9欠場。中盤のボランチ構成（高宇洋・常盤・橋本拳人）に影響。"
-    },
-    {
       "player_name": "キム テヒョン",
       "player_id": "P_KAS_3_キムテヒョン",
       "team_id": "KAS",

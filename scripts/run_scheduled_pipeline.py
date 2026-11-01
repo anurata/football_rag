@@ -32,6 +32,7 @@ from pipeline.phase_calculator import (
 from pipeline.preview_fact_extractor import PreviewFactExtractor
 from pipeline.preview_markdown_formatter import format_preview_markdown
 from scrapers.schedule_crawler import ScheduleCrawler
+from scripts.batch_update_all_teams_tactics import update_team_tactics
 from scripts.plan_phases import build_done_lookup, load_stage_map
 from scripts.update_matchweek import MatchweekUpdater
 
@@ -149,6 +150,23 @@ class ScheduledPipelineRunner:
                     updater.update_from_directory(str(self.markdown_dir), stage=stage)
             finally:
                 updater.close()
+
+            # Automatic recalculation of Layer 2 tactical metrics upon Stage 2 completion
+            if stage == 2:
+                home = match.get("home", "")
+                away = match.get("away", "")
+                for tid in [home, away]:
+                    if tid:
+                        try:
+                            logger.info(f"[{match_id}] Recalculating Layer 2 tactics for {tid}...")
+                            update_team_tactics(
+                                team_id=tid,
+                                db_path=Path(self.db_path),
+                                export_excel=True,
+                            )
+                        except Exception as te:
+                            logger.warning(f"[{match_id}] Failed to update tactics for {tid}: {te}")
+
             return True
         except Exception as e:
             logger.error(f"[{match_id}] Failed to execute Stage {stage}: {e}", exc_info=True)
@@ -180,7 +198,7 @@ class ScheduledPipelineRunner:
 
         for item in plan:
             match_id = item.get("match_id", "")
-            phases = item.get("pending_phases", [])
+            phases = item.get("pending_phases") or item.get("phases", [])
             for phase in phases:
                 results["executed"] += 1
                 success = self.execute_phase(item, phase)

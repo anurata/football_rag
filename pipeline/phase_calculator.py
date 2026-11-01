@@ -106,6 +106,9 @@ def plan_matches(
                 "matchweek": match.get("matchweek"),
                 "kickoff": kickoff.isoformat(),
                 "phases": phases,
+                "pending_phases": phases,
+                "home": match.get("home"),
+                "away": match.get("away"),
             },
         )
     return plan

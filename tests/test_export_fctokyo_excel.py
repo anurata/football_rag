@@ -35,6 +35,7 @@ class TestExportFCTokyoExcel(unittest.TestCase):
 
         wb = openpyxl.load_workbook(str(out_path))
         expected_sheets = [
+            "L2_全55項目戦術完全指標",
             "L2_先進戦術指標",
             "L2_試合戦術プラン推移",
             "L2_クラブ戦術プロファイル",

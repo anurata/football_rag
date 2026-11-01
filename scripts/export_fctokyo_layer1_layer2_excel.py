@@ -19,6 +19,7 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from pipeline.db import DEFAULT_DB_PATH, get_db_connection
+from pipeline.fctokyo_55_metrics_calculator import FCTokyo55MetricsCalculator
 
 OUTPUT_FILE = ROOT_DIR / "exports" / "FCT_Layer1_Layer2_Dossier_2026.xlsx"
 PROFILES_PATH = ROOT_DIR / "knowledge" / "team_tactical_profiles.json"
@@ -370,6 +371,11 @@ def export_fct_excel(output_path: Path = OUTPUT_FILE) -> Path:
 
     matches = get_fct_matches(conn)
 
+    # 55 Tactical Metrics Calculator
+    calc = FCTokyo55MetricsCalculator(db_path=DEFAULT_DB_PATH)
+    metrics_55 = calc.calculate_all_matches()
+    df_l2_55 = pd.DataFrame(metrics_55)
+
     df_l1_team = build_layer1_team_stats(conn, matches)
     df_l1_events = build_layer1_events(conn, matches)
     df_l1_players = build_layer1_player_match_stats(conn, matches)
@@ -381,6 +387,7 @@ def export_fct_excel(output_path: Path = OUTPUT_FILE) -> Path:
     conn.close()
 
     with pd.ExcelWriter(str(output_path), engine="openpyxl") as writer:
+        df_l2_55.to_excel(writer, sheet_name="L2_全55項目戦術完全指標", index=False)
         df_l2_synthetic.to_excel(writer, sheet_name="L2_先進戦術指標", index=False)
         df_l2_phases.to_excel(writer, sheet_name="L2_試合戦術プラン推移", index=False)
         df_l2_profile.to_excel(writer, sheet_name="L2_クラブ戦術プロファイル", index=False)

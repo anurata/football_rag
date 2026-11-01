@@ -324,13 +324,15 @@ def parse_flab_team_side(
     ccr_v, _, ccr_avg = get_v("チャンス構築率")
     pos_v, _, pos_avg = get_v("ボール保持率")
 
-    # CBPのチーム集計
+    # CBPのチーム集計（先頭の真のCBP値のみを登録し、後続の成功率行による上書きを防止）
     cbp_team_list = cbp_dict.get("team", [])
     cbp_map: Dict[str, Dict[str, Any]] = {}
     for c_item in cbp_team_list:
         c_name = c_item.get("name")
         if c_name:
-            cbp_map[c_name.strip()] = c_item
+            c_clean = c_name.strip()
+            if c_clean not in cbp_map:
+                cbp_map[c_clean] = c_item
 
     def get_cbp(c_name: str) -> Tuple[Optional[float], Optional[float]]:
         cd = cbp_map.get(c_name, {})

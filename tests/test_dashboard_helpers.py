@@ -9,6 +9,7 @@ from app import (
     fetch_matches_for_season,
     fetch_matches_for_mw,
     fetch_match_reviews,
+    _format_attendance,
 )
 from pipeline.db import DEFAULT_DB_PATH
 
@@ -53,6 +54,15 @@ class TestDashboardHelpers(unittest.TestCase):
         self.assertIsInstance(reviews, list)
         self.assertTrue(len(reviews) > 0)
         self.assertIn("content_text", reviews[0])
+
+    def test_format_attendance_safety(self):
+        """Verify attendance formatter safely handles integers, strings, None, and empty."""
+        self.assertEqual(_format_attendance(28450), "28,450")
+        self.assertEqual(_format_attendance("28450"), "28,450")
+        self.assertEqual(_format_attendance("28,450人"), "28,450")
+        self.assertEqual(_format_attendance(None), "-")
+        self.assertEqual(_format_attendance(""), "-")
+        self.assertEqual(_format_attendance(0), "0")
 
 
 if __name__ == "__main__":

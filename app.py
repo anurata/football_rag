@@ -197,13 +197,30 @@ def fetch_match_reviews(match_id: str, db_path: str = DEFAULT_DB_PATH) -> List[D
 # UI Component Helpers: Header & Basic Stats
 # ==============================================================================
 
+def _format_attendance(raw_val: Any) -> str:
+    """Safely format attendance number or string, handling None and missing values."""
+    if raw_val is None or raw_val == "":
+        return "-"
+    if isinstance(raw_val, (int, float)):
+        return f"{int(raw_val):,}"
+    val_str = str(raw_val).replace(",", "").replace("人", "").strip()
+    try:
+        return f"{int(val_str):,}"
+    except (ValueError, TypeError):
+        return str(raw_val)
+
+
 def render_header(match: Dict[str, Any]) -> None:
     """Render the top match card header with scores and meta info."""
-    home_score = match.get("home_score", "-")
-    away_score = match.get("away_score", "-")
+    h_score = match.get("home_score")
+    a_score = match.get("away_score")
+    home_score = h_score if h_score is not None else "-"
+    away_score = a_score if a_score is not None else "-"
+
     home_name = get_team_display_name(match.get("home_team_id"))
     away_name = get_team_display_name(match.get("away_team_id"))
     mw_text = get_matchweek_display_text(match)
+    att_str = _format_attendance(match.get("attendance"))
 
     st.markdown(
         f"""
@@ -230,7 +247,7 @@ def render_header(match: Dict[str, Any]) -> None:
                 <span>📅 {match.get('date', '-')}</span>
                 <span>🏟️ {match.get('stadium', '-')}</span>
                 <span>🌤️ {match.get('weather', '-')}</span>
-                <span>👥 {match.get('attendance', 0):,} 人</span>
+                <span>👥 {att_str} 人</span>
             </div>
         </div>
         """,

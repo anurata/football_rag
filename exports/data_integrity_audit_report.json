@@ -1,0 +1,40 @@
+{
+  "1_matches_audit": {
+    "season_2026_mw1_12_matches": 120,
+    "expected_matches": 120,
+    "missing_scores": 0,
+    "missing_tactical_files": [],
+    "missing_archetype_files": [],
+    "status": "PASS"
+  },
+  "2_team_flab_layer1_audit": {
+    "total_team_flab_records": 240,
+    "expected_records": 240,
+    "distinct_teams": 20,
+    "abnormal_team_record_counts": [],
+    "zero_or_null_cbp_attack": 0,
+    "zero_or_null_cbp_pass": 0,
+    "zero_or_null_distance": 0,
+    "zero_or_null_sprints": 0,
+    "status": "PASS"
+  },
+  "3_player_layer1_audit": {
+    "total_player_match_logs": 3810,
+    "unique_players_logged": 532,
+    "teams_in_player_stats": 20,
+    "total_starter_logs": 2647,
+    "logs_with_coordinates": 3802,
+    "player_master_records": 914,
+    "player_master_teams": 20,
+    "status": "PASS"
+  },
+  "4_layer2_analytics_audit": {
+    "audited_teams_count": 20,
+    "missing_55_summary_json": [],
+    "missing_synthesis_json": [],
+    "missing_dossier_excel": [],
+    "player_excel_missing_l2_sheet": [],
+    "metric_anomalies_or_nans": 0,
+    "status": "PASS"
+  }
+}

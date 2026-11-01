@@ -121,5 +121,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "町田ゼルビアの決定機: 町田ゼルビア選手 による得点 (65分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "HIGH_PRESS",
+    "description": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）"
+  }
 }

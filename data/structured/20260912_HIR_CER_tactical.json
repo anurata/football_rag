@@ -154,5 +154,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "セレッソ大阪の決定機: 上門 知樹 による得点 (91分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "HIGH_PRESS",
+    "description": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）"
+  }
 }

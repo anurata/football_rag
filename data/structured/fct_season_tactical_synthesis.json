@@ -1,0 +1,390 @@
+{
+  "meta": {
+    "team_id": "FCT",
+    "season": 2026,
+    "analyzed_matches": 12,
+    "enriched_match_files": 12,
+    "matchweeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "time_segment_dynamics": {
+    "0-15": {
+      "team_goals": 1,
+      "opp_goals": 0,
+      "team_shots_missed": 12,
+      "opp_shots_missed": 2,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 1,
+      "fct_shots_missed": 12,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    },
+    "16-30": {
+      "team_goals": 1,
+      "opp_goals": 0,
+      "team_shots_missed": 10,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 1,
+      "fct_shots_missed": 10,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    },
+    "31-45+": {
+      "team_goals": 4,
+      "opp_goals": 1,
+      "team_shots_missed": 6,
+      "opp_shots_missed": 2,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 4,
+      "fct_shots_missed": 6,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    },
+    "46-60": {
+      "team_goals": 1,
+      "opp_goals": 0,
+      "team_shots_missed": 1,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 1,
+      "fct_shots_missed": 1,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    },
+    "61-75": {
+      "team_goals": 0,
+      "opp_goals": 0,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 0,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    },
+    "76-90+": {
+      "team_goals": 0,
+      "opp_goals": 0,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 0.0,
+      "fct_goals": 0,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    }
+  },
+  "starter_unit_synergy": {
+    "center_back_units": [
+      {
+        "unit_name": "アレクサンダー ショルツ × バングーナガンデ 佳史扶",
+        "matches_played": 7,
+        "win_rate_pct": 71.4,
+        "avg_actual_pts": 2.43,
+        "avg_xpts": 1.89,
+        "avg_convex_hull_m2": 1204.4
+      },
+      {
+        "unit_name": "アレクサンダー ショルツ × 室屋 成",
+        "matches_played": 4,
+        "win_rate_pct": 75.0,
+        "avg_actual_pts": 2.25,
+        "avg_xpts": 1.93,
+        "avg_convex_hull_m2": 1349.8
+      },
+      {
+        "unit_name": "アレクサンダー ショルツ × 森重 真人",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 1.0,
+        "avg_xpts": 1.92,
+        "avg_convex_hull_m2": 1370.3
+      }
+    ],
+    "central_midfield_units": [
+      {
+        "unit_name": "佐藤 恵允 × 本間 至恩",
+        "matches_played": 3,
+        "win_rate_pct": 66.7,
+        "avg_actual_pts": 2.33,
+        "avg_xpts": 2.02,
+        "avg_convex_hull_m2": 1365.0
+      },
+      {
+        "unit_name": "佐藤 恵允 × 安斎 颯馬",
+        "matches_played": 3,
+        "win_rate_pct": 66.7,
+        "avg_actual_pts": 2.33,
+        "avg_xpts": 1.94,
+        "avg_convex_hull_m2": 1232.3
+      },
+      {
+        "unit_name": "俵積田 晃太 × 安斎 颯馬",
+        "matches_played": 3,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 2.0,
+        "avg_convex_hull_m2": 1101.0
+      },
+      {
+        "unit_name": "安斎 颯馬 × 常盤 亨太",
+        "matches_played": 2,
+        "win_rate_pct": 50.0,
+        "avg_actual_pts": 2.0,
+        "avg_xpts": 2.12,
+        "avg_convex_hull_m2": 1403.2
+      },
+      {
+        "unit_name": "佐藤 恵允 × 俵積田 晃太",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 0.79,
+        "avg_convex_hull_m2": 1298.9
+      }
+    ]
+  },
+  "opponent_archetype_resistance": {
+    "MID_BLOCK": {
+      "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+      "match_count": 6,
+      "matches": [
+        "ZEL (1-5)",
+        "VOB (2-2)",
+        "VVN (3-0)",
+        "PUL (1-1)",
+        "NAG (1-0)",
+        "REY (0-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260808_FCT_ZEL",
+          "opp_id": "ZEL",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-5",
+          "pts": 0,
+          "xpts": 0.79,
+          "bpi": 13.4,
+          "conv_30_to_pa": 36.7,
+          "cross_reliance": 12.7,
+          "xt_approx": 2.645,
+          "convex_hull": 1298.9
+        },
+        {
+          "match_id": "20260815_VOB_FCT",
+          "opp_id": "VOB",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "2-2",
+          "pts": 1,
+          "xpts": 1.35,
+          "bpi": 13.5,
+          "conv_30_to_pa": 54.8,
+          "cross_reliance": 17.3,
+          "xt_approx": 3.55,
+          "convex_hull": 1341.5
+        },
+        {
+          "match_id": "20260829_VVN_FCT",
+          "opp_id": "VVN",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "3-0",
+          "pts": 3,
+          "xpts": 2.09,
+          "bpi": 20.2,
+          "conv_30_to_pa": 40.9,
+          "cross_reliance": 9.7,
+          "xt_approx": 4.15,
+          "convex_hull": 1422.3
+        },
+        {
+          "match_id": "20260902_PUL_FCT",
+          "opp_id": "PUL",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-1",
+          "pts": 1,
+          "xpts": 1.92,
+          "bpi": 18.7,
+          "conv_30_to_pa": 34.9,
+          "cross_reliance": 13.6,
+          "xt_approx": 3.68,
+          "convex_hull": 1370.3
+        },
+        {
+          "match_id": "20260919_FCT_NAG",
+          "opp_id": "NAG",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-0",
+          "pts": 3,
+          "xpts": 1.12,
+          "bpi": 14.6,
+          "conv_30_to_pa": 28.6,
+          "cross_reliance": 6.9,
+          "xt_approx": 2.675,
+          "convex_hull": 1172.1
+        },
+        {
+          "match_id": "20261021_FCT_REY",
+          "opp_id": "REY",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "0-0",
+          "pts": 1,
+          "xpts": 1.41,
+          "bpi": 27.8,
+          "conv_30_to_pa": 40.6,
+          "cross_reliance": 10.1,
+          "xt_approx": 6.01,
+          "convex_hull": 1205.6
+        }
+      ],
+      "win_rate_pct": 33.3,
+      "avg_xpts": 1.45,
+      "avg_conv_30_to_pa_pct": 39.4,
+      "avg_cross_reliance_pct": 11.7,
+      "avg_xt_approx": 3.79,
+      "avg_bpi": 18.0
+    },
+    "LOW_BLOCK": {
+      "description": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+      "match_count": 3,
+      "matches": [
+        "JEF (2-0)",
+        "SAN (2-0)",
+        "VER (4-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260821_FCT_JEF",
+          "opp_id": "JEF",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 2.61,
+          "bpi": 26.9,
+          "conv_30_to_pa": 42.6,
+          "cross_reliance": 13.8,
+          "xt_approx": 5.905,
+          "convex_hull": 1331.3
+        },
+        {
+          "match_id": "20260906_FCT_SAN",
+          "opp_id": "SAN",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 2.01,
+          "bpi": 24.3,
+          "conv_30_to_pa": 58.9,
+          "cross_reliance": 20.3,
+          "xt_approx": 6.745,
+          "convex_hull": 1333.1
+        },
+        {
+          "match_id": "20261017_VER_FCT",
+          "opp_id": "VER",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "4-0",
+          "pts": 3,
+          "xpts": 2.84,
+          "bpi": 39.2,
+          "conv_30_to_pa": 35.4,
+          "cross_reliance": 37.1,
+          "xt_approx": 8.29,
+          "convex_hull": 1090.1
+        }
+      ],
+      "win_rate_pct": 100.0,
+      "avg_xpts": 2.49,
+      "avg_conv_30_to_pa_pct": 45.6,
+      "avg_cross_reliance_pct": 23.7,
+      "avg_xt_approx": 6.98,
+      "avg_bpi": 30.1
+    },
+    "HIGH_PRESS": {
+      "description": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+      "match_count": 3,
+      "matches": [
+        "GAM (2-0)",
+        "URA (3-0)",
+        "MIT (6-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260912_GAM_FCT",
+          "opp_id": "GAM",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 2.31,
+          "bpi": 14.1,
+          "conv_30_to_pa": 67.9,
+          "cross_reliance": 6.4,
+          "xt_approx": 3.735,
+          "convex_hull": 1436.0
+        },
+        {
+          "match_id": "20261010_FCT_URA",
+          "opp_id": "URA",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "3-0",
+          "pts": 3,
+          "xpts": 2.03,
+          "bpi": 17.9,
+          "conv_30_to_pa": 39.0,
+          "cross_reliance": 7.9,
+          "xt_approx": 3.755,
+          "convex_hull": 1040.8
+        },
+        {
+          "match_id": "20261025_FCT_MIT",
+          "opp_id": "MIT",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "6-0",
+          "pts": 3,
+          "xpts": 2.4,
+          "bpi": 21.4,
+          "conv_30_to_pa": 35.4,
+          "cross_reliance": 12.3,
+          "xt_approx": 4.145,
+          "convex_hull": 1158.1
+        }
+      ],
+      "win_rate_pct": 100.0,
+      "avg_xpts": 2.25,
+      "avg_conv_30_to_pa_pct": 47.4,
+      "avg_cross_reliance_pct": 8.9,
+      "avg_xt_approx": 3.88,
+      "avg_bpi": 17.8
+    }
+  }
+}

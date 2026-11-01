@@ -143,5 +143,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "川崎フロンターレの決定機: ペドロ ホマーノ による得点 (97分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "MID_BLOCK",
+    "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）"
+  }
 }

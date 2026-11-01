@@ -110,5 +110,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "ヴィッセル神戸の決定機: ヴィッセル神戸選手 による得点 (65分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "MID_BLOCK",
+    "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）"
+  }
 }

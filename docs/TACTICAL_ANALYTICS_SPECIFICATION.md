@@ -85,27 +85,40 @@
 
 ---
 
-### 4. データ永続化および連携アーキテクチャ
+### 4. データ永続化および連携アーキテクチャ（J1全20チーム完全対応）
 
-本機能群によって算出されたデータは、以下の構造化ファイルに永続化され、後続パイプラインおよびUI/QAエンジンから参照されます。
+本機能群によって算出されたデータは、FC東京のみならず **J1全20チーム（2026シーズン 第1節〜第12節、全240試合）** を対象に汎用化され、以下の構造化ファイルに永続化されて後続パイプラインおよびUI/QAエンジンから参照されます。
 
 ```mermaid
 flowchart TD
-    RawDB[("data/football.db")] --> Calc["pipeline/fctokyo_55_metrics_calculator.py<br>pipeline/fctokyo_cross_analytics.py"]
-    Calc --> MasterJSON["data/structured/fctokyo_season_tactical_synthesis.json<br>(シーズン全体集計マスター)"]
-    Calc --> MatchJSON["data/structured/*_tactical.json<br>(各試合の opponent_tactical_archetype エンリッチ)"]
+    RawDB[("data/football.db<br>(全20チーム生スタッツ・イベント)")] --> Batch["scripts/batch_update_all_teams_tactics.py"]
+    Batch --> Calc["pipeline/team_55_metrics_calculator.py<br>(全55項目算出エンジン)"]
+    Batch --> Cross["pipeline/team_cross_analytics.py<br>(3大クロス分析エンジン)"]
+    
+    Cross --> MasterJSON["data/structured/{team_id}_season_tactical_synthesis.json<br>(各クラブ別シーズン統合マスター・20ファイル)"]
+    Calc --> SummaryJSON["exports/{team_id}_55_tactical_metrics_summary.json<br>(各クラブ別全55項目サマリー・20ファイル)"]
+    Calc --> ExcelDossier["exports/{TEAM_ID}_Layer1_Layer2_Dossier_2026.xlsx<br>exports/players/{TEAM_ID}_players.xlsx<br>(L2_全55項目戦術完全指標 シート)"]
+    Cross --> MatchJSON["data/structured/*_tactical.json<br>(各試合の opponent_tactical_archetype エンリッチ)"]
 
     MasterJSON --> RAG["agent/qa_engine.py<br>(戦術QA・深層回答)"]
     MasterJSON --> Preview["pipeline/preview_curation_service.py<br>(次戦プレビュー・相手タイプ別対策生成)"]
     MasterJSON --> Live["scripts/live_match_forecaster.py<br>(試合中の時間帯別失点確率推論)"]
 ```
 
-- **シーズン統合マスター**: `data/structured/fctokyo_season_tactical_synthesis.json`
+- **全20クラブシーズン統合マスター**: `data/structured/{team_id.lower()}_season_tactical_synthesis.json`
+  - 例: `cer_...`, `fct_...`, `fuk_...`, `gam_...`, `hir_...`, `jef_...`, `kas_...`, `kaw_...`, `mar_...`, `mit_...`, `nag_...`, `oka_...`, `pul_...`, `rey_...`, `san_...`, `ura_...`, `ver_...`, `vob_...`, `vvn_...`, `zel_...`
+- **全20クラブ55項目サマリー**: `exports/{team_id.lower()}_55_tactical_metrics_summary.json`
+- **全20クラブ完全Excelドシエ**: `exports/{TEAM_ID}_Layer1_Layer2_Dossier_2026.xlsx`
 - **各試合戦術JSON**: `data/structured/{match_id}_tactical.json`
 - **実装ソース**:
-  - `pipeline/fctokyo_55_metrics_calculator.py`
-  - `pipeline/fctokyo_cross_analytics.py`
+  - `pipeline/team_55_metrics_calculator.py`（汎用55指標計算エンジン）
+  - `pipeline/team_cross_analytics.py`（汎用3大クロス分析エンジン）
+  - `pipeline/fctokyo_55_metrics_calculator.py`（後方互換ラッパー）
+  - `pipeline/fctokyo_cross_analytics.py`（後方互換ラッパー）
+  - `scripts/batch_update_all_teams_tactics.py`（全20チーム一括更新バッチ）
 - **テストコード**:
+  - `tests/test_team_55_metrics_calculator.py`（全チーム汎用テスト）
+  - `tests/test_team_cross_analytics.py`（全チーム汎用クロス集計テスト）
   - `tests/test_fctokyo_55_metrics_calculator.py`
   - `tests/test_fctokyo_cross_analytics.py`
 

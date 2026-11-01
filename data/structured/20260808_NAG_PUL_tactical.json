@@ -88,5 +88,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "清水エスパルスの決定機: 北川 航也 による得点 (38分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "MID_BLOCK",
+    "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）"
+  }
 }

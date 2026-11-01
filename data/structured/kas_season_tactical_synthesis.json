@@ -1,0 +1,414 @@
+{
+  "meta": {
+    "team_id": "KAS",
+    "season": 2026,
+    "analyzed_matches": 12,
+    "enriched_match_files": 12,
+    "matchweeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "time_segment_dynamics": {
+    "0-15": {
+      "team_goals": 4,
+      "opp_goals": 2,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 2.6,
+      "opp_total_xg": 1.3,
+      "fct_goals": 4,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 2.6
+    },
+    "16-30": {
+      "team_goals": 2,
+      "opp_goals": 4,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.3,
+      "opp_total_xg": 2.6,
+      "fct_goals": 2,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.3
+    },
+    "31-45+": {
+      "team_goals": 3,
+      "opp_goals": 3,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.95,
+      "opp_total_xg": 1.95,
+      "fct_goals": 3,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.95
+    },
+    "46-60": {
+      "team_goals": 4,
+      "opp_goals": 7,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 2.6,
+      "opp_total_xg": 4.55,
+      "fct_goals": 4,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 2.6
+    },
+    "61-75": {
+      "team_goals": 4,
+      "opp_goals": 1,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 2.6,
+      "opp_total_xg": 0.65,
+      "fct_goals": 4,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 2.6
+    },
+    "76-90+": {
+      "team_goals": 8,
+      "opp_goals": 4,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 5.2,
+      "opp_total_xg": 2.6,
+      "fct_goals": 8,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 5.2
+    }
+  },
+  "starter_unit_synergy": {
+    "center_back_units": [
+      {
+        "unit_name": "キム テヒョン × 小川 諒也",
+        "matches_played": 6,
+        "win_rate_pct": 16.7,
+        "avg_actual_pts": 0.83,
+        "avg_xpts": 1.66,
+        "avg_convex_hull_m2": 1149.5
+      },
+      {
+        "unit_name": "小川 諒也 × 広瀬 陸斗",
+        "matches_played": 5,
+        "win_rate_pct": 80.0,
+        "avg_actual_pts": 2.4,
+        "avg_xpts": 1.88,
+        "avg_convex_hull_m2": 1182.7
+      },
+      {
+        "unit_name": "大森 渚生 × 植田 直通",
+        "matches_played": 1,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 1.4,
+        "avg_convex_hull_m2": 1456.9
+      }
+    ],
+    "central_midfield_units": [
+      {
+        "unit_name": "エウベル × マテウス ブエノ",
+        "matches_played": 3,
+        "win_rate_pct": 66.7,
+        "avg_actual_pts": 2.0,
+        "avg_xpts": 1.83,
+        "avg_convex_hull_m2": 1252.6
+      },
+      {
+        "unit_name": "マテウス ブエノ × ヤン マテウス",
+        "matches_played": 2,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 2.1,
+        "avg_convex_hull_m2": 1259.0
+      },
+      {
+        "unit_name": "マテウス ブエノ × 三竿 健斗",
+        "matches_played": 2,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.5,
+        "avg_xpts": 1.85,
+        "avg_convex_hull_m2": 1020.6
+      },
+      {
+        "unit_name": "マテウス ブエノ × 吉田 湊海",
+        "matches_played": 1,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 1.11,
+        "avg_convex_hull_m2": 1094.6
+      },
+      {
+        "unit_name": "チャヴリッチ × マテウス ブエノ",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 1.71,
+        "avg_convex_hull_m2": 1248.0
+      },
+      {
+        "unit_name": "マテウス ブエノ × 松村 優太",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 1.0,
+        "avg_xpts": 0.68,
+        "avg_convex_hull_m2": 1131.1
+      },
+      {
+        "unit_name": "三竿 健斗 × 吉田 湊海",
+        "matches_played": 1,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 1.47,
+        "avg_convex_hull_m2": 1271.0
+      },
+      {
+        "unit_name": "三竿 健斗 × 松村 優太",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 2.39,
+        "avg_convex_hull_m2": 1205.6
+      }
+    ]
+  },
+  "opponent_archetype_resistance": {
+    "LOW_BLOCK": {
+      "description": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+      "match_count": 4,
+      "matches": [
+        "MAR (4-3)",
+        "MIT (2-4)",
+        "SAN (2-2)",
+        "REY (2-3)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260807_MAR_KAS",
+          "opp_id": "MAR",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "4-3",
+          "pts": 3,
+          "xpts": 2.22,
+          "bpi": 21.2,
+          "conv_30_to_pa": 36.0,
+          "cross_reliance": 14.5,
+          "xt_approx": 4.36,
+          "convex_hull": 1186.7
+        },
+        {
+          "match_id": "20260902_MIT_KAS",
+          "opp_id": "MIT",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "2-4",
+          "pts": 0,
+          "xpts": 1.17,
+          "bpi": 31.9,
+          "conv_30_to_pa": 24.7,
+          "cross_reliance": 25.2,
+          "xt_approx": 5.165,
+          "convex_hull": 969.6
+        },
+        {
+          "match_id": "20261021_SAN_KAS",
+          "opp_id": "SAN",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "2-2",
+          "pts": 1,
+          "xpts": 2.53,
+          "bpi": 24.0,
+          "conv_30_to_pa": 49.0,
+          "cross_reliance": 16.9,
+          "xt_approx": 5.195,
+          "convex_hull": 1020.5
+        },
+        {
+          "match_id": "20261024_KAS_REY",
+          "opp_id": "REY",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "2-3",
+          "pts": 0,
+          "xpts": 2.39,
+          "bpi": 21.1,
+          "conv_30_to_pa": 53.1,
+          "cross_reliance": 18.1,
+          "xt_approx": 5.485,
+          "convex_hull": 1205.6
+        }
+      ],
+      "win_rate_pct": 25.0,
+      "avg_xpts": 2.08,
+      "avg_conv_30_to_pa_pct": 40.7,
+      "avg_cross_reliance_pct": 18.7,
+      "avg_xt_approx": 5.05,
+      "avg_bpi": 24.6
+    },
+    "HIGH_PRESS": {
+      "description": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+      "match_count": 2,
+      "matches": [
+        "NAG (2-1)",
+        "VER (2-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260815_KAS_NAG",
+          "opp_id": "NAG",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "2-1",
+          "pts": 3,
+          "xpts": 1.97,
+          "bpi": 22.2,
+          "conv_30_to_pa": 29.4,
+          "cross_reliance": 9.9,
+          "xt_approx": 3.96,
+          "convex_hull": 1331.3
+        },
+        {
+          "match_id": "20260829_VER_KAS",
+          "opp_id": "VER",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 2.91,
+          "bpi": 23.7,
+          "conv_30_to_pa": 49.0,
+          "cross_reliance": 14.0,
+          "xt_approx": 5.195,
+          "convex_hull": 1331.3
+        }
+      ],
+      "win_rate_pct": 100.0,
+      "avg_xpts": 2.44,
+      "avg_conv_30_to_pa_pct": 39.2,
+      "avg_cross_reliance_pct": 11.9,
+      "avg_xt_approx": 4.58,
+      "avg_bpi": 22.9
+    },
+    "MID_BLOCK": {
+      "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+      "match_count": 6,
+      "matches": [
+        "FUK (3-2)",
+        "URA (0-1)",
+        "VOB (1-2)",
+        "KAW (3-3)",
+        "GAM (2-0)",
+        "VVN (2-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260822_KAS_FUK",
+          "opp_id": "FUK",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "3-2",
+          "pts": 3,
+          "xpts": 1.11,
+          "bpi": 14.1,
+          "conv_30_to_pa": 50.0,
+          "cross_reliance": 12.4,
+          "xt_approx": 3.01,
+          "convex_hull": 1094.6
+        },
+        {
+          "match_id": "20260906_KAS_URA",
+          "opp_id": "URA",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "0-1",
+          "pts": 0,
+          "xpts": 1.71,
+          "bpi": 20.0,
+          "conv_30_to_pa": 33.3,
+          "cross_reliance": 16.0,
+          "xt_approx": 4.0,
+          "convex_hull": 1248.0
+        },
+        {
+          "match_id": "20260911_VOB_KAS",
+          "opp_id": "VOB",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 1.17,
+          "bpi": 15.6,
+          "conv_30_to_pa": 34.2,
+          "cross_reliance": 15.3,
+          "xt_approx": 3.215,
+          "convex_hull": 1020.8
+        },
+        {
+          "match_id": "20260919_KAW_KAS",
+          "opp_id": "KAW",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "3-3",
+          "pts": 1,
+          "xpts": 0.68,
+          "bpi": 14.4,
+          "conv_30_to_pa": 30.3,
+          "cross_reliance": 11.4,
+          "xt_approx": 2.605,
+          "convex_hull": 1131.1
+        },
+        {
+          "match_id": "20261009_KAS_GAM",
+          "opp_id": "GAM",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 1.47,
+          "bpi": 14.0,
+          "conv_30_to_pa": 69.2,
+          "cross_reliance": 9.3,
+          "xt_approx": 3.52,
+          "convex_hull": 1271.0
+        },
+        {
+          "match_id": "20261017_KAS_VVN",
+          "opp_id": "VVN",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 1.4,
+          "bpi": 18.5,
+          "conv_30_to_pa": 27.9,
+          "cross_reliance": 13.5,
+          "xt_approx": 3.245,
+          "convex_hull": 1456.9
+        }
+      ],
+      "win_rate_pct": 50.0,
+      "avg_xpts": 1.26,
+      "avg_conv_30_to_pa_pct": 40.8,
+      "avg_cross_reliance_pct": 13.0,
+      "avg_xt_approx": 3.27,
+      "avg_bpi": 16.1
+    }
+  }
+}

@@ -99,5 +99,9 @@
       "situation": "OPEN_PLAY",
       "description_text": "セレッソ大阪の決定機: ルーカス フェルナンデス による得点 (51分)"
     }
-  ]
+  ],
+  "opponent_tactical_archetype": {
+    "code": "MID_BLOCK",
+    "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）"
+  }
 }

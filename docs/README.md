@@ -51,6 +51,9 @@ flowchart TD
 | :--- | :--- | :--- |
 | `pipeline/flab_team_stats_ingester.py` | `DATABASE_SCHEMA_SPECIFICATION.md` | `tests/test_flab_team_stats_ingester.py` |
 | `pipeline/match_tactical_enricher.py` | `SYSTEM_ARCHITECTURE_SPECIFICATION.md` | `tests/test_match_tactical_enricher.py` |
+| `pipeline/team_55_metrics_calculator.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_team_55_metrics_calculator.py` |
+| `pipeline/team_cross_analytics.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_team_cross_analytics.py` |
+| `scripts/batch_update_all_teams_tactics.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_team_55_metrics_calculator.py` |
 | `pipeline/fctokyo_55_metrics_calculator.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_fctokyo_55_metrics_calculator.py` |
 | `pipeline/fctokyo_cross_analytics.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_fctokyo_cross_analytics.py` |
 | `pipeline/preview_curation_service.py` | `CURATION_SERVICE_SPECIFICATION.md` | `tests/test_preview_curation_service.py` |

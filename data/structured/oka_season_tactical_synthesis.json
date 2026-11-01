@@ -1,0 +1,398 @@
+{
+  "meta": {
+    "team_id": "OKA",
+    "season": 2026,
+    "analyzed_matches": 12,
+    "enriched_match_files": 12,
+    "matchweeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "time_segment_dynamics": {
+    "0-15": {
+      "team_goals": 2,
+      "opp_goals": 2,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.3,
+      "opp_total_xg": 1.3,
+      "fct_goals": 2,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.3
+    },
+    "16-30": {
+      "team_goals": 3,
+      "opp_goals": 5,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.95,
+      "opp_total_xg": 3.25,
+      "fct_goals": 3,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.95
+    },
+    "31-45+": {
+      "team_goals": 3,
+      "opp_goals": 4,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.95,
+      "opp_total_xg": 2.6,
+      "fct_goals": 3,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.95
+    },
+    "46-60": {
+      "team_goals": 4,
+      "opp_goals": 2,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 2.6,
+      "opp_total_xg": 1.3,
+      "fct_goals": 4,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 2.6
+    },
+    "61-75": {
+      "team_goals": 3,
+      "opp_goals": 2,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 1.95,
+      "opp_total_xg": 1.3,
+      "fct_goals": 3,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 1.95
+    },
+    "76-90+": {
+      "team_goals": 0,
+      "opp_goals": 2,
+      "team_shots_missed": 0,
+      "opp_shots_missed": 0,
+      "team_cards": 0,
+      "opp_cards": 0,
+      "team_total_xg": 0.0,
+      "opp_total_xg": 1.3,
+      "fct_goals": 0,
+      "fct_shots_missed": 0,
+      "fct_cards": 0,
+      "fct_total_xg": 0.0
+    }
+  },
+  "starter_unit_synergy": {
+    "center_back_units": [
+      {
+        "unit_name": "大森 博 × 立田 悠悟",
+        "matches_played": 7,
+        "win_rate_pct": 42.9,
+        "avg_actual_pts": 1.43,
+        "avg_xpts": 1.63,
+        "avg_convex_hull_m2": 1095.2
+      },
+      {
+        "unit_name": "大森 博 × 森 壮一朗",
+        "matches_played": 2,
+        "win_rate_pct": 50.0,
+        "avg_actual_pts": 1.5,
+        "avg_xpts": 1.27,
+        "avg_convex_hull_m2": 1121.6
+      },
+      {
+        "unit_name": "本山 遥 × 立田 悠悟",
+        "matches_played": 2,
+        "win_rate_pct": 50.0,
+        "avg_actual_pts": 1.5,
+        "avg_xpts": 1.92,
+        "avg_convex_hull_m2": 966.4
+      },
+      {
+        "unit_name": "森 壮一朗 × 立田 悠悟",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 0.65,
+        "avg_convex_hull_m2": 1121.6
+      }
+    ],
+    "central_midfield_units": [
+      {
+        "unit_name": "オベルダン × 宮本 英治",
+        "matches_played": 7,
+        "win_rate_pct": 42.9,
+        "avg_actual_pts": 1.43,
+        "avg_xpts": 1.59,
+        "avg_convex_hull_m2": 1081.9
+      },
+      {
+        "unit_name": "オベルダン × 山根 永遠",
+        "matches_played": 2,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 0.88,
+        "avg_convex_hull_m2": 1015.5
+      },
+      {
+        "unit_name": "ブラウン ノア 賢信 × 宮本 英治",
+        "matches_played": 1,
+        "win_rate_pct": 0.0,
+        "avg_actual_pts": 0.0,
+        "avg_xpts": 2.51,
+        "avg_convex_hull_m2": 1199.7
+      },
+      {
+        "unit_name": "オベルダン × 本山 遥",
+        "matches_played": 1,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 0.95,
+        "avg_convex_hull_m2": 1082.5
+      },
+      {
+        "unit_name": "宮本 英治 × 本山 遥",
+        "matches_played": 1,
+        "win_rate_pct": 100.0,
+        "avg_actual_pts": 3.0,
+        "avg_xpts": 2.07,
+        "avg_convex_hull_m2": 1077.3
+      }
+    ]
+  },
+  "opponent_archetype_resistance": {
+    "MID_BLOCK": {
+      "description": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+      "match_count": 6,
+      "matches": [
+        "CER (1-2)",
+        "VVN (1-0)",
+        "NAG (1-2)",
+        "URA (2-1)",
+        "VOB (0-3)",
+        "MIT (2-0)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260808_CER_OKA",
+          "opp_id": "CER",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 2.51,
+          "bpi": 19.3,
+          "conv_30_to_pa": 25.5,
+          "cross_reliance": 20.2,
+          "xt_approx": 3.385,
+          "convex_hull": 1199.7
+        },
+        {
+          "match_id": "20260815_OKA_VVN",
+          "opp_id": "VVN",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-0",
+          "pts": 3,
+          "xpts": 2.23,
+          "bpi": 18.5,
+          "conv_30_to_pa": 37.8,
+          "cross_reliance": 25.9,
+          "xt_approx": 4.04,
+          "convex_hull": 1121.6
+        },
+        {
+          "match_id": "20260829_NAG_OKA",
+          "opp_id": "NAG",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 0.44,
+          "bpi": 13.1,
+          "conv_30_to_pa": 32.3,
+          "cross_reliance": 9.3,
+          "xt_approx": 2.535,
+          "convex_hull": 1153.9
+        },
+        {
+          "match_id": "20260913_URA_OKA",
+          "opp_id": "URA",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "2-1",
+          "pts": 3,
+          "xpts": 2.07,
+          "bpi": 10.3,
+          "conv_30_to_pa": 54.2,
+          "cross_reliance": 12.5,
+          "xt_approx": 2.725,
+          "convex_hull": 1077.3
+        },
+        {
+          "match_id": "20261018_OKA_VOB",
+          "opp_id": "VOB",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "0-3",
+          "pts": 0,
+          "xpts": 0.65,
+          "bpi": 13.1,
+          "conv_30_to_pa": 46.9,
+          "cross_reliance": 21.7,
+          "xt_approx": 3.295,
+          "convex_hull": 1121.6
+        },
+        {
+          "match_id": "20261021_OKA_MIT",
+          "opp_id": "MIT",
+          "archetype_desc": "ミドルブロック・構造的陣形管理型（中盤での迎撃＆ポゼッション）",
+          "score": "2-0",
+          "pts": 3,
+          "xpts": 2.12,
+          "bpi": 13.9,
+          "conv_30_to_pa": 32.4,
+          "cross_reliance": 10.6,
+          "xt_approx": 2.785,
+          "convex_hull": 1087.6
+        }
+      ],
+      "win_rate_pct": 50.0,
+      "avg_xpts": 1.67,
+      "avg_conv_30_to_pa_pct": 38.2,
+      "avg_cross_reliance_pct": 16.7,
+      "avg_xt_approx": 3.13,
+      "avg_bpi": 14.7
+    },
+    "HIGH_PRESS": {
+      "description": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+      "match_count": 5,
+      "matches": [
+        "VER (0-0)",
+        "JEF (2-1)",
+        "HIR (3-2)",
+        "SAN (1-2)",
+        "KAW (1-2)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20260822_OKA_VER",
+          "opp_id": "VER",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "0-0",
+          "pts": 1,
+          "xpts": 2.24,
+          "bpi": 20.2,
+          "conv_30_to_pa": 29.4,
+          "cross_reliance": 20.6,
+          "xt_approx": 3.96,
+          "convex_hull": 1121.6
+        },
+        {
+          "match_id": "20260902_JEF_OKA",
+          "opp_id": "JEF",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "2-1",
+          "pts": 3,
+          "xpts": 1.76,
+          "bpi": 18.4,
+          "conv_30_to_pa": 41.5,
+          "cross_reliance": 14.8,
+          "xt_approx": 3.9,
+          "convex_hull": 1121.6
+        },
+        {
+          "match_id": "20260906_OKA_HIR",
+          "opp_id": "HIR",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "3-2",
+          "pts": 3,
+          "xpts": 0.95,
+          "bpi": 10.6,
+          "conv_30_to_pa": 58.3,
+          "cross_reliance": 11.8,
+          "xt_approx": 2.87,
+          "convex_hull": 1082.5
+        },
+        {
+          "match_id": "20260919_OKA_SAN",
+          "opp_id": "SAN",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 0.97,
+          "bpi": 11.3,
+          "conv_30_to_pa": 21.4,
+          "cross_reliance": 11.2,
+          "xt_approx": 1.85,
+          "convex_hull": 909.5
+        },
+        {
+          "match_id": "20261025_KAW_OKA",
+          "opp_id": "KAW",
+          "archetype_desc": "ハイプレス志向型（前線からのボール狩り＆ショートカウンター）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 1.72,
+          "bpi": 20.5,
+          "conv_30_to_pa": 25.5,
+          "cross_reliance": 16.0,
+          "xt_approx": 3.67,
+          "convex_hull": 845.3
+        }
+      ],
+      "win_rate_pct": 40.0,
+      "avg_xpts": 1.53,
+      "avg_conv_30_to_pa_pct": 35.2,
+      "avg_cross_reliance_pct": 14.9,
+      "avg_xt_approx": 3.25,
+      "avg_bpi": 16.2
+    },
+    "LOW_BLOCK": {
+      "description": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+      "match_count": 1,
+      "matches": [
+        "FUK (1-2)"
+      ],
+      "matches_raw": [
+        {
+          "match_id": "20261010_FUK_OKA",
+          "opp_id": "FUK",
+          "archetype_desc": "低重心ブロック・撤退カウンター型（自陣籠城＆ロングカウンター）",
+          "score": "1-2",
+          "pts": 0,
+          "xpts": 0.78,
+          "bpi": 13.4,
+          "conv_30_to_pa": 18.8,
+          "cross_reliance": 13.6,
+          "xt_approx": 1.99,
+          "convex_hull": 1121.6
+        }
+      ],
+      "win_rate_pct": 0.0,
+      "avg_xpts": 0.78,
+      "avg_conv_30_to_pa_pct": 18.8,
+      "avg_cross_reliance_pct": 13.6,
+      "avg_xt_approx": 1.99,
+      "avg_bpi": 13.4
+    }
+  }
+}

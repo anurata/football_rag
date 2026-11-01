@@ -1,0 +1,125 @@
+{
+  "match_id": "20261021_MAR_VER",
+  "home_formation": "4-2-3-1",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】横浜F・マリノス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1の布陣を敷き、スティーブ コリカ監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。対する東京ヴェルディ（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2で迎え撃ち、城福 浩監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は横浜F・マリノス 54.7% 対 東京ヴェルディ 45.3%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の2-2。",
+    "【試合を動かした得点】23分 宮市 亮 (横浜F・マリノスの決定機: 宮市 亮 による得点 (23分)) / 50分 遠野 大弥 (横浜F・マリノスの決定機: 遠野 大弥 による得点 (50分)) / 73分 藤本 寛也 (東京ヴェルディの決定機: 藤本 寛也 による得点 (73分)) / 93分 山田 剛綺 (東京ヴェルディの決定機: 山田 剛綺 による得点 (93分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、横浜F・マリノスと東京ヴェルディが相手のプレス構造を探り合う。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】23分、宮市 亮がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 宮市 亮 による得点 (23分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】50分、遠野 大弥がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 遠野 大弥 による得点 (50分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】50分、遠野 大弥がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 遠野 大弥 による得点 (50分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】73分、藤本 寛也がネットを揺らしスコアが動く（東京ヴェルディの決定機: 藤本 寛也 による得点 (73分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】93分、山田 剛綺がネットを揺らしスコアが動く（東京ヴェルディの決定機: 山田 剛綺 による得点 (93分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と東京ヴェルディの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 54.7,
+      "away_field_tilt": 45.3
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 35,
+        "pa_entries": 13,
+        "rate_30_to_pa": 37.1
+      },
+      "away": {
+        "m30_entries": 29,
+        "pa_entries": 15,
+        "rate_30_to_pa": 51.7
+      }
+    },
+    "intensity": {
+      "home_distance_km": 112.6,
+      "away_distance_km": 117.6,
+      "home_sprints": 141,
+      "away_sprints": 161
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 23,
+      "period": "1H",
+      "team_id": "MAR",
+      "player_name": "宮市 亮",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 宮市 亮 による得点 (23分)"
+    },
+    {
+      "minute": 50,
+      "period": "2H",
+      "team_id": "MAR",
+      "player_name": "遠野 大弥",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 遠野 大弥 による得点 (50分)"
+    },
+    {
+      "minute": 73,
+      "period": "2H",
+      "team_id": "VER",
+      "player_name": "藤本 寛也",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "東京ヴェルディの決定機: 藤本 寛也 による得点 (73分)"
+    },
+    {
+      "minute": 93,
+      "period": "2H",
+      "team_id": "VER",
+      "player_name": "山田 剛綺",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "東京ヴェルディの決定機: 山田 剛綺 による得点 (93分)"
+    }
+  ]
+}

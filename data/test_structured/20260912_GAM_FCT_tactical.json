@@ -1,0 +1,246 @@
+{
+  "match_id": "20260912_GAM_FCT",
+  "home_formation": "4-2-3-1",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】ガンバ大阪（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-2-3-1の布陣を敷き、明神 智和監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するFC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2で迎え撃ち、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はガンバ大阪 57.6% 対 FC東京 42.4%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度でFC東京がわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】38分 マルセロ ヒアン (GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。最後はペナルティエリア内からの本間のクロスに反応した安斎がペナルティエリア中央から右足でゴール右上に決める)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、ガンバ大阪とFC東京が相手のプレス構造を探り合う。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】38分、マルセロ ヒアンがネットを揺らしスコアが動く（GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。最後はペナルティエリア内からの本間のクロスに反応した安斎がペナルティエリア中央から右足でゴール右上に決める）。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "ガンバ大阪のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 57.6,
+      "away_field_tilt": 42.4
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 38,
+        "pa_entries": 9,
+        "rate_30_to_pa": 23.7
+      },
+      "away": {
+        "m30_entries": 28,
+        "pa_entries": 19,
+        "rate_30_to_pa": 67.9
+      }
+    },
+    "intensity": {
+      "home_distance_km": 111.9,
+      "away_distance_km": 112.7,
+      "home_sprints": 103,
+      "away_sprints": 126
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "両チームともにシ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "両チームともにシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 15,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "左サイドから初瀬",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "左サイド",
+      "description_text": "左サイドから初瀬がドリブルで前進。そのまま持ち運んでクロスを供給するが、Iジェバリはシュートを放つには至らない"
+    },
+    {
+      "minute": 15,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した長倉がペナルティエリア中央から左足で枠内にシュートを放つも、鈴木にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:G大阪:0本、FC東京:1本/枠内シュート:G大阪:0本、FC東京:0本/ゴール期待値:G大阪:0.00、FC東京:0.14"
+    },
+    {
+      "minute": 21,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "安斎がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "安斎がペナルティエリア右から右足で枠内にシュートを放つも、福岡にブロックされる"
+    },
+    {
+      "minute": 21,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 23,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "左サイドから初瀬",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから初瀬がクロスを入れる。これに反応した角がペナルティエリア右からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "アレクサンダー ショルツ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドからアレクサンダー アレクサンダー ショルツがパスを送る。安斎がペナルティエリア右からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、一森にセーブされる"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア右からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "長倉がペナルティエリア中央から左足で枠内にシュートを放つも、一森にセーブされる"
+    },
+    {
+      "minute": 37,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドからドリブルで進入した食野がペナルティエリア左から右足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 38,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。最後はペナルティエリア内からの本間のクロスに反応した安斎がペナルティエリア中央から右足でゴール右上に決める"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:G大阪:2本、FC東京:8本/枠内シュート:G大阪:1本、FC東京:3本/ゴール期待値:G大阪:0.15、FC東京:1.25"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "GAM",
+      "player_name": "手前からドリブル",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からドリブルで進入した食野がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    }
+  ]
+}

@@ -1,80 +1,103 @@
 {
   "match_id": "20260822_HIR_KAW",
-  "home_team_id": "HIR",
-  "away_team_id": "KAW",
-  "home_formation": "4-4-2",
-  "away_formation": "4-4-2",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-2-3-1",
   "tactical_highlights": [
-    "サンフレッチェ広島とKAWによる激闘（最終スコア: 1 - 1）",
-    "得点者: 加藤 陸次樹 (28分), 山本 悠樹 (58分)",
-    "局面ごとの戦術的適応とインテンシティの維持が勝敗を決定"
+    "【基本スタイルと今節の狙い】サンフレッチェ広島（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1の布陣を敷き、バルトシュ ガウル監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。対する川崎フロンターレ（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、長谷部 茂利監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はサンフレッチェ広島 55.6% 対 川崎フロンターレ 44.4%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の1-1。",
+    "【試合を動かした得点】28分 加藤 陸次樹 (サンフレッチェ広島の決定機: 加藤 陸次樹 による得点 (28分)) / 58分 山本 悠樹 (川崎フロンターレの決定機: 山本 悠樹 による得点 (58分))"
   ],
   "phases": [
     {
       "phase": "0-15",
       "dominant_team": "EQUAL",
-      "momentum_summary": "立ち上がりはサンフレッチェ広島とKAWによるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
-      "pressing_battle": "サンフレッチェ広島が前線から連動プレスを仕掛け、KAWはサイドスペースへの配球でプレス回避を狙う。",
-      "tactical_adjustments": "序盤の探り合いを経て、両チームが陣形のコンパクトネスを維持し中央の進入路を遮断。"
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、サンフレッチェ広島と川崎フロンターレが相手のプレス構造を探り合う。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "15-30",
-      "dominant_team": "EQUAL",
-      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
-      "pressing_battle": "サイドハーフスペースへの侵入に対するチャレンジ＆カバーの徹底。",
-      "tactical_adjustments": "ボランチの立ち位置を微修正し、セカンドボールの回収率向上を図る。"
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】28分、加藤 陸次樹がネットを揺らしスコアが動く（サンフレッチェ広島の決定機: 加藤 陸次樹 による得点 (28分)）。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "30-45+",
-      "dominant_team": "HOME",
-      "momentum_summary": "前半終了に向けたプレッシャーの強まり。セットプレーおよびクロスからペナルティエリア内の攻防が激化。",
-      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
-      "tactical_adjustments": "ライン間を締め直し、アディショナルタイムの失点リスクを最小化。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "46-60",
       "dominant_team": "AWAY",
-      "momentum_summary": "ハーフタイムの修正を経た後半立ち上がり。両指揮官の戦術指示がピッチ上で展開。",
-      "pressing_battle": "前線からの即時奪回（ゲーゲンプレス）によるショートカウンターの応酬。",
-      "tactical_adjustments": "ボールの循環テンポを上げ、相手の守備スライドを揺さぶる。"
+      "momentum_summary": "【得点動意】58分、山本 悠樹がネットを揺らしスコアが動く（川崎フロンターレの決定機: 山本 悠樹 による得点 (58分)）。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "60-75",
-      "dominant_team": "AWAY",
-      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
-      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
-      "tactical_adjustments": "交代枠を駆使したプレスのギアチェンジと守備陣形の再構築。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "75-90+",
       "dominant_team": "EQUAL",
-      "momentum_summary": "試合最終盤の総力戦。スコア 1-1 をめぐるアディショナルタイムまでの白熱した攻防決着。",
-      "pressing_battle": "ラスト15分における集中力維持と、泥臭いデュエル・クリアの応酬。",
-      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "サンフレッチェ広島のブロック守備と川崎フロンターレの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     }
   ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 55.6,
+      "away_field_tilt": 44.4
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 60,
+        "pa_entries": 15,
+        "rate_30_to_pa": 25.0
+      },
+      "away": {
+        "m30_entries": 48,
+        "pa_entries": 19,
+        "rate_30_to_pa": 39.6
+      }
+    },
+    "intensity": {
+      "home_distance_km": 110.1,
+      "away_distance_km": 112.7,
+      "home_sprints": 95,
+      "away_sprints": 121
+    }
+  },
   "key_tactical_events": [
     {
       "minute": 28,
       "period": "1H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "加藤 陸次樹"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "サンフレッチェ広島の決定機: 加藤 陸次樹 による得点 (28分)"
+      "team_id": "HIR",
+      "player_name": "加藤 陸次樹",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "サンフレッチェ広島の決定機: 加藤 陸次樹 による得点 (28分)"
     },
     {
       "minute": 58,
       "period": "2H",
-      "team_side": "AWAY",
-      "category": "GOAL",
-      "actors": [
-        "山本 悠樹"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "KAWの決定機: 山本 悠樹 による得点 (58分)"
+      "team_id": "KAW",
+      "player_name": "山本 悠樹",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "川崎フロンターレの決定機: 山本 悠樹 による得点 (58分)"
     }
   ]
 }

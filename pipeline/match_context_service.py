@@ -1009,7 +1009,184 @@ class MatchContextService:
         return mentions
 
     # =========================================================================
-    # 5. 統合API (試合ID指定 / クラブ＋日付・節指定 プレビュー対応)
+    # 5. 順位表・直近先発メンバー（Layer 1 確定事実）
+    # =========================================================================
+    def calculate_league_standings(
+        self,
+        season: int = 2026,
+        as_of_date: str = "2026-12-31",
+    ) -> Dict[str, Any]:
+        """指定日時点の同一シーズン全試合結果から決定論的順位表を算出する."""
+        conn = self._connect()
+        if not conn:
+            return {"table": [], "by_team": {}}
+
+        try:
+            rows = conn.execute(
+                """
+                SELECT home_team_id, away_team_id, home_score, away_score
+                FROM matches
+                WHERE season = ? AND date < ? AND home_score IS NOT NULL
+                """,
+                (season, as_of_date),
+            ).fetchall()
+
+            table_dict: Dict[str, Dict[str, Any]] = {}
+            for r in rows:
+                ht, at = str(r["home_team_id"]), str(r["away_team_id"])
+                hs, as_ = int(r["home_score"]), int(r["away_score"])
+                for tid in (ht, at):
+                    table_dict.setdefault(
+                        tid,
+                        {
+                            "team_id": tid,
+                            "points": 0,
+                            "matches_played": 0,
+                            "wins": 0,
+                            "draws": 0,
+                            "losses": 0,
+                            "goals_for": 0,
+                            "goals_against": 0,
+                            "goal_difference": 0,
+                        },
+                    )
+
+                table_dict[ht]["matches_played"] += 1
+                table_dict[at]["matches_played"] += 1
+                table_dict[ht]["goals_for"] += hs
+                table_dict[ht]["goals_against"] += as_
+                table_dict[at]["goals_for"] += as_
+                table_dict[at]["goals_against"] += hs
+
+                if hs > as_:
+                    table_dict[ht]["points"] += 3
+                    table_dict[ht]["wins"] += 1
+                    table_dict[at]["losses"] += 1
+                elif hs < as_:
+                    table_dict[at]["points"] += 3
+                    table_dict[at]["wins"] += 1
+                    table_dict[ht]["losses"] += 1
+                else:
+                    table_dict[ht]["points"] += 1
+                    table_dict[at]["points"] += 1
+                    table_dict[ht]["draws"] += 1
+                    table_dict[at]["draws"] += 1
+
+            for st in table_dict.values():
+                st["goal_difference"] = st["goals_for"] - st["goals_against"]
+
+            sorted_list = sorted(
+                table_dict.values(),
+                key=lambda x: (x["points"], x["goal_difference"], x["goals_for"]),
+                reverse=True,
+            )
+
+            leader_pts = sorted_list[0]["points"] if sorted_list else 0
+            for rank_idx, item in enumerate(sorted_list, start=1):
+                item["rank"] = rank_idx
+                item["points_from_leader"] = leader_pts - item["points"]
+
+            by_team = {item["team_id"]: item for item in sorted_list}
+            return {
+                "season": season,
+                "as_of_date": as_of_date,
+                "table": sorted_list,
+                "by_team": by_team,
+            }
+        finally:
+            conn.close()
+
+    def get_recent_lineup_and_scorers(
+        self,
+        team_id: str,
+        current_date_str: str,
+    ) -> Dict[str, Any]:
+        """直前試合の実先発11人・ベンチメンバーおよび直近3戦の得点者を決定論抽出する."""
+        conn = self._connect()
+        if not conn:
+            return {"last_match_id": None, "starters": [], "bench": [], "recent_scorers": []}
+
+        try:
+            prior_matches = self._fetch_prior_team_matches(conn, team_id, current_date_str)
+            if not prior_matches:
+                return {"last_match_id": None, "starters": [], "bench": [], "recent_scorers": []}
+
+            last_match = prior_matches[-1]
+            last_mid = str(last_match["match_id"])
+            last_date = str(last_match["date"])
+
+            # 直前試合の出場メンバー
+            p_rows = conn.execute(
+                """
+                SELECT pms.player_id, pms.player_name, pms.number, pms.position,
+                       pms.is_starter, pms.minutes_played, pms.goals,
+                       emp.dominant_foot,
+                       pmp.primary_role, pmp.primary_lane
+                FROM player_match_stats pms
+                LEFT JOIN entity_master_players emp ON pms.player_id = emp.player_id
+                LEFT JOIN player_match_positions pmp ON pms.match_id = pmp.match_id AND pms.player_id = pmp.player_id
+                WHERE pms.match_id = ? AND pms.team_id = ?
+                ORDER BY pms.is_starter DESC, pms.minutes_played DESC, pms.number ASC
+                """,
+                (last_mid, team_id),
+            ).fetchall()
+
+            starters = []
+            bench = []
+            for r in p_rows:
+                p_item = {
+                    "player_id": r["player_id"],
+                    "player_name": r["player_name"],
+                    "number": r["number"],
+                    "position": r["position"],
+                    "primary_role": r["primary_role"] or "",
+                    "primary_lane": r["primary_lane"] or "",
+                    "is_starter": bool(r["is_starter"]),
+                    "minutes_played": r["minutes_played"],
+                    "dominant_foot": r["dominant_foot"],
+                    "goals_in_match": r["goals"],
+                }
+                if r["is_starter"]:
+                    starters.append(p_item)
+                else:
+                    bench.append(p_item)
+
+            # 直近3戦の得点者
+            last_3_mids = [str(m["match_id"]) for m in prior_matches[-3:]]
+            placeholders = ",".join("?" for _ in last_3_mids)
+            scorer_rows = conn.execute(
+                f"""
+                SELECT player_id, player_name, number, SUM(goals) AS total_goals
+                FROM player_match_stats
+                WHERE team_id = ? AND match_id IN ({placeholders}) AND goals > 0
+                GROUP BY player_id
+                ORDER BY total_goals DESC
+                """,
+                [team_id, *last_3_mids],
+            ).fetchall()
+
+            recent_scorers = [
+                {
+                    "player_id": r["player_id"],
+                    "player_name": r["player_name"],
+                    "number": r["number"],
+                    "goals_last_3": r["total_goals"],
+                }
+                for r in scorer_rows
+            ]
+
+            return {
+                "last_match_id": last_mid,
+                "last_match_date": last_date,
+                "starters": starters,
+                "bench": bench,
+                "recent_scorers": recent_scorers,
+            }
+        finally:
+            conn.close()
+
+    # =========================================================================
+    # 6. 統合API (試合ID指定 / クラブ＋日付・節指定 プレビュー対応)
     # =========================================================================
     def get_club_prematch_context(
         self,
@@ -1021,7 +1198,7 @@ class MatchContextService:
         stadium: Optional[str] = None,
         is_home: Optional[bool] = None,
     ) -> Dict[str, Any]:
-        """任意のクラブ・試合・節・日付時点における連戦負荷・出場停止・外部制約を一括取得する."""
+        """任意のクラブ・試合・節・日付時点における連戦負荷・出場停止・順位・直近スタメンを一括取得する."""
         meta = self.resolve_match_or_date_target(
             team_id=team_id,
             match_id=match_id,
@@ -1034,12 +1211,28 @@ class MatchContextService:
         eff_stad = stadium if stadium is not None else meta["stadium"]
         eff_home = is_home if is_home is not None else meta["is_home"]
 
+        standings = self.calculate_league_standings(
+            season=meta["season"],
+            as_of_date=eff_date,
+        )
+        team_standing = standings["by_team"].get(team_id, {})
+        opp_standing = standings["by_team"].get(eff_opp, {}) if eff_opp else {}
+
         return {
             "match_id": eff_mid,
             "matchweek": meta["matchweek"] if matchweek is None else matchweek,
             "as_of_date": eff_date,
             "team_id": team_id,
             "opponent_team_id": eff_opp,
+            "standings": {
+                "team": team_standing,
+                "opponent": opp_standing,
+                "table_top_5": standings["table"][:5],
+            },
+            "recent_lineup": self.get_recent_lineup_and_scorers(
+                team_id=team_id,
+                current_date_str=eff_date,
+            ),
             "schedule_fatigue": self.calculate_schedule_fatigue(
                 team_id=team_id,
                 current_date_str=eff_date,

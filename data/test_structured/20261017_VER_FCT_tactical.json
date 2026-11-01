@@ -1,0 +1,245 @@
+{
+  "match_id": "20261017_VER_FCT",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】東京ヴェルディ（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2の布陣を敷き、城福 浩監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。対するFC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2で迎え撃ち、松橋 力蔵監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。",
+    "【せめぎ合いの力学と内容評価】アウェイのFC東京が敵陣支配率92.3%と試合の主導権を掌握。PA進入率35.4%と相手ブロックのスライドを破断して深くまで侵入。東京ヴェルディは自陣での消火活動に追われ、前線への効果的なカウンタールートを遮断された。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】FC東京の戦術的狙いがピッチ上で完全に機能し、枠内シュート8本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。東京ヴェルディは内容・結果の両面で圧倒され、プランの修正が後手に回った。"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、東京ヴェルディとFC東京が相手のプレス構造を探り合う。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "東京ヴェルディのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 7.7,
+      "away_field_tilt": 92.3
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 8,
+        "pa_entries": 1,
+        "rate_30_to_pa": 12.5
+      },
+      "away": {
+        "m30_entries": 96,
+        "pa_entries": 34,
+        "rate_30_to_pa": 35.4
+      }
+    },
+    "intensity": {
+      "home_distance_km": 108.5,
+      "away_distance_km": 114.8,
+      "home_sprints": 110,
+      "away_sprints": 122
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 2,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "俵積田がペナルテ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "俵積田がペナルティエリア手前から右足で枠内にシュートを放つも、マテウスにセーブされる"
+    },
+    {
+      "minute": 6,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左CKを獲得",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左CKを獲得。キッカーの俵積田は右足でボールを蹴り込む。これに反応した石原がペナルティエリア中央から右足で枠内にシュートを放つも、鈴木海にブロックされる"
+    },
+    {
+      "minute": 8,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "左サイドから新井",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "左サイド",
+      "description_text": "左サイドから新井がドリブルで前進。そのまま持ち運んでクロスを供給するが、染野はシュートを放つには至らない"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "分が経過するも",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "10分が経過するも、まだシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 17,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドからドリ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドからドリブルで進入した俵積田がペナルティエリア左から右足で枠内にシュートを放つも、林にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:東京V:0本、FC東京:3本/枠内シュート:東京V:0本、FC東京:1本/ゴール期待値:東京V:0.00、FC東京:0.19"
+    },
+    {
+      "minute": 21,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドから俵積",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから俵積田がクロスを入れる。これに反応した安斎がペナルティエリア中央からヘディングで枠内にシュートを放つも、マテウスにセーブされる"
+    },
+    {
+      "minute": 22,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "安斎がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "安斎がペナルティエリア手前から右足で枠内にシュートを放つ"
+    },
+    {
+      "minute": 22,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からマルセロ ヒアンがパスを送る。永野がペナルティエリア手前から右足で枠内にシュートを放つも、新井にブロックされる"
+    },
+    {
+      "minute": 26,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "アレクサンダー ショルツ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応したアレクサンダー アレクサンダー ショルツがペナルティエリア中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 29,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "福田OUT",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "14福田OUT→25熊取谷IN"
+    },
+    {
+      "minute": 33,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "高がペナルティエ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "高がペナルティエリア手前から右足で枠内にシュートを放つも、マテウスにセーブされる"
+    },
+    {
+      "minute": 36,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "稲村がペナルティ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "稲村がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 37,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから石原",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから石原がクロスを入れる。これに反応した高がペナルティエリア中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:東京V:0本、FC東京:10本/枠内シュート:東京V:0本、FC東京:3本/ゴール期待値:東京V:0.00、FC東京:1.02"
+    }
+  ]
+}

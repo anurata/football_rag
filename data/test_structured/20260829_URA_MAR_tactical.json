@@ -1,0 +1,136 @@
+{
+  "match_id": "20260829_URA_MAR",
+  "home_formation": "4-1-2-3",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】浦和レッズ（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-1-2-3の布陣を敷き、曺 貴裁監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する横浜F・マリノス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、スティーブ コリカ監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は浦和レッズ 45.5% 対 横浜F・マリノス 54.5%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で浦和レッズがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】38分 谷村 海那 (横浜F・マリノスの決定機: 谷村 海那 による得点 (38分)) / 40分 マテウス サヴィオ (浦和レッズの決定機: マテウス サヴィオ による得点 (40分)) / 57分 谷村 海那 (横浜F・マリノスの決定機: 谷村 海那 による得点 (57分)) / 64分 根本 健太 (浦和レッズの決定機: 根本 健太 による得点 (64分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、浦和レッズと横浜F・マリノスが相手のプレス構造を探り合う。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】38分、谷村 海那がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 谷村 海那 による得点 (38分)）。 【得点動意】40分、マテウス サヴィオがネットを揺らしスコアが動く（浦和レッズの決定機: マテウス サヴィオ による得点 (40分)）。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】57分、谷村 海那がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 谷村 海那 による得点 (57分)）。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】64分、根本 健太がネットを揺らしスコアが動く（浦和レッズの決定機: 根本 健太 による得点 (64分)）。 【得点動意】71分、南野 遥海がネットを揺らしスコアが動く（浦和レッズの決定機: 南野 遥海 による得点 (71分)）。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "浦和レッズのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 45.5,
+      "away_field_tilt": 54.5
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 25,
+        "pa_entries": 13,
+        "rate_30_to_pa": 52.0
+      },
+      "away": {
+        "m30_entries": 30,
+        "pa_entries": 12,
+        "rate_30_to_pa": 40.0
+      }
+    },
+    "intensity": {
+      "home_distance_km": 119.1,
+      "away_distance_km": 114.5,
+      "home_sprints": 150,
+      "away_sprints": 111
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 38,
+      "period": "1H",
+      "team_id": "MAR",
+      "player_name": "谷村 海那",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 谷村 海那 による得点 (38分)"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "URA",
+      "player_name": "マテウス サヴィオ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: マテウス サヴィオ による得点 (40分)"
+    },
+    {
+      "minute": 57,
+      "period": "2H",
+      "team_id": "MAR",
+      "player_name": "谷村 海那",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 谷村 海那 による得点 (57分)"
+    },
+    {
+      "minute": 64,
+      "period": "2H",
+      "team_id": "URA",
+      "player_name": "根本 健太",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: 根本 健太 による得点 (64分)"
+    },
+    {
+      "minute": 71,
+      "period": "2H",
+      "team_id": "URA",
+      "player_name": "南野 遥海",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: 南野 遥海 による得点 (71分)"
+    }
+  ]
+}

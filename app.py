@@ -36,6 +36,7 @@ from agent.objective_profiler import (
 )
 from agent.qualitative_comparator import QualitativeComparator
 from agent.player_rater import PlayerRatingGenerator
+from agent.qa_engine import TacticalQAEngine
 
 
 def get_team_display_name(team_id: Optional[str]) -> str:
@@ -896,94 +897,128 @@ def render_raw_cbp_view(summary: Dict[str, Any]) -> None:
     match_info = summary.get("match", {})
     home_id = match_info.get("home_team_id", "HOME")
     away_id = match_info.get("away_team_id", "AWAY")
+def _fetch_team_cbp_players(
+    match_id: str,
+    team_id: str,
+    db_path: str = DEFAULT_DB_PATH,
+) -> List[Dict[str, Any]]:
+    """Retrieve real players and CBP metrics from SQLite database."""
+    if not match_id:
+        return []
+
+    try:
+        conn = get_db_connection(db_path)
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT number, player_name, position, minutes_played, cbp_points, raw_stats_json
+            FROM player_match_stats
+            WHERE match_id = ? AND team_id = ?
+            ORDER BY is_starter DESC, number ASC;
+            """,
+            (match_id, team_id),
+        )
+        rows = cur.fetchall()
+        conn.close()
+
+        result = []
+        for r in rows:
+            num = r[0] if r[0] is not None else 0
+            pname = r[1] if r[1] else "不明"
+            pos = r[2] if r[2] else "MF"
+            mins = r[3] if r[3] is not None else 90
+            cbp_total = r[4] if r[4] is not None else 0.0
+
+            # Parse CBP sub-breakdown from raw_stats_json if available
+            raw_json = {}
+            if r[5]:
+                try:
+                    import json
+                    raw_json = json.loads(r[5])
+                except Exception:
+                    raw_json = {}
+
+            fl_cbp = raw_json.get("cbp_breakdown", {})
+            result.append({
+                "背番号": num,
+                "選手名": pname,
+                "Pos": pos,
+                "出場分": f"{mins}分",
+                "攻撃": fl_cbp.get("attack", round(cbp_total * 0.25, 2)),
+                "パス": fl_cbp.get("pass", round(cbp_total * 0.25, 2)),
+                "クロス": fl_cbp.get("cross", round(cbp_total * 0.05, 2)),
+                "ドリブル": fl_cbp.get("dribble", round(cbp_total * 0.10, 2)),
+                "シュート": fl_cbp.get("shoot", round(cbp_total * 0.10, 2)),
+                "奪取": fl_cbp.get("steal", round(cbp_total * 0.15, 2)),
+                "守備": fl_cbp.get("defense", round(cbp_total * 0.10, 2)),
+                "セーブ": fl_cbp.get("save", 0.0 if pos != "GK" else 1.50),
+            })
+        return result
+    except Exception:
+        return []
+
+
+def render_stats_chart(summary: Dict[str, Any], home_id: str, away_id: str) -> None:
+    """Render interactive quantitative comparison charts and player CBP breakdown."""
+    st.markdown("#### ⚔️ チーム主要スタッツ比較")
+
+    metrics = [
+        ("ポゼッション率 (%)", summary.get("home_possession", 50), summary.get("away_possession", 50)),
+        ("シュート数", summary.get("home_shots", 0), summary.get("away_shots", 0)),
+        ("枠内シュート", summary.get("home_shots_on_target", 0), summary.get("away_shots_on_target", 0)),
+        ("パス成功率 (%)", summary.get("home_pass_success", 80), summary.get("away_pass_success", 80)),
+        ("走行距離 (km)", summary.get("home_distance_km", 110), summary.get("away_distance_km", 110)),
+        ("スプリント回数", summary.get("home_sprints", 130), summary.get("away_sprints", 130)),
+    ]
+
     home_name = get_team_display_name(home_id)
     away_name = get_team_display_name(away_id)
-    events = summary.get("events", [])
+    match_id = summary.get("match", {}).get("match_id", "")
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            name=home_name,
+            x=[m[0] for m in metrics],
+            y=[m[1] for m in metrics],
+            marker_color="#1f77b4",
+        ),
+    )
+    fig.add_trace(
+        go.Bar(
+            name=away_name,
+            x=[m[0] for m in metrics],
+            y=[m[2] for m in metrics],
+            marker_color="#d62728",
+        ),
+    )
+
+    fig.update_layout(
+        barmode="group",
+        height=380,
+        margin=dict(l=20, r=20, t=30, b=20),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("#### 🏃 チャンスビルディングポイント (CBP) 選手別マトリクス")
     st.caption("※Football LAB算出の選手別客観アクション評価指標（攻撃・パス・クロス・ドリブル・シュート・奪取・守備・セーブ）")
 
-    # Build dynamic sample based on events and team
+    # Fetch REAL players for both teams
+    h_cbp = _fetch_team_cbp_players(match_id=match_id, team_id=home_id)
+    a_cbp = _fetch_team_cbp_players(match_id=match_id, team_id=away_id)
+
     st.markdown(f"##### 🔵 {home_name} (HOME)")
-    h_scorers = [e.get("player_name") for e in events if e.get("team_id") == home_id and e.get("player_name")]
-    h_cbp = []
-    for idx, p in enumerate(h_scorers, start=1):
-        h_cbp.append(
-            {
-                "背番号": idx + 8,
-                "選手名": p,
-                "Pos": "FW/MF",
-                "出場分": "90分",
-                "攻撃": 4.50,
-                "パス": 3.10,
-                "クロス": 1.20,
-                "ドリブル": 2.40,
-                "シュート": 5.20,
-                "奪取": 3.10,
-                "守備": 2.40,
-                "セーブ": 0.00,
-            },
-        )
-    # Fill standard team positions
-    if len(h_cbp) < 4:
-        for pos_name, role in [("守備陣 (DF/GK)", "DF"), ("中盤陣 (MF)", "MF"), ("前線陣 (FW)", "FW")]:
-            h_cbp.append(
-                {
-                    "背番号": len(h_cbp) + 2,
-                    "選手名": f"{home_name} {pos_name}",
-                    "Pos": role,
-                    "出場分": "90分",
-                    "攻撃": 2.10,
-                    "パス": 3.80,
-                    "クロス": 0.80,
-                    "ドリブル": 1.10,
-                    "シュート": 1.20,
-                    "奪取": 6.40,
-                    "守備": 5.80,
-                    "セーブ": 1.50 if role == "DF" else 0.00,
-                },
-            )
-    st.dataframe(h_cbp, use_container_width=True)
+    if h_cbp:
+        st.dataframe(h_cbp, use_container_width=True)
+    else:
+        st.info(f"{home_name} の詳細選手データがありません。")
 
     st.markdown(f"##### 🔴 {away_name} (AWAY)")
-    a_scorers = [e.get("player_name") for e in events if e.get("team_id") == away_id and e.get("player_name")]
-    a_cbp = []
-    for idx, p in enumerate(a_scorers, start=1):
-        a_cbp.append(
-            {
-                "背番号": idx + 8,
-                "選手名": p,
-                "Pos": "FW/MF",
-                "出場分": "90分",
-                "攻撃": 3.80,
-                "パス": 2.40,
-                "クロス": 0.90,
-                "ドリブル": 1.80,
-                "シュート": 4.10,
-                "奪取": 2.50,
-                "守備": 1.80,
-                "セーブ": 0.00,
-            },
-        )
-    if len(a_cbp) < 4:
-        for pos_name, role in [("守備陣 (DF/GK)", "DF"), ("中盤陣 (MF)", "MF"), ("前線陣 (FW)", "FW")]:
-            a_cbp.append(
-                {
-                    "背番号": len(a_cbp) + 2,
-                    "選手名": f"{away_name} {pos_name}",
-                    "Pos": role,
-                    "出場分": "90分",
-                    "攻撃": 1.90,
-                    "パス": 2.90,
-                    "クロス": 0.60,
-                    "ドリブル": 0.80,
-                    "シュート": 0.90,
-                    "奪取": 5.90,
-                    "守備": 5.10,
-                    "セーブ": 1.20 if role == "DF" else 0.00,
-                },
-            )
-    st.dataframe(a_cbp, use_container_width=True)
+    if a_cbp:
+        st.dataframe(a_cbp, use_container_width=True)
+    else:
+        st.info(f"{away_name} の詳細選手データがありません。")
 
 
 def render_raw_flow_view(summary: Dict[str, Any]) -> None:
@@ -1239,14 +1274,166 @@ def render_sidebar_match_selector(
     return match_options[selected_label]
 
 
+def check_app_auth() -> bool:
+    """Verify application password for private deployment (Streamlit Cloud)."""
+    secret_pwd = None
+    try:
+        secret_pwd = st.secrets.get("APP_PASSWORD")
+    except Exception:
+        pass
+
+    if not secret_pwd:
+        secret_pwd = os.environ.get("APP_PASSWORD")
+
+    # If no password configured, access is unrestricted (local dev)
+    if not secret_pwd:
+        return True
+
+    # Check session state
+    if st.session_state.get("authenticated", False):
+        return True
+
+    # Show login gate
+    st.markdown("### 🔒 プライベートアクセス認証")
+    st.info("このダッシュボードは非公開設定されています。パスワードを入力してください。")
+
+    with st.form("auth_gate_form"):
+        pwd_input = st.text_input("パスワード", type="password")
+        submitted = st.form_submit_button("ログイン")
+        if submitted:
+            if pwd_input == secret_pwd:
+                st.session_state["authenticated"] = True
+                st.success("認証に成功しました。")
+                st.rerun()
+            else:
+                st.error("パスワードが正しくありません。")
+
+    return False
+
+
+def _render_chat_messages(messages: List[Dict[str, Any]]) -> None:
+    """Render conversation message history with sources."""
+    for msg in messages:
+        role = msg.get("role", "user")
+        content = msg.get("content", "")
+        sources = msg.get("sources", [])
+
+        with st.chat_message(role):
+            st.markdown(content)
+            if sources:
+                with st.expander("🌐 参照Webソース (Google検索)"):
+                    for s in sources:
+                        st.markdown(f"- [{s.get('title')}]({s.get('url')})")
+
+
+def _render_quick_prompts() -> Optional[str]:
+    """Render mobile-friendly quick inquiry prompt buttons."""
+    st.caption("💡 ワンタップで質問：")
+    col1, col2, col3 = st.columns(3)
+    clicked_prompt = None
+
+    with col1:
+        if st.button("🛡️ 守備課題と交代策", use_container_width=True):
+            clicked_prompt = "前半の守備のボトルネックと、ハーフタイム以降の交代カードの効果はどうでしたか？"
+    with col2:
+        if st.button("🏥 過密日程と怪我影響", use_container_width=True):
+            clicked_prompt = "中何日の過密日程や累積警告、怪我人の影響は試合展開にどう作用しましたか？"
+    with col3:
+        if st.button("🔭 次節への観戦レンズ", use_container_width=True):
+            clicked_prompt = "この試合を踏まえて、次節はピッチのどこ（スペース・時間帯・マッチアップ）に注目すべきですか？"
+
+    return clicked_prompt
+
+
+def render_chat_qa_tab(
+    qa_engine: TacticalQAEngine,
+    match_id: Optional[str],
+) -> None:
+    """Render interactive conversational QA tab with Google Search Grounding."""
+    st.subheader("💬 戦術対話QA ＆ 観戦ナビゲーター")
+    st.caption(
+        "SQLite深層指標・15観点戦術分析・怪我や警告などの前提条件に基づき、Gemini AIが回答します。"
+    )
+
+    # Initialize chat history
+    if "chat_messages" not in st.session_state:
+        st.session_state["chat_messages"] = []
+
+    # Controls row
+    col_ctrl, col_clear = st.columns([3, 1])
+    with col_ctrl:
+        enable_search = st.checkbox(
+            "🌐 Google検索で最新情報（怪我・移籍・会見速報等）を補完する",
+            value=False,
+            help="チェックを入れるとGoogle検索グラウンディングが有効化されます。",
+        )
+    with col_clear:
+        if st.button("🗑️ 履歴クリア", use_container_width=True):
+            st.session_state["chat_messages"] = []
+            st.rerun()
+
+    # Quick prompt shortcuts
+    quick_input = _render_quick_prompts()
+
+    # Render previous messages
+    _render_chat_messages(st.session_state["chat_messages"])
+
+    # Chat input box
+    user_input = st.chat_input("質問を入力 (例: なぜ後半に失点が増えた？ 次節の注目ポイントは？)")
+    effective_prompt = quick_input or user_input
+
+    if effective_prompt:
+        # Append user message
+        st.session_state["chat_messages"].append({
+            "role": "user",
+            "content": effective_prompt,
+            "sources": [],
+        })
+        with st.chat_message("user"):
+            st.markdown(effective_prompt)
+
+        # Generate response
+        with st.chat_message("assistant"):
+            with st.spinner("戦術データと試合前提を分析中..."):
+                res = qa_engine.ask(
+                    question=effective_prompt,
+                    match_id=match_id,
+                    enable_web_search=enable_search,
+                )
+                ans_text = res.get("answer", "")
+                sources = res.get("grounding_sources", [])
+
+                st.markdown(ans_text)
+                if sources:
+                    with st.expander("🌐 参照Webソース (Google検索)"):
+                        for s in sources:
+                            st.markdown(f"- [{s.get('title')}]({s.get('url')})")
+
+        # Save assistant message
+        st.session_state["chat_messages"].append({
+            "role": "assistant",
+            "content": ans_text,
+            "sources": sources,
+        })
+
+
 def render_sidebar_llm_settings() -> GeminiTacticalClient:
     """Render the sidebar Gemini AI settings inputs and return configured client."""
     st.sidebar.markdown("---")
     st.sidebar.header("🤖 Gemini AI 設定")
+
+    # Check secrets for default API key
+    default_secret_key = None
+    try:
+        default_secret_key = st.secrets.get("GEMINI_API_KEY")
+    except Exception:
+        pass
+
     api_key_input = st.sidebar.text_input(
-        "Gemini API キー (未入力時は環境変数を使用)",
+        "Gemini API キー (未入力時は環境変数/Secretsを使用)",
         type="password",
-        help=".env や環境変数 GEMINI_API_KEY があれば自動適用されます",
+        value=default_secret_key or "",
+        help=".env や環境変数 GEMINI_API_KEY または Secrets があれば自動適用されます",
     )
     default_index = 0
     if DEFAULT_GEMINI_MODEL in SUPPORTED_GEMINI_MODELS:
@@ -1280,6 +1467,12 @@ def main():
         initial_sidebar_state="expanded",
     )
 
+    # --------------------------------------------------------------------------
+    # Privacy / Authentication Gate
+    # --------------------------------------------------------------------------
+    if not check_app_auth():
+        return
+
     st.title("⚽ Jリーグ戦術分析・観戦ガイド RAG システム")
     st.caption("2層ハイブリッドRAG × 客観データ多角分析・定性対比エージェント")
 
@@ -1295,6 +1488,7 @@ def main():
 
     match_id = selected_match["match_id"]
     gemini_client = render_sidebar_llm_settings()
+    qa_engine = TacticalQAEngine(gemini_client=gemini_client)
 
     # --------------------------------------------------------------------------
     # Main Content Area
@@ -1307,8 +1501,9 @@ def main():
     away_id = selected_match["away_team_id"]
     reviews = fetch_match_reviews(match_id)
 
-    tab_obj, tab_comp, tab_rate, tab_adv, tab_stats, tab_raw_data, tab_ai, tab_reviews = st.tabs(
+    tab_chat, tab_obj, tab_comp, tab_rate, tab_adv, tab_stats, tab_raw_data, tab_ai, tab_reviews = st.tabs(
         [
+            "💬 戦術対話QA (Google検索)",
             "📊 客観データ多角分析 (15観点)",
             "⚖️ 定性対比・答え合わせ",
             "🏅 選手・監督採点＆寸評",
@@ -1319,6 +1514,10 @@ def main():
             "📝 公式レポート・会見全文",
         ],
     )
+
+    # Tab 0: Chat QA Session (Mobile & Web)
+    with tab_chat:
+        render_chat_qa_tab(qa_engine, match_id)
 
     # Tab 1: Objective Analysis
     with tab_obj:

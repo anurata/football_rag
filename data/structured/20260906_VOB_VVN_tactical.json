@@ -1,102 +1,125 @@
 {
   "match_id": "20260906_VOB_VVN",
-  "home_team_id": "VOB",
-  "away_team_id": "VVN",
-  "home_formation": "4-4-2",
-  "away_formation": "4-4-2",
+  "home_formation": "4-1-2-3",
+  "away_formation": "3-4-2-1",
   "tactical_highlights": [
-    "ヴィッセル神戸とV・ファーレン長崎による激闘（最終スコア: 3 - 1）",
-    "得点者: 永戸 勝也 (2分), 郷家 友太 (34分), 郷家 友太 (52分), 松本 天夢 (93分)",
-    "局面ごとの戦術的適応とインテンシティの維持が勝敗を決定"
+    "【基本スタイルと今節の狙い】ヴィッセル神戸（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-1-2-3の布陣を敷き、ミヒャエル スキッベ監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。対するV・ファーレン長崎（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1で迎え撃ち、高木 琢也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】ヴィッセル神戸が敵陣支配率62.9%で相手を押し込み、PA進入率31.8%と相手の守備ブロックを内側と外側の両面からこじ開けることに成功。対するV・ファーレン長崎はクリア後のボールを前線で収められず、自陣深くに釘付けにされ守勢を強いられた。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】ヴィッセル神戸の戦術的狙いがピッチ上で完全に機能し、枠内シュート6本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。V・ファーレン長崎は内容・結果の両面で圧倒され、プランの修正が後手に回った。",
+    "【試合を動かした得点】2分 永戸 勝也 (ヴィッセル神戸の決定機: 永戸 勝也 による得点 (2分)) / 34分 郷家 友太 (ヴィッセル神戸の決定機: 郷家 友太 による得点 (34分)) / 52分 郷家 友太 (ヴィッセル神戸の決定機: 郷家 友太 による得点 (52分)) / 93分 松本 天夢 (V・ファーレン長崎の決定機: 松本 天夢 による得点 (93分))"
   ],
   "phases": [
     {
       "phase": "0-15",
       "dominant_team": "HOME",
-      "momentum_summary": "立ち上がりはヴィッセル神戸とV・ファーレン長崎によるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
-      "pressing_battle": "ヴィッセル神戸が前線から連動プレスを仕掛け、V・ファーレン長崎はサイドスペースへの配球でプレス回避を狙う。",
-      "tactical_adjustments": "序盤の探り合いを経て、両チームが陣形のコンパクトネスを維持し中央の進入路を遮断。"
+      "momentum_summary": "【得点動意】2分、永戸 勝也がネットを揺らしスコアが動く（ヴィッセル神戸の決定機: 永戸 勝也 による得点 (2分)）。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "15-30",
       "dominant_team": "EQUAL",
-      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
-      "pressing_battle": "サイドハーフスペースへの侵入に対するチャレンジ＆カバーの徹底。",
-      "tactical_adjustments": "ボランチの立ち位置を微修正し、セカンドボールの回収率向上を図る。"
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "30-45+",
       "dominant_team": "HOME",
-      "momentum_summary": "前半終了に向けたプレッシャーの強まり。セットプレーおよびクロスからペナルティエリア内の攻防が激化。",
-      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
-      "tactical_adjustments": "ライン間を締め直し、アディショナルタイムの失点リスクを最小化。"
+      "momentum_summary": "【得点動意】34分、郷家 友太がネットを揺らしスコアが動く（ヴィッセル神戸の決定機: 郷家 友太 による得点 (34分)）。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "46-60",
-      "dominant_team": "AWAY",
-      "momentum_summary": "ハーフタイムの修正を経た後半立ち上がり。両指揮官の戦術指示がピッチ上で展開。",
-      "pressing_battle": "前線からの即時奪回（ゲーゲンプレス）によるショートカウンターの応酬。",
-      "tactical_adjustments": "ボールの循環テンポを上げ、相手の守備スライドを揺さぶる。"
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】52分、郷家 友太がネットを揺らしスコアが動く（ヴィッセル神戸の決定機: 郷家 友太 による得点 (52分)）。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "60-75",
-      "dominant_team": "HOME",
-      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
-      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
-      "tactical_adjustments": "交代枠を駆使したプレスのギアチェンジと守備陣形の再構築。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "75-90+",
-      "dominant_team": "EQUAL",
-      "momentum_summary": "試合最終盤の総力戦。スコア 3-1 をめぐるアディショナルタイムまでの白熱した攻防決着。",
-      "pressing_battle": "ラスト15分における集中力維持と、泥臭いデュエル・クリアの応酬。",
-      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】93分、松本 天夢がネットを揺らしスコアが動く（V・ファーレン長崎の決定機: 松本 天夢 による得点 (93分)）。",
+      "pressing_battle": "ヴィッセル神戸のブロック守備とV・ファーレン長崎の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     }
   ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 62.9,
+      "away_field_tilt": 37.1
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 44,
+        "pa_entries": 14,
+        "rate_30_to_pa": 31.8
+      },
+      "away": {
+        "m30_entries": 26,
+        "pa_entries": 7,
+        "rate_30_to_pa": 26.9
+      }
+    },
+    "intensity": {
+      "home_distance_km": 116.8,
+      "away_distance_km": 114.8,
+      "home_sprints": 136,
+      "away_sprints": 132
+    }
+  },
   "key_tactical_events": [
     {
       "minute": 2,
       "period": "1H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "永戸 勝也"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "ヴィッセル神戸の決定機: 永戸 勝也 による得点 (2分)"
+      "team_id": "VOB",
+      "player_name": "永戸 勝也",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "ヴィッセル神戸の決定機: 永戸 勝也 による得点 (2分)"
     },
     {
       "minute": 34,
       "period": "1H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "郷家 友太"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "ヴィッセル神戸の決定機: 郷家 友太 による得点 (34分)"
+      "team_id": "VOB",
+      "player_name": "郷家 友太",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "ヴィッセル神戸の決定機: 郷家 友太 による得点 (34分)"
     },
     {
       "minute": 52,
       "period": "2H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "郷家 友太"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "ヴィッセル神戸の決定機: 郷家 友太 による得点 (52分)"
+      "team_id": "VOB",
+      "player_name": "郷家 友太",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "ヴィッセル神戸の決定機: 郷家 友太 による得点 (52分)"
     },
     {
       "minute": 93,
       "period": "2H",
-      "team_side": "AWAY",
-      "category": "GOAL",
-      "actors": [
-        "松本 天夢"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "V・ファーレン長崎の決定機: 松本 天夢 による得点 (93分)"
+      "team_id": "VVN",
+      "player_name": "松本 天夢",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "V・ファーレン長崎の決定機: 松本 天夢 による得点 (93分)"
     }
   ]
 }

@@ -1,0 +1,246 @@
+{
+  "match_id": "20260829_VVN_FCT",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】V・ファーレン長崎（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1の布陣を敷き、高木 琢也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するFC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2で迎え撃ち、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はV・ファーレン長崎 46.3% 対 FC東京 53.7%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度でFC東京がわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】38分 GOOOOOAL (GOOOOOAL!!左CKを獲得。キッカーのバングーナガンデは左足でボールを蹴り込む。これに反応した長倉がペナルティエリア中央からヘディングでゴール左下に決める) / 49分 マルセロ ヒアン (GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。本間がペナルティエリア中央から右足でゴール右上に決める)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、V・ファーレン長崎とFC東京が相手のプレス構造を探り合う。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】38分、GOOOOOALがネットを揺らしスコアが動く（GOOOOOAL!!左CKを獲得。キッカーのバングーナガンデは左足でボールを蹴り込む。これに反応した長倉がペナルティエリア中央からヘディングでゴール左下に決める）。 【得点動意】49分、マルセロ ヒアンがネットを揺らしスコアが動く（GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。本間がペナルティエリア中央から右足でゴール右上に決める）。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】49分、マルセロ ヒアンがネットを揺らしスコアが動く（GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。本間がペナルティエリア中央から右足でゴール右上に決める）。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 46.3,
+      "away_field_tilt": 53.7
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 38,
+        "pa_entries": 7,
+        "rate_30_to_pa": 18.4
+      },
+      "away": {
+        "m30_entries": 44,
+        "pa_entries": 18,
+        "rate_30_to_pa": 40.9
+      }
+    },
+    "intensity": {
+      "home_distance_km": 117.5,
+      "away_distance_km": 117.5,
+      "home_sprints": 111,
+      "away_sprints": 134
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 5,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドからドリ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドからドリブルで進入した本間がペナルティエリア左からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 6,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "相手陣中央からドリブルで進入した岩崎がペナルティエリア手前から右足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉が相手陣中央",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "長倉が相手陣中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "新井OUT",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "29新井OUT→3関口IN"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:長崎:1本、FC東京:2本/枠内シュート:長崎:1本、FC東京:0本/ゴール期待値:長崎:0.02、FC東京:0.06"
+    },
+    {
+      "minute": 27,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "本間がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "本間がペナルティエリア中央から右足で枠内にシュートを放つも、後藤にセーブされる"
+    },
+    {
+      "minute": 31,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した室屋がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から長倉がパスを送る。マルセロ ヒアンがペナルティエリア中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 36,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア手前から右足で枠内にシュートを放つも、後藤にセーブされる"
+    },
+    {
+      "minute": 38,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "GOOOOOAL",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!左CKを獲得。キッカーのバングーナガンデは左足でボールを蹴り込む。これに反応した長倉がペナルティエリア中央からヘディングでゴール左下に決める"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:長崎:1本、FC東京:7本/枠内シュート:長崎:1本、FC東京:3本/ゴール期待値:長崎:0.02、FC東京:0.66"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "右サイド",
+      "description_text": "右サイドからアレクサンダー アレクサンダー ショルツがクロスを入れるも、マルセロ ヒアンはシュートを放つには至らない"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前から橋本拳が",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から橋本拳がパスを送る。長倉がペナルティエリア手前から右足で枠内にシュートを放つも、江川にブロックされる"
+    },
+    {
+      "minute": 49,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!マルセロ ヒアンのスルーパスがペナルティエリア内の本間につながる。本間がペナルティエリア中央から右足でゴール右上に決める"
+    },
+    {
+      "minute": 55,
+      "period": "2H",
+      "team_id": "VVN",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:長崎:1本、FC東京:9本/枠内シュート:長崎:1本、FC東京:4本/ゴール期待値:長崎:0.02、FC東京:0.83"
+    }
+  ]
+}

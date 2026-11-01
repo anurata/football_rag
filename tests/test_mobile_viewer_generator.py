@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
 """
 tests/test_mobile_viewer_generator.py
 
 Unit tests for MobileViewerGenerator.
 """
+
+from __future__ import annotations
 
 import json
 import shutil
@@ -44,8 +47,8 @@ class TestMobileViewerGenerator(unittest.TestCase):
     def tearDown(self) -> None:
         shutil.rmtree(self.test_dir, ignore_errors=True)
 
-    def test_generate_html(self) -> None:
-        """Verify mobile viewer HTML generation."""
+    def test_generate_html_and_markdown(self) -> None:
+        """Verify progressive mobile viewer HTML and Markdown generation."""
         out_file = self.generator.generate()
         self.assertTrue(out_file.exists())
 
@@ -53,7 +56,9 @@ class TestMobileViewerGenerator(unittest.TestCase):
         self.assertIn("<!DOCTYPE html>", content)
         self.assertIn("J1戦術カルテ", content)
         self.assertIn("MATCHES", content)
-        self.assertIn("detailDrawer", content)
+        self.assertIn("match-details", content)
+        self.assertIn("mw-section", content)
+        self.assertIn("pills-container", content)
 
 
 if __name__ == "__main__":

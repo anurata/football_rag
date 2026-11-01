@@ -1,0 +1,136 @@
+{
+  "match_id": "20260902_FUK_URA",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-1-2-3",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】アビスパ福岡（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1の布陣を敷き、塚原 真也監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。対する浦和レッズ（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-1-2-3で迎え撃ち、曺 貴裁監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はアビスパ福岡 46.6% 対 浦和レッズ 53.4%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で浦和レッズがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】7分 マテウス サヴィオ (浦和レッズの決定機: マテウス サヴィオ による得点 (7分)) / 24分 碓井 聖生 (アビスパ福岡の決定機: 碓井 聖生 による得点 (24分)) / 35分 師岡 柊生 (アビスパ福岡の決定機: 師岡 柊生 による得点 (35分)) / 45分 浦和レッズ選手 (浦和レッズの決定機: 浦和レッズ選手 による得点 (45分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】7分、マテウス サヴィオがネットを揺らしスコアが動く（浦和レッズの決定機: マテウス サヴィオ による得点 (7分)）。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】24分、碓井 聖生がネットを揺らしスコアが動く（アビスパ福岡の決定機: 碓井 聖生 による得点 (24分)）。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】35分、師岡 柊生がネットを揺らしスコアが動く（アビスパ福岡の決定機: 師岡 柊生 による得点 (35分)）。 【得点動意】45分、浦和レッズ選手がネットを揺らしスコアが動く（浦和レッズの決定機: 浦和レッズ選手 による得点 (45分)）。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】65分、浦和レッズ選手がネットを揺らしスコアが動く（浦和レッズの決定機: 浦和レッズ選手 による得点 (65分)）。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "アビスパ福岡のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 46.6,
+      "away_field_tilt": 53.4
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 34,
+        "pa_entries": 10,
+        "rate_30_to_pa": 29.4
+      },
+      "away": {
+        "m30_entries": 39,
+        "pa_entries": 11,
+        "rate_30_to_pa": 28.2
+      }
+    },
+    "intensity": {
+      "home_distance_km": 115.7,
+      "away_distance_km": 113.3,
+      "home_sprints": 97,
+      "away_sprints": 101
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 7,
+      "period": "1H",
+      "team_id": "URA",
+      "player_name": "マテウス サヴィオ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: マテウス サヴィオ による得点 (7分)"
+    },
+    {
+      "minute": 24,
+      "period": "1H",
+      "team_id": "FUK",
+      "player_name": "碓井 聖生",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "アビスパ福岡の決定機: 碓井 聖生 による得点 (24分)"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FUK",
+      "player_name": "師岡 柊生",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "アビスパ福岡の決定機: 師岡 柊生 による得点 (35分)"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_id": "URA",
+      "player_name": "浦和レッズ選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: 浦和レッズ選手 による得点 (45分)"
+    },
+    {
+      "minute": 65,
+      "period": "2H",
+      "team_id": "URA",
+      "player_name": "浦和レッズ選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "浦和レッズの決定機: 浦和レッズ選手 による得点 (65分)"
+    }
+  ]
+}

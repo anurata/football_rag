@@ -1,0 +1,245 @@
+{
+  "match_id": "20261010_FCT_URA",
+  "home_formation": "4-4-2",
+  "away_formation": "4-1-2-3",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する浦和レッズ（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-1-2-3で迎え撃ち、曺 貴裁監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はFC東京 51.2% 対 浦和レッズ 48.8%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度でFC東京がわずかに上回り、激闘を制した。"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、FC東京と浦和レッズが相手のプレス構造を探り合う。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と浦和レッズの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 51.2,
+      "away_field_tilt": 48.8
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 41,
+        "pa_entries": 16,
+        "rate_30_to_pa": 39.0
+      },
+      "away": {
+        "m30_entries": 39,
+        "pa_entries": 8,
+        "rate_30_to_pa": 20.5
+      }
+    },
+    "intensity": {
+      "home_distance_km": 115.7,
+      "away_distance_km": 114.1,
+      "home_sprints": 142,
+      "away_sprints": 144
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 7,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから金子",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから金子がパスを送る。安居がペナルティエリア右から右足で枠内にシュートを放つも、稲村にブロックされる"
+    },
+    {
+      "minute": 8,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "植木がペナルティエリア手前から左足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "分が経過するも",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "10分が経過するも、まだシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 11,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "金子がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "金子がペナルティエリア右から左足で枠内にシュートを放つも、バングーナガンデにブロックされる"
+    },
+    {
+      "minute": 12,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドからドリ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドからドリブルで進入した俵積田がペナルティエリア手前から右足で枠内にシュートを放つも、西川周にセーブされる"
+    },
+    {
+      "minute": 14,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "常盤がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "常盤がペナルティエリア中央から左足で枠内にシュートを放つも、根本にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア手前から左足で枠内にシュートを放つも、根本にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:3本、浦和:3本/枠内シュート:FC東京:1本、浦和:1本/ゴール期待値:FC東京:0.25、浦和:0.17"
+    },
+    {
+      "minute": 24,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "南野OUT",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "42南野OUT→45オナイウIN"
+    },
+    {
+      "minute": 27,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア手前から右足で枠内にシュートを放つも、根本にブロックされる"
+    },
+    {
+      "minute": 38,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "根本が相手陣中央",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "根本が相手陣中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:4本、浦和:4本/枠内シュート:FC東京:1本、浦和:1本/ゴール期待値:FC東京:0.28、浦和:0.19"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "永野がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "永野がペナルティエリア手前から右足で枠内にシュートを放つも、西川周にセーブされる"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "Mサヴィオがペナ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "Mサヴィオがペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 46,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "内から金子がパス",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から金子がパスを送る。山根がペナルティエリア手前から左足で枠内にシュートを放つも、永野にブロックされる"
+    }
+  ]
+}

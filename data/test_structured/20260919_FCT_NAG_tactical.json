@@ -1,0 +1,246 @@
+{
+  "match_id": "20260919_FCT_NAG",
+  "home_formation": "4-4-2",
+  "away_formation": "3-4-1-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する名古屋グランパス（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-1-2で迎え撃ち、ミハイロ ペトロヴィッチ監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はFC東京 40.7% 対 名古屋グランパス 59.3%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度でFC東京がわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】26分 左サイドから徳元 (左サイドから徳元がクロスを入れる。これに反応した木村がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、FC東京と名古屋グランパスが相手のプレス構造を探り合う。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】26分、左サイドから徳元がネットを揺らしスコアが動く（左サイドから徳元がクロスを入れる。これに反応した木村がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう）。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と名古屋グランパスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 40.7,
+      "away_field_tilt": 59.3
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 35,
+        "pa_entries": 10,
+        "rate_30_to_pa": 28.6
+      },
+      "away": {
+        "m30_entries": 51,
+        "pa_entries": 15,
+        "rate_30_to_pa": 29.4
+      }
+    },
+    "intensity": {
+      "home_distance_km": 112.5,
+      "away_distance_km": 114.7,
+      "home_sprints": 142,
+      "away_sprints": 154
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 1,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した常盤がペナルティエリア手前から右足で枠内にシュートを放つも、内田にブロックされる"
+    },
+    {
+      "minute": 4,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "木村がペナルティエリア左から右足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 9,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "木村がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "木村がペナルティエリア中央から右足で枠内にシュートを放つも、高にブロックされる"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "常盤がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "常盤がペナルティエリア手前から右足で枠内にシュートを放つも、藤井にブロックされる"
+    },
+    {
+      "minute": 12,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "木村がペナルティ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "木村がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 17,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した佐藤がペナルティエリア中央から右足で枠内にシュートを放つも、シュミットにセーブされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:3本、名古屋:2本/枠内シュート:FC東京:1本、名古屋:0本/ゴール期待値:FC東京:0.25、名古屋:0.11"
+    },
+    {
+      "minute": 24,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "俵積田がペナルテ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "俵積田がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "山岸がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "山岸がペナルティエリア中央から右足で枠内にシュートを放つも、バングーナガンデにブロックされる"
+    },
+    {
+      "minute": 26,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドから徳元",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから徳元がクロスを入れる。これに反応した木村がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう"
+    },
+    {
+      "minute": 31,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:5本、名古屋:4本/枠内シュート:FC東京:1本、名古屋:0本/ゴール期待値:FC東京:0.34、名古屋:0.37"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドから中山",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから中山がクロスを入れる。これに反応した山岸がペナルティエリア中央からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 47,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、高嶺にブロックされる"
+    },
+    {
+      "minute": 48,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:6本、名古屋:5本/枠内シュート:FC東京:1本、名古屋:0本/ゴール期待値:FC東京:0.48、名古屋:0.52"
+    }
+  ]
+}

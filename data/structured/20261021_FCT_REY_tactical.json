@@ -1,68 +1,156 @@
 {
   "match_id": "20261021_FCT_REY",
-  "home_formation": "4-2-3-1",
+  "game_id": "2026102108",
+  "home_team_id": "FCT",
+  "away_team_id": "REY",
+  "home_team_name": "FC東京",
+  "away_team_name": "柏レイソル",
+  "score": "0-0",
+  "home_formation": "4-2-1-3",
   "away_formation": "4-4-2",
   "tactical_highlights": [
-    "FC東京は高宇洋とアレクサンダー・ショルツを基点にボール保持率と敵陣支配度（58.04%）で優位に立つも、柏レイソルの小西雄大と弓場堅真が形成する中央プロテクト網に阻まれ、30mラインからPAへの進入変換率が17.28%と外周循環に追い込まれた。",
-    "柏レイソルはリカルド・ロドリゲス監督のもと、4-4-2ブロックのミドルゾーン設定を徹底。三丸拡と戸嶋祥郎がサイドのスペースを消しつつ、セットプレーやトランジションから山内寛史、小泉佳穂を走らせてシュート数（9本）でホームチームを上回る実利的なゲームプランを展開した。",
-    "後半の選手交代において、松橋力蔵監督は俵積田晃太、仲川輝人、山田楓喜、ダニエル・ゴメスを相次いで投入しサイドのアイソレーションを狙ったが、柏守備陣のカバーリングの前に交代枠インパクトCBPが0.0に終わり、強固なブロックをこじ開けられずスコアレスドローに終わった。"
+    "FC東京 vs 柏レイソル（第11節・最終スコア 0-0）の攻防。",
+    "松橋 力蔵監督とリカルド ロドリゲス監督による緻密な戦術采配のせめぎ合い。",
+    "【公式戦評より】FC東京はホームの味スタに柏を迎えた上位対決で、０－０の引き分けに終わった。前半は長倉、マルセロ ヒアンらを中心にゴールを目指すが、柏の堅い守備を崩し切れずにスコアレスで折り返す。後半、柏が選手交代で流れを変えにくると、FC東京も俵積田、山田..."
   ],
   "phases": [
     {
       "phase": "0-15",
       "dominant_team": "EQUAL",
-      "momentum_summary": "立ち上がりからFC東京が高宇洋のセカンドボール回収とアレクサンダー・ショルツの配球で前進を図り、3分には高がPA手前からファーストシュートを放つ。対する柏も13分に戸嶋祥郎の左FKからPA中央で山内寛史が合わせる決定機を作るなど、互いに規律あるプレッシングで牽制し合う。",
-      "pressing_battle": "FC東京はマルセロ・ヒアンと長倉幹樹が柏の2CBに対してコースを制限しながらハイプレスを敢行。対する柏はGKを含めたビルドアップから小西雄大がアンカー位置に落ちて逃げ道を作り、高宇洋の迎撃エリアを回避して前進を試みた。",
-      "tactical_adjustments": "柏のリカルド・ロドリゲス監督は、相手右SB石原広教の攻撃参加を警戒し、左サイドハーフの守備意識を強化して自陣4-4-2の幅をコンパクトに保つよう指示。"
+      "momentum_summary": "0-15分：攻勢指数 50.0 vs 50.0（シュート 0本 vs 0本）。ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア中央から右足で枠内にシュートを放つも、永井にセーブされる こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     },
     {
       "phase": "15-30",
-      "dominant_team": "HOME",
-      "momentum_summary": "FC東京がピッチ中央の主導権を掌握し、敵陣へ押し込む時間を増やす。28分にはマルセロ・ヒアンが中央でタメを作って正確なスルーパスを左ハーフスペースへ通し、抜け出した安斎颯馬がPA左から狙い澄ましたシュートを放つが、柏のGKとCBの体を張ったシュートブロックに阻まれる。",
-      "pressing_battle": "FC東京の即時奪回が機能。ボールロスト直後に常盤亨太と高宇洋が中央で厳しく挟み込み、柏カウンターの起点となる小泉佳穂や弓場堅真に前を向かせず、連続攻撃のサイクルを生み出した。",
-      "tactical_adjustments": "松橋力蔵監督は佐藤恵允に対し、大外に張るだけでなくインサイドのレーンへ斜めに侵入させ、柏の右SBとCBのギャップを広げるオフ・ザ・ボールの動きを指示。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "15-30分：攻勢指数 50.0 vs 50.0（シュート 0本 vs 0本）。こぼれ球に反応した久保がペナルティエリア右から右足で枠内にシュートを放つも、稲村にブロックされる ここまでのシュート:FC東京:2本、柏:2本/枠内シュート:FC東京:1本、柏:0本/ゴール期待値:FC東京:0.18、柏:0.74",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     },
     {
       "phase": "30-45+",
-      "dominant_team": "HOME",
-      "momentum_summary": "前半終盤にかけてFC東京が攻勢を強め、シュート数を6本まで伸ばす。43分には長倉幹樹が柏のバイタルエリア手前の狭いスペースでパスを受け、鋭いターンからミドルシュートを放つもバーの上へ外れる。柏は自陣PA内に強固な壁を築き、スコアレスのままハーフタイムへ持ち込む。",
-      "pressing_battle": "柏は前線からの深追いプレスを自重し、ミドルサードに全員が撤退する4-4-2のコンパクトなローブロックへ移行。小西雄大と三丸拡がハーフスペースへのクサビを徹底的に遮断した。",
-      "tactical_adjustments": "柏ベンチは中盤の守備奪取力トップの小西雄大に対し、FC東京の長倉幹樹が下りてくる動きを深追いせず、バイタルエリアの中央スペースを最優先でプロテクトするよう修正を施した。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "30-45+分：攻勢指数 50.0 vs 50.0（シュート 0本 vs 0本）。長倉がペナルティエリア右から右足で枠内にシュートを放つも、古賀にブロックされる ペナルティエリア内からドリブルで進入した山内がペナルティエリア左から右足で枠内にシュートを放つも、アレクサンダー アレクサンダー ショルツにブロックされる",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     },
     {
       "phase": "45-60",
       "dominant_team": "EQUAL",
-      "momentum_summary": "後半開始直後、柏がプレッシングの開始ラインを5メートル押し上げ、中盤でのデュエルで弓場堅真が激しくファイト。FC東京の前進を中盤で寸断し、手数をかけずにサイドからアタッキングサードへボールを送り込むなど、柏がボール保持とカウンターを織り交ぜて盛り返す。",
-      "pressing_battle": "柏の2トップがFC東京のアンカー高宇洋へのパスコースを遮断。FC東京はアレクサンダー・ショルツからの長距離フィードに頼らざるを得なくなり、オープンな展開へシフトした。",
-      "tactical_adjustments": "FC東京ベンチは停滞を打破するため、ベンチのウインガー陣（俵積田晃太、仲川輝人）に早めのウォーミングアップを指示し、サイドの1対1で仕掛ける準備を整える。"
+      "momentum_summary": "45-60分：攻勢指数 50.0 vs 50.0（シュート 0本 vs 0本）。ここまでのシュート:FC東京:7本、柏:5本/枠内シュート:FC東京:2本、柏:0本/ゴール期待値:FC東京:0.56、柏:0.95 アレクサンダー アレクサンダー ショルツがペナルティエリア中央から左足で枠内にシュートを放つも、小泉にブロックされる",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     },
     {
       "phase": "60-75",
-      "dominant_team": "HOME",
-      "momentum_summary": "松橋監督が俵積田晃太、山田楓喜、仲川輝人を投入して前線のフレッシュ化を図る。左サイドで俵積田がドリブル突破からクロスを供給するが、柏の強固な最終ラインがPA内でことごとく跳ね返す。柏も交代選手を投入してインテンシティを維持し、決定機を与えない。",
-      "pressing_battle": "交代で入ったFC東京のアタッカー陣が前線からのハイプレスを再点火。しかし柏は慌てることなく、三丸拡がセーフティなクリアとタッチライン際への逃げ球を徹底し、セカンドボールの回収争いに持ち込んだ。",
-      "tactical_adjustments": "リカルド・ロドリゲス監督は中盤の疲弊を見逃さず、走力を補完する交代カードを順次投入。守備時の5バック化も視野に入れつつ、サイドのスペースを埋めるポジショニングを徹底させた。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "60-75分：中盤での激しい主導権争い（攻勢指数 50.0 vs 50.0）。互いに譲らず均衡した局面。",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     },
     {
       "phase": "75-90+",
-      "dominant_team": "HOME",
-      "momentum_summary": "FC東京はダニエル・ゴメスを投入してパワープレーの圧力を高め、アレクサンダー・ショルツも前線へボールを送り続ける。しかし柏はCB陣と小西雄大を中心に集中力を切らさずブロックを死守。柏も終了間際にショートカウンターからFC東京ゴールを脅かすがゴールには至らず、互いに無得点でタイムアップを迎えた。",
-      "pressing_battle": "FC東京の焦燥感に伴う前がかりな配置に対し、柏はブロック内でボールを奪うと即座に前線のオープンスペースへ配球。FC東京は石原広教とショルツが広大な背後スペースをカバーし、カウンターの芽を摘み取った。",
-      "tactical_adjustments": "松橋監督はアディショナルタイムに石原広教の攻撃参加を最大化させペナルティエリア内への人数を増やしたが、中央密集の攻略には至らなかった。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "75-90+分：中盤での激しい主導権争い（攻勢指数 50.0 vs 50.0）。互いに譲らず均衡した局面。",
+      "pressing_battle": "中盤でのインテンシティの高いデュエルが続き、セカンドボールを互いに激しく競り合う。",
+      "tactical_adjustments": "両軍ともに陣形のコンパクトネスを保ち、リスクを抑えた前進ルートを選択。"
     }
   ],
   "key_tactical_events": [
     {
-      "minute": 13,
+      "minute": 3,
       "period": "1H",
-      "team_side": "AWAY",
+      "team_side": "HOME",
       "category": "CHANCE_CREATION",
       "actors": [
-        "戸嶋　祥郎",
-        "山内　寛史"
+        "マルセロ ヒアン"
       ],
-      "zone": "ペナルティエリア中央",
-      "description": "左サイドで得たFKから戸嶋祥郎が鋭いインスイングのボールをPA中央へ供給。マークを外した山内寛史がヘディングで合わせる決定機を創出し、立ち上がりの主導権をアウェイの柏が引き寄せる契機となった。"
+      "zone": "ペナルティエリア内",
+      "description": "ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア中央から右足で枠内にシュートを放つも、永井にセーブされる"
+    },
+    {
+      "minute": 3,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "こぼれ球に反応し",
+        "た高がペナルティ"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "分が経過するも",
+        "まだシュートに至"
+      ],
+      "zone": "中央",
+      "description": "10分が経過するも、まだシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 13,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "左サイドでFKを",
+        "獲得"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "左サイドでFKを獲得。キッカーの戸嶋は右足でボールを送る。これに反応した山内がペナルティエリア中央からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 17,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "こぼれ球に反応し",
+        "た久保がペナルテ"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "こぼれ球に反応した久保がペナルティエリア右から右足で枠内にシュートを放つも、稲村にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "ここまでのシュー",
+        "FC東京"
+      ],
+      "zone": "中央",
+      "description": "ここまでのシュート:FC東京:2本、柏:2本/枠内シュート:FC東京:1本、柏:0本/ゴール期待値:FC東京:0.18、柏:0.74"
+    },
+    {
+      "minute": 21,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "マルセロ ヒアン"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "マルセロ ヒアンがペナルティエリア中央から左足で枠内にシュートを放つも、古賀にブロックされる"
+    },
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "手前からドリブル",
+        "で進入した長倉が"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "ペナルティエリア手前からドリブルで進入した長倉がペナルティエリア手前から右足で枠内にシュートを放つも、永井にセーブされる"
     },
     {
       "minute": 28,
@@ -70,11 +158,45 @@
       "team_side": "HOME",
       "category": "CHANCE_CREATION",
       "actors": [
-        "マルセロ　ヒアン",
-        "安斎　颯馬"
+        "マルセロ ヒアン"
       ],
-      "zone": "左ポケット",
-      "description": "ペナルティエリア手前中央で柏のプレッシャーを受けながらもタメを作ったマルセロヒアンが、相手CBの背後へ絶妙なスルーパスを通す。フリーで抜け出した安斎颯馬が左ポケットから決定的な枠内シュートを放ったが、柏守備陣の献身的なコース制限により得点には至らず。"
+      "zone": "ペナルティエリア内",
+      "description": "ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア左からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 33,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "長倉がペナルティ",
+        "エリア右から右足"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "長倉がペナルティエリア右から右足で枠内にシュートを放つも、古賀にブロックされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "アレクサンダー ショルツ"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "ペナルティエリア内からドリブルで進入した山内がペナルティエリア左から右足で枠内にシュートを放つも、アレクサンダー アレクサンダー ショルツにブロックされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "ここまでのシュー",
+        "FC東京"
+      ],
+      "zone": "中央",
+      "description": "ここまでのシュート:FC東京:6本、柏:3本/枠内シュート:FC東京:2本、柏:0本/ゴール期待値:FC東京:0.52、柏:0.77"
     },
     {
       "minute": 43,
@@ -82,239 +204,49 @@
       "team_side": "HOME",
       "category": "CHANCE_CREATION",
       "actors": [
-        "長倉　幹樹",
-        "高　宇洋"
+        "長倉がペナルティ",
+        "エリア手前からシ"
       ],
-      "zone": "バイタルエリア中央",
-      "description": "高宇洋の縦パスをバイタルエリアで受けた長倉幹樹が、相手ボランチの小西雄大を剥がして素早く右足を振り抜く。枠を捉えきれずバーを越えたものの、柏の守備ブロックの間隙を突いた鋭いフィニッシュワークであった。"
+      "zone": "ペナルティエリア内",
+      "description": "長倉がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
     },
     {
-      "minute": 68,
+      "minute": 44,
       "period": "1H",
       "team_side": "HOME",
-      "category": "SUBSTITUTION_TACTIC",
+      "category": "CHANCE_CREATION",
       "actors": [
-        "俵積田　晃太",
-        "松橋　力蔵"
+        "内から山内がパス",
+        "を送る"
       ],
-      "zone": "左サイド大外レーン",
-      "description": "松橋力蔵監督は左ウイングにドリブラーの俵積田晃太を投入。閉塞した中央攻撃から大外のアイソレーションによる1対1打開へと明確な戦術シフトを図り、アタッキングサードへの進入頻度を高めようと試みた。"
+      "zone": "ペナルティエリア内",
+      "description": "ペナルティエリア内から山内がパスを送る。久保がペナルティエリア右からシュートを放つも、ゴールの枠に当たってしまう"
+    },
+    {
+      "minute": 44,
+      "period": "1H",
+      "team_side": "HOME",
+      "category": "CHANCE_CREATION",
+      "actors": [
+        "汰木がペナルティ",
+        "エリア中央から左"
+      ],
+      "zone": "ペナルティエリア内",
+      "description": "汰木がペナルティエリア中央から左足で枠内にシュートを放つも、稲村にブロックされる"
     }
   ],
-  "perspective_insights": {
-    "game_flow": {
-      "layer1_summary": "試合全体を通じてFC東京が敵陣支配度（Field Tilt）58.04%を記録し、ピッチ上のテリトリー争いでは優勢を維持した。しかしアタッキングサード侵入後の進入変換率（30m→PA）は17.28%にとどまり、柏の4-4-2コンパクトブロックの外側を迂回させられる展開が常態化した。PA進入後の決定力変換率は42.86%と一定の水準を保ったものの、シュート総数では柏の9本に対しFC東京は7本と下回った。アレクサンダー・ショルツ（攻撃CBP 2.91）や高宇洋（守備CBP 20.78）が後方でゲームをコントロールして無失点に抑え無敗記録を10に伸ばしたものの、強固な自陣撤退ブロックを相手にした崩しのクオリティにおいて課題を露呈する結果となった。",
-      "layer3_theory": "ポジショナルプレーの観点において、FC東京は柏の第一プレッシャーライン（2トップ）をショルツと高宇洋のポジショニングで容易に越えられたものの、第2ライン（4MF）の手前で柏の守備基準点をピン留め（Pinning）するストライカーとインサイドハーフの配置が不十分であった。柏の小西雄大と弓場堅真が縦パスのコースを遮断したため、ボールはサイドの石原広教や大外ウインガーへと逃げざるを得ず、相手の守備スライドを強いる前に自ら攻撃テンポを落としてしまった。",
-      "away_perspective": "柏レイソル視点において、敵地・味スタで首位争いを演じるFC東京の攻撃力を無力化した守備設計は極めて計画通りの成果であった。敵陣支配度41.96%と押し込まれる前提のゲームプランを受け入れつつ、小西雄大（守備CBP 19.61）と弓場堅真（守備CBP 15.17）のダブルボランチがバイタルエリアを完全に施錠した。また、奪ったボールを小泉佳穂や中川敦瑛が確実に落ち着かせ、三丸拡のオーバーラップや戸嶋祥郎のセットプレーキックを武器に相手を上回るシュート9本を放ち、アウェイで勝ち点1以上の脅威を与え続けたことは大きな収穫である。"
-    },
-    "pressing_battle": {
-      "layer1_summary": "FC東京は高宇洋（守備CBP 20.78）と石原広教（守備CBP 20.64）が中盤と右サイドで圧倒的なボール奪取力を発揮し、柏のロングカウンターを中盤で即座に迎撃するアグレッシブなプレッシングを展開した。一方の柏は深追いを避けたミドルブロックを敷き、中央へのクサビに対して小西雄大が猛烈なプレッシャーをかけて前を向かせず、互いの守備組織が攻撃側の企図を上回り続ける構図となった。",
-      "layer3_theory": "ハイプレスとブロック守備の力学において、FC東京はボールロスト直後のゲーゲンプレッシングで柏のトランジションを封殺したが、ブロックが整った柏に対してはプレッシング耐性を持つ小泉佳穂や弓場堅真に逃げ場を与えて時間を稼がれた。柏は4-4の2ライン間を10〜12メートルに圧縮し、FC東京が狙うハーフスペースでの「前を向くアクション」を物理的に不可能にするゾーン守備の完勝と言える。",
-      "away_perspective": "柏にとって、自陣ペナルティエリア手前でのプレッシング強度は今季屈指の完成度であった。FC東京のFWマルセロ・ヒアンにボールが入った瞬間、センターバックが背後から密着し、ボランチの小西が挟み込む「前後の挟撃（サンドイッチ）」を徹底。不用意にファウルを与えず、シュートコースを限定して枠内シュートを最小限に抑え込んだ戦術的ディシプリンは称賛に値する。"
-    },
-    "substitution_impact": {
-      "layer1_summary": "両指揮官ともに後半に勝負手を打ったものの、公式データの途中交代枠インパクトCBPは両軍ともに0.0と沈黙を示した。FC東京は俵積田晃太、仲川輝人、山田楓喜、ダニエル・ゴメスと異なる個性を次々にピッチへ送り込んだが、組織化された柏の撤退守備に対して個々の打開が単発に終わり、連動した決定機創出には至らなかった。柏も守備の強度維持を目的とした交代が主となり、試合の流れを決定づけるインパクトには結びつかなかった。",
-      "layer3_theory": "5人交代制のマネジメント論において、松橋監督の交代カードは「ブロック崩しのためのドリブラー（俵積田）とボックスストライカー（ダニエル・ゴメス）の同時活用」という論理的な一手であった。しかし、交代アタッカーに対してペナルティエリア内で質的優位を作り出すためのボール供給役（ラストパサー）が疲弊していたため、交代選手が孤立した状態でボールを受けざるを得ず、戦術的レバレッジが機能しなかった。",
-      "away_perspective": "リカルド・ロドリゲス監督にとって、交代策の最優先ミッションは「試合終盤の失点リスクの極小化」と「疲弊した中盤の運動量補充」であった。FC東京の強力な交代ウインガー陣に対し、サイドバックとサイドハーフの縦関係をリフレッシュしてダブルチームを徹底させた采配は見事に当たり、アウェイの地で相手の猛攻を無失点に封じ込めるミッションを完遂した。"
-    }
-  },
-  "deep_metrics": {
-    "match_id": "2026102108",
-    "conversion_rates": {
-      "home": {
-        "m30_count": 243,
-        "pa_count": 42,
-        "shot_count": 18,
-        "rate_30_to_pa": 17.28,
-        "eval_30_to_pa": "外周停滞・封殺（PA手前で跳ね返され外回しに終始）",
-        "rate_pa_to_shot": 42.86,
-        "eval_pa_to_shot": "標準水準（平均的なフィニッシュ精度）"
-      },
-      "away": {
-        "m30_count": 192,
-        "pa_count": 30,
-        "shot_count": 11,
-        "rate_30_to_pa": 15.62,
-        "eval_30_to_pa": "外周停滞・封殺（PA手前で跳ね返され外回しに終始）",
-        "rate_pa_to_shot": 36.67,
-        "eval_pa_to_shot": "標準水準（平均的なフィニッシュ精度）"
-      }
-    },
-    "field_tilt": {
-      "home_at3rd_count": 332,
-      "away_at3rd_count": 240,
-      "home_field_tilt": 58.04,
-      "away_field_tilt": 41.96,
-      "home_eval": "互角・拮抗（中盤での主導権争いが交互に発生）",
-      "away_eval": "自陣防戦（押し込まれロングボール依存の展開）"
-    },
-    "cbp_rankings": {
-      "home": {
-        "top_attack": [
-          {
-            "name": "アレクサンダー　ショルツ",
-            "value": 2.91
-          },
-          {
-            "name": "長倉　幹樹",
-            "value": 2.87
-          },
-          {
-            "name": "佐藤　恵允",
-            "value": 2.83
-          }
-        ],
-        "top_defense": [
-          {
-            "name": "キム　スンギュ",
-            "value": 2.46
-          },
-          {
-            "name": "アレクサンダー　ショルツ",
-            "value": 2.39
-          },
-          {
-            "name": "稲村　隼翔",
-            "value": 2.31
-          }
-        ],
-        "top_gain": [
-          {
-            "name": "高　宇洋",
-            "value": 20.78
-          },
-          {
-            "name": "石原　広教",
-            "value": 20.64
-          },
-          {
-            "name": "常盤　亨太",
-            "value": 15.96
-          }
-        ],
-        "top_pass": [
-          {
-            "name": "アレクサンダー　ショルツ",
-            "value": 2.91
-          },
-          {
-            "name": "高　宇洋",
-            "value": 2.74
-          },
-          {
-            "name": "長倉　幹樹",
-            "value": 2.18
-          }
-        ],
-        "bench_impact": 0.0,
-        "bench_eval": "交代不発・沈黙（交代組がボールに絡めずピッチ上で孤立）"
-      },
-      "away": {
-        "top_attack": [
-          {
-            "name": "弓場　堅真",
-            "value": 2.0
-          },
-          {
-            "name": "小泉　佳穂",
-            "value": 1.71
-          },
-          {
-            "name": "中川　敦瑛",
-            "value": 1.71
-          }
-        ],
-        "top_defense": [
-          {
-            "name": "古賀　太陽",
-            "value": 2.45
-          },
-          {
-            "name": "小西　雄大",
-            "value": 2.43
-          },
-          {
-            "name": "戸嶋　祥郎",
-            "value": 1.52
-          }
-        ],
-        "top_gain": [
-          {
-            "name": "小西　雄大",
-            "value": 19.61
-          },
-          {
-            "name": "弓場　堅真",
-            "value": 15.17
-          },
-          {
-            "name": "三丸　拡",
-            "value": 11.71
-          }
-        ],
-        "top_pass": [
-          {
-            "name": "中川　敦瑛",
-            "value": 1.71
-          },
-          {
-            "name": "小泉　佳穂",
-            "value": 1.45
-          },
-          {
-            "name": "三丸　拡",
-            "value": 1.41
-          }
-        ],
-        "bench_impact": 0.0,
-        "bench_eval": "交代不発・沈黙（交代組がボールに絡めずピッチ上で孤立）"
-      }
-    },
-    "timeline_events": {
-      "total_events": 140,
-      "home_counts": {
-        "goals": 17,
-        "shots": 7,
-        "blocks": 9,
-        "crosses": 3,
-        "corners": 4,
-        "fouls": 0,
-        "yellow_cards": 3,
-        "red_cards": 0,
-        "subs": 5
-      },
-      "away_counts": {
-        "goals": 4,
-        "shots": 9,
-        "blocks": 13,
-        "crosses": 6,
-        "corners": 2,
-        "fouls": 1,
-        "yellow_cards": 4,
-        "red_cards": 0,
-        "subs": 5
-      },
-      "key_plays_sample": [
-        "前半0分 【ゴール】瀬川は直近5試合で5得点1アシストを記録",
-        "前半0分 【ゴール】長倉は直近5試合で4得点2アシストを記録",
-        "前半3分 【ゴール】こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう",
-        "前半13分 【ゴール】左サイドでFKを獲得。キッカーの戸嶋は右足でボールを送る。これに反応した山内がペナルティエリア中央からシュートを放つも、",
-        "前半20分 【ゴール】ここまでのシュート:FC東京:2本、柏:2本/枠内シュート:FC東京:1本、柏:0本/ゴール期待値:FC東京:0.18、",
-        "前半28分 【ゴール】ペナルティエリア手前からマルセロヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア左からシュートを放つも、ゴール",
-        "前半40分 【ゴール】ここまでのシュート:FC東京:6本、柏:3本/枠内シュート:FC東京:2本、柏:0本/ゴール期待値:FC東京:0.52、",
-        "前半43分 【ゴール】長倉がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
-      ]
-    }
-  },
   "match_context": {
     "match_id": "20261021_FCT_REY",
     "team_id": "FCT",
     "opponent_team_id": "REY",
     "schedule_fatigue": {
+      "previous_match_id": "20261017_VER_FCT",
       "previous_match_date": "2026-10-17",
       "days_between": 4,
       "rest_days": 3,
       "rest_days_display": "中3日",
+      "matches_in_last_14d": 2,
+      "matches_in_last_21d": 2,
       "is_congested": true,
       "is_consecutive_away": false,
       "travel_distance_km": 0,
@@ -322,30 +254,594 @@
       "fatigue_risk_level": "MEDIUM",
       "summary_text": "前節（2026-10-17）より中3日の過密日程。選手の筋疲労・後半運動量低下リスクに注意。"
     },
-    "disciplinary": {
-      "suspended_players": [],
-      "warning_reach_players": [
+    "player_load": {
+      "prior_matches_count": 10,
+      "high_load_players": [
         {
-          "player_name": "高 宇洋",
-          "cumulative_yellows": 3,
-          "warning": "累積警告3枚（あと1枚で次節出場停止リーチ）"
+          "player_id": "P_FCT_4_稲村隼翔",
+          "player_name": "稲村 隼翔",
+          "number": 4,
+          "position": "DF",
+          "season_appearances": 8,
+          "season_starts": 8,
+          "season_minutes": 704,
+          "last_match_minutes": 90,
+          "minutes_last_3": 270,
+          "starts_last_3": 3,
+          "distance_km_last_3": 31.432,
+          "sprints_last_3": 27,
+          "minutes_last_5": 450,
+          "starts_last_5": 5,
+          "distance_km_last_5": 52.004,
+          "sprints_last_5": 39,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "HIGH"
         },
         {
-          "player_name": "マルセロ ヒアン",
-          "cumulative_yellows": 3,
-          "warning": "累積警告3枚（あと1枚で次節出場停止リーチ）"
+          "player_id": "P_FCT_24_アレクサンダーシ",
+          "player_name": "アレクサンダー ショルツ",
+          "number": 24,
+          "position": "DF",
+          "season_appearances": 10,
+          "season_starts": 10,
+          "season_minutes": 855,
+          "last_match_minutes": 90,
+          "minutes_last_3": 270,
+          "starts_last_3": 3,
+          "distance_km_last_3": 28.523,
+          "sprints_last_3": 14,
+          "minutes_last_5": 405,
+          "starts_last_5": 5,
+          "distance_km_last_5": 42.881,
+          "sprints_last_5": 18,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "HIGH"
+        },
+        {
+          "player_id": "P_FCT_7_安斎颯馬",
+          "player_name": "安斎 颯馬",
+          "number": 7,
+          "position": "MF",
+          "season_appearances": 9,
+          "season_starts": 6,
+          "season_minutes": 575,
+          "last_match_minutes": 83,
+          "minutes_last_3": 263,
+          "starts_last_3": 3,
+          "distance_km_last_3": 31.117,
+          "sprints_last_3": 52,
+          "minutes_last_5": 415,
+          "starts_last_5": 5,
+          "distance_km_last_5": 48.825,
+          "sprints_last_5": 79,
+          "minutes_last_14d": 173,
+          "minutes_last_21d": 173,
+          "load_level": "HIGH"
         }
       ],
+      "players": [
+        {
+          "player_id": "P_FCT_81_キムスンギュ",
+          "player_name": "キム スンギュ",
+          "number": 81,
+          "position": "GK",
+          "season_appearances": 10,
+          "season_starts": 10,
+          "season_minutes": 900,
+          "last_match_minutes": 90,
+          "minutes_last_3": 270,
+          "starts_last_3": 3,
+          "distance_km_last_3": 15.373,
+          "sprints_last_3": 1,
+          "minutes_last_5": 450,
+          "starts_last_5": 5,
+          "distance_km_last_5": 25.523,
+          "sprints_last_5": 2,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "HIGH"
+        },
+        {
+          "player_id": "P_FCT_4_稲村隼翔",
+          "player_name": "稲村 隼翔",
+          "number": 4,
+          "position": "DF",
+          "season_appearances": 8,
+          "season_starts": 8,
+          "season_minutes": 704,
+          "last_match_minutes": 90,
+          "minutes_last_3": 270,
+          "starts_last_3": 3,
+          "distance_km_last_3": 31.432,
+          "sprints_last_3": 27,
+          "minutes_last_5": 450,
+          "starts_last_5": 5,
+          "distance_km_last_5": 52.004,
+          "sprints_last_5": 39,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "HIGH"
+        },
+        {
+          "player_id": "P_FCT_24_アレクサンダーシ",
+          "player_name": "アレクサンダー ショルツ",
+          "number": 24,
+          "position": "DF",
+          "season_appearances": 10,
+          "season_starts": 10,
+          "season_minutes": 855,
+          "last_match_minutes": 90,
+          "minutes_last_3": 270,
+          "starts_last_3": 3,
+          "distance_km_last_3": 28.523,
+          "sprints_last_3": 14,
+          "minutes_last_5": 405,
+          "starts_last_5": 5,
+          "distance_km_last_5": 42.881,
+          "sprints_last_5": 18,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "HIGH"
+        },
+        {
+          "player_id": "P_FCT_7_安斎颯馬",
+          "player_name": "安斎 颯馬",
+          "number": 7,
+          "position": "MF",
+          "season_appearances": 9,
+          "season_starts": 6,
+          "season_minutes": 575,
+          "last_match_minutes": 83,
+          "minutes_last_3": 263,
+          "starts_last_3": 3,
+          "distance_km_last_3": 31.117,
+          "sprints_last_3": 52,
+          "minutes_last_5": 415,
+          "starts_last_5": 5,
+          "distance_km_last_5": 48.825,
+          "sprints_last_5": 79,
+          "minutes_last_14d": 173,
+          "minutes_last_21d": 173,
+          "load_level": "HIGH"
+        },
+        {
+          "player_id": "P_FCT_9_マルセロヒアン",
+          "player_name": "マルセロ ヒアン",
+          "number": 9,
+          "position": "FW",
+          "season_appearances": 10,
+          "season_starts": 9,
+          "season_minutes": 671,
+          "last_match_minutes": 83,
+          "minutes_last_3": 229,
+          "starts_last_3": 3,
+          "distance_km_last_3": 24.393,
+          "sprints_last_3": 48,
+          "minutes_last_5": 342,
+          "starts_last_5": 4,
+          "distance_km_last_5": 36.896,
+          "sprints_last_5": 87,
+          "minutes_last_14d": 159,
+          "minutes_last_21d": 159,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_26_長倉幹樹",
+          "player_name": "長倉 幹樹",
+          "number": 26,
+          "position": "FW",
+          "season_appearances": 10,
+          "season_starts": 9,
+          "season_minutes": 745,
+          "last_match_minutes": 90,
+          "minutes_last_3": 210,
+          "starts_last_3": 2,
+          "distance_km_last_3": 29.083,
+          "sprints_last_3": 53,
+          "minutes_last_5": 366,
+          "starts_last_5": 4,
+          "distance_km_last_5": 49.316,
+          "sprints_last_5": 92,
+          "minutes_last_14d": 178,
+          "minutes_last_21d": 178,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_6_バングーナガンデ",
+          "player_name": "バングーナガンデ 佳史扶",
+          "number": 6,
+          "position": "DF",
+          "season_appearances": 7,
+          "season_starts": 5,
+          "season_minutes": 383,
+          "last_match_minutes": 66,
+          "minutes_last_3": 204,
+          "starts_last_3": 3,
+          "distance_km_last_3": 24.367,
+          "sprints_last_3": 36,
+          "minutes_last_5": 249,
+          "starts_last_5": 3,
+          "distance_km_last_5": 29.701,
+          "sprints_last_5": 43,
+          "minutes_last_14d": 127,
+          "minutes_last_21d": 127,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_27_常盤亨太",
+          "player_name": "常盤 亨太",
+          "number": 27,
+          "position": "MF",
+          "season_appearances": 9,
+          "season_starts": 5,
+          "season_minutes": 506,
+          "last_match_minutes": 16,
+          "minutes_last_3": 196,
+          "starts_last_3": 2,
+          "distance_km_last_3": 24.426,
+          "sprints_last_3": 15,
+          "minutes_last_5": 376,
+          "starts_last_5": 4,
+          "distance_km_last_5": 46.245,
+          "sprints_last_5": 29,
+          "minutes_last_14d": 106,
+          "minutes_last_21d": 106,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_33_俵積田晃太",
+          "player_name": "俵積田 晃太",
+          "number": 33,
+          "position": "MF",
+          "season_appearances": 7,
+          "season_starts": 4,
+          "season_minutes": 296,
+          "last_match_minutes": 66,
+          "minutes_last_3": 185,
+          "starts_last_3": 3,
+          "distance_km_last_3": 22.851,
+          "sprints_last_3": 35,
+          "minutes_last_5": 236,
+          "starts_last_5": 3,
+          "distance_km_last_5": 30.453,
+          "sprints_last_5": 48,
+          "minutes_last_14d": 127,
+          "minutes_last_21d": 127,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_20_永野修都",
+          "player_name": "永野 修都",
+          "number": 20,
+          "position": "MF",
+          "season_appearances": 2,
+          "season_starts": 2,
+          "season_minutes": 180,
+          "last_match_minutes": 90,
+          "minutes_last_3": 180,
+          "starts_last_3": 2,
+          "distance_km_last_3": 24.102,
+          "sprints_last_3": 13,
+          "minutes_last_5": 180,
+          "starts_last_5": 2,
+          "distance_km_last_5": 24.102,
+          "sprints_last_5": 13,
+          "minutes_last_14d": 180,
+          "minutes_last_21d": 180,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_22_石原広教",
+          "player_name": "石原 広教",
+          "number": 22,
+          "position": "DF",
+          "season_appearances": 10,
+          "season_starts": 4,
+          "season_minutes": 439,
+          "last_match_minutes": 90,
+          "minutes_last_3": 179,
+          "starts_last_3": 2,
+          "distance_km_last_3": 21.349,
+          "sprints_last_3": 33,
+          "minutes_last_5": 188,
+          "starts_last_5": 2,
+          "distance_km_last_5": 23.936,
+          "sprints_last_5": 39,
+          "minutes_last_14d": 166,
+          "minutes_last_21d": 166,
+          "load_level": "MEDIUM"
+        },
+        {
+          "player_id": "P_FCT_8_高宇洋",
+          "player_name": "高 宇洋",
+          "number": 8,
+          "position": "MF",
+          "season_appearances": 9,
+          "season_starts": 9,
+          "season_minutes": 728,
+          "last_match_minutes": 74,
+          "minutes_last_3": 142,
+          "starts_last_3": 2,
+          "distance_km_last_3": 16.874,
+          "sprints_last_3": 10,
+          "minutes_last_5": 322,
+          "starts_last_5": 4,
+          "distance_km_last_5": 38.977,
+          "sprints_last_5": 23,
+          "minutes_last_14d": 74,
+          "minutes_last_21d": 74,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_10_佐藤恵允",
+          "player_name": "佐藤 恵允",
+          "number": 10,
+          "position": "MF",
+          "season_appearances": 10,
+          "season_starts": 6,
+          "season_minutes": 617,
+          "last_match_minutes": 24,
+          "minutes_last_3": 130,
+          "starts_last_3": 1,
+          "distance_km_last_3": 17.319,
+          "sprints_last_3": 28,
+          "minutes_last_5": 265,
+          "starts_last_5": 2,
+          "distance_km_last_5": 34.96,
+          "sprints_last_5": 51,
+          "minutes_last_14d": 53,
+          "minutes_last_21d": 53,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_2_室屋成",
+          "player_name": "室屋 成",
+          "number": 2,
+          "position": "DF",
+          "season_appearances": 7,
+          "season_starts": 7,
+          "season_minutes": 626,
+          "last_match_minutes": 0,
+          "minutes_last_3": 90,
+          "starts_last_3": 1,
+          "distance_km_last_3": 10.577,
+          "sprints_last_3": 15,
+          "minutes_last_5": 266,
+          "starts_last_5": 3,
+          "distance_km_last_5": 30.808,
+          "sprints_last_5": 44,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_15_大森理生",
+          "player_name": "大森 理生",
+          "number": 15,
+          "position": "DF",
+          "season_appearances": 3,
+          "season_starts": 0,
+          "season_minutes": 98,
+          "last_match_minutes": 24,
+          "minutes_last_3": 53,
+          "starts_last_3": 0,
+          "distance_km_last_3": 7.248,
+          "sprints_last_3": 6,
+          "minutes_last_5": 53,
+          "starts_last_5": 0,
+          "distance_km_last_5": 7.248,
+          "sprints_last_5": 6,
+          "minutes_last_14d": 53,
+          "minutes_last_21d": 53,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_71_山田楓喜",
+          "player_name": "山田 楓喜",
+          "number": 71,
+          "position": "MF",
+          "season_appearances": 4,
+          "season_starts": 0,
+          "season_minutes": 76,
+          "last_match_minutes": 7,
+          "minutes_last_3": 21,
+          "starts_last_3": 0,
+          "distance_km_last_3": 4.073,
+          "sprints_last_3": 5,
+          "minutes_last_5": 21,
+          "starts_last_5": 0,
+          "distance_km_last_5": 4.073,
+          "sprints_last_5": 5,
+          "minutes_last_14d": 21,
+          "minutes_last_21d": 21,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_18_橋本拳人",
+          "player_name": "橋本 拳人",
+          "number": 18,
+          "position": "MF",
+          "season_appearances": 6,
+          "season_starts": 4,
+          "season_minutes": 359,
+          "last_match_minutes": 0,
+          "minutes_last_3": 20,
+          "starts_last_3": 0,
+          "distance_km_last_3": 3.284,
+          "sprints_last_3": 2,
+          "minutes_last_5": 20,
+          "starts_last_5": 0,
+          "distance_km_last_5": 3.284,
+          "sprints_last_5": 2,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_39_仲川輝人",
+          "player_name": "仲川 輝人",
+          "number": 39,
+          "position": "FW",
+          "season_appearances": 6,
+          "season_starts": 0,
+          "season_minutes": 94,
+          "last_match_minutes": 0,
+          "minutes_last_3": 14,
+          "starts_last_3": 0,
+          "distance_km_last_3": 2.176,
+          "sprints_last_3": 3,
+          "minutes_last_5": 15,
+          "starts_last_5": 0,
+          "distance_km_last_5": 3.335,
+          "sprints_last_5": 7,
+          "minutes_last_14d": 14,
+          "minutes_last_21d": 14,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_3_森重真人",
+          "player_name": "森重 真人",
+          "number": 3,
+          "position": "DF",
+          "season_appearances": 5,
+          "season_starts": 2,
+          "season_minutes": 249,
+          "last_match_minutes": 0,
+          "minutes_last_3": 13,
+          "starts_last_3": 0,
+          "distance_km_last_3": 1.817,
+          "sprints_last_3": 1,
+          "minutes_last_5": 58,
+          "starts_last_5": 0,
+          "distance_km_last_5": 6.338,
+          "sprints_last_5": 4,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_99_ダニゴメス",
+          "player_name": "ダニ ゴメス",
+          "number": 99,
+          "position": "FW",
+          "season_appearances": 2,
+          "season_starts": 0,
+          "season_minutes": 9,
+          "last_match_minutes": 7,
+          "minutes_last_3": 9,
+          "starts_last_3": 0,
+          "distance_km_last_3": 2.628,
+          "sprints_last_3": 9,
+          "minutes_last_5": 9,
+          "starts_last_5": 0,
+          "distance_km_last_5": 2.628,
+          "sprints_last_5": 9,
+          "minutes_last_14d": 9,
+          "minutes_last_21d": 9,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_19_本間至恩",
+          "player_name": "本間 至恩",
+          "number": 19,
+          "position": "MF",
+          "season_appearances": 7,
+          "season_starts": 6,
+          "season_minutes": 422,
+          "last_match_minutes": 0,
+          "minutes_last_3": 0,
+          "starts_last_3": 0,
+          "distance_km_last_3": 0.0,
+          "sprints_last_3": 0,
+          "minutes_last_5": 107,
+          "starts_last_5": 2,
+          "distance_km_last_5": 12.05,
+          "sprints_last_5": 23,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_5_長友佑都",
+          "player_name": "長友 佑都",
+          "number": 5,
+          "position": "DF",
+          "season_appearances": 2,
+          "season_starts": 1,
+          "season_minutes": 73,
+          "last_match_minutes": 0,
+          "minutes_last_3": 0,
+          "starts_last_3": 0,
+          "distance_km_last_3": 0.0,
+          "sprints_last_3": 0,
+          "minutes_last_5": 73,
+          "starts_last_5": 1,
+          "distance_km_last_5": 10.014,
+          "sprints_last_5": 15,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_42_橋本健人",
+          "player_name": "橋本 健人",
+          "number": 42,
+          "position": "DF",
+          "season_appearances": 4,
+          "season_starts": 3,
+          "season_minutes": 220,
+          "last_match_minutes": 0,
+          "minutes_last_3": 0,
+          "starts_last_3": 0,
+          "distance_km_last_3": 0.0,
+          "sprints_last_3": 0,
+          "minutes_last_5": 62,
+          "starts_last_5": 1,
+          "distance_km_last_5": 7.253,
+          "sprints_last_5": 12,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        },
+        {
+          "player_id": "P_FCT_25_小湊絆",
+          "player_name": "小湊 絆",
+          "number": 25,
+          "position": "FW",
+          "season_appearances": 1,
+          "season_starts": 0,
+          "season_minutes": 1,
+          "last_match_minutes": 0,
+          "minutes_last_3": 0,
+          "starts_last_3": 0,
+          "distance_km_last_3": 0.0,
+          "sprints_last_3": 0,
+          "minutes_last_5": 0,
+          "starts_last_5": 0,
+          "distance_km_last_5": 0.0,
+          "sprints_last_5": 0,
+          "minutes_last_14d": 0,
+          "minutes_last_21d": 0,
+          "load_level": "LOW"
+        }
+      ],
+      "summary_text": "【高負荷主力】稲村 隼翔(直近3戦270分), アレクサンダー ショルツ(直近3戦270分), 安斎 颯馬(直近3戦263分)"
+    },
+    "disciplinary": {
+      "suspended_players": [],
+      "warning_reach_players": [],
       "all_cumulative_yellows": {
         "佐藤 恵允": 2,
         "本間 至恩": 1,
-        "高 宇洋": 3,
-        "マルセロ ヒアン": 3,
+        "高 宇洋": 1,
+        "マルセロ ヒアン": 2,
         "バングーナガンデ 佳史扶": 1,
         "石原 広教": 1,
         "橋本 拳人": 1
       },
-      "summary_text": "【警告リーチ】高 宇洋(3枚), マルセロ ヒアン(3枚)"
+      "summary_text": "累積警告・退場による出場停止・リーチ選手なし"
     },
     "weather_pitch": {
       "weather_condition": "晴れ｜気温:27",
@@ -391,10 +887,45 @@
           "expected_recovery": "全治約3週間",
           "status": "RECOVERED",
           "notes": "MW7〜MW9欠場。中盤のボランチ構成（高宇洋・常盤・橋本拳人）に影響。"
+        },
+        {
+          "player_name": "室屋 成",
+          "injury_type": "ふくらはぎ負傷",
+          "expected_recovery": "復帰時期未定",
+          "status": "OUT",
+          "notes": "Transfermarkt J1負傷者リスト (RSB)"
+        },
+        {
+          "player_name": "本間 至恩",
+          "injury_type": "ハムストリング負傷",
+          "expected_recovery": "復帰時期未定",
+          "status": "OUT",
+          "notes": "Transfermarkt J1負傷者リスト (LMF)"
+        },
+        {
+          "player_name": "長友 佑都",
+          "injury_type": "Cruciate Ligament Injury",
+          "expected_recovery": "復帰時期未定",
+          "status": "OUT",
+          "notes": "Transfermarkt J1負傷者リスト (LSB)"
+        },
+        {
+          "player_name": "橋本 健人",
+          "injury_type": "Fibula shaft fractures",
+          "expected_recovery": "復帰時期未定",
+          "status": "OUT",
+          "notes": "Transfermarkt J1負傷者リスト (LSB)"
+        },
+        {
+          "player_name": "ニコライ ヴァリス",
+          "injury_type": "Cruciate Ligament Injury",
+          "expected_recovery": "復帰時期未定",
+          "status": "OUT",
+          "notes": "Transfermarkt J1負傷者リスト (LWG)"
         }
       ],
       "coach_mentions": [],
-      "summary_text": "【負傷離脱・調整】エンリケ トレヴィザン（左膝内側側副靭帯損傷）, 荒木 遼太郎（右大腿二頭筋筋損傷）, 仲川 輝人（コンディション調整・プレー時間制限）, 小泉 慶（右足首捻挫）"
+      "summary_text": "【負傷離脱・調整】エンリケ トレヴィザン（左膝内側側副靭帯損傷）, 荒木 遼太郎（右大腿二頭筋筋損傷）, 仲川 輝人（コンディション調整・プレー時間制限）, 小泉 慶（右足首捻挫）, 室屋 成（ふくらはぎ負傷）, 本間 至恩（ハムストリング負傷）, 長友 佑都（Cruciate Ligament Injury）, 橋本 健人（Fibula shaft fractures）, ニコライ ヴァリス（Cruciate Ligament Injury）"
     }
   }
 }

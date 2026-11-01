@@ -1,0 +1,125 @@
+{
+  "match_id": "20261024_VER_FUK",
+  "home_formation": "4-4-2",
+  "away_formation": "3-4-2-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】東京ヴェルディ（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2の布陣を敷き、城福 浩監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するアビスパ福岡（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1で迎え撃ち、塚原 真也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は東京ヴェルディ 47.1% 対 アビスパ福岡 52.9%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で東京ヴェルディがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】10分 熊取谷 一星 (東京ヴェルディの決定機: 熊取谷 一星 による得点 (10分)) / 56分 ウェリック ポポ (アビスパ福岡の決定機: ウェリック ポポ による得点 (56分)) / 74分 松橋 優安 (東京ヴェルディの決定機: 松橋 優安 による得点 (74分)) / 90分 寺沼 星文 (東京ヴェルディの決定機: 寺沼 星文 による得点 (90分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】10分、熊取谷 一星がネットを揺らしスコアが動く（東京ヴェルディの決定機: 熊取谷 一星 による得点 (10分)）。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】56分、ウェリック ポポがネットを揺らしスコアが動く（アビスパ福岡の決定機: ウェリック ポポ による得点 (56分)）。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】74分、松橋 優安がネットを揺らしスコアが動く（東京ヴェルディの決定機: 松橋 優安 による得点 (74分)）。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】90分、寺沼 星文がネットを揺らしスコアが動く（東京ヴェルディの決定機: 寺沼 星文 による得点 (90分)）。",
+      "pressing_battle": "東京ヴェルディのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 47.1,
+      "away_field_tilt": 52.9
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 33,
+        "pa_entries": 12,
+        "rate_30_to_pa": 36.4
+      },
+      "away": {
+        "m30_entries": 37,
+        "pa_entries": 13,
+        "rate_30_to_pa": 35.1
+      }
+    },
+    "intensity": {
+      "home_distance_km": 124.5,
+      "away_distance_km": 118.7,
+      "home_sprints": 163,
+      "away_sprints": 111
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "VER",
+      "player_name": "熊取谷 一星",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "東京ヴェルディの決定機: 熊取谷 一星 による得点 (10分)"
+    },
+    {
+      "minute": 56,
+      "period": "2H",
+      "team_id": "FUK",
+      "player_name": "ウェリック ポポ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "アビスパ福岡の決定機: ウェリック ポポ による得点 (56分)"
+    },
+    {
+      "minute": 74,
+      "period": "2H",
+      "team_id": "VER",
+      "player_name": "松橋 優安",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "東京ヴェルディの決定機: 松橋 優安 による得点 (74分)"
+    },
+    {
+      "minute": 90,
+      "period": "2H",
+      "team_id": "VER",
+      "player_name": "寺沼 星文",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "東京ヴェルディの決定機: 寺沼 星文 による得点 (90分)"
+    }
+  ]
+}

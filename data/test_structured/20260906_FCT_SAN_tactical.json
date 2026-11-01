@@ -1,0 +1,246 @@
+{
+  "match_id": "20260906_FCT_SAN",
+  "home_formation": "4-4-2",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。対する京都サンガF.C.（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、ランコ ポポヴィッチ監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。",
+    "【せめぎ合いの力学と内容評価】FC東京が敵陣支配率65.9%で相手を押し込み、PA進入率58.9%と相手の守備ブロックを内側と外側の両面からこじ開けることに成功。対する京都サンガF.C.はクリア後のボールを前線で収められず、自陣深くに釘付けにされ守勢を強いられた。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】FC東京の戦術的狙いがピッチ上で完全に機能し、枠内シュート6本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。京都サンガF.C.は内容・結果の両面で圧倒され、プランの修正が後手に回った。",
+    "【試合を動かした得点】35分 右サイドから安斎 (右サイドから安斎がクロスを入れる。これに反応した本間がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、FC東京と京都サンガF.C.が相手のプレス構造を探り合う。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】35分、右サイドから安斎がネットを揺らしスコアが動く（右サイドから安斎がクロスを入れる。これに反応した本間がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう）。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 65.9,
+      "away_field_tilt": 34.1
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 56,
+        "pa_entries": 33,
+        "rate_30_to_pa": 58.9
+      },
+      "away": {
+        "m30_entries": 29,
+        "pa_entries": 5,
+        "rate_30_to_pa": 17.2
+      }
+    },
+    "intensity": {
+      "home_distance_km": 115.1,
+      "away_distance_km": 115.8,
+      "home_sprints": 158,
+      "away_sprints": 135
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "両チームともにシ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "両チームともにシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドでFKを",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "右サイド",
+      "description_text": "右サイドでFKを獲得。キッカーの橋本健が左足で直接ゴールを狙うも、ハウスにセーブされる"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 14,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "内から本間がパス",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から本間がパスを送る。高がペナルティエリア中央から左足で枠内にシュートを放つも、ハウスにセーブされる"
+    },
+    {
+      "minute": 14,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "Eマセイオがペナ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "Eマセイオがペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 18,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドでFKを",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドでFKを獲得。キッカーの新井は右足でボールを送る。これに反応した鈴木がペナルティエリア中央からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 19,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドからドリ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドからドリブルで進入した安斎がペナルティエリア右からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:4本、京都:2本/枠内シュート:FC東京:2本、京都:0本/ゴール期待値:FC東京:0.26、京都:0.12"
+    },
+    {
+      "minute": 22,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから室屋",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "右サイド",
+      "description_text": "右サイドから室屋がクロスを入れるも、本間はシュートを放つには至らない"
+    },
+    {
+      "minute": 23,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "佐藤がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "佐藤がペナルティエリア左から左足で枠内にシュートを放つも、鈴木にブロックされる"
+    },
+    {
+      "minute": 27,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "安斎がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "安斎がペナルティエリア中央から右足で枠内にシュートを放つも、佐藤にブロックされる"
+    },
+    {
+      "minute": 32,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉がペナルティ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "長倉がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから安斎",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから安斎がクロスを入れる。これに反応した本間がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう"
+    },
+    {
+      "minute": 38,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから橋本",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから橋本健がパスを送る。本間がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:9本、京都:2本/枠内シュート:FC東京:2本、京都:0本/ゴール期待値:FC東京:0.88、京都:0.12"
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "match_id": "20261021_FCT_REY",
+  "home_formation": "4-4-2",
+  "away_formation": "3-4-2-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する柏レイソル（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1で迎え撃ち、リカルド ロドリゲス監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はFC東京 59.8% 対 柏レイソル 40.2%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の0-0。",
+    "【試合を動かした得点】44分 内から山内がパス (ペナルティエリア内から山内がパスを送る。久保がペナルティエリア右からシュートを放つも、ゴールの枠に当たってしまう)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、FC東京と柏レイソルが相手のプレス構造を探り合う。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】44分、内から山内がパスがネットを揺らしスコアが動く（ペナルティエリア内から山内がパスを送る。久保がペナルティエリア右からシュートを放つも、ゴールの枠に当たってしまう）。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と柏レイソルの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 59.8,
+      "away_field_tilt": 40.2
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 64,
+        "pa_entries": 26,
+        "rate_30_to_pa": 40.6
+      },
+      "away": {
+        "m30_entries": 43,
+        "pa_entries": 16,
+        "rate_30_to_pa": 37.2
+      }
+    },
+    "intensity": {
+      "home_distance_km": 118.0,
+      "away_distance_km": 121.6,
+      "home_sprints": 121,
+      "away_sprints": 104
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 3,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア中央から右足で枠内にシュートを放つも、永井にセーブされる"
+    },
+    {
+      "minute": 3,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した高がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "分が経過するも",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "10分が経過するも、まだシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 13,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドでFKを",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドでFKを獲得。キッカーの戸嶋は右足でボールを送る。これに反応した山内がペナルティエリア中央からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 17,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した久保がペナルティエリア右から右足で枠内にシュートを放つも、稲村にブロックされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:2本、柏:2本/枠内シュート:FC東京:1本、柏:0本/ゴール期待値:FC東京:0.18、柏:0.74"
+    },
+    {
+      "minute": 21,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア中央から左足で枠内にシュートを放つも、古賀にブロックされる"
+    },
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前からドリブル",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からドリブルで進入した長倉がペナルティエリア手前から右足で枠内にシュートを放つも、永井にセーブされる"
+    },
+    {
+      "minute": 28,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からマルセロ ヒアンがスルーパスを送る。抜け出した安斎がペナルティエリア左からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 33,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "長倉がペナルティエリア右から右足で枠内にシュートを放つも、古賀にブロックされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "アレクサンダー ショルツ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内からドリブルで進入した山内がペナルティエリア左から右足で枠内にシュートを放つも、アレクサンダー アレクサンダー ショルツにブロックされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:6本、柏:3本/枠内シュート:FC東京:2本、柏:0本/ゴール期待値:FC東京:0.52、柏:0.77"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉がペナルティ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "長倉がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 44,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "内から山内がパス",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から山内がパスを送る。久保がペナルティエリア右からシュートを放つも、ゴールの枠に当たってしまう"
+    },
+    {
+      "minute": 44,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "汰木がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "汰木がペナルティエリア中央から左足で枠内にシュートを放つも、稲村にブロックされる"
+    }
+  ]
+}

@@ -153,6 +153,32 @@ class TestMatchContextService(unittest.TestCase):
         suspended = [p["player_name"] for p in ctx_early["disciplinary"]["suspended_players"]]
         self.assertFalse(any("高" in n and "宇洋" in n for n in suspended))
 
+    def test_calculate_league_standings_mw12(self) -> None:
+        """第12節終了時点（2026-10-26）の順位表が正確に計算されることを検証."""
+        st = self.service.calculate_league_standings(season=2026, as_of_date="2026-10-26")
+        self.assertEqual(len(st["table"]), 20)
+        # 1位町田、2位FC東京（勝点27同率）
+        top1 = st["table"][0]
+        top2 = st["table"][1]
+        self.assertIn(top1["team_id"], ["ZEL", "FCT"])
+        self.assertIn(top2["team_id"], ["ZEL", "FCT"])
+        self.assertEqual(top1["points"], 27)
+        self.assertEqual(top2["points"], 27)
+
+    def test_get_recent_lineup_and_scorers(self) -> None:
+        """直前節（MW12）の実先発メンバーおよび得点者が正しく取得されることを検証."""
+        lineup = self.service.get_recent_lineup_and_scorers(team_id="FCT", current_date_str="2026-10-31")
+        self.assertEqual(lineup["last_match_id"], "20261025_FCT_MIT")
+        starter_names = [p["player_name"] for p in lineup["starters"]]
+        self.assertIn("仲川 輝人", starter_names)
+        self.assertIn("長倉 幹樹", starter_names)
+        self.assertIn("アレクサンダー ショルツ", starter_names)
+
+        # 直近得点者に仲川、ダニ・ゴメス、安斎、ショルツ等が含まれること
+        scorer_names = [s["player_name"] for s in lineup["recent_scorers"]]
+        self.assertTrue(any("仲川" in n for n in scorer_names))
+        self.assertTrue(any("ダニ" in n for n in scorer_names))
+
     def test_matchup_prematch_context_both_sides(self) -> None:
         """1試合の両チーム双方のコンテキストと休養日数差が一括取得できることを検証."""
         res = self.service.get_matchup_prematch_context("20261025_FCT_MIT")

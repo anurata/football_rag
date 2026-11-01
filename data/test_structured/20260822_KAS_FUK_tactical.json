@@ -1,0 +1,136 @@
+{
+  "match_id": "20260822_KAS_FUK",
+  "home_formation": "4-4-2",
+  "away_formation": "3-4-2-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】鹿島アントラーズ（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、鬼木 達監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するアビスパ福岡（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1で迎え撃ち、塚原 真也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は鹿島アントラーズ 41.8% 対 アビスパ福岡 58.2%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で鹿島アントラーズがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】31分 オウンゴール (鹿島アントラーズの決定機: オウンゴール による得点 (31分)) / 43分 師岡 柊生 (アビスパ福岡の決定機: 師岡 柊生 による得点 (43分)) / 60分 レオ セアラ (鹿島アントラーズの決定機: レオ セアラ による得点 (60分)) / 64分 チャヴリッチ (鹿島アントラーズの決定機: チャヴリッチ による得点 (64分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、鹿島アントラーズとアビスパ福岡が相手のプレス構造を探り合う。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】31分、オウンゴールがネットを揺らしスコアが動く（鹿島アントラーズの決定機: オウンゴール による得点 (31分)）。 【得点動意】43分、師岡 柊生がネットを揺らしスコアが動く（アビスパ福岡の決定機: 師岡 柊生 による得点 (43分)）。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】60分、レオ セアラがネットを揺らしスコアが動く（鹿島アントラーズの決定機: レオ セアラ による得点 (60分)）。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】64分、チャヴリッチがネットを揺らしスコアが動く（鹿島アントラーズの決定機: チャヴリッチ による得点 (64分)）。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】76分、オウンゴールがネットを揺らしスコアが動く（アビスパ福岡の決定機: オウンゴール による得点 (76分)）。",
+      "pressing_battle": "鹿島アントラーズのブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 41.8,
+      "away_field_tilt": 58.2
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 28,
+        "pa_entries": 14,
+        "rate_30_to_pa": 50.0
+      },
+      "away": {
+        "m30_entries": 39,
+        "pa_entries": 15,
+        "rate_30_to_pa": 38.5
+      }
+    },
+    "intensity": {
+      "home_distance_km": 111.5,
+      "away_distance_km": 118.5,
+      "home_sprints": 116,
+      "away_sprints": 114
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 31,
+      "period": "1H",
+      "team_id": "KAS",
+      "player_name": "オウンゴール",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "鹿島アントラーズの決定機: オウンゴール による得点 (31分)"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FUK",
+      "player_name": "師岡 柊生",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "アビスパ福岡の決定機: 師岡 柊生 による得点 (43分)"
+    },
+    {
+      "minute": 60,
+      "period": "2H",
+      "team_id": "KAS",
+      "player_name": "レオ セアラ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "鹿島アントラーズの決定機: レオ セアラ による得点 (60分)"
+    },
+    {
+      "minute": 64,
+      "period": "2H",
+      "team_id": "KAS",
+      "player_name": "チャヴリッチ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "鹿島アントラーズの決定機: チャヴリッチ による得点 (64分)"
+    },
+    {
+      "minute": 76,
+      "period": "2H",
+      "team_id": "FUK",
+      "player_name": "オウンゴール",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "アビスパ福岡の決定機: オウンゴール による得点 (76分)"
+    }
+  ]
+}

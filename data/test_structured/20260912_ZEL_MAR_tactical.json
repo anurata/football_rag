@@ -1,0 +1,103 @@
+{
+  "match_id": "20260912_ZEL_MAR",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】町田ゼルビア（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1の布陣を敷き、黒田 剛監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。対する横浜F・マリノス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、スティーブ コリカ監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は町田ゼルビア 49.3% 対 横浜F・マリノス 50.7%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の1-1。",
+    "【試合を動かした得点】12分 谷村 海那 (横浜F・マリノスの決定機: 谷村 海那 による得点 (12分)) / 84分 望月 ヘンリー海輝 (町田ゼルビアの決定機: 望月 ヘンリー海輝 による得点 (84分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】12分、谷村 海那がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 谷村 海那 による得点 (12分)）。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】84分、望月 ヘンリー海輝がネットを揺らしスコアが動く（町田ゼルビアの決定機: 望月 ヘンリー海輝 による得点 (84分)）。",
+      "pressing_battle": "町田ゼルビアのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 49.3,
+      "away_field_tilt": 50.7
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 36,
+        "pa_entries": 11,
+        "rate_30_to_pa": 30.6
+      },
+      "away": {
+        "m30_entries": 37,
+        "pa_entries": 3,
+        "rate_30_to_pa": 8.1
+      }
+    },
+    "intensity": {
+      "home_distance_km": 119.5,
+      "away_distance_km": 121.8,
+      "home_sprints": 119,
+      "away_sprints": 99
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 12,
+      "period": "1H",
+      "team_id": "MAR",
+      "player_name": "谷村 海那",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 谷村 海那 による得点 (12分)"
+    },
+    {
+      "minute": 84,
+      "period": "2H",
+      "team_id": "ZEL",
+      "player_name": "望月 ヘンリー海輝",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "町田ゼルビアの決定機: 望月 ヘンリー海輝 による得点 (84分)"
+    }
+  ]
+}

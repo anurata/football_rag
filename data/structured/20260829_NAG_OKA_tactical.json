@@ -1,91 +1,114 @@
 {
   "match_id": "20260829_NAG_OKA",
-  "home_team_id": "NAG",
-  "away_team_id": "OKA",
-  "home_formation": "4-4-2",
-  "away_formation": "4-4-2",
+  "home_formation": "3-4-2-1",
+  "away_formation": "3-4-2-1",
   "tactical_highlights": [
-    "名古屋グランパスとファジアーノ岡山による激闘（最終スコア: 2 - 1）",
-    "得点者: 鈴木 喜丈 (38分), 稲垣 祥 (43分), 中山 克広 (91分)",
-    "局面ごとの戦術的適応とインテンシティの維持が勝敗を決定"
+    "【基本スタイルと今節の狙い】名古屋グランパス（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1の布陣を敷き、ミハイロ ペトロヴィッチ監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。対するファジアーノ岡山（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1で迎え撃ち、木山 隆之監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は名古屋グランパス 53.0% 対 ファジアーノ岡山 47.0%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で名古屋グランパスがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】38分 鈴木 喜丈 (ファジアーノ岡山の決定機: 鈴木 喜丈 による得点 (38分)) / 43分 稲垣 祥 (名古屋グランパスの決定機: 稲垣 祥 による得点 (43分)) / 91分 中山 克広 (名古屋グランパスの決定機: 中山 克広 による得点 (91分))"
   ],
   "phases": [
     {
       "phase": "0-15",
-      "dominant_team": "HOME",
-      "momentum_summary": "立ち上がりは名古屋グランパスとファジアーノ岡山によるインテンシティの高い攻防。セカンドボールの回収をめぐる中盤のせめぎ合い。",
-      "pressing_battle": "名古屋グランパスが前線から連動プレスを仕掛け、ファジアーノ岡山はサイドスペースへの配球でプレス回避を狙う。",
-      "tactical_adjustments": "序盤の探り合いを経て、両チームが陣形のコンパクトネスを維持し中央の進入路を遮断。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、名古屋グランパスとファジアーノ岡山が相手のプレス構造を探り合う。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "15-30",
       "dominant_team": "EQUAL",
-      "momentum_summary": "試合のテンポが落ち着き、互いにボールを動かしながら敵陣バイタルエリアへの侵入コースを探索。",
-      "pressing_battle": "サイドハーフスペースへの侵入に対するチャレンジ＆カバーの徹底。",
-      "tactical_adjustments": "ボランチの立ち位置を微修正し、セカンドボールの回収率向上を図る。"
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "30-45+",
-      "dominant_team": "HOME",
-      "momentum_summary": "前半終了に向けたプレッシャーの強まり。セットプレーおよびクロスからペナルティエリア内の攻防が激化。",
-      "pressing_battle": "ショートカウンターを狙うネガティブトランジションのスピードアップ。",
-      "tactical_adjustments": "ライン間を締め直し、アディショナルタイムの失点リスクを最小化。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】38分、鈴木 喜丈がネットを揺らしスコアが動く（ファジアーノ岡山の決定機: 鈴木 喜丈 による得点 (38分)）。 【得点動意】43分、稲垣 祥がネットを揺らしスコアが動く（名古屋グランパスの決定機: 稲垣 祥 による得点 (43分)）。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "46-60",
-      "dominant_team": "AWAY",
-      "momentum_summary": "ハーフタイムの修正を経た後半立ち上がり。両指揮官の戦術指示がピッチ上で展開。",
-      "pressing_battle": "前線からの即時奪回（ゲーゲンプレス）によるショートカウンターの応酬。",
-      "tactical_adjustments": "ボールの循環テンポを上げ、相手の守備スライドを揺さぶる。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "60-75",
-      "dominant_team": "HOME",
-      "momentum_summary": "両ベンチが相次いで交代カードを投入。フレッシュな選手によるインテンシティの再注入。",
-      "pressing_battle": "疲労が蓄積し始める時間帯において、間延びしたスペースへの侵入戦。",
-      "tactical_adjustments": "交代枠を駆使したプレスのギアチェンジと守備陣形の再構築。"
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     },
     {
       "phase": "75-90+",
-      "dominant_team": "EQUAL",
-      "momentum_summary": "試合最終盤の総力戦。スコア 2-1 をめぐるアディショナルタイムまでの白熱した攻防決着。",
-      "pressing_battle": "ラスト15分における集中力維持と、泥臭いデュエル・クリアの応酬。",
-      "tactical_adjustments": "パワープレーへの対応とリスクマネジメントの徹底。"
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】91分、中山 克広がネットを揺らしスコアが動く（名古屋グランパスの決定機: 中山 克広 による得点 (91分)）。",
+      "pressing_battle": "名古屋グランパスのブロック守備とファジアーノ岡山の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
     }
   ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 53.0,
+      "away_field_tilt": 47.0
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 35,
+        "pa_entries": 10,
+        "rate_30_to_pa": 28.6
+      },
+      "away": {
+        "m30_entries": 31,
+        "pa_entries": 10,
+        "rate_30_to_pa": 32.3
+      }
+    },
+    "intensity": {
+      "home_distance_km": 104.1,
+      "away_distance_km": 106.7,
+      "home_sprints": 95,
+      "away_sprints": 122
+    }
+  },
   "key_tactical_events": [
     {
       "minute": 38,
       "period": "1H",
-      "team_side": "AWAY",
-      "category": "GOAL",
-      "actors": [
-        "鈴木 喜丈"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "ファジアーノ岡山の決定機: 鈴木 喜丈 による得点 (38分)"
+      "team_id": "OKA",
+      "player_name": "鈴木 喜丈",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "ファジアーノ岡山の決定機: 鈴木 喜丈 による得点 (38分)"
     },
     {
       "minute": 43,
       "period": "1H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "稲垣 祥"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "名古屋グランパスの決定機: 稲垣 祥 による得点 (43分)"
+      "team_id": "NAG",
+      "player_name": "稲垣 祥",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "名古屋グランパスの決定機: 稲垣 祥 による得点 (43分)"
     },
     {
       "minute": 91,
       "period": "2H",
-      "team_side": "HOME",
-      "category": "GOAL",
-      "actors": [
-        "中山 克広"
-      ],
-      "zone": "ペナルティエリア中央",
-      "description": "名古屋グランパスの決定機: 中山 克広 による得点 (91分)"
+      "team_id": "NAG",
+      "player_name": "中山 克広",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "名古屋グランパスの決定機: 中山 克広 による得点 (91分)"
     }
   ]
 }

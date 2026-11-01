@@ -1,0 +1,246 @@
+{
+  "match_id": "20260808_FCT_ZEL",
+  "home_formation": "4-4-2",
+  "away_formation": "3-4-2-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する町田ゼルビア（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1で迎え撃ち、黒田 剛監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。",
+    "【せめぎ合いの力学と内容評価】アウェイの町田ゼルビアが敵陣支配率64.3%と試合の主導権を掌握。PA進入率29.6%と相手ブロックのスライドを破断して深くまで侵入。FC東京は自陣での消火活動に追われ、前線への効果的なカウンタールートを遮断された。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】町田ゼルビアの戦術的狙いがピッチ上で完全に機能し、枠内シュート8本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。FC東京は内容・結果の両面で圧倒され、プランの修正が後手に回った。",
+    "【試合を動かした得点】5分 マルセロ ヒアン (GOOOOOAL!!右サイドから佐藤が出したパスに反応したマルセロ ヒアンがペナルティエリア右から右足でゴール下に決める) / 27分 ミッチェル デューク (GOOOOOAL!!相馬のスルーパスがペナルティエリア内の中山につながる。最後はペナルティエリア内からの中山のクロスに反応したミッチェル デュークがペナルティエリア中央からヘディングでゴール左上に決める)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】5分、マルセロ ヒアンがネットを揺らしスコアが動く（GOOOOOAL!!右サイドから佐藤が出したパスに反応したマルセロ ヒアンがペナルティエリア右から右足でゴール下に決める）。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】27分、ミッチェル デュークがネットを揺らしスコアが動く（GOOOOOAL!!相馬のスルーパスがペナルティエリア内の中山につながる。最後はペナルティエリア内からの中山のクロスに反応したミッチェル デュークがペナルティエリア中央からヘディングでゴール左上に決める）。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と町田ゼルビアの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 35.7,
+      "away_field_tilt": 64.3
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 30,
+        "pa_entries": 11,
+        "rate_30_to_pa": 36.7
+      },
+      "away": {
+        "m30_entries": 54,
+        "pa_entries": 16,
+        "rate_30_to_pa": 29.6
+      }
+    },
+    "intensity": {
+      "home_distance_km": 113.7,
+      "away_distance_km": 119.8,
+      "home_sprints": 139,
+      "away_sprints": 131
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 1,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから中山がパスを送る。明本がペナルティエリア左から左足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 2,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応したマルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、谷にセーブされる"
+    },
+    {
+      "minute": 4,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した昌子がペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 5,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!右サイドから佐藤が出したパスに反応したマルセロ ヒアンがペナルティエリア右から右足でゴール下に決める"
+    },
+    {
+      "minute": 11,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "内からドリブルで",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内からドリブルで進入した俵積田がペナルティエリア中央から右足で枠内にシュートを放つも、中村にブロックされる"
+    },
+    {
+      "minute": 12,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ミッチェル デューク",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "左サイドから明本がクロスを入れる。これに反応したミッチェル デュークがペナルティエリア中央からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:3本、町田:3本/枠内シュート:FC東京:2本、町田:1本/ゴール期待値:FC東京:0.33、町田:0.12"
+    },
+    {
+      "minute": 22,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "マルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、谷にセーブされる"
+    },
+    {
+      "minute": 27,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ミッチェル デューク",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!相馬のスルーパスがペナルティエリア内の中山につながる。最後はペナルティエリア内からの中山のクロスに反応したミッチェル デュークがペナルティエリア中央からヘディングでゴール左上に決める"
+    },
+    {
+      "minute": 32,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ミッチェル デューク",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応したミッチェル デュークがペナルティエリア中央からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 35,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "左サイドから相馬",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "左サイド",
+      "description_text": "左サイドから相馬がドリブルで前進。そのまま持ち運んでクロスを供給するが、中村はシュートを放つには至らない"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "キム スンギュ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前でFKを獲得。キッカーの相馬が右足で直接ゴールを狙うも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:4本、町田:6本/枠内シュート:FC東京:3本、町田:3本/ゴール期待値:FC東京:0.58、町田:0.46"
+    },
+    {
+      "minute": 42,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉OUT",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "26長倉OUT→22石原IN"
+    },
+    {
+      "minute": 43,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドからドリ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドからドリブルで進入した佐藤がペナルティエリア右からシュートを放つも、ゴール左に外れてしまう"
+    }
+  ]
+}

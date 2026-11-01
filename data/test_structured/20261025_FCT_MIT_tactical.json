@@ -1,0 +1,246 @@
+{
+  "match_id": "20261025_FCT_MIT",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】FC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2の布陣を敷き、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する水戸ホーリーホック（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2で迎え撃ち、樹森 大介監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】FC東京が敵陣支配率60.8%で相手を押し込み、PA進入率35.4%と相手の守備ブロックを内側と外側の両面からこじ開けることに成功。対する水戸ホーリーホックはクリア後のボールを前線で収められず、自陣深くに釘付けにされ守勢を強いられた。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】FC東京の戦術的狙いがピッチ上で完全に機能し、枠内シュート11本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。水戸ホーリーホックは内容・結果の両面で圧倒され、プランの修正が後手に回った。",
+    "【試合を動かした得点】32分 GOOOOOAL (GOOOOOAL!!右サイドからの石原のクロスに反応した仲川がペナルティエリア中央からヘディングでゴール左下に決める)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、FC東京と水戸ホーリーホックが相手のプレス構造を探り合う。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】32分、GOOOOOALがネットを揺らしスコアが動く（GOOOOOAL!!右サイドからの石原のクロスに反応した仲川がペナルティエリア中央からヘディングでゴール左下に決める）。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "FC東京のブロック守備と水戸ホーリーホックの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 60.8,
+      "away_field_tilt": 39.2
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 48,
+        "pa_entries": 17,
+        "rate_30_to_pa": 35.4
+      },
+      "away": {
+        "m30_entries": 31,
+        "pa_entries": 7,
+        "rate_30_to_pa": 22.6
+      }
+    },
+    "intensity": {
+      "home_distance_km": 116.9,
+      "away_distance_km": 118.6,
+      "home_sprints": 166,
+      "away_sprints": 138
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 1,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "こぼれ球に反応し",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した奥村がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 2,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "山本がペナルティ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "山本がペナルティエリア手前から右足で枠内にシュートを放つも、佐藤恵にブロックされる"
+    },
+    {
+      "minute": 3,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から奥村がパスを送る。谷口がペナルティエリア中央からヘディングで枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 7,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "長倉が相手陣中央",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "右サイド",
+      "description_text": "長倉が相手陣中央から右足で枠内にシュートを放つも、Jスウォビィクにセーブされる"
+    },
+    {
+      "minute": 11,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "右サイドから長倉",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから長倉がクロスを入れる。これに反応した仲川がペナルティエリア中央から右足で枠内にシュートを放つも、Jスウォビィクにセーブされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:2本、水戸:3本/枠内シュート:FC東京:2本、水戸:1本/ゴール期待値:FC東京:0.18、水戸:0.12"
+    },
+    {
+      "minute": 22,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "佐藤恵がペナルテ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "佐藤恵がペナルティエリア手前からシュートを放つも、ゴール左に外れてしまう"
+    },
+    {
+      "minute": 23,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ウーゴがペナルテ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ウーゴがペナルティエリア手前からシュートを放つも、ゴールの上に外れてしまう"
+    },
+    {
+      "minute": 23,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前から奥村がパ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から奥村がパスを送る。谷口がペナルティエリア左からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 26,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "奥村がペナルティ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "奥村がペナルティエリア手前からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 28,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前から安斎がパ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から安斎がパスを送る。仲川がペナルティエリア中央からヘディングで枠内にシュートを放つも、木本にブロックされる"
+    },
+    {
+      "minute": 30,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前から仲川がパ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から仲川がパスを送る。長倉がペナルティエリア手前から右足で枠内にシュートを放つも、Jスウォビィクにセーブされる"
+    },
+    {
+      "minute": 32,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "GOOOOOAL",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "GOOOOOAL!!右サイドからの石原のクロスに反応した仲川がペナルティエリア中央からヘディングでゴール左下に決める"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "手前から奥村がス",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から奥村がスルーパスを送る。抜け出した山崎がペナルティエリア左からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:FC東京:6本、水戸:7本/枠内シュート:FC東京:4本、水戸:1本/ゴール期待値:FC東京:0.52、水戸:0.27"
+    }
+  ]
+}

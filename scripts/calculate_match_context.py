@@ -93,6 +93,31 @@ class MatchContextCalculator:
         )
 
     # ==========================================
+    # 2b. 順位表・直近メンバー (Standings & Lineup)
+    # ==========================================
+    def calculate_league_standings(
+        self,
+        season: int = 2026,
+        as_of_date: str = "2026-12-31",
+    ) -> Dict[str, Any]:
+        """Calculate deterministic league standings."""
+        return self._service.calculate_league_standings(
+            season=season,
+            as_of_date=as_of_date,
+        )
+
+    def get_recent_lineup_and_scorers(
+        self,
+        team_id: str,
+        current_date_str: str,
+    ) -> Dict[str, Any]:
+        """Get actual starters and bench from the directly preceding match."""
+        return self._service.get_recent_lineup_and_scorers(
+            team_id=team_id,
+            current_date_str=current_date_str,
+        )
+
+    # ==========================================
     # 3. 累積警告・出場停止情報 (Disciplinary Status)
     # ==========================================
     def calculate_disciplinary_status(

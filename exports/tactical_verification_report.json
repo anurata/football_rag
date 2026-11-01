@@ -1,0 +1,42 @@
+{
+  "generated_count": 120,
+  "layer1_validation": {
+    "total_files": 120,
+    "physical_bounds_valid": 120,
+    "conversion_containment_valid": 120,
+    "intensity_db_matches": 120,
+    "null_issues": [],
+    "bounds_issues": []
+  },
+  "layer2_stability": {
+    "total_comparisons": 120,
+    "identical_files": 108,
+    "identical_ratio_pct": 90.0,
+    "diff_files": [
+      "20260808_FCT_ZEL_tactical.json",
+      "20260815_VOB_FCT_tactical.json",
+      "20260821_FCT_JEF_tactical.json",
+      "20260829_VVN_FCT_tactical.json",
+      "20260902_PUL_FCT_tactical.json",
+      "20260906_FCT_SAN_tactical.json",
+      "20260912_GAM_FCT_tactical.json",
+      "20260919_FCT_NAG_tactical.json",
+      "20261010_FCT_URA_tactical.json",
+      "20261017_VER_FCT_tactical.json",
+      "20261021_FCT_REY_tactical.json",
+      "20261025_FCT_MIT_tactical.json"
+    ],
+    "formation_dist": {
+      "4-2-3-1": 40,
+      "4-1-2-3": 34,
+      "4-4-2": 50,
+      "3-4-2-1": 114,
+      "3-4-1-2": 2
+    },
+    "dominant_team_dist": {
+      "EQUAL": 465,
+      "AWAY": 114,
+      "HOME": 141
+    }
+  }
+}

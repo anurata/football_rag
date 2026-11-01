@@ -1,0 +1,246 @@
+{
+  "match_id": "20260902_PUL_FCT",
+  "home_formation": "4-1-2-3",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】清水エスパルス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-1-2-3の布陣を敷き、吉田 孝行監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するFC東京（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は4-4-2で迎え撃ち、松橋 力蔵監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は清水エスパルス 41.1% 対 FC東京 58.9%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の1-1。",
+    "【試合を動かした得点】3分 マルセロ ヒアン (ペナルティエリア内からマルセロ ヒアンがクロスを入れる。これに反応した長倉がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう)"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】3分、マルセロ ヒアンがネットを揺らしスコアが動く（ペナルティエリア内からマルセロ ヒアンがクロスを入れる。これに反応した長倉がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう）。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "清水エスパルスのブロック守備とFC東京の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 41.1,
+      "away_field_tilt": 58.9
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 30,
+        "pa_entries": 13,
+        "rate_30_to_pa": 43.3
+      },
+      "away": {
+        "m30_entries": 43,
+        "pa_entries": 15,
+        "rate_30_to_pa": 34.9
+      }
+    },
+    "intensity": {
+      "home_distance_km": 110.6,
+      "away_distance_km": 106.8,
+      "home_sprints": 124,
+      "away_sprints": 122
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 0,
+      "period": "2H",
+      "team_id": "PUL",
+      "player_name": "辻OUT",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "38辻OUT→50藤井IN"
+    },
+    {
+      "minute": 2,
+      "period": "2H",
+      "team_id": "PUL",
+      "player_name": "右サイドから松崎",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "右サイドから松崎がクロスを入れる。これに反応したジャーメインがペナルティエリア中央からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 3,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内からマルセロ ヒアンがクロスを入れる。これに反応した長倉がペナルティエリア中央からシュートを放つも、ゴールの枠に当たってしまう"
+    },
+    {
+      "minute": 6,
+      "period": "1H",
+      "team_id": "PUL",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "こぼれ球に反応した嶋本がペナルティエリア手前から左足で枠内にシュートを放つも、マルセロ ヒアンにブロックされる"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "分が経過するも",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "10分が経過するも、まだシュートに至るシーンを作り出せない"
+    },
+    {
+      "minute": 10,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "内からドリブルで",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内からドリブルで進入した本間がペナルティエリア中央から右足で枠内にシュートを放つも、弓場にブロックされる"
+    },
+    {
+      "minute": 12,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から本間がクロスを入れる。これに反応したマルセロ ヒアンがペナルティエリア中央からシュートを放つも、ゴール右に外れてしまう"
+    },
+    {
+      "minute": 15,
+      "period": "1H",
+      "team_id": "PUL",
+      "player_name": "キム スンギュ",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "右サイド",
+      "description_text": "右サイドでFKを獲得。キッカーの弓場が左足で直接ゴールを狙うも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 16,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前から高がスルーパスを送る。抜け出したマルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、梅田にセーブされる"
+    },
+    {
+      "minute": 20,
+      "period": "1H",
+      "team_id": "PUL",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:清水:2本、FC東京:3本/枠内シュート:清水:1本、FC東京:1本/ゴール期待値:清水:0.10、FC東京:0.33"
+    },
+    {
+      "minute": 26,
+      "period": "1H",
+      "team_id": "FCT",
+      "player_name": "内から長倉がパス",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア内から長倉がパスを送る。安斎がペナルティエリア右から左足で枠内にシュートを放つも、梅田にセーブされる"
+    },
+    {
+      "minute": 40,
+      "period": "1H",
+      "team_id": "PUL",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:清水:2本、FC東京:4本/枠内シュート:清水:1本、FC東京:2本/ゴール期待値:清水:0.10、FC東京:0.39"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_id": "PUL",
+      "player_name": "キム スンギュ",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "辻がペナルティエリア左から右足で枠内にシュートを放つも、キム スンギュにセーブされる"
+    },
+    {
+      "minute": 47,
+      "period": "2H",
+      "team_id": "FCT",
+      "player_name": "マルセロ ヒアン",
+      "event_type": "PLAY",
+      "zone_name": null,
+      "xg": null,
+      "situation": "ペナルティエリア内",
+      "description_text": "ペナルティエリア手前からドリブルで進入したマルセロ ヒアンがペナルティエリア中央から右足で枠内にシュートを放つも、高橋にブロックされる"
+    },
+    {
+      "minute": 47,
+      "period": "2H",
+      "team_id": "PUL",
+      "player_name": "ここまでのシュー",
+      "event_type": "GOAL",
+      "zone_name": null,
+      "xg": null,
+      "situation": "中央",
+      "description_text": "ここまでのシュート:清水:3本、FC東京:5本/枠内シュート:清水:2本、FC東京:2本/ゴール期待値:清水:0.13、FC東京:0.53"
+    }
+  ]
+}

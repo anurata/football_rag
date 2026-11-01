@@ -1,0 +1,103 @@
+{
+  "match_id": "20260902_MAR_SAN",
+  "home_formation": "4-2-3-1",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】横浜F・マリノス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1の布陣を敷き、スティーブ コリカ監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。対する京都サンガF.C.（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、ランコ ポポヴィッチ監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は横浜F・マリノス 56.1% 対 京都サンガF.C. 43.9%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の1-1。",
+    "【試合を動かした得点】64分 中野 瑠馬 (京都サンガF.C.の決定機: 中野 瑠馬 による得点 (64分)) / 73分 谷村 海那 (横浜F・マリノスの決定機: 谷村 海那 による得点 (73分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、横浜F・マリノスと京都サンガF.C.が相手のプレス構造を探り合う。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】64分、中野 瑠馬がネットを揺らしスコアが動く（京都サンガF.C.の決定機: 中野 瑠馬 による得点 (64分)）。 【得点動意】73分、谷村 海那がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 谷村 海那 による得点 (73分)）。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "横浜F・マリノスのブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 56.1,
+      "away_field_tilt": 43.9
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 37,
+        "pa_entries": 11,
+        "rate_30_to_pa": 29.7
+      },
+      "away": {
+        "m30_entries": 29,
+        "pa_entries": 12,
+        "rate_30_to_pa": 41.4
+      }
+    },
+    "intensity": {
+      "home_distance_km": 107.3,
+      "away_distance_km": 108.7,
+      "home_sprints": 128,
+      "away_sprints": 126
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 64,
+      "period": "2H",
+      "team_id": "SAN",
+      "player_name": "中野 瑠馬",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "京都サンガF.C.の決定機: 中野 瑠馬 による得点 (64分)"
+    },
+    {
+      "minute": 73,
+      "period": "2H",
+      "team_id": "MAR",
+      "player_name": "谷村 海那",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 谷村 海那 による得点 (73分)"
+    }
+  ]
+}

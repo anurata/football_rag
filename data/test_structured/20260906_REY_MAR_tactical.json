@@ -1,0 +1,103 @@
+{
+  "match_id": "20260906_REY_MAR",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】柏レイソル（基本方針: 後方からの丁寧なビルドアップと位置的優位の追求）は3-4-2-1の布陣を敷き、リカルド ロドリゲス監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。対する横浜F・マリノス（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、スティーブ コリカ監督のもと、サイドへの配球を増やし、相手守備ブロックの外側からクロスを連打してPA内へ圧力をかけるプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は柏レイソル 57.6% 対 横浜F・マリノス 42.4%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で横浜F・マリノスがわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】25分 横浜F・マリノス選手 (横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (25分)) / 45分 横浜F・マリノス選手 (横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (45分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、柏レイソルと横浜F・マリノスが相手のプレス構造を探り合う。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】25分、横浜F・マリノス選手がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (25分)）。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】45分、横浜F・マリノス選手がネットを揺らしスコアが動く（横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (45分)）。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "柏レイソルのブロック守備と横浜F・マリノスの前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 57.6,
+      "away_field_tilt": 42.4
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 38,
+        "pa_entries": 18,
+        "rate_30_to_pa": 47.4
+      },
+      "away": {
+        "m30_entries": 28,
+        "pa_entries": 14,
+        "rate_30_to_pa": 50.0
+      }
+    },
+    "intensity": {
+      "home_distance_km": 120.0,
+      "away_distance_km": 122.1,
+      "home_sprints": 121,
+      "away_sprints": 120
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "MAR",
+      "player_name": "横浜F・マリノス選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (25分)"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_id": "MAR",
+      "player_name": "横浜F・マリノス選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "横浜F・マリノスの決定機: 横浜F・マリノス選手 による得点 (45分)"
+    }
+  ]
+}

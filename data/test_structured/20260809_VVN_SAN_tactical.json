@@ -1,0 +1,114 @@
+{
+  "match_id": "20260809_VVN_SAN",
+  "home_formation": "3-4-2-1",
+  "away_formation": "4-2-3-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】V・ファーレン長崎（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1の布陣を敷き、高木 琢也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対する京都サンガF.C.（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-2-3-1で迎え撃ち、ランコ ポポヴィッチ監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。",
+    "【せめぎ合いの力学と内容評価】京都サンガF.C.が敵陣支配率66.7%で攻勢に出たものの、V・ファーレン長崎がPA侵入率22.7%に抑え込む鉄壁の中央ブロックを形成。危険なバイタルエリアを徹底的に封鎖し、外に追いやるV・ファーレン長崎の守備プランが奏功した。",
+    "【内容と結果の因果・構造的総括】【内容と結果の一致】V・ファーレン長崎の戦術的狙いがピッチ上で完全に機能し、枠内シュート4本と決定機を確実にゴールへ結びつけて順当な勝利を収めた。京都サンガF.C.は内容・結果の両面で圧倒され、プランの修正が後手に回った。",
+    "【試合を動かした得点】11分 チアゴ サンタナ (V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (11分)) / 29分 チアゴ サンタナ (V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (29分)) / 54分 ラファエル エリアス (京都サンガF.C.の決定機: ラファエル エリアス による得点 (54分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】11分、チアゴ サンタナがネットを揺らしスコアが動く（V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (11分)）。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】29分、チアゴ サンタナがネットを揺らしスコアが動く（V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (29分)）。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】54分、ラファエル エリアスがネットを揺らしスコアが動く（京都サンガF.C.の決定機: ラファエル エリアス による得点 (54分)）。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "V・ファーレン長崎のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 33.3,
+      "away_field_tilt": 66.7
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 22,
+        "pa_entries": 12,
+        "rate_30_to_pa": 54.5
+      },
+      "away": {
+        "m30_entries": 44,
+        "pa_entries": 10,
+        "rate_30_to_pa": 22.7
+      }
+    },
+    "intensity": {
+      "home_distance_km": 111.9,
+      "away_distance_km": 112.0,
+      "home_sprints": 141,
+      "away_sprints": 131
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 11,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "チアゴ サンタナ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (11分)"
+    },
+    {
+      "minute": 29,
+      "period": "1H",
+      "team_id": "VVN",
+      "player_name": "チアゴ サンタナ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "V・ファーレン長崎の決定機: チアゴ サンタナ による得点 (29分)"
+    },
+    {
+      "minute": 54,
+      "period": "2H",
+      "team_id": "SAN",
+      "player_name": "ラファエル エリアス",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "京都サンガF.C.の決定機: ラファエル エリアス による得点 (54分)"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "match_id": "20260919_OKA_SAN",
+  "home_formation": "3-4-2-1",
+  "away_formation": "3-4-2-1",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】ファジアーノ岡山（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1の布陣を敷き、木山 隆之監督のもと、あえて保持を相手に譲り、中央を固めたブロック守備から背後の広大なスペースを突くロングカウンタープランを選択。対する京都サンガF.C.（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は3-4-2-1で迎え撃ち、ランコ ポポヴィッチ監督のもと、ボール保持率を高めて相手を自陣に押し込み、中央・ハーフスペースを崩すプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率はファジアーノ岡山 43.8% 対 京都サンガF.C. 56.2%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【微差が分けた結末】内容面では互角のせめぎ合いだったが、ペナルティエリア内での一瞬の隙やフィニッシュの個の精度で京都サンガF.C.がわずかに上回り、激闘を制した。",
+    "【試合を動かした得点】25分 京都サンガF.C.選手 (京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (25分)) / 45分 京都サンガF.C.選手 (京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (45分)) / 46分 ナ サンホ (ファジアーノ岡山の決定機: ナ サンホ による得点 (46分))"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、ファジアーノ岡山と京都サンガF.C.が相手のプレス構造を探り合う。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "AWAY",
+      "momentum_summary": "【得点動意】25分、京都サンガF.C.選手がネットを揺らしスコアが動く（京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (25分)）。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "【得点動意】45分、京都サンガF.C.選手がネットを揺らしスコアが動く（京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (45分)）。 【得点動意】46分、ナ サンホがネットを揺らしスコアが動く（ファジアーノ岡山の決定機: ナ サンホ による得点 (46分)）。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "HOME",
+      "momentum_summary": "【得点動意】46分、ナ サンホがネットを揺らしスコアが動く（ファジアーノ岡山の決定機: ナ サンホ による得点 (46分)）。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "ファジアーノ岡山のブロック守備と京都サンガF.C.の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 43.8,
+      "away_field_tilt": 56.2
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 28,
+        "pa_entries": 6,
+        "rate_30_to_pa": 21.4
+      },
+      "away": {
+        "m30_entries": 36,
+        "pa_entries": 6,
+        "rate_30_to_pa": 16.7
+      }
+    },
+    "intensity": {
+      "home_distance_km": 110.5,
+      "away_distance_km": 111.6,
+      "home_sprints": 137,
+      "away_sprints": 105
+    }
+  },
+  "key_tactical_events": [
+    {
+      "minute": 25,
+      "period": "1H",
+      "team_id": "SAN",
+      "player_name": "京都サンガF.C.選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (25分)"
+    },
+    {
+      "minute": 45,
+      "period": "1H",
+      "team_id": "SAN",
+      "player_name": "京都サンガF.C.選手",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "京都サンガF.C.の決定機: 京都サンガF.C.選手 による得点 (45分)"
+    },
+    {
+      "minute": 46,
+      "period": "2H",
+      "team_id": "OKA",
+      "player_name": "ナ サンホ",
+      "event_type": "GOAL",
+      "zone_name": "ペナルティエリア中央",
+      "xg": 0.65,
+      "situation": "OPEN_PLAY",
+      "description_text": "ファジアーノ岡山の決定機: ナ サンホ による得点 (46分)"
+    }
+  ]
+}

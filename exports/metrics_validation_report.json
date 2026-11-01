@@ -1,0 +1,336 @@
+{
+  "analyzed_players_count": 327,
+  "correlations": {
+    "pearson_goals_xg": 0.8848,
+    "spearman_goals_xg": 0.7904,
+    "pearson_assists_xa": 0.7723,
+    "spearman_assists_xa": 0.7056,
+    "pearson_goals90_xg90": 0.8761,
+    "pearson_assists90_xa90": 0.7541
+  },
+  "positional_breakdown": {
+    "FW": {
+      "player_count": 71,
+      "avg_xg90": 0.288,
+      "avg_xa90": 0.131,
+      "avg_goals90": 0.36,
+      "avg_assists90": 0.123,
+      "avg_total_xg": 1.95,
+      "avg_total_xa": 0.92
+    },
+    "MF": {
+      "player_count": 126,
+      "avg_xg90": 0.133,
+      "avg_xa90": 0.132,
+      "avg_goals90": 0.121,
+      "avg_assists90": 0.12,
+      "avg_total_xg": 0.95,
+      "avg_total_xa": 0.95
+    },
+    "DF": {
+      "player_count": 101,
+      "avg_xg90": 0.057,
+      "avg_xa90": 0.072,
+      "avg_goals90": 0.041,
+      "avg_assists90": 0.056,
+      "avg_total_xg": 0.45,
+      "avg_total_xa": 0.53
+    },
+    "GK": {
+      "player_count": 29,
+      "avg_xg90": 0.0,
+      "avg_xa90": 0.003,
+      "avg_goals90": 0.0,
+      "avg_assists90": 0.0,
+      "avg_total_xg": 0.0,
+      "avg_total_xa": 0.02
+    }
+  },
+  "team_consistency": {
+    "match_count": 240,
+    "mean_absolute_difference": 0.0963,
+    "max_absolute_difference": 0.707,
+    "perfect_match_ratio": 0.5708
+  },
+  "anomalies": {
+    "negative_values_count": 0,
+    "extreme_single_match_xg_over_2_5": 0,
+    "gk_with_unreasonable_xg": 1
+  },
+  "top_performers": {
+    "top_xg": [
+      {
+        "name": "鈴木 章斗",
+        "team": "HIR",
+        "pos": "FW",
+        "xg": 6.48,
+        "goals": 9,
+        "xg90": 0.56,
+        "minutes": 1041
+      },
+      {
+        "name": "レオ セアラ",
+        "team": "KAS",
+        "pos": "FW",
+        "xg": 6.16,
+        "goals": 12,
+        "xg90": 0.66,
+        "minutes": 837
+      },
+      {
+        "name": "長倉 幹樹",
+        "team": "FCT",
+        "pos": "FW",
+        "xg": 4.49,
+        "goals": 7,
+        "xg90": 0.44,
+        "minutes": 912
+      },
+      {
+        "name": "マルシーニョ",
+        "team": "KAW",
+        "pos": "FW",
+        "xg": 4.05,
+        "goals": 8,
+        "xg90": 0.46,
+        "minutes": 791
+      },
+      {
+        "name": "脇坂 泰斗",
+        "team": "KAW",
+        "pos": "MF",
+        "xg": 4.02,
+        "goals": 4,
+        "xg90": 0.36,
+        "minutes": 1014
+      },
+      {
+        "name": "マルセロ ヒアン",
+        "team": "FCT",
+        "pos": "FW",
+        "xg": 4.02,
+        "goals": 5,
+        "xg90": 0.47,
+        "minutes": 770
+      },
+      {
+        "name": "ラファエル エリアス",
+        "team": "SAN",
+        "pos": "FW",
+        "xg": 3.72,
+        "goals": 5,
+        "xg90": 0.44,
+        "minutes": 754
+      },
+      {
+        "name": "チャヴリッチ",
+        "team": "KAS",
+        "pos": "FW",
+        "xg": 3.64,
+        "goals": 6,
+        "xg90": 0.73,
+        "minutes": 450
+      },
+      {
+        "name": "瀬川 祐輔",
+        "team": "REY",
+        "pos": "MF",
+        "xg": 3.63,
+        "goals": 8,
+        "xg90": 0.75,
+        "minutes": 434
+      },
+      {
+        "name": "加藤 陸次樹",
+        "team": "HIR",
+        "pos": "FW",
+        "xg": 3.62,
+        "goals": 3,
+        "xg90": 0.43,
+        "minutes": 758
+      },
+      {
+        "name": "谷村 海那",
+        "team": "MAR",
+        "pos": "FW",
+        "xg": 3.49,
+        "goals": 6,
+        "xg90": 0.31,
+        "minutes": 1026
+      },
+      {
+        "name": "安斎 颯馬",
+        "team": "FCT",
+        "pos": "MF",
+        "xg": 3.37,
+        "goals": 5,
+        "xg90": 0.4,
+        "minutes": 752
+      },
+      {
+        "name": "大迫 勇也",
+        "team": "VOB",
+        "pos": "FW",
+        "xg": 3.37,
+        "goals": 6,
+        "xg90": 0.4,
+        "minutes": 757
+      },
+      {
+        "name": "マテウス サヴィオ",
+        "team": "URA",
+        "pos": "MF",
+        "xg": 3.31,
+        "goals": 5,
+        "xg90": 0.38,
+        "minutes": 785
+      },
+      {
+        "name": "オ セフン",
+        "team": "PUL",
+        "pos": "FW",
+        "xg": 3.26,
+        "goals": 2,
+        "xg90": 0.43,
+        "minutes": 684
+      }
+    ],
+    "top_xa": [
+      {
+        "name": "東 俊希",
+        "team": "HIR",
+        "pos": "MF",
+        "xa": 3.32,
+        "assists": 3,
+        "xa90": 0.32,
+        "minutes": 925
+      },
+      {
+        "name": "相馬 勇紀",
+        "team": "ZEL",
+        "pos": "FW",
+        "xa": 3.22,
+        "assists": 4,
+        "xa90": 0.28,
+        "minutes": 1042
+      },
+      {
+        "name": "金子 拓郎",
+        "team": "URA",
+        "pos": "MF",
+        "xa": 3.15,
+        "assists": 6,
+        "xa90": 0.29,
+        "minutes": 965
+      },
+      {
+        "name": "長倉 幹樹",
+        "team": "FCT",
+        "pos": "FW",
+        "xa": 2.74,
+        "assists": 4,
+        "xa90": 0.27,
+        "minutes": 912
+      },
+      {
+        "name": "小泉 佳穂",
+        "team": "REY",
+        "pos": "MF",
+        "xa": 2.6,
+        "assists": 3,
+        "xa90": 0.24,
+        "minutes": 972
+      },
+      {
+        "name": "鈴木 章斗",
+        "team": "HIR",
+        "pos": "FW",
+        "xa": 2.52,
+        "assists": 4,
+        "xa90": 0.22,
+        "minutes": 1041
+      },
+      {
+        "name": "久保 藤次郎",
+        "team": "REY",
+        "pos": "DF",
+        "xa": 2.38,
+        "assists": 3,
+        "xa90": 0.23,
+        "minutes": 948
+      },
+      {
+        "name": "中野 就斗",
+        "team": "HIR",
+        "pos": "MF",
+        "xa": 2.28,
+        "assists": 1,
+        "xa90": 0.19,
+        "minutes": 1080
+      },
+      {
+        "name": "伊藤 達哉",
+        "team": "KAW",
+        "pos": "MF",
+        "xa": 2.19,
+        "assists": 3,
+        "xa90": 0.21,
+        "minutes": 937
+      },
+      {
+        "name": "松村 優太",
+        "team": "KAS",
+        "pos": "MF",
+        "xa": 2.19,
+        "assists": 2,
+        "xa90": 0.23,
+        "minutes": 863
+      },
+      {
+        "name": "永戸 勝也",
+        "team": "VOB",
+        "pos": "MF",
+        "xa": 2.19,
+        "assists": 1,
+        "xa90": 0.23,
+        "minutes": 845
+      },
+      {
+        "name": "マルシーニョ",
+        "team": "KAW",
+        "pos": "FW",
+        "xa": 2.18,
+        "assists": 3,
+        "xa90": 0.25,
+        "minutes": 791
+      },
+      {
+        "name": "鈴木 優磨",
+        "team": "KAS",
+        "pos": "FW",
+        "xa": 2.09,
+        "assists": 3,
+        "xa90": 0.19,
+        "minutes": 992
+      },
+      {
+        "name": "松村 晃助",
+        "team": "MAR",
+        "pos": "MF",
+        "xa": 1.97,
+        "assists": 4,
+        "xa90": 0.18,
+        "minutes": 982
+      },
+      {
+        "name": "山下 諒也",
+        "team": "GAM",
+        "pos": "FW",
+        "xa": 1.95,
+        "assists": 3,
+        "xa90": 0.22,
+        "minutes": 805
+      }
+    ]
+  }
+}

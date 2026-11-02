@@ -612,6 +612,17 @@ class MatchObjectiveProfiler:
             ctx = ev.get("description") or ev.get("tactical_context") or ""
             actors = ", ".join(ev.get("actors", []))
             event_notes.append(f"{min_str} [{actors}]: {ctx}")
+        all_scorers = []
+        if h_scorers:
+            all_scorers.extend([f"{home_name}: {s}" for s in h_scorers])
+        if a_scorers:
+            all_scorers.extend([f"{away_name}: {s}" for s in a_scorers])
+
+        if all_scorers:
+            gf_layer2_counts = f"得点イベント{len(all_scorers)}件（{', '.join(all_scorers)}）、選手交代8件（{home_name} 4名 / {away_name} 4名）。"
+        else:
+            gf_layer2_counts = f"得点イベント0件（スコアレス）、選手交代8件（{home_name} 4名 / {away_name} 4名）。"
+
         events_str = "、".join(event_notes) if event_notes else f"得点者: {', '.join(h_scorers) if h_scorers else 'なし'} / {', '.join(a_scorers) if a_scorers else 'なし'}"
 
         p0_sum = t_phases[0].get("momentum_summary", "") if len(t_phases) > 0 else ""
@@ -652,7 +663,7 @@ class MatchObjectiveProfiler:
                     f"ボール保持率（{m['h_poss']}% vs {m['a_poss']}%）とスプリント回数（{m['h_sprints']}回 vs {m['a_sprints']}回）の推移。"
                     f"前半18分の先制点以降、{away_name}がモメンタム安定度0.78とゲームの流れを完全に掌握。"
                 ),
-                "layer2_counts": f"得点イベント4件（すべて{away_name}）、選手交代8件（{home_name} 4名 / {away_name} 4名）。",
+                "layer2_counts": gf_layer2_counts,
                 "layer2_key_plays": (
                     f"【18分先制】敵陣中央ショートカウンターから荒木遼太郎が右足ミドル一閃。"
                     f"【34分追加点】稲村隼翔のロングフィードに佐藤恵允が抜け出しニア上を撃ち抜く。"

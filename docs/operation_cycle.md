@@ -77,4 +77,18 @@
 2. 日程→フェーズ算出スクリプトとテスト: 完了 (`pipeline/phase_calculator.py`, `scripts/plan_phases.py`)
 3. `.github/workflows/`（日程同期・Stage 1・Stage 2）と `.gitignore` 整理: 完了
 4. 共同作成用スキル（プレビュー／速報／総括）: 完了 (`.agents/skills/match-curator/SKILL.md`, `pipeline/review_curation_service.py`, `scripts/curate_match_review.py`)
+5. サイト運用・更新・デプロイ統合スキル: 完了 (`.agents/skills/site-operations/SKILL.md`, `docs/SITE_OPERATIONS_SPECIFICATION.md`)
+
+---
+
+## 8. サイト運用4大独立モード (`site-operations`)
+
+手動・対話運用における変更の安全性と局所性を担保するため、以下の4モードを定義しています。
+詳細は [SITE_OPERATIONS_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/SITE_OPERATIONS_SPECIFICATION.md) を参照。
+
+- **Mode 1: 試合単体アップデート (`match-update`)**: 指定試合の実名・スタッツ・Layer 2仮説レビュー・ダイレクト外部リンクの局所更新。
+- **Mode 2: チーム単体アップデート (`team-update`)**: 指定クラブの名鑑Excel・怪我/警告トラッカー・戦術プロファイルの局所更新。
+- **Mode 3: リーグ全体スタッツ更新 (`league-update`)**: 全カードの戦術JSON一括再構築と全節戦術カルテの同期。
+- **Mode 4: デプロイ＆本番同期 (`site-deploy`)**: フルテスト365+件パス ➔ Rebase統合 ➔ コミット＆プッシュ ➔ Streamlit Cloud自動反映。
+
 

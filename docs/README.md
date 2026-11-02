@@ -18,10 +18,11 @@ flowchart TD
         S_CUR["4. プレビュー＆レビュー キュレーション仕様書<br>docs/CURATION_SERVICE_SPECIFICATION.md"]
         S_LIV["5. インマッチ速報・ライブ勝率分析エンジン<br>docs/live_match_tracker_spec.md"]
         S_OPS["6. 運用サイクル・自動化スケジュール仕様書<br>docs/operation_cycle.md"]
+        S_SOP["7. サイト運用・更新・デプロイ完全仕様書<br>docs/SITE_OPERATIONS_SPECIFICATION.md"]
     end
 
     subgraph DeploySpecs ["インフラ・デプロイ仕様書"]
-        S_CLD["7. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
+        S_CLD["8. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
     end
 
     Manifesto --> CoreSpecs
@@ -41,7 +42,8 @@ flowchart TD
 | **4. キュレーション仕様** | 試合前プレビュー（3案分岐シナリオ）および試合後戦術カルテ生成仕様。<br>事実と推測のタグ付け、結果バイアスの排除ロジック。 | [CURATION_SERVICE_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/CURATION_SERVICE_SPECIFICATION.md) |
 | **5. ライブ速報エンジン** | インマッチ速報、SPAIA詳細スタッツ連携、二変量ポアソン畳み込みによるリアルタイム動的勝率推論。 | [live_match_tracker_spec.md](file:///d:/workspace/flutter/football_rag/docs/live_match_tracker_spec.md) |
 | **6. 運用サイクル仕様** | KOからの相対時間（KO-48h, KO-1h, Stage 1: KO+3h, Stage 2: KO+48h）による日次・試合日自動バッチパイプライン。 | [operation_cycle.md](file:///d:/workspace/flutter/football_rag/docs/operation_cycle.md) |
-| **7. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
+| **7. サイト運用仕様** | 4つの独立運用モード（試合単体/チーム単体/リーグ全体/デプロイ）、安全ガードレール、該当試合ダイレクト4大外部リンク仕様。 | [SITE_OPERATIONS_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/SITE_OPERATIONS_SPECIFICATION.md) |
+| **8. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
 
 ---
 
@@ -58,6 +60,8 @@ flowchart TD
 | `pipeline/fctokyo_cross_analytics.py` | `TACTICAL_ANALYTICS_SPECIFICATION.md` | `tests/test_fctokyo_cross_analytics.py` |
 | `pipeline/preview_curation_service.py` | `CURATION_SERVICE_SPECIFICATION.md` | `tests/test_preview_curation_service.py` |
 | `pipeline/review_curation_service.py` | `CURATION_SERVICE_SPECIFICATION.md` | `tests/test_review_curation_service.py` |
+| `pipeline/external_links.py` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_external_links.py` |
+| `.agents/skills/site-operations/` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_spec_conformance.py` |
 | `scripts/live_match_forecaster.py` | `live_match_tracker_spec.md` | `tests/test_live_match_forecaster.py` |
 | `scripts/run_scheduled_pipeline.py` | `operation_cycle.md` | `tests/test_run_scheduled_pipeline.py` |
 

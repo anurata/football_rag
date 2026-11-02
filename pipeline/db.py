@@ -143,6 +143,30 @@ CREATE TABLE IF NOT EXISTS entity_master_players (
 );
 """
 
+SCHEMA_AI_CHAT_SESSIONS = """
+CREATE TABLE IF NOT EXISTS ai_chat_sessions (
+    session_id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    view_type TEXT NOT NULL,
+    section_key TEXT,
+    context_data_json TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+"""
+
+SCHEMA_AI_CHAT_MESSAGES = """
+CREATE TABLE IF NOT EXISTS ai_chat_messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id TEXT NOT NULL,
+    role TEXT NOT NULL,
+    content TEXT NOT NULL,
+    metadata_json TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (session_id) REFERENCES ai_chat_sessions(session_id) ON DELETE CASCADE
+);
+"""
+
 INDEX_STATEMENTS = [
     "CREATE INDEX IF NOT EXISTS idx_matches_date ON matches(date);",
     "CREATE INDEX IF NOT EXISTS idx_matches_teams ON matches(home_team_id, away_team_id);",
@@ -151,6 +175,8 @@ INDEX_STATEMENTS = [
     "CREATE INDEX IF NOT EXISTS idx_player_stats_name ON player_match_stats(player_name);",
     "CREATE INDEX IF NOT EXISTS idx_events_match_minute ON match_events(match_id, minute);",
     "CREATE INDEX IF NOT EXISTS idx_reviews_match ON match_reviews(match_id, review_type);",
+    "CREATE INDEX IF NOT EXISTS idx_ai_sessions_view ON ai_chat_sessions(view_type, updated_at DESC);",
+    "CREATE INDEX IF NOT EXISTS idx_ai_messages_session ON ai_chat_messages(session_id, created_at ASC);",
 ]
 
 
@@ -177,6 +203,8 @@ def init_db(db_path: Optional[str] = None) -> sqlite3.Connection:
         SCHEMA_MATCH_REVIEWS,
         SCHEMA_ENTITY_TEAMS,
         SCHEMA_ENTITY_PLAYERS,
+        SCHEMA_AI_CHAT_SESSIONS,
+        SCHEMA_AI_CHAT_MESSAGES,
     ]
 
     for statement in tables:

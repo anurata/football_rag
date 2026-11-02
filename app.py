@@ -38,6 +38,20 @@ from agent.qualitative_comparator import QualitativeComparator
 from agent.player_rater import PlayerRatingGenerator
 from agent.qa_engine import TacticalQAEngine
 from pipeline.external_links import generate_match_external_links
+from views.navigation import (
+    VIEW_LEAGUE,
+    VIEW_TEAM,
+    VIEW_MATCH,
+    VIEW_PLAYER,
+    VIEW_AI_CHAT,
+    render_sidebar_navigation,
+)
+from views.components.ai_modal import check_and_trigger_auto_ai_modal
+from views.league_view import render_league_view
+from views.team_view import render_team_view
+from views.player_view import render_player_view
+from views.ai_chat_view import render_ai_chat_view
+from views.match_view import render_match_view
 
 
 def get_team_display_name(team_id: Optional[str]) -> str:
@@ -1459,19 +1473,25 @@ def render_sidebar_match_selector(
         return None
 
     match_options = {}
-    for m in matches:
+    default_idx = 0
+    target_match_id = st.session_state.get("selected_match_id")
+    for idx, m in enumerate(matches):
         h_name = get_team_display_name(m.get("home_team_id"))
         a_name = get_team_display_name(m.get("away_team_id"))
         mw_str = get_matchweek_display_text(m)
         label = f"[{m.get('date', '-')}] {h_name} {m.get('home_score', '-')}-{m.get('away_score', '-')} {a_name} ({mw_str})"
         match_options[label] = m
+        if target_match_id and m.get("match_id") == target_match_id:
+            default_idx = idx
 
     selected_label = st.sidebar.selectbox(
         "試合カードを選択",
         options=list(match_options.keys()),
-        index=0,
+        index=default_idx,
     )
-    return match_options[selected_label]
+    chosen_match = match_options[selected_label]
+    st.session_state["selected_match_id"] = chosen_match.get("match_id")
+    return chosen_match
 
 
 def check_app_auth() -> bool:
@@ -1673,97 +1693,62 @@ def main():
     if not check_app_auth():
         return
 
-    st.title("⚽ Jリーグ戦術分析・観戦ガイド RAG システム")
-    st.caption("2層ハイブリッドRAG × 客観データ多角分析・定性対比エージェント")
-
+    # Backend engine & AI client initialization
     engine = get_engine()
     profiler, comparator, rater = get_analysis_modules()
-
-    # --------------------------------------------------------------------------
-    # Sidebar Filters & AI Settings
-    # --------------------------------------------------------------------------
-    selected_match = render_sidebar_match_selector()
-    if not selected_match:
-        return
-
-    match_id = selected_match["match_id"]
     gemini_client = render_sidebar_llm_settings()
     qa_engine = TacticalQAEngine(gemini_client=gemini_client)
 
     # --------------------------------------------------------------------------
-    # Main Content Area
+    # Sidebar Navigation (SPA view routing)
     # --------------------------------------------------------------------------
-    render_header(selected_match)
-    render_external_links_bar(selected_match)
-    render_match_context_bar(match_id)
+    current_view = render_sidebar_navigation()
 
-    summary = engine.sql_tools.get_match_summary(match_id) or {}
-    home_id = selected_match["home_team_id"]
-    away_id = selected_match["away_team_id"]
-    reviews = fetch_match_reviews(match_id)
+    # --------------------------------------------------------------------------
+    # View Routing Hub
+    # --------------------------------------------------------------------------
+    if current_view == VIEW_LEAGUE:
+        render_league_view(qa_engine)
+    elif current_view == VIEW_TEAM:
+        render_team_view(qa_engine)
+    elif current_view == VIEW_PLAYER:
+        render_player_view(qa_engine)
+    elif current_view == VIEW_AI_CHAT:
+        render_ai_chat_view(qa_engine)
+    else:
+        # Default: VIEW_MATCH
+        selected_match = render_sidebar_match_selector()
+        if not selected_match:
+            return
 
-    tab_chat, tab_obj, tab_comp, tab_rate, tab_adv, tab_stats, tab_raw_data, tab_ai, tab_reviews = st.tabs(
-        [
-            "💬 戦術対話QA (Google検索)",
-            "📊 客観データ多角分析 (15観点)",
-            "⚖️ 定性対比・答え合わせ",
-            "🏅 選手・監督採点＆寸評",
-            "🚀 5大発展戦術レポート",
-            "📈 スタッツグラフ比較",
-            "📦 収集Rawデータ詳細",
-            "🧠 プロ分析官のAI深層推論",
-            "📝 公式レポート・会見全文",
-        ],
-    )
+        app_helpers = {
+            "render_header": render_header,
+            "render_external_links_bar": render_external_links_bar,
+            "render_match_context_bar": render_match_context_bar,
+            "fetch_match_reviews": fetch_match_reviews,
+            "render_chat_qa_tab": render_chat_qa_tab,
+            "render_objective_perspectives_tab": render_objective_perspectives_tab,
+            "render_qualitative_comparison_tab": render_qualitative_comparison_tab,
+            "render_player_ratings_tab": render_player_ratings_tab,
+            "render_advanced_reports_tab": render_advanced_reports_tab,
+            "render_stats_chart": render_stats_chart,
+            "render_raw_data_tab": render_raw_data_tab,
+            "render_ai_reasoning_tab": render_ai_reasoning_tab,
+        }
 
-    # Tab 0: Chat QA Session (Mobile & Web)
-    with tab_chat:
-        render_chat_qa_tab(qa_engine, match_id)
+        render_match_view(
+            selected_match=selected_match,
+            engine=engine,
+            profiler=profiler,
+            comparator=comparator,
+            rater=rater,
+            gemini_client=gemini_client,
+            qa_engine=qa_engine,
+            app_helpers=app_helpers,
+        )
 
-    # Tab 1: Objective Analysis
-    with tab_obj:
-        render_objective_perspectives_tab(profiler, summary)
-
-    # Tab 2: Qualitative Comparison
-    with tab_comp:
-        render_qualitative_comparison_tab(comparator, profiler, match_id, summary, reviews)
-
-    # Tab 3: Player Ratings
-    with tab_rate:
-        render_player_ratings_tab(rater, summary)
-
-    # Tab 4: 5 Advanced Reports
-    with tab_adv:
-        render_advanced_reports_tab(profiler, summary)
-
-    # Tab 5: Stats Chart
-    with tab_stats:
-        st.subheader("📊 定量スタッツのグラフィカル比較")
-        render_stats_chart(summary, home_id, away_id)
-
-    # Tab 6: Raw Data Explorer
-    with tab_raw_data:
-        render_raw_data_tab(match_id, summary)
-
-    # Tab 7: AI Reasoning
-    with tab_ai:
-        render_ai_reasoning_tab(engine, gemini_client, match_id, home_id, away_id)
-
-    # Tab 8: Raw Qualitative Reviews
-    with tab_reviews:
-        st.subheader("📝 公式戦評および監督・選手インタビュー全文")
-        if not reviews:
-            st.info("定性レポートがまだ登録されていません。")
-        else:
-            for rev in reviews:
-                rtype = rev.get("review_type", "")
-                title = rev.get("title") or rtype
-                speaker = rev.get("speaker_name") or ""
-                with st.expander(
-                    f"【{rtype}】{title} {f'({speaker})' if speaker else ''}",
-                    expanded=(rtype == "OFFICIAL_REPORT"),
-                ):
-                    st.markdown(rev.get("content_text", ""))
+    # Check for auto-triggered AI dialog resumption
+    check_and_trigger_auto_ai_modal(qa_engine, current_view)
 
 
 if __name__ == "__main__":

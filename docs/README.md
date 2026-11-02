@@ -19,10 +19,11 @@ flowchart TD
         S_LIV["5. インマッチ速報・ライブ勝率分析エンジン<br>docs/live_match_tracker_spec.md"]
         S_OPS["6. 運用サイクル・自動化スケジュール仕様書<br>docs/operation_cycle.md"]
         S_SOP["7. サイト運用・更新・デプロイ完全仕様書<br>docs/SITE_OPERATIONS_SPECIFICATION.md"]
+        S_UI["8. 観戦ガイドUI/UX再編仕様書<br>docs/WATCHING_GUIDE_UI_SPECIFICATION.md"]
     end
 
     subgraph DeploySpecs ["インフラ・デプロイ仕様書"]
-        S_CLD["8. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
+        S_CLD["9. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
     end
 
     Manifesto --> CoreSpecs
@@ -43,7 +44,8 @@ flowchart TD
 | **5. ライブ速報エンジン** | インマッチ速報、SPAIA詳細スタッツ連携、二変量ポアソン畳み込みによるリアルタイム動的勝率推論。 | [live_match_tracker_spec.md](file:///d:/workspace/flutter/football_rag/docs/live_match_tracker_spec.md) |
 | **6. 運用サイクル仕様** | KOからの相対時間（KO-48h, KO-1h, Stage 1: KO+3h, Stage 2: KO+48h）による日次・試合日自動バッチパイプライン。 | [operation_cycle.md](file:///d:/workspace/flutter/football_rag/docs/operation_cycle.md) |
 | **7. サイト運用仕様** | 4つの独立運用モード（試合単体/チーム単体/リーグ全体/デプロイ）、安全ガードレール、該当試合ダイレクト4大外部リンク仕様。 | [SITE_OPERATIONS_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/SITE_OPERATIONS_SPECIFICATION.md) |
-| **8. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
+| **8. 観戦ガイドUI仕様** | Jリーグ全体・チーム毎・試合・選手の4画面再編仕様、5大セクション試合ビュー、どこでもAI対話QAモーダル設計。 | [WATCHING_GUIDE_UI_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/WATCHING_GUIDE_UI_SPECIFICATION.md) |
+| **9. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
 
 ---
 

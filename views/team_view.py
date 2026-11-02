@@ -495,20 +495,20 @@ def _render_squad_tab(team_id: str) -> None:
     for idx, p in enumerate(filtered):
         with cols[idx % 3]:
             with st.container(border=True):
-                col_img, col_info = st.columns([1, 2.3])
+                col_img, col_info = st.columns([1.1, 1.6])
                 with col_img:
                     photo_url = p.get("photo_url")
                     if photo_url:
-                        st.image(photo_url, width=70)
+                        st.image(photo_url, use_container_width=True)
                     else:
                         st.markdown(
-                            "<div style='width:64px;height:64px;background:#f1f5f9;border-radius:32px;"
-                            "display:flex;align-items:center;justify-content:center;font-size:26px;'>👤</div>",
+                            "<div style='width:100%;height:110px;background:#f1f5f9;border-radius:8px;"
+                            "display:flex;align-items:center;justify-content:center;font-size:36px;'>👤</div>",
                             unsafe_allow_html=True,
                         )
                 with col_info:
-                    st.markdown(f"**{p['player_name']}**")
-                    st.caption(f"{p['position']} #{p['number']} ｜ `{p['matches']}試合` ({p['minutes']}分)")
+                    st.markdown(f"#### {p['player_name']}")
+                    st.markdown(f"`{p['position']}` **#{p['number']}** ｜ `{p['matches']}試合` ({p['minutes']}分)")
                     st.caption(f"得点: **`{p['goals']}`** ｜ 助攻: **`{p['assists']}`** ｜ 走力: `{p['sprints']}回`")
                     st.markdown(f"**CBP**: :blue-background[**{p['total_cbp']} pt**]")
 

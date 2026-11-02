@@ -125,7 +125,7 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         self.assertIn("reason", top1)
 
     def test_get_team_squad_cbp(self):
-        """所属選手ロスター＆CBP集計の検証."""
+        """所属選手ロスター＆CBP集計の検証（写真URL含む）."""
         squad = get_team_squad_cbp("FCT")
         self.assertGreater(len(squad), 15)
 
@@ -134,7 +134,12 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         self.assertIn("player_name", top_player)
         self.assertIn("position", top_player)
         self.assertIn("total_cbp", top_player)
+        self.assertIn("photo_url", top_player)
         self.assertGreaterEqual(top_player["total_cbp"], 0.0)
+
+        # 多数の選手に写真URLが存在すること
+        with_photos = [p for p in squad if p.get("photo_url")]
+        self.assertGreater(len(with_photos), 10)
 
     def test_get_team_h2h_comparison(self):
         """他クラブ直接対比（Head-to-Head）の検証."""

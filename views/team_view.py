@@ -495,12 +495,24 @@ def _render_squad_tab(team_id: str) -> None:
     for idx, p in enumerate(filtered):
         with cols[idx % 3]:
             with st.container(border=True):
-                st.markdown(f"##### {p['player_name']} ({p['position']} #{p['number']})")
-                st.write(
-                    f"出場: `{p['matches']}試合` (`{p['minutes']}分`) ｜ 得点: **`{p['goals']}`** ｜ 助攻: **`{p['assists']}`**"
-                )
-                st.markdown(f"**CBP総合**: :blue-background[**{p['total_cbp']} pt**] ｜ スプリント: `{p['sprints']}回`")
-                if st.button("👤 選手詳細を見る ❯", key=f"btn_squad_p_{p['player_id']}_{idx}"):
+                col_img, col_info = st.columns([1, 2.3])
+                with col_img:
+                    photo_url = p.get("photo_url")
+                    if photo_url:
+                        st.image(photo_url, width=70)
+                    else:
+                        st.markdown(
+                            "<div style='width:64px;height:64px;background:#f1f5f9;border-radius:32px;"
+                            "display:flex;align-items:center;justify-content:center;font-size:26px;'>👤</div>",
+                            unsafe_allow_html=True,
+                        )
+                with col_info:
+                    st.markdown(f"**{p['player_name']}**")
+                    st.caption(f"{p['position']} #{p['number']} ｜ `{p['matches']}試合` ({p['minutes']}分)")
+                    st.caption(f"得点: **`{p['goals']}`** ｜ 助攻: **`{p['assists']}`** ｜ 走力: `{p['sprints']}回`")
+                    st.markdown(f"**CBP**: :blue-background[**{p['total_cbp']} pt**]")
+
+                if st.button("👤 詳細を見る ❯", key=f"btn_squad_p_{p['player_id']}_{idx}", use_container_width=True):
                     navigate_to(
                         view=VIEW_PLAYER,
                         team_id=team_id,

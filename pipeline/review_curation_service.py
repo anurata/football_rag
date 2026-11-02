@@ -1,37 +1,41 @@
 # -*- coding: utf-8 -*-
 """
 Review Curation Service (pipeline/review_curation_service.py).
-Supports collaborative post-match review and tactical summary authoring
-by extracting objective post-match facts, generating decision branches
-with strict Fact/Inference separation, and compiling curated review reports.
+Fully updated to conform to Layer 2 metrics analysis & hypothesis generation.
+Extracts deep match facts, analyzes event dynamics using Layer 2 metrics,
+formulates grounded tactical hypotheses, and compiles curated review reports.
 """
 
 from __future__ import annotations
 
 import json
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+import logging
 import sqlite3
-
-from pipeline.db import DEFAULT_DB_PATH, get_db_connection
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+from pipeline.db import DEFAULT_DB_PATH, get_db_connection
+from scripts.calculate_match_context import MatchContextCalculator
+
+logger = logging.getLogger("review_curation_service")
 
 
 class ReviewCurationService:
-    """Service to extract match facts, generate review branches, and compile curated reviews."""
+    """Service to extract Layer 2 match facts, analyze match dynamics, and compile curated reviews."""
 
     def __init__(
         self,
         db_path: Optional[str] = None,
     ) -> None:
-        self.db_path = db_path or DEFAULT_DB_PATH
+        self.db_path = str(db_path or DEFAULT_DB_PATH)
+        self.context_calculator = MatchContextCalculator(db_path=self.db_path)
 
     def extract_match_review_facts(
         self,
         match_id: str,
     ) -> Dict[str, Any]:
-        """Extract objective facts from SQLite and structured tactical files for a finished match."""
+        """Extract comprehensive Layer 1 & Layer 2 facts from SQLite and tactical context."""
         conn = get_db_connection(self.db_path)
         cursor = conn.cursor()
 
@@ -67,13 +71,13 @@ class ReviewCurationService:
             "stage": row[12] or 1,
         }
 
-        # 2. Team match stats
+        # 2. Team match stats (Layer 1 & Layer 2 intensity)
         cursor.execute(
             """
             SELECT team_id, possession, xg, shots, shots_on_target,
                    total_distance_km, sprints
             FROM team_match_stats
-            WHERE match_id = ? AND period = 'ALL'
+            WHERE match_id = ? AND (period = 'ALL' OR period = 'FULL')
             """,
             (match_id,),
         )
@@ -81,15 +85,15 @@ class ReviewCurationService:
         team_stats: Dict[str, Dict[str, Any]] = {}
         for ts in team_stats_rows:
             team_stats[ts[0]] = {
-                "possession": ts[1],
-                "xg": ts[2],
-                "shots": ts[3],
-                "shots_on_target": ts[4],
-                "distance_km": ts[5],
-                "sprints": ts[6],
+                "possession": ts[1] if ts[1] is not None else 50.0,
+                "xg": ts[2] if ts[2] is not None else 0.0,
+                "shots": ts[3] if ts[3] is not None else 0,
+                "shots_on_target": ts[4] if ts[4] is not None else 0,
+                "distance_km": ts[5] if ts[5] is not None else 0.0,
+                "sprints": ts[6] if ts[6] is not None else 0,
             }
 
-        # 3. Match events (goals, substitutions, cards)
+        # 3. Match events (goals, substitutions, cards, turning points)
         cursor.execute(
             """
             SELECT minute, period, event_type, team_id, player_name, description_text
@@ -113,35 +117,55 @@ class ReviewCurationService:
                 },
             )
 
-        # 4. Top player stats (goals, assists, top distance)
+        # 4. Detailed player stats with Layer 2 metrics (CBP, duels, touches, distance)
         cursor.execute(
             """
-            SELECT player_name, team_id, goals, assists, xg, xa, touches
+            SELECT player_name, team_id, position, number, is_starter, minutes_played,
+                   goals, assists, xg, xa, touches, duels_won, distance_km, cbp_points
             FROM player_match_stats
             WHERE match_id = ?
-            ORDER BY goals DESC, assists DESC, touches DESC
-            LIMIT 10
+            ORDER BY cbp_points DESC, goals DESC, assists DESC
             """,
             (match_id,),
         )
         player_rows = cursor.fetchall()
-        notable_players: List[Dict[str, Any]] = []
+        players: List[Dict[str, Any]] = []
         for pr in player_rows:
-            notable_players.append(
+            players.append(
                 {
                     "name": pr[0],
                     "team_id": pr[1],
-                    "goals": pr[2] or 0,
-                    "assists": pr[3] or 0,
-                    "xg": pr[4] or 0.0,
-                    "xa": pr[5] or 0.0,
-                    "touches": pr[6] or 0,
+                    "position": pr[2] or "-",
+                    "number": pr[3] or 0,
+                    "is_starter": bool(pr[4]),
+                    "minutes_played": pr[5] or 0,
+                    "goals": pr[6] or 0,
+                    "assists": pr[7] or 0,
+                    "xg": pr[8] or 0.0,
+                    "xa": pr[9] or 0.0,
+                    "touches": pr[10] or 0,
+                    "duels_won": pr[11] or 0,
+                    "distance_km": pr[12] or 0.0,
+                    "cbp": pr[13] or 0.0,
                 },
             )
 
         conn.close()
 
-        # 5. Optional structured tactical json
+        # 5. Extract match context (Schedule, fatigue, disciplinary, weather)
+        home_id = basic_info["home_team_id"]
+        away_id = basic_info["away_team_id"]
+        try:
+            home_ctx = self.context_calculator.calculate_context(match_id=match_id, team_id=home_id)
+        except Exception:
+            home_ctx = {}
+
+        try:
+            away_ctx = self.context_calculator.calculate_context(match_id=match_id, team_id=away_id)
+        except Exception:
+            away_ctx = {}
+
+        # 6. Structured tactical data if available
         tactical_json_path = ROOT_DIR / "data" / "structured" / f"{match_id}_tactical.json"
         tactical_data: Dict[str, Any] = {}
         if tactical_json_path.exists():
@@ -154,23 +178,138 @@ class ReviewCurationService:
             "basic_info": basic_info,
             "team_stats": team_stats,
             "events": events,
-            "notable_players": notable_players,
+            "players": players,
+            "notable_players": players,
+            "home_context": home_ctx,
+            "away_context": away_ctx,
             "tactical_data": tactical_data,
+        }
+
+    def analyze_layer2_dynamics_and_hypotheses(
+        self,
+        facts: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """
+        Synthesize Layer 2 metrics to derive structured tactical events and hypotheses.
+        Evaluates physical intensity discrepancy, transition efficiency, and turning points.
+        """
+        basic = facts.get("basic_info", {})
+        team_stats = facts.get("team_stats", {})
+        players = facts.get("players", [])
+        events = facts.get("events", [])
+        home_id = basic.get("home_team_id", "HOME")
+        away_id = basic.get("away_team_id", "AWAY")
+        home_score = basic.get("home_score", 0)
+        away_score = basic.get("away_score", 0)
+
+        home_st = team_stats.get(home_id, {})
+        away_st = team_stats.get(away_id, {})
+
+        # Intensity comparison
+        h_dist = home_st.get("distance_km", 0.0)
+        a_dist = away_st.get("distance_km", 0.0)
+        h_spr = home_st.get("sprints", 0)
+        a_spr = away_st.get("sprints", 0)
+        h_xg = home_st.get("xg", 0.0)
+        a_xg = away_st.get("xg", 0.0)
+
+        # Top performers by CBP
+        home_players = [p for p in players if p["team_id"] == home_id]
+        away_players = [p for p in players if p["team_id"] == away_id]
+
+        top_home_cbp = sorted(home_players, key=lambda x: x["cbp"], reverse=True)[:3]
+        top_away_cbp = sorted(away_players, key=lambda x: x["cbp"], reverse=True)[:3]
+
+        # Goals events
+        goals = [e for e in events if e.get("type") == "GOAL"]
+
+        # Derive hypotheses
+        hypotheses: List[Dict[str, str]] = []
+
+        # Hypothesis 1: Intensity and Transition Dynamics
+        if a_spr > h_spr + 5 or a_dist > h_dist + 2.0:
+            spr_diff = a_spr - h_spr
+            hypotheses.append(
+                {
+                    "title": "インテンシティ格差とトランジションの制圧",
+                    "fact": f"{away_id}のスプリント数（{a_spr}回）が{home_id}（{h_spr}回）を{spr_diff}回上回り、走行距離でも{a_dist:.1f}km vs {h_dist:.1f}kmと優勢。",
+                    "hypothesis": f"【推測】ボール非保持時・即時奪回時におけるスプリント回数の優位性が、{home_id}のパスコースを限定させ、速攻への導線を完全に遮断した。",
+                },
+            )
+        elif h_spr > a_spr + 5 or h_dist > a_dist + 2.0:
+            spr_diff = h_spr - a_spr
+            hypotheses.append(
+                {
+                    "title": "ハイプレス運動量とピッチ支配力",
+                    "fact": f"{home_id}のスプリント数（{h_spr}回）が{away_id}（{a_spr}回）を上回り、走行距離でも圧倒。",
+                    "hypothesis": f"【推測】ホームの利を活かした高い運動量が相手陣でのボール回収確率を引き上げ、主導権掌握に直結した。",
+                },
+            )
+
+        # Hypothesis 2: Central Hub and Tactical Linkage (CBP & Touches)
+        if top_away_cbp and top_away_cbp[0]["cbp"] >= 10.0:
+            hub = top_away_cbp[0]
+            hypotheses.append(
+                {
+                    "title": f"中盤の戦術的ハブ機能（{hub['name']}の圧倒的関与）",
+                    "fact": f"{hub['name']}がCBP {hub['cbp']:.1f}ポイント・タッチ数 {hub['touches']}回・デュエル勝利 {hub['duels_won']}回を記録。",
+                    "hypothesis": f"【推測】{hub['name']}が相手のファーストプレッシャーの背後でボールを引き出し、左右への配球と縦パスの出し手として相手守備網を広げる決定打となった。",
+                },
+            )
+        elif top_home_cbp and top_home_cbp[0]["cbp"] >= 10.0:
+            hub = top_home_cbp[0]
+            hypotheses.append(
+                {
+                    "title": f"攻守の軸としての躍動（{hub['name']}）",
+                    "fact": f"{hub['name']}がCBP {hub['cbp']:.1f}ポイントを記録し、ゲームメイクの中心として機能。",
+                    "hypothesis": f"【推測】中盤底でのボール保持安定と前線への配給テンポをコントロールした。",
+                },
+            )
+
+        # Hypothesis 3: Finishing Efficiency vs Chance Creation (xG vs Actual Goals)
+        if away_score >= 3:
+            hypotheses.append(
+                {
+                    "title": "決定機の質と決定力の構造的連動",
+                    "fact": f"{away_id}はシュート{away_st.get('shots', 0)}本中{away_st.get('shots_on_target', 0)}本が枠内。xG {a_xg:.2f}に対し{away_score}得点を記録。",
+                    "hypothesis": f"【推測】ペナルティエリア内でのラストパス・ラストアクションの質が高く、GKとの1対1や高確率ゾーンからのシュートを冷静に完結させた。",
+                },
+            )
+        elif home_score >= 3:
+            hypotheses.append(
+                {
+                    "title": "枠内シュート精度と決定力爆発",
+                    "fact": f"{home_id}はシュート{home_st.get('shots', 0)}本から{home_score}得点を奪取。",
+                    "hypothesis": f"【推測】相手の守備ブロックが崩れた瞬間を的確に見逃さず、高精度フィニッシュで仕留めた。",
+                },
+            )
+
+        return {
+            "top_home_cbp": top_home_cbp,
+            "top_away_cbp": top_away_cbp,
+            "goals": goals,
+            "hypotheses": hypotheses,
         }
 
     def generate_curation_workspace(
         self,
         match_id: str,
     ) -> Dict[str, Any]:
-        """Extract facts and generate deterministic review decision branches."""
+        """Extract facts and generate deterministic review decision branches grounded in Layer 2."""
         facts = self.extract_match_review_facts(match_id)
-        branches = self._build_review_branches(facts)
+        dynamics = self.analyze_layer2_dynamics_and_hypotheses(facts)
+        branches = self._build_review_branches(facts, dynamics)
         return {
             "facts": facts,
+            "dynamics": dynamics,
             "branches": branches,
         }
 
-    def _build_review_branches(self, facts: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def _build_review_branches(
+        self,
+        facts: Dict[str, Any],
+        dynamics: Dict[str, Any],
+    ) -> List[Dict[str, Any]]:
         """Construct deterministic decision branches for post-match tactical review."""
         basic = facts.get("basic_info", {})
         home_id = basic.get("home_team_id", "HOME")
@@ -186,14 +325,17 @@ class ReviewCurationService:
                 home_score=home_score,
                 away_score=away_score,
                 team_stats=team_stats,
+                dynamics=dynamics,
             ),
             self._create_tactical_matchup_branch(
                 home_id=home_id,
                 away_id=away_id,
                 facts=facts,
+                dynamics=dynamics,
             ),
             self._create_impact_player_branch(
                 facts=facts,
+                dynamics=dynamics,
             ),
         ]
         return branches
@@ -205,17 +347,17 @@ class ReviewCurationService:
         home_score: int,
         away_score: int,
         team_stats: Dict[str, Any],
+        dynamics: Dict[str, Any],
     ) -> Dict[str, Any]:
         """Generate branch options for the game deciding turning point."""
         home_st = team_stats.get(home_id, {})
         away_st = team_stats.get(away_id, {})
         home_shots = home_st.get("shots", 0)
         away_shots = away_st.get("shots", 0)
+        winner_id = away_id if away_score > home_score else (home_id if home_score > away_score else None)
 
-        if home_score > away_score:
-            result_context = f"{home_id} が {home_score}-{away_score} で勝利。"
-        elif away_score > home_score:
-            result_context = f"{away_id} が {away_score}-{home_score} で勝利。"
+        if winner_id:
+            result_context = f"{winner_id} が {max(home_score, away_score)}-{min(home_score, away_score)} で勝利。"
         else:
             result_context = f"{home_score}-{away_score} の引き分け。"
 
@@ -226,21 +368,21 @@ class ReviewCurationService:
             "options": [
                 {
                     "option_id": "A",
-                    "label": "決定力と決定機創出のクオリティ差",
-                    "fact_basis": f"【事実】最終スコア {home_score}-{away_score}（シュート数: {home_id} {home_shots}本 vs {away_id} {away_shots}本）。{result_context}",
-                    "inference": "【推測】限られたチャンスにおけるフィニッシュ精度およびペナルティエリア内の落ち着きが勝敗に直結した。",
+                    "label": "ハイインテンシティと即時奪回によるショートカウンターの炸裂",
+                    "fact_basis": f"【事実】シュート数 {home_id} {home_shots}本 vs {away_id} {away_shots}本。スプリント数・走行距離での優位性を保持しての複数得点（{result_context}）。",
+                    "inference": "【推測】ボールロスト直後のトランジション速度が相手陣形のスライドを上回り、守備ブロックの再構築前に決定機を創出した。",
                 },
                 {
                     "option_id": "B",
-                    "label": "守備ブロックの組織的強度とピンチでの粘り",
-                    "fact_basis": f"【事実】相手の枠内シュートや攻撃圧力に対し、失点を最小限に抑え込んだスタッツ推移。",
-                    "inference": "【推測】自陣ゴール前でのタイトなスライドと連動したブロック守備が相手の追加点・反撃の芽を摘んだ。",
+                    "label": "サイドのスペース攻略とDFライン背後への配球クオリティ",
+                    "fact_basis": f"【事実】ペナルティエリア進入回数および高精度クロス・ロングフィードからの決定機創出。",
+                    "inference": "【推測】相手のコンパクトな中央ブロックに対し、外から揺さぶり背後のスペースを突く攻撃設計が機能した。",
                 },
                 {
                     "option_id": "C",
-                    "label": "後半の選手交代・時間帯マネジメントの差",
-                    "fact_basis": "【事実】後半の選手交代以降におけるボール保持率・シュート発生頻度の変化。",
-                    "inference": "【推測】ベンチワークによるインテンシティの再注入またはゲームクローズ戦術の徹底が勝点配分を確定づけた。",
+                    "label": "セットプレーおよびセカンドボール回収の徹底",
+                    "fact_basis": "【事実】中盤のこぼれ球奪取率とペナルティエリア外からのセカンドチャンスにおけるシュート発生。",
+                    "inference": "【推測】ルーズボールの予測とデュエルでの粘りが主導権を手放さないゲームクローズに寄与した。",
                 },
             ],
         }
@@ -250,30 +392,31 @@ class ReviewCurationService:
         home_id: str,
         away_id: str,
         facts: Dict[str, Any],
+        dynamics: Dict[str, Any],
     ) -> Dict[str, Any]:
         """Generate branch options for tactical matchup evaluation."""
         return {
             "branch_id": "tactical_evaluation",
-            "title": "【戦術的噛み合わせの総括】ピッチ上の主導権争い",
+            "title": "【戦術的噛み合わせの総括】ピッチ上の主導権争いと構造的力学",
             "category": "tactical_matchup",
             "options": [
                 {
                     "option_id": "A",
-                    "label": "ハイプレスとビルドアップのせめぎ合い",
-                    "fact_basis": f"【事実】敵陣でのボール奪取、プレッシングの強度、および後方からのパス成功率。",
-                    "inference": f"【推測】プレッシャーを回避して前進できた時間帯に明確な優位性が現れていた。",
+                    "label": "ハイプレス回避とブロック間ポケットの有効活用",
+                    "fact_basis": "【事実】中盤ボランチ・トップ下を中心としたボール経由数と相手プレッシャーライン背後への前進パス。",
+                    "inference": "【推測】相手の前プレを誘引して空いた中間ポジションにボールを差し込み、中央突破の足がかりを作った。",
                 },
                 {
                     "option_id": "B",
-                    "label": "サイドの局地戦（ウイング/SB vs WB/サイドCB）の攻防",
-                    "fact_basis": "【事実】サイド攻撃比率とクロス配給数、サイドでのデュエル発生状況。",
-                    "inference": "【推測】幅を使ったアタックとオーバーラップに対する守備対応が全体の守備陣形を広げた。",
+                    "label": "5バック気味の強固な撤退守備 vs ポゼッションによる崩し",
+                    "fact_basis": "【事実】ボール保持率の偏りと自陣深くでのシュートブロック・クリア数。",
+                    "inference": "【推測】相手のカウンター警戒ラインを保ちつつ、リスクを最小限に抑えたボール循環でスペースの創出を試みた。",
                 },
                 {
                     "option_id": "C",
-                    "label": "中盤のセカンドボール回収とトランジションのスピード",
-                    "fact_basis": "【事実】ボランチを中心とした中盤のボール奪取数および攻守切り替え直後の前進スピード。",
-                    "inference": "【推測】トランジションで素早く縦に付けられた側が相手ディフェンスの帰陣前に決定機を創出した。",
+                    "label": "プレッシャー強度の時間帯別推移と交代策による打開",
+                    "fact_basis": "【事実】後半60分以降の交代出場選手のシュート関与・アシスト記録。",
+                    "inference": "【推測】疲労が見え始めた相手守備陣に対しフレッシュなアタッカーを投入し、スピードで圧倒した。",
                 },
             ],
         }
@@ -281,11 +424,12 @@ class ReviewCurationService:
     def _create_impact_player_branch(
         self,
         facts: Dict[str, Any],
+        dynamics: Dict[str, Any],
     ) -> Dict[str, Any]:
         """Generate branch options for player evaluation."""
-        notable = facts.get("notable_players", [])
-        top_name = notable[0]["name"] if notable else "中心選手"
-        second_name = notable[1]["name"] if len(notable) > 1 else "守備リーダー"
+        players = facts.get("players", [])
+        top_cbp_p = players[0] if players else {"name": "中心選手", "team_id": "TEAM", "cbp": 0.0}
+        second_cbp_p = players[1] if len(players) > 1 else {"name": "キーマン", "team_id": "TEAM", "cbp": 0.0}
 
         return {
             "branch_id": "impact_player",
@@ -294,43 +438,32 @@ class ReviewCurationService:
             "options": [
                 {
                     "option_id": "A",
-                    "label": f"攻撃を牽引したキーマンの躍動（{top_name}）",
-                    "fact_basis": f"【事実】得点・アシスト関与またはペナルティエリア付近での高いタッチ数・決定機関与（{top_name} 等）。",
-                    "inference": "【推測】相手のマークを引き付けつつ自ら決定的な仕事を果たし、攻撃の起点となった。",
+                    "label": f"ピッチを支配した最高評価選手（{top_cbp_p['name']}）",
+                    "fact_basis": f"【事実】CBP {top_cbp_p.get('cbp', 0.0):.1f}pt、タッチ数 {top_cbp_p.get('touches', 0)}回、攻守に圧倒的な関与度を記録。",
+                    "inference": "【推測】攻守の切り替えとゲームメイクの心臓部として機能し、チームの勝利に最も決定的な役割を果たした。",
                 },
                 {
                     "option_id": "B",
-                    "label": f"守備の要として破綻を防いだ貢献（{second_name}）",
-                    "fact_basis": f"【事実】重要なシュートブロック、デュエル、ボール回収スタッツでの貢献（{second_name} 等）。",
-                    "inference": "【推測】相手の決定的なアタックを寸前で食い止め、チーム全体のゲームコントロールを支えた。",
+                    "label": f"戦術的タスクを完遂した影の立役者（{second_cbp_p['name']}）",
+                    "fact_basis": f"【事実】CBP {second_cbp_p.get('cbp', 0.0):.1f}pt、デュエル・守備ブロックでの高い貢献度。",
+                    "inference": "【推測】目立たない局面でも献身的なカバーリングとリスク管理を徹底し、全体の守備破綻を未然に防いだ。",
                 },
             ],
         }
 
     def format_review_markdown(self, facts: Dict[str, Any]) -> str:
-        """Render deterministic review facts into clean Markdown format."""
+        """Render comprehensive review facts with Layer 2 metrics and hypotheses into clean Markdown."""
         basic = facts.get("basic_info", {})
         team_stats = facts.get("team_stats", {})
         events = facts.get("events", [])
-        notable = facts.get("notable_players", [])
+        players = facts.get("players", [])
+        home_ctx = facts.get("home_context", {})
+        away_ctx = facts.get("away_context", {})
 
         home_id = basic.get("home_team_id", "HOME")
         away_id = basic.get("away_team_id", "AWAY")
         home_score = basic.get("home_score", 0)
         away_score = basic.get("away_score", 0)
-
-        lines: List[str] = [
-            f"# ⚽ 試合総括レポート: {basic.get('date', '')} {home_id} vs {away_id}",
-            "",
-            "## 1. 試合基本情報",
-            f"- **スコア**: {home_id} {home_score} - {away_score} {away_id}",
-            f"- **日程・会場**: {basic.get('date', '')} / {basic.get('stadium', '')}（天候: {basic.get('weather', '')} / 観客数: {basic.get('attendance', 0):,}人）",
-            f"- **更新ステージ**: Stage {basic.get('stage', 1)}",
-            "",
-            "## 2. チーム確定スタッツ",
-            f"| 指標 | {home_id} | {away_id} |",
-            "|---|---|---|",
-        ]
 
         home_st = team_stats.get(home_id, {})
         away_st = team_stats.get(away_id, {})
@@ -342,17 +475,33 @@ class ReviewCurationService:
                 return f"{val:.1f}"
             return str(val)
 
+        lines: List[str] = [
+            f"# ⚽ 試合総括レポート: {basic.get('date', '')} {home_id} vs {away_id}",
+            "",
+            "## 1. 試合基本情報＆前提コンテキスト",
+            f"- **スコア**: {home_id} {home_score} - {away_score} {away_id}",
+            f"- **日程・会場**: {basic.get('date', '')} / {basic.get('stadium', '')}（天候: {basic.get('weather', '')} / 観客数: {basic.get('attendance', 0):,}人）",
+        ]
+
+        # Context details
+        h_sched = home_ctx.get("schedule_fatigue", {})
+        a_sched = away_ctx.get("schedule_fatigue", {})
         lines.extend(
             [
-                f"| スコア | {home_score} | {away_score} |",
-                f"| シュート数 | {_fmt(home_st.get('shots'))} | {_fmt(away_st.get('shots'))} |",
-                f"| 枠内シュート | {_fmt(home_st.get('shots_on_target'))} | {_fmt(away_st.get('shots_on_target'))} |",
-                f"| ボール支配率 (%) | {_fmt(home_st.get('possession'))} | {_fmt(away_st.get('possession'))} |",
-                f"| 期待ゴール (xG) | {_fmt(home_st.get('xg'))} | {_fmt(away_st.get('xg'))} |",
-                f"| 走行距離 (km) | {_fmt(home_st.get('distance_km'))} | {_fmt(away_st.get('distance_km'))} |",
-                f"| スプリント回数 | {_fmt(home_st.get('sprints'))} | {_fmt(away_st.get('sprints'))} |",
+                f"- **日程・疲労度**: {home_id}（{h_sched.get('rest_days_display', '-')} / 疲労度: {h_sched.get('fatigue_risk_level', '-')}） vs {away_id}（{a_sched.get('rest_days_display', '-')} / 疲労度: {a_sched.get('fatigue_risk_level', '-')}）",
                 "",
-                "## 3. 主要マッチイベント",
+                "## 2. 確定スタッツ＆Layer2インテンシティ比較",
+                f"| 指標 | {home_id} | {away_id} | 戦術的含意 |",
+                "|---|---|---|---|",
+                f"| スコア | {home_score} | {away_score} | 最終結果 |",
+                f"| ボール支配率 (%) | {_fmt(home_st.get('possession'))} | {_fmt(away_st.get('possession'))} | ポゼッション主導権 |",
+                f"| シュート数 | {_fmt(home_st.get('shots'))} | {_fmt(away_st.get('shots'))} | フィニッシュ創出頻度 |",
+                f"| 枠内シュート | {_fmt(home_st.get('shots_on_target'))} | {_fmt(away_st.get('shots_on_target'))} | フィニッシュ精度 |",
+                f"| 期待ゴール (xG) | {_fmt(home_st.get('xg'))} | {_fmt(away_st.get('xg'))} | 決定機の質的総量 |",
+                f"| 総走行距離 (km) | {_fmt(home_st.get('distance_km'))} | {_fmt(away_st.get('distance_km'))} | チーム総運動量 |",
+                f"| スプリント回数 | {_fmt(home_st.get('sprints'))} | {_fmt(away_st.get('sprints'))} | ハイインテンシティ頻度 |",
+                "",
+                "## 3. 主要マッチイベント＆時間帯別力学",
             ]
         )
 
@@ -363,26 +512,62 @@ class ReviewCurationService:
                 desc = ev.get("description", "")
                 pname = ev.get("player_name", "")
                 tid = ev.get("team_id", "")
-                lines.append(f"- **{minute}'** [{ev_type}] {tid} {pname} {f'({desc})' if desc else ''}".strip())
+                icon = "⚽" if ev_type == "GOAL" else ("🔄" if ev_type == "SUBSTITUTION" else "🟨")
+                lines.append(f"- **{minute}'** {icon} [{ev_type}] **{tid} {pname}**: {desc}".strip())
         else:
             lines.append("- イベント記録なし")
 
         lines.extend(
             [
                 "",
-                "## 4. 主な個人スタッツ記録",
+                "## 4. 個人詳細スタッツ＆CBPトップパフォーマンス",
             ]
         )
 
-        if notable:
-            for p in notable[:5]:
+        if players:
+            lines.append(f"### 【{away_id}】トップパフォーマンス選手")
+            for p in [x for x in players if x["team_id"] == away_id][:5]:
                 lines.append(
-                    f"- **{p['name']}** ({p['team_id']}): "
-                    f"得点 {p['goals']}, アシスト {p['assists']}, "
-                    f"xG {p['xg']:.2f}, xA {p['xa']:.2f}, タッチ数 {p['touches']}",
+                    f"- **#{p['number']} {p['name']}** ({p['position']}): "
+                    f"CBP **{p['cbp']:.1f}pt**, 得点 {p['goals']}, アシスト {p['assists']}, "
+                    f"タッチ {p['touches']}回, デュエル勝利 {p['duels_won']}回, 走破 {p['distance_km']:.1f}km",
+                )
+            lines.append("")
+            lines.append(f"### 【{home_id}】トップパフォーマンス選手")
+            for p in [x for x in players if x["team_id"] == home_id][:5]:
+                lines.append(
+                    f"- **#{p['number']} {p['name']}** ({p['position']}): "
+                    f"CBP **{p['cbp']:.1f}pt**, 得点 {p['goals']}, アシスト {p['assists']}, "
+                    f"タッチ {p['touches']}回, デュエル勝利 {p['duels_won']}回, 走破 {p['distance_km']:.1f}km",
                 )
         else:
             lines.append("- 特筆スタッツ選手なし")
+
+        # Section 5: Layer 2 Derived Hypotheses
+        dynamics = self.analyze_layer2_dynamics_and_hypotheses(facts)
+        hypotheses = dynamics.get("hypotheses", [])
+        lines.extend(
+            [
+                "",
+                "## 5. 🧠 Layer 2指標に基づく事象分析＆導き出される戦術的仮説",
+                "> [!IMPORTANT]",
+                "> 単なる結果論（Outcome Bias）を排除し、走行距離・スプリント・CBP・xGといったLayer 2客観スタッツから、試合の因果関係と戦術的メカニズムを紐解きます。",
+                "",
+            ]
+        )
+
+        if hypotheses:
+            for i, hyp in enumerate(hypotheses, 1):
+                lines.extend(
+                    [
+                        f"### ◆ 仮説{i}: {hyp['title']}",
+                        f"- {hyp['fact']}",
+                        f"- {hyp['hypothesis']}",
+                        "",
+                    ]
+                )
+        else:
+            lines.append("- 算出された戦術仮説なし")
 
         return "\n".join(lines)
 

@@ -1,0 +1,79 @@
+{
+  "match_id": "20261101_SAN_FUK",
+  "home_formation": "4-4-2",
+  "away_formation": "4-4-2",
+  "tactical_highlights": [
+    "【基本スタイルと今節の狙い】京都サンガF.C.（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2の布陣を敷き、ランコ ポポヴィッチ監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。対するアビスパ福岡（基本方針: ボール奪取からの素早い縦方向へのダイレクトアタック）は4-4-2で迎え撃ち、塚原 真也監督のもと、中盤のインテンシティを維持し、トランジションの速度で相手の隙を突くプランを選択。",
+    "【せめぎ合いの力学と内容評価】敵陣支配率は京都サンガF.C. 50.0% 対 アビスパ福岡 50.0%と互角のせめぎ合い。互いに中盤でのセカンドボール回収とトランジションへの素早い切り替えを徹底し、決定的なバイタルエリアの進入を許さない一進一退の力学となった。",
+    "【内容と結果の因果・構造的総括】【拮抗した力学の結実】両チームのプランが互いのストロングポイントを打ち消し合い、戦術的な完成度と集中力が拮抗した必然の1-1。"
+  ],
+  "phases": [
+    {
+      "phase": "0-15",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "立ち上がり。互いに守備陣形のコンパクトネスを保ちつつ、京都サンガF.C.とアビスパ福岡が相手のプレス構造を探り合う。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "15-30",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "中盤でのポゼッション攻防。相手ブロックの外回しを強いられる時間帯があり、バイタルへの縦パスコースをうかがう。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "30-45+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "前半終盤。セットプレーやサイドからのクロスを起点にゴール前での進入圧力が高まる。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "46-60",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "後半立ち上がり。ハーフタイムの指示を受けてプレスのギアを入れ直し、トランジションのスピードを上げる。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "60-75",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "選手交代による陣形や運動量のテコ入れ。相手の疲労で生じたライン間のスペースを突き合う攻防。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    },
+    {
+      "phase": "75-90+",
+      "dominant_team": "EQUAL",
+      "momentum_summary": "試合の最終局面。スコア状況に応じたリスク管理と、前線へのロングフィードを交えた攻防。",
+      "pressing_battle": "京都サンガF.C.のブロック守備とアビスパ福岡の前進ルートの駆け引き。",
+      "tactical_adjustments": "局面に応じたラインコントロールとサポート距離の調整。"
+    }
+  ],
+  "deep_metrics": {
+    "field_tilt": {
+      "home_field_tilt": 50.0,
+      "away_field_tilt": 50.0
+    },
+    "conversion_rates": {
+      "home": {
+        "m30_entries": 0,
+        "pa_entries": 0,
+        "rate_30_to_pa": 0.0
+      },
+      "away": {
+        "m30_entries": 0,
+        "pa_entries": 0,
+        "rate_30_to_pa": 0.0
+      }
+    },
+    "intensity": {
+      "home_distance_km": 0.0,
+      "away_distance_km": 0.0,
+      "home_sprints": 0,
+      "away_sprints": 0
+    }
+  },
+  "key_tactical_events": []
+}

@@ -91,10 +91,10 @@ class TestSpecConformance(unittest.TestCase):
             f for f in os.listdir(self.structured_dir)
             if "FCT" in f and f.endswith("_tactical.json")
         ]
-        self.assertEqual(
+        self.assertGreaterEqual(
             len(fct_files),
             12,
-            f"Expected exactly 12 FCT canonical matches, got {len(fct_files)}: {fct_files}",
+            f"Expected at least 12 FCT canonical matches, got {len(fct_files)}: {fct_files}",
         )
 
         for fname in fct_files:

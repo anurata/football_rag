@@ -21,6 +21,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from agent.objective_profiler import resolve_team_name, TEAM_NAME_MAP
 from pipeline.db import DEFAULT_DB_PATH, get_db_connection
+from scripts.calculate_match_context import MatchContextCalculator
 
 logger = logging.getLogger("match_tactical_enricher")
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -35,8 +36,9 @@ class DeterministicTacticalEnricher:
         db_path: Path = DEFAULT_DB_PATH,
         profiles_path: Path = PROFILES_PATH,
     ) -> None:
-        self.db_path = db_path
+        self.db_path = Path(db_path)
         self.profiles = self._load_team_profiles(profiles_path)
+        self.context_calculator = MatchContextCalculator(db_path=Path(db_path))
 
     def _load_team_profiles(self, path: Path) -> Dict[str, Any]:
         """Load tactical profiles master for all 20 clubs."""
@@ -64,7 +66,6 @@ class DeterministicTacticalEnricher:
                    home_score, away_score, stadium, weather
             FROM matches
             WHERE season = 2026
-              AND matchweek <= 12
             ORDER BY matchweek ASC, date ASC;
             """
         )
@@ -141,7 +142,17 @@ class DeterministicTacticalEnricher:
             flab_a=flab_a,
         )
 
-        return {
+        match_context = None
+        try:
+            target_team_id = "FCT" if "FCT" in (h_id, a_id) else h_id
+            match_context = self.context_calculator.calculate_context(
+                match_id=m_id,
+                team_id=target_team_id,
+            )
+        except Exception as e:
+            logger.debug("Failed to calculate context for %s: %s", m_id, e)
+
+        result: Dict[str, Any] = {
             "match_id": m_id,
             "home_formation": formations.get("home_initial", "4-4-2"),
             "away_formation": formations.get("away_initial", "4-4-2"),
@@ -150,6 +161,10 @@ class DeterministicTacticalEnricher:
             "deep_metrics": deep_metrics,
             "key_tactical_events": events,
         }
+        if match_context:
+            result["match_context"] = match_context
+
+        return result
 
     # -------------------------------------------------------------------------
     # Core Synthesis: Base Style -> Match Plan -> Clash -> Discrepancy Evaluation

@@ -170,13 +170,13 @@ class MatchContextService:
 
     def __init__(
         self,
-        db_path: Optional[Path] = None,
+        db_path: Optional[Any] = None,
         stadium_config_path: Optional[Path] = None,
         loan_config_path: Optional[Path] = None,
         injury_config_path: Optional[Path] = None,
         markdown_dir: Optional[Path] = None,
     ) -> None:
-        self.db_path = db_path or DEFAULT_DB_PATH
+        self.db_path = Path(db_path) if db_path else DEFAULT_DB_PATH
         self.stadium_config_path = stadium_config_path or DEFAULT_STADIUM_PATH
         self.loan_config_path = loan_config_path or DEFAULT_LOAN_PATH
         self.injury_config_path = injury_config_path or DEFAULT_INJURY_PATH

@@ -643,12 +643,89 @@ def get_style_adherence_matches(team_id: str) -> List[Dict[str, Any]]:
     return [item[1] for item in scored_matches[:3]]
 
 
+def romaji_to_hiragana(text: str) -> str:
+    """ローマ字（ヘボン式・訓令式）を平仮名よみがなに変換する."""
+    if not text:
+        return ""
+    
+    # 既にカタカナまたは平仮名が含まれる場合はそのまま返す
+    if any('\u3040' <= ch <= '\u30ff' for ch in text):
+        return text
+
+    table = {
+        'kya': 'きゃ', 'kyu': 'きゅ', 'kyo': 'きょ',
+        'sha': 'しゃ', 'shu': 'しゅ', 'sho': 'しょ', 'shi': 'し',
+        'cha': 'ちゃ', 'chu': 'ちゅ', 'cho': 'ちょ', 'chi': 'ち',
+        'tsu': 'つ',
+        'nya': 'にゃ', 'nyu': 'にゅ', 'nyo': 'にょ',
+        'hya': 'ひゃ', 'hyu': 'ひゅ', 'hyo': 'ひょ',
+        'mya': 'みゃ', 'myu': 'みゅ', 'myo': 'みょ',
+        'rya': 'りゃ', 'ryu': 'りゅ', 'ryo': 'りょ',
+        'gya': 'ぎゃ', 'gyu': 'ぎゅ', 'gyo': 'ぎょ',
+        'ja': 'じゃ', 'ju': 'じゅ', 'jo': 'じょ', 'ji': 'じ',
+        'bya': 'びゃ', 'byu': 'びゅ', 'byo': 'びょ',
+        'pya': 'ぴゃ', 'pyu': 'ぴゅ', 'pyo': 'ぴょ',
+        'ka': 'か', 'ki': 'き', 'ku': 'く', 'ke': 'け', 'ko': 'こ',
+        'sa': 'さ', 'su': 'す', 'se': 'せ', 'so': 'そ',
+        'ta': 'た', 'te': 'て', 'to': 'と',
+        'na': 'な', 'ni': 'に', 'nu': 'ぬ', 'ne': 'ね', 'no': 'の',
+        'ha': 'は', 'hi': 'ひ', 'fu': 'ふ', 'he': 'へ', 'ho': 'ほ',
+        'ma': 'ま', 'mi': 'み', 'mu': 'む', 'me': 'め', 'mo': 'も',
+        'ya': 'や', 'yu': 'ゆ', 'yo': 'よ',
+        'ra': 'ら', 'ri': 'り', 'ru': 'る', 're': 'れ', 'ro': 'ろ',
+        'wa': 'わ', 'wo': 'を', 'nn': 'ん',
+        'ga': 'が', 'gi': 'ぎ', 'gu': 'ぐ', 'ge': 'げ', 'go': 'ご',
+        'za': 'ざ', 'zu': 'ず', 'ze': 'ぜ', 'zo': 'ぞ',
+        'da': 'だ', 'di': 'ぢ', 'du': 'づ', 'de': 'で', 'do': 'ど',
+        'ba': 'ば', 'bi': 'び', 'bu': 'ぶ', 'be': 'べ', 'bo': 'ぼ',
+        'pa': 'ぱ', 'pi': 'ぴ', 'pu': 'ぷ', 'pe': 'ぺ', 'po': 'ぽ',
+        'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
+        'n': 'ん',
+    }
+    
+    words = text.strip().split()
+    converted_words = []
+    
+    for word in words:
+        w = word.lower()
+        res = []
+        i = 0
+        while i < len(w):
+            # 促音 (っ): 子音連続 (例: tt, ss, kk, pp, mm/nn->ん)
+            if i + 1 < len(w) and w[i] == w[i+1] and w[i] not in 'aeiouy-':
+                if w[i] in 'mn':
+                    res.append('ん')
+                else:
+                    res.append('っ')
+                i += 1
+                continue
+            if w[i:i+3] == 'tch':
+                res.append('っ')
+                i += 1
+                continue
+            
+            matched = False
+            for length in (3, 2, 1):
+                part = w[i:i+length]
+                if part in table:
+                    res.append(table[part])
+                    i += length
+                    matched = True
+                    break
+            if not matched:
+                res.append(w[i])
+                i += 1
+        converted_words.append("".join(res))
+    
+    return " ".join(converted_words)
+
+
 # ---------------------------------------------------------------------------
 # 6. 所属選手ロスターのCBP＆スタッツ集計
 # ---------------------------------------------------------------------------
 @st.cache_data(ttl=600)
 def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
-    """所属選手の出場時間、得点、アシスト、CBP指標を集計する."""
+    """所属選手の出場時間、得点、アシスト、CBP指標、よみがなを集計する."""
     conn = _get_db()
     cursor = conn.cursor()
 
@@ -659,6 +736,7 @@ def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
         COALESCE(emp.position, pms.position, 'MF') AS pos,
         COALESCE(emp.number, pms.number, 0) AS num,
         MAX(emp.photo_url) AS photo_url,
+        MAX(emp.en_name) AS en_name,
         COUNT(DISTINCT pms.match_id) AS matches_count,
         SUM(pms.minutes_played) AS total_minutes,
         SUM(pms.goals) AS goals,
@@ -680,9 +758,19 @@ def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
 
     squad: List[Dict[str, Any]] = []
     for r in rows:
+        p_name = r["player_name"]
+        en_name = r["en_name"] or ""
+        # 選手名が既にカタカナの場合はカタカナをそのまま、漢字の場合はローマ字から平仮名変換
+        if any('\u30a0' <= ch <= '\u30ff' for ch in p_name) and not any('\u4e00' <= ch <= '\u9fff' for ch in p_name):
+            yomi = p_name
+        else:
+            yomi = romaji_to_hiragana(en_name)
+
         squad.append({
             "player_id": r["player_id"],
-            "player_name": r["player_name"],
+            "player_name": p_name,
+            "yomi": yomi,
+            "en_name": en_name,
             "position": r["pos"] or "MF",
             "number": r["num"] or "-",
             "photo_url": r["photo_url"],

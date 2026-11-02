@@ -132,14 +132,18 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         top_player = squad[0]
         self.assertIn("player_id", top_player)
         self.assertIn("player_name", top_player)
+        self.assertIn("yomi", top_player)
+        self.assertIn("en_name", top_player)
         self.assertIn("position", top_player)
         self.assertIn("total_cbp", top_player)
         self.assertIn("photo_url", top_player)
         self.assertGreaterEqual(top_player["total_cbp"], 0.0)
 
-        # 多数の選手に写真URLが存在すること
+        # 多数の選手に写真URLおよびよみがなが存在すること
         with_photos = [p for p in squad if p.get("photo_url")]
         self.assertGreater(len(with_photos), 10)
+        with_yomi = [p for p in squad if p.get("yomi")]
+        self.assertGreater(len(with_yomi), 10)
 
     def test_get_team_h2h_comparison(self):
         """他クラブ直接対比（Head-to-Head）の検証."""

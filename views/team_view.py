@@ -513,6 +513,16 @@ def _render_squad_tab(team_id: str) -> None:
                         )
                 with col_info:
                     st.markdown(f"### {p['player_name']}")
+                    yomi_str = p.get("yomi", "")
+                    en_str = p.get("en_name", "")
+                    if yomi_str and yomi_str != p["player_name"]:
+                        sub_text = f"よみがな: **{yomi_str}**"
+                        if en_str and en_str.lower() != yomi_str.lower():
+                            sub_text += f" ({en_str})"
+                        st.caption(sub_text)
+                    elif en_str:
+                        st.caption(f"表記: **{en_str}**")
+
                     st.markdown(f"`{p['position']}` **#{p['number']}** ｜ `{p['matches']}試合` ({p['minutes']}分)")
                     st.write(f"得点: **`{p['goals']}`** ｜ 助攻: **`{p['assists']}`** ｜ 走力: `{p['sprints']}回`")
                     st.markdown(f"**CBP総合**: :blue-background[**{p['total_cbp']} pt**]")

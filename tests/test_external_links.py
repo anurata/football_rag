@@ -110,6 +110,16 @@ class TestExternalLinks(unittest.TestCase):
         fl_top = get_football_lab_url("FCT", None)
         self.assertEqual(fl_top, "https://www.football-lab.jp/fctk/")
 
+    def test_fallback_with_empty_or_none_match(self) -> None:
+        """Test fallback behavior when match data is empty or None."""
+        self.assertEqual(get_yahoo_soccer_url(None), "https://soccer.yahoo.co.jp/jleague/category/j1")
+        self.assertEqual(get_jleague_official_match_url(None), "https://www.jleague.jp/")
+        self.assertEqual(get_football_lab_url(None, None), "https://www.football-lab.jp/")
+        
+        empty_links = generate_match_external_links({})
+        self.assertEqual(empty_links["yahoo_soccer"]["url"], "https://soccer.yahoo.co.jp/jleague/category/j1")
+        self.assertEqual(empty_links["jleague_official"]["url"], "https://www.jleague.jp/")
+
     def test_generate_match_external_links_structure(self) -> None:
         """Test complete direct external links dict structure."""
         links = generate_match_external_links(self.mw13_match)

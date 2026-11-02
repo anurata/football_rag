@@ -14,6 +14,7 @@ VIEW_TEAM = "TEAM"
 VIEW_MATCH = "MATCH"
 VIEW_PLAYER = "PLAYER"
 VIEW_AI_CHAT = "AI_CHAT"
+VIEW_SETTINGS = "SETTINGS"
 
 VIEW_LABELS: Dict[str, str] = {
     VIEW_LEAGUE: "🏆 Jリーグ全体",
@@ -21,6 +22,7 @@ VIEW_LABELS: Dict[str, str] = {
     VIEW_MATCH: "⚽ 試合詳細",
     VIEW_PLAYER: "👤 選手名鑑",
     VIEW_AI_CHAT: "🤖 AI対話一覧",
+    VIEW_SETTINGS: "⚙️ 設定",
 }
 
 LABEL_TO_VIEW: Dict[str, str] = {

@@ -44,6 +44,7 @@ from views.navigation import (
     VIEW_MATCH,
     VIEW_PLAYER,
     VIEW_AI_CHAT,
+    VIEW_SETTINGS,
     render_sidebar_navigation,
 )
 from views.components.ai_modal import check_and_trigger_auto_ai_modal
@@ -52,6 +53,10 @@ from views.team_view import render_team_view
 from views.player_view import render_player_view
 from views.ai_chat_view import render_ai_chat_view
 from views.match_view import render_match_view
+from views.settings_view import (
+    render_settings_view,
+    get_configured_gemini_client,
+)
 
 
 def get_team_display_name(team_id: Optional[str]) -> str:
@@ -1638,42 +1643,8 @@ def render_chat_qa_tab(
 
 
 def render_sidebar_llm_settings() -> GeminiTacticalClient:
-    """Render the sidebar Gemini AI settings inputs and return configured client."""
-    st.sidebar.markdown("---")
-    st.sidebar.header("🤖 Gemini AI 設定")
-
-    # Check secrets for default API key
-    default_secret_key = None
-    try:
-        default_secret_key = st.secrets.get("GEMINI_API_KEY")
-    except Exception:
-        pass
-
-    api_key_input = st.sidebar.text_input(
-        "Gemini API キー (未入力時は環境変数/Secretsを使用)",
-        type="password",
-        value=default_secret_key or "",
-        help=".env や環境変数 GEMINI_API_KEY または Secrets があれば自動適用されます",
-    )
-    default_index = 0
-    if DEFAULT_GEMINI_MODEL in SUPPORTED_GEMINI_MODELS:
-        default_index = SUPPORTED_GEMINI_MODELS.index(DEFAULT_GEMINI_MODEL)
-
-    model_name = st.sidebar.selectbox(
-        "モデル選択",
-        options=SUPPORTED_GEMINI_MODELS,
-        index=default_index,
-    )
-    use_mock = st.sidebar.checkbox(
-        "検証用モックモード (APIキー不要)",
-        value=False,
-    )
-    return GeminiTacticalClient(
-        api_key=api_key_input or None,
-        model=model_name,
-        mock_mode=use_mock,
-    )
-
+    """Deprecated alias: retrieves configured Gemini client from session state."""
+    return get_configured_gemini_client()
 
 # ==============================================================================
 # Main Streamlit App
@@ -1696,7 +1667,7 @@ def main():
     # Backend engine & AI client initialization
     engine = get_engine()
     profiler, comparator, rater = get_analysis_modules()
-    gemini_client = render_sidebar_llm_settings()
+    gemini_client = get_configured_gemini_client()
     qa_engine = TacticalQAEngine(gemini_client=gemini_client)
 
     # --------------------------------------------------------------------------
@@ -1715,6 +1686,8 @@ def main():
         render_player_view(qa_engine)
     elif current_view == VIEW_AI_CHAT:
         render_ai_chat_view(qa_engine)
+    elif current_view == VIEW_SETTINGS:
+        render_settings_view()
     else:
         # Default: VIEW_MATCH
         selected_match = render_sidebar_match_selector()

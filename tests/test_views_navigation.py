@@ -13,6 +13,7 @@ from views.navigation import (
     VIEW_MATCH,
     VIEW_PLAYER,
     VIEW_AI_CHAT,
+    VIEW_SETTINGS,
     VIEW_LABELS,
     LABEL_TO_VIEW,
     init_navigation_state,
@@ -37,6 +38,7 @@ class TestViewsNavigation(unittest.TestCase):
             VIEW_MATCH,
             VIEW_PLAYER,
             VIEW_AI_CHAT,
+            VIEW_SETTINGS,
         ]
         for v in expected_views:
             self.assertIn(v, VIEW_LABELS)
@@ -88,7 +90,14 @@ class TestViewsNavigation(unittest.TestCase):
         self.assertEqual(st.session_state["selected_player_id"], "P999")
         self.assertEqual(st.session_state["selected_player_name"], "仲川 輝人")
 
+    def test_navigate_to_settings(self) -> None:
+        """Verify navigation to settings view."""
+        navigate_to(
+            view=VIEW_SETTINGS,
+            trigger_rerun=False,
+        )
+        self.assertEqual(st.session_state["current_view"], VIEW_SETTINGS)
+
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -21,10 +21,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from agent.objective_profiler import resolve_team_name, TEAM_NAME_MAP
+from agent.objective_profiler import resolve_team_name
 from agent.qa_engine import TacticalQAEngine
 from pipeline.league_overview_data import get_league_standings
 from pipeline.team_analytics_engine import (
+    TEAM_ID_MAP,
     compute_all_teams_clusters,
     get_goal_pattern_breakdown,
     get_style_adherence_matches,
@@ -94,7 +95,7 @@ def render_team_view(qa_engine: TacticalQAEngine) -> None:
 # ===========================================================================
 def _render_team_selector() -> str:
     """分析対象クラブ選択プルダウン."""
-    team_keys = list(TEAM_NAME_MAP.keys())
+    team_keys = list(TEAM_ID_MAP.keys())
     current_team = st.session_state.get("selected_team_id")
     default_idx = team_keys.index(current_team) if current_team in team_keys else 0
 
@@ -514,7 +515,7 @@ def _render_h2h_tab(team_id: str) -> None:
     st.subheader("⚔️ 他クラブとの直接対比 (Head-to-Head Comparison)")
     st.caption("比較対象クラブを選択すると、戦術レーダーチャートの重畳表示、主要10指標の比較、および今季の直接対決実績を表示します。")
 
-    other_teams = [t for t in TEAM_NAME_MAP.keys() if t != team_id]
+    other_teams = [t for t in TEAM_ID_MAP.keys() if t != team_id]
     current_target = st.session_state.get("h2h_target_team_id")
     default_idx = other_teams.index(current_target) if current_target in other_teams else 0
 

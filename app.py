@@ -257,10 +257,11 @@ def render_header(match: Dict[str, Any]) -> None:
 
 
 def render_external_links_bar(match: Dict[str, Any]) -> None:
-    """Render mobile-optimized 4 major external links buttons bar."""
+    """Render mobile-optimized direct external links buttons bar."""
     links = generate_match_external_links(match)
 
     yt = links.get("youtube_highlights", {})
+    jl = links.get("jleague_official", {})
     home_rev = links.get("home_official_review", {})
     away_rev = links.get("away_official_review", {})
     yahoo = links.get("yahoo_soccer", {})
@@ -270,13 +271,17 @@ def render_external_links_bar(match: Dict[str, Any]) -> None:
         f"""
         <div style="margin-bottom: 20px; padding: 12px 16px; background: rgba(30, 41, 59, 0.6); border-radius: 10px; border: 1px solid #334155;">
             <div style="font-size: 0.85em; font-weight: 700; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <span>🔗 公式・外部観戦リンク</span>
+                <span>🔗 公式・外部観戦リンク (該当試合ダイレクト)</span>
                 <span style="font-size: 0.8em; color: #64748b;">(タップで別タブで開きます)</span>
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                 <a href="{yt.get('url', '#')}" target="_blank" rel="noopener noreferrer" style="flex: 1 1 calc(50% - 10px); min-width: 140px; text-decoration: none; background: #dc2626; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.82em; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                     <span>{yt.get('icon', '📺')}</span>
                     <span>{yt.get('title', 'YouTube ハイライト')}</span>
+                </a>
+                <a href="{jl.get('url', '#')}" target="_blank" rel="noopener noreferrer" style="flex: 1 1 calc(50% - 10px); min-width: 140px; text-decoration: none; background: #ea580c; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.82em; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    <span>{jl.get('icon', '⚽')}</span>
+                    <span>{jl.get('title', 'Jリーグ公式 戦評')}</span>
                 </a>
                 <a href="{home_rev.get('url', '#')}" target="_blank" rel="noopener noreferrer" style="flex: 1 1 calc(50% - 10px); min-width: 140px; text-decoration: none; background: #1e3a8a; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.82em; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                     <span>{home_rev.get('icon', '🏢')}</span>
@@ -292,7 +297,7 @@ def render_external_links_bar(match: Dict[str, Any]) -> None:
                 </a>
                 <a href="{flab.get('url', '#')}" target="_blank" rel="noopener noreferrer" style="flex: 1 1 calc(50% - 10px); min-width: 140px; text-decoration: none; background: #059669; color: white; padding: 8px 12px; border-radius: 8px; font-size: 0.82em; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                     <span>{flab.get('icon', '📊')}</span>
-                    <span>{flab.get('title', 'Football LAB')}</span>
+                    <span>{flab.get('title', 'Football LAB レポート')}</span>
                 </a>
             </div>
         </div>

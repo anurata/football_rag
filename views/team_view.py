@@ -126,10 +126,12 @@ def _render_club_header(
 
     # 順位表から今季スタッツを取得
     standings = get_league_standings()
-    s_info = next((s for s in standings if s["team_id"] == team_id), None)
-    rank_str = f"J1 第{s_info['rank']}位" if s_info else "J1"
-    pts_str = f"{s_info['pts']} pts" if s_info else "-"
-    form_badges = s_info.get("form", ["W", "W", "W", "D", "W"]) if s_info else []
+    s_info = next((s for s in standings if s.get("team_id") == team_id), None)
+    rank_val = s_info.get("rank") if s_info else None
+    pts_val = s_info.get("points") if s_info else None
+    rank_str = f"J1 第{rank_val}位" if rank_val is not None else "J1"
+    pts_str = f"{pts_val} pts" if pts_val is not None else "-"
+    form_badges = s_info.get("form", []) if s_info else []
 
     col_left, col_right = st.columns([3, 2])
 

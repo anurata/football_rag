@@ -153,16 +153,39 @@ class TestTeamView(unittest.TestCase):
         # バーセルHTMLおよびテキストを含むmarkdownが描画されていること
         self.assertGreaterEqual(mock_st.markdown.call_count, 3)
 
+    def test_get_sorted_team_list(self):
+        """順位順のチームリストが正常に取得できること."""
+        teams = tv._get_sorted_team_list()
+        self.assertIsInstance(teams, list)
+        self.assertGreaterEqual(len(teams), 1)
+        self.assertIn("team_id", teams[0])
+        self.assertIn("rank", teams[0])
+        self.assertIn("team_name", teams[0])
+
+    @patch("views.team_view.st")
+    def test_render_team_dialog_body(self, mock_st):
+        """モバイル用クラブ選択モーダルが描画されること."""
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.container.return_value.__enter__.return_value = MagicMock()
+        mock_st.button.return_value = False
+
+        sample_teams = [
+            {"team_id": "FCT", "team_name": "FC東京", "rank": 1, "points": 10},
+            {"team_id": "ZEL", "team_name": "町田", "rank": 2, "points": 9},
+        ]
+        tv._render_team_dialog_body(sample_teams, "FCT")
+        mock_st.markdown.assert_called()
+
     @patch("views.team_view.st")
     def test_render_team_selector(self, mock_st):
-        """チームセレクターがselectboxを正しく呼ぶこと."""
+        """レスポンシブなチームセレクター（PC横並び+モバイルダイアログ連携）が正しく描画されること."""
         mock_st.session_state = {"selected_team_id": "FCT"}
-        mock_st.columns.return_value = [MagicMock(), MagicMock()]
-        mock_st.selectbox.return_value = "FCT"
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.button.return_value = False
 
         selected = tv._render_team_selector()
         self.assertEqual(selected, "FCT")
-        mock_st.selectbox.assert_called_once()
+        mock_st.markdown.assert_called()
 
 
 if __name__ == "__main__":

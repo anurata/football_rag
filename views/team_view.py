@@ -96,23 +96,283 @@ def render_team_view(qa_engine: TacticalQAEngine) -> None:
 # ===========================================================================
 # 2. セレクター & クラブヘッダー
 # ===========================================================================
-def _render_team_selector() -> str:
-    """分析対象クラブ選択プルダウン."""
-    team_keys = list(TEAM_ID_MAP.keys())
-    current_team = st.session_state.get("selected_team_id")
-    default_idx = team_keys.index(current_team) if current_team in team_keys else 0
+def _get_sorted_team_list() -> List[Dict[str, Any]]:
+    """順位表に基づき1位〜20位の順にチーム情報を取得する."""
+    standings = get_league_standings()
+    if standings:
+        teams = []
+        seen = set()
+        for s in standings:
+            tid = s.get("team_id")
+            if tid in TEAM_ID_MAP and tid not in seen:
+                seen.add(tid)
+                teams.append({
+                    "team_id": tid,
+                    "team_name": resolve_team_name(tid),
+                    "rank": s.get("rank", 99),
+                    "points": s.get("points", 0),
+                })
+        # 順位順にソート
+        teams.sort(key=lambda x: x["rank"])
+        if teams:
+            return teams
 
-    col_sel, _ = st.columns([2, 3])
-    with col_sel:
-        selected_team = st.selectbox(
-            "分析対象クラブを選択",
-            options=team_keys,
-            index=default_idx,
-            format_func=lambda tid: f"{resolve_team_name(tid)} ({tid})",
-            key="team_view_selector",
+    # フォールバック (順位表がない場合)
+    return [
+        {
+            "team_id": tid,
+            "team_name": resolve_team_name(tid),
+            "rank": i + 1,
+            "points": 0,
+        }
+        for i, tid in enumerate(TEAM_ID_MAP.keys())
+    ]
+
+
+def _render_team_dialog_body(
+    sorted_teams: List[Dict[str, Any]],
+    current_team: str,
+) -> None:
+    """モバイル用クラブ選択モーダルダイアログの本文を描画する."""
+    st.markdown("### 🛡️ J1分析対象クラブを選択")
+    st.caption("現在の順位順に並んでいます。クラブをタップすると即座に切り替わります。")
+    st.write("")
+
+    # 2カラムグリッドでクラブカードを一覧表示
+    for i in range(0, len(sorted_teams), 2):
+        pair = sorted_teams[i : i + 2]
+        cols = st.columns(2)
+        for col, t_info in zip(cols, pair):
+            tid = t_info["team_id"]
+            is_active = (tid == current_team)
+            with col:
+                with st.container(border=True):
+                    # エンブレムとクラブ名
+                    emblem_html = get_team_emblem_html(tid, width=38, height=38)
+                    active_border = "border-left: 3px solid #2563eb;" if is_active else ""
+                    st.markdown(
+                        f"<div style='display: flex; align-items: center; gap: 8px; {active_border} padding-left: 4px;'>"
+                        f"  {emblem_html}"
+                        f"  <div>"
+                        f"    <div style='font-size: 11px; color: #64748b; font-weight: 700;'>第{t_info['rank']}位 ｜ {t_info['points']}pts</div>"
+                        f"    <div style='font-size: 13.5px; font-weight: 700; color: #1e293b;'>{t_info['team_name']}</div>"
+                        f"  </div>"
+                        f"</div>",
+                        unsafe_allow_html=True,
+                    )
+                    st.write("")
+                    if is_active:
+                        st.button(
+                            "選択中",
+                            key=f"btn_modal_sel_{tid}",
+                            disabled=True,
+                            use_container_width=True,
+                        )
+                    else:
+                        if st.button(
+                            "分析を見る",
+                            key=f"btn_modal_sel_{tid}",
+                            use_container_width=True,
+                        ):
+                            st.session_state["selected_team_id"] = tid
+                            st.rerun()
+
+
+@st.dialog("🛡️ クラブ選択", width="large")
+def _show_team_select_dialog(
+    sorted_teams: List[Dict[str, Any]],
+    current_team: str,
+) -> None:
+    """モバイル用クラブ選択ダイアログを開く."""
+    _render_team_dialog_body(sorted_teams, current_team)
+
+
+def _inject_sticky_team_selector_css() -> None:
+    """スクロール追従・上部固定（Sticky）およびPC/モバイル切り替えCSSを注入する."""
+    st.markdown(
+        """
+        <style>
+        /* 祖先ラッパーのoverflow制約を解除してStickyを確実に有効化 */
+        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge),
+        div[data-testid="stVerticalBlock"]:has(.sticky-team-badge) {
+            overflow: visible !important;
+        }
+
+        /* チーム名バーの上部固定表示 (Sticky Header) */
+        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge) {
+            position: sticky !important;
+            top: 56px !important;
+            z-index: 999 !important;
+            background: rgba(255, 255, 255, 0.97) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 4px 8px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+            margin-bottom: 8px !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(.sticky-team-badge) {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            align-items: center !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .sticky-team-badge {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        /* PC用横一列エンブレムストリップ */
+        .pc-team-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: auto;
+            gap: 6px;
+            padding: 6px 4px 8px 4px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #f1f5f9;
+            scrollbar-width: thin;
+        }
+        .pc-team-strip::-webkit-scrollbar {
+            height: 4px;
+        }
+        .pc-team-strip::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .team-strip-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 4px 6px;
+            border-radius: 6px;
+            border: 1.5px solid transparent;
+            transition: all 0.15s ease-in-out;
+            min-width: 44px;
+            box-sizing: border-box;
+        }
+        .team-strip-item:hover {
+            background-color: #f8fafc;
+            transform: translateY(-1px);
+        }
+        .team-strip-item.active {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+            box-shadow: 0 1px 3px rgba(37, 99, 235, 0.12);
+        }
+        .team-strip-item .rank-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: #475569;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+        .team-strip-item.active .rank-tag {
+            color: #2563eb;
+            font-weight: 800;
+        }
+
+        /* モバイル画面 (幅 <= 768px): PC用ストリップを完全非表示 */
+        @media (max-width: 768px) {
+            .pc-team-strip-container {
+                display: none !important;
+            }
+        }
+        /* PC画面 (幅 > 768px): PC用ストリップを表示 */
+        @media (min-width: 769px) {
+            .pc-team-strip-container {
+                display: block !important;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _render_team_selector() -> str:
+    """
+    分析対象クラブ選択バー (レスポンシブ・上部固定).
+    PC画面: 上部に固定チーム名バー + 順位順に横一列にエンブレムを並べて選択.
+    モバイル画面: 上部に固定チーム名バー ＋ クラブ選択ダイアログ.
+    """
+    _inject_sticky_team_selector_css()
+    sorted_teams = _get_sorted_team_list()
+
+    valid_ids = [t["team_id"] for t in sorted_teams]
+
+    # クエリパラメータによる選択切り替えを検知
+    qp_team = st.query_params.get("team")
+    if qp_team and qp_team in valid_ids:
+        st.session_state["selected_team_id"] = qp_team
+
+    current_team = st.session_state.get("selected_team_id")
+    if current_team not in valid_ids:
+        current_team = valid_ids[0] if valid_ids else "FCT"
+        st.session_state["selected_team_id"] = current_team
+
+    cur_info = next((t for t in sorted_teams if t["team_id"] == current_team), sorted_teams[0])
+
+    # --------------------------------------------------------------------------
+    # 1. スクロールしても上部に固定表示される「チーム名バー」 (Sticky Header)
+    # --------------------------------------------------------------------------
+    col_team_info, col_team_btn = st.columns([3.4, 1.6], vertical_alignment="center")
+    with col_team_info:
+        emblem_img = get_team_emblem_html(current_team, width=34, height=34)
+        st.markdown(
+            f"<div class='sticky-team-badge'>"
+            f"  {emblem_img}"
+            f"  <div>"
+            f"    <span style='font-size: 15px; font-weight: 800; color: #0f172a;'>{cur_info['team_name']}</span>"
+            f"    <span style='font-size: 11.5px; font-weight: 700; color: #2563eb; background: #eff6ff; padding: 2px 7px; border-radius: 4px; margin-left: 6px; border: 1px solid #bfdbfe; white-space: nowrap;'>第{cur_info['rank']}位 ({cur_info['points']}pts)</span>"
+            f"  </div>"
+            f"</div>",
+            unsafe_allow_html=True,
         )
-    st.session_state["selected_team_id"] = selected_team
-    return selected_team
+    with col_team_btn:
+        if st.button("クラブ変更 ▾", key="btn_sticky_change_team", use_container_width=True):
+            _show_team_select_dialog(sorted_teams, current_team)
+
+    # --------------------------------------------------------------------------
+    # 2. PC用横一列エンブレムバー (幅 > 768px で表示、順位順20クラブ)
+    # --------------------------------------------------------------------------
+    strip_items_html = []
+    for t_info in sorted_teams:
+        tid = t_info["team_id"]
+        is_active = (tid == current_team)
+        active_cls = "active" if is_active else ""
+        emblem_svg = get_team_emblem_html(tid, width=28, height=28)
+        item_html = (
+            f"<a href='?team={tid}' target='_self' class='team-strip-item {active_cls}' title='第{t_info['rank']}位 {t_info['team_name']} ({t_info['points']}pts)'>"
+            f"  {emblem_svg}"
+            f"  <span class='rank-tag'>{t_info['rank']}位</span>"
+            f"</a>"
+        )
+        strip_items_html.append(item_html)
+
+    full_pc_strip_html = (
+        f"<div class='pc-team-strip-container'>"
+        f"  <div style='font-size: 11.5px; color: #64748b; margin-bottom: 4px;'>"
+        f"    🏆 <b>J1全20クラブ (順位順)</b> ｜ エンブレムをクリックして分析対象を即座に切り替え"
+        f"  </div>"
+        f"  <div class='pc-team-strip'>"
+        f"    {''.join(strip_items_html)}"
+        f"  </div>"
+        f"</div>"
+    )
+    st.markdown(full_pc_strip_html, unsafe_allow_html=True)
+
+    return current_team
 
 
 def _render_club_header(

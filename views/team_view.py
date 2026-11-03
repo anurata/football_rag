@@ -175,6 +175,7 @@ def _render_team_dialog_body(
                             use_container_width=True,
                         ):
                             st.session_state["selected_team_id"] = tid
+                            st.query_params["team"] = tid
                             st.rerun()
 
 
@@ -192,9 +193,8 @@ def _inject_sticky_team_selector_css() -> None:
     st.markdown(
         """
         <style>
-        /* 祖先ラッパーのoverflow制約を解除してStickyを確実に有効化 */
-        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge),
-        div[data-testid="stVerticalBlock"]:has(.sticky-team-badge) {
+        /* 祖先ラッパーのoverflow制約を解除してStickyを確実に有効化 (ルートコンテナは除外) */
+        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge) {
             overflow: visible !important;
         }
 
@@ -470,15 +470,42 @@ def _render_club_header(
         )
 
     with col_right:
-        # 直近戦績 (Form)
-        st.markdown("**直近5試合の戦績 (Form)**")
-        form_cols = st.columns(5)
-        badge_map = {"W": "🟢 勝", "D": "⚪ 分", "L": "🔴 負"}
-        for idx, res in enumerate(form_badges[:5]):
-            with form_cols[idx]:
-                st.caption(badge_map.get(res, res))
+        # 直近戦績 (Form) - 白◯ (勝) / 黒◯ (負) / 灰◯ (分) の1行インライン表示
+        st.markdown("<div style='font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 6px;'>直近5試合の戦績 (Form)</div>", unsafe_allow_html=True)
+        badge_html_list = []
+        for res in form_badges[:5]:
+            if res == "W":
+                # 白◯ (勝)
+                b_html = (
+                    "<span style='display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; "
+                    "border-radius: 4px; background: #ffffff; border: 1.5px solid #0f172a; font-size: 11.5px; "
+                    "font-weight: 700; color: #0f172a; white-space: nowrap;'>"
+                    "<span style='display: inline-block; width: 7px; height: 7px; border-radius: 50%; "
+                    "background: #ffffff; border: 1.5px solid #0f172a;'></span>勝</span>"
+                )
+            elif res == "L":
+                # 黒◯ (負)
+                b_html = (
+                    "<span style='display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; "
+                    "border-radius: 4px; background: #0f172a; border: 1.5px solid #0f172a; font-size: 11.5px; "
+                    "font-weight: 700; color: #ffffff; white-space: nowrap;'>"
+                    "<span style='display: inline-block; width: 7px; height: 7px; border-radius: 50%; "
+                    "background: #0f172a; border: 1.5px solid #ffffff;'></span>負</span>"
+                )
+            else:
+                # 灰◯ (分)
+                b_html = (
+                    "<span style='display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; "
+                    "border-radius: 4px; background: #f1f5f9; border: 1.5px solid #94a3b8; font-size: 11.5px; "
+                    "font-weight: 700; color: #475569; white-space: nowrap;'>"
+                    "<span style='display: inline-block; width: 7px; height: 7px; border-radius: 50%; "
+                    "background: #94a3b8;'></span>分</span>"
+                )
+            badge_html_list.append(b_html)
 
-        st.write("")
+        form_html = f"<div style='display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; margin-bottom: 8px;'>{''.join(badge_html_list)}</div>"
+        st.markdown(form_html, unsafe_allow_html=True)
+
         render_ai_button(
             button_key=f"team_header_ai_{team_id}",
             view_type=VIEW_TEAM,
@@ -571,14 +598,36 @@ def _build_signature_metric_row_html(item: Dict[str, Any]) -> str:
     return html
 
 
-def _render_signature_metric_card(item: Dict[str, Any], is_strength: bool) -> None:
-    """シグネチャー指標（武器/課題）の個別カードを描画する (1行コンパクト表示)."""
+def _find_55_metric_detail(metric_name: str, team_id: str) -> Optional[Dict[str, Any]]:
+    """55戦術指標データの中から該当指標名の詳細辞書を検索する."""
+    categorized = get_team_55_metrics_categorized(team_id)
+    for _, items in categorized.items():
+        for it in items:
+            if it.get("metric_name") == metric_name:
+                return it
+    return None
+
+
+def _render_signature_metric_card(
+    item: Dict[str, Any],
+    is_strength: bool,
+    team_id: str,
+) -> None:
+    """シグネチャー指標（武器/課題）の個別カードを描画する (1行コンパクト表示 ＆ 丸い？ボタン付き)."""
     note = "リーグ上位の突出したストロングポイント" if is_strength else "戦術上の大胆な割り切り、または攻略されやすいポイント"
     z_sc = item.get("z_score", 0.0)
+    m_name = item.get("metric_name", "")
     row_html = _build_signature_metric_row_html(item)
 
     with st.container(border=True):
-        st.markdown(f"**{item['metric_name']}**")
+        c_title, c_btn = st.columns([0.88, 0.12], vertical_alignment="center")
+        with c_title:
+            st.markdown(f"**{m_name}**")
+        with c_btn:
+            if st.button("?", key=f"btn_sig_help_{m_name}", help=f"{m_name}の詳細解説と判定基準をダイアログで表示"):
+                detail_item = _find_55_metric_detail(m_name, team_id)
+                if detail_item:
+                    _show_metric_detail_dialog(detail_item)
         st.markdown(row_html, unsafe_allow_html=True)
         st.caption(f"偏差乖離: **{z_sc:+.2f} σ**（{note}）")
 
@@ -594,12 +643,12 @@ def _render_signature_metrics_section(team_id: str) -> None:
     with col_str:
         st.markdown("##### 🌟 際立つ最大の武器 (Top 3 強み)")
         for item in top_strengths:
-            _render_signature_metric_card(item, is_strength=True)
+            _render_signature_metric_card(item, is_strength=True, team_id=team_id)
 
     with col_weak:
         st.markdown("##### ⚠️ 顕著な割り切り・改善課題 (Bottom 3 特徴)")
         for item in bottom_weaknesses:
-            _render_signature_metric_card(item, is_strength=False)
+            _render_signature_metric_card(item, is_strength=False, team_id=team_id)
 
 
 def _render_tactical_radar_chart(t_prof: Dict[str, Any]) -> None:
@@ -1035,8 +1084,9 @@ def _inject_metric_table_custom_css() -> None:
             }
         }
 
-        /* エキスパンダー内のすべてのボタンを完全な円形（丸い？ボタン）にする */
-        div[data-testid="stExpanderDetails"] button {
+        /* 指標詳細のすべての「？」ボタンを完全な円形（丸い？ボタン）にする */
+        div[data-testid="stExpanderDetails"] button,
+        button[aria-label*="詳細解説"] {
             width: 20px !important;
             min-width: 20px !important;
             max-width: 20px !important;
@@ -1058,13 +1108,16 @@ def _inject_metric_table_custom_css() -> None:
             cursor: pointer !important;
             box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
         }
-        div[data-testid="stExpanderDetails"] button:hover {
+        div[data-testid="stExpanderDetails"] button:hover,
+        button[aria-label*="詳細解説"]:hover {
             background-color: #2563eb !important;
             color: #ffffff !important;
             border-color: #2563eb !important;
         }
         div[data-testid="stExpanderDetails"] button p,
-        div[data-testid="stExpanderDetails"] button div {
+        div[data-testid="stExpanderDetails"] button div,
+        button[aria-label*="詳細解説"] p,
+        button[aria-label*="詳細解説"] div {
             margin: 0 !important;
             padding: 0 !important;
             font-size: 11px !important;

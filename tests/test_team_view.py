@@ -205,8 +205,11 @@ class TestTeamView(unittest.TestCase):
 
     @patch("views.team_view.st")
     def test_render_signature_metric_card(self, mock_st):
-        """シグネチャー指標カードが1行HTMLを含めて正常に描画されること."""
+        """シグネチャー指標カードが1行HTMLと丸い？ボタンを含めて正常に描画されること."""
         mock_st.container.return_value.__enter__.return_value = MagicMock()
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.button.return_value = False
+
         sample_item = {
             "metric_name": "46_ベイズ縮小決定力スキル",
             "team_value": 1.47,
@@ -215,9 +218,17 @@ class TestTeamView(unittest.TestCase):
             "total_teams": 20,
             "z_score": 2.32,
         }
-        tv._render_signature_metric_card(sample_item, is_strength=True)
+        tv._render_signature_metric_card(sample_item, is_strength=True, team_id="FCT")
         mock_st.markdown.assert_any_call("**46_ベイズ縮小決定力スキル**")
+        mock_st.button.assert_called_with("?", key="btn_sig_help_46_ベイズ縮小決定力スキル", help="46_ベイズ縮小決定力スキルの詳細解説と判定基準をダイアログで表示")
         mock_st.caption.assert_called()
+
+    def test_find_55_metric_detail(self):
+        """55指標詳細検索ヘルパーが正常に指標データを取得できること."""
+        item = tv._find_55_metric_detail("04_パス総数", "FCT")
+        self.assertIsNotNone(item)
+        self.assertEqual(item["metric_name"], "04_パス総数")
+        self.assertIn("current_tier", item)
 
 
 if __name__ == "__main__":

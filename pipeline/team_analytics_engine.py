@@ -211,7 +211,8 @@ def compute_all_teams_clusters() -> Dict[str, Any]:
             "bpi": avg_val("BPI", 20.0),  # 前進指数
             "pa_conv": avg_val("30m→PA進入変換率", 40.0),
             "cross_ratio": avg_val("攻撃経路クロス依存度", 15.0),
-            "sprints": avg_val("スプリント", 130.0),
+            "distance": avg_val("走行距離", 114.0),
+            "sprints": avg_val("スプリント", 120.0),
             "convex_hull": avg_val("チーム凸包面積", 1250.0),
             "xg_diff": avg_val("xG期待値差分", 0.0),
             "cbp_gain": avg_val("プレス誘発カウンター変換効率", 30.0),
@@ -301,11 +302,22 @@ def compute_all_teams_clusters() -> Dict[str, Any]:
             score = max(10.0, min(95.0, score))
             return round(100.0 - score if reverse else score, 1)
 
+        # 走力強度は総走行距離とスプリント数の複合評価 (各50%配分)
+        # J1標準基準幅 (距離: 108〜122km, スプリント: 95〜145回) に基づき極端な相対凹みを防止
+        d_min = min(float(df_feat["distance"].min()), 108.0)
+        d_max = max(float(df_feat["distance"].max()), 122.0)
+        s_min = min(float(df_feat["sprints"].min()), 95.0)
+        s_max = max(float(df_feat["sprints"].max()), 145.0)
+
+        dist_score = norm_score(row["distance"], d_min, d_max)
+        sprint_score = norm_score(row["sprints"], s_min, s_max)
+        running_score = round(dist_score * 0.5 + sprint_score * 0.5, 1)
+
         radar = {
             "ポゼッション支配力": norm_score(row["possession"], df_feat["possession"].min(), df_feat["possession"].max()),
             "前進・推進突破力": norm_score(row["bpi"], df_feat["bpi"].min(), df_feat["bpi"].max()),
             "ハイプレス即時奪取": norm_score(row["ppda"], df_feat["ppda"].min(), df_feat["ppda"].max(), reverse=True),
-            "フィジカル・走力強度": norm_score(row["sprints"], df_feat["sprints"].min(), df_feat["sprints"].max()),
+            "フィジカル・走力強度": running_score,
             "ゴール期待創出度": norm_score(row["xg_diff"], df_feat["xg_diff"].min(), df_feat["xg_diff"].max()),
         }
 

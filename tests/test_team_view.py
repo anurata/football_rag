@@ -35,6 +35,7 @@ class TestTeamView(unittest.TestCase):
         self.assertTrue(callable(tv._render_55_metrics_expander_section))
         self.assertTrue(callable(tv._build_metric_rank_badge_style))
         self.assertTrue(callable(tv._build_metric_bar_cell_html))
+        self.assertTrue(callable(tv._inject_metric_table_custom_css))
         self.assertTrue(callable(tv._render_metric_row))
         self.assertTrue(callable(tv._render_metric_category_table))
         self.assertTrue(callable(tv._render_metric_dialog_body))

@@ -1,0 +1,17 @@
+#!/bin/sh
+# Git post-commit hook: Auto-sync docs/ to NotebookLM in the background
+
+# Check if any markdown files under docs/ were changed in the latest commit
+CHANGED_DOCS=$(git diff-tree -r --no-commit-id --name-only HEAD | grep -E "^docs/.*\.md$")
+
+if [ -n "$CHANGED_DOCS" ]; then
+    echo "[post-commit] docs/ changes detected. Launching NotebookLM background sync..."
+    mkdir -p logs
+
+    # Launch background process without blocking Git commit completion
+    if command -v powershell.exe >/dev/null 2>&1; then
+        powershell.exe -NoProfile -Command "Start-Process python -ArgumentList 'scripts/sync_docs_to_nlm.py' -RedirectStandardOutput 'logs/nlm_sync.log' -RedirectStandardError 'logs/nlm_sync.err.log' -WindowStyle Hidden"
+    else
+        nohup python scripts/sync_docs_to_nlm.py > logs/nlm_sync.log 2> logs/nlm_sync.err.log &
+    fi
+fi

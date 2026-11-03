@@ -106,7 +106,7 @@ flowchart TD
 | リーグ全体更新 | `scripts/rebuild_all_tactical_structures.py`<br>`scripts/batch_update_all_teams_tactics.py` | `tests/test_spec_conformance.py` |
 | 4大外部リンク生成 | `pipeline/external_links.py` | `tests/test_external_links.py` |
 | UI統合表示 | `app.py` (`render_external_links_bar`) | `tests/test_dashboard_helpers.py` |
-| 仕様書 NotebookLM 同期 | `scripts/sync_docs_to_nlm.py` | `tests/test_sync_docs_to_nlm.py` |
+| 仕様書 NotebookLM 同期 | `scripts/sync_docs_to_nlm.py`<br>`scripts/setup_git_hooks.py` | `tests/test_sync_docs_to_nlm.py`<br>`tests/test_git_hooks.py` |
 
 ---
 
@@ -114,19 +114,27 @@ flowchart TD
 
 システム設計書・運用仕様書群（`docs/*.md`）は、Gemini NotebookLM の専用ノートブック（`⚽ football_rag システム仕様書`、エイリアス: `football_rag_docs`）へスマート差分同期されます。
 
-#### 1. 運用コマンド
+#### 1. 運用コマンド & Git Hook 自動連携
 ```bash
-# 差分シミュレーション（アップロード・削除を行わず計画のみ表示）
+# 1. Git post-commit フックのセットアップ（初回のみ）
+python scripts/setup_git_hooks.py
+
+# 2. 手動差分シミュレーション（アップロード・削除を行わず計画のみ表示）
 python scripts/sync_docs_to_nlm.py --dry-run
 
-# スマート差分同期実行（ハッシュ検知により変更があったファイルのみ削除・再登録）
+# 3. 手動スマート差分同期実行（ハッシュ検知により変更があったファイルのみ削除・再登録）
 python scripts/sync_docs_to_nlm.py
 
-# 強制全件再同期（ハッシュ一致を無視して全件再アップロード）
+# 4. 強制全件再同期（ハッシュ一致を無視して全件再アップロード）
 python scripts/sync_docs_to_nlm.py --force
 ```
 
-#### 2. スマート差分検出アーキテクチャ
+#### 2. Git Post-Commit フックによる完全自動同期
+- **自動発火**: `git commit` 実行時、直前コミットに `docs/*.md` の変更が含まれる場合のみ、`.git/hooks/post-commit` が自動発火。
+- **非同期バックグラウンド実行**: コミット操作を待たせることなくバックグラウンド（Windows: `Start-Process`, Unix: `nohup`）で `sync_docs_to_nlm.py` を起動。
+- **ログ記録**: バックグラウンド実行のログは `logs/nlm_sync.log` および `logs/nlm_sync.err.log` に自動追記されます。
+
+#### 3. スマート差分検出アーキテクチャ
 1. **SHA256ハッシュ判定**: ローカルの `docs/*.md` のハッシュ値を計算し、`.nlm_sync_cache.json` と比較。
 2. **変更分のみ更新**: 未変更ファイル（8〜9割）はスキップし、変更があったファイルのみ旧ソース削除・最新版アップロードを実施。
 3. **新規・削除追従**: ローカルに新規追加されたファイルは NotebookLM に追加、ローカルで削除されたファイルはリモートからも自動削除。

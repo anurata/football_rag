@@ -126,6 +126,77 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
     );
   }
 
+  void _showStopwatchSettingsDialog(
+    BuildContext context,
+    MatchTrackingNotifier notifier,
+  ) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[900],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Row(
+            children: [
+              Icon(Icons.timer_outlined, color: Colors.amber, size: 20),
+              SizedBox(width: 8),
+              Text(
+                '試合タイマー設定',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.replay, color: Colors.blueAccent),
+                title: const Text(
+                  '前半開始 (00:00にリセット)',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  '経過時間を0分0秒に戻します',
+                  style: TextStyle(color: Colors.white54, fontSize: 11),
+                ),
+                onTap: () {
+                  HapticFeedback.selectionClick();
+                  notifier.setElapsedSeconds(0);
+                  Navigator.pop(ctx);
+                },
+              ),
+              const Divider(color: Colors.white24, height: 1),
+              ListTile(
+                leading: const Icon(Icons.fast_forward, color: Colors.amberAccent),
+                title: const Text(
+                  '後半開始 (45:00に設定)',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  '経過時間を45分0秒に設定します',
+                  style: TextStyle(color: Colors.white54, fontSize: 11),
+                ),
+                onTap: () {
+                  HapticFeedback.selectionClick();
+                  notifier.setElapsedSeconds(45 * 60);
+                  Navigator.pop(ctx);
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('キャンセル', style: TextStyle(color: Colors.white54)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _showDeleteActionDialog(
     UserAction action,
     MatchTrackingNotifier notifier,
@@ -224,16 +295,23 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
           _buildTeamToggleBar(match, isHome, notifier),
           ActionTicker(
             currentMinute: state.currentMinute,
+            formattedTime: state.formattedTime,
+            isTimerRunning: state.isTimerRunning,
+            isOver45Minutes: state.isOver45Minutes,
             recentActions: state.recentActions,
             syncStatus: state.syncStatusMessage,
-            onIncrementMinute: () => notifier.incrementMinute(),
-            onDecrementMinute: () {
-              if (state.currentMinute > 0) {
-                notifier.setMinute(state.currentMinute - 1);
-              }
+            onIncrementMinute: () => notifier.adjustMinutes(1),
+            onDecrementMinute: () => notifier.adjustMinutes(-1),
+            onToggleTimer: () {
+              HapticFeedback.selectionClick();
+              notifier.toggleTimer();
+            },
+            onLongPressTimer: () {
+              HapticFeedback.heavyImpact();
+              _showStopwatchSettingsDialog(context, notifier);
             },
             onTapAction: (action) {
-              HapticFeedback.lightImpact();
+              HapticFeedback.selectionClick();
               notifier.incrementActionBonus(action.id);
             },
             onLongPressAction: (action) {

@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/action_models.dart';
 
 class ActionTicker extends StatelessWidget {
   final int currentMinute;
+  final String formattedTime;
+  final bool isTimerRunning;
+  final bool isOver45Minutes;
   final List<UserAction> recentActions;
   final String syncStatus;
   final VoidCallback onIncrementMinute;
   final VoidCallback onDecrementMinute;
+  final VoidCallback? onToggleTimer;
+  final VoidCallback? onLongPressTimer;
   final Function(UserAction action)? onTapAction;
   final Function(UserAction action)? onLongPressAction;
 
   const ActionTicker({
     super.key,
     required this.currentMinute,
+    this.formattedTime = '00:00',
+    this.isTimerRunning = false,
+    this.isOver45Minutes = false,
     required this.recentActions,
     required this.syncStatus,
     required this.onIncrementMinute,
     required this.onDecrementMinute,
+    this.onToggleTimer,
+    this.onLongPressTimer,
     this.onTapAction,
     this.onLongPressAction,
   });
@@ -54,81 +65,135 @@ class ActionTicker extends StatelessWidget {
 
     return Row(
       children: [
-        // Match minute controller
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: Colors.white24),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
+        _buildStopwatchBox(),
+        const SizedBox(width: 8),
+        _buildSyncPill(isOnline),
+        const Spacer(),
+        _buildTotalCount(),
+      ],
+    );
+  }
+
+  Widget _buildStopwatchBox() {
+    // Orange background when exceeding 45 minutes
+    final bgColor = isOver45Minutes ? const Color(0xFFEA580C) : Colors.black;
+    final borderColor = isOver45Minutes ? Colors.amber : Colors.white24;
+
+    return GestureDetector(
+      onLongPress: () {
+        HapticFeedback.heavyImpact();
+        if (onLongPressTimer != null) onLongPressTimer!();
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: borderColor, width: 1.2),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Decrement minute button (only when paused)
+            if (!isTimerRunning) ...[
               IconButton(
                 visualDensity: VisualDensity.compact,
                 iconSize: 16,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.remove, color: Colors.white70),
-                onPressed: onDecrementMinute,
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  onDecrementMinute();
+                },
               ),
-              const SizedBox(width: 6),
-              Text(
-                "$currentMinute'",
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+              const SizedBox(width: 4),
+            ],
+
+            // Stopwatch time display & play/pause toggle
+            GestureDetector(
+              onTap: () {
+                HapticFeedback.selectionClick();
+                if (onToggleTimer != null) onToggleTimer!();
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    isTimerRunning ? Icons.pause : Icons.play_arrow,
+                    size: 14,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    formattedTime,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      fontFeatures: [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 6),
+            ),
+
+            // Increment minute button (only when paused)
+            if (!isTimerRunning) ...[
+              const SizedBox(width: 4),
               IconButton(
                 visualDensity: VisualDensity.compact,
                 iconSize: 16,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.add, color: Colors.white70),
-                onPressed: onIncrementMinute,
+                onPressed: () {
+                  HapticFeedback.selectionClick();
+                  onIncrementMinute();
+                },
               ),
             ],
-          ),
+          ],
         ),
-        const SizedBox(width: 8),
+      ),
+    );
+  }
 
-        // Sync status pill
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(
-            color: isOnline ? Colors.green[900] : Colors.orange[900],
-            borderRadius: BorderRadius.circular(12),
+  Widget _buildSyncPill(bool isOnline) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: isOnline ? Colors.green[900] : Colors.orange[900],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            isOnline ? Icons.cloud_done : Icons.cloud_queue,
+            size: 12,
+            color: Colors.white,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                isOnline ? Icons.cloud_done : Icons.cloud_queue,
-                size: 12,
-                color: Colors.white,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                syncStatus,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+          const SizedBox(width: 4),
+          Text(
+            syncStatus,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        const Spacer(),
-        Text(
-          'Total: ${recentActions.length}',
-          style: const TextStyle(color: Colors.white54, fontSize: 11),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTotalCount() {
+    return Text(
+      'Total: ${recentActions.length}',
+      style: const TextStyle(color: Colors.white54, fontSize: 11),
     );
   }
 

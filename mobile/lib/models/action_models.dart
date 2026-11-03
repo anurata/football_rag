@@ -31,8 +31,14 @@ class UserAction {
     this.isSynced = false,
   });
 
-  /// Total points contributed by this action (+1 base for good, -1 for bad, plus bonus points)
-  int get netPoints => (actionType == 'good' ? 1 : -1) + bonusPoints;
+  /// Positive points (+1 base for good, plus bonus points)
+  int get positivePoints => actionType == 'good' ? (1 + bonusPoints) : 0;
+
+  /// Negative points (+1 base for bad)
+  int get negativePoints => actionType == 'bad' ? 1 : 0;
+
+  /// Net points (+ for good, - for bad)
+  int get netPoints => positivePoints - negativePoints;
 
   UserAction copyWith({
     String? id,
@@ -92,6 +98,8 @@ class UserAction {
       'play_category': playCategory,
       'note': note,
       'bonus_points': bonusPoints,
+      'positive_points': positivePoints,
+      'negative_points': negativePoints,
       'created_at': createdAt,
     };
   }
@@ -108,8 +116,55 @@ class UserAction {
       'play_category': playCategory,
       'note': note,
       'bonus_points': bonusPoints,
+      'positive_points': positivePoints,
+      'negative_points': negativePoints,
       'created_at': createdAt,
       'is_synced': isSynced ? 1 : 0,
     };
+  }
+}
+
+/// Detailed positive/negative score summary per player
+class PlayerScoreSummary {
+  final String playerId;
+  final int positivePoints;
+  final int negativePoints;
+
+  const PlayerScoreSummary({
+    required this.playerId,
+    this.positivePoints = 0,
+    this.negativePoints = 0,
+  });
+
+  /// Net score used for badge color calculation (-5 to +15)
+  int get netScore => positivePoints - negativePoints;
+
+  PlayerScoreSummary copyWith({
+    String? playerId,
+    int? positivePoints,
+    int? negativePoints,
+  }) {
+    return PlayerScoreSummary(
+      playerId: playerId ?? this.playerId,
+      positivePoints: positivePoints ?? this.positivePoints,
+      negativePoints: negativePoints ?? this.negativePoints,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'player_id': playerId,
+      'positive_points': positivePoints,
+      'negative_points': negativePoints,
+      'net_score': netScore,
+    };
+  }
+
+  factory PlayerScoreSummary.fromJson(Map<String, dynamic> json) {
+    return PlayerScoreSummary(
+      playerId: json['player_id'] as String? ?? '',
+      positivePoints: json['positive_points'] as int? ?? 0,
+      negativePoints: json['negative_points'] as int? ?? 0,
+    );
   }
 }

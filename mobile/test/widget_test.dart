@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile/models/action_models.dart';
 import 'package:mobile/models/match_models.dart';
+import 'package:mobile/widgets/action_ticker.dart';
 import 'package:mobile/widgets/player_pin.dart';
 
 void main() {
@@ -40,6 +41,41 @@ void main() {
       expect(reconstructed.playerName, action.playerName);
       expect(reconstructed.bonusPoints, 2);
       expect(reconstructed.netPoints, 3);
+      expect(reconstructed.positivePoints, 3);
+      expect(reconstructed.negativePoints, 0);
+
+      final badAction = UserAction(
+        id: 'bad_1',
+        matchId: '20261031_OKA_FCT',
+        playerId: 'p1',
+        teamId: 'OKA',
+        actionType: 'bad',
+        matchMinute: 15,
+        bonusPoints: 0,
+        createdAt: '2026-11-04T00:00:00Z',
+      );
+      expect(badAction.positivePoints, 0);
+      expect(badAction.negativePoints, 1);
+      expect(badAction.netPoints, -1);
+    });
+
+    test('PlayerScoreSummary calculation and serialization', () {
+      const summary = PlayerScoreSummary(
+        playerId: 'p_oka_10',
+        positivePoints: 7,
+        negativePoints: 2,
+      );
+      expect(summary.netScore, 5);
+      final json = summary.toJson();
+      expect(json['positive_points'], 7);
+      expect(json['negative_points'], 2);
+      expect(json['net_score'], 5);
+
+      final fromJson = PlayerScoreSummary.fromJson(json);
+      expect(fromJson.playerId, 'p_oka_10');
+      expect(fromJson.positivePoints, 7);
+      expect(fromJson.negativePoints, 2);
+      expect(fromJson.netScore, 5);
     });
 
     test('MatchAppContext serialization', () {
@@ -346,6 +382,97 @@ void main() {
       badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
       expect(badgeBox.color, const Color(0xFFFFD700));
       expect(find.text('+15'), findsOneWidget);
+    });
+  });
+
+  group('ActionTicker Widget Tests', () {
+    testWidgets('ActionTicker displays stopwatch, handles running state and 45min orange background', (
+      WidgetTester tester,
+    ) async {
+      bool timerToggled = false;
+      bool minuteIncremented = false;
+      bool minuteDecremented = false;
+      bool timerLongPressed = false;
+
+      // 1. Stopped state before 45 minutes
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ActionTicker(
+              currentMinute: 20,
+              formattedTime: '20:15',
+              isTimerRunning: false,
+              isOver45Minutes: false,
+              recentActions: const [],
+              syncStatus: '同期済み',
+              onIncrementMinute: () => minuteIncremented = true,
+              onDecrementMinute: () => minuteDecremented = true,
+              onToggleTimer: () => timerToggled = true,
+              onLongPressTimer: () => timerLongPressed = true,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('20:15'), findsOneWidget);
+      expect(find.byIcon(Icons.remove), findsOneWidget);
+      expect(find.byIcon(Icons.add), findsOneWidget);
+      expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+
+      // Tap + and -
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pump();
+      expect(minuteIncremented, isTrue);
+
+      await tester.tap(find.byIcon(Icons.remove));
+      await tester.pump();
+      expect(minuteDecremented, isTrue);
+
+      // Long press timer
+      await tester.longPress(find.text('20:15'));
+      await tester.pump();
+      expect(timerLongPressed, isTrue);
+
+      // 2. Running state after 45 minutes (Orange background)
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ActionTicker(
+              currentMinute: 48,
+              formattedTime: '48:30',
+              isTimerRunning: true,
+              isOver45Minutes: true,
+              recentActions: const [],
+              syncStatus: '同期済み',
+              onIncrementMinute: () {},
+              onDecrementMinute: () {},
+              onToggleTimer: () => timerToggled = true,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('48:30'), findsOneWidget);
+      expect(find.byIcon(Icons.pause), findsOneWidget);
+      // Minus and plus buttons should be hidden while running
+      expect(find.byIcon(Icons.remove), findsNothing);
+      expect(find.byIcon(Icons.add), findsNothing);
+
+      // Verify orange background Container
+      final timerContainerFinder = find.byWidgetPredicate(
+        (w) =>
+            w is AnimatedContainer &&
+            w.decoration is BoxDecoration &&
+            (w.decoration as BoxDecoration).color == const Color(0xFFEA580C),
+      );
+      expect(timerContainerFinder, findsOneWidget);
+
+      // Tap to toggle timer (pause)
+      await tester.tap(find.text('48:30'));
+      await tester.pump();
+      expect(timerToggled, isTrue);
     });
   });
 }

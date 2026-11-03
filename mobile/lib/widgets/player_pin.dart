@@ -42,13 +42,13 @@ class _PlayerPinState extends State<PlayerPin> {
   void _handleVerticalDrag(DragEndDetails details) {
     final vy = details.primaryVelocity ?? 0;
     if (vy < -150) {
-      // Swiped Up: Good!
-      HapticFeedback.mediumImpact();
+      // Swiped Up: Good! (Crisp mechanical click)
+      HapticFeedback.selectionClick();
       _triggerFlash(Colors.green.withValues(alpha: 0.6));
       widget.onAction('good', null);
     } else if (vy > 150) {
-      // Swiped Down: Bad!
-      HapticFeedback.heavyImpact();
+      // Swiped Down: Bad! (Crisp mechanical click)
+      HapticFeedback.selectionClick();
       _triggerFlash(Colors.red.withValues(alpha: 0.6));
       widget.onAction('bad', null);
     }
@@ -66,6 +66,7 @@ class _PlayerPinState extends State<PlayerPin> {
           number: widget.player.number,
           onSelect: (type, cat) {
             Navigator.pop(ctx);
+            HapticFeedback.selectionClick();
             _triggerFlash(
               type == 'good'
                   ? Colors.green.withValues(alpha: 0.6)

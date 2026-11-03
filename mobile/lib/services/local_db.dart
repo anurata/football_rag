@@ -28,7 +28,7 @@ class LocalDbService {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE local_actions (
@@ -42,6 +42,8 @@ class LocalDbService {
             play_category TEXT,
             note TEXT,
             bonus_points INTEGER DEFAULT 0,
+            positive_points INTEGER DEFAULT 0,
+            negative_points INTEGER DEFAULT 0,
             created_at TEXT,
             is_synced INTEGER DEFAULT 0
           );
@@ -52,6 +54,16 @@ class LocalDbService {
           try {
             await db.execute(
               'ALTER TABLE local_actions ADD COLUMN bonus_points INTEGER DEFAULT 0;',
+            );
+          } catch (_) {}
+        }
+        if (oldVersion < 3) {
+          try {
+            await db.execute(
+              'ALTER TABLE local_actions ADD COLUMN positive_points INTEGER DEFAULT 0;',
+            );
+            await db.execute(
+              'ALTER TABLE local_actions ADD COLUMN negative_points INTEGER DEFAULT 0;',
             );
           } catch (_) {}
         }

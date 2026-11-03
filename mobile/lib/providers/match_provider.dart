@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,7 +19,8 @@ class MatchTrackingState {
   final MatchAppContext? matchContext;
   final bool isLoading;
   final String selectedTeam; // 'HOME' or 'AWAY'
-  final int currentMinute;
+  final int elapsedSeconds; // Stopwatch seconds
+  final bool isTimerRunning;
   final List<UserAction> recentActions;
   final bool isSyncing;
   final String syncStatusMessage;
@@ -27,26 +29,51 @@ class MatchTrackingState {
     this.matchContext,
     this.isLoading = false,
     this.selectedTeam = 'HOME',
-    this.currentMinute = 0,
+    this.elapsedSeconds = 0,
+    this.isTimerRunning = false,
     this.recentActions = const [],
     this.isSyncing = false,
     this.syncStatusMessage = 'Ready',
   });
 
-  /// Real-time net score per player across recorded actions
-  Map<String, int> get playerScores {
-    final map = <String, int>{};
+  /// Current minute (e.g. 0' at 0-59s, 45' at 45:00)
+  int get currentMinute => (elapsedSeconds / 60).floor();
+
+  /// Formatted mm:ss string (e.g. "00:00", "45:12")
+  String get formattedTime {
+    final m = (elapsedSeconds / 60).floor().toString().padLeft(2, '0');
+    final s = (elapsedSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  /// True if over 45 minutes (triggers orange background)
+  bool get isOver45Minutes => elapsedSeconds >= 45 * 60;
+
+  /// Detailed positive and negative points per player
+  Map<String, PlayerScoreSummary> get playerScoresDetailed {
+    final map = <String, PlayerScoreSummary>{};
     for (final act in recentActions) {
-      map[act.playerId] = (map[act.playerId] ?? 0) + act.netPoints;
+      final existing = map[act.playerId] ??
+          PlayerScoreSummary(playerId: act.playerId);
+      map[act.playerId] = existing.copyWith(
+        positivePoints: existing.positivePoints + act.positivePoints,
+        negativePoints: existing.negativePoints + act.negativePoints,
+      );
     }
     return map;
+  }
+
+  /// Real-time net score per player across recorded actions
+  Map<String, int> get playerScores {
+    return playerScoresDetailed.map((k, v) => MapEntry(k, v.netScore));
   }
 
   MatchTrackingState copyWith({
     MatchAppContext? matchContext,
     bool? isLoading,
     String? selectedTeam,
-    int? currentMinute,
+    int? elapsedSeconds,
+    bool? isTimerRunning,
     List<UserAction>? recentActions,
     bool? isSyncing,
     String? syncStatusMessage,
@@ -55,7 +82,8 @@ class MatchTrackingState {
       matchContext: matchContext ?? this.matchContext,
       isLoading: isLoading ?? this.isLoading,
       selectedTeam: selectedTeam ?? this.selectedTeam,
-      currentMinute: currentMinute ?? this.currentMinute,
+      elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
+      isTimerRunning: isTimerRunning ?? this.isTimerRunning,
       recentActions: recentActions ?? this.recentActions,
       isSyncing: isSyncing ?? this.isSyncing,
       syncStatusMessage: syncStatusMessage ?? this.syncStatusMessage,
@@ -67,13 +95,60 @@ class MatchTrackingNotifier extends Notifier<MatchTrackingState> {
   late final ApiClient _apiClient;
   late final LocalDbService _localDb;
   final _uuid = const Uuid();
+  Timer? _stopwatchTimer;
 
   @override
   MatchTrackingState build() {
     _apiClient = ref.watch(apiClientProvider);
     _localDb = ref.watch(localDbProvider);
+    ref.onDispose(() => _stopTimer());
     return const MatchTrackingState();
   }
+
+  void toggleTimer() {
+    if (state.isTimerRunning) {
+      _stopTimer();
+    } else {
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    _stopwatchTimer?.cancel();
+    state = state.copyWith(isTimerRunning: true);
+    _stopwatchTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final nextSec = state.elapsedSeconds + 1;
+      if (nextSec >= 60 * 60) {
+        // Automatically stop at 60:00
+        _stopTimer();
+        state = state.copyWith(elapsedSeconds: 60 * 60);
+      } else {
+        state = state.copyWith(elapsedSeconds: nextSec);
+      }
+    });
+  }
+
+  void _stopTimer() {
+    _stopwatchTimer?.cancel();
+    _stopwatchTimer = null;
+    state = state.copyWith(isTimerRunning: false);
+  }
+
+  void adjustMinutes(int deltaMinutes) {
+    if (state.isTimerRunning) return; // Only allow adjusting when paused
+    final currentMin = (state.elapsedSeconds / 60).floor();
+    final newMin = (currentMin + deltaMinutes).clamp(0, 60);
+    state = state.copyWith(elapsedSeconds: newMin * 60);
+  }
+
+  void setElapsedSeconds(int seconds) {
+    _stopTimer();
+    state = state.copyWith(elapsedSeconds: seconds.clamp(0, 60 * 60));
+  }
+
+  void incrementMinute() => adjustMinutes(1);
+
+  void setMinute(int min) => setElapsedSeconds(min * 60);
 
   Future<void> loadMatch(String matchId) async {
     state = state.copyWith(isLoading: true);
@@ -102,14 +177,6 @@ class MatchTrackingNotifier extends Notifier<MatchTrackingState> {
     if (state.selectedTeam != team) {
       state = state.copyWith(selectedTeam: team);
     }
-  }
-
-  void incrementMinute() {
-    state = state.copyWith(currentMinute: state.currentMinute + 1);
-  }
-
-  void setMinute(int min) {
-    state = state.copyWith(currentMinute: min);
   }
 
   Future<void> recordAction({

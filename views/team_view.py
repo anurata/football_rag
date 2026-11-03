@@ -193,6 +193,7 @@ def _render_tactical_profile_tab(
     qa_engine: TacticalQAEngine,
 ) -> None:
     """戦術プロファイルタブ全体の描画."""
+    _inject_metric_table_custom_css()
     st.subheader("1. クラブ戦術スタイル ＆ 際立つ特徴指標")
 
     style_desc = t_prof.get("style_description", "")
@@ -637,35 +638,54 @@ def _show_metric_detail_dialog(item: Dict[str, Any]) -> None:
 
 
 def _inject_metric_table_custom_css() -> None:
-    """指標テーブルの縦崩れを防止し、丸い「？」ボタンを表示するためのCSSを注入する."""
+    """指標テーブルの縦崩れを防止し、丸い「？」ボタンを指標名直後にインライン配置するためのCSSを注入する."""
     st.markdown(
         """
         <style>
-        /* 指標テーブル専用: 幅が狭い画面でも縦積みに崩れず横並びを維持 */
+        /* 指標テーブル専用: 画面幅に関わらず横並びを維持 */
         div[data-testid="stExpanderDetails"] div[data-testid="stHorizontalBlock"] {
             flex-wrap: nowrap !important;
             align-items: center !important;
-            gap: 0.4rem !important;
+            gap: 0.5rem !important;
         }
         div[data-testid="stExpanderDetails"] div[data-testid="column"] {
             min-width: 0 !important;
-            flex: 1 1 auto !important;
         }
-        /* 丸い「？」ボタンスタイル (円形、薄青背景、青文字、ホバーで濃青) */
-        div[data-testid="stExpanderDetails"] button[aria-label*="戦術指標の詳細解説"],
-        button[aria-label*="戦術指標の詳細解説"] {
-            width: 22px !important;
-            min-width: 22px !important;
-            max-width: 22px !important;
-            height: 22px !important;
-            min-height: 22px !important;
-            max-height: 22px !important;
+
+        /* 指標名エリア内のテキストと丸い？ボタンを直後にピタッとインライン配置 */
+        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 6px !important;
+            width: 100% !important;
+        }
+        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:first-child {
+            flex: 0 1 auto !important;
+            width: auto !important;
+            max-width: calc(100% - 28px) !important;
+        }
+        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:last-child {
+            flex: 0 0 24px !important;
+            width: 24px !important;
+            min-width: 24px !important;
+        }
+
+        /* エキスパンダー内のすべてのボタンを完全な円形（丸い？ボタン）にする */
+        div[data-testid="stExpanderDetails"] button {
+            width: 20px !important;
+            min-width: 20px !important;
+            max-width: 20px !important;
+            height: 20px !important;
+            min-height: 20px !important;
+            max-height: 20px !important;
             border-radius: 50% !important;
             padding: 0 !important;
             margin: 0 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
-            line-height: 20px !important;
+            line-height: 18px !important;
             color: #2563eb !important;
             background-color: #eff6ff !important;
             border: 1.5px solid #93c5fd !important;
@@ -675,11 +695,18 @@ def _inject_metric_table_custom_css() -> None:
             cursor: pointer !important;
             box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
         }
-        div[data-testid="stExpanderDetails"] button[aria-label*="戦術指標の詳細解説"]:hover,
-        button[aria-label*="戦術指標の詳細解説"]:hover {
+        div[data-testid="stExpanderDetails"] button:hover {
             background-color: #2563eb !important;
             color: #ffffff !important;
             border-color: #2563eb !important;
+        }
+        div[data-testid="stExpanderDetails"] button p,
+        div[data-testid="stExpanderDetails"] button div {
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            line-height: 18px !important;
         }
         </style>
         """,
@@ -688,7 +715,7 @@ def _inject_metric_table_custom_css() -> None:
 
 
 def _render_metric_row(item: Dict[str, Any]) -> None:
-    """全55戦術指標テーブルの1行分を描画する (指標名と同じ高さで後ろに丸い「？」ボタンを配置)."""
+    """全55戦術指標テーブルの1行分を描画する (指標名と同じ高さで直後に丸い「？」ボタンを配置)."""
     c_name_area, c_val, c_lat, c_avg = st.columns([3.8, 4.2, 2.0, 2.0])
 
     cur_tier = item.get("current_tier", {})
@@ -696,17 +723,32 @@ def _render_metric_row(item: Dict[str, Any]) -> None:
     level = cur_tier.get("level", "B").split()[0]
 
     with c_name_area:
-        c_txt, c_btn = st.columns([0.84, 0.16])
+        c_txt, c_btn = st.columns([0.82, 0.18])
         with c_txt:
             st.markdown(
-                f"<div style='font-size: 13px; font-weight: 600; line-height: 1.35; color: #1e293b; padding-top: 5px;'>{item['metric_name']}<br><span style='font-size: 11px; font-weight: 700; color: #d97706;'>{stars[:3]} ({level})</span></div>",
+                f"<div style='font-size: 13px; font-weight: 700; color: #1e293b; line-height: 1.3;'>{item['metric_name']}</div>"
+                f"<div style='font-size: 11px; font-weight: 700; color: #d97706; line-height: 1.2;'>{stars[:3]} ({level})</div>",
                 unsafe_allow_html=True,
             )
         with c_btn:
-            st.markdown("<div style='padding-top: 4px;'>", unsafe_allow_html=True)
             if st.button("?", key=f"btn_help_{item['metric_name']}", help="戦術指標の詳細解説と5段階判定基準をダイアログで表示"):
                 _show_metric_detail_dialog(item)
-            st.markdown("</div>", unsafe_allow_html=True)
+
+    with c_val:
+        bar_html = _build_metric_bar_cell_html(item)
+        st.markdown(bar_html, unsafe_allow_html=True)
+
+    with c_lat:
+        st.markdown(
+            f"<div style='font-size: 13px; color: #475569; padding-top: 8px; text-align: center;'>{item.get('latest_val', '-')}</div>",
+            unsafe_allow_html=True,
+        )
+
+    with c_avg:
+        st.markdown(
+            f"<div style='font-size: 13px; color: #64748b; padding-top: 8px; text-align: center;'>{item.get('league_avg', '-')}</div>",
+            unsafe_allow_html=True,
+        )
 
     with c_val:
         bar_html = _build_metric_bar_cell_html(item)

@@ -111,7 +111,11 @@ class PitchBoard extends StatelessWidget {
 class _SoccerPitchPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // 1. Grass background gradient
+    _drawGrassBackground(canvas, size);
+    _drawHalfCourtLines(canvas, size);
+  }
+
+  void _drawGrassBackground(Canvas canvas, Size size) {
     final grassPaint = Paint()
       ..shader = const LinearGradient(
         begin: Alignment.topCenter,
@@ -119,53 +123,70 @@ class _SoccerPitchPainter extends CustomPainter {
         colors: [
           Color(0xFF1B5E20),
           Color(0xFF2E7D32),
-          Color(0xFF1B5E20),
+          Color(0xFF1E6E26),
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), grassPaint);
+  }
 
-    // 2. White pitch lines
+  void _drawHalfCourtLines(Canvas canvas, Size size) {
     final linePaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.6)
+      ..color = Colors.white.withValues(alpha: 0.65)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    // Outer border
+    const pad = 6.0;
+    final w = size.width;
+    final h = size.height;
+
+    // 1. Outer half-court border
     canvas.drawRect(
-      Rect.fromLTWH(8, 8, size.width - 16, size.height - 16),
+      Rect.fromLTWH(pad, pad, w - (pad * 2), h - (pad * 2)),
       linePaint,
     );
 
-    // Halfway line
-    final midY = size.height / 2;
-    canvas.drawLine(
-      Offset(8, midY),
-      Offset(size.width - 8, midY),
+    // 2. Top Halfway Line & Center Circle Arc
+    final centerTop = Offset(w / 2, pad);
+    canvas.drawArc(
+      Rect.fromCircle(center: centerTop, radius: w * 0.20),
+      0,
+      3.14159265,
+      false,
+      linePaint,
+    );
+    canvas.drawCircle(
+      centerTop,
+      3.0,
+      Paint()..color = Colors.white70,
+    );
+
+    // 3. Bottom Penalty Area (Large box)
+    final penW = w * 0.60;
+    final penH = h * 0.28;
+    final penLeft = (w - penW) / 2;
+    final penTop = h - pad - penH;
+    canvas.drawRect(
+      Rect.fromLTWH(penLeft, penTop, penW, penH),
       linePaint,
     );
 
-    // Center circle
-    final center = Offset(size.width / 2, midY);
-    canvas.drawCircle(center, size.width * 0.16, linePaint);
-    canvas.drawCircle(center, 3.0, Paint()..color = Colors.white70);
+    // 4. Goal Area (Small box)
+    final goalW = w * 0.32;
+    final goalH = h * 0.12;
+    final goalLeft = (w - goalW) / 2;
+    final goalTop = h - pad - goalH;
+    canvas.drawRect(
+      Rect.fromLTWH(goalLeft, goalTop, goalW, goalH),
+      linePaint,
+    );
 
-    // Penalty areas
-    _drawPenaltyArea(canvas, size, linePaint, isTop: true);
-    _drawPenaltyArea(canvas, size, linePaint, isTop: false);
-  }
-
-  void _drawPenaltyArea(
-    Canvas canvas,
-    Size size,
-    Paint paint, {
-    required bool isTop,
-  }) {
-    final boxW = size.width * 0.55;
-    final boxH = size.height * 0.14;
-    final left = (size.width - boxW) / 2;
-    final top = isTop ? 8.0 : (size.height - 8.0 - boxH);
-
-    canvas.drawRect(Rect.fromLTWH(left, top, boxW, boxH), paint);
+    // 5. Penalty Spot (PK dot)
+    final pkY = h - pad - (penH * 0.65);
+    canvas.drawCircle(
+      Offset(w / 2, pkY),
+      2.5,
+      Paint()..color = Colors.white70,
+    );
   }
 
   @override

@@ -326,12 +326,12 @@ class TestApiMobile(unittest.TestCase):
         layout_3b = _auto_layout_starters(starters_3back)
         coord_map_3b = {p.position: (p.pitch_x, p.pitch_y) for p in layout_3b}
 
-        self.assertEqual(coord_map_3b["GK"], (50.0, 88.0))
-        self.assertEqual(coord_map_3b["LCB"], (24.0, 75.0))
-        self.assertEqual(coord_map_3b["CB"], (50.0, 77.0))
-        self.assertEqual(coord_map_3b["RCB"], (76.0, 75.0))
-        self.assertEqual(coord_map_3b["LWB"], (12.0, 55.0))
-        self.assertEqual(coord_map_3b["CF"], (50.0, 22.0))
+        self.assertEqual(coord_map_3b["GK"], (50.0, 90.0))
+        self.assertEqual(coord_map_3b["LCB"], (24.0, 72.0))
+        self.assertEqual(coord_map_3b["CB"], (50.0, 70.0))
+        self.assertEqual(coord_map_3b["RCB"], (76.0, 72.0))
+        self.assertEqual(coord_map_3b["LWB"], (12.0, 52.0))
+        self.assertEqual(coord_map_3b["CF"], (50.0, 16.0))
 
         # 2. Test 4-back pattern
         starters_4back = [
@@ -346,12 +346,12 @@ class TestApiMobile(unittest.TestCase):
         layout_4b = _auto_layout_starters(starters_4back)
         coord_map_4b = {p.position: (p.pitch_x, p.pitch_y) for p in layout_4b}
 
-        self.assertEqual(coord_map_4b["LSB"], (14.0, 73.0))
-        self.assertEqual(coord_map_4b["LCB"], (38.0, 75.0))
-        self.assertEqual(coord_map_4b["RCB"], (62.0, 75.0))
-        self.assertEqual(coord_map_4b["RSB"], (86.0, 73.0))
-        self.assertEqual(coord_map_4b["LCF"], (35.0, 24.0))
-        self.assertEqual(coord_map_4b["RCF"], (65.0, 24.0))
+        self.assertEqual(coord_map_4b["LSB"], (14.0, 72.0))
+        self.assertEqual(coord_map_4b["LCB"], (38.0, 72.0))
+        self.assertEqual(coord_map_4b["RCB"], (62.0, 72.0))
+        self.assertEqual(coord_map_4b["RSB"], (86.0, 72.0))
+        self.assertEqual(coord_map_4b["LCF"], (35.0, 18.0))
+        self.assertEqual(coord_map_4b["RCF"], (65.0, 18.0))
 
 
 if __name__ == "__main__":

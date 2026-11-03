@@ -77,6 +77,9 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
             self.assertGreaterEqual(radar[k], 0.0)
             self.assertLessEqual(radar[k], 100.0)
 
+        # FC東京はリーグ最高スプリント回数（平均138回超）のため、フィジカル走力強度が90pt以上であること
+        self.assertGreaterEqual(radar["フィジカル・走力強度"], 90.0)
+
     def test_get_team_signature_metrics(self):
         """シグネチャー指標（強み Top 3 & 課題 Bottom 3）の検証."""
         sig = get_team_signature_metrics("FCT")
@@ -102,6 +105,15 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         self.assertGreaterEqual(len(wl["comparison_table"]), 5)
         self.assertGreaterEqual(len(wl["win_takeaways"]), 1)
         self.assertGreaterEqual(len(wl["loss_takeaways"]), 1)
+
+        # プレス強度 (PPDA) および スプリント数 (回) がキー不一致で0にならず実数値が入っていること
+        table_map = {row["metric_label"]: row for row in wl["comparison_table"]}
+        self.assertIn("プレス強度 (PPDA)", table_map)
+        self.assertIn("スプリント数 (回)", table_map)
+        self.assertGreater(table_map["プレス強度 (PPDA)"]["win_avg"], 10.0)
+        self.assertGreater(table_map["プレス強度 (PPDA)"]["loss_avg"], 10.0)
+        self.assertGreater(table_map["スプリント数 (回)"]["win_avg"], 100.0)
+        self.assertGreater(table_map["スプリント数 (回)"]["loss_avg"], 100.0)
 
     def test_get_goal_pattern_breakdown(self):
         """得点パターンおよび時間帯別ダイナミクスの検証."""
@@ -196,9 +208,14 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
             "🎯 勝敗・期待値 & ゲーム管理",
             "📋 陣形・環境・セットプレー",
         ]
+        total_items = 0
         for c in expected_cats:
             self.assertIn(c, categorized)
             self.assertGreater(len(categorized[c]), 0)
+            total_items += len(categorized[c])
+
+        # 55指標中、数値指標54個が全て網羅されていること
+        self.assertGreaterEqual(total_items, 50)
 
 
 if __name__ == "__main__":

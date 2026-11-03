@@ -210,7 +210,7 @@ def compute_all_teams_clusters() -> Dict[str, Any]:
             "bpi": avg_val("BPI", 20.0),  # 前進指数
             "pa_conv": avg_val("30m→PA進入変換率", 40.0),
             "cross_ratio": avg_val("攻撃経路クロス依存度", 15.0),
-            "sprints": avg_val("スプリント数", 130.0),
+            "sprints": avg_val("スプリント", 130.0),
             "convex_hull": avg_val("チーム凸包面積", 1250.0),
             "xg_diff": avg_val("xG期待値差分", 0.0),
             "cbp_gain": avg_val("プレス誘発カウンター変換効率", 30.0),
@@ -442,17 +442,33 @@ def get_win_loss_pattern_analysis(team_id: str) -> Dict[str, Any]:
         ("01_xG期待値差分", "ゴール期待値差分 (xG)"),
         ("12_PA進入数", "ペナルティエリア進入数 (回)"),
         ("13_30m→PA進入変換率(%)", "30m→PA進入変換率 (%)"),
-        ("18_プレス強度(PPDA)", "プレス強度 (PPDA)"),
-        ("20b_スプリント数", "スプリント数 (回)"),
+        ("18_守備プレス強度(PPDA)", "プレス強度 (PPDA)"),
+        ("20b_スプリント回数", "スプリント数 (回)"),
         ("48_BPI(ボール前進総合指数)", "ボール前進総合指数 (BPI)"),
         ("50_守備ブロック弾力性(Box Resistance)", "ブロック守備弾力性"),
     ]
 
+    def get_match_metric_val(m: Dict[str, Any], key: str) -> Optional[float]:
+        """完全一致、プレフィックス一致、部分一致の順で堅牢にメトリクス値を取得する."""
+        if key in m and isinstance(m[key], (int, float)):
+            return float(m[key])
+        # プレフィックス一致 (例: "18_" or "20b_")
+        prefix = key.split("_")[0] + "_" if "_" in key else key
+        for k, v in m.items():
+            if k.startswith(prefix) and isinstance(v, (int, float)):
+                return float(v)
+        # 部分一致
+        for k, v in m.items():
+            if key in k and isinstance(v, (int, float)):
+                return float(v)
+        return None
+
     def calc_mean(match_list: List[Dict[str, Any]], key: str) -> float:
         if not match_list:
             return 0.0
-        vals = [float(m[key]) for m in match_list if key in m and isinstance(m[key], (int, float))]
-        return float(np.mean(vals)) if vals else 0.0
+        vals = [get_match_metric_val(m, key) for m in match_list]
+        valid_vals = [v for v in vals if v is not None]
+        return float(np.mean(valid_vals)) if valid_vals else 0.0
 
     comparison_table: List[Dict[str, Any]] = []
     for k_raw, label in key_metrics:
@@ -473,7 +489,7 @@ def get_win_loss_pattern_analysis(team_id: str) -> Dict[str, Any]:
 
     pos_diff = calc_mean(win_matches, "09_ボール支配率(%)") - calc_mean(loss_matches, "09_ボール支配率(%)")
     pa_diff = calc_mean(win_matches, "12_PA進入数") - calc_mean(loss_matches, "12_PA進入数")
-    ppda_diff = calc_mean(win_matches, "18_プレス強度(PPDA)") - calc_mean(loss_matches, "18_プレス強度(PPDA)")
+    ppda_diff = calc_mean(win_matches, "18_守備プレス強度(PPDA)") - calc_mean(loss_matches, "18_守備プレス強度(PPDA)")
     bpi_diff = calc_mean(win_matches, "48_BPI(ボール前進総合指数)") - calc_mean(loss_matches, "48_BPI(ボール前進総合指数)")
 
     if pa_diff > 2.0:
@@ -488,7 +504,7 @@ def get_win_loss_pattern_analysis(team_id: str) -> Dict[str, Any]:
     if pa_diff > 2.0:
         loss_takeaways.append(f"【負け筋】相手の撤退ブロックに外回りを強いられ、PA進入数が平均 {calc_mean(loss_matches, '12_PA進入数'):.1f}回に半減した試合で失点・敗戦。")
     if ppda_diff > 2.0:
-        loss_takeaways.append(f"【負け筋】前線からのプレス強度が緩み（PPDA {calc_mean(loss_matches, '18_プレス強度(PPDA)'):.1f}）、相手に容易に縦パスを通された試合で崩れる。")
+        loss_takeaways.append(f"【負け筋】前線からのプレス強度が緩み（PPDA {calc_mean(loss_matches, '18_守備プレス強度(PPDA)'):.1f}）、相手に容易に縦パスを通された試合で崩れる。")
     if not loss_takeaways:
         loss_takeaways.append("【負け筋】接戦での決定機逸や、終盤のセットプレー・カウンター被弾による僅差負けが目立つ。")
 
@@ -596,8 +612,8 @@ def get_style_adherence_matches(team_id: str) -> List[Dict[str, Any]]:
 
         xg_diff = float(m.get("01_xG期待値差分", 0.0))
         pa_conv = float(m.get("13_30m→PA進入変換率(%)", 35.0))
-        ppda = float(m.get("18_プレス強度(PPDA)", 15.0))
-        sprints = float(m.get("20b_スプリント数", 120.0))
+        ppda = float(m.get("18_守備プレス強度(PPDA)", m.get("18_プレス強度(PPDA)", 15.0)))
+        sprints = float(m.get("20b_スプリント回数", m.get("20b_スプリント数", 120.0)))
         bpi = float(m.get("48_BPI(ボール前進総合指数)", 18.0))
         possession = float(m.get("09_ボール支配率(%)", 50.0))
 
@@ -1066,11 +1082,11 @@ def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, An
     # 6大カテゴリ定義
     categories = {
         "⚽ ポゼッション & パス循環": ["04_パス", "05_パス", "09_ボール支配", "10_ポゼッション", "35_タッチ関与", "36_ビルドアップ", "37_有向PageRank", "47_ポゼッション補正"],
-        "⚔️ チャンス創出 & 前進推進": ["01_xG期待値", "02_シュート数", "03_枠内シュート", "11_30m進入", "12_PA進入", "13_30m→PA", "38_攻撃チャンネル", "39_ゾーン別", "40_アクション価値", "41_オン・ザ・ボール", "42_スペース創出", "45_1シュート", "48_BPI"],
-        "🛡️ 守備・プレッシング & 迎撃": ["07_クロス被", "08_ドリブル", "17_チームコンパクト", "18_プレス強度", "29_プレッシング耐性", "31_チーム凸包", "32_伸縮指数", "33_縦横アスペクト", "49_プレス誘発", "49b_プレス強度", "50_守備ブロック"],
-        "⚡ フィジカル & 運動量強度": ["20_走行距離", "20b_スプリント", "21_終盤運動量", "52_温熱ストレス", "54_ピリオダイゼーション"],
+        "⚔️ チャンス創出 & 前進推進": ["01_xG期待値", "02_シュート数", "03_枠内シュート", "11_30mライン", "12_PA進入", "13_30m→PA", "38_攻撃チャンネル", "39_ゾーン別", "40_アクション価値", "41_オンザボール", "42_スペース創出", "45_1シュート", "48_BPI"],
+        "🛡️ 守備・プレッシング & 迎撃": ["07_クロス成功率", "08_ドリブル", "17_縦横コンパクト", "18_守備プレス強度", "29_プレッシング耐性", "31_チーム凸包", "32_伸縮指数", "33_縦横アスペクト", "49_プレス誘発", "49b_プレス強度", "50_守備ブロック"],
+        "⚡ フィジカル & 運動量強度": ["20_走行距離", "20b_スプリント", "21_選手間平均距離復元率", "52_温熱ストレス", "54_ピリオダイゼーション"],
         "🎯 勝敗・期待値 & ゲーム管理": ["43_ポアソン", "43b_運指数", "44_ピタゴラス", "46_ベイズ", "51_ゲーム状態", "53_交替選手", "55_マルコフ"],
-        "📋 陣形・環境・セットプレー": ["06_クロス総数", "14_攻撃経路", "15_チーム重心", "16_チャンス構築", "19_シュート枠", "22_擬似xG", "23_擬似xA", "24_マッチ評点", "25_ホーム", "26_対戦相手", "28_セットプレー", "30_クロスターゲット", "34_ボロノイ"],
+        "📋 陣形・環境・セットプレー": ["06_クロス総数", "14_攻撃経路", "15_チーム重心", "16_チャンス構築", "19_シュート枠", "22_擬似xG", "23_擬似xA", "24_マッチ評点", "25_ホーム", "26_次戦対戦相手適合度", "28_セットプレー", "30_クロスターゲット", "34_ボロノイ"],
     }
 
     categorized_result: Dict[str, List[Dict[str, Any]]] = {}

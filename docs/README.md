@@ -66,4 +66,5 @@ flowchart TD
 | `.agents/skills/site-operations/` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_spec_conformance.py` |
 | `scripts/live_match_forecaster.py` | `live_match_tracker_spec.md` | `tests/test_live_match_forecaster.py` |
 | `scripts/run_scheduled_pipeline.py` | `operation_cycle.md` | `tests/test_run_scheduled_pipeline.py` |
+| `scripts/sync_docs_to_nlm.py` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_sync_docs_to_nlm.py` |
 

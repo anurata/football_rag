@@ -106,4 +106,30 @@ flowchart TD
 | リーグ全体更新 | `scripts/rebuild_all_tactical_structures.py`<br>`scripts/batch_update_all_teams_tactics.py` | `tests/test_spec_conformance.py` |
 | 4大外部リンク生成 | `pipeline/external_links.py` | `tests/test_external_links.py` |
 | UI統合表示 | `app.py` (`render_external_links_bar`) | `tests/test_dashboard_helpers.py` |
+| 仕様書 NotebookLM 同期 | `scripts/sync_docs_to_nlm.py` | `tests/test_sync_docs_to_nlm.py` |
+
+---
+
+### 6. 仕様書 NotebookLM 自動同期運用 (Doc Sync to NotebookLM)
+
+システム設計書・運用仕様書群（`docs/*.md`）は、Gemini NotebookLM の専用ノートブック（`⚽ football_rag システム仕様書`、エイリアス: `football_rag_docs`）へスマート差分同期されます。
+
+#### 1. 運用コマンド
+```bash
+# 差分シミュレーション（アップロード・削除を行わず計画のみ表示）
+python scripts/sync_docs_to_nlm.py --dry-run
+
+# スマート差分同期実行（ハッシュ検知により変更があったファイルのみ削除・再登録）
+python scripts/sync_docs_to_nlm.py
+
+# 強制全件再同期（ハッシュ一致を無視して全件再アップロード）
+python scripts/sync_docs_to_nlm.py --force
+```
+
+#### 2. スマート差分検出アーキテクチャ
+1. **SHA256ハッシュ判定**: ローカルの `docs/*.md` のハッシュ値を計算し、`.nlm_sync_cache.json` と比較。
+2. **変更分のみ更新**: 未変更ファイル（8〜9割）はスキップし、変更があったファイルのみ旧ソース削除・最新版アップロードを実施。
+3. **新規・削除追従**: ローカルに新規追加されたファイルは NotebookLM に追加、ローカルで削除されたファイルはリモートからも自動削除。
+4. **クォータ保護**: NotebookLM の API クォータと不要な ID 再生成を最小限に抑制。
+
 

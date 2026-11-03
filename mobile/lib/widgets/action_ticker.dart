@@ -104,7 +104,7 @@ class ActionTicker extends StatelessWidget {
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.remove, color: Colors.white70),
                 onPressed: () {
-                  HapticFeedback.selectionClick();
+                  HapticFeedback.mediumImpact();
                   onDecrementMinute();
                 },
               ),
@@ -114,7 +114,7 @@ class ActionTicker extends StatelessWidget {
             // Stopwatch time display & play/pause toggle
             GestureDetector(
               onTap: () {
-                HapticFeedback.selectionClick();
+                HapticFeedback.mediumImpact();
                 if (onToggleTimer != null) onToggleTimer!();
               },
               child: Row(
@@ -150,7 +150,7 @@ class ActionTicker extends StatelessWidget {
                 constraints: const BoxConstraints(),
                 icon: const Icon(Icons.add, color: Colors.white70),
                 onPressed: () {
-                  HapticFeedback.selectionClick();
+                  HapticFeedback.mediumImpact();
                   onIncrementMinute();
                 },
               ),

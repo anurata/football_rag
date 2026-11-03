@@ -162,7 +162,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
                   style: TextStyle(color: Colors.white54, fontSize: 11),
                 ),
                 onTap: () {
-                  HapticFeedback.selectionClick();
+                  HapticFeedback.mediumImpact();
                   notifier.setElapsedSeconds(0);
                   Navigator.pop(ctx);
                 },
@@ -179,7 +179,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
                   style: TextStyle(color: Colors.white54, fontSize: 11),
                 ),
                 onTap: () {
-                  HapticFeedback.selectionClick();
+                  HapticFeedback.mediumImpact();
                   notifier.setElapsedSeconds(45 * 60);
                   Navigator.pop(ctx);
                 },
@@ -303,7 +303,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
             onIncrementMinute: () => notifier.adjustMinutes(1),
             onDecrementMinute: () => notifier.adjustMinutes(-1),
             onToggleTimer: () {
-              HapticFeedback.selectionClick();
+              HapticFeedback.mediumImpact();
               notifier.toggleTimer();
             },
             onLongPressTimer: () {
@@ -311,7 +311,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
               _showStopwatchSettingsDialog(context, notifier);
             },
             onTapAction: (action) {
-              HapticFeedback.selectionClick();
+              HapticFeedback.mediumImpact();
               notifier.incrementActionBonus(action.id);
             },
             onLongPressAction: (action) {

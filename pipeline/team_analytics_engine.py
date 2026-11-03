@@ -35,6 +35,7 @@ DB_PATH = ROOT_DIR / "data" / "football.db"
 EXPORTS_DIR = ROOT_DIR / "exports"
 STRUCTURED_DIR = ROOT_DIR / "data" / "structured"
 PROFILES_PATH = ROOT_DIR / "knowledge" / "team_tactical_profiles.json"
+METRIC_DEFS_PATH = ROOT_DIR / "knowledge" / "metric_definitions_55.json"
 
 TEAM_ID_MAP = {
     "CER": "セレッソ大阪",
@@ -1083,22 +1084,110 @@ def get_team_h2h_comparison(team_a: str, team_b: str) -> Dict[str, Any]:
 # 8. 全55戦術指標の6大カテゴリ別集計
 # ---------------------------------------------------------------------------
 @st.cache_data(ttl=600)
+def load_metric_definitions_55() -> Dict[str, Dict[str, Any]]:
+    """全55戦術指標の解説・基準値・反転フラグマスターを読み込む."""
+    if not METRIC_DEFS_PATH.exists():
+        return {}
+    try:
+        with open(METRIC_DEFS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        logger.warning(f"Failed to load metric definitions: {e}")
+        return {}
+
+
+@st.cache_data(ttl=600)
+def get_league_55_metrics_summary() -> Dict[str, Dict[str, Any]]:
+    """J1全20クラブの55戦術指標について、最高値・平均値・クラブ別順位を事前集計する."""
+    all_metrics = load_all_teams_55_metrics()
+    metric_defs = load_metric_definitions_55()
+    team_keys = list(TEAM_ID_MAP.keys())
+
+    # 全クラブのシーズン平均を算出
+    team_stats: Dict[str, Dict[str, float]] = defaultdict(dict)
+    for tid, m_list in all_metrics.items():
+        agg: Dict[str, List[float]] = defaultdict(list)
+        for m in m_list:
+            for k, v in m.items():
+                if isinstance(v, (int, float)) and any(c.isdigit() for c in k[:3]):
+                    agg[k].append(float(v))
+        for k, vs in agg.items():
+            if vs:
+                team_stats[tid][k] = float(np.mean(vs))
+
+    all_metric_names = sorted(
+        list(set(k for tid in team_stats for k in team_stats[tid].keys())),
+    )
+    summary: Dict[str, Dict[str, Any]] = {}
+
+    for m_name in all_metric_names:
+        vals: Dict[str, float] = {}
+        for tid in team_keys:
+            if m_name in team_stats.get(tid, {}):
+                vals[tid] = team_stats[tid][m_name]
+        if not vals:
+            continue
+
+        m_def = metric_defs.get(m_name, {})
+        lower_is_better = m_def.get("lower_is_better", "PPDA" in m_name)
+
+        s = pd.Series(vals)
+        ranks = s.rank(ascending=lower_is_better, method="min").to_dict()
+
+        best_tid = str(s.idxmin() if lower_is_better else s.idxmax())
+        best_val = float(s[best_tid])
+        max_val = float(s.max())
+        min_val = float(s.min())
+        mean_val = float(s.mean())
+
+        summary[m_name] = {
+            "max_val": round(max_val, 2),
+            "min_val": round(min_val, 2),
+            "mean_val": round(mean_val, 2),
+            "best_tid": best_tid,
+            "best_team_name": TEAM_ID_MAP.get(best_tid, best_tid),
+            "best_val": round(best_val, 2),
+            "lower_is_better": lower_is_better,
+            "ranks": {tid: int(r) for tid, r in ranks.items()},
+            "team_vals": {tid: round(float(v), 2) for tid, v in vals.items()},
+        }
+
+    return summary
+
+
+def _compute_metric_bar_ratio(
+    val: float,
+    best_val: float,
+    max_val: float,
+    min_val: float,
+    lower_is_better: bool,
+) -> float:
+    """Jリーグトップを100%とした相対バー比率(0.0〜100.0%)を算出する."""
+    if lower_is_better:
+        if val > 0 and best_val > 0:
+            ratio = (best_val / val) * 100.0
+        else:
+            ratio = 50.0
+    else:
+        if best_val > 0:
+            ratio = (val / best_val) * 100.0
+        else:
+            denom = max_val - min_val
+            ratio = ((val - min_val) / denom) * 100.0 if denom > 0 else 50.0
+
+    return max(4.0, min(100.0, float(ratio)))
+
+
+@st.cache_data(ttl=600)
 def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, Any]]]:
-    """全55戦術指標を6つの戦術カテゴリに分類し、最新値・シーズン平均・リーグ内順位を返す."""
+    """全55戦術指標を6つの戦術カテゴリに分類し、最新値・シーズン平均・リーグ順位・相対バー比率・解説を返す."""
     all_metrics = load_all_teams_55_metrics()
     matches = all_metrics.get(team_id, [])
     if not matches:
         return {}
 
-    # 全クラブ平均データ構築
-    league_avgs: Dict[str, List[float]] = defaultdict(list)
-    for tid, m_list in all_metrics.items():
-        for m in m_list:
-            for k, v in m.items():
-                if isinstance(v, (int, float)) and any(c.isdigit() for c in k[:3]):
-                    league_avgs[k].append(float(v))
-
-    l_mean_map = {k: float(np.mean(vs)) for k, vs in league_avgs.items()}
+    league_summary = get_league_55_metrics_summary()
+    metric_defs = load_metric_definitions_55()
 
     # チーム平均と最新節値
     team_mean_map: Dict[str, float] = {}
@@ -1117,12 +1206,75 @@ def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, An
 
     # 6大カテゴリ定義
     categories = {
-        "⚽ ポゼッション & パス循環": ["04_パス", "05_パス", "09_ボール支配", "10_ポゼッション", "35_タッチ関与", "36_ビルドアップ", "37_有向PageRank", "47_ポゼッション補正"],
-        "⚔️ チャンス創出 & 前進推進": ["01_xG期待値", "02_シュート数", "03_枠内シュート", "11_30mライン", "12_PA進入", "13_30m→PA", "38_攻撃チャンネル", "39_ゾーン別", "40_アクション価値", "41_オンザボール", "42_スペース創出", "45_1シュート", "48_BPI"],
-        "🛡️ 守備・プレッシング & 迎撃": ["07_クロス成功率", "08_ドリブル", "17_縦横コンパクト", "18_守備プレス強度", "29_プレッシング耐性", "31_チーム凸包", "32_伸縮指数", "33_縦横アスペクト", "49_プレス誘発", "49b_プレス強度", "50_守備ブロック"],
-        "⚡ フィジカル & 運動量強度": ["20_走行距離", "20b_スプリント", "21_選手間平均距離復元率", "52_温熱ストレス", "54_ピリオダイゼーション"],
-        "🎯 勝敗・期待値 & ゲーム管理": ["43_ポアソン", "43b_運指数", "44_ピタゴラス", "46_ベイズ", "51_ゲーム状態", "53_交替選手", "55_マルコフ"],
-        "📋 陣形・環境・セットプレー": ["06_クロス総数", "14_攻撃経路", "15_チーム重心", "16_チャンス構築", "19_シュート枠", "22_擬似xG", "23_擬似xA", "24_マッチ評点", "25_ホーム", "26_次戦対戦相手適合度", "28_セットプレー", "30_クロスターゲット", "34_ボロノイ"],
+        "⚽ ポゼッション & パス循環": [
+            "04_パス",
+            "05_パス",
+            "09_ボール支配",
+            "10_ポゼッション",
+            "35_タッチ関与",
+            "36_ビルドアップ",
+            "37_有向PageRank",
+            "47_ポゼッション補正",
+        ],
+        "⚔️ チャンス創出 & 前進推進": [
+            "01_xG期待値",
+            "02_シュート数",
+            "03_枠内シュート",
+            "11_30mライン",
+            "12_PA進入",
+            "13_30m→PA",
+            "38_攻撃チャンネル",
+            "39_ゾーン別",
+            "40_アクション価値",
+            "41_オンザボール",
+            "42_スペース創出",
+            "45_1シュート",
+            "48_BPI",
+        ],
+        "🛡️ 守備・プレッシング & 迎撃": [
+            "07_クロス成功率",
+            "08_ドリブル",
+            "17_縦横コンパクト",
+            "18_守備プレス強度",
+            "29_プレッシング耐性",
+            "31_チーム凸包",
+            "32_伸縮指数",
+            "33_縦横アスペクト",
+            "49_プレス誘発",
+            "49b_プレス強度",
+            "50_守備ブロック",
+        ],
+        "⚡ フィジカル & 運動量強度": [
+            "20_走行距離",
+            "20b_スプリント",
+            "21_選手間平均距離復元率",
+            "52_温熱ストレス",
+            "54_ピリオダイゼーション",
+        ],
+        "🎯 勝敗・期待値 & ゲーム管理": [
+            "43_ポアソン",
+            "43b_運指数",
+            "44_ピタゴラス",
+            "46_ベイズ",
+            "51_ゲーム状態",
+            "53_交替選手",
+            "55_マルコフ",
+        ],
+        "📋 陣形・環境・セットプレー": [
+            "06_クロス総数",
+            "14_攻撃経路",
+            "15_チーム重心",
+            "16_チャンス構築",
+            "19_シュート枠",
+            "22_擬似xG",
+            "23_擬似xA",
+            "24_マッチ評点",
+            "25_ホーム",
+            "26_次戦対戦相手適合度",
+            "28_セットプレー",
+            "30_クロスターゲット",
+            "34_ボロノイ",
+        ],
     }
 
     categorized_result: Dict[str, List[Dict[str, Any]]] = {}
@@ -1134,13 +1286,44 @@ def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, An
             for k in team_mean_map.keys():
                 if pat in k:
                     t_val = team_mean_map[k]
-                    l_val = l_mean_map.get(k, t_val)
                     lat_val = team_latest_map.get(k, t_val)
+
+                    l_info = league_summary.get(k, {})
+                    l_val = l_info.get("mean_val", t_val)
+                    rank = l_info.get("ranks", {}).get(team_id, 10)
+                    best_val = l_info.get("best_val", t_val)
+                    best_team = l_info.get("best_team_name", "J1トップ")
+                    max_val = l_info.get("max_val", t_val)
+                    min_val = l_info.get("min_val", t_val)
+                    lower_is_better = l_info.get("lower_is_better", False)
+
+                    bar_ratio = _compute_metric_bar_ratio(
+                        val=t_val,
+                        best_val=best_val,
+                        max_val=max_val,
+                        min_val=min_val,
+                        lower_is_better=lower_is_better,
+                    )
+
+                    m_def = metric_defs.get(k, {})
+                    desc = m_def.get("description", "戦術的指標の計測値です。")
+                    std_val = m_def.get("standard_val", "リーグ標準水準を参照")
+
                     items.append({
                         "metric_name": k,
                         "season_avg": round(t_val, 2) if isinstance(t_val, float) else t_val,
                         "latest_val": round(lat_val, 2) if isinstance(lat_val, float) else lat_val,
                         "league_avg": round(l_val, 2) if isinstance(l_val, float) else l_val,
+                        "rank": rank,
+                        "total_teams": len(TEAM_ID_MAP),
+                        "best_val": best_val,
+                        "best_team_name": best_team,
+                        "max_val": max_val,
+                        "min_val": min_val,
+                        "bar_ratio": round(bar_ratio, 1),
+                        "description": desc,
+                        "standard_val": std_val,
+                        "lower_is_better": lower_is_better,
                     })
                     break
         categorized_result[cat_name] = items

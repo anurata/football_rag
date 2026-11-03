@@ -33,6 +33,52 @@ class TestTeamView(unittest.TestCase):
         self.assertTrue(callable(tv._render_goal_and_time_dynamics_section))
         self.assertTrue(callable(tv._render_cross_analytics_section))
         self.assertTrue(callable(tv._render_55_metrics_expander_section))
+        self.assertTrue(callable(tv._build_metric_rank_badge_style))
+        self.assertTrue(callable(tv._build_metric_bar_cell_html))
+        self.assertTrue(callable(tv._render_metric_row))
+        self.assertTrue(callable(tv._render_metric_category_table))
+
+    def test_build_metric_rank_badge_style(self):
+        """順位に応じたバッジ色分けスタイルの検証."""
+        bg1, text1 = tv._build_metric_rank_badge_style(1)
+        self.assertEqual(bg1, "#fef3c7")
+        self.assertEqual(text1, "#b45309")
+
+        bg3, text3 = tv._build_metric_rank_badge_style(3)
+        self.assertEqual(bg3, "#e0e7ff")
+        self.assertEqual(text3, "#3730a3")
+
+        bg15, text15 = tv._build_metric_rank_badge_style(15)
+        self.assertEqual(bg15, "#f8fafc")
+        self.assertEqual(text15, "#64748b")
+
+    def test_build_metric_bar_cell_html(self):
+        """インセルバーHTML生成ロジックの検証."""
+        sample_item = {
+            "metric_name": "20b_スプリント回数",
+            "season_avg": 138.4,
+            "rank": 1,
+            "total_teams": 20,
+            "bar_ratio": 100.0,
+            "best_val": 138.4,
+            "best_team_name": "FC東京",
+        }
+        html = tv._build_metric_bar_cell_html(sample_item)
+        self.assertIn("138.4", html)
+        self.assertIn("width: 100.0%", html)
+        self.assertIn("1位/20", html)
+        self.assertIn("linear-gradient", html)
+
+    @patch("views.team_view.st")
+    def test_render_55_metrics_expander_section(self, mock_st):
+        """全55戦術指標セクションがエラーなく描画されること."""
+        mock_st.columns.side_effect = lambda spec: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.expander.return_value.__enter__.return_value = MagicMock()
+        mock_st.popover.return_value.__enter__.return_value = MagicMock()
+
+        tv._render_55_metrics_expander_section("FCT")
+        mock_st.caption.assert_called()
+        self.assertGreaterEqual(mock_st.expander.call_count, 6)
 
     @patch("views.team_view.st")
     def test_render_team_selector(self, mock_st):

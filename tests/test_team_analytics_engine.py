@@ -219,6 +219,29 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         # 55指標中、数値指標54個が全て網羅されていること
         self.assertGreaterEqual(total_items, 50)
 
+        # 各指標アイテムに新要件の必須フィールドが含まれ、正しく計算されていること
+        sprint_item = None
+        for cat, items in categorized.items():
+            for item in items:
+                self.assertIn("rank", item)
+                self.assertGreaterEqual(item["rank"], 1)
+                self.assertLessEqual(item["rank"], 20)
+                self.assertIn("bar_ratio", item)
+                self.assertGreaterEqual(item["bar_ratio"], 0.0)
+                self.assertLessEqual(item["bar_ratio"], 100.0)
+                self.assertIn("best_val", item)
+                self.assertIn("best_team_name", item)
+                self.assertIn("description", item)
+                self.assertIn("standard_val", item)
+                if "スプリント" in item["metric_name"]:
+                    sprint_item = item
+
+        # FC東京はスプリント回数J1トップ（1位、バー長100%）
+        self.assertIsNotNone(sprint_item)
+        self.assertEqual(sprint_item["rank"], 1)
+        self.assertEqual(sprint_item["bar_ratio"], 100.0)
+        self.assertEqual(sprint_item["best_team_name"], "FC東京")
+
     def test_get_team_manager_helpers(self):
         """クラブ監督情報および公式顔写真アバターHTMLの検証."""
         # 1. FC東京（松橋力蔵監督）

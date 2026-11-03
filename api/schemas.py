@@ -100,6 +100,7 @@ class PhotosListResponse(BaseModel):
 class PlayerContextItem(BaseModel):
     player_id: str
     player_name: str
+    short_name: Optional[str] = None
     number: Optional[int] = None
     position: Optional[str] = None
     is_starter: bool = True

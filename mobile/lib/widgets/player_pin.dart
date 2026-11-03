@@ -6,12 +6,14 @@ import '../models/match_models.dart';
 class PlayerPin extends StatefulWidget {
   final PlayerContextItem player;
   final String teamId;
+  final bool isHome;
   final Function(String actionType, String? category) onAction;
 
   const PlayerPin({
     super.key,
     required this.player,
     required this.teamId,
+    this.isHome = true,
     required this.onAction,
   });
 
@@ -81,13 +83,18 @@ class _PlayerPinState extends State<PlayerPin> {
       onTap: () => _showCategoryDialog(context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
         decoration: _buildBoxDecoration(),
-        child: Center(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: _buildPinContent(),
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildNumberAndPositionRow(),
+            const SizedBox(height: 1),
+            Expanded(
+              child: _buildPlayerNameText(),
+            ),
+          ],
         ),
       ),
     );
@@ -95,38 +102,62 @@ class _PlayerPinState extends State<PlayerPin> {
 
   BoxDecoration _buildBoxDecoration() {
     final isFlashing = _flashColor != Colors.transparent;
-    return BoxDecoration(
-      color: isFlashing ? _flashColor : Colors.black.withValues(alpha: 0.75),
-      borderRadius: BorderRadius.circular(14),
-      border: Border.all(
-        color: isFlashing ? Colors.white : Colors.white70,
-        width: 1.5,
-      ),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black38,
-          blurRadius: 4,
-          offset: Offset(0, 2),
-        ),
-      ],
-    );
-  }
+    if (isFlashing) {
+      return BoxDecoration(
+        color: _flashColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white, width: 1.5),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      );
+    }
 
-  Widget _buildPinContent() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildNumberAndPositionRow(),
-        const SizedBox(height: 2),
-        _buildPlayerNameText(),
-      ],
-    );
+    // Home: Club color (Fagiano Red 0xFF7D1B2D) with subtle border
+    // Away: Crisp white kit (0xFFFFFFFF) with club navy border
+    if (widget.isHome) {
+      return BoxDecoration(
+        color: const Color(0xFF7D1B2D),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.85),
+          width: 1.2,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black54,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      );
+    } else {
+      return BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFF1E3A8A),
+          width: 1.5,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildNumberAndPositionRow() {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildNumberBadge(),
         const SizedBox(width: 4),
@@ -136,45 +167,64 @@ class _PlayerPinState extends State<PlayerPin> {
   }
 
   Widget _buildNumberBadge() {
+    final badgeBg = widget.isHome ? Colors.amber : const Color(0xFF1E3A8A);
+    final badgeTextColor = widget.isHome ? Colors.black : Colors.white;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+      width: 18,
+      height: 18,
       decoration: BoxDecoration(
-        color: Colors.amber,
-        borderRadius: BorderRadius.circular(8),
+        color: badgeBg,
+        shape: BoxShape.circle,
       ),
+      alignment: Alignment.center,
       child: Text(
         '${widget.player.number}',
-        style: const TextStyle(
-          fontSize: 10,
+        textScaler: TextScaler.noScaling,
+        style: TextStyle(
+          fontSize: 9.5,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
+          color: badgeTextColor,
+          height: 1.1,
         ),
       ),
     );
   }
 
   Widget _buildPositionLabel() {
+    final textColor = widget.isHome
+        ? Colors.white.withValues(alpha: 0.9)
+        : const Color(0xFF334155);
+
     return Text(
       widget.player.position,
-      style: const TextStyle(
-        fontSize: 9,
+      textScaler: TextScaler.noScaling,
+      style: TextStyle(
+        fontSize: 9.0,
         fontWeight: FontWeight.bold,
-        color: Colors.white70,
+        color: textColor,
       ),
     );
   }
 
   Widget _buildPlayerNameText() {
-    return Text(
-      widget.player.playerName,
-      style: const TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
+    final textColor = widget.isHome ? Colors.white : const Color(0xFF0F172A);
+
+    return SizedBox(
+      width: double.infinity,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          widget.player.displayName,
+          style: TextStyle(
+            fontSize: 9.5,
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          ),
+          maxLines: 1,
+          textAlign: TextAlign.center,
+        ),
       ),
-      overflow: TextOverflow.ellipsis,
-      maxLines: 1,
-      textAlign: TextAlign.center,
     );
   }
 }

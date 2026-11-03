@@ -24,37 +24,83 @@ router = APIRouter(prefix="/api", tags=["context"])
 STRUCTURED_DIR = Path("data") / "structured"
 
 
-POSITION_COORDINATES: Dict[str, Tuple[float, float]] = {
-    # Goalkeeper
-    "GK": (50.0, 90.0),
-    # 4-back
-    "LSB": (14.0, 72.0),
-    "LCB": (38.0, 72.0),
-    "RCB": (62.0, 72.0),
-    "RSB": (86.0, 72.0),
-    # 3-back (wider horizontal distribution to prevent overlapping)
+KNOWN_SHORT_NAMES: Dict[str, str] = {
+    "バングーナガンデ 佳史扶": "バングーナガンデ",
+    "アレクサンダー ショルツ": "ショルツ",
+    "ブラウンノア 賢信": "ブラウンノア",
+    "レナート モーザー": "モーザー",
+    "ダニ ゴメス": "ダニ ゴメス",
+    "キム スンギュ": "キム スンギュ",
+    "ナ サンホ": "ナ サンホ",
+    "レオ ガウショ": "レオ ガウショ",
+}
+
+
+def resolve_short_player_name(full_name: str) -> str:
+    """Return a compact display name suitable for mobile pitch card."""
+    if not full_name:
+        return ""
+    if full_name in KNOWN_SHORT_NAMES:
+        return KNOWN_SHORT_NAMES[full_name]
+    parts = full_name.split()
+    if len(parts) >= 2 and len(full_name) > 5:
+        return parts[0]
+    return full_name
+
+
+# Base coordinates for 5-line / 3-back formations (18% equal vertical steps: 88 -> 70 -> 52 -> 34 -> 16)
+COORDINATES_5LINE: Dict[str, Tuple[float, float]] = {
+    "GK": (50.0, 88.0),
+    "LSB": (14.0, 70.0),
+    "LCB": (24.0, 70.0),
     "CB": (50.0, 70.0),
-    # Midfield / Wings / Volante
+    "RCB": (76.0, 70.0),
+    "RSB": (86.0, 70.0),
     "LWB": (12.0, 52.0),
     "RWB": (88.0, 52.0),
-    "LSH": (14.0, 48.0),
-    "RSH": (86.0, 48.0),
     "LCM": (38.0, 52.0),
     "RCM": (62.0, 52.0),
-    "DMF": (50.0, 54.0),
-    "CMF": (50.0, 50.0),
+    "DMF": (50.0, 52.0),
+    "CMF": (50.0, 52.0),
+    "LSH": (14.0, 52.0),
+    "RSH": (86.0, 52.0),
     "OMF": (50.0, 34.0),
     "CAM": (50.0, 34.0),
-    "LOM": (32.0, 32.0),
-    "ROM": (68.0, 32.0),
-    "LWG": (16.0, 26.0),
-    "RWG": (84.0, 26.0),
-    # Forwards
+    "LOM": (32.0, 34.0),
+    "ROM": (68.0, 34.0),
     "CF": (50.0, 16.0),
-    "LCF": (35.0, 18.0),
-    "RCF": (65.0, 18.0),
+    "LCF": (35.0, 16.0),
+    "RCF": (65.0, 16.0),
     "ST": (50.0, 16.0),
 }
+
+# Base coordinates for 4-line / 4-back formations (23% equal vertical steps: 89 -> 66 -> 43 -> 20)
+COORDINATES_4LINE: Dict[str, Tuple[float, float]] = {
+    "GK": (50.0, 89.0),
+    "LSB": (14.0, 66.0),
+    "LCB": (38.0, 66.0),
+    "RCB": (62.0, 66.0),
+    "RSB": (86.0, 66.0),
+    "CB": (50.0, 66.0),
+    "LWB": (12.0, 43.0),
+    "RWB": (88.0, 43.0),
+    "LSH": (14.0, 43.0),
+    "RSH": (86.0, 43.0),
+    "LCM": (38.0, 43.0),
+    "RCM": (62.0, 43.0),
+    "DMF": (50.0, 43.0),
+    "CMF": (50.0, 43.0),
+    "OMF": (50.0, 31.0),
+    "CAM": (50.0, 31.0),
+    "LOM": (32.0, 31.0),
+    "ROM": (68.0, 31.0),
+    "CF": (50.0, 20.0),
+    "LCF": (35.0, 20.0),
+    "RCF": (65.0, 20.0),
+    "ST": (50.0, 20.0),
+}
+
+POSITION_COORDINATES = COORDINATES_5LINE
 
 
 def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerContextItem]:
@@ -64,30 +110,26 @@ def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerConte
 
     # Check if starters have detailed tactical position codes
     has_detailed_positions = any(
-        (p.position or "").upper() in POSITION_COORDINATES for p in starters
+        (p.position or "").upper() in COORDINATES_5LINE for p in starters
     )
 
     if has_detailed_positions:
         result: List[PlayerContextItem] = []
         has_cb = any((p.position or "").upper() == "CB" for p in starters)
+        coord_dict = COORDINATES_5LINE if has_cb else COORDINATES_4LINE
 
         for p in starters:
             pos_key = (p.position or "").upper()
-            coords = POSITION_COORDINATES.get(pos_key)
+            coords = coord_dict.get(pos_key)
             if coords:
                 x, y = coords
-                # In 3-back formations (has a central CB), spread LCB and RCB wider
-                if has_cb:
-                    if pos_key == "LCB":
-                        x = 24.0
-                    elif pos_key == "RCB":
-                        x = 76.0
             else:
                 x, y = (p.pitch_x, p.pitch_y)
             result.append(
                 PlayerContextItem(
                     player_id=p.player_id,
                     player_name=p.player_name,
+                    short_name=resolve_short_player_name(p.player_name),
                     number=p.number,
                     position=p.position,
                     is_starter=p.is_starter,
@@ -130,11 +172,12 @@ def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerConte
 
         line_res: List[PlayerContextItem] = []
         for i, p in enumerate(players):
-            stagger = 3.0 if (i % 2 == 1 and n > 3) else 0.0
+            stagger = 2.0 if (i % 2 == 1 and n > 3) else 0.0
             line_res.append(
                 PlayerContextItem(
                     player_id=p.player_id,
                     player_name=p.player_name,
+                    short_name=resolve_short_player_name(p.player_name),
                     number=p.number,
                     position=p.position,
                     is_starter=p.is_starter,
@@ -145,18 +188,10 @@ def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerConte
             )
         return line_res
 
-    res_gk = _spread_line(gk_list, 88.0)
-    res_df = _spread_line(df_list, 74.0)
-
-    if len(mf_list) >= 4:
-        half = len(mf_list) // 2
-        dmf_line = mf_list[:half]
-        amf_line = mf_list[half:]
-        res_mf = _spread_line(dmf_line, 58.0) + _spread_line(amf_line, 42.0)
-    else:
-        res_mf = _spread_line(mf_list, 52.0)
-
-    res_fw = _spread_line(fw_list, 24.0)
+    res_gk = _spread_line(gk_list, 89.0)
+    res_df = _spread_line(df_list, 66.0)
+    res_mf = _spread_line(mf_list, 43.0)
+    res_fw = _spread_line(fw_list, 20.0)
 
     return res_gk + res_df + res_mf + res_fw
 
@@ -210,6 +245,7 @@ def _build_team_context(
         item = PlayerContextItem(
             player_id=p_id,
             player_name=r["player_name"],
+            short_name=resolve_short_player_name(r["player_name"]),
             number=r["number"],
             position=pos,
             is_starter=is_st,

@@ -163,6 +163,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
             height: 330,
             child: PitchBoard(
               team: currentTeam,
+              isHome: isHome,
               onPlayerAction: (player, actionType, category) {
                 notifier.recordAction(
                   playerId: player.playerId,

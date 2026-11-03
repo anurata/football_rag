@@ -124,11 +124,152 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Verify no overflow exception was thrown and player elements are visible
+      // Verify no overflow exception was thrown and player elements are visible with short name
       expect(find.text('24'), findsOneWidget);
       expect(find.text('CB'), findsOneWidget);
-      expect(find.text('アレクサンダー ショルツ'), findsOneWidget);
+      expect(find.text('ショルツ'), findsOneWidget);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('PlayerPin number circle has uniform dimensions for 1-digit and 2-digit numbers', (
+      WidgetTester tester,
+    ) async {
+      const p1 = PlayerContextItem(
+        playerId: 'p1',
+        playerName: '稲村 隼翔',
+        number: 4,
+        position: 'LCB',
+        isStarter: true,
+        pitchX: 38.0,
+        pitchY: 66.0,
+      );
+      const p2 = PlayerContextItem(
+        playerId: 'p2',
+        playerName: 'ルカオ',
+        number: 99,
+        position: 'CF',
+        isStarter: true,
+        pitchX: 50.0,
+        pitchY: 16.0,
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Row(
+              children: [
+                SizedBox(
+                  width: 82.0,
+                  height: 46.0,
+                  child: PlayerPin(
+                    player: p1,
+                    teamId: 'FCT',
+                    isHome: true,
+                    onAction: (a, c) {},
+                  ),
+                ),
+                SizedBox(
+                  width: 82.0,
+                  height: 46.0,
+                  child: PlayerPin(
+                    player: p2,
+                    teamId: 'OKA',
+                    isHome: false,
+                    onAction: (a, c) {},
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      // Find the circular badge containers
+      final badges = tester.widgetList<Container>(
+        find.byWidgetPredicate(
+          (w) =>
+              w is Container &&
+              w.constraints?.minWidth == 18 &&
+              w.constraints?.minHeight == 18,
+        ),
+      );
+
+      // Verify both 1-digit and 2-digit badges have fixed 18x18 size
+      expect(badges.length, 2);
+      for (final b in badges) {
+        expect(b.constraints?.maxWidth, 18);
+        expect(b.constraints?.maxHeight, 18);
+      }
+    });
+
+    testWidgets('PlayerPin renders Home in fagiano red and Away in white kit', (
+      WidgetTester tester,
+    ) async {
+      const pHome = PlayerContextItem(
+        playerId: 'p_home',
+        playerName: '濱田 太郎',
+        number: 52,
+        position: 'GK',
+        isStarter: true,
+        pitchX: 50.0,
+        pitchY: 88.0,
+      );
+      const pAway = PlayerContextItem(
+        playerId: 'p_away',
+        playerName: 'キム スンギュ',
+        number: 81,
+        position: 'GK',
+        isStarter: true,
+        pitchX: 50.0,
+        pitchY: 89.0,
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Column(
+              children: [
+                SizedBox(
+                  width: 82.0,
+                  height: 46.0,
+                  child: PlayerPin(
+                    player: pHome,
+                    teamId: 'OKA',
+                    isHome: true,
+                    onAction: (a, c) {},
+                  ),
+                ),
+                SizedBox(
+                  width: 82.0,
+                  height: 46.0,
+                  child: PlayerPin(
+                    player: pAway,
+                    teamId: 'FCT',
+                    isHome: false,
+                    onAction: (a, c) {},
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      // Home pin card has 0xFF7D1B2D color
+      final animatedContainers = tester.widgetList<AnimatedContainer>(
+        find.byType(AnimatedContainer),
+      );
+      expect(animatedContainers.length, 2);
+
+      final homeDec = animatedContainers.first.decoration as BoxDecoration;
+      expect(homeDec.color, const Color(0xFF7D1B2D));
+
+      final awayDec = animatedContainers.last.decoration as BoxDecoration;
+      expect(awayDec.color, Colors.white);
     });
   });
 }

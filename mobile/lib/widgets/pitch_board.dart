@@ -4,11 +4,13 @@ import 'player_pin.dart';
 
 class PitchBoard extends StatelessWidget {
   final TeamContextItem team;
+  final bool isHome;
   final Function(PlayerContextItem player, String actionType, String? category) onPlayerAction;
 
   const PitchBoard({
     super.key,
     required this.team,
+    this.isHome = true,
     required this.onPlayerAction,
   });
 
@@ -62,11 +64,21 @@ class PitchBoard extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(width: 6),
               itemBuilder: (context, index) {
                 final p = team.bench[index];
+                final chipBg = isHome ? const Color(0xFF7D1B2D) : Colors.white;
+                final chipText = isHome ? Colors.white : const Color(0xFF0F172A);
                 return ActionChip(
                   padding: EdgeInsets.zero,
-                  label: Text('#${p.number} ${p.playerName}'),
-                  labelStyle: const TextStyle(fontSize: 10, color: Colors.white),
-                  backgroundColor: Colors.white24,
+                  label: Text('#${p.number} ${p.displayName}'),
+                  labelStyle: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: chipText,
+                  ),
+                  backgroundColor: chipBg,
+                  side: BorderSide(
+                    color: isHome ? Colors.white38 : const Color(0xFF1E3A8A),
+                    width: 1,
+                  ),
                   onPressed: () => onPlayerAction(p, 'good', null),
                 );
               },
@@ -100,6 +112,7 @@ class PitchBoard extends StatelessWidget {
       child: PlayerPin(
         player: player,
         teamId: team.teamId,
+        isHome: isHome,
         onAction: (actionType, category) {
           onPlayerAction(player, actionType, category);
         },

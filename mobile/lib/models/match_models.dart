@@ -5,6 +5,7 @@ library;
 class PlayerContextItem {
   final String playerId;
   final String playerName;
+  final String? shortName;
   final int number;
   final String position;
   final bool isStarter;
@@ -15,6 +16,7 @@ class PlayerContextItem {
   const PlayerContextItem({
     required this.playerId,
     required this.playerName,
+    this.shortName,
     required this.number,
     required this.position,
     required this.isStarter,
@@ -23,10 +25,37 @@ class PlayerContextItem {
     this.photoUrl,
   });
 
+  /// Get compact display name suitable for mobile pitch pin card
+  String get displayName {
+    if (shortName != null && shortName!.trim().isNotEmpty) {
+      return shortName!;
+    }
+    // Fallback if shortName not provided by server
+    const knownShortNames = {
+      'バングーナガンデ 佳史扶': 'バングーナガンデ',
+      'アレクサンダー ショルツ': 'ショルツ',
+      'ブラウンノア 賢信': 'ブラウンノア',
+      'レナート モーザー': 'モーザー',
+      'ダニ ゴメス': 'ダニ ゴメス',
+      'キム スンギュ': 'キム スンギュ',
+      'ナ サンホ': 'ナ サンホ',
+      'レオ ガウショ': 'レオ ガウショ',
+    };
+    if (knownShortNames.containsKey(playerName)) {
+      return knownShortNames[playerName]!;
+    }
+    final parts = playerName.split(' ');
+    if (parts.length >= 2 && playerName.length > 5) {
+      return parts[0];
+    }
+    return playerName;
+  }
+
   factory PlayerContextItem.fromJson(Map<String, dynamic> json) {
     return PlayerContextItem(
       playerId: json['player_id'] as String? ?? '',
       playerName: json['player_name'] as String? ?? '',
+      shortName: json['short_name'] as String?,
       number: json['number'] as int? ?? 0,
       position: json['position'] as String? ?? 'MF',
       isStarter: json['is_starter'] as bool? ?? true,
@@ -40,6 +69,7 @@ class PlayerContextItem {
     return {
       'player_id': playerId,
       'player_name': playerName,
+      'short_name': shortName,
       'number': number,
       'position': position,
       'is_starter': isStarter,

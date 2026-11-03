@@ -560,34 +560,42 @@ def _build_metric_bar_cell_html(item: Dict[str, Any]) -> str:
     return html
 
 
-def _render_metric_popover_content(item: Dict[str, Any]) -> None:
-    """ヒントマーク選択時のポップアップ内容を描画する (5倍詳細解説 ＆ 5段階基準数値幅一覧)."""
+def _render_metric_dialog_body(item: Dict[str, Any]) -> None:
+    """戦術指標モーダルダイアログの本文を描画する (5倍詳細解説・5段階基準数値幅・J1比較)."""
     cur_tier = item.get("current_tier", {})
     stars = cur_tier.get("stars", "★★★☆☆")
     level = cur_tier.get("level", "B")
 
-    st.markdown(f"#### 📖 {item['metric_name']}")
+    st.subheader(f"{item['metric_name']}")
     st.markdown(
-        f"**現在のJ1評価**: :orange[{stars}] **{level}** ｜ 実績: `{item.get('season_avg')}` （**J1 {item.get('rank')}位** / {item.get('total_teams', 20)}クラブ）",
+        f"**現在のJ1評価**: :orange[{stars}] **{level}** ｜ 実績値: `{item.get('season_avg')}` （**J1 {item.get('rank')}位** / {item.get('total_teams', 20)}クラブ）",
     )
     st.markdown("---")
 
     # 1. 戦術の概要 (5倍詳細解説)
-    st.markdown("**📌 戦術の概要とピッチ上の影響**")
+    st.markdown("#### 📌 戦術の概要とピッチ上の影響")
     st.info(item.get("description", "戦術的指標の計測値です。"))
 
     # 2. 5段階の基準数値幅と判定基準
-    st.markdown("**🎯 指標の5段階判定基準 (目安数値幅)**")
+    st.markdown("#### 🎯 指標の5段階判定基準 (目安数値幅)")
     five_tiers = item.get("five_tier_scale", [])
     if five_tiers:
         for t in five_tiers:
             is_current = (t.get("tier") == cur_tier.get("tier"))
-            highlight_style = "border-left: 4px solid #2563eb; background: #eff6ff; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px;" if is_current else "background: #f8fafc; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px; border: 1px solid #e2e8f0;"
-            current_tag = " <span style='background: #2563eb; color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 3px; font-weight: 700;'>👈 該当チームの現在値</span>" if is_current else ""
+            highlight_style = (
+                "border-left: 4px solid #2563eb; background: #eff6ff; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px;"
+                if is_current
+                else "background: #f8fafc; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; border: 1px solid #e2e8f0;"
+            )
+            current_tag = (
+                " <span style='background: #2563eb; color: #fff; font-size: 11px; padding: 2px 7px; border-radius: 3px; font-weight: 700;'>👈 該当チームの現在値</span>"
+                if is_current
+                else ""
+            )
             st.markdown(
                 f"""<div style="{highlight_style}">
   <strong>{t.get('stars')} {t.get('level')}</strong> 【{t.get('range')}】{current_tag}<br>
-  <span style="font-size: 12px; color: #475569;">{t.get('description')}</span>
+  <span style="font-size: 12.5px; color: #475569; line-height: 1.5;">{t.get('description')}</span>
 </div>""",
                 unsafe_allow_html=True,
             )
@@ -595,7 +603,7 @@ def _render_metric_popover_content(item: Dict[str, Any]) -> None:
         st.success(item.get("standard_val", "リーグ標準水準を参照"))
 
     # 3. リーグ最高値、平均値、該当チームの値
-    st.markdown("**📊 J1リーグ比較サマリー**")
+    st.markdown("#### 📊 J1リーグ比較サマリー")
     c1, c2, c3 = st.columns(3)
     with c1:
         best_label = "🏆 J1最良値" if item.get("lower_is_better") else "🏆 J1最高値"
@@ -617,24 +625,34 @@ def _render_metric_popover_content(item: Dict[str, Any]) -> None:
         )
         st.caption(f"順位: **{item.get('rank')}位** / 20クラブ")
 
+    st.write("")
+    if st.button("閉じる", key=f"btn_close_dialog_{item['metric_name']}", use_container_width=True):
+        st.rerun()
+
+
+@st.dialog("📖 戦術指標 詳細解説", width="large")
+def _show_metric_detail_dialog(item: Dict[str, Any]) -> None:
+    """戦術指標の「？」ボタン選択時にモーダルダイアログを開く."""
+    _render_metric_dialog_body(item)
+
 
 def _render_metric_row(item: Dict[str, Any]) -> None:
-    """全55戦術指標テーブルの1行分を描画する (フラットな5カラムで文字消えを防止)."""
-    c_hint, c_name, c_val, c_lat, c_avg = st.columns([0.6, 3.6, 4.0, 1.9, 1.9])
+    """全55戦術指標テーブルの1行分を描画する (指標名の横に「？」ボタンを配置)."""
+    c_name, c_help, c_val, c_lat, c_avg = st.columns([3.4, 0.6, 4.0, 2.0, 2.0])
 
     cur_tier = item.get("current_tier", {})
     stars = cur_tier.get("stars", "★★★☆☆")
     level = cur_tier.get("level", "B").split()[0]
-
-    with c_hint:
-        with st.popover("ℹ️", help="5段階の基準数値幅と戦術詳細解説を表示"):
-            _render_metric_popover_content(item)
 
     with c_name:
         st.markdown(
             f"<div style='font-size: 13px; font-weight: 600; line-height: 1.35; color: #1e293b; padding-top: 5px;'>{item['metric_name']}<br><span style='font-size: 11px; font-weight: 700; color: #d97706;'>{stars[:3]} ({level})</span></div>",
             unsafe_allow_html=True,
         )
+
+    with c_help:
+        if st.button("❓", key=f"btn_help_{item['metric_name']}", help="戦術指標の詳細解説と5段階判定基準をダイアログで表示"):
+            _show_metric_detail_dialog(item)
 
     with c_val:
         bar_html = _build_metric_bar_cell_html(item)
@@ -655,9 +673,9 @@ def _render_metric_row(item: Dict[str, Any]) -> None:
 
 def _render_metric_category_table(category_name: str, metrics: List[Dict[str, Any]]) -> None:
     """1つのカテゴリ内の指標一覧テーブルを描画する."""
-    h_hint, h_name, h_val, h_lat, h_avg = st.columns([0.6, 3.6, 4.0, 1.9, 1.9])
-    h_hint.caption("解説")
+    h_name, h_help, h_val, h_lat, h_avg = st.columns([3.4, 0.6, 4.0, 2.0, 2.0])
     h_name.caption("戦術指標名 (評価)")
+    h_help.caption("詳細")
     h_val.caption("シーズン平均 (J1相対バー / 順位)")
     h_lat.caption("直近節値")
     h_avg.caption("J1平均値")
@@ -670,13 +688,13 @@ def _render_metric_category_table(category_name: str, metrics: List[Dict[str, An
 
 
 def _render_55_metrics_expander_section(team_id: str) -> None:
-    """全55戦術指標の6大カテゴリ別エキスパンダーテーブル（相対バー・ランク・ヒントポップアップ付き）."""
+    """全55戦術指標の6大カテゴリ別エキスパンダーテーブル（相対バー・ランク・詳細ダイアログボタン付き）."""
     categorized = get_team_55_metrics_categorized(team_id)
     if not categorized:
         st.caption("55戦術指標データがありません。")
         return
 
-    st.caption("ℹ️ 各指標名の横のヒントボタンを押すと、戦術概要・5段階基準数値幅・J1最良値・平均値のポップアップを確認できます。セル内のバーはJ1トップを90%とした相対度合いを示します。")
+    st.caption("ℹ️ 各指標名の横の「？」ボタンを押すと、戦術概要・5段階基準数値幅・J1最良値・平均値の解説ダイアログを確認できます。セル内のバーはJ1トップを90%とした相対度合いを示します。")
 
     for cat_title, metrics_list in categorized.items():
         with st.expander(f"{cat_title} ({len(metrics_list)}指標)"):

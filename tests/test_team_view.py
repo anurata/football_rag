@@ -37,6 +37,8 @@ class TestTeamView(unittest.TestCase):
         self.assertTrue(callable(tv._build_metric_bar_cell_html))
         self.assertTrue(callable(tv._render_metric_row))
         self.assertTrue(callable(tv._render_metric_category_table))
+        self.assertTrue(callable(tv._render_metric_dialog_body))
+        self.assertTrue(callable(tv._show_metric_detail_dialog))
 
     def test_build_metric_rank_badge_style(self):
         """順位に応じたバッジ色分けスタイルの検証."""
@@ -74,11 +76,54 @@ class TestTeamView(unittest.TestCase):
         """全55戦術指標セクションがエラーなく描画されること."""
         mock_st.columns.side_effect = lambda spec: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
         mock_st.expander.return_value.__enter__.return_value = MagicMock()
-        mock_st.popover.return_value.__enter__.return_value = MagicMock()
+        mock_st.button.return_value = False
 
         tv._render_55_metrics_expander_section("FCT")
         mock_st.caption.assert_called()
         self.assertGreaterEqual(mock_st.expander.call_count, 6)
+
+    @patch("views.team_view.st")
+    def test_show_metric_detail_dialog(self, mock_st):
+        """戦術指標詳細ダイアログが正しく要素を描画すること."""
+        mock_st.columns.side_effect = lambda spec: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.button.return_value = False
+
+        sample_item = {
+            "metric_name": "04_パス総数",
+            "season_avg": 489.58,
+            "rank": 7,
+            "total_teams": 20,
+            "best_val": 560.0,
+            "best_team_name": "浦和",
+            "league_avg": 455.43,
+            "description": "ポゼッション維持とゲーム支配を司る基幹指標。",
+            "current_tier": {
+                "tier": 2,
+                "stars": "★★★★☆",
+                "level": "A (上位水準)",
+            },
+            "five_tier_scale": [
+                {
+                    "tier": 1,
+                    "stars": "★★★★★",
+                    "level": "S (リーグ屈指)",
+                    "range": "520.00以上",
+                    "description": "圧倒的なポゼッション",
+                },
+                {
+                    "tier": 2,
+                    "stars": "★★★★☆",
+                    "level": "A (上位水準)",
+                    "range": "480.00〜519.99",
+                    "description": "優れたパス供給力",
+                },
+            ],
+        }
+
+        # _render_metric_dialog_body 実行
+        tv._render_metric_dialog_body(sample_item)
+        mock_st.subheader.assert_called_with("04_パス総数")
+        mock_st.info.assert_called_with(sample_item["description"])
 
     @patch("views.team_view.st")
     def test_render_team_selector(self, mock_st):

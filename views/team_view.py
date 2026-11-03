@@ -214,12 +214,58 @@ def _inject_sticky_team_selector_css() -> None:
         }
 
         div[data-testid="stHorizontalBlock"]:has(.sticky-team-badge) {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
-            align-items: center !important;
             padding: 0 !important;
             margin: 0 !important;
+            width: 100% !important;
+        }
+
+        /* モバイルでもチーム名バーのカラム折り返しを強制防止 */
+        div[data-testid="stHorizontalBlock"]:has(.sticky-team-badge) > [data-testid="stColumn"] {
+            min-width: 0 !important;
+            width: auto !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(.sticky-team-badge) > [data-testid="stColumn"]:first-child {
+            flex: 1 1 auto !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(.sticky-team-badge) > [data-testid="stColumn"]:last-child {
+            flex: 0 0 auto !important;
+            text-align: right !important;
+        }
+
+        /* クラブ変更ボタンの小型化・省スペース化 */
+        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge) button {
+            height: 28px !important;
+            min-height: 28px !important;
+            max-height: 28px !important;
+            padding: 2px 10px !important;
+            font-size: 11.5px !important;
+            font-weight: 700 !important;
+            line-height: 24px !important;
+            border-radius: 6px !important;
+            white-space: nowrap !important;
+            width: auto !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-left: auto !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #334155 !important;
+        }
+        div[data-testid="stLayoutWrapper"]:has(.sticky-team-badge) button:hover {
+            background-color: #eff6ff !important;
+            border-color: #3b82f6 !important;
+            color: #1d4ed8 !important;
         }
 
         .sticky-team-badge {
@@ -326,7 +372,7 @@ def _render_team_selector() -> str:
     # --------------------------------------------------------------------------
     # 1. スクロールしても上部に固定表示される「チーム名バー」 (Sticky Header)
     # --------------------------------------------------------------------------
-    col_team_info, col_team_btn = st.columns([3.4, 1.6], vertical_alignment="center")
+    col_team_info, col_team_btn = st.columns([3.8, 1.2], vertical_alignment="center")
     with col_team_info:
         emblem_img = get_team_emblem_html(current_team, width=34, height=34)
         st.markdown(
@@ -340,7 +386,7 @@ def _render_team_selector() -> str:
             unsafe_allow_html=True,
         )
     with col_team_btn:
-        if st.button("クラブ変更 ▾", key="btn_sticky_change_team", use_container_width=True):
+        if st.button("変更 ▾", key="btn_sticky_change_team", use_container_width=False):
             _show_team_select_dialog(sorted_teams, current_team)
 
     # --------------------------------------------------------------------------
@@ -497,6 +543,46 @@ def _render_tactical_profile_tab(
     _render_55_metrics_expander_section(team_id)
 
 
+def _build_signature_metric_row_html(item: Dict[str, Any]) -> str:
+    """チーム平均・リーグ平均・リーグ順位を1行に収めたHTML."""
+    t_val = item.get("team_value", "-")
+    l_avg = item.get("league_average", "-")
+    rank = item.get("rank", "-")
+    total = item.get("total_teams", 20)
+
+    html = (
+        f"<div style='display: flex; justify-content: space-between; align-items: center; "
+        f"background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; "
+        f"margin: 6px 0 4px 0; font-size: 12px; box-sizing: border-box; flex-wrap: nowrap; gap: 4px;'>"
+        f"  <div style='flex: 1; text-align: left; white-space: nowrap;'>"
+        f"    <span style='color: #64748b; font-size: 11px;'>チーム平均:</span> "
+        f"    <strong style='font-size: 13.5px; color: #0f172a;'>{t_val}</strong>"
+        f"  </div>"
+        f"  <div style='flex: 1; text-align: center; white-space: nowrap;'>"
+        f"    <span style='color: #64748b; font-size: 11px;'>リーグ平均:</span> "
+        f"    <strong style='font-size: 13.5px; color: #475569;'>{l_avg}</strong>"
+        f"  </div>"
+        f"  <div style='flex: 1; text-align: right; white-space: nowrap;'>"
+        f"    <span style='color: #64748b; font-size: 11px;'>リーグ順位:</span> "
+        f"    <strong style='font-size: 13.5px; color: #2563eb;'>{rank}位/{total}</strong>"
+        f"  </div>"
+        f"</div>"
+    )
+    return html
+
+
+def _render_signature_metric_card(item: Dict[str, Any], is_strength: bool) -> None:
+    """シグネチャー指標（武器/課題）の個別カードを描画する (1行コンパクト表示)."""
+    note = "リーグ上位の突出したストロングポイント" if is_strength else "戦術上の大胆な割り切り、または攻略されやすいポイント"
+    z_sc = item.get("z_score", 0.0)
+    row_html = _build_signature_metric_row_html(item)
+
+    with st.container(border=True):
+        st.markdown(f"**{item['metric_name']}**")
+        st.markdown(row_html, unsafe_allow_html=True)
+        st.caption(f"偏差乖離: **{z_sc:+.2f} σ**（{note}）")
+
+
 def _render_signature_metrics_section(team_id: str) -> None:
     """突出した武器 Top 3 と 顕著な割り切り/課題 Bottom 3 を表示."""
     sig_data = get_team_signature_metrics(team_id)
@@ -508,24 +594,12 @@ def _render_signature_metrics_section(team_id: str) -> None:
     with col_str:
         st.markdown("##### 🌟 際立つ最大の武器 (Top 3 強み)")
         for item in top_strengths:
-            with st.container(border=True):
-                st.markdown(f"**{item['metric_name']}**")
-                c1, c2, c3 = st.columns(3)
-                c1.metric("チーム平均", f"{item['team_value']}")
-                c2.metric("リーグ平均", f"{item['league_average']}")
-                c3.metric("リーグ順位", f"{item['rank']}位 / {item['total_teams']}")
-                st.caption(f"偏差乖離: **{item['z_score']:+.2f} σ**（リーグ上位の突出したストロングポイント）")
+            _render_signature_metric_card(item, is_strength=True)
 
     with col_weak:
         st.markdown("##### ⚠️ 顕著な割り切り・改善課題 (Bottom 3 特徴)")
         for item in bottom_weaknesses:
-            with st.container(border=True):
-                st.markdown(f"**{item['metric_name']}**")
-                c1, c2, c3 = st.columns(3)
-                c1.metric("チーム平均", f"{item['team_value']}")
-                c2.metric("リーグ平均", f"{item['league_average']}")
-                c3.metric("リーグ順位", f"{item['rank']}位 / {item['total_teams']}")
-                st.caption(f"偏差乖離: **{item['z_score']:+.2f} σ**（戦術上の大胆な割り切り、または攻略されやすいポイント）")
+            _render_signature_metric_card(item, is_strength=False)
 
 
 def _render_tactical_radar_chart(t_prof: Dict[str, Any]) -> None:

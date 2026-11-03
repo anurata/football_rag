@@ -187,6 +187,38 @@ class TestTeamView(unittest.TestCase):
         self.assertEqual(selected, "FCT")
         mock_st.markdown.assert_called()
 
+    def test_build_signature_metric_row_html(self):
+        """チーム平均・リーグ平均・リーグ順位が1行HTMLとして正しく生成されること."""
+        sample_item = {
+            "metric_name": "46_ベイズ縮小決定力スキル",
+            "team_value": 1.47,
+            "league_average": 1.17,
+            "rank": 1,
+            "total_teams": 20,
+            "z_score": 2.32,
+        }
+        html = tv._build_signature_metric_row_html(sample_item)
+        self.assertIn("1.47", html)
+        self.assertIn("1.17", html)
+        self.assertIn("1位/20", html)
+        self.assertIn("flex-wrap: nowrap", html)
+
+    @patch("views.team_view.st")
+    def test_render_signature_metric_card(self, mock_st):
+        """シグネチャー指標カードが1行HTMLを含めて正常に描画されること."""
+        mock_st.container.return_value.__enter__.return_value = MagicMock()
+        sample_item = {
+            "metric_name": "46_ベイズ縮小決定力スキル",
+            "team_value": 1.47,
+            "league_average": 1.17,
+            "rank": 1,
+            "total_teams": 20,
+            "z_score": 2.32,
+        }
+        tv._render_signature_metric_card(sample_item, is_strength=True)
+        mock_st.markdown.assert_any_call("**46_ベイズ縮小決定力スキル**")
+        mock_st.caption.assert_called()
+
 
 if __name__ == "__main__":
     unittest.main()

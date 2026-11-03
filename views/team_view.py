@@ -553,10 +553,10 @@ def _build_metric_bar_cell_html(item: Dict[str, Any]) -> str:
     else:
         bar_gradient = "linear-gradient(90deg, rgba(59,130,246,0.16), rgba(96,165,250,0.26))"
 
-    html = f"""<div style="position: relative; width: 100%; min-height: 32px; background: #f8fafc; border-radius: 6px; overflow: hidden; padding: 4px 10px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+    html = f"""<div style="position: relative; width: 100%; min-height: 32px; background: #f8fafc; border-radius: 6px; overflow: hidden; padding: 4px 10px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; margin-top: 3px;">
   <div style="position: absolute; left: 0; top: 0; bottom: 0; width: {bar_ratio}%; background: {bar_gradient}; z-index: 1;"></div>
-  <span style="position: relative; z-index: 2; font-weight: 700; font-size: 13.5px; color: #0f172a;">{val}</span>
-  <span style="position: relative; z-index: 2; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: {bg_color}; color: {text_color}; border: 1px solid rgba(0,0,0,0.06);">{rank}位/{total_teams} <span style="opacity: 0.85;">({level})</span></span>
+  <span style="position: relative; z-index: 2; font-weight: 700; font-size: 13.5px; color: #0f172a; white-space: nowrap;">{val}</span>
+  <span style="position: relative; z-index: 2; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: {bg_color}; color: {text_color}; border: 1px solid rgba(0,0,0,0.06); white-space: nowrap;">{rank}位/{total_teams} <span style="opacity: 0.85;">({level})</span></span>
 </div>"""
     return html
 
@@ -642,34 +642,63 @@ def _inject_metric_table_custom_css() -> None:
     st.markdown(
         """
         <style>
-        /* 指標テーブル専用: 画面幅に関わらず横並びを維持 */
-        div[data-testid="stExpanderDetails"] div[data-testid="stHorizontalBlock"] {
+        /* モバイル幅でも指標カードの上段とタイトル＋ボタンは絶対に折り返さず横並びを維持 */
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] {
             flex-wrap: nowrap !important;
-            align-items: center !important;
-            gap: 0.5rem !important;
+            flex-direction: row !important;
         }
-        div[data-testid="stExpanderDetails"] div[data-testid="column"] {
+
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] [data-testid="stColumn"] {
             min-width: 0 !important;
         }
 
-        /* 指標名エリア内のテキストと丸い？ボタンを直後にピタッとインライン配置 */
-        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] {
+        /* 指標名と丸い？ボタンのstHorizontalBlock: テキスト直後にピッタリ配置 */
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) {
             display: flex !important;
             flex-direction: row !important;
+            flex-wrap: nowrap !important;
             align-items: center !important;
             justify-content: flex-start !important;
             gap: 6px !important;
             width: 100% !important;
         }
-        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:first-child {
-            flex: 0 1 auto !important;
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:first-child {
+            flex: 0 0 auto !important;
             width: auto !important;
-            max-width: calc(100% - 28px) !important;
+            min-width: 0 !important;
+            max-width: fit-content !important;
         }
-        div[data-testid="stExpanderDetails"] div[data-testid="column"]:first-child div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:last-child {
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:last-child {
             flex: 0 0 24px !important;
             width: 24px !important;
             min-width: 24px !important;
+            max-width: 24px !important;
+        }
+
+        /* Streamlitのモバイル用メディアクエリ (min-width: calc(100% - ...)) を完全上書き */
+        @media (max-width: 768px) {
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] {
+                flex-wrap: nowrap !important;
+            }
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] [data-testid="stColumn"] {
+                min-width: 0 !important;
+                width: auto !important;
+            }
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) {
+                flex-wrap: nowrap !important;
+            }
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:first-child {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                min-width: 0 !important;
+                max-width: fit-content !important;
+            }
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:last-child {
+                flex: 0 0 24px !important;
+                width: 24px !important;
+                min-width: 24px !important;
+                max-width: 24px !important;
+            }
         }
 
         /* エキスパンダー内のすべてのボタンを完全な円形（丸い？ボタン）にする */
@@ -715,71 +744,50 @@ def _inject_metric_table_custom_css() -> None:
 
 
 def _render_metric_row(item: Dict[str, Any]) -> None:
-    """全55戦術指標テーブルの1行分を描画する (指標名と同じ高さで直後に丸い「？」ボタンを配置)."""
-    c_name_area, c_val, c_lat, c_avg = st.columns([3.8, 4.2, 2.0, 2.0])
-
+    """全55戦術指標の1指標分を2段カード形式で描画する (モバイル最適化・指標名直後に丸い？ボタン)."""
     cur_tier = item.get("current_tier", {})
     stars = cur_tier.get("stars", "★★★☆☆")
     level = cur_tier.get("level", "B").split()[0]
+    latest = item.get("latest_val", "-")
+    avg = item.get("league_avg", "-")
 
-    with c_name_area:
-        c_txt, c_btn = st.columns([0.82, 0.18])
-        with c_txt:
+    # 上段: [指標名 + 評価] [?] ｜ [直近節値 ＆ J1平均]
+    c_top_left, c_top_right = st.columns([2.6, 1.4], vertical_alignment="center")
+
+    with c_top_left:
+        c_title, c_btn = st.columns([0.85, 0.15], vertical_alignment="center")
+        with c_title:
             st.markdown(
-                f"<div style='font-size: 13px; font-weight: 700; color: #1e293b; line-height: 1.3;'>{item['metric_name']}</div>"
-                f"<div style='font-size: 11px; font-weight: 700; color: #d97706; line-height: 1.2;'>{stars[:3]} ({level})</div>",
+                f"<div style='display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; line-height: 1.3;'>"
+                f"<span style='font-size: 13.5px; font-weight: 700; color: #1e293b;'>{item['metric_name']}</span>"
+                f"<span style='font-size: 11px; font-weight: 700; color: #d97706;'>{stars[:3]} ({level})</span>"
+                f"</div>",
                 unsafe_allow_html=True,
             )
         with c_btn:
             if st.button("?", key=f"btn_help_{item['metric_name']}", help="戦術指標の詳細解説と5段階判定基準をダイアログで表示"):
                 _show_metric_detail_dialog(item)
 
-    with c_val:
-        bar_html = _build_metric_bar_cell_html(item)
-        st.markdown(bar_html, unsafe_allow_html=True)
-
-    with c_lat:
+    with c_top_right:
         st.markdown(
-            f"<div style='font-size: 13px; color: #475569; padding-top: 8px; text-align: center;'>{item.get('latest_val', '-')}</div>",
+            f"<div style='font-size: 11.5px; color: #64748b; text-align: right; line-height: 1.4; white-space: nowrap;'>"
+            f"直近: <b style='color: #1e293b;'>{latest}</b> ｜ 平均: {avg}</div>",
             unsafe_allow_html=True,
         )
 
-    with c_avg:
-        st.markdown(
-            f"<div style='font-size: 13px; color: #64748b; padding-top: 8px; text-align: center;'>{item.get('league_avg', '-')}</div>",
-            unsafe_allow_html=True,
-        )
-
-    with c_val:
-        bar_html = _build_metric_bar_cell_html(item)
-        st.markdown(bar_html, unsafe_allow_html=True)
-
-    with c_lat:
-        st.markdown(
-            f"<div style='font-size: 13px; color: #475569; padding-top: 8px; text-align: center;'>{item.get('latest_val', '-')}</div>",
-            unsafe_allow_html=True,
-        )
-
-    with c_avg:
-        st.markdown(
-            f"<div style='font-size: 13px; color: #64748b; padding-top: 8px; text-align: center;'>{item.get('league_avg', '-')}</div>",
-            unsafe_allow_html=True,
-        )
+    # 下段: 横幅100%のインセルプログレスバー (モバイルでも文字重なり・順位見切れなし)
+    bar_html = _build_metric_bar_cell_html(item)
+    st.markdown(bar_html, unsafe_allow_html=True)
 
 
 def _render_metric_category_table(category_name: str, metrics: List[Dict[str, Any]]) -> None:
-    """1つのカテゴリ内の指標一覧テーブルを描画する (4カラム構成)."""
-    h_name, h_val, h_lat, h_avg = st.columns([3.8, 4.2, 2.0, 2.0])
-    h_name.caption("戦術指標名 (評価)")
-    h_val.caption("シーズン平均 (J1相対バー / 順位)")
-    h_lat.caption("直近節値")
-    h_avg.caption("J1平均値")
-
-    st.markdown("<div style='margin-bottom: 6px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
+    """1つのカテゴリ内の指標一覧を描画する (モバイル最適化2段カード構成)."""
+    st.caption("💡 指標名横の「？」ボタンで5段階評価基準と詳細解説を表示できます。バー内はシーズン平均値とJ1順位です。")
+    st.markdown("<div style='margin-bottom: 8px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
 
     for item in metrics:
         _render_metric_row(item)
-        st.markdown("<div style='margin: 4px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin: 8px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
 
 
 def _render_55_metrics_expander_section(team_id: str) -> None:

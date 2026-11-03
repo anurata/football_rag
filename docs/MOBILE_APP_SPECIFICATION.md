@@ -177,3 +177,28 @@ CREATE INDEX IF NOT EXISTS idx_photos_stadium ON user_stadium_photos(stadium_id)
 - **テスト駆動**:
   - バックエンドAPIは `pytest` による単体・結合テストを作成。
   - Flutter側は `flutter test` によるモデルのシリアライズ・ローカルDB・Widgetテストを作成。
+
+---
+
+## 9. レイアウト・アクセシビリティ対応（フォント倍率耐性）
+
+- **端末文字サイズ拡大対応 (`FittedBox`)**:
+  - Android OSのフォントサイズ変更（1.15倍〜1.5倍など）によってピッチ上の選手ピン内で `RenderFlex overflowed` が発生するのを防止。
+  - `PlayerPin` 内部のテキスト群を `FittedBox(fit: BoxFit.scaleDown)` で保護し、枠内に安全に自動スケーリング。
+  - ピンの寸法を `width: 82.0, height: 46.0` に最適化し、背番号・ポジション・氏名が視認しやすくタップしやすいタッチターゲットを確保。
+  - Widgetの分割（`_buildBoxDecoration`, `_buildNumberBadge`, `_buildPositionLabel`, `_buildPlayerNameText`）によりネストを浅く保ち、末尾カンマを徹底。
+
+---
+
+## 10. 実データ連携仕様 (第13節 ファジアーノ岡山 vs FC東京)
+
+- **岡山 (HOME) スタメン (11名)**:
+  - GK 52 濱田 太郎 / DF 43 鈴木 喜丈, 44 森 壮一朗, 48 立田 悠悟 / MF 8 江坂 任, 10 ナ サンホ, 26 本山 遥, 41 宮本 英治, 51 白井 康介, 80 オベルダン / FW 99 ルカオ
+- **岡山 (HOME) 控え (7名)**:
+  - GK 1 レナート モーザー, DF 2 高木 友也, DF 6 大森 博, MF 14 田部井 涼, MF 17 末吉 塁, FW 9 グレイソン, FW 11 木村 太哉
+- **FC東京 (AWAY) スタメン (11名)**:
+  - GK 81 キム スンギュ / DF 4 稲村 隼翔, 6 バングーナガンデ 佳史扶, 22 石原 広教, 24 アレクサンダー ショルツ / MF 7 安斎 颯馬, 8 高 宇洋, 10 佐藤 恵允, 20 永野 修都 / FW 26 長倉 幹樹, 39 仲川 輝人
+- **FC東京 (AWAY) 控え (7名)**:
+  - GK 1 児玉 剛, DF 3 森重 真人, MF 27 常盤 亨太, MF 37 小泉 慶, MF 71 荒木 遼太郎, FW 11 遠藤 渓太, FW 98 白井 陽斗
+- **自動配置アルゴリズム**:
+  - `api/routes/context.py` の `_auto_layout_starters` により、GK(Y:88%), DF(Y:72%), ボランチ(Y:55%), トップ下/サイド(Y:38%), FW(Y:18%) のピッチラインへ人数に応じて自動等間隔分散配置。重なりを完全排除。

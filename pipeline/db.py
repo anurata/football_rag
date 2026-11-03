@@ -167,6 +167,50 @@ CREATE TABLE IF NOT EXISTS ai_chat_messages (
 );
 """
 
+SCHEMA_USER_MATCH_ACTIONS = """
+CREATE TABLE IF NOT EXISTS user_match_actions (
+    id TEXT PRIMARY KEY,
+    match_id TEXT NOT NULL,
+    player_id TEXT NOT NULL,
+    team_id TEXT NOT NULL,
+    action_type TEXT NOT NULL,
+    match_minute INTEGER NOT NULL,
+    play_category TEXT,
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_synced INTEGER DEFAULT 1,
+    FOREIGN KEY (match_id) REFERENCES matches(match_id) ON DELETE CASCADE
+);
+"""
+
+SCHEMA_USER_MATCH_NOTES = """
+CREATE TABLE IF NOT EXISTS user_match_notes (
+    id TEXT PRIMARY KEY,
+    match_id TEXT NOT NULL,
+    phase TEXT NOT NULL,
+    note TEXT NOT NULL,
+    mom_player_id TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_synced INTEGER DEFAULT 1,
+    FOREIGN KEY (match_id) REFERENCES matches(match_id) ON DELETE CASCADE
+);
+"""
+
+SCHEMA_USER_STADIUM_PHOTOS = """
+CREATE TABLE IF NOT EXISTS user_stadium_photos (
+    id TEXT PRIMARY KEY,
+    match_id TEXT NOT NULL,
+    stadium_id TEXT NOT NULL,
+    phase TEXT,
+    file_path TEXT NOT NULL,
+    caption TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_synced INTEGER DEFAULT 1,
+    FOREIGN KEY (match_id) REFERENCES matches(match_id) ON DELETE CASCADE
+);
+"""
+
 INDEX_STATEMENTS = [
     "CREATE INDEX IF NOT EXISTS idx_matches_date ON matches(date);",
     "CREATE INDEX IF NOT EXISTS idx_matches_teams ON matches(home_team_id, away_team_id);",
@@ -177,6 +221,10 @@ INDEX_STATEMENTS = [
     "CREATE INDEX IF NOT EXISTS idx_reviews_match ON match_reviews(match_id, review_type);",
     "CREATE INDEX IF NOT EXISTS idx_ai_sessions_view ON ai_chat_sessions(view_type, updated_at DESC);",
     "CREATE INDEX IF NOT EXISTS idx_ai_messages_session ON ai_chat_messages(session_id, created_at ASC);",
+    "CREATE INDEX IF NOT EXISTS idx_actions_match ON user_match_actions(match_id, player_id);",
+    "CREATE UNIQUE INDEX IF NOT EXISTS idx_notes_match_phase ON user_match_notes(match_id, phase);",
+    "CREATE INDEX IF NOT EXISTS idx_photos_match ON user_stadium_photos(match_id);",
+    "CREATE INDEX IF NOT EXISTS idx_photos_stadium ON user_stadium_photos(stadium_id);",
 ]
 
 
@@ -205,6 +253,9 @@ def init_db(db_path: Optional[str] = None) -> sqlite3.Connection:
         SCHEMA_ENTITY_PLAYERS,
         SCHEMA_AI_CHAT_SESSIONS,
         SCHEMA_AI_CHAT_MESSAGES,
+        SCHEMA_USER_MATCH_ACTIONS,
+        SCHEMA_USER_MATCH_NOTES,
+        SCHEMA_USER_STADIUM_PHOTOS,
     ]
 
     for statement in tables:

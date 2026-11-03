@@ -75,7 +75,7 @@ class TestTeamView(unittest.TestCase):
     @patch("views.team_view.st")
     def test_render_55_metrics_expander_section(self, mock_st):
         """全55戦術指標セクションがエラーなく描画されること."""
-        mock_st.columns.side_effect = lambda spec: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
         mock_st.expander.return_value.__enter__.return_value = MagicMock()
         mock_st.button.return_value = False
 
@@ -86,7 +86,7 @@ class TestTeamView(unittest.TestCase):
     @patch("views.team_view.st")
     def test_show_metric_detail_dialog(self, mock_st):
         """戦術指標詳細ダイアログが正しく要素を描画すること."""
-        mock_st.columns.side_effect = lambda spec: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
         mock_st.button.return_value = False
 
         sample_item = {
@@ -125,6 +125,33 @@ class TestTeamView(unittest.TestCase):
         tv._render_metric_dialog_body(sample_item)
         mock_st.subheader.assert_called_with("04_パス総数")
         mock_st.info.assert_called_with(sample_item["description"])
+
+    @patch("views.team_view.st")
+    def test_render_metric_row(self, mock_st):
+        """指標行が2段カード形式（上段: 指標名+?+直近/平均、下段: バー）で正しく描画されること."""
+        mock_st.columns.side_effect = lambda spec, *args, **kwargs: [MagicMock() for _ in range(len(spec) if isinstance(spec, list) else spec)]
+        mock_st.button.return_value = False
+
+        sample_item = {
+            "metric_name": "04_パス総数",
+            "season_avg": 489.58,
+            "rank": 7,
+            "total_teams": 20,
+            "latest_val": 540,
+            "league_avg": 455.43,
+            "current_tier": {
+                "stars": "★★★☆☆",
+                "level": "A (上位水準)",
+            },
+        }
+
+        tv._render_metric_row(sample_item)
+        # 上段の2カラム分割 + 指標名・ボタンの2カラム分割
+        self.assertGreaterEqual(mock_st.columns.call_count, 2)
+        # ?ボタンが描画されていること
+        mock_st.button.assert_called_with("?", key="btn_help_04_パス総数", help="戦術指標の詳細解説と5段階判定基準をダイアログで表示")
+        # バーセルHTMLおよびテキストを含むmarkdownが描画されていること
+        self.assertGreaterEqual(mock_st.markdown.call_count, 3)
 
     @patch("views.team_view.st")
     def test_render_team_selector(self, mock_st):

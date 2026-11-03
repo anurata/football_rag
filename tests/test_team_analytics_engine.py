@@ -233,14 +233,17 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
                 self.assertIn("best_team_name", item)
                 self.assertIn("description", item)
                 self.assertIn("standard_val", item)
+                self.assertIn("five_tier_scale", item)
+                self.assertIn("current_tier", item)
                 if "スプリント" in item["metric_name"]:
                     sprint_item = item
 
-        # FC東京はスプリント回数J1トップ（1位、バー長100%）
+        # FC東京はスプリント回数J1トップ（1位、指定仕様によりバー長90.0%、最高ランクS）
         self.assertIsNotNone(sprint_item)
         self.assertEqual(sprint_item["rank"], 1)
-        self.assertEqual(sprint_item["bar_ratio"], 100.0)
+        self.assertEqual(sprint_item["bar_ratio"], 90.0)
         self.assertEqual(sprint_item["best_team_name"], "FC東京")
+        self.assertEqual(sprint_item["current_tier"]["tier"], 5)
 
     def test_get_team_manager_helpers(self):
         """クラブ監督情報および公式顔写真アバターHTMLの検証."""

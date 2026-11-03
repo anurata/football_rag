@@ -1162,20 +1162,54 @@ def _compute_metric_bar_ratio(
     min_val: float,
     lower_is_better: bool,
 ) -> float:
-    """Jリーグトップを100%とした相対バー比率(0.0〜100.0%)を算出する."""
-    if lower_is_better:
-        if val > 0 and best_val > 0:
-            ratio = (best_val / val) * 100.0
-        else:
-            ratio = 50.0
-    else:
-        if best_val > 0:
-            ratio = (val / best_val) * 100.0
-        else:
-            denom = max_val - min_val
-            ratio = ((val - min_val) / denom) * 100.0 if denom > 0 else 50.0
+    """Jリーグトップを90%とし、全クラブの分布に基づいて10%〜90%にスケーリングしたバー比率を算出する."""
+    denom = max_val - min_val
+    if denom <= 0:
+        return 50.0
 
-    return max(4.0, min(100.0, float(ratio)))
+    if lower_is_better:
+        # 低いほど良い（最少 min_val がトップで90%、最大 max_val が最下位で10%）
+        norm = (max_val - val) / denom
+    else:
+        # 高いほど良い（最多 max_val がトップで90%、最少 min_val が最下位で10%）
+        norm = (val - min_val) / denom
+
+    norm = max(0.0, min(1.0, float(norm)))
+    # 1位が90%、最下位が10%
+    ratio = 10.0 + (norm * 80.0)
+    return round(ratio, 1)
+
+
+def _determine_metric_tier(
+    val: float,
+    five_tier_scale: List[Dict[str, Any]],
+    lower_is_better: bool,
+) -> Dict[str, Any]:
+    """該当チームの数値が5段階基準のどこに合致するかを判定する."""
+    if not five_tier_scale:
+        return {
+            "tier": 3,
+            "stars": "★★★☆☆",
+            "level": "B (標準水準)",
+            "range": "-",
+            "description": "標準水準",
+        }
+
+    for t in five_tier_scale:
+        t_min = t.get("threshold_min")
+        t_max = t.get("threshold_max")
+        if t_min is not None and t_max is not None:
+            if t_min <= val <= t_max:
+                return t
+        elif t_min is not None and t_max is None:
+            if val >= t_min:
+                return t
+        elif t_min is None and t_max is not None:
+            if val <= t_max:
+                return t
+
+    # 最も近いTier
+    return five_tier_scale[2] if len(five_tier_scale) >= 3 else five_tier_scale[0]
 
 
 @st.cache_data(ttl=600)
@@ -1308,6 +1342,12 @@ def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, An
                     m_def = metric_defs.get(k, {})
                     desc = m_def.get("description", "戦術的指標の計測値です。")
                     std_val = m_def.get("standard_val", "リーグ標準水準を参照")
+                    five_tier_scale = m_def.get("five_tier_scale", [])
+                    current_tier = _determine_metric_tier(
+                        val=t_val,
+                        five_tier_scale=five_tier_scale,
+                        lower_is_better=lower_is_better,
+                    )
 
                     items.append({
                         "metric_name": k,
@@ -1324,6 +1364,8 @@ def get_team_55_metrics_categorized(team_id: str) -> Dict[str, List[Dict[str, An
                         "description": desc,
                         "standard_val": std_val,
                         "lower_is_better": lower_is_better,
+                        "five_tier_scale": five_tier_scale,
+                        "current_tier": current_tier,
                     })
                     break
         categorized_result[cat_name] = items

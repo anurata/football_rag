@@ -318,6 +318,63 @@ def _render_tactical_radar_chart(t_prof: Dict[str, Any]) -> None:
     st.plotly_chart(fig, use_container_width=True)
 
 
+def _render_win_loss_bar_table(comparison_table: List[Dict[str, Any]]) -> None:
+    """勝利時 vs 敗戦時の指標対比テーブルにインセルバーとギャップバッジを描画する."""
+    if not comparison_table:
+        return
+
+    # ヘッダー
+    h_name, h_win, h_loss, h_diff = st.columns([3.5, 3.2, 3.2, 2.1])
+    h_name.caption("戦術指標")
+    h_win.caption("勝利時 平均 (緑バー)")
+    h_loss.caption("敗戦時 平均 (赤バー)")
+    h_diff.caption("ギャップ (勝 - 敗)")
+    st.markdown("<div style='margin-bottom: 6px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
+
+    for row in comparison_table:
+        label = row.get("metric_label", "")
+        w_val = float(row.get("win_avg", 0.0))
+        l_val = float(row.get("loss_avg", 0.0))
+        diff = float(row.get("diff", 0.0))
+
+        # バーの最大基準値
+        max_v = max(abs(w_val), abs(l_val), 1.0)
+        w_ratio = min(90.0, max(8.0, (abs(w_val) / max_v) * 90.0))
+        l_ratio = min(90.0, max(8.0, (abs(l_val) / max_v) * 90.0))
+
+        # 勝利時セルHTML
+        w_html = f"""<div style="position: relative; width: 100%; min-height: 28px; background: #f8fafc; border-radius: 4px; overflow: hidden; padding: 3px 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; box-sizing: border-box;">
+  <div style="position: absolute; left: 0; top: 0; bottom: 0; width: {w_ratio}%; background: linear-gradient(90deg, rgba(34,197,94,0.18), rgba(22,163,74,0.30)); z-index: 1;"></div>
+  <span style="position: relative; z-index: 2; font-weight: 700; font-size: 13px; color: #166534;">{w_val}</span>
+</div>"""
+
+        # 敗戦時セルHTML
+        l_html = f"""<div style="position: relative; width: 100%; min-height: 28px; background: #f8fafc; border-radius: 4px; overflow: hidden; padding: 3px 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; box-sizing: border-box;">
+  <div style="position: absolute; left: 0; top: 0; bottom: 0; width: {l_ratio}%; background: linear-gradient(90deg, rgba(239,68,68,0.18), rgba(220,38,38,0.30)); z-index: 1;"></div>
+  <span style="position: relative; z-index: 2; font-weight: 700; font-size: 13px; color: #991b1b;">{l_val}</span>
+</div>"""
+
+        # ギャップバッジ
+        diff_color = "#16a34a" if diff > 0 else ("#dc2626" if diff < 0 else "#64748b")
+        diff_bg = "#dcfce7" if diff > 0 else ("#fee2e2" if diff < 0 else "#f1f5f9")
+        diff_sign = "+" if diff > 0 else ""
+        diff_html = f"""<div style="padding-top: 4px; text-align: center;">
+  <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12.5px; background: {diff_bg}; color: {diff_color};">{diff_sign}{diff}</span>
+</div>"""
+
+        c_name, c_win, c_loss, c_diff = st.columns([3.5, 3.2, 3.2, 2.1])
+        with c_name:
+            st.markdown(f"<div style='font-size: 13px; font-weight: 600; color: #1e293b; padding-top: 5px;'>{label}</div>", unsafe_allow_html=True)
+        with c_win:
+            st.markdown(w_html, unsafe_allow_html=True)
+        with c_loss:
+            st.markdown(l_html, unsafe_allow_html=True)
+        with c_diff:
+            st.markdown(diff_html, unsafe_allow_html=True)
+
+        st.markdown("<div style='margin: 3px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
+
+
 def _render_win_loss_analysis_section(team_id: str) -> None:
     """勝ち筋・負け筋のスタッツ差分テーブルと分析テキスト."""
     wl = get_win_loss_pattern_analysis(team_id)
@@ -343,9 +400,7 @@ def _render_win_loss_analysis_section(team_id: str) -> None:
     st.markdown("##### 勝利時 vs 敗戦時の指標対比テーブル")
     comp_table = wl.get("comparison_table", [])
     if comp_table:
-        df_comp = pd.DataFrame(comp_table)[["metric_label", "win_avg", "loss_avg", "diff"]]
-        df_comp.columns = ["戦術指標", "勝利時 平均", "敗戦時 平均", "ギャップ (勝-敗)"]
-        st.dataframe(df_comp, use_container_width=True, hide_index=True)
+        _render_win_loss_bar_table(comp_table)
 
 
 def _render_style_adherence_section(team_id: str) -> None:
@@ -385,8 +440,23 @@ def _render_goal_and_time_dynamics_section(team_id: str) -> None:
         st.markdown("##### ⏱️ 15分時間帯別の得点・失点ダイナミクス")
         if time_segments:
             labels = list(time_segments.keys())
-            goals_for = [time_segments[k].get("goals_for", 0) for k in labels]
-            goals_against = [time_segments[k].get("goals_against", 0) for k in labels]
+            goals_for = [
+                time_segments[k].get(
+                    "team_goals",
+                    time_segments[k].get(
+                        "goals_for",
+                        time_segments[k].get(f"{team_id.lower()}_goals", 0),
+                    ),
+                )
+                for k in labels
+            ]
+            goals_against = [
+                time_segments[k].get(
+                    "opp_goals",
+                    time_segments[k].get("goals_against", 0),
+                )
+                for k in labels
+            ]
 
             fig = go.Figure()
             fig.add_trace(go.Bar(
@@ -474,6 +544,9 @@ def _build_metric_bar_cell_html(item: Dict[str, Any]) -> str:
     total_teams = int(item.get("total_teams", 20))
     bg_color, text_color = _build_metric_rank_badge_style(rank)
 
+    cur_tier = item.get("current_tier", {})
+    level = cur_tier.get("level", "B").split()[0]  # "S", "A", "B", "C", "D"
+
     if rank <= 3:
         bar_gradient = "linear-gradient(90deg, rgba(37,99,235,0.28), rgba(59,130,246,0.40))"
     else:
@@ -482,29 +555,50 @@ def _build_metric_bar_cell_html(item: Dict[str, Any]) -> str:
     html = f"""<div style="position: relative; width: 100%; min-height: 32px; background: #f8fafc; border-radius: 6px; overflow: hidden; padding: 4px 10px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
   <div style="position: absolute; left: 0; top: 0; bottom: 0; width: {bar_ratio}%; background: {bar_gradient}; z-index: 1;"></div>
   <span style="position: relative; z-index: 2; font-weight: 700; font-size: 13.5px; color: #0f172a;">{val}</span>
-  <span style="position: relative; z-index: 2; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: {bg_color}; color: {text_color}; border: 1px solid rgba(0,0,0,0.06);">{rank}位/{total_teams}</span>
+  <span style="position: relative; z-index: 2; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: {bg_color}; color: {text_color}; border: 1px solid rgba(0,0,0,0.06);">{rank}位/{total_teams} <span style="opacity: 0.85;">({level})</span></span>
 </div>"""
     return html
 
 
 def _render_metric_popover_content(item: Dict[str, Any]) -> None:
-    """ヒントマーク選択時のポップアップ内容を描画する."""
+    """ヒントマーク選択時のポップアップ内容を描画する (5倍詳細解説 ＆ 5段階基準数値幅一覧)."""
+    cur_tier = item.get("current_tier", {})
+    stars = cur_tier.get("stars", "★★★☆☆")
+    level = cur_tier.get("level", "B")
+
     st.markdown(f"#### 📖 {item['metric_name']}")
+    st.markdown(
+        f"**現在のJ1評価**: :orange[{stars}] **{level}** ｜ 実績: `{item.get('season_avg')}` （**J1 {item.get('rank')}位** / {item.get('total_teams', 20)}クラブ）",
+    )
     st.markdown("---")
 
-    # 1. 戦術の概要
-    st.markdown("**📌 戦術の概要**")
+    # 1. 戦術の概要 (5倍詳細解説)
+    st.markdown("**📌 戦術の概要とピッチ上の影響**")
     st.info(item.get("description", "戦術的指標の計測値です。"))
 
-    # 2. 指標の基準値
-    st.markdown("**🎯 指標の基準値 (目安)**")
-    st.success(item.get("standard_val", "リーグ標準水準を参照"))
+    # 2. 5段階の基準数値幅と判定基準
+    st.markdown("**🎯 指標の5段階判定基準 (目安数値幅)**")
+    five_tiers = item.get("five_tier_scale", [])
+    if five_tiers:
+        for t in five_tiers:
+            is_current = (t.get("tier") == cur_tier.get("tier"))
+            highlight_style = "border-left: 4px solid #2563eb; background: #eff6ff; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px;" if is_current else "background: #f8fafc; padding: 6px 10px; border-radius: 4px; margin-bottom: 6px; border: 1px solid #e2e8f0;"
+            current_tag = " <span style='background: #2563eb; color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 3px; font-weight: 700;'>👈 該当チームの現在値</span>" if is_current else ""
+            st.markdown(
+                f"""<div style="{highlight_style}">
+  <strong>{t.get('stars')} {t.get('level')}</strong> 【{t.get('range')}】{current_tag}<br>
+  <span style="font-size: 12px; color: #475569;">{t.get('description')}</span>
+</div>""",
+                unsafe_allow_html=True,
+            )
+    else:
+        st.success(item.get("standard_val", "リーグ標準水準を参照"))
 
     # 3. リーグ最高値、平均値、該当チームの値
-    st.markdown("**📊 J1リーグ比較**")
-    c1, c2 = st.columns(2)
+    st.markdown("**📊 J1リーグ比較サマリー**")
+    c1, c2, c3 = st.columns(3)
     with c1:
-        best_label = "🏆 J1最良値 (高強度)" if item.get("lower_is_better") else "🏆 J1最高値"
+        best_label = "🏆 J1最良値" if item.get("lower_is_better") else "🏆 J1最高値"
         st.metric(
             label=best_label,
             value=f"{item.get('best_val')}",
@@ -516,33 +610,31 @@ def _render_metric_popover_content(item: Dict[str, Any]) -> None:
             label="📈 J1平均値",
             value=f"{item.get('league_avg')}",
         )
-
-    # 4. 該当チーム値と順位
-    st.markdown("---")
-    st.markdown(
-        f"📍 **該当チームの実績**: `{item.get('season_avg')}` （現在 **J1 {item.get('rank')}位** / {item.get('total_teams', 20)}クラブ中）",
-    )
-
-
-def _render_metric_name_with_popover(item: Dict[str, Any]) -> None:
-    """戦術指標名とヒントマーク(ℹ️ popover)を描画する."""
-    c_text, c_hint = st.columns([0.84, 0.16])
-    with c_text:
-        st.markdown(
-            f"<div style='font-size: 13px; font-weight: 600; line-height: 1.4; color: #1e293b; padding-top: 6px;'>{item['metric_name']}</div>",
-            unsafe_allow_html=True,
+    with c3:
+        st.metric(
+            label="📍 該当チーム",
+            value=f"{item.get('season_avg')}",
         )
-    with c_hint:
-        with st.popover("ℹ️", help="指標の解説と基準値を表示"):
-            _render_metric_popover_content(item)
+        st.caption(f"順位: **{item.get('rank')}位** / 20クラブ")
 
 
 def _render_metric_row(item: Dict[str, Any]) -> None:
-    """全55戦術指標テーブルの1行分を描画する."""
-    c_name, c_val, c_lat, c_avg = st.columns([4.2, 3.8, 1.8, 1.8])
+    """全55戦術指標テーブルの1行分を描画する (フラットな5カラムで文字消えを防止)."""
+    c_hint, c_name, c_val, c_lat, c_avg = st.columns([0.6, 3.6, 4.0, 1.9, 1.9])
+
+    cur_tier = item.get("current_tier", {})
+    stars = cur_tier.get("stars", "★★★☆☆")
+    level = cur_tier.get("level", "B").split()[0]
+
+    with c_hint:
+        with st.popover("ℹ️", help="5段階の基準数値幅と戦術詳細解説を表示"):
+            _render_metric_popover_content(item)
 
     with c_name:
-        _render_metric_name_with_popover(item)
+        st.markdown(
+            f"<div style='font-size: 13px; font-weight: 600; line-height: 1.35; color: #1e293b; padding-top: 5px;'>{item['metric_name']}<br><span style='font-size: 11px; font-weight: 700; color: #d97706;'>{stars[:3]} ({level})</span></div>",
+            unsafe_allow_html=True,
+        )
 
     with c_val:
         bar_html = _build_metric_bar_cell_html(item)
@@ -550,25 +642,31 @@ def _render_metric_row(item: Dict[str, Any]) -> None:
 
     with c_lat:
         st.markdown(
-            f"<div style='font-size: 13px; color: #475569; padding-top: 6px; text-align: center;'>{item.get('latest_val', '-')}</div>",
+            f"<div style='font-size: 13px; color: #475569; padding-top: 8px; text-align: center;'>{item.get('latest_val', '-')}</div>",
             unsafe_allow_html=True,
         )
 
     with c_avg:
         st.markdown(
-            f"<div style='font-size: 13px; color: #64748b; padding-top: 6px; text-align: center;'>{item.get('league_avg', '-')}</div>",
+            f"<div style='font-size: 13px; color: #64748b; padding-top: 8px; text-align: center;'>{item.get('league_avg', '-')}</div>",
             unsafe_allow_html=True,
         )
 
 
 def _render_metric_category_table(category_name: str, metrics: List[Dict[str, Any]]) -> None:
     """1つのカテゴリ内の指標一覧テーブルを描画する."""
-    # テーブルヘッダー
-    h_name, h_val, h_lat, h_avg = st.columns([4.2, 3.8, 1.8, 1.8])
-    h_name.caption("戦術指標名")
+    h_hint, h_name, h_val, h_lat, h_avg = st.columns([0.6, 3.6, 4.0, 1.9, 1.9])
+    h_hint.caption("解説")
+    h_name.caption("戦術指標名 (評価)")
     h_val.caption("シーズン平均 (J1相対バー / 順位)")
     h_lat.caption("直近節値")
     h_avg.caption("J1平均値")
+
+    st.markdown("<div style='margin-bottom: 6px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
+
+    for item in metrics:
+        _render_metric_row(item)
+        st.markdown("<div style='margin: 4px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
 
     st.markdown("<div style='margin-bottom: 6px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
 

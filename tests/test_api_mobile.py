@@ -308,6 +308,51 @@ class TestApiMobile(unittest.TestCase):
         self.assertEqual(len(s_items), 1)
         self.assertEqual(s_items[0]["stadium_id"], "味の素スタジアム")
 
+    def test_formation_pattern_coordinates(self) -> None:
+        """Verify detailed tactical formation positions map to proper pitch coordinates."""
+        from api.routes.context import _auto_layout_starters
+        from api.schemas import PlayerContextItem
+
+        # 1. Test 3-back pattern
+        starters_3back = [
+            PlayerContextItem(player_id="1", player_name="GK", number=1, position="GK", is_starter=True),
+            PlayerContextItem(player_id="2", player_name="LCB", number=2, position="LCB", is_starter=True),
+            PlayerContextItem(player_id="3", player_name="CB", number=3, position="CB", is_starter=True),
+            PlayerContextItem(player_id="4", player_name="RCB", number=4, position="RCB", is_starter=True),
+            PlayerContextItem(player_id="5", player_name="LWB", number=5, position="LWB", is_starter=True),
+            PlayerContextItem(player_id="6", player_name="RWB", number=6, position="RWB", is_starter=True),
+            PlayerContextItem(player_id="7", player_name="CF", number=7, position="CF", is_starter=True),
+        ]
+        layout_3b = _auto_layout_starters(starters_3back)
+        coord_map_3b = {p.position: (p.pitch_x, p.pitch_y) for p in layout_3b}
+
+        self.assertEqual(coord_map_3b["GK"], (50.0, 88.0))
+        self.assertEqual(coord_map_3b["LCB"], (24.0, 75.0))
+        self.assertEqual(coord_map_3b["CB"], (50.0, 77.0))
+        self.assertEqual(coord_map_3b["RCB"], (76.0, 75.0))
+        self.assertEqual(coord_map_3b["LWB"], (12.0, 55.0))
+        self.assertEqual(coord_map_3b["CF"], (50.0, 22.0))
+
+        # 2. Test 4-back pattern
+        starters_4back = [
+            PlayerContextItem(player_id="10", player_name="GK", number=1, position="GK", is_starter=True),
+            PlayerContextItem(player_id="11", player_name="LSB", number=2, position="LSB", is_starter=True),
+            PlayerContextItem(player_id="12", player_name="LCB", number=3, position="LCB", is_starter=True),
+            PlayerContextItem(player_id="13", player_name="RCB", number=4, position="RCB", is_starter=True),
+            PlayerContextItem(player_id="14", player_name="RSB", number=5, position="RSB", is_starter=True),
+            PlayerContextItem(player_id="15", player_name="LCF", number=6, position="LCF", is_starter=True),
+            PlayerContextItem(player_id="16", player_name="RCF", number=7, position="RCF", is_starter=True),
+        ]
+        layout_4b = _auto_layout_starters(starters_4back)
+        coord_map_4b = {p.position: (p.pitch_x, p.pitch_y) for p in layout_4b}
+
+        self.assertEqual(coord_map_4b["LSB"], (14.0, 73.0))
+        self.assertEqual(coord_map_4b["LCB"], (38.0, 75.0))
+        self.assertEqual(coord_map_4b["RCB"], (62.0, 75.0))
+        self.assertEqual(coord_map_4b["RSB"], (86.0, 73.0))
+        self.assertEqual(coord_map_4b["LCF"], (35.0, 24.0))
+        self.assertEqual(coord_map_4b["RCF"], (65.0, 24.0))
+
 
 if __name__ == "__main__":
     unittest.main()

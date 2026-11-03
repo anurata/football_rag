@@ -156,7 +156,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
       appBar: _buildAppBar(match),
       body: Column(
         children: [
-          _buildTeamToggleBar(match, isHome, notifier),
+          _buildLiveNewsPlaceholder(match),
           Expanded(
             child: PitchBoard(
               team: currentTeam,
@@ -171,6 +171,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
               },
             ),
           ),
+          _buildTeamToggleBar(match, isHome, notifier),
           ActionTicker(
             currentMinute: state.currentMinute,
             recentActions: state.recentActions,
@@ -239,6 +240,40 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildLiveNewsPlaceholder(MatchAppContext match) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.fromLTRB(10, 6, 10, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.blueGrey.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.bolt, color: Colors.amber, size: 18),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '試合速報・戦術ハイライト（中央表示エリア）',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white70,
+                fontWeight: FontWeight.w500,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Icon(Icons.chevron_right, color: Colors.white38, size: 16),
+        ],
+      ),
     );
   }
 

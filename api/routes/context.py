@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from fastapi import APIRouter, HTTPException
 
 from agent.objective_profiler import resolve_team_name
@@ -24,11 +24,81 @@ router = APIRouter(prefix="/api", tags=["context"])
 STRUCTURED_DIR = Path("data") / "structured"
 
 
+POSITION_COORDINATES: Dict[str, Tuple[float, float]] = {
+    # Goalkeeper
+    "GK": (50.0, 88.0),
+    # 4-back
+    "LSB": (14.0, 73.0),
+    "LCB": (38.0, 75.0),
+    "RCB": (62.0, 75.0),
+    "RSB": (86.0, 73.0),
+    # 3-back (wider horizontal distribution to prevent overlapping)
+    "CB": (50.0, 77.0),
+    # Midfield / Wings / Volante
+    "LWB": (12.0, 55.0),
+    "RWB": (88.0, 55.0),
+    "LSH": (14.0, 52.0),
+    "RSH": (86.0, 52.0),
+    "LCM": (38.0, 58.0),
+    "RCM": (62.0, 58.0),
+    "DMF": (50.0, 62.0),
+    "CMF": (50.0, 55.0),
+    "OMF": (50.0, 40.0),
+    "CAM": (50.0, 40.0),
+    "LOM": (32.0, 38.0),
+    "ROM": (68.0, 38.0),
+    "LWG": (16.0, 32.0),
+    "RWG": (84.0, 32.0),
+    # Forwards
+    "CF": (50.0, 22.0),
+    "LCF": (35.0, 24.0),
+    "RCF": (65.0, 24.0),
+    "ST": (50.0, 22.0),
+}
+
+
 def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerContextItem]:
-    """Auto-layout starters across GK, DF, MF, FW lines without any overlaps."""
+    """Auto-layout starters across GK, DF, MF, FW lines or precise position coordinates."""
     if not starters:
         return []
 
+    # Check if starters have detailed tactical position codes
+    has_detailed_positions = any(
+        (p.position or "").upper() in POSITION_COORDINATES for p in starters
+    )
+
+    if has_detailed_positions:
+        result: List[PlayerContextItem] = []
+        has_cb = any((p.position or "").upper() == "CB" for p in starters)
+
+        for p in starters:
+            pos_key = (p.position or "").upper()
+            coords = POSITION_COORDINATES.get(pos_key)
+            if coords:
+                x, y = coords
+                # In 3-back formations (has a central CB), spread LCB and RCB wider
+                if has_cb:
+                    if pos_key == "LCB":
+                        x = 24.0
+                    elif pos_key == "RCB":
+                        x = 76.0
+            else:
+                x, y = (p.pitch_x, p.pitch_y)
+            result.append(
+                PlayerContextItem(
+                    player_id=p.player_id,
+                    player_name=p.player_name,
+                    number=p.number,
+                    position=p.position,
+                    is_starter=p.is_starter,
+                    pitch_x=x,
+                    pitch_y=y,
+                    photo_url=p.photo_url,
+                ),
+            )
+        return result
+
+    # Fallback: line-by-line distribution
     gk_list: List[PlayerContextItem] = []
     df_list: List[PlayerContextItem] = []
     mf_list: List[PlayerContextItem] = []
@@ -58,10 +128,10 @@ def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerConte
             step = 72.0 / (n - 1)
             xs = [14.0 + (i * step) for i in range(n)]
 
-        result: List[PlayerContextItem] = []
+        line_res: List[PlayerContextItem] = []
         for i, p in enumerate(players):
             stagger = 3.0 if (i % 2 == 1 and n > 3) else 0.0
-            result.append(
+            line_res.append(
                 PlayerContextItem(
                     player_id=p.player_id,
                     player_name=p.player_name,
@@ -73,20 +143,20 @@ def _auto_layout_starters(starters: List[PlayerContextItem]) -> List[PlayerConte
                     photo_url=p.photo_url,
                 ),
             )
-        return result
+        return line_res
 
     res_gk = _spread_line(gk_list, 88.0)
-    res_df = _spread_line(df_list, 72.0)
+    res_df = _spread_line(df_list, 74.0)
 
     if len(mf_list) >= 4:
         half = len(mf_list) // 2
         dmf_line = mf_list[:half]
         amf_line = mf_list[half:]
-        res_mf = _spread_line(dmf_line, 55.0) + _spread_line(amf_line, 38.0)
+        res_mf = _spread_line(dmf_line, 58.0) + _spread_line(amf_line, 42.0)
     else:
-        res_mf = _spread_line(mf_list, 48.0)
+        res_mf = _spread_line(mf_list, 52.0)
 
-    res_fw = _spread_line(fw_list, 18.0)
+    res_fw = _spread_line(fw_list, 24.0)
 
     return res_gk + res_df + res_mf + res_fw
 

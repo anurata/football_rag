@@ -753,6 +753,42 @@ def get_team_emblem_html(team_id: str, width: int = 80, height: int = 80) -> str
     )
 
 
+def get_team_manager_info(team_id: str) -> Dict[str, Any]:
+    """クラブ監督名、公式スタッフID、顔写真URLを取得する."""
+    meta = load_team_tactical_profile_meta(team_id)
+    manager_name = meta.get("manager", "監督情報準備中")
+    staff_id = meta.get("manager_staff_id")
+    image_url = meta.get("manager_image_url")
+    if not image_url and staff_id:
+        image_url = f"https://data.j-league.or.jp/img/manager/{staff_id}.jpg"
+    return {
+        "manager_name": manager_name,
+        "staff_id": staff_id,
+        "image_url": image_url,
+    }
+
+
+def get_team_manager_avatar_html(team_id: str, size: int = 56) -> str:
+    """監督の公式顔写真アバターHTML（円形・境界線・フォールバック付き）を返す."""
+    mgr = get_team_manager_info(team_id)
+    img_url = mgr.get("image_url")
+    name = mgr.get("manager_name", "監督")
+
+    if img_url:
+        return (
+            f'<img src="{img_url}" width="{size}" height="{size}" '
+            f'alt="{name}" title="{name} 監督" '
+            f'style="border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0; '
+            f'box-shadow: 0 2px 5px rgba(0,0,0,0.12); vertical-align: middle;" />'
+        )
+    return (
+        f'<div style="width: {size}px; height: {size}px; border-radius: 50%; '
+        f'background: #f1f5f9; display: inline-flex; align-items: center; '
+        f'justify-content: center; font-size: {size // 2}px; border: 2px solid #e2e8f0; '
+        f'box-shadow: 0 2px 5px rgba(0,0,0,0.12); vertical-align: middle;">👔</div>'
+    )
+
+
 def romaji_to_hiragana(text: str, kanji_name: str = "") -> str:
     """ヘボン式ローマ字の長音省略（O, U等）を補正し、自然で正確な平仮名よみがなを生成する."""
     if not text:

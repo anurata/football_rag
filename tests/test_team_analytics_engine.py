@@ -19,6 +19,8 @@ from pipeline.team_analytics_engine import (
     get_team_emblem_html,
     get_team_emblem_url,
     get_team_h2h_comparison,
+    get_team_manager_avatar_html,
+    get_team_manager_info,
     get_team_signature_metrics,
     get_team_squad_cbp,
     get_win_loss_pattern_analysis,
@@ -216,6 +218,29 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
 
         # 55指標中、数値指標54個が全て網羅されていること
         self.assertGreaterEqual(total_items, 50)
+
+    def test_get_team_manager_helpers(self):
+        """クラブ監督情報および公式顔写真アバターHTMLの検証."""
+        # 1. FC東京（松橋力蔵監督）
+        fct_mgr = get_team_manager_info("FCT")
+        self.assertEqual(fct_mgr["manager_name"], "松橋 力蔵")
+        self.assertEqual(fct_mgr["staff_id"], "003239")
+        self.assertIn("003239.jpg", fct_mgr["image_url"])
+
+        fct_html = get_team_manager_avatar_html("FCT", size=50)
+        self.assertIn("<img", fct_html)
+        self.assertIn("003239.jpg", fct_html)
+        self.assertIn("width=\"50\"", fct_html)
+
+        # 2. 全20クラブで監督情報と画像URLが取得できること
+        from pipeline.team_analytics_engine import TEAM_ID_MAP
+        for tid in TEAM_ID_MAP.keys():
+            info = get_team_manager_info(tid)
+            self.assertTrue(info["manager_name"])
+            self.assertTrue(info["image_url"], f"Missing manager image url for {tid}")
+            self.assertTrue(info["image_url"].startswith("https://data.j-league.or.jp/img/manager/"))
+            html = get_team_manager_avatar_html(tid, size=40)
+            self.assertIn("<img", html)
 
 
 if __name__ == "__main__":

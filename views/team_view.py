@@ -32,6 +32,8 @@ from pipeline.team_analytics_engine import (
     get_team_55_metrics_categorized,
     get_team_emblem_html,
     get_team_h2h_comparison,
+    get_team_manager_avatar_html,
+    get_team_manager_info,
     get_team_signature_metrics,
     get_team_squad_cbp,
     get_win_loss_pattern_analysis,
@@ -145,9 +147,17 @@ def _render_club_header(
         )
 
     with col_info:
+        mgr_avatar = get_team_manager_avatar_html(team_id, size=46)
         st.markdown(f"## {team_name} <span style='font-size: 1.2rem; color: #757575;'>({team_id})</span>", unsafe_allow_html=True)
         st.markdown(
-            f"**{rank_str}** ({pts_str}) ｜ 指揮官: **{manager}** ｜ 基本布陣: **`{base_f}`**"
+            f"<div style='display: flex; align-items: center; gap: 12px; margin-bottom: 6px;'>"
+            f"  {mgr_avatar}"
+            f"  <div>"
+            f"    <div style='font-size: 0.95rem; line-height: 1.3;'><b>{rank_str}</b> ({pts_str}) ｜ 基本布陣: <code>{base_f}</code></div>"
+            f"    <div style='color: #334155; font-size: 0.9rem; line-height: 1.3;'>指揮官: <b>{manager} 監督</b></div>"
+            f"  </div>"
+            f"</div>",
+            unsafe_allow_html=True,
         )
         st.markdown(
             f"🏷️ **動的戦術分類**: :blue-background[**{style_label}**]"
@@ -568,13 +578,24 @@ def _render_h2h_tab(team_id: str) -> None:
         )
     st.session_state["h2h_target_team_id"] = target_team
 
-    # 両クラブのエンブレムバナー
+    # 両クラブのエンブレム＆指揮官バナー
+    mgr1 = get_team_manager_info(team_id)
+    mgr2 = get_team_manager_info(target_team)
+    mgr_av1 = get_team_manager_avatar_html(team_id, size=40)
+    mgr_av2 = get_team_manager_avatar_html(target_team, size=40)
+
     col_em1, col_vs, col_em2 = st.columns([4, 1, 4])
     with col_em1:
         st.markdown(
-            f"<div style='display: flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.08); padding: 10px 14px; border-radius: 8px;'>"
-            f"{get_team_emblem_html(team_id, width=48, height=48)}"
-            f"<div><strong style='font-size: 1.1rem; color: #1e3a8a;'>{resolve_team_name(team_id)}</strong><br><span style='font-size: 0.85rem; color: #64748b;'>自クラブ (青)</span></div>"
+            f"<div style='display: flex; align-items: center; justify-content: space-between; background: rgba(59, 130, 246, 0.08); padding: 10px 14px; border-radius: 8px;'>"
+            f"  <div style='display: flex; align-items: center; gap: 10px;'>"
+            f"    {get_team_emblem_html(team_id, width=44, height=44)}"
+            f"    <div><strong style='font-size: 1.05rem; color: #1e3a8a;'>{resolve_team_name(team_id)}</strong><br><span style='font-size: 0.8rem; color: #64748b;'>自クラブ (青)</span></div>"
+            f"  </div>"
+            f"  <div style='display: flex; align-items: center; gap: 8px;'>"
+            f"    <div style='text-align: right;'><span style='font-size: 0.75rem; color: #64748b;'>指揮官</span><br><b style='font-size: 0.85rem;'>{mgr1.get('manager_name')}</b></div>"
+            f"    {mgr_av1}"
+            f"  </div>"
             f"</div>",
             unsafe_allow_html=True,
         )
@@ -585,9 +606,15 @@ def _render_h2h_tab(team_id: str) -> None:
         )
     with col_em2:
         st.markdown(
-            f"<div style='display: flex; align-items: center; gap: 12px; background: rgba(249, 115, 22, 0.08); padding: 10px 14px; border-radius: 8px;'>"
-            f"{get_team_emblem_html(target_team, width=48, height=48)}"
-            f"<div><strong style='font-size: 1.1rem; color: #7c2d12;'>{resolve_team_name(target_team)}</strong><br><span style='font-size: 0.85rem; color: #64748b;'>比較クラブ (橙)</span></div>"
+            f"<div style='display: flex; align-items: center; justify-content: space-between; background: rgba(249, 115, 22, 0.08); padding: 10px 14px; border-radius: 8px;'>"
+            f"  <div style='display: flex; align-items: center; gap: 8px;'>"
+            f"    {mgr_av2}"
+            f"    <div style='text-align: left;'><span style='font-size: 0.75rem; color: #64748b;'>指揮官</span><br><b style='font-size: 0.85rem;'>{mgr2.get('manager_name')}</b></div>"
+            f"  </div>"
+            f"  <div style='display: flex; align-items: center; gap: 10px;'>"
+            f"    <div style='text-align: right;'><strong style='font-size: 1.05rem; color: #7c2d12;'>{resolve_team_name(target_team)}</strong><br><span style='font-size: 0.8rem; color: #64748b;'>比較クラブ (橙)</span></div>"
+            f"    {get_team_emblem_html(target_team, width=44, height=44)}"
+            f"  </div>"
             f"</div>",
             unsafe_allow_html=True,
         )

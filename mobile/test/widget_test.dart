@@ -17,23 +17,29 @@ void main() {
         matchMinute: 23,
         playCategory: 'pass',
         note: 'ナイススルーパス',
+        bonusPoints: 2,
         createdAt: '2026-11-03T16:00:00Z',
         isSynced: false,
       );
+
+      expect(action.netPoints, 3); // 1 + 2
 
       final json = action.toJson();
       expect(json['id'], 'test_uuid_123');
       expect(json['action_type'], 'good');
       expect(json['match_minute'], 23);
+      expect(json['bonus_points'], 2);
 
       final dbMap = action.toDbMap();
       expect(dbMap['is_synced'], 0);
       expect(dbMap['player_name'], '小泉 慶');
+      expect(dbMap['bonus_points'], 2);
 
       final reconstructed = UserAction.fromJson(dbMap);
       expect(reconstructed.id, action.id);
       expect(reconstructed.playerName, action.playerName);
-      expect(reconstructed.isSynced, false);
+      expect(reconstructed.bonusPoints, 2);
+      expect(reconstructed.netPoints, 3);
     });
 
     test('MatchAppContext serialization', () {
@@ -270,6 +276,76 @@ void main() {
 
       final awayDec = animatedContainers.last.decoration as BoxDecoration;
       expect(awayDec.color, Colors.white);
+    });
+
+    testWidgets('PlayerPin number circle color reflects gradient from -5 to +15 pts', (
+      WidgetTester tester,
+    ) async {
+      const p = PlayerContextItem(
+        playerId: 'p1',
+        playerName: 'ルカオ',
+        number: 99,
+        position: 'CF',
+        isStarter: true,
+        pitchX: 50.0,
+        pitchY: 16.0,
+      );
+
+      // 1. Min score (-5 pts): deep crimson red (0xFF991B1B)
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 82.0,
+              height: 46.0,
+              child: PlayerPin(
+                player: p,
+                teamId: 'OKA',
+                isHome: true,
+                score: -5,
+                onAction: (a, c) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      var badgeFinder = find.byWidgetPredicate(
+        (w) =>
+            w is Container &&
+            w.constraints?.minWidth == 18 &&
+            w.decoration is BoxDecoration &&
+            (w.decoration as BoxDecoration).shape == BoxShape.circle,
+      );
+      expect(badgeFinder, findsOneWidget);
+      var badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
+      expect(badgeBox.color, const Color(0xFF991B1B));
+      expect(find.text('-5'), findsOneWidget);
+
+      // 2. Max score (+15 pts): shining gold (0xFFFFD700)
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 82.0,
+              height: 46.0,
+              child: PlayerPin(
+                player: p,
+                teamId: 'OKA',
+                isHome: true,
+                score: 15,
+                onAction: (a, c) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
+      expect(badgeBox.color, const Color(0xFFFFD700));
+      expect(find.text('+15'), findsOneWidget);
     });
   });
 }

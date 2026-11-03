@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/action_models.dart';
 import '../models/match_models.dart';
 import '../providers/match_provider.dart';
 import '../widgets/action_ticker.dart';
@@ -124,6 +126,49 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
     );
   }
 
+  void _showDeleteActionDialog(
+    UserAction action,
+    MatchTrackingNotifier notifier,
+  ) {
+    final name = action.playerName ?? action.playerId;
+    final typeLabel = action.actionType == 'good' ? '👍 Good' : '👎 Bad';
+    final bonusText = action.bonusPoints > 0 ? ' (+${action.bonusPoints}点)' : '';
+
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[900],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text(
+            'アクションの削除',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          content: Text(
+            "${action.matchMinute}' $name の評価 ($typeLabel$bonusText) を削除しますか？\n選手の点数も元に戻ります。",
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('キャンセル', style: TextStyle(color: Colors.white54)),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red[700]),
+              onPressed: () {
+                notifier.removeAction(action.id);
+                Navigator.pop(ctx);
+              },
+              child: const Text('削除する', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(matchTrackingProvider);
@@ -164,6 +209,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
             child: PitchBoard(
               team: currentTeam,
               isHome: isHome,
+              playerScores: state.playerScores,
               onPlayerAction: (player, actionType, category) {
                 notifier.recordAction(
                   playerId: player.playerId,
@@ -185,6 +231,14 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
               if (state.currentMinute > 0) {
                 notifier.setMinute(state.currentMinute - 1);
               }
+            },
+            onTapAction: (action) {
+              HapticFeedback.lightImpact();
+              notifier.incrementActionBonus(action.id);
+            },
+            onLongPressAction: (action) {
+              HapticFeedback.heavyImpact();
+              _showDeleteActionDialog(action, notifier);
             },
           ),
         ],

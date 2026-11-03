@@ -33,6 +33,15 @@ class MatchTrackingState {
     this.syncStatusMessage = 'Ready',
   });
 
+  /// Real-time net score per player across recorded actions
+  Map<String, int> get playerScores {
+    final map = <String, int>{};
+    for (final act in recentActions) {
+      map[act.playerId] = (map[act.playerId] ?? 0) + act.netPoints;
+    }
+    return map;
+  }
+
   MatchTrackingState copyWith({
     MatchAppContext? matchContext,
     bool? isLoading,
@@ -138,6 +147,29 @@ class MatchTrackingNotifier extends Notifier<MatchTrackingState> {
 
     // 3. Asynchronously push to server
     _trySyncPendingActions();
+  }
+
+  Future<void> incrementActionBonus(String actionId) async {
+    final idx = state.recentActions.indexWhere((a) => a.id == actionId);
+    if (idx == -1) return;
+
+    final target = state.recentActions[idx];
+    final updated = target.copyWith(bonusPoints: target.bonusPoints + 1);
+
+    await _localDb.updateBonusPoints(actionId, updated.bonusPoints);
+
+    final newList = List<UserAction>.from(state.recentActions);
+    newList[idx] = updated;
+    state = state.copyWith(recentActions: newList);
+
+    _trySyncPendingActions();
+  }
+
+  Future<void> removeAction(String actionId) async {
+    await _localDb.deleteAction(actionId);
+
+    final newList = state.recentActions.where((a) => a.id != actionId).toList();
+    state = state.copyWith(recentActions: newList);
   }
 
   Future<void> _trySyncPendingActions() async {

@@ -12,6 +12,7 @@ class UserAction {
   final int matchMinute;
   final String? playCategory;
   final String? note;
+  final int bonusPoints;
   final String? createdAt;
   final bool isSynced;
 
@@ -25,9 +26,13 @@ class UserAction {
     required this.matchMinute,
     this.playCategory,
     this.note,
+    this.bonusPoints = 0,
     this.createdAt,
     this.isSynced = false,
   });
+
+  /// Total points contributed by this action (+1 base for good, -1 for bad, plus bonus points)
+  int get netPoints => (actionType == 'good' ? 1 : -1) + bonusPoints;
 
   UserAction copyWith({
     String? id,
@@ -39,6 +44,7 @@ class UserAction {
     int? matchMinute,
     String? playCategory,
     String? note,
+    int? bonusPoints,
     String? createdAt,
     bool? isSynced,
   }) {
@@ -52,6 +58,7 @@ class UserAction {
       matchMinute: matchMinute ?? this.matchMinute,
       playCategory: playCategory ?? this.playCategory,
       note: note ?? this.note,
+      bonusPoints: bonusPoints ?? this.bonusPoints,
       createdAt: createdAt ?? this.createdAt,
       isSynced: isSynced ?? this.isSynced,
     );
@@ -68,6 +75,7 @@ class UserAction {
       matchMinute: json['match_minute'] as int? ?? 0,
       playCategory: json['play_category'] as String?,
       note: json['note'] as String?,
+      bonusPoints: json['bonus_points'] as int? ?? 0,
       createdAt: json['created_at'] as String?,
       isSynced: (json['is_synced'] as int? ?? 0) == 1,
     );
@@ -83,6 +91,7 @@ class UserAction {
       'match_minute': matchMinute,
       'play_category': playCategory,
       'note': note,
+      'bonus_points': bonusPoints,
       'created_at': createdAt,
     };
   }
@@ -98,6 +107,7 @@ class UserAction {
       'match_minute': matchMinute,
       'play_category': playCategory,
       'note': note,
+      'bonus_points': bonusPoints,
       'created_at': createdAt,
       'is_synced': isSynced ? 1 : 0,
     };

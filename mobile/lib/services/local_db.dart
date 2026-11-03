@@ -28,7 +28,7 @@ class LocalDbService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE local_actions (
@@ -41,10 +41,20 @@ class LocalDbService {
             match_minute INTEGER NOT NULL,
             play_category TEXT,
             note TEXT,
+            bonus_points INTEGER DEFAULT 0,
             created_at TEXT,
             is_synced INTEGER DEFAULT 0
           );
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          try {
+            await db.execute(
+              'ALTER TABLE local_actions ADD COLUMN bonus_points INTEGER DEFAULT 0;',
+            );
+          } catch (_) {}
+        }
       },
     );
   }
@@ -55,6 +65,28 @@ class LocalDbService {
       'local_actions',
       action.toDbMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> updateBonusPoints(String actionId, int bonusPoints) async {
+    final db = await database;
+    await db.update(
+      'local_actions',
+      {
+        'bonus_points': bonusPoints,
+        'is_synced': 0,
+      },
+      where: 'id = ?',
+      whereArgs: [actionId],
+    );
+  }
+
+  Future<void> deleteAction(String actionId) async {
+    final db = await database;
+    await db.delete(
+      'local_actions',
+      where: 'id = ?',
+      whereArgs: [actionId],
     );
   }
 

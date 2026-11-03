@@ -7,6 +7,8 @@ class ActionTicker extends StatelessWidget {
   final String syncStatus;
   final VoidCallback onIncrementMinute;
   final VoidCallback onDecrementMinute;
+  final Function(UserAction action)? onTapAction;
+  final Function(UserAction action)? onLongPressAction;
 
   const ActionTicker({
     super.key,
@@ -15,6 +17,8 @@ class ActionTicker extends StatelessWidget {
     required this.syncStatus,
     required this.onIncrementMinute,
     required this.onDecrementMinute,
+    this.onTapAction,
+    this.onLongPressAction,
   });
 
   @override
@@ -131,7 +135,7 @@ class ActionTicker extends StatelessWidget {
   Widget _buildActionList() {
     if (recentActions.isEmpty) {
       return const SizedBox(
-        height: 28,
+        height: 30,
         child: Center(
           child: Text(
             '選手ピンを上スワイプでGood👍 / 下スワイプでBad👎',
@@ -142,58 +146,106 @@ class ActionTicker extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 28,
+      height: 30,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: recentActions.length,
         separatorBuilder: (context, index) => const SizedBox(width: 6),
         itemBuilder: (context, index) {
           final act = recentActions[index];
-          final isGood = act.actionType == 'good';
-
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(
-              color: isGood ? Colors.green[800] : Colors.red[800],
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "${act.matchMinute}'",
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white70,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  act.playerName ?? act.playerId,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(
-                  isGood ? Icons.thumb_up : Icons.thumb_down,
-                  size: 11,
-                  color: Colors.white,
-                ),
-                if (act.playCategory != null) ...[
-                  const SizedBox(width: 3),
-                  Text(
-                    '(${act.playCategory})',
-                    style: const TextStyle(fontSize: 9, color: Colors.white70),
-                  ),
-                ],
-              ],
-            ),
-          );
+          return _buildActionChip(act);
         },
+      ),
+    );
+  }
+
+  Widget _buildActionChip(UserAction act) {
+    final isGood = act.actionType == 'good';
+    final hasBonus = act.bonusPoints > 0;
+
+    return GestureDetector(
+      onTap: () {
+        if (onTapAction != null) {
+          onTapAction!(act);
+        }
+      },
+      onLongPress: () {
+        if (onLongPressAction != null) {
+          onLongPressAction!(act);
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        decoration: BoxDecoration(
+          color: isGood ? Colors.green[800] : Colors.red[800],
+          borderRadius: BorderRadius.circular(12),
+          border: hasBonus
+              ? Border.all(color: Colors.amber, width: 1.2)
+              : null,
+          boxShadow: hasBonus
+              ? const [
+                  BoxShadow(
+                    color: Colors.amberAccent,
+                    blurRadius: 4,
+                    offset: Offset(0, 1),
+                  ),
+                ]
+              : null,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "${act.matchMinute}'",
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
+            ),
+            const SizedBox(width: 4),
+            Text(
+              act.playerName ?? act.playerId,
+              style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(width: 4),
+            Icon(
+              isGood ? Icons.thumb_up : Icons.thumb_down,
+              size: 11,
+              color: Colors.white,
+            ),
+            if (hasBonus) ...[
+              const SizedBox(width: 3),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 0.5),
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  '+${act.bonusPoints}',
+                  style: const TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+            if (act.playCategory != null) ...[
+              const SizedBox(width: 3),
+              Text(
+                '(${act.playCategory})',
+                style: const TextStyle(fontSize: 9, color: Colors.white70),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

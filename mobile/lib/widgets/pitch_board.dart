@@ -5,12 +5,14 @@ import 'player_pin.dart';
 class PitchBoard extends StatelessWidget {
   final TeamContextItem team;
   final bool isHome;
+  final Map<String, int> playerScores;
   final Function(PlayerContextItem player, String actionType, String? category) onPlayerAction;
 
   const PitchBoard({
     super.key,
     required this.team,
     this.isHome = true,
+    this.playerScores = const {},
     required this.onPlayerAction,
   });
 
@@ -64,11 +66,13 @@ class PitchBoard extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(width: 6),
               itemBuilder: (context, index) {
                 final p = team.bench[index];
+                final score = playerScores[p.playerId] ?? 0;
+                final scoreSuffix = score != 0 ? ' (${score > 0 ? '+' : ''}$score)' : '';
                 final chipBg = isHome ? const Color(0xFF7D1B2D) : Colors.white;
                 final chipText = isHome ? Colors.white : const Color(0xFF0F172A);
                 return ActionChip(
                   padding: EdgeInsets.zero,
-                  label: Text('#${p.number} ${p.displayName}'),
+                  label: Text('#${p.number} ${p.displayName}$scoreSuffix'),
                   labelStyle: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -113,6 +117,7 @@ class PitchBoard extends StatelessWidget {
         player: player,
         teamId: team.teamId,
         isHome: isHome,
+        score: playerScores[player.playerId] ?? 0,
         onAction: (actionType, category) {
           onPlayerAction(player, actionType, category);
         },

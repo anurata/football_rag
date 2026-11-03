@@ -7,6 +7,7 @@ class PlayerPin extends StatefulWidget {
   final PlayerContextItem player;
   final String teamId;
   final bool isHome;
+  final int score;
   final Function(String actionType, String? category) onAction;
 
   const PlayerPin({
@@ -14,6 +15,7 @@ class PlayerPin extends StatefulWidget {
     required this.player,
     required this.teamId,
     this.isHome = true,
+    this.score = 0,
     required this.onAction,
   });
 
@@ -160,15 +162,16 @@ class _PlayerPinState extends State<PlayerPin> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildNumberBadge(),
-        const SizedBox(width: 4),
+        const SizedBox(width: 3),
         _buildPositionLabel(),
+        _buildScorePill(),
       ],
     );
   }
 
   Widget _buildNumberBadge() {
-    final badgeBg = widget.isHome ? Colors.amber : const Color(0xFF1E3A8A);
-    final badgeTextColor = widget.isHome ? Colors.black : Colors.white;
+    final badgeBg = _calculateScoreBadgeColor(widget.score, widget.isHome);
+    final badgeTextColor = _calculateBadgeTextColor(badgeBg);
 
     return Container(
       width: 18,
@@ -176,6 +179,9 @@ class _PlayerPinState extends State<PlayerPin> {
       decoration: BoxDecoration(
         color: badgeBg,
         shape: BoxShape.circle,
+        border: widget.score >= 10
+            ? Border.all(color: Colors.white, width: 1.2)
+            : null,
       ),
       alignment: Alignment.center,
       child: Text(
@@ -186,6 +192,61 @@ class _PlayerPinState extends State<PlayerPin> {
           fontWeight: FontWeight.bold,
           color: badgeTextColor,
           height: 1.1,
+        ),
+      ),
+    );
+  }
+
+  Color _calculateScoreBadgeColor(int score, bool isHome) {
+    // Clamped strictly between -5 (lower limit) and +15 (upper limit)
+    final clamped = score.clamp(-5, 15);
+    final neutralColor = isHome ? Colors.amber : const Color(0xFF1E3A8A);
+    const minColor = Color(0xFF991B1B); // -5 pts lower limit: deep crimson red
+    const midColor = Color(0xFF22C55E); // +7 pts: vibrant emerald green
+    const maxColor = Color(0xFFFFD700); // +15 pts upper limit: shining gold
+
+    if (clamped == 0) {
+      return neutralColor;
+    } else if (clamped < 0) {
+      // 1-step per point gradient from 0 down to -5
+      final t = clamped.abs() / 5.0;
+      return Color.lerp(neutralColor, minColor, t)!;
+    } else {
+      // 1-step per point gradient from 0 up to +15
+      if (clamped <= 7) {
+        final t = clamped / 7.0;
+        return Color.lerp(neutralColor, midColor, t)!;
+      } else {
+        final t = (clamped - 7) / 8.0;
+        return Color.lerp(midColor, maxColor, t)!;
+      }
+    }
+  }
+
+  Color _calculateBadgeTextColor(Color bg) {
+    return bg.computeLuminance() > 0.45 ? Colors.black : Colors.white;
+  }
+
+  Widget _buildScorePill() {
+    if (widget.score == 0) return const SizedBox.shrink();
+    final isPos = widget.score > 0;
+    final prefix = isPos ? '+' : '';
+    final pillColor = isPos ? const Color(0xFF16A34A) : const Color(0xFFDC2626);
+
+    return Container(
+      margin: const EdgeInsets.only(left: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 0.5),
+      decoration: BoxDecoration(
+        color: pillColor,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        '$prefix${widget.score}',
+        textScaler: TextScaler.noScaling,
+        style: const TextStyle(
+          fontSize: 8.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
         ),
       ),
     );

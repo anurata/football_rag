@@ -14,9 +14,11 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import math
+import re
 import sqlite3
 from collections import defaultdict
 from pathlib import Path
@@ -643,14 +645,121 @@ def get_style_adherence_matches(team_id: str) -> List[Dict[str, Any]]:
     return [item[1] for item in scored_matches[:3]]
 
 
-def romaji_to_hiragana(text: str) -> str:
-    """ローマ字（ヘボン式・訓令式）を平仮名よみがなに変換する."""
+# ---------------------------------------------------------------------------
+# クラブ公式エンブレム（SVG / PNG）マッピング
+# ---------------------------------------------------------------------------
+TEAM_EMBLEM_MAP: Dict[str, str] = {
+    "FCT": "https://www.jleague.jp/image/clubs/fc-tokyo.svg",
+    "KAS": "https://www.jleague.jp/image/clubs/kashima.svg",
+    "URA": "https://www.jleague.jp/image/clubs/urawa.svg",
+    "REY": "https://www.jleague.jp/image/clubs/kashiwa.svg",
+    "VER": "https://www.jleague.jp/image/clubs/tokyo-v.svg",
+    "ZEL": "https://www.jleague.jp/image/clubs/machida.svg",
+    "KAW": "https://www.jleague.jp/image/clubs/kawasaki.svg",
+    "MAR": "https://www.jleague.jp/image/clubs/yokohama-fm.svg",
+    "YFC": "https://www.jleague.jp/image/clubs/yokohama-fc.svg",
+    "BEL": "https://www.jleague.jp/image/clubs/shonan.svg",
+    "NII": "https://www.jleague.jp/image/clubs/niigata.svg",
+    "PUL": "https://www.jleague.jp/image/clubs/shimizu.svg",
+    "IWA": "https://www.jleague.jp/image/clubs/iwata.svg",
+    "NAG": "https://www.jleague.jp/image/clubs/nagoya.svg",
+    "SAN": "https://www.jleague.jp/image/clubs/kyoto.svg",
+    "GAM": "https://www.jleague.jp/image/clubs/g-osaka.svg",
+    "CER": "https://www.jleague.jp/image/clubs/c-osaka.svg",
+    "VOB": "https://www.jleague.jp/image/clubs/kobe.svg",
+    "OKA": "https://www.jleague.jp/image/clubs/okayama.svg",
+    "HIR": "https://www.jleague.jp/image/clubs/hiroshima.svg",
+    "FUK": "https://www.jleague.jp/image/clubs/fukuoka.svg",
+    "SAG": "https://www.jleague.jp/image/clubs/tosu.svg",
+    "VVN": "https://www.jleague.jp/image/clubs/nagasaki.svg",
+    "CON": "https://www.jleague.jp/image/clubs/sapporo.svg",
+    "JEF": "https://www.jleague.jp/image/clubs/chiba.svg",
+    "MIT": "https://www.jleague.jp/image/clubs/mito.svg",
+}
+
+TEAM_FLAB_EMBLEM_MAP: Dict[str, str] = {
+    "FCT": "https://www.football-lab.jp/img/team/FCTK_sdw.png",
+    "KAS": "https://www.football-lab.jp/img/team/KASM_sdw.png",
+    "URA": "https://www.football-lab.jp/img/team/URAW_sdw.png",
+    "REY": "https://www.football-lab.jp/img/team/KASW_sdw.png",
+    "VER": "https://www.football-lab.jp/img/team/TK-V_sdw.png",
+    "ZEL": "https://www.football-lab.jp/img/team/MCD_sdw.png",
+    "KAW": "https://www.football-lab.jp/img/team/KA-F_sdw.png",
+    "MAR": "https://www.football-lab.jp/img/team/Y-FM_sdw.png",
+    "YFC": "https://www.football-lab.jp/img/team/Y-FC_sdw.png",
+    "BEL": "https://www.football-lab.jp/img/team/SHON_sdw.png",
+    "NII": "https://www.football-lab.jp/img/team/NIIG_sdw.png",
+    "PUL": "https://www.football-lab.jp/img/team/SHIM_sdw.png",
+    "IWA": "https://www.football-lab.jp/img/team/IWAT_sdw.png",
+    "NAG": "https://www.football-lab.jp/img/team/NAGO_sdw.png",
+    "SAN": "https://www.football-lab.jp/img/team/KYOT_sdw.png",
+    "GAM": "https://www.football-lab.jp/img/team/G-OS_sdw.png",
+    "CER": "https://www.football-lab.jp/img/team/C-OS_sdw.png",
+    "VOB": "https://www.football-lab.jp/img/team/KOBE_sdw.png",
+    "OKA": "https://www.football-lab.jp/img/team/OKAY_sdw.png",
+    "HIR": "https://www.football-lab.jp/img/team/HIRO_sdw.png",
+    "FUK": "https://www.football-lab.jp/img/team/FUKU_sdw.png",
+    "SAG": "https://www.football-lab.jp/img/team/TOSU_sdw.png",
+    "VVN": "https://www.football-lab.jp/img/team/NGSK_sdw.png",
+    "CON": "https://www.football-lab.jp/img/team/SAPP_sdw.png",
+    "JEF": "https://www.football-lab.jp/img/team/CHIB_sdw.png",
+    "MIT": "https://www.football-lab.jp/img/team/MITO_sdw.png",
+}
+
+
+def get_team_emblem_url(team_id: str, prefer_png: bool = False) -> str:
+    """クラブ公式エンブレムの画像URL（公式SVGまたはFootball-LAB PNG）を返す."""
+    tid = (team_id or "").upper()
+    if prefer_png:
+        return TEAM_FLAB_EMBLEM_MAP.get(tid, TEAM_EMBLEM_MAP.get(tid, ""))
+    return TEAM_EMBLEM_MAP.get(tid, TEAM_FLAB_EMBLEM_MAP.get(tid, ""))
+
+
+def get_team_emblem_html(team_id: str, width: int = 80, height: int = 80) -> str:
+    """ローカルSVGまたは公式URLからクラブ公式エンブレムのHTML imgタグを返す."""
+    tid = (team_id or "").upper()
+    svg_path = Path(__file__).resolve().parent.parent / "assets" / "emblems" / f"team_{tid}.svg"
+    if svg_path.exists():
+        try:
+            b64 = base64.b64encode(svg_path.read_bytes()).decode("utf-8")
+            src = f"data:image/svg+xml;base64,{b64}"
+        except Exception:
+            src = get_team_emblem_url(tid)
+    else:
+        src = get_team_emblem_url(tid)
+
+    if not src:
+        return "<div style='font-size: 2.5rem; text-align: center;'>🛡️</div>"
+
+    return (
+        f'<img src="{src}" width="{width}" height="{height}" '
+        f'alt="{tid}" style="object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18));" />'
+    )
+
+
+def romaji_to_hiragana(text: str, kanji_name: str = "") -> str:
+    """ヘボン式ローマ字の長音省略（O, U等）を補正し、自然で正確な平仮名よみがなを生成する."""
     if not text:
         return ""
     
     # 既にカタカナまたは平仮名が含まれる場合はそのまま返す
     if any('\u3040' <= ch <= '\u30ff' for ch in text):
         return text
+
+    # 特殊な漢字選手名・苗字の例外明示マップ
+    clean_k = (kanji_name or "").strip()
+    kanji_overrides = {
+        "高 宇洋": "こう たかひろ",
+        "高宇洋": "こう たかひろ",
+        "常盤 亨太": "ときわ きょうた",
+        "俵積田 晃太": "たわらつみだ こうた",
+        "荒木 遼太郎": "あらき りょうたろう",
+    }
+    if clean_k in kanji_overrides:
+        return kanji_overrides[clean_k]
+    for k, v in kanji_overrides.items():
+        if k.replace(" ", "").replace("　", "") == clean_k.replace(" ", "").replace("　", ""):
+            return v
 
     table = {
         'kya': 'きゃ', 'kyu': 'きゅ', 'kyo': 'きょ',
@@ -686,8 +795,57 @@ def romaji_to_hiragana(text: str) -> str:
     words = text.strip().split()
     converted_words = []
     
-    for word in words:
-        w = word.lower()
+    for word_idx, raw_w in enumerate(words):
+        w = raw_w.lower()
+        is_first_name = (word_idx == len(words) - 1 and len(words) > 1)
+        is_family_name = (word_idx == 0 and len(words) > 1)
+
+        # 1. 苗字の漢字連携特例
+        if is_family_name:
+            if clean_k.startswith("高 ") or clean_k.startswith("高　") or clean_k == "高":
+                if w == "ko":
+                    converted_words.append("こう")
+                    continue
+            # 佐藤、加藤、後藤、近藤、遠藤、工藤、安藤、進藤等の「〜藤（-TO）」
+            if any(clean_k.startswith(f) for f in ["佐藤", "加藤", "伊藤", "後藤", "近藤", "遠藤", "工藤", "安藤", "進藤", "武藤", "内藤", "斉藤", "齋藤"]):
+                if w.endswith("to") and not w.endswith("uto"):
+                    w = w[:-2] + "tou"
+            # 大迫、大野、大森、大久保等の「大〜（O-）」
+            if clean_k.startswith("大") and w.startswith("o") and not w.startswith("oo"):
+                w = "oo" + w[1:]
+
+        # 2. 拗音長音の自動復元（人名では kyo, ryo, sho, cho 等は例外なく長音）
+        for stem in ['kyo', 'ryo', 'sho', 'cho', 'jyo', 'hyo', 'myo', 'gyo', 'byo', 'pyo']:
+            if w.startswith(stem):
+                if not w.startswith(stem + 'u') and not w.startswith(stem + 'o'):
+                    w = stem + 'u' + w[len(stem):]
+            else:
+                pattern = r'(?<![a-z])' + stem + r'(?![uo])'
+                w = re.sub(pattern, stem + 'u', w)
+
+        # 3. 下の名前の長音自動復元
+        if is_first_name:
+            for prefix in ['kota', 'koki', 'kosuke', 'kosei', 'kotaro', 'koya', 'koyo']:
+                if w.startswith(prefix) and not w.startswith('kou'):
+                    w = 'kou' + w[2:]
+                    break
+            for prefix in ['sota', 'soma', 'sotaro', 'sosuke']:
+                if w.startswith(prefix) and not w.startswith('sou'):
+                    w = 'sou' + w[2:]
+                    break
+            for prefix in ['toma', 'toya', 'tosuke']:
+                if w.startswith(prefix) and not w.startswith('tou'):
+                    w = 'tou' + w[2:]
+                    break
+            for prefix in ['yuto', 'yuta', 'yuma', 'yuki', 'yusuke', 'yuya', 'yudai', 'yusei', 'yugo', 'yuri']:
+                if w.startswith(prefix) and not w.startswith('yuu'):
+                    w = 'yuu' + w[2:]
+                    break
+            for ending in ['taro', 'jiro', 'shiro', 'goro', 'ichiro', 'saburo']:
+                if w.endswith(ending):
+                    w = w[:-len(ending)] + ending + 'u'
+                    break
+
         res = []
         i = 0
         while i < len(w):
@@ -715,7 +873,16 @@ def romaji_to_hiragana(text: str) -> str:
             if not matched:
                 res.append(w[i])
                 i += 1
-        converted_words.append("".join(res))
+        
+        res_word = "".join(res)
+        # もし未解決のアルファベットが残り、漢字名側にカタカナがある場合は平仮名化して割り当て
+        if any('a' <= ch <= 'z' for ch in res_word):
+            kanji_parts = clean_k.split()
+            if word_idx < len(kanji_parts):
+                kp = kanji_parts[word_idx]
+                if any('\u30a0' <= ch <= '\u30ff' for ch in kp):
+                    res_word = "".join(chr(ord(ch) - 0x60) if '\u30a0' <= ch <= '\u30ff' else ch for ch in kp)
+        converted_words.append(res_word)
     
     return " ".join(converted_words)
 
@@ -731,10 +898,10 @@ def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
 
     query = """
     SELECT 
-        pms.player_id,
-        pms.player_name,
-        COALESCE(emp.position, pms.position, 'MF') AS pos,
-        COALESCE(emp.number, pms.number, 0) AS num,
+        COALESCE(MAX(emp.player_id), pms.player_id) AS resolved_player_id,
+        COALESCE(MAX(emp.canonical_name), pms.player_name) AS resolved_player_name,
+        COALESCE(MAX(emp.position), MAX(pms.position), 'MF') AS pos,
+        COALESCE(MAX(emp.number), MAX(pms.number), 0) AS num,
         MAX(emp.photo_url) AS photo_url,
         MAX(emp.en_name) AS en_name,
         COUNT(DISTINCT pms.match_id) AS matches_count,
@@ -746,9 +913,12 @@ def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
         ROUND(AVG(pms.xg), 2) AS avg_xg,
         ROUND(AVG(pms.xa), 2) AS avg_xa
     FROM player_match_stats pms
-    LEFT JOIN entity_master_players emp ON pms.player_id = emp.player_id
+    LEFT JOIN entity_master_players emp ON (
+        pms.player_id = emp.player_id 
+        OR (pms.team_id = emp.team_id AND REPLACE(REPLACE(pms.player_name, ' ', ''), '　', '') = REPLACE(REPLACE(emp.canonical_name, ' ', ''), '　', ''))
+    )
     WHERE pms.team_id = ?
-    GROUP BY pms.player_id, pms.player_name
+    GROUP BY COALESCE(emp.player_id, REPLACE(REPLACE(pms.player_name, ' ', ''), '　', ''))
     HAVING total_minutes > 0
     ORDER BY total_cbp DESC, total_minutes DESC
     """
@@ -758,16 +928,16 @@ def get_team_squad_cbp(team_id: str) -> List[Dict[str, Any]]:
 
     squad: List[Dict[str, Any]] = []
     for r in rows:
-        p_name = r["player_name"]
+        p_name = r["resolved_player_name"]
         en_name = r["en_name"] or ""
         # 選手名が既にカタカナの場合はカタカナをそのまま、漢字の場合はローマ字から平仮名変換
         if any('\u30a0' <= ch <= '\u30ff' for ch in p_name) and not any('\u4e00' <= ch <= '\u9fff' for ch in p_name):
             yomi = p_name
         else:
-            yomi = romaji_to_hiragana(en_name)
+            yomi = romaji_to_hiragana(en_name, kanji_name=p_name)
 
         squad.append({
-            "player_id": r["player_id"],
+            "player_id": r["resolved_player_id"],
             "player_name": p_name,
             "yomi": yomi,
             "en_name": en_name,

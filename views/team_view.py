@@ -30,6 +30,7 @@ from pipeline.team_analytics_engine import (
     get_goal_pattern_breakdown,
     get_style_adherence_matches,
     get_team_55_metrics_categorized,
+    get_team_emblem_html,
     get_team_h2h_comparison,
     get_team_signature_metrics,
     get_team_squad_cbp,
@@ -133,10 +134,18 @@ def _render_club_header(
     pts_str = f"{pts_val} pts" if pts_val is not None else "-"
     form_badges = s_info.get("form", []) if s_info else []
 
-    col_left, col_right = st.columns([3, 2])
+    col_logo, col_info, col_right = st.columns([1, 4, 3])
 
-    with col_left:
-        st.markdown(f"## 🛡️ {team_name} ({team_id})")
+    with col_logo:
+        st.markdown(
+            f"<div style='text-align: center; padding-top: 6px;'>"
+            f"{get_team_emblem_html(team_id, width=82, height=82)}"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+
+    with col_info:
+        st.markdown(f"## {team_name} <span style='font-size: 1.2rem; color: #757575;'>({team_id})</span>", unsafe_allow_html=True)
         st.markdown(
             f"**{rank_str}** ({pts_str}) ｜ 指揮官: **{manager}** ｜ 基本布陣: **`{base_f}`**"
         )
@@ -558,6 +567,31 @@ def _render_h2h_tab(team_id: str) -> None:
             key="h2h_target_selector",
         )
     st.session_state["h2h_target_team_id"] = target_team
+
+    # 両クラブのエンブレムバナー
+    col_em1, col_vs, col_em2 = st.columns([4, 1, 4])
+    with col_em1:
+        st.markdown(
+            f"<div style='display: flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.08); padding: 10px 14px; border-radius: 8px;'>"
+            f"{get_team_emblem_html(team_id, width=48, height=48)}"
+            f"<div><strong style='font-size: 1.1rem; color: #1e3a8a;'>{resolve_team_name(team_id)}</strong><br><span style='font-size: 0.85rem; color: #64748b;'>自クラブ (青)</span></div>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+    with col_vs:
+        st.markdown(
+            "<div style='text-align: center; font-size: 1.5rem; font-weight: 800; color: #94a3b8; line-height: 52px;'>VS</div>",
+            unsafe_allow_html=True,
+        )
+    with col_em2:
+        st.markdown(
+            f"<div style='display: flex; align-items: center; gap: 12px; background: rgba(249, 115, 22, 0.08); padding: 10px 14px; border-radius: 8px;'>"
+            f"{get_team_emblem_html(target_team, width=48, height=48)}"
+            f"<div><strong style='font-size: 1.1rem; color: #7c2d12;'>{resolve_team_name(target_team)}</strong><br><span style='font-size: 0.85rem; color: #64748b;'>比較クラブ (橙)</span></div>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+    st.write("")
 
     # 比較データ取得
     h2h_data = get_team_h2h_comparison(team_id, target_team)

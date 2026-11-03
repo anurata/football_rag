@@ -16,12 +16,15 @@ from pipeline.team_analytics_engine import (
     get_goal_pattern_breakdown,
     get_style_adherence_matches,
     get_team_55_metrics_categorized,
+    get_team_emblem_html,
+    get_team_emblem_url,
     get_team_h2h_comparison,
     get_team_signature_metrics,
     get_team_squad_cbp,
     get_win_loss_pattern_analysis,
     load_all_matches_scores_map,
     load_all_teams_55_metrics,
+    romaji_to_hiragana,
 )
 
 
@@ -144,6 +147,29 @@ class TestTeamAnalyticsEngine(unittest.TestCase):
         self.assertGreater(len(with_photos), 10)
         with_yomi = [p for p in squad if p.get("yomi")]
         self.assertGreater(len(with_yomi), 10)
+
+        # 選手名の重複が一切存在しないこと
+        clean_names = [p["player_name"].replace(" ", "").replace("　", "") for p in squad]
+        self.assertEqual(len(clean_names), len(set(clean_names)))
+
+    def test_romaji_to_hiragana_advanced(self):
+        """ヘボン式長音復元および例外マッピングの検証."""
+        self.assertEqual(romaji_to_hiragana("KO Takahiro", kanji_name="高 宇洋"), "こう たかひろ")
+        self.assertEqual(romaji_to_hiragana("TOKIWA Kyota", kanji_name="常盤 亨太"), "ときわ きょうた")
+        self.assertEqual(romaji_to_hiragana("TAWARATSUMIDA Kota", kanji_name="俵積田 晃太"), "たわらつみだ こうた")
+        self.assertEqual(romaji_to_hiragana("ARAKI Ryotaro", kanji_name="荒木 遼太郎"), "あらき りょうたろう")
+        self.assertEqual(romaji_to_hiragana("NAGATOMO Yuto", kanji_name="長友 佑都"), "ながとも ゆうと")
+
+    def test_get_team_emblem_helpers(self):
+        """チーム公式エンブレムURLおよびHTML生成の検証."""
+        url_svg = get_team_emblem_url("FCT")
+        self.assertIn("fc-tokyo.svg", url_svg)
+        url_png = get_team_emblem_url("KAS", prefer_png=True)
+        self.assertIn(".png", url_png)
+
+        html = get_team_emblem_html("FCT", width=80, height=80)
+        self.assertIn("<img", html)
+        self.assertIn("width=\"80\"", html)
 
     def test_get_team_h2h_comparison(self):
         """他クラブ直接対比（Head-to-Head）の検証."""

@@ -274,7 +274,7 @@ def import_mw13(db_path: str = DEFAULT_DB_PATH) -> None:
             """,
             (
                 "20261031_OKA_FCT",
-                f"P_OKA_{p[0]}_{p[1].replace(' ', '_')}",
+                f"P_OKA_{p[0]}_{p[1].replace(' ', '').replace('　', '')}",
                 p[1],
                 "OKA",
                 p[3],
@@ -301,7 +301,7 @@ def import_mw13(db_path: str = DEFAULT_DB_PATH) -> None:
             """,
             (
                 "20261031_OKA_FCT",
-                f"P_FCT_{p[0]}_{p[1].replace(' ', '_')}",
+                f"P_FCT_{p[0]}_{p[1].replace(' ', '').replace('　', '')}",
                 p[1],
                 "FCT",
                 p[3],

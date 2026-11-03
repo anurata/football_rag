@@ -122,7 +122,7 @@ def update_san_fuk_match(db_path: str = str(DEFAULT_DB_PATH)) -> None:
             """,
             (
                 MATCH_ID,
-                f"P_SAN_{p[0]}_{p[1].replace(' ', '_')}",
+                f"P_SAN_{p[0]}_{p[1].replace(' ', '').replace('　', '')}",
                 p[1],
                 "SAN",
                 p[3],
@@ -150,7 +150,7 @@ def update_san_fuk_match(db_path: str = str(DEFAULT_DB_PATH)) -> None:
             """,
             (
                 MATCH_ID,
-                f"P_FUK_{p[0]}_{p[1].replace(' ', '_')}",
+                f"P_FUK_{p[0]}_{p[1].replace(' ', '').replace('　', '')}",
                 p[1],
                 "FUK",
                 p[3],

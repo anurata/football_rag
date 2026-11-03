@@ -18,6 +18,10 @@ from pipeline.league_overview_data import (
     get_matchweek_matches,
     get_tactical_positioning_map_data,
 )
+from pipeline.team_analytics_engine import (
+    get_team_emblem_html,
+    get_team_emblem_url,
+)
 from views.components.ai_modal import render_ai_button
 from views.navigation import (
     VIEW_LEAGUE,
@@ -68,13 +72,21 @@ def _render_form_badge(form_list: List[str]) -> str:
 
 
 def _render_standings_card(team: Dict[str, Any]) -> None:
-    """Render a single club standings card."""
+    """Render a single club standings card with official emblem."""
     with st.container(border=True):
-        col_rank, col_name = st.columns([1, 3])
+        col_rank, col_emblem, col_name = st.columns([1, 1, 4])
         with col_rank:
             rank = team.get("rank", 1)
             medal = "🥇" if rank == 1 else ("🥈" if rank == 2 else ("🥉" if rank == 3 else f"#{rank}"))
             st.markdown(f"### {medal}")
+        with col_emblem:
+            tid = team.get("team_id", "")
+            st.markdown(
+                f"<div style='text-align: center; padding-top: 4px;'>"
+                f"{get_team_emblem_html(tid, width=38, height=38)}"
+                f"</div>",
+                unsafe_allow_html=True,
+            )
         with col_name:
             st.markdown(f"**{team.get('name', 'チーム')}**")
             st.caption(f"消化: {team.get('played', 0)}試合 | {team.get('won', 0)}勝{team.get('drawn', 0)}分{team.get('lost', 0)}敗")
@@ -352,22 +364,54 @@ def _render_tactical_map_section(
     y_label = map_data.get("y_label", "Y軸")
     qlabels = map_data.get("quadrant_labels", {})
 
+    # Calculate data bounds for sizing emblem markers
+    x_min = min(t["x"] for t in teams)
+    x_max = max(t["x"] for t in teams)
+    y_min = min(t["y"] for t in teams)
+    y_max = max(t["y"] for t in teams)
+    x_range = x_max - x_min if x_max > x_min else 10.0
+    y_range = y_max - y_min if y_max > y_min else 10.0
+    sizex = x_range * 0.082
+    sizey = y_range * 0.082
+
     # Create Plotly figure
     fig = go.Figure()
 
-    # Scatter points for teams
+    # Add official club emblems as scatter layout images
+    for t in teams:
+        tid = t.get("team_id", "")
+        emb_url = get_team_emblem_url(tid, prefer_png=True)
+        if emb_url:
+            fig.add_layout_image(
+                dict(
+                    source=emb_url,
+                    xref="x",
+                    yref="y",
+                    x=t["x"],
+                    y=t["y"],
+                    sizex=sizex,
+                    sizey=sizey,
+                    sizing="contain",
+                    xanchor="center",
+                    yanchor="middle",
+                    layer="above",
+                )
+            )
+
+    # Scatter points for teams (transparent markers for hover tooltip + short name label)
     fig.add_trace(
         go.Scatter(
             x=[t["x"] for t in teams],
             y=[t["y"] for t in teams],
             mode="markers+text",
             text=[t["short_name"] for t in teams],
-            textposition="top center",
+            textposition="bottom center",
             marker=dict(
-                size=12,
-                color="#1E88E5",
-                line=dict(width=1.5, color="#0D47A1"),
+                size=24,
+                color="rgba(30, 136, 229, 0.01)",
+                line=dict(width=0),
             ),
+            textfont=dict(size=11, color="#1e293b", weight="bold"),
             hovertemplate=(
                 "<b>%{text}</b> (順位: #%{customdata[0]})<br>"
                 + f"{x_label}: %{{x}}<br>"

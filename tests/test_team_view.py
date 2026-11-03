@@ -219,7 +219,9 @@ class TestTeamView(unittest.TestCase):
             "z_score": 2.32,
         }
         tv._render_signature_metric_card(sample_item, is_strength=True, team_id="FCT")
-        mock_st.markdown.assert_any_call("**46_ベイズ縮小決定力スキル**")
+        # タイトルがインラインクラス付きHTMLで出力されていること
+        md_calls = [c[0][0] for c in mock_st.markdown.call_args_list if c[0]]
+        self.assertTrue(any("sig-metric-title" in s and "46_ベイズ縮小決定力スキル" in s for s in md_calls))
         mock_st.button.assert_called_with("?", key="btn_sig_help_46_ベイズ縮小決定力スキル", help="46_ベイズ縮小決定力スキルの詳細解説と判定基準をダイアログで表示")
         mock_st.caption.assert_called()
 

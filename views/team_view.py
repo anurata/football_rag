@@ -620,9 +620,13 @@ def _render_signature_metric_card(
     row_html = _build_signature_metric_row_html(item)
 
     with st.container(border=True):
-        c_title, c_btn = st.columns([0.88, 0.12], vertical_alignment="center")
+        c_title, c_btn = st.columns([0.85, 0.15], vertical_alignment="center")
         with c_title:
-            st.markdown(f"**{m_name}**")
+            st.markdown(
+                f"<div class='sig-metric-title' style='font-size: 14px; font-weight: 700; color: #1e293b; line-height: 1.3;'>"
+                f"{m_name}</div>",
+                unsafe_allow_html=True,
+            )
         with c_btn:
             if st.button("?", key=f"btn_sig_help_{m_name}", help=f"{m_name}の詳細解説と判定基準をダイアログで表示"):
                 detail_item = _find_55_metric_detail(m_name, team_id)
@@ -1021,21 +1025,12 @@ def _show_metric_detail_dialog(item: Dict[str, Any]) -> None:
 
 
 def _inject_metric_table_custom_css() -> None:
-    """指標テーブルの縦崩れを防止し、丸い「？」ボタンを指標名直後にインライン配置するためのCSSを注入する."""
+    """指標テーブルおよびシグネチャー指標カードの縦崩れを防止し、丸い「？」ボタンを指標名直後にインライン配置するためのCSSを注入する."""
     st.markdown(
         """
         <style>
-        /* モバイル幅でも指標カードの上段とタイトル＋ボタンは絶対に折り返さず横並びを維持 */
-        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] {
-            flex-wrap: nowrap !important;
-            flex-direction: row !important;
-        }
-
-        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] [data-testid="stColumn"] {
-            min-width: 0 !important;
-        }
-
-        /* 指標名と丸い？ボタンのstHorizontalBlock: テキスト直後にピッタリ配置 */
+        /* モバイル幅でも指標カードの上段タイトル＋丸い？ボタン行は絶対に折り返さず横並びを維持 */
+        [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title),
         div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) {
             display: flex !important;
             flex-direction: row !important;
@@ -1045,12 +1040,21 @@ def _inject_metric_table_custom_css() -> None:
             gap: 6px !important;
             width: 100% !important;
         }
+
+        [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"],
+        div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"] {
+            min-width: 0 !important;
+        }
+
+        [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"]:first-child,
         div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:first-child {
             flex: 0 0 auto !important;
             width: auto !important;
             min-width: 0 !important;
             max-width: fit-content !important;
         }
+
+        [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"]:last-child,
         div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:last-child {
             flex: 0 0 24px !important;
             width: 24px !important;
@@ -1060,22 +1064,24 @@ def _inject_metric_table_custom_css() -> None:
 
         /* Streamlitのモバイル用メディアクエリ (min-width: calc(100% - ...)) を完全上書き */
         @media (max-width: 768px) {
-            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] {
+            [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title),
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) {
                 flex-wrap: nowrap !important;
+                flex-direction: row !important;
             }
-            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"] [data-testid="stColumn"] {
+            [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"],
+            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"] {
                 min-width: 0 !important;
                 width: auto !important;
             }
-            div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) {
-                flex-wrap: nowrap !important;
-            }
+            [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"]:first-child,
             div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:first-child {
                 flex: 0 0 auto !important;
                 width: auto !important;
                 min-width: 0 !important;
                 max-width: fit-content !important;
             }
+            [data-testid="stColumn"] [data-testid="stHorizontalBlock"]:has(.sig-metric-title) > [data-testid="stColumn"]:last-child,
             div[data-testid="stExpanderDetails"] [data-testid="stHorizontalBlock"]:has(button) > [data-testid="stColumn"]:last-child {
                 flex: 0 0 24px !important;
                 width: 24px !important;
@@ -1085,6 +1091,7 @@ def _inject_metric_table_custom_css() -> None:
         }
 
         /* 指標詳細のすべての「？」ボタンを完全な円形（丸い？ボタン）にする */
+        [data-testid="stHorizontalBlock"]:has(.sig-metric-title) button,
         div[data-testid="stExpanderDetails"] button,
         button[aria-label*="詳細解説"] {
             width: 20px !important;
@@ -1108,12 +1115,15 @@ def _inject_metric_table_custom_css() -> None:
             cursor: pointer !important;
             box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
         }
+        [data-testid="stHorizontalBlock"]:has(.sig-metric-title) button:hover,
         div[data-testid="stExpanderDetails"] button:hover,
         button[aria-label*="詳細解説"]:hover {
             background-color: #2563eb !important;
             color: #ffffff !important;
             border-color: #2563eb !important;
         }
+        [data-testid="stHorizontalBlock"]:has(.sig-metric-title) button p,
+        [data-testid="stHorizontalBlock"]:has(.sig-metric-title) button div,
         div[data-testid="stExpanderDetails"] button p,
         div[data-testid="stExpanderDetails"] button div,
         button[aria-label*="詳細解説"] p,

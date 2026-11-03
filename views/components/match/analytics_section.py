@@ -176,10 +176,15 @@ def _render_next_match_outlook(
 ) -> None:
     """Render next match tactical outlook (strengths, fixes, continuity)."""
     st.markdown("##### 🔮 次節に向けた各チームの戦術的展望")
-    wl_data = profiler.analyze_win_loss_dynamics(summary)
+    wl_func = getattr(
+        profiler,
+        "analyze_win_loss_dynamics",
+        getattr(profiler, "build_win_loss_continuity_reports", None),
+    )
+    wl_data = wl_func(summary) if wl_func else {}
 
-    h_data = wl_data.get("home_team", {})
-    a_data = wl_data.get("away_team", {})
+    h_data = wl_data.get("home", wl_data.get("home_team", {}))
+    a_data = wl_data.get("away", wl_data.get("away_team", {}))
 
     col_h, col_a = st.columns(2)
     with col_h:

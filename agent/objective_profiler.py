@@ -1220,6 +1220,7 @@ class MatchObjectiveProfiler:
 
     # Alias for test compatibility
     build_win_loss_report = build_win_loss_continuity_reports
+    analyze_win_loss_dynamics = build_win_loss_continuity_reports
 
     def build_5_advanced_tactical_reports(
         self,

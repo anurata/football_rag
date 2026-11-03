@@ -54,9 +54,17 @@ class TestViewsNavigation(unittest.TestCase):
 
     def test_get_current_view(self) -> None:
         """Verify getting the current active view."""
-        self.assertEqual(get_current_view(), VIEW_MATCH)
-        st.session_state["current_view"] = VIEW_TEAM
         self.assertEqual(get_current_view(), VIEW_TEAM)
+        st.session_state["current_view"] = VIEW_MATCH
+        self.assertEqual(get_current_view(), VIEW_MATCH)
+
+    def test_sidebar_radio_sync(self) -> None:
+        """Verify sidebar_view_radio synchronizes properly on navigate_to."""
+        navigate_to(view=VIEW_TEAM, trigger_rerun=False)
+        self.assertEqual(st.session_state["sidebar_view_radio"], VIEW_LABELS[VIEW_TEAM])
+
+        navigate_to(view=VIEW_MATCH, trigger_rerun=False)
+        self.assertEqual(st.session_state["sidebar_view_radio"], VIEW_LABELS[VIEW_MATCH])
 
     def test_navigate_to_deep_linking(self) -> None:
         """Verify navigate_to sets all context attributes properly."""
@@ -97,6 +105,18 @@ class TestViewsNavigation(unittest.TestCase):
             trigger_rerun=False,
         )
         self.assertEqual(st.session_state["current_view"], VIEW_SETTINGS)
+
+    def test_on_sidebar_nav_change_callback(self) -> None:
+        """Verify _on_sidebar_nav_change updates current_view properly."""
+        from views.navigation import _on_sidebar_nav_change
+        init_navigation_state(VIEW_TEAM)
+        st.session_state["sidebar_view_radio"] = VIEW_LABELS[VIEW_LEAGUE]
+        _on_sidebar_nav_change()
+        self.assertEqual(st.session_state["current_view"], VIEW_LEAGUE)
+
+        st.session_state["sidebar_view_radio"] = VIEW_LABELS[VIEW_TEAM]
+        _on_sidebar_nav_change()
+        self.assertEqual(st.session_state["current_view"], VIEW_TEAM)
 
 
 if __name__ == "__main__":

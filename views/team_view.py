@@ -668,12 +668,6 @@ def _render_metric_category_table(category_name: str, metrics: List[Dict[str, An
         _render_metric_row(item)
         st.markdown("<div style='margin: 4px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
 
-    st.markdown("<div style='margin-bottom: 6px; border-bottom: 1px solid #cbd5e1;'></div>", unsafe_allow_html=True)
-
-    for item in metrics:
-        _render_metric_row(item)
-        st.markdown("<div style='margin: 4px 0; border-bottom: 1px solid #f1f5f9;'></div>", unsafe_allow_html=True)
-
 
 def _render_55_metrics_expander_section(team_id: str) -> None:
     """全55戦術指標の6大カテゴリ別エキスパンダーテーブル（相対バー・ランク・ヒントポップアップ付き）."""
@@ -682,7 +676,7 @@ def _render_55_metrics_expander_section(team_id: str) -> None:
         st.caption("55戦術指標データがありません。")
         return
 
-    st.caption("ℹ️ 各指標名の横のヒントボタンを押すと、戦術概要・基準値・J1最高値・平均値のポップアップを確認できます。セル内のバーはJ1トップを100%とした相対度合いを示します。")
+    st.caption("ℹ️ 各指標名の横のヒントボタンを押すと、戦術概要・5段階基準数値幅・J1最良値・平均値のポップアップを確認できます。セル内のバーはJ1トップを90%とした相対度合いを示します。")
 
     for cat_title, metrics_list in categorized.items():
         with st.expander(f"{cat_title} ({len(metrics_list)}指標)"):

@@ -31,10 +31,11 @@ LABEL_TO_VIEW: Dict[str, str] = {
 }
 
 
-def init_navigation_state(default_view: str = VIEW_MATCH) -> None:
+def init_navigation_state(default_view: str = VIEW_TEAM) -> None:
     """Initialize navigation keys in st.session_state if not present."""
     defaults: Dict[str, Any] = {
         "current_view": default_view,
+        "sidebar_view_radio": VIEW_LABELS.get(default_view, VIEW_LABELS[VIEW_TEAM]),
         "selected_match_id": None,
         "selected_team_id": None,
         "selected_player_id": None,
@@ -51,8 +52,8 @@ def init_navigation_state(default_view: str = VIEW_MATCH) -> None:
 
 def get_current_view() -> str:
     """Return currently active view key."""
-    init_navigation_state()
-    return st.session_state.get("current_view", VIEW_MATCH)
+    init_navigation_state(VIEW_TEAM)
+    return st.session_state.get("current_view", VIEW_TEAM)
 
 
 def navigate_to(
@@ -70,8 +71,9 @@ def navigate_to(
     Seamless deep-linking transition to a target view and target context.
     Optionally restores an AI chat session and requests auto-opening modal.
     """
-    init_navigation_state()
+    init_navigation_state(VIEW_TEAM)
     st.session_state["current_view"] = view
+    st.session_state["sidebar_view_radio"] = VIEW_LABELS.get(view, VIEW_LABELS[VIEW_TEAM])
 
     if match_id is not None:
         st.session_state["selected_match_id"] = match_id
@@ -101,31 +103,36 @@ def _safe_rerun() -> None:
         pass
 
 
+def _on_sidebar_nav_change() -> None:
+    """Callback triggered whenever user selects a different view in the sidebar radio."""
+    selected_label = st.session_state.get("sidebar_view_radio")
+    new_view = LABEL_TO_VIEW.get(selected_label, VIEW_TEAM)
+    st.session_state["current_view"] = new_view
+
+
 def render_sidebar_navigation() -> str:
     """
     Render top-level sidebar navigation widget (segmented radio buttons).
     Returns the selected view key.
     """
-    init_navigation_state()
-    current_view = st.session_state.get("current_view", VIEW_MATCH)
+    init_navigation_state(VIEW_TEAM)
+    current_view = st.session_state.get("current_view", VIEW_TEAM)
+    current_label = VIEW_LABELS.get(current_view, VIEW_LABELS[VIEW_TEAM])
+
+    # Ensure sidebar radio widget key is strictly synchronized with current_view
+    if st.session_state.get("sidebar_view_radio") != current_label:
+        st.session_state["sidebar_view_radio"] = current_label
 
     options = list(VIEW_LABELS.values())
-    current_label = VIEW_LABELS.get(current_view, VIEW_LABELS[VIEW_MATCH])
-    current_index = options.index(current_label) if current_label in options else 0
 
     st.sidebar.markdown("### 🧭 観戦ガイド・ナビゲーション")
-    selected_label = st.sidebar.radio(
+    st.sidebar.radio(
         label="画面切り替え",
         options=options,
-        index=current_index,
         label_visibility="collapsed",
         key="sidebar_view_radio",
+        on_change=_on_sidebar_nav_change,
     )
 
-    new_view = LABEL_TO_VIEW.get(selected_label, VIEW_MATCH)
-    if new_view != current_view:
-        st.session_state["current_view"] = new_view
-        _safe_rerun()
-
-    return new_view
+    return st.session_state.get("current_view", VIEW_TEAM)
 

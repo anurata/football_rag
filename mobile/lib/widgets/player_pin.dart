@@ -22,25 +22,26 @@ class PlayerPin extends StatefulWidget {
   static Color calculateScoreBadgeColor(int score, {bool isHome = true}) {
     // Clamped strictly between -5 (lower limit) and +15 (upper limit)
     final clamped = score.clamp(-5, 15);
-    final neutralColor = isHome ? Colors.amber : const Color(0xFF1E3A8A);
-    const minColor = Color(0xFF991B1B); // -5 pts lower limit: deep crimson red
-    const midColor = Color(0xFF22C55E); // +7 pts: vibrant emerald green
-    const maxColor = Color(0xFFFFD700); // +15 pts upper limit: shining gold
+    const neutralColor = Colors.white; // 0 pts initial: clean white
+    const minBlue = Color(0xFF1D4ED8); // -5 pts lower limit: deep cobalt blue
+    const midRed = Color(0xFFE11D48); // +7 pts: rich crimson red
+    const maxGold = Color(0xFFFFD700); // +15 pts upper limit: shining gold
 
     if (clamped == 0) {
       return neutralColor;
     } else if (clamped < 0) {
-      // 1-step per point gradient from 0 down to -5
+      // 1-step per point gradient from 0 down to -5 (White -> Deep Blue)
       final t = clamped.abs() / 5.0;
-      return Color.lerp(neutralColor, minColor, t)!;
+      return Color.lerp(neutralColor, minBlue, t)!;
     } else {
-      // 1-step per point gradient from 0 up to +15
+      // 0 to +7: White -> Crimson Red gradient
       if (clamped <= 7) {
         final t = clamped / 7.0;
-        return Color.lerp(neutralColor, midColor, t)!;
+        return Color.lerp(neutralColor, midRed, t)!;
       } else {
+        // +7 to +15: Crimson Red -> Shining Gold gradient
         final t = (clamped - 7) / 8.0;
-        return Color.lerp(midColor, maxColor, t)!;
+        return Color.lerp(midRed, maxGold, t)!;
       }
     }
   }
@@ -208,8 +209,8 @@ class _PlayerPinState extends State<PlayerPin> {
         color: badgeBg,
         shape: BoxShape.circle,
         border: widget.score >= 10
-            ? Border.all(color: Colors.white, width: 1.2)
-            : null,
+            ? Border.all(color: const Color(0xFFFFD700), width: 1.2)
+            : Border.all(color: Colors.black26, width: 0.8),
       ),
       alignment: Alignment.center,
       child: Text(

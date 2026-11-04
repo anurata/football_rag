@@ -331,7 +331,7 @@ void main() {
         pitchY: 16.0,
       );
 
-      // 1. Min score (-5 pts): deep crimson red (0xFF991B1B)
+      // 1. Min score (-5 pts): deep cobalt blue (0xFF1D4ED8)
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -360,10 +360,57 @@ void main() {
       );
       expect(badgeFinder, findsOneWidget);
       var badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
-      expect(badgeBox.color, const Color(0xFF991B1B));
+      expect(badgeBox.color, const Color(0xFF1D4ED8));
       expect(find.text('-5'), findsOneWidget);
 
-      // 2. Max score (+15 pts): shining gold (0xFFFFD700)
+      // 2. Initial score (0 pts): clean white (Colors.white)
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 82.0,
+              height: 46.0,
+              child: PlayerPin(
+                player: p,
+                teamId: 'OKA',
+                isHome: true,
+                score: 0,
+                onAction: (a, c) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
+      expect(badgeBox.color, Colors.white);
+
+      // 3. Mid positive score (+7 pts): crimson red (0xFFE11D48)
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 82.0,
+              height: 46.0,
+              child: PlayerPin(
+                player: p,
+                teamId: 'OKA',
+                isHome: true,
+                score: 7,
+                onAction: (a, c) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
+      expect(badgeBox.color, const Color(0xFFE11D48));
+      expect(find.text('+7'), findsOneWidget);
+
+      // 4. Max score (+15 pts): shining gold (0xFFFFD700)
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

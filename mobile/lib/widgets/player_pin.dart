@@ -19,6 +19,32 @@ class PlayerPin extends StatefulWidget {
     required this.onAction,
   });
 
+  static Color calculateScoreBadgeColor(int score, {bool isHome = true}) {
+    // Clamped strictly between -5 (lower limit) and +15 (upper limit)
+    final clamped = score.clamp(-5, 15);
+    final neutralColor = isHome ? Colors.amber : const Color(0xFF1E3A8A);
+    const minColor = Color(0xFF991B1B); // -5 pts lower limit: deep crimson red
+    const midColor = Color(0xFF22C55E); // +7 pts: vibrant emerald green
+    const maxColor = Color(0xFFFFD700); // +15 pts upper limit: shining gold
+
+    if (clamped == 0) {
+      return neutralColor;
+    } else if (clamped < 0) {
+      // 1-step per point gradient from 0 down to -5
+      final t = clamped.abs() / 5.0;
+      return Color.lerp(neutralColor, minColor, t)!;
+    } else {
+      // 1-step per point gradient from 0 up to +15
+      if (clamped <= 7) {
+        final t = clamped / 7.0;
+        return Color.lerp(neutralColor, midColor, t)!;
+      } else {
+        final t = (clamped - 7) / 8.0;
+        return Color.lerp(midColor, maxColor, t)!;
+      }
+    }
+  }
+
   @override
   State<PlayerPin> createState() => _PlayerPinState();
 }
@@ -171,7 +197,8 @@ class _PlayerPinState extends State<PlayerPin> {
   }
 
   Widget _buildNumberBadge() {
-    final badgeBg = _calculateScoreBadgeColor(widget.score, widget.isHome);
+    final badgeBg =
+        PlayerPin.calculateScoreBadgeColor(widget.score, isHome: widget.isHome);
     final badgeTextColor = _calculateBadgeTextColor(badgeBg);
 
     return Container(
@@ -196,32 +223,6 @@ class _PlayerPinState extends State<PlayerPin> {
         ),
       ),
     );
-  }
-
-  Color _calculateScoreBadgeColor(int score, bool isHome) {
-    // Clamped strictly between -5 (lower limit) and +15 (upper limit)
-    final clamped = score.clamp(-5, 15);
-    final neutralColor = isHome ? Colors.amber : const Color(0xFF1E3A8A);
-    const minColor = Color(0xFF991B1B); // -5 pts lower limit: deep crimson red
-    const midColor = Color(0xFF22C55E); // +7 pts: vibrant emerald green
-    const maxColor = Color(0xFFFFD700); // +15 pts upper limit: shining gold
-
-    if (clamped == 0) {
-      return neutralColor;
-    } else if (clamped < 0) {
-      // 1-step per point gradient from 0 down to -5
-      final t = clamped.abs() / 5.0;
-      return Color.lerp(neutralColor, minColor, t)!;
-    } else {
-      // 1-step per point gradient from 0 up to +15
-      if (clamped <= 7) {
-        final t = clamped / 7.0;
-        return Color.lerp(neutralColor, midColor, t)!;
-      } else {
-        final t = (clamped - 7) / 8.0;
-        return Color.lerp(midColor, maxColor, t)!;
-      }
-    }
   }
 
   Color _calculateBadgeTextColor(Color bg) {

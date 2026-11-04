@@ -7,6 +7,9 @@ import '../models/match_models.dart';
 import '../providers/match_provider.dart';
 import '../widgets/action_ticker.dart';
 import '../widgets/pitch_board.dart';
+import '../widgets/player_ranking_sheet.dart';
+import '../widgets/position_swap_modal.dart';
+import '../widgets/substitution_modal.dart';
 
 class MatchTrackingScreen extends ConsumerStatefulWidget {
   final String matchId;
@@ -240,6 +243,48 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
     );
   }
 
+  void _showSubstitutionModal(TeamContextItem team, bool isHome) {
+    SubstitutionModal.show(
+      context: context,
+      team: team,
+      isHome: isHome,
+      onConfirm: (outPlayerId, inPlayerId) {
+        ref.read(matchTrackingProvider.notifier).substitutePlayer(
+              teamId: team.teamId,
+              outPlayerId: outPlayerId,
+              inPlayerId: inPlayerId,
+            );
+      },
+    );
+  }
+
+  void _showPositionSwapModal(TeamContextItem team, bool isHome) {
+    PositionSwapModal.show(
+      context: context,
+      team: team,
+      isHome: isHome,
+      onConfirm: (p1Id, p2Id) {
+        ref.read(matchTrackingProvider.notifier).swapPositions(
+              teamId: team.teamId,
+              player1Id: p1Id,
+              player2Id: p2Id,
+            );
+      },
+    );
+  }
+
+  void _showPlayerRankingSheet(TeamContextItem team, bool isHome) {
+    final rankings = ref.read(matchTrackingProvider.notifier).getRankings(
+          teamId: team.teamId,
+        );
+    PlayerRankingSheet.show(
+      context: context,
+      team: team,
+      isHome: isHome,
+      rankings: rankings,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(matchTrackingProvider);
@@ -276,11 +321,14 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
             child: _buildLiveNewsPlaceholder(match),
           ),
           SizedBox(
-            height: 330,
+            height: 362,
             child: PitchBoard(
               team: currentTeam,
               isHome: isHome,
               playerScores: state.playerScores,
+              onSubstituteTap: () => _showSubstitutionModal(currentTeam, isHome),
+              onSwapPositionsTap: () => _showPositionSwapModal(currentTeam, isHome),
+              onShowRankingsTap: () => _showPlayerRankingSheet(currentTeam, isHome),
               onPlayerAction: (player, actionType, category) {
                 notifier.recordAction(
                   playerId: player.playerId,

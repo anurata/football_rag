@@ -239,6 +239,183 @@ class MatchTrackingNotifier extends Notifier<MatchTrackingState> {
     state = state.copyWith(recentActions: newList);
   }
 
+  void substitutePlayer({
+    required String teamId,
+    required String outPlayerId,
+    required String inPlayerId,
+  }) {
+    final ctx = state.matchContext;
+    if (ctx == null) return;
+
+    final isHome = teamId == ctx.homeTeam.teamId || teamId == 'HOME';
+    final targetTeam = isHome ? ctx.homeTeam : ctx.awayTeam;
+
+    final outIdx = targetTeam.starters.indexWhere((p) => p.playerId == outPlayerId);
+    final inIdx = targetTeam.bench.indexWhere((p) => p.playerId == inPlayerId);
+    if (outIdx == -1 || inIdx == -1) return;
+
+    final outPlayer = targetTeam.starters[outIdx];
+    final inPlayer = targetTeam.bench[inIdx];
+
+    final updatedInPlayer = inPlayer.copyWith(
+      position: outPlayer.position,
+      pitchX: outPlayer.pitchX,
+      pitchY: outPlayer.pitchY,
+      isStarter: true,
+    );
+
+    final updatedOutPlayer = outPlayer.copyWith(
+      isStarter: false,
+    );
+
+    final newStarters = List<PlayerContextItem>.from(targetTeam.starters);
+    newStarters[outIdx] = updatedInPlayer;
+
+    final newBench = List<PlayerContextItem>.from(targetTeam.bench);
+    newBench[inIdx] = updatedOutPlayer;
+
+    final updatedTeam = targetTeam.copyWith(
+      starters: newStarters,
+      bench: newBench,
+    );
+
+    final updatedCtx = isHome
+        ? ctx.copyWith(homeTeam: updatedTeam)
+        : ctx.copyWith(awayTeam: updatedTeam);
+
+    state = state.copyWith(matchContext: updatedCtx);
+
+    recordAction(
+      playerId: inPlayer.playerId,
+      playerName: inPlayer.displayName,
+      teamId: targetTeam.teamId,
+      actionType: 'sub',
+      playCategory: '交代',
+      note: '🔄 交代: IN #${inPlayer.number} ${inPlayer.displayName} / OUT #${outPlayer.number} ${outPlayer.displayName}',
+    );
+  }
+
+  void swapPositions({
+    required String teamId,
+    required String player1Id,
+    required String player2Id,
+  }) {
+    final ctx = state.matchContext;
+    if (ctx == null) return;
+
+    final isHome = teamId == ctx.homeTeam.teamId || teamId == 'HOME';
+    final targetTeam = isHome ? ctx.homeTeam : ctx.awayTeam;
+
+    final idx1 = targetTeam.starters.indexWhere((p) => p.playerId == player1Id);
+    final idx2 = targetTeam.starters.indexWhere((p) => p.playerId == player2Id);
+    if (idx1 == -1 || idx2 == -1 || idx1 == idx2) return;
+
+    final p1 = targetTeam.starters[idx1];
+    final p2 = targetTeam.starters[idx2];
+
+    final updatedP1 = p1.copyWith(
+      position: p2.position,
+      pitchX: p2.pitchX,
+      pitchY: p2.pitchY,
+    );
+
+    final updatedP2 = p2.copyWith(
+      position: p1.position,
+      pitchX: p1.pitchX,
+      pitchY: p1.pitchY,
+    );
+
+    final newStarters = List<PlayerContextItem>.from(targetTeam.starters);
+    newStarters[idx1] = updatedP1;
+    newStarters[idx2] = updatedP2;
+
+    final updatedTeam = targetTeam.copyWith(starters: newStarters);
+    final updatedCtx = isHome
+        ? ctx.copyWith(homeTeam: updatedTeam)
+        : ctx.copyWith(awayTeam: updatedTeam);
+
+    state = state.copyWith(matchContext: updatedCtx);
+
+    recordAction(
+      playerId: p1.playerId,
+      playerName: p1.displayName,
+      teamId: targetTeam.teamId,
+      actionType: 'swap',
+      playCategory: '位置変更',
+      note: '⇄ 入替: #${p1.number} ${p1.displayName} (${p1.position}→${p2.position}) ↔ #${p2.number} ${p2.displayName} (${p2.position}→${p1.position})',
+    );
+  }
+
+  List<PlayerRankingEntry> getRankings({required String teamId}) {
+    final ctx = state.matchContext;
+    if (ctx == null) return const [];
+
+    final isHome = teamId == ctx.homeTeam.teamId || teamId == 'HOME';
+    final targetTeam = isHome ? ctx.homeTeam : ctx.awayTeam;
+
+    final allPlayers = [...targetTeam.starters, ...targetTeam.bench];
+    final scoresMap = state.playerScoresDetailed;
+
+    final actionCounts = <String, int>{};
+    for (final act in state.recentActions) {
+      if (act.actionType == 'good' || act.actionType == 'bad') {
+        actionCounts[act.playerId] = (actionCounts[act.playerId] ?? 0) + 1;
+      }
+    }
+
+    final entries = allPlayers.map((player) {
+      final summary = scoresMap[player.playerId] ??
+          PlayerScoreSummary(playerId: player.playerId);
+      final count = actionCounts[player.playerId] ?? 0;
+      return PlayerRankingEntry(
+        player: player,
+        rank: 1,
+        netScore: summary.netScore,
+        positivePoints: summary.positivePoints,
+        negativePoints: summary.negativePoints,
+        actionCount: count,
+      );
+    }).toList();
+
+    entries.sort((a, b) {
+      if (b.netScore != a.netScore) {
+        return b.netScore.compareTo(a.netScore);
+      }
+      if (b.positivePoints != a.positivePoints) {
+        return b.positivePoints.compareTo(a.positivePoints);
+      }
+      if (b.actionCount != a.actionCount) {
+        return b.actionCount.compareTo(a.actionCount);
+      }
+      return a.player.number.compareTo(b.player.number);
+    });
+
+    final rankedList = <PlayerRankingEntry>[];
+    int currentRank = 1;
+    for (int i = 0; i < entries.length; i++) {
+      if (i > 0) {
+        final prev = entries[i - 1];
+        final curr = entries[i];
+        if (curr.netScore != prev.netScore ||
+            curr.positivePoints != prev.positivePoints) {
+          currentRank = i + 1;
+        }
+      }
+      rankedList.add(
+        PlayerRankingEntry(
+          player: entries[i].player,
+          rank: currentRank,
+          netScore: entries[i].netScore,
+          positivePoints: entries[i].positivePoints,
+          negativePoints: entries[i].negativePoints,
+          actionCount: entries[i].actionCount,
+        ),
+      );
+    }
+
+    return rankedList;
+  }
+
   Future<void> _trySyncPendingActions() async {
     final unsynced = await _localDb.getUnsyncedActions();
     if (unsynced.isEmpty) return;

@@ -78,6 +78,30 @@ class PlayerContextItem {
       'photo_url': photoUrl,
     };
   }
+
+  PlayerContextItem copyWith({
+    String? playerId,
+    String? playerName,
+    String? shortName,
+    int? number,
+    String? position,
+    bool? isStarter,
+    double? pitchX,
+    double? pitchY,
+    String? photoUrl,
+  }) {
+    return PlayerContextItem(
+      playerId: playerId ?? this.playerId,
+      playerName: playerName ?? this.playerName,
+      shortName: shortName ?? this.shortName,
+      number: number ?? this.number,
+      position: position ?? this.position,
+      isStarter: isStarter ?? this.isStarter,
+      pitchX: pitchX ?? this.pitchX,
+      pitchY: pitchY ?? this.pitchY,
+      photoUrl: photoUrl ?? this.photoUrl,
+    );
+  }
 }
 
 class TeamContextItem {
@@ -128,6 +152,26 @@ class TeamContextItem {
       'starters': starters.map((e) => e.toJson()).toList(),
       'bench': bench.map((e) => e.toJson()).toList(),
     };
+  }
+
+  TeamContextItem copyWith({
+    String? teamId,
+    String? teamName,
+    String? shortName,
+    int? score,
+    String? formation,
+    List<PlayerContextItem>? starters,
+    List<PlayerContextItem>? bench,
+  }) {
+    return TeamContextItem(
+      teamId: teamId ?? this.teamId,
+      teamName: teamName ?? this.teamName,
+      shortName: shortName ?? this.shortName,
+      score: score ?? this.score,
+      formation: formation ?? this.formation,
+      starters: starters ?? this.starters,
+      bench: bench ?? this.bench,
+    );
   }
 }
 
@@ -193,4 +237,51 @@ class MatchAppContext {
       'live_stats': liveStats,
     };
   }
+
+  MatchAppContext copyWith({
+    String? matchId,
+    int? season,
+    int? matchweek,
+    String? date,
+    String? stadium,
+    String? weather,
+    String? status,
+    TeamContextItem? homeTeam,
+    TeamContextItem? awayTeam,
+    Map<String, dynamic>? tacticalPreview,
+    Map<String, dynamic>? liveStats,
+  }) {
+    return MatchAppContext(
+      matchId: matchId ?? this.matchId,
+      season: season ?? this.season,
+      matchweek: matchweek ?? this.matchweek,
+      date: date ?? this.date,
+      stadium: stadium ?? this.stadium,
+      weather: weather ?? this.weather,
+      status: status ?? this.status,
+      homeTeam: homeTeam ?? this.homeTeam,
+      awayTeam: awayTeam ?? this.awayTeam,
+      tacticalPreview: tacticalPreview ?? this.tacticalPreview,
+      liveStats: liveStats ?? this.liveStats,
+    );
+  }
+}
+
+/// Represents an aggregated rating entry for ranking display
+class PlayerRankingEntry {
+  final PlayerContextItem player;
+  final int rank;
+  final int netScore;
+  final int positivePoints;
+  final int negativePoints;
+  final int actionCount;
+
+  const PlayerRankingEntry({
+    required this.player,
+    required this.rank,
+    required this.netScore,
+    required this.positivePoints,
+    required this.negativePoints,
+    required this.actionCount,
+  });
 }

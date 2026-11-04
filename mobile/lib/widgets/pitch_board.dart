@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import '../models/match_models.dart';
 import 'player_pin.dart';
+import 'tactical_action_bar.dart';
 
 class PitchBoard extends StatelessWidget {
   final TeamContextItem team;
   final bool isHome;
   final Map<String, int> playerScores;
   final Function(PlayerContextItem player, String actionType, String? category) onPlayerAction;
+  final VoidCallback? onSubstituteTap;
+  final VoidCallback? onSwapPositionsTap;
+  final VoidCallback? onShowRankingsTap;
 
   const PitchBoard({
     super.key,
@@ -14,12 +18,23 @@ class PitchBoard extends StatelessWidget {
     this.isHome = true,
     this.playerScores = const {},
     required this.onPlayerAction,
+    this.onSubstituteTap,
+    this.onSwapPositionsTap,
+    this.onShowRankingsTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        if (onSubstituteTap != null &&
+            onSwapPositionsTap != null &&
+            onShowRankingsTap != null)
+          TacticalActionBar(
+            onSubstituteTap: onSubstituteTap!,
+            onSwapPositionsTap: onSwapPositionsTap!,
+            onShowRankingsTap: onShowRankingsTap!,
+          ),
         if (team.bench.isNotEmpty) _buildBenchTray(context),
         Expanded(
           child: LayoutBuilder(

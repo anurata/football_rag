@@ -226,7 +226,21 @@ class ActionTicker extends StatelessWidget {
 
   Widget _buildActionChip(UserAction act) {
     final isGood = act.actionType == 'good';
+    final isBad = act.actionType == 'bad';
+    final isSub = act.actionType == 'sub';
+    final isSwap = act.actionType == 'swap';
     final hasBonus = act.bonusPoints > 0;
+
+    Color chipBg = const Color(0xFF334155); // Slate 700 default
+    if (isGood) {
+      chipBg = Colors.green[800]!;
+    } else if (isBad) {
+      chipBg = Colors.red[800]!;
+    } else if (isSub) {
+      chipBg = const Color(0xFF854D0E); // Yellow-amber 800
+    } else if (isSwap) {
+      chipBg = const Color(0xFF0F766E); // Teal 700
+    }
 
     return GestureDetector(
       onTap: () {
@@ -243,7 +257,7 @@ class ActionTicker extends StatelessWidget {
         duration: const Duration(milliseconds: 150),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
         decoration: BoxDecoration(
-          color: isGood ? Colors.green[800] : Colors.red[800],
+          color: chipBg,
           borderRadius: BorderRadius.circular(12),
           border: hasBonus
               ? Border.all(color: Colors.amber, width: 1.2)
@@ -279,11 +293,14 @@ class ActionTicker extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            Icon(
-              isGood ? Icons.thumb_up : Icons.thumb_down,
-              size: 11,
-              color: Colors.white,
-            ),
+            if (isGood)
+              const Icon(Icons.thumb_up, size: 11, color: Colors.white)
+            else if (isBad)
+              const Icon(Icons.thumb_down, size: 11, color: Colors.white)
+            else if (isSub)
+              const Icon(Icons.swap_horiz, size: 12, color: Colors.amberAccent)
+            else if (isSwap)
+              const Icon(Icons.sync_alt, size: 12, color: Colors.cyanAccent),
             if (hasBonus) ...[
               const SizedBox(width: 3),
               Container(

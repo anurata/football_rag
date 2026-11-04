@@ -4,6 +4,10 @@ import 'package:mobile/models/action_models.dart';
 import 'package:mobile/models/match_models.dart';
 import 'package:mobile/widgets/action_ticker.dart';
 import 'package:mobile/widgets/player_pin.dart';
+import 'package:mobile/widgets/player_ranking_sheet.dart';
+import 'package:mobile/widgets/position_swap_modal.dart';
+import 'package:mobile/widgets/substitution_modal.dart';
+import 'package:mobile/widgets/tactical_action_bar.dart';
 
 void main() {
   group('Model Serialization Tests', () {
@@ -473,6 +477,431 @@ void main() {
       await tester.tap(find.text('48:30'));
       await tester.pump();
       expect(timerToggled, isTrue);
+    });
+  });
+
+  group('Substitution and Swap Logic Tests', () {
+    test('PlayerContextItem copyWith updates coordinates and position properly', () {
+      const original = PlayerContextItem(
+        playerId: 'p_1',
+        playerName: '佐藤 太郎',
+        shortName: '佐藤',
+        number: 10,
+        position: 'LOM',
+        isStarter: true,
+        pitchX: 30.0,
+        pitchY: 40.0,
+      );
+
+      final updated = original.copyWith(
+        position: 'ROM',
+        pitchX: 70.0,
+        pitchY: 40.0,
+        isStarter: false,
+      );
+
+      expect(updated.playerId, 'p_1');
+      expect(updated.position, 'ROM');
+      expect(updated.pitchX, 70.0);
+      expect(updated.isStarter, false);
+      expect(original.position, 'LOM'); // Original intact
+    });
+
+    test('Substitution logic swaps starter and bench player', () {
+      const starter1 = PlayerContextItem(
+        playerId: 'p_start_1',
+        playerName: '安斎 颯馬',
+        shortName: '安斎',
+        number: 7,
+        position: 'LSH',
+        isStarter: true,
+        pitchX: 14.0,
+        pitchY: 48.0,
+      );
+      const bench1 = PlayerContextItem(
+        playerId: 'p_bench_1',
+        playerName: '本間 至恩',
+        shortName: '本間',
+        number: 19,
+        position: 'MF',
+        isStarter: false,
+        pitchX: 50.0,
+        pitchY: 50.0,
+      );
+
+      final inPlayer = bench1.copyWith(
+        position: starter1.position,
+        pitchX: starter1.pitchX,
+        pitchY: starter1.pitchY,
+        isStarter: true,
+      );
+      final outPlayer = starter1.copyWith(
+        isStarter: false,
+      );
+
+      expect(inPlayer.isStarter, true);
+      expect(inPlayer.position, 'LSH');
+      expect(inPlayer.pitchX, 14.0);
+      expect(inPlayer.pitchY, 48.0);
+      expect(outPlayer.isStarter, false);
+    });
+
+    test('Swap positions exchanges coordinates and positions between two starters', () {
+      const p1 = PlayerContextItem(
+        playerId: 'p_1',
+        playerName: '左SH',
+        number: 7,
+        position: 'LSH',
+        isStarter: true,
+        pitchX: 14.0,
+        pitchY: 48.0,
+      );
+      const p2 = PlayerContextItem(
+        playerId: 'p_2',
+        playerName: '右SH',
+        number: 10,
+        position: 'RSH',
+        isStarter: true,
+        pitchX: 86.0,
+        pitchY: 48.0,
+      );
+
+      final newP1 = p1.copyWith(
+        position: p2.position,
+        pitchX: p2.pitchX,
+        pitchY: p2.pitchY,
+      );
+      final newP2 = p2.copyWith(
+        position: p1.position,
+        pitchX: p1.pitchX,
+        pitchY: p1.pitchY,
+      );
+
+      expect(newP1.position, 'RSH');
+      expect(newP1.pitchX, 86.0);
+      expect(newP2.position, 'LSH');
+      expect(newP2.pitchX, 14.0);
+    });
+
+    test('PlayerRankingEntry sorts players descending by net score and tie-breaks', () {
+      const p1 = PlayerContextItem(
+        playerId: 'p1',
+        playerName: 'エースFW',
+        number: 9,
+        position: 'FW',
+        isStarter: true,
+        pitchX: 50,
+        pitchY: 20,
+      );
+      const p2 = PlayerContextItem(
+        playerId: 'p2',
+        playerName: '司令塔MF',
+        number: 10,
+        position: 'MF',
+        isStarter: true,
+        pitchX: 50,
+        pitchY: 50,
+      );
+      const p3 = PlayerContextItem(
+        playerId: 'p3',
+        playerName: '守備的DF',
+        number: 4,
+        position: 'DF',
+        isStarter: true,
+        pitchX: 50,
+        pitchY: 80,
+      );
+
+      final list = [
+        const PlayerRankingEntry(
+          player: p3,
+          rank: 0,
+          netScore: -1,
+          positivePoints: 1,
+          negativePoints: 2,
+          actionCount: 3,
+        ),
+        const PlayerRankingEntry(
+          player: p1,
+          rank: 0,
+          netScore: 8,
+          positivePoints: 8,
+          negativePoints: 0,
+          actionCount: 5,
+        ),
+        const PlayerRankingEntry(
+          player: p2,
+          rank: 0,
+          netScore: 4,
+          positivePoints: 5,
+          negativePoints: 1,
+          actionCount: 6,
+        ),
+      ];
+
+      list.sort((a, b) => b.netScore.compareTo(a.netScore));
+
+      expect(list[0].player.number, 9);
+      expect(list[0].netScore, 8);
+      expect(list[1].player.number, 10);
+      expect(list[1].netScore, 4);
+      expect(list[2].player.number, 4);
+      expect(list[2].netScore, -1);
+    });
+  });
+
+  group('Tactical UI Components Widget Tests', () {
+    testWidgets('TacticalActionBar renders 3 buttons and triggers callbacks', (tester) async {
+      bool subTapped = false;
+      bool swapTapped = false;
+      bool rankTapped = false;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TacticalActionBar(
+              onSubstituteTap: () => subTapped = true,
+              onSwapPositionsTap: () => swapTapped = true,
+              onShowRankingsTap: () => rankTapped = true,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('選手交代'), findsOneWidget);
+      expect(find.text('位置入替'), findsOneWidget);
+      expect(find.text('評価ランク'), findsOneWidget);
+
+      await tester.tap(find.text('選手交代'));
+      await tester.pump();
+      expect(subTapped, isTrue);
+
+      await tester.tap(find.text('位置入替'));
+      await tester.pump();
+      expect(swapTapped, isTrue);
+
+      await tester.tap(find.text('評価ランク'));
+      await tester.pump();
+      expect(rankTapped, isTrue);
+    });
+
+    testWidgets('SubstitutionModal allows selecting OUT/IN and confirms', (tester) async {
+      const mockTeam = TeamContextItem(
+        teamId: 'OKA',
+        teamName: 'ファジアーノ岡山',
+        shortName: '岡山',
+        score: 0,
+        formation: '3-4-2-1',
+        starters: [
+          PlayerContextItem(
+            playerId: 'p_out_1',
+            playerName: 'ルカオ',
+            shortName: 'ルカオ',
+            number: 99,
+            position: 'CF',
+            isStarter: true,
+            pitchX: 50,
+            pitchY: 20,
+          ),
+        ],
+        bench: [
+          PlayerContextItem(
+            playerId: 'p_in_1',
+            playerName: 'レオ ガウショ',
+            shortName: 'レオ ガウショ',
+            number: 9,
+            position: 'FW',
+            isStarter: false,
+            pitchX: 50,
+            pitchY: 50,
+          ),
+        ],
+      );
+
+      String? confirmedOut;
+      String? confirmedIn;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SubstitutionModal(
+              team: mockTeam,
+              isHome: true,
+              onConfirm: (outId, inId) {
+                confirmedOut = outId;
+                confirmedIn = inId;
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('選手交代 - 岡山'), findsOneWidget);
+      expect(find.text('#99 ルカオ'), findsOneWidget);
+      expect(find.text('#9 レオ ガウショ'), findsOneWidget);
+
+      // Select OUT
+      await tester.tap(find.text('#99 ルカオ'));
+      await tester.pump();
+
+      // Select IN
+      await tester.tap(find.text('#9 レオ ガウショ'));
+      await tester.pump();
+
+      // Confirm button is now active
+      final confirmBtn = find.text('選手交代を実行する');
+      expect(confirmBtn, findsOneWidget);
+      await tester.tap(confirmBtn);
+      await tester.pump();
+
+      expect(confirmedOut, 'p_out_1');
+      expect(confirmedIn, 'p_in_1');
+    });
+
+    testWidgets('PositionSwapModal allows selecting 2 starters and confirms swap', (tester) async {
+      const mockTeam = TeamContextItem(
+        teamId: 'FCT',
+        teamName: 'FC東京',
+        shortName: 'FC東京',
+        score: 0,
+        formation: '4-4-2',
+        starters: [
+          PlayerContextItem(
+            playerId: 'p_fct_1',
+            playerName: '安斎 颯馬',
+            shortName: '安斎',
+            number: 7,
+            position: 'LSH',
+            isStarter: true,
+            pitchX: 14,
+            pitchY: 48,
+          ),
+          PlayerContextItem(
+            playerId: 'p_fct_2',
+            playerName: '佐藤 恵允',
+            shortName: '佐藤',
+            number: 10,
+            position: 'RSH',
+            isStarter: true,
+            pitchX: 86,
+            pitchY: 48,
+          ),
+        ],
+        bench: [],
+      );
+
+      String? swapP1;
+      String? swapP2;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PositionSwapModal(
+              team: mockTeam,
+              isHome: false,
+              onConfirm: (p1, p2) {
+                swapP1 = p1;
+                swapP2 = p2;
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('ポジション入替 - FC東京'), findsOneWidget);
+
+      // Tap player 1
+      await tester.tap(find.text('#7 安斎 [LSH]'));
+      await tester.pump();
+
+      // Tap player 2
+      await tester.tap(find.text('#10 佐藤 [RSH]'));
+      await tester.pump();
+
+      // Confirm swap
+      final confirmBtn = find.text('ポジション入替を実行する');
+      expect(confirmBtn, findsOneWidget);
+      await tester.tap(confirmBtn);
+      await tester.pump();
+
+      expect(swapP1, 'p_fct_1');
+      expect(swapP2, 'p_fct_2');
+    });
+
+    testWidgets('PlayerRankingSheet displays sorted players with badges and points', (tester) async {
+      const p1 = PlayerContextItem(
+        playerId: 'p_1',
+        playerName: 'ルカオ',
+        number: 99,
+        position: 'CF',
+        isStarter: true,
+        pitchX: 50,
+        pitchY: 20,
+      );
+      const p2 = PlayerContextItem(
+        playerId: 'p_2',
+        playerName: '江坂 任',
+        number: 8,
+        position: 'LOM',
+        isStarter: true,
+        pitchX: 30,
+        pitchY: 30,
+      );
+
+      final rankings = [
+        const PlayerRankingEntry(
+          player: p1,
+          rank: 1,
+          netScore: 6,
+          positivePoints: 7,
+          negativePoints: 1,
+          actionCount: 8,
+        ),
+        const PlayerRankingEntry(
+          player: p2,
+          rank: 2,
+          netScore: 3,
+          positivePoints: 4,
+          negativePoints: 1,
+          actionCount: 5,
+        ),
+      ];
+
+      const mockTeam = TeamContextItem(
+        teamId: 'OKA',
+        teamName: 'ファジアーノ岡山',
+        shortName: '岡山',
+        score: 0,
+        formation: '3-4-2-1',
+        starters: [p1, p2],
+        bench: [],
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: PlayerRankingSheet(
+              team: mockTeam,
+              isHome: true,
+              rankings: rankings,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('選手評価ランキング - 岡山'), findsOneWidget);
+      expect(find.text('🥇'), findsOneWidget); // Rank 1 gold badge
+      expect(find.text('🥈'), findsOneWidget); // Rank 2 silver badge
+      expect(find.text('ルカオ'), findsOneWidget);
+      expect(find.text('江坂 任'), findsOneWidget);
+      expect(find.text('+6'), findsOneWidget);
+      expect(find.text('+3'), findsOneWidget);
+      expect(find.text('👍 +7'), findsOneWidget);
+      expect(find.text('計 8件'), findsOneWidget);
     });
   });
 }

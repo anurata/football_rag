@@ -79,7 +79,7 @@ def resolve_canonical_match_id(
 
 def run_batch_fetch(
     start_mw: int = 1,
-    end_mw: int = 12,
+    end_mw: int = 38,
     output_dir: Path = ROOT_DIR / "data" / "raw" / "yahoo",
     db_path: Path = ROOT_DIR / "data" / "football.db",
     sleep_sec: float = 0.4,
@@ -161,7 +161,7 @@ def run_batch_fetch(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fetch Yahoo /summary formation snapshots.")
     parser.add_argument("--start-mw", type=int, default=1)
-    parser.add_argument("--end-mw", type=int, default=12)
+    parser.add_argument("--end-mw", type=int, default=38)
     parser.add_argument("--sleep", type=float, default=0.4)
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()

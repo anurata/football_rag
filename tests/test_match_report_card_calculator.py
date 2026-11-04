@@ -61,6 +61,7 @@ class TestMatchReportCardCalculator(unittest.TestCase):
             events=events,
             t_flab=t_flab,
             o_flab=o_flab,
+            is_home=True,
         )
 
         # 5.0 (base) + 1.5 (derby win) + 1.5 (comeback win) + 1.5 (late goal) + 0.5 (high xG 3.3) + 0.5 (sprints 250) + 0.5 (3 goals) = 11.0 -> clamped to 10
@@ -68,6 +69,17 @@ class TestMatchReportCardCalculator(unittest.TestCase):
         self.assertTrue(any("神奈川ダービー" in r for r in details["reasons"]))
         self.assertTrue(any("逆転勝利" in r for r in details["reasons"]))
         self.assertTrue(any("80分以降" in r for r in details["reasons"]))
+
+    def test_outcome_calibration(self):
+        """Test outcome-based calibration caps and floors."""
+        # Victory floor
+        self.assertEqual(self.calc._calibrate_total_score(30, team_score=2, opp_score=1), 37)
+        self.assertEqual(self.calc._calibrate_total_score(35, team_score=3, opp_score=1), 42)
+        # Defeat cap
+        self.assertEqual(self.calc._calibrate_total_score(46, team_score=2, opp_score=3), 36)
+        self.assertEqual(self.calc._calibrate_total_score(45, team_score=0, opp_score=2), 32)
+        # Draw cap
+        self.assertEqual(self.calc._calibrate_total_score(43, team_score=2, opp_score=2), 38)
 
     def test_calculate_actual_match(self):
         """Test calculation on real match data in database."""

@@ -123,9 +123,9 @@ class ScheduleCrawler:
     def build_schedule(
         self,
         html_content: Optional[str] = None,
-        year: int = 2024,
+        year: int = 2026,
         start_mw: int = 1,
-        end_mw: int = 12,
+        end_mw: int = 38,
     ) -> List[Dict[str, Any]]:
         """
         Build complete schedule with unique match_id and official J-League match URLs.

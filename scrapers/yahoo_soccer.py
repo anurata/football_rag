@@ -204,7 +204,7 @@ class YahooSoccerScraper:
     def fetch_schedule_game_ids(
         self,
         start_mw: int = 1,
-        end_mw: int = 12,
+        end_mw: int = 38,
         competition_id: Optional[str] = None,
     ) -> Dict[int, List[str]]:
         """Yahoo!サッカーの日程ページから各節の10桁game_id一覧を取得する."""

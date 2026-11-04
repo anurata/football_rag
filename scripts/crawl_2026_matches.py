@@ -31,7 +31,7 @@ def get_existing_valid_matches(output_dir: str) -> Set[str]:
 
 def run_crawler_2026(
     start_mw: int = 1,
-    end_mw: int = 12,
+    end_mw: int = 38,
     output_dir: str = "data/markdown/2026",
     max_idx_per_date: int = 25,
 ) -> None:
@@ -121,4 +121,4 @@ def run_crawler_2026(
 
 
 if __name__ == "__main__":
-    run_crawler_2026(start_mw=1, end_mw=12)
+    run_crawler_2026(start_mw=1, end_mw=38)

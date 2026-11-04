@@ -39,6 +39,12 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+# Ensure Google Cloud SDK is in PATH if newly installed
+$cloudSdkBin = "$env:LOCALAPPDATA\Google\Cloud SDK\google-cloud-sdk\bin"
+if ((Test-Path $cloudSdkBin) -and ($env:Path -notlike "*$cloudSdkBin*")) {
+    $env:Path = "$cloudSdkBin;$env:Path"
+}
+
 if ([string]::IsNullOrWhiteSpace($BucketName)) {
     $BucketName = "${ProjectId}-football-rag-data"
 }
@@ -67,13 +73,21 @@ gcloud services enable `
 
 # 2. Setup GCS bucket & Sync data
 Write-Host "`n[2/5] Checking GCS Bucket: gs://$BucketName..." -ForegroundColor Yellow
-$bucketExists = gcloud storage buckets describe "gs://$BucketName" --format="value(name)" 2>$null
-if (-not $bucketExists) {
+$existingBuckets = gcloud storage buckets list --project=$ProjectId --format="value(name)"
+if ($existingBuckets -notcontains $BucketName) {
     Write-Host "Creating GCS Bucket: gs://$BucketName..." -ForegroundColor Green
     gcloud storage buckets create "gs://$BucketName" --location=$Region
 } else {
     Write-Host "Bucket gs://$BucketName already exists." -ForegroundColor Gray
 }
+
+# Grant Cloud Run default service account permission to access the GCS bucket
+$projectNumber = gcloud projects describe $ProjectId --format="value(projectNumber)"
+$computeServiceAccount = "${projectNumber}-compute@developer.gserviceaccount.com"
+Write-Host "Granting Storage Object Admin to $computeServiceAccount on gs://$BucketName..." -ForegroundColor Gray
+gcloud storage buckets add-iam-policy-binding "gs://$BucketName" `
+    --member="serviceAccount:${computeServiceAccount}" `
+    --role="roles/storage.objectAdmin" 2>$null
 
 if (-not $SkipDataSync) {
     Write-Host "Syncing local data/ to gs://$BucketName/..." -ForegroundColor Green
@@ -86,18 +100,26 @@ if (-not $SkipDataSync) {
 
 # 3. Setup Artifact Registry Repository
 Write-Host "`n[3/5] Checking Artifact Registry repository..." -ForegroundColor Yellow
-$repoExists = gcloud artifacts repositories describe $RepoName --location=$Region --format="value(name)" 2>$null
-if (-not $repoExists) {
+$existingRepos = gcloud artifacts repositories list --location=$Region --format="value(name)"
+$repoFound = $false
+foreach ($r in $existingRepos) {
+    if ($r -match $RepoName) { $repoFound = $true; break }
+}
+if (-not $repoFound) {
     Write-Host "Creating Artifact Registry repository: $RepoName..." -ForegroundColor Green
     gcloud artifacts repositories create $RepoName `
         --repository-format=docker `
         --location=$Region `
         --description="Football RAG Container Repository"
+    if ($LASTEXITCODE -ne 0) { throw "Failed to create Artifact Registry repository." }
+} else {
+    Write-Host "Artifact Registry repository $RepoName already exists." -ForegroundColor Gray
 }
 
 # 4. Build and Submit Container Image
 Write-Host "`n[4/5] Building container image with Cloud Build..." -ForegroundColor Yellow
 gcloud builds submit --tag $ImageTag .
+if ($LASTEXITCODE -ne 0) { throw "Cloud Build failed." }
 
 # 5. Deploy to Cloud Run with GCS Volume Mount
 Write-Host "`n[5/5] Deploying to Cloud Run..." -ForegroundColor Yellow
@@ -106,6 +128,7 @@ gcloud run deploy $ServiceName `
     --region=$Region `
     --platform=managed `
     --allow-unauthenticated `
+    --execution-environment=gen2 `
     --memory=2Gi `
     --cpu=1 `
     --min-instances=0 `
@@ -113,6 +136,7 @@ gcloud run deploy $ServiceName `
     --set-env-vars="FOOTBALL_DB_PATH=/mnt/gcs/football.db,CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db,APP_MODE=streamlit" `
     --add-volume="name=gcs-data,type=cloud-storage,bucket=${BucketName}" `
     --add-volume-mount="volume=gcs-data,mount-path=/mnt/gcs"
+if ($LASTEXITCODE -ne 0) { throw "Cloud Run deployment failed." }
 
 Write-Host "`n==========================================================" -ForegroundColor Cyan
 Write-Host " Deployment completed successfully!" -ForegroundColor Green

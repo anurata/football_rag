@@ -76,17 +76,35 @@ flowchart TD
 
 #### 4.1 初回デプロイ（PowerShellワンライナー）
 ```powershell
-.\scripts\gcp_deploy.ps1 -ProjectId "your-gcp-project-id" -Region "asia-northeast1"
+.\scripts\gcp_deploy.ps1 -ProjectId "football-rag-app" -Region "asia-northeast1"
 ```
 
-#### 4.2 週末のデータ更新運用フロー
+#### 4.2 本番稼働エンドポイント（Phase 1 稼働中）
+- **Web UI (Streamlit)**: [https://football-rag-app-717245533761.asia-northeast1.run.app](https://football-rag-app-717245533761.asia-northeast1.run.app)
+- **GCP プロジェクト**: `football-rag-app` (プロジェクト番号: `717245533761`)
+- **データバケット**: `gs://football-rag-app-football-rag-data`
+- **コンテナリポジトリ**: `asia-northeast1-docker.pkg.dev/football-rag-app/football-rag/football-rag-app:latest`
+
+#### 4.3 秘密情報（Gemini API Key / パスワード）の設定
+```powershell
+# Gemini APIキーをSecret Managerに登録
+Write-Output "your-gemini-api-key" | gcloud secrets create GEMINI_API_KEY --data-file=- --project=football-rag-app
+
+# Cloud RunサービスにSecretをアタッチ
+gcloud run services update football-rag-app `
+    --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest" `
+    --region="asia-northeast1" `
+    --project="football-rag-app"
+```
+
+#### 4.4 週末のデータ更新運用フロー
 PCローカルで試合データ収集・戦術エンリッチを実行後、GCSへ差分同期するだけで完了（コンテナ再ビルド不要）：
 ```powershell
 # 1. ローカルで試合データ更新
 python scripts/update_matchweek.py --mw 14
 
 # 2. GCSへデータを同期
-gcloud storage rsync -r data/ gs://your-gcp-project-id-football-rag-data/
+gcloud storage rsync -r data/ gs://football-rag-app-football-rag-data/
 ```
 同期後、Cloud Run側でマウントされた最新データが即座に反映されます。
 

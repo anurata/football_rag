@@ -125,7 +125,9 @@ class PlayerRankingSheet extends StatelessWidget {
       child: Row(
         children: [
           _buildRankBadge(entry.rank, isTop3),
-          const SizedBox(width: 10),
+          const SizedBox(width: 8),
+          _buildPlayerPhotoAvatar(entry.player),
+          const SizedBox(width: 8),
           _buildPlayerNumberCircle(entry.player, entry.netScore),
           const SizedBox(width: 10),
           Expanded(
@@ -134,6 +136,40 @@ class PlayerRankingSheet extends StatelessWidget {
           const SizedBox(width: 8),
           _buildScoreColumn(entry),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPlayerPhotoAvatar(PlayerContextItem player) {
+    return Container(
+      width: 34,
+      height: 34,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: const Color(0xFF1E293B),
+        border: Border.all(
+          color: Colors.white24,
+          width: 1,
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: player.photoUrl != null && player.photoUrl!.isNotEmpty
+          ? Image.network(
+              player.photoUrl!,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) =>
+                  _buildPhotoFallback(player),
+            )
+          : _buildPhotoFallback(player),
+    );
+  }
+
+  Widget _buildPhotoFallback(PlayerContextItem player) {
+    return Center(
+      child: Icon(
+        Icons.person,
+        size: 20,
+        color: Colors.white.withValues(alpha: 0.6),
       ),
     );
   }
@@ -171,7 +207,8 @@ class PlayerRankingSheet extends StatelessWidget {
   }
 
   Widget _buildPlayerNumberCircle(PlayerContextItem player, int netScore) {
-    final circleColor = PlayerPin.calculateScoreBadgeColor(netScore, isHome: isHome);
+    final circleColor =
+        PlayerPin.calculateScoreBadgeColor(netScore, isHome: isHome);
 
     return Container(
       width: 28,
@@ -180,7 +217,7 @@ class PlayerRankingSheet extends StatelessWidget {
         color: circleColor,
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colors.white38,
+          color: Colors.black26,
           width: 1,
         ),
       ),
@@ -190,7 +227,7 @@ class PlayerRankingSheet extends StatelessWidget {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black, // Number text color strictly set to black
           ),
         ),
       ),
@@ -206,12 +243,16 @@ class PlayerRankingSheet extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              p.displayName,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            Expanded(
+              child: Text(
+                p.playerName, // Full name display
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(width: 6),

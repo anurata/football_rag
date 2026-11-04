@@ -237,16 +237,16 @@ void main() {
         find.byWidgetPredicate(
           (w) =>
               w is Container &&
-              w.constraints?.minWidth == 18 &&
-              w.constraints?.minHeight == 18,
+              w.constraints?.minWidth == 20 &&
+              w.constraints?.minHeight == 20,
         ),
       );
 
-      // Verify both 1-digit and 2-digit badges have fixed 18x18 size
+      // Verify both 1-digit and 2-digit badges have fixed 20x20 size
       expect(badges.length, 2);
       for (final b in badges) {
-        expect(b.constraints?.maxWidth, 18);
-        expect(b.constraints?.maxHeight, 18);
+        expect(b.constraints?.maxWidth, 20);
+        expect(b.constraints?.maxHeight, 20);
       }
     });
 
@@ -315,7 +315,7 @@ void main() {
       expect(homeDec.color, const Color(0xFF7D1B2D));
 
       final awayDec = animatedContainers.last.decoration as BoxDecoration;
-      expect(awayDec.color, Colors.white);
+      expect(awayDec.color, const Color(0xFFE2E8F0));
     });
 
     testWidgets('PlayerPin number circle color reflects gradient from -5 to +15 pts', (
@@ -336,8 +336,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SizedBox(
-              width: 82.0,
-              height: 46.0,
+              width: 90.0,
+              height: 50.0,
               child: PlayerPin(
                 player: p,
                 teamId: 'OKA',
@@ -354,7 +354,7 @@ void main() {
       var badgeFinder = find.byWidgetPredicate(
         (w) =>
             w is Container &&
-            w.constraints?.minWidth == 18 &&
+            w.constraints?.minWidth == 20 &&
             w.decoration is BoxDecoration &&
             (w.decoration as BoxDecoration).shape == BoxShape.circle,
       );
@@ -368,8 +368,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SizedBox(
-              width: 82.0,
-              height: 46.0,
+              width: 90.0,
+              height: 50.0,
               child: PlayerPin(
                 player: p,
                 teamId: 'OKA',
@@ -391,8 +391,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SizedBox(
-              width: 82.0,
-              height: 46.0,
+              width: 90.0,
+              height: 50.0,
               child: PlayerPin(
                 player: p,
                 teamId: 'OKA',
@@ -415,8 +415,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SizedBox(
-              width: 82.0,
-              height: 46.0,
+              width: 90.0,
+              height: 50.0,
               child: PlayerPin(
                 player: p,
                 teamId: 'OKA',
@@ -433,6 +433,46 @@ void main() {
       badgeBox = tester.widget<Container>(badgeFinder).decoration as BoxDecoration;
       expect(badgeBox.color, const Color(0xFFFFD700));
       expect(find.text('+15'), findsOneWidget);
+    });
+
+    testWidgets('PlayerPin glows gold with shadow when score >= 10', (
+      WidgetTester tester,
+    ) async {
+      const p = PlayerContextItem(
+        playerId: 'p1',
+        playerName: 'ルカオ',
+        number: 99,
+        position: 'CF',
+        isStarter: true,
+        pitchX: 50.0,
+        pitchY: 16.0,
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 90.0,
+              height: 50.0,
+              child: PlayerPin(
+                player: p,
+                teamId: 'OKA',
+                isHome: true,
+                score: 11,
+                onAction: (a, c) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final pinFinder = find.byType(AnimatedContainer);
+      expect(pinFinder, findsOneWidget);
+      final pinDec = tester.widget<AnimatedContainer>(pinFinder).decoration as BoxDecoration;
+      expect(pinDec.boxShadow, isNotNull);
+      expect(pinDec.boxShadow!.first.color, const Color(0xFFFFD700));
+      expect(pinDec.border?.top.color, const Color(0xFFFFD700));
     });
   });
 
@@ -943,12 +983,69 @@ void main() {
       expect(find.text('選手評価ランキング - 岡山'), findsOneWidget);
       expect(find.text('🥇'), findsOneWidget); // Rank 1 gold badge
       expect(find.text('🥈'), findsOneWidget); // Rank 2 silver badge
-      expect(find.text('ルカオ'), findsOneWidget);
-      expect(find.text('江坂 任'), findsOneWidget);
+      expect(find.text('ルカオ'), findsOneWidget); // Full name
+      expect(find.text('江坂 任'), findsOneWidget); // Full name
+      expect(find.byIcon(Icons.person), findsNWidgets(2)); // Avatar fallback icons
       expect(find.text('+6'), findsOneWidget);
       expect(find.text('+3'), findsOneWidget);
       expect(find.text('👍 +7'), findsOneWidget);
       expect(find.text('計 8件'), findsOneWidget);
+
+      // Verify number text color is strictly black
+      final numberText99 = tester.widget<Text>(find.text('99'));
+      expect(numberText99.style?.color, Colors.black);
+      final numberText8 = tester.widget<Text>(find.text('8'));
+      expect(numberText8.style?.color, Colors.black);
+    });
+
+    test('TeamContextItem getPlayerDisplayName handles duplicate last names properly', () {
+      const p1 = PlayerContextItem(
+        playerId: 'p_1',
+        playerName: '鈴木 喜丈',
+        shortName: '鈴木',
+        number: 43,
+        position: 'CB',
+        isStarter: true,
+        pitchX: 24,
+        pitchY: 72,
+      );
+      const p2 = PlayerContextItem(
+        playerId: 'p_2',
+        playerName: '鈴木 楓',
+        shortName: '鈴木',
+        number: 44,
+        position: 'DF',
+        isStarter: false,
+        pitchX: 0,
+        pitchY: 0,
+      );
+      const p3 = PlayerContextItem(
+        playerId: 'p_3',
+        playerName: '立田 悠悟',
+        shortName: '立田',
+        number: 48,
+        position: 'CB',
+        isStarter: true,
+        pitchX: 76,
+        pitchY: 72,
+      );
+
+      const teamWithSameLastName = TeamContextItem(
+        teamId: 'OKA',
+        teamName: 'ファジアーノ岡山',
+        shortName: '岡山',
+        score: 0,
+        formation: '3-4-2-1',
+        starters: [p1, p3],
+        bench: [p2],
+      );
+
+      // Same last name "鈴木" -> returns full name
+      expect(teamWithSameLastName.getPlayerDisplayName(p1), '鈴木 喜丈');
+      expect(teamWithSameLastName.getPlayerDisplayName(p2), '鈴木 楓');
+
+      // Unique last name "立田" -> returns compact displayName
+      expect(teamWithSameLastName.getPlayerDisplayName(p3), '立田');
     });
   });
 }

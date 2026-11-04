@@ -173,6 +173,24 @@ class TeamContextItem {
       bench: bench ?? this.bench,
     );
   }
+
+  /// Returns appropriate display name. If multiple players in the team share the same last name,
+  /// returns the full name to clearly distinguish them on the pitch.
+  String getPlayerDisplayName(PlayerContextItem player) {
+    final allPlayers = [...starters, ...bench];
+    final parts = player.playerName.trim().split(RegExp(r'\s+'));
+    if (parts.length >= 2) {
+      final lastName = parts.first;
+      final duplicateCount = allPlayers.where((p) {
+        final pParts = p.playerName.trim().split(RegExp(r'\s+'));
+        return pParts.isNotEmpty && pParts.first == lastName;
+      }).length;
+      if (duplicateCount > 1) {
+        return player.playerName;
+      }
+    }
+    return player.displayName;
+  }
 }
 
 class MatchAppContext {

@@ -83,11 +83,12 @@ class PitchBoard extends StatelessWidget {
                 final p = team.bench[index];
                 final score = playerScores[p.playerId] ?? 0;
                 final scoreSuffix = score != 0 ? ' (${score > 0 ? '+' : ''}$score)' : '';
-                final chipBg = isHome ? const Color(0xFF7D1B2D) : Colors.white;
+                final chipBg = isHome ? const Color(0xFF7D1B2D) : const Color(0xFFE2E8F0);
                 final chipText = isHome ? Colors.white : const Color(0xFF0F172A);
+                final displayName = team.getPlayerDisplayName(p);
                 return ActionChip(
                   padding: EdgeInsets.zero,
-                  label: Text('#${p.number} ${p.displayName}$scoreSuffix'),
+                  label: Text('#${p.number} $displayName$scoreSuffix'),
                   labelStyle: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -116,9 +117,9 @@ class PitchBoard extends StatelessWidget {
     final posX = (player.pitchX / 100.0) * constraints.maxWidth;
     final posY = (player.pitchY / 100.0) * constraints.maxHeight;
 
-    // Pin size optimized to prevent text overflows while preserving pitch space
-    const pinW = 82.0;
-    const pinH = 46.0;
+    // Pin size scaled up by one step for improved readability and tap targets
+    const pinW = 90.0;
+    const pinH = 50.0;
 
     final left = (posX - (pinW / 2)).clamp(4.0, constraints.maxWidth - pinW - 4.0);
     final top = (posY - (pinH / 2)).clamp(4.0, constraints.maxHeight - pinH - 4.0);
@@ -133,6 +134,7 @@ class PitchBoard extends StatelessWidget {
         teamId: team.teamId,
         isHome: isHome,
         score: playerScores[player.playerId] ?? 0,
+        overrideDisplayName: team.getPlayerDisplayName(player),
         onAction: (actionType, category) {
           onPlayerAction(player, actionType, category);
         },

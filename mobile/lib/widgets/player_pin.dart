@@ -8,6 +8,7 @@ class PlayerPin extends StatefulWidget {
   final String teamId;
   final bool isHome;
   final int score;
+  final String? overrideDisplayName;
   final Function(String actionType, String? category) onAction;
 
   const PlayerPin({
@@ -16,6 +17,7 @@ class PlayerPin extends StatefulWidget {
     required this.teamId,
     this.isHome = true,
     this.score = 0,
+    this.overrideDisplayName,
     required this.onAction,
   });
 
@@ -147,53 +149,66 @@ class _PlayerPinState extends State<PlayerPin> {
       );
     }
 
-    // Home: Club color (Fagiano Red 0xFF7D1B2D) with subtle border
-    // Away: Crisp white kit (0xFFFFFFFF) with club navy border
-    if (widget.isHome) {
-      return BoxDecoration(
-        color: const Color(0xFF7D1B2D),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.85),
-          width: 1.2,
+    // 10+ points: Glowing gold aura for exceptional high ratings
+    final isGlowing = widget.score >= 10;
+    final baseColor = widget.isHome
+        ? const Color(0xFF7D1B2D) // Fagiano Red
+        : const Color(0xFFE2E8F0); // Away light grey
+
+    final borderColor = isGlowing
+        ? const Color(0xFFFFD700)
+        : (widget.isHome
+            ? Colors.white.withValues(alpha: 0.85)
+            : const Color(0xFF1E3A8A));
+
+    final borderWidth = isGlowing ? 1.8 : (widget.isHome ? 1.2 : 1.5);
+
+    final shadows = <BoxShadow>[
+      if (isGlowing)
+        const BoxShadow(
+          color: Color(0xFFFFD700),
+          blurRadius: 10,
+          spreadRadius: 1.5,
+          offset: Offset(0, 1),
+        )
+      else if (widget.isHome)
+        const BoxShadow(
+          color: Colors.black54,
+          blurRadius: 4,
+          offset: Offset(0, 2),
+        )
+      else
+        const BoxShadow(
+          color: Colors.black26,
+          blurRadius: 4,
+          offset: Offset(0, 2),
         ),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      );
-    } else {
-      return BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF1E3A8A),
-          width: 1.5,
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black38,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      );
-    }
+    ];
+
+    return BoxDecoration(
+      color: baseColor,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: borderColor,
+        width: borderWidth,
+      ),
+      boxShadow: shadows,
+    );
   }
 
   Widget _buildNumberAndPositionRow() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildNumberBadge(),
-        const SizedBox(width: 3),
-        _buildPositionLabel(),
-        _buildScorePill(),
-      ],
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildNumberBadge(),
+          const SizedBox(width: 3),
+          _buildPositionLabel(),
+          _buildScorePill(),
+        ],
+      ),
     );
   }
 
@@ -203,8 +218,8 @@ class _PlayerPinState extends State<PlayerPin> {
     final badgeTextColor = _calculateBadgeTextColor(badgeBg);
 
     return Container(
-      width: 18,
-      height: 18,
+      width: 20,
+      height: 20,
       decoration: BoxDecoration(
         color: badgeBg,
         shape: BoxShape.circle,
@@ -217,7 +232,7 @@ class _PlayerPinState extends State<PlayerPin> {
         '${widget.player.number}',
         textScaler: TextScaler.noScaling,
         style: TextStyle(
-          fontSize: 9.5,
+          fontSize: 10.5,
           fontWeight: FontWeight.bold,
           color: badgeTextColor,
           height: 1.1,
@@ -264,7 +279,7 @@ class _PlayerPinState extends State<PlayerPin> {
       widget.player.position,
       textScaler: TextScaler.noScaling,
       style: TextStyle(
-        fontSize: 9.0,
+        fontSize: 10.0,
         fontWeight: FontWeight.bold,
         color: textColor,
       ),
@@ -273,15 +288,17 @@ class _PlayerPinState extends State<PlayerPin> {
 
   Widget _buildPlayerNameText() {
     final textColor = widget.isHome ? Colors.white : const Color(0xFF0F172A);
+    final displayName =
+        widget.overrideDisplayName ?? widget.player.displayName;
 
     return SizedBox(
       width: double.infinity,
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          widget.player.displayName,
+          displayName,
           style: TextStyle(
-            fontSize: 9.5,
+            fontSize: 11.0,
             fontWeight: FontWeight.bold,
             color: textColor,
           ),

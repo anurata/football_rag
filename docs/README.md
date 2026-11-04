@@ -20,10 +20,11 @@ flowchart TD
         S_OPS["6. 運用サイクル・自動化スケジュール仕様書<br>docs/operation_cycle.md"]
         S_SOP["7. サイト運用・更新・デプロイ完全仕様書<br>docs/SITE_OPERATIONS_SPECIFICATION.md"]
         S_UI["8. 観戦ガイドUI/UX再編仕様書<br>docs/WATCHING_GUIDE_UI_SPECIFICATION.md"]
+        S_REP["9. 試合番記者通信簿評価仕様書<br>docs/MATCH_REPORT_CARD_SPECIFICATION.md"]
     end
 
     subgraph DeploySpecs ["インフラ・デプロイ仕様書"]
-        S_CLD["9. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
+        S_CLD["10. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
     end
 
     Manifesto --> CoreSpecs
@@ -45,7 +46,8 @@ flowchart TD
 | **6. 運用サイクル仕様** | KOからの相対時間（KO-48h, KO-1h, Stage 1: KO+3h, Stage 2: KO+48h）による日次・試合日自動バッチパイプライン。 | [operation_cycle.md](file:///d:/workspace/flutter/football_rag/docs/operation_cycle.md) |
 | **7. サイト運用仕様** | 4つの独立運用モード（試合単体/チーム単体/リーグ全体/デプロイ）、安全ガードレール、該当試合ダイレクト4大外部リンク仕様。 | [SITE_OPERATIONS_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/SITE_OPERATIONS_SPECIFICATION.md) |
 | **8. 観戦ガイドUI仕様** | Jリーグ全体・チーム毎・試合・選手の4画面再編仕様、5大セクション試合ビュー、どこでもAI対話QAモーダル設計。 | [WATCHING_GUIDE_UI_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/WATCHING_GUIDE_UI_SPECIFICATION.md) |
-| **9. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
+| **9. 番記者通信簿仕様** | エル・ゴラッソ準拠の6項目（ゲーム支配・個人・スタイル・球際・リレーション・興奮度）評価とS〜D総合ランク採点エンジン仕様。 | [MATCH_REPORT_CARD_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/MATCH_REPORT_CARD_SPECIFICATION.md) |
+| **10. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
 
 ---
 

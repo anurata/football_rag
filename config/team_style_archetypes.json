@@ -1,0 +1,184 @@
+{
+  "FCT": {
+    "team_name": "FC東京",
+    "style_name": "ハイプレス・ショートカウンター",
+    "description": "前線からの連動プレスと鋭いトランジション速攻",
+    "key_metrics": ["cbp_gain", "sprints", "chance_create_rate", "proxy_ppda"],
+    "direction": {"cbp_gain": "high", "sprints": "high", "chance_create_rate": "high", "proxy_ppda": "low"}
+  },
+  "KAS": {
+    "team_name": "鹿島アントラーズ",
+    "style_name": "勝負強さ・縦に速いハイインテンシティ＆球際",
+    "description": "伝統の勝負哲学、強固な球際デュエルと電光石火の縦突破",
+    "key_metrics": ["tackles", "cbp_gain", "pa_entries", "sprints"],
+    "direction": {"tackles": "high", "cbp_gain": "high", "pa_entries": "high", "sprints": "high"}
+  },
+  "URA": {
+    "team_name": "浦和レッズ",
+    "style_name": "強固な組織守備・秩序的ポゼッション",
+    "description": "安定したブロック形成と中央・サイドを使い分けるボール前進",
+    "key_metrics": ["passes_rate", "cbp_pass", "clears", "possession_rate"],
+    "direction": {"passes_rate": "high", "cbp_pass": "high", "clears": "high", "possession_rate": "high"}
+  },
+  "REY": {
+    "team_name": "柏レイソル",
+    "style_name": "アグレッシブ・インテンシティ＆組織的連動",
+    "description": "規律あるポジショニングと攻守のシームレスな一体感",
+    "key_metrics": ["sprints", "cbp_gain", "distance_m", "chance_create_rate"],
+    "direction": {"sprints": "high", "cbp_gain": "high", "distance_m": "high", "chance_create_rate": "high"}
+  },
+  "VER": {
+    "team_name": "東京ヴェルディ",
+    "style_name": "テクニカル・ハードワーク＆コレクティブ守備",
+    "description": "豊富な運動量と高い技術を融合した組織的フットボール",
+    "key_metrics": ["distance_m", "sprints", "passes_rate", "tackles"],
+    "direction": {"distance_m": "high", "sprints": "high", "passes_rate": "high", "tackles": "high"}
+  },
+  "ZEL": {
+    "team_name": "FC町田ゼルビア",
+    "style_name": "徹底したハイボール＆ロングスロー＆極限デュエル",
+    "description": "フィジカルバトルで相手を圧倒し隙を与えない堅守速攻",
+    "key_metrics": ["clears", "cbp_gain", "tackles", "sprints"],
+    "direction": {"clears": "high", "cbp_gain": "high", "tackles": "high", "sprints": "high"}
+  },
+  "KAW": {
+    "team_name": "川崎フロンターレ",
+    "style_name": "ポジショナル・アタッキングフットボール",
+    "description": "圧倒的なボール支配と連続パスワークによる完全崩し",
+    "key_metrics": ["passes", "passes_rate", "cbp_pass", "pa_entries"],
+    "direction": {"passes": "high", "passes_rate": "high", "cbp_pass": "high", "pa_entries": "high"}
+  },
+  "MAR": {
+    "team_name": "横浜F・マリノス",
+    "style_name": "アタッキング・フットボール（ハイライン・ハイプレス）",
+    "description": "高精度なビルドアップとサイド圧倒、超攻撃的哲学",
+    "key_metrics": ["field_tilt", "pa_entries", "cbp_attack", "sprints"],
+    "direction": {"field_tilt": "high", "pa_entries": "high", "cbp_attack": "high", "sprints": "high"}
+  },
+  "YFC": {
+    "team_name": "横浜FC",
+    "style_name": "堅守速攻・ブロック構築型カウンター",
+    "description": "強固な5バック・3バックブロックからの鋭い推進",
+    "key_metrics": ["clears", "tackles", "intercepts", "cbp_defense"],
+    "direction": {"clears": "high", "tackles": "high", "intercepts": "high", "cbp_defense": "high"}
+  },
+  "BEL": {
+    "team_name": "湘南ベルマーレ",
+    "style_name": "ノンストップ・湘南スタイル（走力＆縦への推進）",
+    "description": "リーグ屈指の走行距離と激しい前線プレスによる速攻",
+    "key_metrics": ["distance_m", "sprints", "cbp_gain", "tackles"],
+    "direction": {"distance_m": "high", "sprints": "high", "cbp_gain": "high", "tackles": "high"}
+  },
+  "NII": {
+    "team_name": "アルビレックス新潟",
+    "style_name": "パス＆ムーブ・ポゼッションフットボール",
+    "description": "GKからの丁寧なビルドアップと流動的なコンビネーション",
+    "key_metrics": ["passes", "passes_rate", "possession_rate", "cbp_pass"],
+    "direction": {"passes": "high", "passes_rate": "high", "possession_rate": "high", "cbp_pass": "high"}
+  },
+  "IWA": {
+    "team_name": "ジュビロ磐田",
+    "style_name": "サイドアタック＆ボックス侵入クロス",
+    "description": "サイドの突破力と前線の高さを活かした多彩な仕掛け",
+    "key_metrics": ["crosses", "cbp_cross", "pa_entries", "dribbles"],
+    "direction": {"crosses": "high", "cbp_cross": "high", "pa_entries": "high", "dribbles": "high"}
+  },
+  "NAG": {
+    "team_name": "名古屋グランパス",
+    "style_name": "堅守・ブロック＆高速パワフルトランジション",
+    "description": "ゴール前に強固な壁を築き、奪ってからの縦スピードで仕留める",
+    "key_metrics": ["clears", "cbp_defense", "intercepts", "chance_create_rate"],
+    "direction": {"clears": "high", "cbp_defense": "high", "intercepts": "high", "chance_create_rate": "high"}
+  },
+  "SAN": {
+    "team_name": "京都サンガF.C.",
+    "style_name": "ハイインテンシティ・オールコートプレス",
+    "description": "前線からの猛烈なプレッシングと休まない連続スプリント",
+    "key_metrics": ["sprints", "distance_m", "tackles", "proxy_ppda"],
+    "direction": {"sprints": "high", "distance_m": "high", "tackles": "high", "proxy_ppda": "low"}
+  },
+  "GAM": {
+    "team_name": "ガンバ大阪",
+    "style_name": "ソリッドディフェンス＆タレントの個人打開",
+    "description": "整ったブロック守備と前線のクオリティを活かした決定機創出",
+    "key_metrics": ["cbp_shoot", "pa_entries", "clears", "cbp_gain"],
+    "direction": {"cbp_shoot": "high", "pa_entries": "high", "clears": "high", "cbp_gain": "high"}
+  },
+  "CER": {
+    "team_name": "セレッソ大阪",
+    "style_name": "ポジショナル・サイド崩し＆高精度パスワーク",
+    "description": "サイドでの数的優位と中央への差し込みを両立する攻撃",
+    "key_metrics": ["passes_rate", "crosses", "cbp_pass", "pa_entries"],
+    "direction": {"passes_rate": "high", "crosses": "high", "cbp_pass": "high", "pa_entries": "high"}
+  },
+  "VOB": {
+    "team_name": "ヴィッセル神戸",
+    "style_name": "王者インテンシティ＆ハイプレス・ロングカウンター",
+    "description": "球際の圧倒的強度、ロングボールの回収と前線の破壊力",
+    "key_metrics": ["cbp_gain", "tackles", "pa_entries", "sprints"],
+    "direction": {"cbp_gain": "high", "tackles": "high", "pa_entries": "high", "sprints": "high"}
+  },
+  "HIR": {
+    "team_name": "サンフレッチェ広島",
+    "style_name": "ドイツ式ゲーゲンプレス＆超攻撃的3バック",
+    "description": "高い位置での即時奪回と分厚い波状攻撃、PA侵入の嵐",
+    "key_metrics": ["pa_entries", "m30_entries", "sprints", "cbp_attack"],
+    "direction": {"pa_entries": "high", "m30_entries": "high", "sprints": "high", "cbp_attack": "high"}
+  },
+  "FUK": {
+    "team_name": "アビスパ福岡",
+    "style_name": "堅忍不抜の堅守＆セットプレー・カウンター",
+    "description": "中央を完全に塞ぐローブロックと一撃必殺のセットプレー",
+    "key_metrics": ["clears", "cbp_defense", "intercepts", "tackles"],
+    "direction": {"clears": "high", "cbp_defense": "high", "intercepts": "high", "tackles": "high"}
+  },
+  "SAG": {
+    "team_name": "サガン鳥栖",
+    "style_name": "ハードワーク＆ダイナミック・トランジション",
+    "description": "ハードワークをベースにした粘り強いプレッシングと速攻",
+    "key_metrics": ["distance_m", "sprints", "tackles", "intercepts"],
+    "direction": {"distance_m": "high", "sprints": "high", "tackles": "high", "intercepts": "high"}
+  },
+  "CON": {
+    "team_name": "北海道コンサドーレ札幌",
+    "style_name": "オールコート・マンツーマンプレス＆超攻撃",
+    "description": "ピッチ全域での徹底したマンマークと縦に速いスリリングな攻防",
+    "key_metrics": ["sprints", "pa_entries", "cbp_shoot", "proxy_ppda"],
+    "direction": {"sprints": "high", "pa_entries": "high", "cbp_shoot": "high", "proxy_ppda": "low"}
+  },
+  "OKA": {
+    "team_name": "ファジアーノ岡山",
+    "style_name": "堅守強靭＆スピーディーカウンター",
+    "description": "粘り強い守備ブロックと規律あるカウンターアタック",
+    "key_metrics": ["clears", "tackles", "cbp_defense", "sprints"],
+    "direction": {"clears": "high", "tackles": "high", "cbp_defense": "high", "sprints": "high"}
+  },
+  "PUL": {
+    "team_name": "清水エスパルス",
+    "style_name": "サイドアタック＆華麗なアタッキングフットボール",
+    "description": "多彩なパスワークとサイドアタックによる好機演出",
+    "key_metrics": ["cbp_attack", "crosses", "dribbles", "pa_entries"],
+    "direction": {"cbp_attack": "high", "crosses": "high", "dribbles": "high", "pa_entries": "high"}
+  },
+  "MIT": {
+    "team_name": "水戸ホーリーホック",
+    "style_name": "アグレッシブ・フォワードプレス＆運動量",
+    "description": "若さ溢れる前線からの激しいプレスと切り替えの速さ",
+    "key_metrics": ["sprints", "distance_m", "cbp_gain", "tackles"],
+    "direction": {"sprints": "high", "distance_m": "high", "cbp_gain": "high", "tackles": "high"}
+  },
+  "JEF": {
+    "team_name": "ジェフユナイテッド千葉",
+    "style_name": "ハイライン・ハイプレス＆怒涛のコレクティブアタック",
+    "description": "小林慶行監督のもとで磨かれた超攻撃的ハイプレスと波状攻撃",
+    "key_metrics": ["sprints", "cbp_gain", "pa_entries", "field_tilt"],
+    "direction": {"sprints": "high", "cbp_gain": "high", "pa_entries": "high", "field_tilt": "high"}
+  },
+  "VVN": {
+    "team_name": "V・ファーレン長崎",
+    "style_name": "個の圧倒的タレント＆高速サイドアタック",
+    "description": "強力な外国籍選手・アタッカーの突破力を軸にした爆発力",
+    "key_metrics": ["dribbles", "cbp_dribble", "cbp_shoot", "pa_entries"],
+    "direction": {"dribbles": "high", "cbp_dribble": "high", "cbp_shoot": "high", "pa_entries": "high"}
+  }
+}

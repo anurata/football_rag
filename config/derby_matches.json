@@ -1,0 +1,119 @@
+{
+  "derbies": [
+    {
+      "name": "神奈川ダービー",
+      "teams": ["MAR", "KAW"],
+      "description": "横浜F・マリノス vs 川崎フロンターレの激突"
+    },
+    {
+      "name": "神奈川ダービー (横浜ダービー)",
+      "teams": ["MAR", "YFC"],
+      "description": "横浜F・マリノス vs 横浜FCの横浜頂上決戦"
+    },
+    {
+      "name": "神奈川ダービー (湘南vs川崎)",
+      "teams": ["KAW", "BEL"],
+      "description": "川崎フロンターレ vs 湘南ベルマーレ"
+    },
+    {
+      "name": "神奈川ダービー (湘南vs横浜FM)",
+      "teams": ["MAR", "BEL"],
+      "description": "横浜F・マリノス vs 湘南ベルマーレ"
+    },
+    {
+      "name": "多摩川クラシコ",
+      "teams": ["FCT", "KAW"],
+      "description": "FC東京 vs 川崎フロンターレの伝統の一戦"
+    },
+    {
+      "name": "東京ダービー",
+      "teams": ["FCT", "VER"],
+      "description": "FC東京 vs 東京ヴェルディの首都決戦"
+    },
+    {
+      "name": "東京クラシック",
+      "teams": ["FCT", "ZEL"],
+      "description": "FC東京 vs FC町田ゼルビアの新東京対決"
+    },
+    {
+      "name": "東京ダービー (東京Vvs町田)",
+      "teams": ["VER", "ZEL"],
+      "description": "東京ヴェルディ vs FC町田ゼルビア"
+    },
+    {
+      "name": "千葉ダービー",
+      "teams": ["REY", "JEF"],
+      "description": "柏レイソル vs ジェフユナイテッド千葉のちばぎんカップ伝統カード"
+    },
+    {
+      "name": "埼玉ダービー",
+      "teams": ["URA", "OMI"],
+      "description": "浦和レッズ vs 大宮アルディージャ"
+    },
+    {
+      "name": "大阪ダービー",
+      "teams": ["GAM", "CER"],
+      "description": "ガンバ大阪 vs セレッソ大阪の大阪頂上決戦"
+    },
+    {
+      "name": "阪神ダービー / 関西ダービー",
+      "teams": ["GAM", "VOB"],
+      "description": "ガンバ大阪 vs ヴィッセル神戸"
+    },
+    {
+      "name": "阪神ダービー / 関西ダービー",
+      "teams": ["CER", "VOB"],
+      "description": "セレッソ大阪 vs ヴィッセル神戸"
+    },
+    {
+      "name": "京阪ダービー",
+      "teams": ["SAN", "GAM"],
+      "description": "京都サンガF.C. vs ガンバ大阪"
+    },
+    {
+      "name": "京阪ダービー",
+      "teams": ["SAN", "CER"],
+      "description": "京都サンガF.C. vs セレッソ大阪"
+    },
+    {
+      "name": "静岡ダービー",
+      "teams": ["PUL", "IWA"],
+      "description": "清水エスパルス vs ジュビロ磐田の静岡サッカー伝統決戦"
+    },
+    {
+      "name": "東海ダービー",
+      "teams": ["NAG", "IWA"],
+      "description": "名古屋グランパス vs ジュビロ磐田"
+    },
+    {
+      "name": "東海ダービー",
+      "teams": ["NAG", "PUL"],
+      "description": "名古屋グランパス vs 清水エスパルス"
+    },
+    {
+      "name": "九州ダービー",
+      "teams": ["FUK", "SAG"],
+      "description": "アビスパ福岡 vs サガン鳥栖のバトル・オブ・九州"
+    },
+    {
+      "name": "九州ダービー",
+      "teams": ["FUK", "VVN"],
+      "description": "アビスパ福岡 vs V・ファーレン長崎"
+    },
+    {
+      "name": "九州ダービー",
+      "teams": ["SAG", "VVN"],
+      "description": "サガン鳥栖 vs V・ファーレン長崎"
+    },
+    {
+      "name": "北関東ダービー",
+      "teams": ["MIT", "TOF"],
+      "description": "水戸ホーリーホック vs 栃木SC"
+    },
+    {
+      "name": "東三河・名岐 / 中部決戦",
+      "teams": ["NAG", "SAN"],
+      "description": "名古屋グランパス vs 京都サンガF.C."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# Git and IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Local Environment & Secrets
+.env
+*.env
+*.pem
+*.key
+
+# Data Separation (Data lives on Cloud Storage / GCS Mount)
+data/
+data/**
+
+# Mobile Flutter source (Managed separately)
+mobile/
+mobile/**
+
+# Python & Build Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local logs and temporary dumps
+logs/
+*.log
+page_*.html
+temp_*.txt
+scratch/
+
+# Tests & Experiments (Keep production container slim)
+tests/
+experiments/
+
+# Documentation source not needed inside container
+docs/
+.agents/

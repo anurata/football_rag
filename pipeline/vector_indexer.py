@@ -3,6 +3,7 @@ ChromaDB vector indexer for tactical match knowledge and serialized chunks.
 Manages persistent and in-memory indexing of 4 standardized chunks per match.
 """
 
+import os
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 import chromadb
@@ -11,7 +12,10 @@ from chromadb.api.types import EmbeddingFunction
 from pipeline.models import MatchBundleModel, SerializedChunkModel
 from pipeline.semantic_serializer import SemanticSerializer
 
-DEFAULT_CHROMA_DIR = str(Path(__file__).resolve().parent.parent / "data" / "chroma_db")
+DEFAULT_CHROMA_DIR = os.getenv(
+    "CHROMA_PERSIST_DIR",
+    str(Path(__file__).resolve().parent.parent / "data" / "chroma_db"),
+)
 DEFAULT_COLLECTION_NAME = "jleague_tactical_fact"
 
 

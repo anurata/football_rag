@@ -7,7 +7,7 @@ import os
 import sqlite3
 from typing import Optional, Dict, Any, List
 
-DEFAULT_DB_PATH = os.path.join("data", "football.db")
+DEFAULT_DB_PATH = os.getenv("FOOTBALL_DB_PATH", os.path.join("data", "football.db"))
 
 SCHEMA_MATCHES = """
 CREATE TABLE IF NOT EXISTS matches (

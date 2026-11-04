@@ -110,29 +110,36 @@ def _on_sidebar_nav_change() -> None:
     st.session_state["current_view"] = new_view
 
 
+def _render_nav_button(view: str, label: str, is_active: bool) -> None:
+    """Render a single full-width navigation button with primary highlighting if active."""
+    btn_type = "primary" if is_active else "secondary"
+    clicked = st.sidebar.button(
+        label,
+        key=f"nav_btn_{view}",
+        use_container_width=True,
+        type=btn_type,
+    )
+    if clicked and not is_active:
+        navigate_to(view=view,)
+
+
 def render_sidebar_navigation() -> str:
     """
-    Render top-level sidebar navigation widget (segmented radio buttons).
+    Render top-level sidebar navigation buttons.
     Returns the selected view key.
     """
-    init_navigation_state(VIEW_TEAM)
+    init_navigation_state(default_view=VIEW_TEAM,)
     current_view = st.session_state.get("current_view", VIEW_TEAM)
-    current_label = VIEW_LABELS.get(current_view, VIEW_LABELS[VIEW_TEAM])
-
-    # Ensure sidebar radio widget key is strictly synchronized with current_view
-    if st.session_state.get("sidebar_view_radio") != current_label:
-        st.session_state["sidebar_view_radio"] = current_label
-
-    options = list(VIEW_LABELS.values())
 
     st.sidebar.markdown("### 🧭 観戦ガイド・ナビゲーション")
-    st.sidebar.radio(
-        label="画面切り替え",
-        options=options,
-        label_visibility="collapsed",
-        key="sidebar_view_radio",
-        on_change=_on_sidebar_nav_change,
-    )
+
+    for view, label in VIEW_LABELS.items():
+        is_active = (view == current_view)
+        _render_nav_button(
+            view=view,
+            label=label,
+            is_active=is_active,
+        )
 
     return st.session_state.get("current_view", VIEW_TEAM)
 

@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -22,7 +23,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 logger = logging.getLogger("tactical_matchup_engine")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT_DIR / "data" / "football.db"
+DB_PATH = Path(os.getenv("FOOTBALL_DB_PATH", ROOT_DIR / "data" / "football.db"))
 TEAM_PROFILES_PATH = ROOT_DIR / "knowledge" / "team_tactical_profiles.json"
 
 

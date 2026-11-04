@@ -56,6 +56,8 @@ class TestGCPConfig(unittest.TestCase):
         self.assertIn("uvicorn api.main:app", content)
         self.assertIn("streamlit run app.py", content)
         self.assertIn("PORT", content)
+        self.assertIn("/mnt/gcs", content)
+        self.assertIn("ln -sfn", content)
 
     def test_gcp_deploy_script(self):
         """Verify PowerShell deployment script contains volume mount and required parameters."""
@@ -72,12 +74,15 @@ class TestGCPConfig(unittest.TestCase):
         """Test that FOOTBALL_DB_PATH environment variable overrides default SQLite path."""
         import importlib
         import pipeline.db
+        import pipeline.team_analytics_engine
 
         custom_path = "/tmp/test_custom_football.db"
         os.environ["FOOTBALL_DB_PATH"] = custom_path
 
         importlib.reload(pipeline.db)
+        importlib.reload(pipeline.team_analytics_engine)
         self.assertEqual(pipeline.db.DEFAULT_DB_PATH, custom_path)
+        self.assertEqual(str(pipeline.team_analytics_engine.DB_PATH), str(Path(custom_path)))
 
     def test_env_chroma_dir_override(self):
         """Test that CHROMA_PERSIST_DIR environment variable overrides default ChromaDB directory."""

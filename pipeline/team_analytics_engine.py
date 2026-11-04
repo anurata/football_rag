@@ -18,6 +18,7 @@ import base64
 import json
 import logging
 import math
+import os
 import re
 import sqlite3
 from collections import defaultdict
@@ -31,9 +32,10 @@ import streamlit as st
 logger = logging.getLogger("team_analytics_engine")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT_DIR / "data" / "football.db"
+DB_PATH = Path(os.getenv("FOOTBALL_DB_PATH", ROOT_DIR / "data" / "football.db"))
 EXPORTS_DIR = ROOT_DIR / "exports"
-STRUCTURED_DIR = ROOT_DIR / "data" / "structured"
+DATA_DIR = Path(os.getenv("FOOTBALL_DATA_DIR", DB_PATH.parent))
+STRUCTURED_DIR = DATA_DIR / "structured"
 PROFILES_PATH = ROOT_DIR / "knowledge" / "team_tactical_profiles.json"
 METRIC_DEFS_PATH = ROOT_DIR / "knowledge" / "metric_definitions_55.json"
 

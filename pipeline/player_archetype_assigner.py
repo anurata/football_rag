@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple
 logger = logging.getLogger("player_archetype_assigner")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT_DIR / "data" / "football.db"
+DB_PATH = Path(os.getenv("FOOTBALL_DB_PATH", ROOT_DIR / "data" / "football.db"))
 ARCHETYPES_DEF_PATH = ROOT_DIR / "knowledge" / "player_archetypes.json"
 OUTPUT_ASSIGNMENTS_PATH = ROOT_DIR / "knowledge" / "player_archetype_assignments.json"
 

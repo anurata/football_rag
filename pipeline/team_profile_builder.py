@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sqlite3
 from collections import Counter
 from datetime import datetime, timezone
@@ -20,7 +21,7 @@ from typing import Any, Dict, List, Tuple
 logger = logging.getLogger("team_profile_builder")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT_DIR / "data" / "football.db"
+DB_PATH = Path(os.getenv("FOOTBALL_DB_PATH", ROOT_DIR / "data" / "football.db"))
 OUTPUT_PATH = ROOT_DIR / "knowledge" / "team_tactical_profiles.json"
 
 TEAM_NAMES = {

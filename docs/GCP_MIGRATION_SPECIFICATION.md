@@ -63,12 +63,21 @@ flowchart TD
 | `PORT` | `8080` | Cloud Run が動的に割り当てるリッスンポート。 |
 | `FOOTBALL_DB_PATH` | `data/football.db` | SQLiteデータベースのファイルパス。GCSマウント時は `/mnt/gcs/football.db`。 |
 | `CHROMA_PERSIST_DIR` | `data/chroma_db` | ChromaDBの永続化ディレクトリ。GCSマウント時は `/mnt/gcs/chroma_db`。 |
+| `PHOTO_STORAGE_BACKEND` | `local` | 写真保存先バックエンド。`local`（ローカル保存）または `gcs`（Cloud Storage直接保存）。 |
+| `GCS_PHOTO_BUCKET` | *(デプロイバケット名)* | GCS写真保存時のターゲットバケット名（例: `football-rag-app-football-rag-data`）。 |
+| `GCS_PHOTO_PREFIX` | `photos` | GCS写真保存時のバケット内ディレクトリプレフィックス。 |
 | `GEMINI_API_KEY` | *(Secret Manager)* | Google Gemini API利用キー。 |
 | `APP_PASSWORD` | *(Secret Manager)* | Web UIのプライベート認証パスワード。 |
 
 #### 3.2 データ分離ポリシー（`.dockerignore`）
 - コンテナイメージ内に `data/` 配下のファイル（SQLite、ChromaDB、生HTML、写真等）は一切含めない。
 - これによりイメージビルド時間を短縮し、データ更新時のイメージ再構築を不要化。
+
+#### 3.3 観戦写真ストレージ永続化設計（StorageAdapter）
+- `pipeline/storage_adapter.py` により、環境変数 `PHOTO_STORAGE_BACKEND` および `GCS_PHOTO_BUCKET` に基づいて保存先を動的解決。
+  - **ローカル開発・テスト時 (`local`)**: `data/uploads/photos/` に保存し、相対URL `/uploads/photos/<filename>` を返却。
+  - **Cloud Run本番運用時 (`gcs`)**: Google Cloud Storage (`gs://<bucket>/photos/<filename>`) へ直接アップロードし、公開URL `https://storage.googleapis.com/<bucket>/photos/<filename>` をDBに格納。
+  - **フォールバック保証**: GCSクライアント初期化エラーや認証未設定時は自動で `LocalStorageAdapter` にフォールバックし、API停止を回避。
 
 ---
 

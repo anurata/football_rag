@@ -72,6 +72,8 @@ class TestGCPConfig(unittest.TestCase):
         self.assertIn("AppMode", content)
         self.assertIn("football-rag-api", content)
         self.assertIn("SkipBuild", content)
+        self.assertIn("PHOTO_STORAGE_BACKEND=gcs", content)
+        self.assertIn("GCS_PHOTO_BUCKET=", content)
 
     def test_env_db_path_override(self):
         """Test that FOOTBALL_DB_PATH environment variable overrides default SQLite path."""

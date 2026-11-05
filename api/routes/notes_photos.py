@@ -22,11 +22,15 @@ from api.schemas import (
     UserNoteItem,
 )
 from pipeline.db import get_db_connection
+from pipeline.storage_adapter import (
+    DEFAULT_UPLOAD_DIR,
+    get_storage_adapter,
+)
 
 router = APIRouter(prefix="/api", tags=["notes_photos"])
 
-UPLOAD_BASE_DIR = Path("data") / "uploads" / "photos"
-UPLOAD_BASE_DIR.mkdir(parents=True, exist_ok=True)
+# Backward compatibility alias for tests patching UPLOAD_BASE_DIR directly
+UPLOAD_BASE_DIR = DEFAULT_UPLOAD_DIR
 
 
 def _upsert_user_note(
@@ -148,13 +152,15 @@ async def upload_stadium_photo(
         ext = ".jpg"
 
     safe_filename = f"{match_id}_{p_id}{ext}"
-    target_path = UPLOAD_BASE_DIR / safe_filename
 
-    # Save binary to disk
-    with open(target_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    relative_url = f"/uploads/photos/{safe_filename}"
+    # Read binary content and save via configured storage adapter (GCS or Local)
+    file_bytes = await file.read()
+    adapter = get_storage_adapter(custom_dir=UPLOAD_BASE_DIR)
+    stored_url = adapter.save_photo(
+        file_bytes=file_bytes,
+        filename=safe_filename,
+        content_type=file.content_type or "image/jpeg",
+    )
 
     conn = get_db_connection()
     try:
@@ -181,7 +187,7 @@ async def upload_stadium_photo(
                 match_id,
                 stadium_id,
                 phase,
-                relative_url,
+                stored_url,
                 caption,
             ),
         )
@@ -199,7 +205,7 @@ async def upload_stadium_photo(
             match_id=match_id,
             stadium_id=stadium_id,
             phase=phase,
-            file_url=relative_url,
+            file_url=stored_url,
             caption=caption,
             created_at=created_at_str,
         )

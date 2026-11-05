@@ -168,7 +168,7 @@ $deployArgs = @(
     "--cpu=1",
     "--min-instances=0",
     "--max-instances=1",
-    "--set-env-vars=FOOTBALL_DB_PATH=/mnt/gcs/football.db,CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db,APP_MODE=$AppMode",
+    "--set-env-vars=FOOTBALL_DB_PATH=/mnt/gcs/football.db,CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db,APP_MODE=$AppMode,PHOTO_STORAGE_BACKEND=gcs,GCS_PHOTO_BUCKET=${BucketName}",
     "--add-volume=name=gcs-data,type=cloud-storage,bucket=${BucketName}",
     "--add-volume-mount=volume=gcs-data,mount-path=/mnt/gcs"
 ) + $secretArgs

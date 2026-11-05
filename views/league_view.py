@@ -251,6 +251,7 @@ def _render_matchweek_section(
 def _render_team_report_mini_card(
     card: Dict[str, Any],
     show_rank_number: bool = False,
+    key_prefix: str = "rank",
 ) -> None:
     """Render a compact report card for a single team in the matchweek."""
     tid = card.get("team_id", "")
@@ -322,7 +323,7 @@ def _render_team_report_mini_card(
                 m_score = metrics.get(m_key, {}).get("score", 0)
                 st.caption(f"{m_label}:{m_score}")
 
-        if st.button("試合詳細へ ❯", key=f"btn_rc_goto_{mid}_{tid}", use_container_width=True):
+        if st.button("試合詳細へ ❯", key=f"btn_rc_goto_{key_prefix}_{mid}_{tid}", use_container_width=True):
             navigate_to(view=VIEW_MATCH, match_id=mid)
 
 
@@ -338,14 +339,14 @@ def _render_match_pair_report_card(pair: Dict[str, Any]) -> None:
         st.caption(f"📅 {date} | 🏟️ {stadium}")
         c_h, c_vs, c_a = st.columns([5, 1, 5])
         with c_h:
-            _render_team_report_mini_card(home, show_rank_number=False)
+            _render_team_report_mini_card(home, show_rank_number=False, key_prefix=f"pair_h_{mid}")
         with c_vs:
             st.markdown(
                 "<div style='text-align:center; padding-top:40px; font-weight:bold; color:#94a3b8;'>VS</div>",
                 unsafe_allow_html=True,
             )
         with c_a:
-            _render_team_report_mini_card(away, show_rank_number=False)
+            _render_team_report_mini_card(away, show_rank_number=False, key_prefix=f"pair_a_{mid}")
 
 
 def _render_matchweek_report_cards_section(
@@ -405,7 +406,7 @@ def _render_matchweek_report_cards_section(
         for idx, card in enumerate(team_cards):
             target_col = c1 if idx % 2 == 0 else c2
             with target_col:
-                _render_team_report_mini_card(card, show_rank_number=True)
+                _render_team_report_mini_card(card, show_rank_number=True, key_prefix=f"rank_{idx}")
 
     with tab_pair:
         st.caption(f"第 {selected_week} 節の全10試合におけるホーム vs アウェイ両軍の通信簿対比です。")

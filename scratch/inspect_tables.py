@@ -1,19 +1,17 @@
-import sys
-import urllib.request
-from bs4 import BeautifulSoup
+import sqlite3
+import json
 
-sys.stdout.reconfigure(encoding='utf-8')
+conn = sqlite3.connect('data/football.db')
+cursor = conn.cursor()
 
-url = 'https://www.jleague.jp/match/j1/2024/022301/player/'
-headers = {'User-Agent': 'Mozilla/5.0'}
-req = urllib.request.Request(url, headers=headers)
-with urllib.request.urlopen(req, timeout=10) as resp:
-    soup = BeautifulSoup(resp.read().decode('utf-8', errors='ignore'), 'html.parser')
+for t in ['team_match_stats', 'team_match_flab_stats', 'player_match_stats']:
+    cursor.execute(f"PRAGMA table_info({t})")
+    cols = [c[1] for c in cursor.fetchall()]
+    print(f"=== {t} ===")
+    print(cols)
+    cursor.execute(f"SELECT * FROM {t} LIMIT 1")
+    row = cursor.fetchone()
+    if row:
+        print("Sample:", dict(zip(cols, row)))
 
-tables = soup.find_all('table')
-print(f'Tables count: {len(tables)}')
-for i, t in enumerate(tables):
-    cls = t.get('class')
-    print(f'Table {i}: class={cls} text_len={len(t.get_text())}')
-    headers = [th.get_text(strip=True) for th in t.find_all(['th', 'td'])][:15]
-    print(f'  First cells: {headers}')
+conn.close()

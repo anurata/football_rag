@@ -181,12 +181,16 @@ def _render_match_card(m: Dict[str, Any]) -> None:
         col_ext, col_nav = st.columns([2, 1])
         with col_ext:
             links = []
-            yt_url = m.get("youtube_url")
-            if yt_url:
-                links.append(f"[📺 ハイライト]({yt_url})")
-            rep_url = m.get("official_report_url")
-            if rep_url:
-                links.append(f"[📋 公式戦評]({rep_url})")
+            yt_val = m.get("youtube_url")
+            if yt_val:
+                yt_target = yt_val.get("url", "") if isinstance(yt_val, dict) else str(yt_val)
+                if yt_target:
+                    links.append(f"[📺 ハイライト]({yt_target})")
+            rep_val = m.get("official_report_url")
+            if rep_val:
+                rep_target = rep_val.get("url", "") if isinstance(rep_val, dict) else str(rep_val)
+                if rep_target:
+                    links.append(f"[📋 公式戦評]({rep_target})")
             if links:
                 st.markdown(" • ".join(links))
         with col_nav:

@@ -5,7 +5,8 @@ Calculates the 6-dimension report card (Game Dominance, Individual Power,
 Style Execution, Duels & Intensity, Team Cohesion, Excitement Index)
 conforming to docs/MATCH_REPORT_CARD_SPECIFICATION.md and El Golasso's
 reporter scorecard standard.
-Tuned with outcome-anchored adjustments and empirical data baselines.
+Implements outcome decay factor (gamma) and negative excitement penalties
+so that the sum of the 6 metrics always perfectly equals the total score.
 """
 
 from __future__ import annotations
@@ -59,6 +60,30 @@ class MatchReportCardCalculator:
             if set(d.get("teams", [])) == pair:
                 return d.get("name", "ダービーマッチ")
         return None
+
+    def compute_outcome_decay_factor(
+        self,
+        team_score: int,
+        opp_score: int,
+    ) -> float:
+        """Calculate outcome decay factor gamma based on win/draw/loss and goal difference."""
+        diff = team_score - opp_score
+        if diff > 0:
+            if diff >= 3:
+                return 1.10
+            elif diff >= 2:
+                return 1.05
+            else:
+                return 1.00
+        elif diff == 0:
+            return 0.90
+        else:
+            if diff <= -3:
+                return 0.65
+            elif diff == -2:
+                return 0.72
+            else:
+                return 0.80
 
     def calculate_report_card(
         self,
@@ -132,39 +157,39 @@ class MatchReportCardCalculator:
             )
             mw_stats = [dict(row) for row in cur.fetchall()]
 
-        # 6. Calculate 6 Dimensions with Outcome Integration
-        score_1, details_1 = self._calc_game_dominance(
+        # 6. Compute Raw Scores for 6 Dimensions
+        raw_1, details_1 = self._calc_game_dominance(
             t_flab=t_flab,
             o_flab=o_flab,
             team_score=team_score,
             opp_score=opp_score,
         )
-        score_2, details_2 = self._calc_individual_power(
+        raw_2, details_2 = self._calc_individual_power(
             t_flab=t_flab,
             players=players,
             team_score=team_score,
             opp_score=opp_score,
         )
-        score_3, details_3 = self._calc_style_execution(
+        raw_3, details_3 = self._calc_style_execution(
             team_id=team_id,
             t_flab=t_flab,
             mw_stats=mw_stats,
             team_score=team_score,
             opp_score=opp_score,
         )
-        score_4, details_4 = self._calc_duels_intensity(
+        raw_4, details_4 = self._calc_duels_intensity(
             t_flab=t_flab,
             players=players,
             team_score=team_score,
             opp_score=opp_score,
         )
-        score_5, details_5 = self._calc_team_cohesion(
+        raw_5, details_5 = self._calc_team_cohesion(
             t_flab=t_flab,
             players=players,
             team_score=team_score,
             opp_score=opp_score,
         )
-        score_6, details_6 = self._calc_excitement_index(
+        raw_6, details_6 = self._calc_excitement_index(
             team_id=team_id,
             opp_id=opp_id,
             team_score=team_score,
@@ -175,8 +200,24 @@ class MatchReportCardCalculator:
             is_home=is_home,
         )
 
-        raw_total = score_1 + score_2 + score_3 + score_4 + score_5 + score_6
-        total_score = self._calibrate_total_score(raw_total, team_score, opp_score)
+        # 7. Apply Outcome Decay Factor (gamma) across all dimensions
+        gamma = self.compute_outcome_decay_factor(team_score, opp_score)
+
+        score_1 = max(0, min(10, round(raw_1 * gamma)))
+        score_2 = max(0, min(10, round(raw_2 * gamma)))
+        score_3 = max(0, min(10, round(raw_3 * gamma)))
+        score_4 = max(0, min(10, round(raw_4 * gamma)))
+        score_5 = max(0, min(10, round(raw_5 * gamma)))
+        score_6 = max(0, min(10, round(raw_6 * gamma)))
+
+        # Update details with decay info
+        for d, r in [(details_1, raw_1), (details_2, raw_2), (details_3, raw_3),
+                    (details_4, raw_4), (details_5, raw_5), (details_6, raw_6)]:
+            d["raw_unscaled"] = r
+            d["gamma"] = gamma
+
+        # 8. Total Score is exactly the sum of the 6 calibrated metric scores
+        total_score = score_1 + score_2 + score_3 + score_4 + score_5 + score_6
         rank = self._determine_rank(total_score)
 
         return {
@@ -187,6 +228,7 @@ class MatchReportCardCalculator:
             "score": f"{team_score}-{opp_score}",
             "total_score": total_score,
             "rank": rank,
+            "decay_factor": gamma,
             "metrics": {
                 "game_dominance": {
                     "name": "①ゲーム支配",
@@ -231,11 +273,8 @@ class MatchReportCardCalculator:
         o_flab: Dict[str, Any],
         team_score: int,
         opp_score: int,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """1. Game Dominance (0-10)
-
-        Anchored to pitch territory, xG suppress and actual goal difference.
-        """
+    ) -> Tuple[float, Dict[str, Any]]:
+        """1. Game Dominance (Raw Base)"""
         poss = float(t_flab.get("possession_rate") or 50.0)
         t_m30 = float(t_flab.get("m30_entries") or 0.0)
         o_m30 = float(o_flab.get("m30_entries") or 0.0)
@@ -245,24 +284,18 @@ class MatchReportCardCalculator:
         o_xg = float(o_flab.get("xg") or 0.0)
         xg_diff = t_xg - o_xg
 
-        goal_diff = team_score - opp_score
-
         s_poss = (poss - 50.0) * 0.06
         s_tilt = (field_tilt - 50.0) * 0.04
         s_suppress = xg_diff * 0.6
-        s_result = goal_diff * 0.5  # Outcome anchor
 
-        raw = 5.0 + s_poss + s_tilt + s_suppress + s_result
+        raw = 5.0 + s_poss + s_tilt + s_suppress
         if opp_score == 0 and team_score > 0:
-            raw += 0.5  # Clean sheet victory bonus
+            raw += 0.5  # Clean sheet bonus
 
-        final = max(0, min(10, round(raw)))
-
-        return final, {
+        return raw, {
             "possession_rate": poss,
             "field_tilt": round(field_tilt, 1),
             "xg_diff": round(xg_diff, 2),
-            "goal_diff": goal_diff,
             "raw_score": round(raw, 2),
         }
 
@@ -272,19 +305,18 @@ class MatchReportCardCalculator:
         players: List[Dict[str, Any]],
         team_score: int,
         opp_score: int,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """2. Individual Power (0-10)"""
+    ) -> Tuple[float, Dict[str, Any]]:
+        """2. Individual Power (Raw Base)"""
         dribbles = float(t_flab.get("dribbles") or 0.0)
         drib_rate = float(t_flab.get("dribbles_rate") or 0.0)
         drib_succ = dribbles * (drib_rate / 100.0)
 
-        # Max player rating and individual scoring brilliance
         ratings = []
-        max_goals_by_single_player = 0
+        max_goals = 0
         for p in players:
             g = int(p.get("goals") or 0)
-            if g > max_goals_by_single_player:
-                max_goals_by_single_player = g
+            if g > max_goals:
+                max_goals = g
             raw_str = p.get("raw_stats_json")
             if raw_str:
                 try:
@@ -299,7 +331,6 @@ class MatchReportCardCalculator:
         t_crosses = float(t_flab.get("crosses") or 0.0)
         non_shot_obv = t_m30 * 0.02 + t_crosses * 0.015 + drib_succ * 0.025
 
-        # Sub impact
         bench = [p for p in players if not p.get("is_starter") and (p.get("minutes_played") or 0) > 0]
         sub_mva = sum(float(p.get("xg") or 0.0) + float(p.get("xa") or 0.0) for p in bench)
 
@@ -307,15 +338,14 @@ class MatchReportCardCalculator:
         s_rating = (max_rating - 6.0) * 1.0
         s_threat = (non_shot_obv - 1.5) * 0.25
         s_sub = min(sub_mva * 0.8, 1.0)
-        s_individual_goals = 1.0 if max_goals_by_single_player >= 2 else (0.5 if max_goals_by_single_player == 1 else 0.0)
+        s_brace = 1.0 if max_goals >= 2 else (0.5 if max_goals == 1 else 0.0)
 
-        raw = 5.0 + s_drib + s_rating + s_threat + s_sub + s_individual_goals
-        final = max(0, min(10, round(raw)))
+        raw = 5.0 + s_drib + s_rating + s_threat + s_sub + s_brace
 
-        return final, {
+        return raw, {
             "dribble_success": round(drib_succ, 1),
             "max_player_rating": max_rating,
-            "max_single_goals": max_goals_by_single_player,
+            "max_single_goals": max_goals,
             "non_shot_obv": round(non_shot_obv, 2),
             "sub_mva": round(sub_mva, 2),
             "raw_score": round(raw, 2),
@@ -328,13 +358,8 @@ class MatchReportCardCalculator:
         mw_stats: List[Dict[str, Any]],
         team_score: int,
         opp_score: int,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """3. Tactical Style Execution (0-10)
-
-        Base: Percentile rank across league matches
-        Bonus: Growth exceeding own team's season average
-        Anchor: Victory bonus (+1.0) or Heavy Loss Cap (max 5 for >=3 goal defeat)
-        """
+    ) -> Tuple[float, Dict[str, Any]]:
+        """3. Tactical Style Execution (Raw Base)"""
         arch = self.archetypes.get(team_id, {})
         key_metrics = arch.get(
             "key_metrics",
@@ -366,7 +391,6 @@ class MatchReportCardCalculator:
         avg_pct = sum(percentiles) / max(len(percentiles), 1)
         base_score = avg_pct * 10.0
 
-        # Growth bonus
         avg_growth = sum(growth_ratios) / max(len(growth_ratios), 1) if growth_ratios else 1.0
         bonus_growth = 0.0
         if avg_growth >= 1.25:
@@ -375,16 +399,10 @@ class MatchReportCardCalculator:
             bonus_growth = 0.5
 
         raw = base_score + bonus_growth
-
-        # Result alignment
         if team_score > opp_score:
-            raw += 0.8  # Style led to victory
-        elif (opp_score - team_score) >= 3:
-            raw = min(raw, 5.0)  # Cannot claim style success when demolished
+            raw += 0.5  # Modest victory execution bonus
 
-        final = max(0, min(10, round(raw)))
-
-        return final, {
+        return raw, {
             "style_name": arch.get("style_name", "標準バランス型"),
             "key_metrics": key_metrics,
             "percentile": round(avg_pct, 3),
@@ -399,20 +417,15 @@ class MatchReportCardCalculator:
         players: List[Dict[str, Any]],
         team_score: int,
         opp_score: int,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """4. Duels & Intensity (0-10)
-
-        Tuned to empirical J1 player duel median (~20 duels won per team).
-        """
+    ) -> Tuple[float, Dict[str, Any]]:
+        """4. Duels & Intensity (Raw Base)"""
         tackles_rate = float(t_flab.get("tackles_rate") or 60.0)
         cbp_gain = float(t_flab.get("cbp_gain") or 60.0)
 
-        # duels won (actual median in DB is ~20)
         duels_won = sum(int(p.get("duels_won") or 0) for p in players)
         if duels_won == 0:
-            duels_won = 20  # empirical fallback default
+            duels_won = 20
 
-        # proxy ppda
         tackles = float(t_flab.get("tackles") or 0.0)
         intercepts = float(t_flab.get("intercepts") or 0.0)
         def_actions = tackles + intercepts
@@ -420,14 +433,13 @@ class MatchReportCardCalculator:
         proxy_ppda = opp_passes / max(def_actions, 1.0)
 
         s_tackle = (tackles_rate - 60.0) * 0.08
-        s_duel = (duels_won - 20.0) * 0.12  # Tuned around 20 duels
+        s_duel = (duels_won - 20.0) * 0.12
         s_gain = (cbp_gain - 60.0) * 0.04
         s_ppda = (18.0 - min(proxy_ppda, 30.0)) * 0.10
 
         raw = 5.0 + s_tackle + s_duel + s_gain + s_ppda
-        final = max(0, min(10, round(raw)))
 
-        return final, {
+        return raw, {
             "tackles_rate": tackles_rate,
             "duels_won": duels_won,
             "cbp_gain": cbp_gain,
@@ -441,8 +453,8 @@ class MatchReportCardCalculator:
         players: List[Dict[str, Any]],
         team_score: int,
         opp_score: int,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """5. Team Cohesion (0-10)"""
+    ) -> Tuple[float, Dict[str, Any]]:
+        """5. Team Cohesion (Raw Base)"""
         fwd_passes = 0
         opp_half_passes = 0
         opp_half_success = 0
@@ -486,9 +498,8 @@ class MatchReportCardCalculator:
         s_ent = (entropy - 0.85) * 4.0
 
         raw = 5.0 + s_fwd + s_opp + s_ent + s_assist
-        final = max(0, min(10, round(raw)))
 
-        return final, {
+        return raw, {
             "forward_passes": fwd_passes,
             "opp_area_pass_rate": round(opp_pass_rate, 1),
             "touch_entropy": round(entropy, 3),
@@ -506,34 +517,41 @@ class MatchReportCardCalculator:
         t_flab: Dict[str, Any],
         o_flab: Dict[str, Any],
         is_home: bool,
-    ) -> Tuple[int, Dict[str, Any]]:
-        """6. Excitement Index (0-10)"""
+    ) -> Tuple[float, Dict[str, Any]]:
+        """6. Excitement Index (Raw Base with Positive & Negative Penalties)"""
         bonuses = 0.0
-        bonus_reasons = []
+        penalties = 0.0
+        reasons = []
 
-        # A. Derby Match
         derby_name = self.is_derby_match(team_id, opp_id)
+
+        # ---------------------------------------------------------------------
+        # Positive Factors (Victories & Thrilling Events)
+        # ---------------------------------------------------------------------
         if derby_name and team_score > opp_score:
             bonuses += 1.5
-            bonus_reasons.append(f"{derby_name}勝利 (+1.5)")
+            reasons.append(f"{derby_name}勝利 (+1.5)")
 
-        # B. Red card drama (numerical disadvantage)
+        # Red card events
         red_card_events = [e for e in events if e.get("event_type") == "red_card"]
         team_reds = [e for e in red_card_events if e.get("team_id") == team_id]
         if team_reds:
             red_min = team_reds[0].get("minute") or 0
             if team_score > opp_score:
                 bonuses += 2.0
-                bonus_reasons.append(f"退場者発生({red_min}分)後の数的不利勝利 (+2.0)")
+                reasons.append(f"退場発生({red_min}分)後の数的不利勝利 (+2.0)")
             elif team_score == opp_score:
                 bonuses += 1.5
-                bonus_reasons.append(f"退場者発生({red_min}分)後の数的不利ドロー (+1.5)")
+                reasons.append(f"退場発生({red_min}分)後の数的不利ドロー (+1.5)")
 
-        # C. Comeback win (Trailing to Win)
+        # Timeline analysis for comeback, late goals, and blown leads
         running_t = 0
         running_o = 0
         was_trailing = False
-        late_goal = False
+        was_leading = False
+        late_goal_scored = False
+        late_goal_conceded = False
+
         for e in events:
             ev_type = e.get("event_type")
             ev_team = e.get("team_id")
@@ -545,90 +563,103 @@ class MatchReportCardCalculator:
                     running_o += 1
                 if running_o > running_t:
                     was_trailing = True
-                if minute >= 80 and ev_team == team_id and running_t >= running_o:
-                    late_goal = True
+                if running_t > running_o:
+                    was_leading = True
+                if minute >= 80:
+                    if ev_team == team_id:
+                        late_goal_scored = True
+                    else:
+                        late_goal_conceded = True
 
+        # Comeback win
         if was_trailing and team_score > opp_score:
             bonuses += 1.5
-            bonus_reasons.append("ビハインドからの逆転勝利 (+1.5)")
+            reasons.append("ビハインドからの逆転勝利 (+1.5)")
 
-        # D. Late dramatic goal
-        if late_goal and team_score >= opp_score:
+        # Late dramatic goal
+        if late_goal_scored and team_score >= opp_score:
             bonuses += 1.5
-            bonus_reasons.append("80分以降の劇的ゴール (+1.5)")
+            reasons.append("80分以降の劇的ゴール (+1.5)")
 
-        # E. Convincing win / Away win
+        # Convincing win / Away win
         if team_score > opp_score:
             if (team_score - opp_score) >= 3:
                 bonuses += 1.5
-                bonus_reasons.append(f"{team_score}-{opp_score}の圧巻快勝劇 (+1.5)")
+                reasons.append(f"{team_score}-{opp_score}の圧巻快勝劇 (+1.5)")
             elif not is_home:
                 bonuses += 1.0
-                bonus_reasons.append("敵地でのアウェイ白星 (+1.0)")
+                reasons.append("敵地でのアウェイ白星 (+1.0)")
 
-        # F. Goal shootout / high xG
+        # Goal shootout / high xG
         total_goals = team_score + opp_score
         if total_goals >= 4:
             bonuses += 1.0
-            bonus_reasons.append(f"合計{total_goals}得点の乱打戦 (+1.0)")
+            reasons.append(f"合計{total_goals}得点の乱打戦 (+1.0)")
         elif total_goals == 3:
             bonuses += 0.5
-            bonus_reasons.append(f"合計{total_goals}得点の打ち合い (+0.5)")
+            reasons.append(f"合計{total_goals}得点の打ち合い (+0.5)")
 
         t_xg = float(t_flab.get("xg") or 0.0)
         o_xg = float(o_flab.get("xg") or 0.0)
         if (t_xg + o_xg) >= 3.0:
             bonuses += 0.5
-            bonus_reasons.append(f"両チーム合計xG {round(t_xg+o_xg, 1)}の好機量産 (+0.5)")
+            reasons.append(f"両チーム合計xG {round(t_xg+o_xg, 1)}の好機量産 (+0.5)")
 
-        # G. High Intensity
+        # High Intensity
         t_sprints = int(t_flab.get("sprints") or 0)
         o_sprints = int(o_flab.get("sprints") or 0)
         if (t_sprints + o_sprints) >= 240:
             bonuses += 0.5
-            bonus_reasons.append("激しいスプリント攻防 (+0.5)")
+            reasons.append("激しいスプリント攻防 (+0.5)")
 
-        # H. Bore draw penalty
-        penalty = 0.0
+        # ---------------------------------------------------------------------
+        # Negative Factors (Frustrations & Painful Failures)
+        # ---------------------------------------------------------------------
+        # A. Blown Lead / Comeback defeat
+        if was_leading and team_score < opp_score:
+            penalties += 1.5
+            reasons.append("先制・リードからの逆転負け (-1.5)")
+
+        # B. Late dramatic goal conceded
+        if late_goal_conceded and team_score <= opp_score:
+            penalties += 1.5
+            reasons.append("85分以降の痛恨の被弾 (-1.5)")
+
+        # C. Self-destruction via red card in defeat
+        if team_reds and team_score < opp_score:
+            penalties += 1.5
+            reasons.append("自チーム退場による自滅・敗戦 (-1.5)")
+
+        # D. Derby Defeat
+        if derby_name and team_score < opp_score:
+            penalties += 1.0
+            reasons.append(f"{derby_name}敗戦の屈辱 (-1.0)")
+
+        # E. Demolition defeat (3+ goal margin)
+        if (opp_score - team_score) >= 3:
+            penalties += 1.5
+            reasons.append(f"{team_score}-{opp_score}のショッキングな大敗 (-1.5)")
+
+        # F. Home shutout defeat
+        if is_home and team_score == 0 and opp_score > 0:
+            penalties += 0.5
+            reasons.append("本拠地での完封負け (-0.5)")
+
+        # G. Bore draw penalty
         t_sot = int(t_flab.get("shots_on_target") or 0)
         o_sot = int(o_flab.get("shots_on_target") or 0)
         if total_goals == 0 and (t_sot + o_sot) <= 4:
-            penalty = 2.0
-            bonus_reasons.append("決定機僅少の0-0膠着戦 (-2.0)")
+            penalties += 2.0
+            reasons.append("決定機僅少の0-0膠着戦 (-2.0)")
 
-        raw = 5.0 + bonuses - penalty
-        final = max(0, min(10, round(raw)))
+        raw = 5.0 + bonuses - penalties
 
-        return final, {
+        return raw, {
             "bonuses": round(bonuses, 2),
-            "penalty": penalty,
-            "reasons": bonus_reasons,
+            "penalties": round(penalties, 2),
+            "reasons": reasons,
             "raw_score": round(raw, 2),
         }
-
-    def _calibrate_total_score(
-        self,
-        raw_total: int,
-        team_score: int,
-        opp_score: int,
-    ) -> int:
-        """Outcome alignment calibration to maintain reporter-grade consistency."""
-        tot = raw_total
-        if team_score > opp_score:
-            # Victory floor guarantees at least A- (37)
-            tot = max(tot, 37)
-            if (team_score - opp_score) >= 2:
-                tot = max(tot, 42)
-        elif team_score < opp_score:
-            # Defeat cap: cannot receive A+ (43+) on defeat
-            if (opp_score - team_score) >= 2:
-                tot = min(tot, 32)
-            else:
-                tot = min(tot, 36)
-        else:
-            # Draw cap: draws do not reach A+ (max 38 A-)
-            tot = min(tot, 38)
-        return max(0, min(60, tot))
 
     def _determine_rank(self, total: int) -> str:
         """S to D grade mapping according to El Golasso standard."""

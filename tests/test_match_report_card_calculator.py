@@ -64,22 +64,49 @@ class TestMatchReportCardCalculator(unittest.TestCase):
             is_home=True,
         )
 
-        # 5.0 (base) + 1.5 (derby win) + 1.5 (comeback win) + 1.5 (late goal) + 0.5 (high xG 3.3) + 0.5 (sprints 250) + 0.5 (3 goals) = 11.0 -> clamped to 10
-        self.assertEqual(score, 10)
+        # Raw unscaled score before final clamping/scaling
+        self.assertGreaterEqual(score, 10.0)
         self.assertTrue(any("神奈川ダービー" in r for r in details["reasons"]))
         self.assertTrue(any("逆転勝利" in r for r in details["reasons"]))
         self.assertTrue(any("80分以降" in r for r in details["reasons"]))
 
-    def test_outcome_calibration(self):
-        """Test outcome-based calibration caps and floors."""
-        # Victory floor
-        self.assertEqual(self.calc._calibrate_total_score(30, team_score=2, opp_score=1), 37)
-        self.assertEqual(self.calc._calibrate_total_score(35, team_score=3, opp_score=1), 42)
-        # Defeat cap
-        self.assertEqual(self.calc._calibrate_total_score(46, team_score=2, opp_score=3), 36)
-        self.assertEqual(self.calc._calibrate_total_score(45, team_score=0, opp_score=2), 32)
-        # Draw cap
-        self.assertEqual(self.calc._calibrate_total_score(43, team_score=2, opp_score=2), 38)
+    def test_scaling_factor(self):
+        """Test outcome and goal-difference scaling factor (gamma)."""
+        # Big win (+3 or more) -> 1.10
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=4, opp_score=0), 1.10)
+        # Moderate win (+2) -> 1.05
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=3, opp_score=1), 1.05)
+        # 1-goal win (+1) -> 1.00
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=2, opp_score=1), 1.00)
+        # Draw (0) -> 0.90
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=1, opp_score=1), 0.90)
+        # 1-goal loss (-1) -> 0.80
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=1, opp_score=2), 0.80)
+        # 2-goal loss (-2) -> 0.72
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=0, opp_score=2), 0.72)
+        # Big loss (-3 or more) -> 0.65
+        self.assertAlmostEqual(self.calc.compute_outcome_decay_factor(team_score=0, opp_score=4), 0.65)
+
+    def test_metrics_sum_equals_total_score(self):
+        """Test that sum of 6 rounded metrics strictly equals total_score."""
+        if not DB_PATH.exists():
+            self.skipTest("data/football.db not found")
+
+        conn = sqlite3.connect(DB_PATH)
+        cur = conn.cursor()
+        cur.execute("SELECT match_id, home_team_id, away_team_id FROM matches WHERE matchweek = 13 LIMIT 3")
+        rows = cur.fetchall()
+        conn.close()
+
+        for mid, home, away in rows:
+            for tid in (home, away):
+                card = self.calc.calculate_report_card(mid, tid)
+                m_sum = sum(v["score"] for v in card["metrics"].values())
+                self.assertEqual(
+                    card["total_score"],
+                    m_sum,
+                    f"Mismatch in {mid} for {tid}: total={card['total_score']} vs sum={m_sum}",
+                )
 
     def test_calculate_actual_match(self):
         """Test calculation on real match data in database."""

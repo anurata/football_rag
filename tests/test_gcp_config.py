@@ -27,6 +27,16 @@ class TestGCPConfig(unittest.TestCase):
         else:
             os.environ.pop("CHROMA_PERSIST_DIR", None)
 
+        # Restore reloaded modules to default configurations
+        import importlib
+        import sys
+        if "pipeline.db" in sys.modules:
+            importlib.reload(sys.modules["pipeline.db"])
+        if "pipeline.team_analytics_engine" in sys.modules:
+            importlib.reload(sys.modules["pipeline.team_analytics_engine"])
+        if "pipeline.vector_indexer" in sys.modules:
+            importlib.reload(sys.modules["pipeline.vector_indexer"])
+
     def test_dockerfile_and_dockerignore_configuration(self):
         """Verify Dockerfile and .dockerignore exist and enforce data separation & security."""
         dockerfile_path = self.root_dir / "Dockerfile"

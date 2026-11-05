@@ -7,7 +7,9 @@ class PitchBoard extends StatelessWidget {
   final TeamContextItem team;
   final bool isHome;
   final Map<String, int> playerScores;
+  final Map<String, String> playerLiveStatus;
   final Function(PlayerContextItem player, String actionType, String? category) onPlayerAction;
+  final Function(PlayerContextItem player)? onPlayerDoubleTap;
   final VoidCallback? onSubstituteTap;
   final VoidCallback? onSwapPositionsTap;
   final VoidCallback? onShowRankingsTap;
@@ -17,7 +19,9 @@ class PitchBoard extends StatelessWidget {
     required this.team,
     this.isHome = true,
     this.playerScores = const {},
+    this.playerLiveStatus = const {},
     required this.onPlayerAction,
+    this.onPlayerDoubleTap,
     this.onSubstituteTap,
     this.onSwapPositionsTap,
     this.onShowRankingsTap,
@@ -135,6 +139,10 @@ class PitchBoard extends StatelessWidget {
         isHome: isHome,
         score: playerScores[player.playerId] ?? 0,
         overrideDisplayName: team.getPlayerDisplayName(player),
+        liveStatus: playerLiveStatus[player.playerId] ?? 'normal',
+        onDoubleTap: onPlayerDoubleTap != null
+            ? () => onPlayerDoubleTap!(player)
+            : null,
         onAction: (actionType, category) {
           onPlayerAction(player, actionType, category);
         },

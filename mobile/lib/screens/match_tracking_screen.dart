@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/action_models.dart';
+import '../models/live_match_models.dart';
 import '../models/match_models.dart';
 import '../providers/match_provider.dart';
 import '../widgets/action_ticker.dart';
+import '../widgets/live/live_center_area.dart';
 import '../widgets/pitch_board.dart';
 import '../widgets/player_ranking_sheet.dart';
 import '../widgets/position_swap_modal.dart';
@@ -24,6 +26,9 @@ class MatchTrackingScreen extends ConsumerStatefulWidget {
 }
 
 class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
+  final LiveSnapshotData _liveSnapshot = MockLiveSnapshot.getSample();
+  PlayerContextItem? _selectedPlayer;
+
   @override
   void initState() {
     super.initState();
@@ -318,7 +323,47 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
       body: Column(
         children: [
           Expanded(
-            child: _buildLiveNewsPlaceholder(match),
+            child: LiveCenterArea(
+              snapshot: _liveSnapshot,
+              userActions: state.recentActions,
+              selectedPlayer: _selectedPlayer,
+              selectedPlayerScore: _selectedPlayer != null
+                  ? (state.playerScores[_selectedPlayer!.playerId] ?? 0)
+                  : 0,
+              homeTeamName: match.homeTeam.shortName,
+              awayTeamName: match.awayTeam.shortName,
+              onClearSelectedPlayer: () {
+                setState(() => _selectedPlayer = null);
+              },
+              onOpenWebDetails: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('🌐 Web詳細カルテへ遷移（実装予定）'),
+                    duration: Duration(seconds: 1),
+                  ),
+                );
+              },
+              onSpeakTweet: () {
+                HapticFeedback.mediumImpact();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '🔊 [TTS読み上げ] ${_liveSnapshot.latestAiTweet?.text ?? ""}',
+                    ),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              },
+              onAskLlm: () {
+                HapticFeedback.mediumImpact();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('💬 戦術質問ダイアログ（実装予定）'),
+                    duration: Duration(seconds: 1),
+                  ),
+                );
+              },
+            ),
           ),
           SizedBox(
             height: 362,
@@ -326,6 +371,14 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
               team: currentTeam,
               isHome: isHome,
               playerScores: state.playerScores,
+              playerLiveStatus: {
+                for (final e in _liveSnapshot.playerLiveStatus.entries)
+                  e.key: e.value.status,
+              },
+              onPlayerDoubleTap: (player) {
+                HapticFeedback.mediumImpact();
+                setState(() => _selectedPlayer = player);
+              },
               onSubstituteTap: () => _showSubstitutionModal(currentTeam, isHome),
               onSwapPositionsTap: () => _showPositionSwapModal(currentTeam, isHome),
               onShowRankingsTap: () => _showPlayerRankingSheet(currentTeam, isHome),
@@ -427,77 +480,7 @@ class _MatchTrackingScreenState extends ConsumerState<MatchTrackingScreen> {
     );
   }
 
-  Widget _buildLiveNewsPlaceholder(MatchAppContext match) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.fromLTRB(10, 6, 10, 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.blueGrey.withValues(alpha: 0.35),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.bolt, color: Colors.amber, size: 16),
-              SizedBox(width: 6),
-              Text(
-                'LIVE MATCH FEED & TACTICAL INFO',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                  color: Colors.amber,
-                ),
-              ),
-              Spacer(),
-              Icon(Icons.expand_more, color: Colors.white38, size: 16),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '中央試合情報表示エリア（中身は後で実装）',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '• ゴール速報・ハイライトイベント\n• xG推移・ボール支配率・シュートスタッツ\n• AI戦術インサイト・モメンタム速報',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Colors.white60,
-                      height: 1.45,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 
   Widget _buildTeamToggleBar(
     MatchAppContext match,

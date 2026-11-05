@@ -21,10 +21,13 @@ flowchart TD
         S_SOP["7. サイト運用・更新・デプロイ完全仕様書<br>docs/SITE_OPERATIONS_SPECIFICATION.md"]
         S_UI["8. 観戦ガイドUI/UX再編仕様書<br>docs/WATCHING_GUIDE_UI_SPECIFICATION.md"]
         S_REP["9. 試合番記者通信簿評価仕様書<br>docs/MATCH_REPORT_CARD_SPECIFICATION.md"]
+        S_MOB["11. 観戦特化型モバイルアプリ基本仕様<br>docs/MOBILE_APP_SPECIFICATION.md"]
+        S_MOBL["12. モバイル・ライブ速報＆AI自動実況仕様<br>docs/MOBILE_APP_LIVE_SPECIFICATION.md"]
     end
 
     subgraph DeploySpecs ["インフラ・デプロイ仕様書"]
         S_CLD["10. クラウドデプロイ・運用保守ガイド<br>CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md"]
+        S_GCP["13. GCP移行・分散データ基盤仕様書<br>docs/GCP_MIGRATION_SPECIFICATION.md"]
     end
 
     Manifesto --> CoreSpecs
@@ -48,6 +51,9 @@ flowchart TD
 | **8. 観戦ガイドUI仕様** | Jリーグ全体・チーム毎・試合・選手の4画面再編仕様、5大セクション試合ビュー、どこでもAI対話QAモーダル設計。 | [WATCHING_GUIDE_UI_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/WATCHING_GUIDE_UI_SPECIFICATION.md) |
 | **9. 番記者通信簿仕様** | エル・ゴラッソ準拠の6項目（ゲーム支配・個人・スタイル・球際・リレーション・興奮度）評価とS〜D総合ランク採点エンジン仕様。 | [MATCH_REPORT_CARD_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/MATCH_REPORT_CARD_SPECIFICATION.md) |
 | **10. クラウド運用ガイド** | Streamlit Cloud、GitHub Actions、Google Drive同期、OneDrive連携のインフラ設定とデプロイ手順。 | [CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md](file:///d:/workspace/flutter/football_rag/CLOUD_DEPLOYMENT_AND_OPERATION_GUIDE.md) |
+| **11. モバイル基本仕様** | 観戦特化型Flutterアプリ仕様。片手親指ハーフピッチUI、Good/Badスワイプ、Local-First同期、観戦メモ・写真。 | [MOBILE_APP_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/MOBILE_APP_SPECIFICATION.md) |
+| **12. モバイル・ライブ＆実況** | センターエリア6大カード、選手ピン動的演出（消えてる/光る）、Ear-First自動実況（AIつぶやき・TTS）、リプレイAPI。 | [MOBILE_APP_LIVE_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/MOBILE_APP_LIVE_SPECIFICATION.md) |
+| **13. GCP移行・データ基盤** | Cloud Run、Firestore Realtime Listener、BigQuery統合への段階的移行アーキテクチャ。 | [GCP_MIGRATION_SPECIFICATION.md](file:///d:/workspace/flutter/football_rag/docs/GCP_MIGRATION_SPECIFICATION.md) |
 
 ---
 
@@ -70,4 +76,8 @@ flowchart TD
 | `scripts/run_scheduled_pipeline.py` | `operation_cycle.md` | `tests/test_run_scheduled_pipeline.py` |
 | `scripts/sync_docs_to_nlm.py` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_sync_docs_to_nlm.py` |
 | `scripts/setup_git_hooks.py` | `SITE_OPERATIONS_SPECIFICATION.md` | `tests/test_git_hooks.py` |
+| `mobile/lib/screens/match_tracking_screen.dart` | `MOBILE_APP_SPECIFICATION.md` / `LIVE` | `mobile/test/widget_test.dart` |
+| `mobile/lib/widgets/pitch_board.dart` | `MOBILE_APP_SPECIFICATION.md` / `LIVE` | `mobile/test/widget_test.dart` |
+| `mobile/lib/widgets/player_pin.dart` | `MOBILE_APP_SPECIFICATION.md` / `LIVE` | `mobile/test/widget_test.dart` |
+| `api/main.py` | `MOBILE_APP_SPECIFICATION.md` / `LIVE` | `tests/test_api_mobile.py` |
 

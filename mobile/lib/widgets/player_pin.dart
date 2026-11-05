@@ -9,6 +9,8 @@ class PlayerPin extends StatefulWidget {
   final bool isHome;
   final int score;
   final String? overrideDisplayName;
+  final String liveStatus; // 'normal' | 'faded' | 'overdrive'
+  final VoidCallback? onDoubleTap;
   final Function(String actionType, String? category) onAction;
 
   const PlayerPin({
@@ -18,6 +20,8 @@ class PlayerPin extends StatefulWidget {
     this.isHome = true,
     this.score = 0,
     this.overrideDisplayName,
+    this.liveStatus = 'normal',
+    this.onDoubleTap,
     required this.onAction,
   });
 
@@ -110,23 +114,29 @@ class _PlayerPinState extends State<PlayerPin> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onVerticalDragEnd: _handleVerticalDrag,
-      onTap: () => _showCategoryDialog(context),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
-        decoration: _buildBoxDecoration(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildNumberAndPositionRow(),
-            const SizedBox(height: 1),
-            Expanded(
-              child: _buildPlayerNameText(),
-            ),
-          ],
+    final isFaded = widget.liveStatus == 'faded';
+
+    return Opacity(
+      opacity: isFaded ? 0.50 : 1.0,
+      child: GestureDetector(
+        onVerticalDragEnd: _handleVerticalDrag,
+        onTap: () => _showCategoryDialog(context),
+        onDoubleTap: widget.onDoubleTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          decoration: _buildBoxDecoration(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildNumberAndPositionRow(),
+              const SizedBox(height: 1),
+              Expanded(
+                child: _buildPlayerNameText(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -149,8 +159,9 @@ class _PlayerPinState extends State<PlayerPin> {
       );
     }
 
-    // 10+ points: Glowing gold aura for exceptional high ratings
-    final isGlowing = widget.score >= 10;
+    // 10+ points or Overdrive (sprint surge): Glowing gold aura
+    final isOverdrive = widget.liveStatus == 'overdrive';
+    final isGlowing = widget.score >= 10 || isOverdrive;
     final baseColor = widget.isHome
         ? const Color(0xFF7D1B2D) // Fagiano Red
         : const Color(0xFFE2E8F0); // Away light grey

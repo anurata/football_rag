@@ -91,7 +91,8 @@ class MatchReportCardCalculator:
         team_id: str,
     ) -> Dict[str, Any]:
         """Calculate complete 6-metric report card for target team in specified match."""
-        with get_db_connection(self.db_path) as conn:
+        conn = get_db_connection(self.db_path)
+        try:
             conn.row_factory = sqlite3.Row
             cur = conn.cursor()
 
@@ -156,6 +157,8 @@ class MatchReportCardCalculator:
                 (matchweek,),
             )
             mw_stats = [dict(row) for row in cur.fetchall()]
+        finally:
+            conn.close()
 
         # 6. Compute Raw Scores for 6 Dimensions
         raw_1, details_1 = self._calc_game_dominance(
@@ -220,7 +223,7 @@ class MatchReportCardCalculator:
         total_score = score_1 + score_2 + score_3 + score_4 + score_5 + score_6
         rank = self._determine_rank(total_score)
 
-        return {
+        result = {
             "match_id": match_id,
             "team_id": team_id,
             "opp_team_id": opp_id,
@@ -262,6 +265,10 @@ class MatchReportCardCalculator:
                 },
             },
         }
+
+        # 9. Generate El Golasso style critique
+        result["critique"] = self.generate_critique(result)
+        return result
 
     # -------------------------------------------------------------------------
     # Dimension Calculators
@@ -676,3 +683,106 @@ class MatchReportCardCalculator:
         if total >= 13:
             return "C"
         return "D"
+
+    def generate_critique(
+        self,
+        report_card: Dict[str, Any],
+    ) -> Dict[str, str]:
+        """Generate El Golasso-style reporter critique and headline."""
+        rank = report_card.get("rank", "B+")
+        total_score = report_card.get("total_score", 30)
+        score_str = report_card.get("score", "0-0")
+        is_home = report_card.get("is_home", True)
+        metrics = report_card.get("metrics", {})
+
+        # Parse score
+        parts = score_str.split("-")
+        t_score = int(parts[0]) if len(parts) == 2 else 0
+        o_score = int(parts[1]) if len(parts) == 2 else 0
+
+        # Sort metrics by score
+        metric_items = [
+            (k, v.get("name", k), v.get("score", 0), v.get("details", {}))
+            for k, v in metrics.items()
+        ]
+        metric_items.sort(key=lambda x: x[2], reverse=True)
+
+        best_m = metric_items[0] if metric_items else ("none", "総合", 5, {})
+        worst_m = metric_items[-1] if metric_items else ("none", "総合", 5, {})
+
+        # Excitement reasons if any
+        exc_reasons = (
+            metrics.get("excitement_index", {})
+            .get("details", {})
+            .get("reasons", [])
+        )
+
+        # Headlines by rank
+        headline_map = {
+            "S": "【最高評価 S】敵陣を完全制圧。戦術遂行と気迫が結実した圧巻の勝利",
+            "A+": "【高評価 A+】高い完成度と球際強度で相手を凌駕。手応え十分の白星",
+            "A-": "【好評価 A-】主導権を握り要所を締める。狙い通りの試合運びを披露",
+            "B+": "【及第点 B+】激しい攻防の中で粘り強さを発揮。収穫の多い戦い",
+            "B-": "【課題残す B-】随所に好機を作るも詰めを欠く。次節への修正が焦点",
+            "C": "【苦杯 C】相手の圧力に後手を踏み、最後まで主導権を取り戻せず",
+            "D": "【完敗 D】攻守に精彩を欠き厳しい内容。組織全体の建て直しが急務",
+        }
+        headline = headline_map.get(rank, f"【評価 {rank}】総得点 {total_score}点の戦い")
+
+        # Context summary
+        loc_str = "本拠地" if is_home else "アウェイ"
+        if t_score > o_score:
+            res_str = f"{loc_str}で{t_score}-{o_score}の白星。"
+        elif t_score == o_score:
+            res_str = f"{loc_str}で{t_score}-{o_score}のドロー決着。"
+        else:
+            res_str = f"{loc_str}で{t_score}-{o_score}の敗戦。"
+
+        # Highlights
+        pos_notes = []
+        if best_m[2] >= 7:
+            clean_name = (
+                best_m[1]
+                .replace("①", "")
+                .replace("②", "")
+                .replace("③", "")
+                .replace("④", "")
+                .replace("⑤", "")
+                .replace("⑥", "")
+            )
+            pos_notes.append(f"「{clean_name}」で高い水準（{best_m[2]}/10点）を発揮")
+
+        if exc_reasons:
+            clean_reasons = [r.split(" (")[0] for r in exc_reasons if "+" in r]
+            if clean_reasons:
+                pos_notes.append(f"{'・'.join(clean_reasons[:2])}などドラマ性も際立った")
+
+        neg_notes = []
+        if worst_m[2] <= 4:
+            clean_worst = (
+                worst_m[1]
+                .replace("①", "")
+                .replace("②", "")
+                .replace("③", "")
+                .replace("④", "")
+                .replace("⑤", "")
+                .replace("⑥", "")
+            )
+            neg_notes.append(f"「{clean_worst}」（{worst_m[2]}/10点）に改善の余地を残す")
+
+        body_parts = [res_str]
+        if pos_notes:
+            body_parts.append(f"とりわけ{'、'.join(pos_notes)}。")
+        if neg_notes:
+            body_parts.append(f"一方で{'、'.join(neg_notes)}。")
+        else:
+            body_parts.append("全項目で破綻なくバランスの取れたパフォーマンスを披露した。")
+
+        text = "".join(body_parts)
+
+        return {
+            "headline": headline,
+            "text": text,
+            "best_metric": best_m[1],
+            "worst_metric": worst_m[1],
+        }

@@ -16,6 +16,7 @@ from pipeline.league_overview_data import (
     get_league_standings,
     get_league_stats_rankings,
     get_matchweek_matches,
+    get_matchweek_report_cards,
     get_tactical_positioning_map_data,
 )
 from pipeline.team_analytics_engine import (
@@ -23,6 +24,10 @@ from pipeline.team_analytics_engine import (
     get_team_emblem_url,
 )
 from views.components.ai_modal import render_ai_button
+from views.components.match.report_card_section import (
+    _get_rank_badge_html,
+    _RANK_COLORS,
+)
 from views.navigation import (
     VIEW_LEAGUE,
     VIEW_MATCH,
@@ -42,6 +47,12 @@ def _load_standings_data(season: int) -> List[Dict[str, Any]]:
 def _load_matchweek_data(season: int, matchweek: Optional[int]) -> Dict[str, Any]:
     """Cached loader for matchweek schedule and cards."""
     return get_matchweek_matches(season=season, matchweek=matchweek)
+
+
+@st.cache_data(ttl=600)
+def _load_matchweek_report_cards(season: int, matchweek: Optional[int]) -> Dict[str, Any]:
+    """Cached loader for matchweek report cards (all 20 clubs)."""
+    return get_matchweek_report_cards(season=season, matchweek=matchweek)
 
 
 @st.cache_data(ttl=600)
@@ -233,14 +244,179 @@ def _render_matchweek_section(
             _render_match_card(m)
 
 
+def _render_team_report_mini_card(
+    card: Dict[str, Any],
+    show_rank_number: bool = False,
+) -> None:
+    """Render a compact report card for a single team in the matchweek."""
+    tid = card.get("team_id", "")
+    tname = card.get("team_name", tid)
+    rank = card.get("rank", "B+")
+    score = card.get("total_score", 0)
+    critique = card.get("critique", {})
+    score_str = card.get("score", "")
+    opp_name = card.get("opp_team_name", "")
+    mid = card.get("match_id", "")
+    metrics = card.get("metrics", {})
+    week_rank = card.get("week_rank", 1)
+
+    with st.container(border=True):
+        col_rank, col_emb, col_info = st.columns([1, 1, 4])
+        with col_rank:
+            if show_rank_number:
+                medal = (
+                    "🥇"
+                    if week_rank == 1
+                    else ("🥈" if week_rank == 2 else ("🥉" if week_rank == 3 else f"#{week_rank}"))
+                )
+                st.markdown(f"### {medal}")
+            else:
+                st.markdown(f"**{card.get('score', '')}**")
+        with col_emb:
+            st.markdown(
+                f"<div style='text-align: center; padding-top: 4px;'>"
+                f"{get_team_emblem_html(tid, width=36, height=36)}"
+                f"</div>",
+                unsafe_allow_html=True,
+            )
+        with col_info:
+            st.markdown(f"**{tname}**")
+            st.caption(f"vs {opp_name} ({score_str})")
+
+        # Rank and Score Row
+        c_badge, c_pts = st.columns([3, 2])
+        with c_badge:
+            st.markdown(_get_rank_badge_html(rank), unsafe_allow_html=True)
+        with c_pts:
+            st.markdown(
+                f"<div style='text-align: right;'>"
+                f"<b>{score}</b> <span style='font-size:0.8rem;color:#94a3b8;'>/ 60点</span>"
+                f"</div>",
+                unsafe_allow_html=True,
+            )
+
+        # Headline & Text
+        st.markdown(
+            f"<p style='font-size:0.9rem; margin-top:8px; margin-bottom:4px; font-weight:700;'>"
+            f"{critique.get('headline', '')}</p>",
+            unsafe_allow_html=True,
+        )
+        st.caption(critique.get("text", ""))
+
+        # 6-Metric Mini Progress
+        metric_keys = [
+            ("game_dominance", "支配"),
+            ("individual_power", "個"),
+            ("style_execution", "型"),
+            ("duels_intensity", "球際"),
+            ("team_cohesion", "連係"),
+            ("excitement_index", "熱"),
+        ]
+        cols = st.columns(6)
+        for i, (m_key, m_label) in enumerate(metric_keys):
+            with cols[i]:
+                m_score = metrics.get(m_key, {}).get("score", 0)
+                st.caption(f"{m_label}:{m_score}")
+
+        if st.button("試合詳細へ ❯", key=f"btn_rc_goto_{mid}_{tid}", use_container_width=True):
+            navigate_to(view=VIEW_MATCH, match_id=mid)
+
+
+def _render_match_pair_report_card(pair: Dict[str, Any]) -> None:
+    """Render paired match comparison card with home and away team report cards."""
+    mid = pair.get("match_id", "")
+    date = pair.get("date", "")
+    stadium = pair.get("stadium", "")
+    home = pair.get("home", {})
+    away = pair.get("away", {})
+
+    with st.container(border=True):
+        st.caption(f"📅 {date} | 🏟️ {stadium}")
+        c_h, c_vs, c_a = st.columns([5, 1, 5])
+        with c_h:
+            _render_team_report_mini_card(home, show_rank_number=False)
+        with c_vs:
+            st.markdown(
+                "<div style='text-align:center; padding-top:40px; font-weight:bold; color:#94a3b8;'>VS</div>",
+                unsafe_allow_html=True,
+            )
+        with c_a:
+            _render_team_report_mini_card(away, show_rank_number=False)
+
+
+def _render_matchweek_report_cards_section(
+    season: int,
+    qa_engine: TacticalQAEngine,
+) -> None:
+    """Section 3: Matchweek Report Cards for all 20 clubs (エル・ゴラッソ公認 番記者通信簿)."""
+    col_title, col_ai = st.columns([3, 1])
+    with col_title:
+        st.subheader("📰 3. 節別 J1番記者通信簿（全10試合・20チーム一覧）")
+        st.caption(
+            "当節開催された全10試合・20クラブの6大観点評価（S〜Dランク・合計得点・番記者寸評）を一覧比較できます。"
+        )
+    with col_ai:
+        render_ai_button(
+            button_key="ai_btn_mw_report_cards",
+            view_type=VIEW_LEAGUE,
+            qa_engine=qa_engine,
+            section_key="report_cards",
+            note=f"{season}シーズン 当節の全チーム通信簿・評価ランキングについて質問",
+            button_label="🤖 節の通信簿をAI分析",
+        )
+
+    # Available matchweeks
+    meta_info = _load_matchweek_data(season=season, matchweek=None)
+    available_weeks = meta_info.get("available_matchweeks", [])
+    if not available_weeks:
+        st.info("日程データが登録されていません。")
+        return
+
+    default_week = meta_info.get("selected_matchweek", available_weeks[0])
+    selected_week = st.selectbox(
+        "通信簿を表示する節を選択",
+        options=available_weeks,
+        index=available_weeks.index(default_week) if default_week in available_weeks else 0,
+        format_func=lambda w: f"第 {w} 節 通信簿",
+        key=f"sb_mw_rc_selector_{season}",
+    )
+
+    rc_data = _load_matchweek_report_cards(season=season, matchweek=selected_week)
+    team_cards = rc_data.get("team_cards", [])
+    match_pairs = rc_data.get("match_pairs", [])
+
+    if not team_cards:
+        st.info(f"第 {selected_week} 節の完了試合通信簿データがありません。")
+        return
+
+    # View Tabs: Ranking vs Pair
+    tab_rank, tab_pair = st.tabs([
+        "🏆 今節チーム評価ランキング (1位〜20位)",
+        "⚔️ 対戦カード別 20チーム対比 (全10試合)",
+    ])
+
+    with tab_rank:
+        st.caption(f"第 {selected_week} 節の全20チームをエル・ゴラッソ番記者評価得点（60点満点）順に掲載しています。")
+        c1, c2 = st.columns(2)
+        for idx, card in enumerate(team_cards):
+            target_col = c1 if idx % 2 == 0 else c2
+            with target_col:
+                _render_team_report_mini_card(card, show_rank_number=True)
+
+    with tab_pair:
+        st.caption(f"第 {selected_week} 節の全10試合におけるホーム vs アウェイ両軍の通信簿対比です。")
+        for pair in match_pairs:
+            _render_match_pair_report_card(pair)
+
+
 def _render_stats_rankings_section(
     season: int,
     qa_engine: TacticalQAEngine,
 ) -> None:
-    """Section 3: League Statistical Rankings (Team & Player Top 5)."""
+    """Section 4: League Statistical Rankings (Team & Player Top 5)."""
     col_title, col_ai = st.columns([3, 1])
     with col_title:
-        st.subheader("🏅 3. リーグスタッツランキング (Top 5)")
+        st.subheader("🏅 4. リーグスタッツランキング (Top 5)")
         st.caption("チームおよび選手の主要戦術指標リーダーボードです。選手名から選手名鑑へ直接ジャンプできます。")
     with col_ai:
         render_ai_button(
@@ -323,10 +499,10 @@ def _render_tactical_map_section(
     season: int,
     qa_engine: TacticalQAEngine,
 ) -> None:
-    """Section 4: 4-Quadrant Tactical Positioning Map with Plotly."""
+    """Section 5: 4-Quadrant Tactical Positioning Map with Plotly."""
     col_title, col_ai = st.columns([3, 1])
     with col_title:
-        st.subheader("🗺️ 4. 戦術ポジショニング比較マップ")
+        st.subheader("🗺️ 5. 戦術ポジショニング比較マップ")
         st.caption("20クラブの戦術スタイルや攻守期待値、フィジカル走量を4象限散布図でインタラクティブに比較します。")
     with col_ai:
         render_ai_button(
@@ -536,10 +712,15 @@ def render_league_view(qa_engine: TacticalQAEngine) -> None:
 
     st.divider()
 
-    # Section 3: League stats rankings
+    # Section 3: Matchweek Report Cards (20 clubs)
+    _render_matchweek_report_cards_section(season=selected_season, qa_engine=qa_engine)
+
+    st.divider()
+
+    # Section 4: League stats rankings
     _render_stats_rankings_section(season=selected_season, qa_engine=qa_engine)
 
     st.divider()
 
-    # Section 4: 4-Quadrant Tactical Positioning Map
+    # Section 5: 4-Quadrant Tactical Positioning Map
     _render_tactical_map_section(season=selected_season, qa_engine=qa_engine)

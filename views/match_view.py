@@ -25,6 +25,7 @@ from views.components.match import (
     render_match_insights_section,
     render_match_player_stats_section,
     render_match_ratings_section,
+    render_match_report_card_section,
     render_match_summary_section,
 )
 from views.navigation import VIEW_MATCH
@@ -138,6 +139,14 @@ def render_match_view(
         home_id=home_id,
         away_id=away_id,
         struct_summary=struct_summary,
+        qa_engine=qa_engine,
+    )
+
+    # J1 Reporter Scorecard (番記者通信簿)
+    render_match_report_card_section(
+        match_id=match_id,
+        home_id=home_id,
+        away_id=away_id,
         qa_engine=qa_engine,
     )
 

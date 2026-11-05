@@ -175,5 +175,32 @@ $$\text{Score}_6 = \text{clamp}(\text{round}(5.0 + \sum \text{Bonuses} - \text{P
 2. **`config/derby_matches.json`**: ダービーマッチ対戦カード定義
 3. **`pipeline/match_report_card_calculator.py`**:
    - `MatchReportCardCalculator` クラス
-   - `calculate_match_report_card(match_id, team_id) -> Dict[str, Any]`
-4. **`tests/test_match_report_card_calculator.py`**: 単体テストスイート
+   - `calculate_report_card(match_id, team_id) -> Dict[str, Any]`
+   - `generate_critique(report_card) -> Dict[str, str]`（番記者寸評・見出し自動生成）
+4. **`views/components/match/report_card_section.py`**:
+   - 試合詳細画面向け6軸レーダーチャート（Plotly）
+   - 両チーム評価カード（S〜Dランクバッジ、合計得点/60点、6指標内訳バー、寸評）
+5. **`pipeline/league_overview_data.py` (`get_matchweek_report_cards`)**:
+   - 節単位の全10試合・20クラブ通信簿一括集約エンジン（合計得点順ソート & 対戦ペア構築）
+6. **`views/league_view.py` (`_render_matchweek_report_cards_section`)**:
+   - Jリーグ全体画面の「📰 3. 節別 J1番記者通信簿（全10試合・20チーム一覧）」
+   - 「今節チーム評価ランキング (1位〜20位)」および「対戦カード別 20チーム対比 (全10試合)」タブ
+7. **テストスイート**:
+   - `tests/test_match_report_card_calculator.py`
+   - `tests/test_match_report_card_view.py`
+   - `tests/test_league_report_cards.py`
+
+---
+
+## 7. 番記者寸評（Critique）生成仕様
+
+エル・ゴラッソ公認の番記者短評スタイルを踏襲し、以下の3要素を融合して客観的かつ臨場感ある寸評テキストを動的に合成する。
+
+1. **見出し（Headline）**:
+   - 総合ランク（S〜D）に応じた戦況総括フレーズ（例: 「【最高評価 S】敵陣を完全制圧。戦術遂行と気迫が結実した圧巻の勝利」）。
+2. **勝敗・戦況コンテクスト**:
+   - ホーム／アウェイ、得点スコア（白星／ドロー決着／敗戦）。
+3. **強み・課題・ドラマ性の自動抽出**:
+   - 7点以上の最高得点指標（例: 「球際で高い水準（9/10点）を発揮」）。
+   - 4点以下の最低得点指標（例: 「個人パワー（3/10点）に改善の余地を残す」）。
+   - 劇的弾、ダービー勝利、逆転劇、クリーンシート等の興奮度加点要因。

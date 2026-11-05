@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from agent.objective_profiler import TEAM_NAME_MAP
 from pipeline.db import DEFAULT_DB_PATH, get_db_connection
 from pipeline.external_links import generate_match_external_links
+from pipeline.match_report_card_calculator import MatchReportCardCalculator
 from pipeline.team_55_metrics_calculator import simulate_poisson_match
 
 
@@ -719,3 +720,87 @@ def get_tactical_positioning_map_data(
         return preset_info
     finally:
         conn.close()
+
+
+def get_matchweek_report_cards(
+    season: int = 2026,
+    matchweek: Optional[int] = None,
+    db_path: str = DEFAULT_DB_PATH,
+) -> Dict[str, Any]:
+    """
+    Return calculated 6-metric report cards for all 20 clubs in a given matchweek.
+    Returns both team_cards (sorted by total_score DESC) and match_pairs (paired by match).
+    """
+    mw_data = get_matchweek_matches(
+        season=season,
+        matchweek=matchweek,
+        db_path=db_path,
+    )
+    selected_week = mw_data.get("selected_matchweek", 1)
+    matches = mw_data.get("matches", [])
+
+    calc = MatchReportCardCalculator(db_path=db_path)
+    team_cards: List[Dict[str, Any]] = []
+    match_pairs: List[Dict[str, Any]] = []
+
+    for m in matches:
+        mid = m.get("match_id", "")
+        hid = m.get("home_team_id", "")
+        aid = m.get("away_team_id", "")
+        h_score = m.get("home_score")
+        a_score = m.get("away_score")
+
+        if h_score is None or a_score is None:
+            continue
+
+        h_card = calc.calculate_report_card(match_id=mid, team_id=hid)
+        a_card = calc.calculate_report_card(match_id=mid, team_id=aid)
+
+        h_entry = {
+            "match_id": mid,
+            "team_id": hid,
+            "team_name": m.get("home_team", hid),
+            "opp_team_id": aid,
+            "opp_team_name": m.get("away_team", aid),
+            "is_home": True,
+            "score": f"{h_score}-{a_score}",
+            "rank": h_card.get("rank", "B+"),
+            "total_score": h_card.get("total_score", 0),
+            "critique": h_card.get("critique", {}),
+            "metrics": h_card.get("metrics", {}),
+        }
+        a_entry = {
+            "match_id": mid,
+            "team_id": aid,
+            "team_name": m.get("away_team", aid),
+            "opp_team_id": hid,
+            "opp_team_name": m.get("home_team", hid),
+            "is_home": False,
+            "score": f"{a_score}-{h_score}",
+            "rank": a_card.get("rank", "B+"),
+            "total_score": a_card.get("total_score", 0),
+            "critique": a_card.get("critique", {}),
+            "metrics": a_card.get("metrics", {}),
+        }
+
+        team_cards.extend([h_entry, a_entry])
+        match_pairs.append({
+            "match_id": mid,
+            "date": m.get("date", ""),
+            "stadium": m.get("stadium", ""),
+            "home": h_entry,
+            "away": a_entry,
+        })
+
+    # Sort team cards by total_score DESC
+    team_cards.sort(key=lambda x: x["total_score"], reverse=True)
+    for idx, card in enumerate(team_cards, start=1):
+        card["week_rank"] = idx
+
+    return {
+        "season": season,
+        "matchweek": selected_week,
+        "available_matchweeks": mw_data.get("available_matchweeks", []),
+        "team_cards": team_cards,
+        "match_pairs": match_pairs,
+    }

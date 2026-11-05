@@ -69,6 +69,9 @@ class TestGCPConfig(unittest.TestCase):
         self.assertIn("--add-volume-mount", content)
         self.assertIn("FOOTBALL_DB_PATH=/mnt/gcs/football.db", content)
         self.assertIn("CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db", content)
+        self.assertIn("AppMode", content)
+        self.assertIn("football-rag-api", content)
+        self.assertIn("SkipBuild", content)
 
     def test_env_db_path_override(self):
         """Test that FOOTBALL_DB_PATH environment variable overrides default SQLite path."""

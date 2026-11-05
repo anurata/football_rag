@@ -74,28 +74,29 @@ flowchart TD
 
 ### 4. 運用・デプロイ手順
 
-#### 4.1 初回デプロイ（PowerShellワンライナー）
+#### 4.1 デプロイ手順（PowerShellワンライナー）
 ```powershell
-.\scripts\gcp_deploy.ps1 -ProjectId "football-rag-app" -Region "asia-northeast1"
+# Web UI (Streamlit) のデプロイ
+.\scripts\gcp_deploy.ps1 -ProjectId "football-rag-app" -Region "asia-northeast1" -AppMode streamlit
+
+# モバイル向け FastAPI バックエンド (football-rag-api) のデプロイ (共通イメージ再利用)
+.\scripts\gcp_deploy.ps1 -ProjectId "football-rag-app" -Region "asia-northeast1" -AppMode api -SkipBuild
 ```
 
-#### 4.2 本番稼働エンドポイント（Phase 1 稼働中）
+#### 4.2 本番稼働エンドポイント（Phase 1 & Phase 2 稼働中）
 - **Web UI (Streamlit)**: [https://football-rag-app-717245533761.asia-northeast1.run.app](https://football-rag-app-717245533761.asia-northeast1.run.app)
+- **Mobile Backend (FastAPI)**: [https://football-rag-api-717245533761.asia-northeast1.run.app](https://football-rag-api-717245533761.asia-northeast1.run.app)
+  - Swagger UI: [https://football-rag-api-717245533761.asia-northeast1.run.app/docs](https://football-rag-api-717245533761.asia-northeast1.run.app/docs)
+  - Health API: [https://football-rag-api-717245533761.asia-northeast1.run.app/api/health](https://football-rag-api-717245533761.asia-northeast1.run.app/api/health)
 - **GCP プロジェクト**: `football-rag-app` (プロジェクト番号: `717245533761`)
 - **データバケット**: `gs://football-rag-app-football-rag-data`
 - **コンテナリポジトリ**: `asia-northeast1-docker.pkg.dev/football-rag-app/football-rag/football-rag-app:latest`
 
 #### 4.3 秘密情報（Gemini API Key / パスワード）の設定
+Secret Manager の `GEMINI_API_KEY` は登録済みで、Cloud Run の両サービスへ自動マウントされます。
 ```powershell
-# Gemini APIキーをSecret Managerに登録
-Write-Output "your-gemini-api-key" | gcloud secrets create GEMINI_API_KEY --data-file=- --project=football-rag-app
-
-# Cloud RunサービスにSecretをアタッチ
-gcloud run services update football-rag-app `
-    --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest" `
-    --region="asia-northeast1" `
-    --project="football-rag-app"
-```
+# APIキー更新時
+Write-Output "your-gemini-api-key" | gcloud secrets versions add GEMINI_API_KEY --data-file=- --project=football-rag-app
 
 #### 4.4 週末のデータ更新運用フロー
 PCローカルで試合データ収集・戦術エンリッチを実行後、GCSへ差分同期するだけで完了（コンテナ再ビルド不要）：

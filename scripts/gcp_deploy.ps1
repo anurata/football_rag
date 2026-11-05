@@ -4,19 +4,23 @@
 .DESCRIPTION
     Automates:
       1. GCS Bucket creation & data sync (data/ -> gs://<bucket>)
-      2. Secret Manager configuration (GEMINI_API_KEY, APP_PASSWORD)
+      2. Secret Manager auto-detection (GEMINI_API_KEY)
       3. Container build with Cloud Build / Artifact Registry
-      4. Cloud Run deployment with GCS volume mount
+      4. Cloud Run deployment with GCS volume mount for either Streamlit or FastAPI
 .PARAMETER ProjectId
     GCP Project ID.
 .PARAMETER Region
     GCP Region (Default: asia-northeast1).
+.PARAMETER AppMode
+    Application mode to deploy: "streamlit" (Web UI) or "api" (Mobile FastAPI). Default: streamlit.
 .PARAMETER ServiceName
-    Cloud Run service name (Default: football-rag-app).
+    Cloud Run service name (Default: football-rag-app for streamlit, football-rag-api for api).
 .PARAMETER BucketName
     GCS Bucket name for persistent data (Default: <ProjectId>-football-rag-data).
 .PARAMETER SkipDataSync
     Skip uploading local data/ directory to GCS.
+.PARAMETER SkipBuild
+    Skip container image build with Cloud Build (reuse latest existing image).
 #>
 
 [CmdletBinding()]
@@ -28,13 +32,20 @@ param(
     [string]$Region = "asia-northeast1",
 
     [Parameter(Mandatory = $false)]
-    [string]$ServiceName = "football-rag-app",
+    [ValidateSet("streamlit", "api")]
+    [string]$AppMode = "streamlit",
+
+    [Parameter(Mandatory = $false)]
+    [string]$ServiceName = "",
 
     [Parameter(Mandatory = $false)]
     [string]$BucketName = "",
 
     [Parameter(Mandatory = $false)]
-    [switch]$SkipDataSync
+    [switch]$SkipDataSync,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$SkipBuild
 )
 
 $ErrorActionPreference = "Stop"
@@ -45,17 +56,27 @@ if ((Test-Path $cloudSdkBin) -and ($env:Path -notlike "*$cloudSdkBin*")) {
     $env:Path = "$cloudSdkBin;$env:Path"
 }
 
+if ([string]::IsNullOrWhiteSpace($ServiceName)) {
+    if ($AppMode -eq "api") {
+        $ServiceName = "football-rag-api"
+    } else {
+        $ServiceName = "football-rag-app"
+    }
+}
+
 if ([string]::IsNullOrWhiteSpace($BucketName)) {
     $BucketName = "${ProjectId}-football-rag-data"
 }
 
-$ImageTag = "${Region}-docker.pkg.dev/${ProjectId}/football-rag/${ServiceName}:latest"
+# Container image tag is shared across services since docker_entrypoint.sh routes via APP_MODE
+$ImageTag = "${Region}-docker.pkg.dev/${ProjectId}/football-rag/football-rag-app:latest"
 $RepoName = "football-rag"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host " Football RAG - GCP Cloud Run Deployment" -ForegroundColor Cyan
 Write-Host " Project:     $ProjectId" -ForegroundColor Green
 Write-Host " Region:      $Region" -ForegroundColor Green
+Write-Host " App Mode:    $AppMode" -ForegroundColor Green
 Write-Host " Service:     $ServiceName" -ForegroundColor Green
 Write-Host " Bucket:      $BucketName" -ForegroundColor Green
 Write-Host " Image:       $ImageTag" -ForegroundColor Green
@@ -117,30 +138,50 @@ if (-not $repoFound) {
 }
 
 # 4. Build and Submit Container Image
-Write-Host "`n[4/5] Building container image with Cloud Build..." -ForegroundColor Yellow
-gcloud builds submit --tag $ImageTag .
-if ($LASTEXITCODE -ne 0) { throw "Cloud Build failed." }
+if (-not $SkipBuild) {
+    Write-Host "`n[4/5] Building container image with Cloud Build..." -ForegroundColor Yellow
+    gcloud builds submit --tag $ImageTag .
+    if ($LASTEXITCODE -ne 0) { throw "Cloud Build failed." }
+} else {
+    Write-Host "`n[4/5] Skipping container build as requested (-SkipBuild)." -ForegroundColor Gray
+}
 
 # 5. Deploy to Cloud Run with GCS Volume Mount
-Write-Host "`n[5/5] Deploying to Cloud Run..." -ForegroundColor Yellow
-gcloud run deploy $ServiceName `
-    --image=$ImageTag `
-    --region=$Region `
-    --platform=managed `
-    --allow-unauthenticated `
-    --execution-environment=gen2 `
-    --memory=2Gi `
-    --cpu=1 `
-    --min-instances=0 `
-    --max-instances=1 `
-    --set-env-vars="FOOTBALL_DB_PATH=/mnt/gcs/football.db,CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db,APP_MODE=streamlit" `
-    --add-volume="name=gcs-data,type=cloud-storage,bucket=${BucketName}" `
-    --add-volume-mount="volume=gcs-data,mount-path=/mnt/gcs"
+Write-Host "`n[5/5] Deploying service '$ServiceName' to Cloud Run (APP_MODE=$AppMode)..." -ForegroundColor Yellow
+
+# Check if GEMINI_API_KEY secret exists in Secret Manager
+$secretArgs = @()
+$existingSecrets = gcloud secrets list --project=$ProjectId --format="value(name)" 2>$null
+if ($existingSecrets -match "GEMINI_API_KEY") {
+    Write-Host "Detected Secret 'GEMINI_API_KEY'. Adding secret binding..." -ForegroundColor Green
+    $secretArgs = @("--set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest")
+}
+
+$deployArgs = @(
+    "run", "deploy", $ServiceName,
+    "--image=$ImageTag",
+    "--region=$Region",
+    "--platform=managed",
+    "--allow-unauthenticated",
+    "--execution-environment=gen2",
+    "--memory=2Gi",
+    "--cpu=1",
+    "--min-instances=0",
+    "--max-instances=1",
+    "--set-env-vars=FOOTBALL_DB_PATH=/mnt/gcs/football.db,CHROMA_PERSIST_DIR=/mnt/gcs/chroma_db,APP_MODE=$AppMode",
+    "--add-volume=name=gcs-data,type=cloud-storage,bucket=${BucketName}",
+    "--add-volume-mount=volume=gcs-data,mount-path=/mnt/gcs"
+) + $secretArgs
+
+& gcloud @deployArgs
 if ($LASTEXITCODE -ne 0) { throw "Cloud Run deployment failed." }
 
 Write-Host "`n==========================================================" -ForegroundColor Cyan
-Write-Host " Deployment completed successfully!" -ForegroundColor Green
-Write-Host " To set Secrets (API Keys):" -ForegroundColor Gray
-Write-Host "   gcloud secrets create GEMINI_API_KEY --data-file=-" -ForegroundColor Gray
-Write-Host "   gcloud run services update $ServiceName --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest --region=$Region" -ForegroundColor Gray
+Write-Host " Deployment of '$ServiceName' ($AppMode) completed successfully!" -ForegroundColor Green
+$serviceUrl = gcloud run services describe $ServiceName --project=$ProjectId --region=$Region --format="value(status.url)"
+Write-Host " Service URL: $serviceUrl" -ForegroundColor Cyan
+if ($AppMode -eq "api") {
+    Write-Host " Swagger UI:  ${serviceUrl}/docs" -ForegroundColor Yellow
+    Write-Host " Health API:  ${serviceUrl}/api/health" -ForegroundColor Yellow
+}
 Write-Host "==========================================================" -ForegroundColor Cyan
